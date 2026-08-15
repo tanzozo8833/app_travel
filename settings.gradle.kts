@@ -25,5 +25,3 @@ dependencyResolutionManagement {
 rootProject.name = "Lumina"
 
 include(":app")
-include(":app")
- 
