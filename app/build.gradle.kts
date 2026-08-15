@@ -11,9 +11,11 @@ plugins {
 
 android {
   namespace = "com.example"
-  compileSdk { version = release(36) { minorApiLevel = 1 } }
+    compileSdk {
+        version = release(37)
+    }
 
-  defaultConfig {
+    defaultConfig {
     applicationId = "com.aistudio.luminavietnam.trav"
     minSdk = 24
     targetSdk = 36
@@ -80,7 +82,8 @@ dependencies {
   implementation(platform(libs.firebase.bom))
   // implementation(libs.accompanist.permissions)
   implementation(libs.androidx.activity.compose)
-  // implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.appcompat)
+    // implementation(libs.androidx.camera.camera2)
   // implementation(libs.androidx.camera.core)
   // implementation(libs.androidx.camera.lifecycle)
   // implementation(libs.androidx.camera.view)
@@ -114,7 +117,8 @@ dependencies {
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.logging.interceptor)
-  implementation(libs.moshi.kotlin)
+    implementation(libs.material)
+    implementation(libs.moshi.kotlin)
   implementation(libs.okhttp)
   // implementation(libs.play.services.location)
   implementation(libs.retrofit)
