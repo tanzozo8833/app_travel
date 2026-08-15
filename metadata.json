@@ -1,0 +1,6 @@
+{
+  "name": "Lumina",
+  "description": "Lumina — Cuốn hộ chiếu du lịch Việt Nam sống động của Gen Z: check-in 34 tỉnh thành, lịch trình AI và feed ảnh phong cách.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

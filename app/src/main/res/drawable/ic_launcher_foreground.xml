@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer stamp ring -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M54,54m-27,0a27,27 0 1,0 54,0a27,27 0 1,0 -54,0"
+        android:strokeWidth="2"
+        android:strokeColor="#F5B301" />
+    <!-- Inner dashed stamp ring -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M54,54m-23,0a23,23 0 1,0 46,0a23,23 0 1,0 -46,0"
+        android:strokeWidth="1"
+        android:strokeColor="#FFF3D1" />
+    <!-- Center star compass / travel pin -->
+    <path
+        android:fillColor="#F5B301"
+        android:pathData="M54,34L57.5,47.5L71,51L57.5,54.5L54,68L50.5,54.5L37,51L50.5,47.5Z" />
+    <path
+        android:fillColor="#FFF3D1"
+        android:pathData="M54,41L56,49L64,51L56,53L54,61L52,53L44,51L52,49Z" />
+    <!-- Stylized mountain contour at bottom of seal -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,63L47,56L54,60L61,54L69,63"
+        android:strokeWidth="1.8"
+        android:strokeColor="#F5B301"
+        android:strokeLineCap="round" />
+</vector>
