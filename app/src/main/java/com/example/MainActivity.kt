@@ -41,7 +41,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LuminaTheme {
+            val isDark by viewModel.isDarkMode.collectAsState()
+            LuminaTheme(darkTheme = isDark) {
                 LuminaApp(viewModel = viewModel)
             }
         }
@@ -75,6 +76,12 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val isShowingCityPassport by viewModel.isShowingCityPassport.collectAsState()
     val selectedProvinceForPassport by viewModel.selectedProvinceForPassport.collectAsState()
     val isShowingTravelCv by viewModel.isShowingTravelCv.collectAsState()
+
+    val isShowingSettings by viewModel.isShowingSettings.collectAsState()
+    val isDarkMode by viewModel.isDarkMode.collectAsState()
+    val appLanguage by viewModel.appLanguage.collectAsState()
+    val userAccounts by viewModel.userAccounts.collectAsState()
+    val currentAccountIndex by viewModel.currentAccountIndex.collectAsState()
 
     val aiWizardState by viewModel.aiWizardState.collectAsState()
     val chatMessages by viewModel.chatMessages.collectAsState()
@@ -135,18 +142,6 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             }
                         )
                     }
-                    MainTab.MAP -> {
-                        InteractiveMapScreen(
-                            provinces = provinces,
-                            checkIns = checkIns,
-                            onQuickCheckIn = { place, pCode, pName ->
-                                viewModel.performQuickStamp(place, pCode, pName)
-                            },
-                            onProvinceClick = { prov ->
-                                viewModel.showCityPassport(true, prov)
-                            }
-                        )
-                    }
                     MainTab.AI_PLAN -> {
                         AiPlanScreen(
                             wizardState = aiWizardState,
@@ -175,11 +170,19 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                     MainTab.MY_TRIPS -> {
                         MyTripsScreen(
                             trips = trips,
+                            provinces = provinces,
+                            checkIns = checkIns,
                             currentSubTab = tripSubTab,
                             onSubTabChanged = { viewModel.setTripSubTab(it) },
                             onTripClick = { viewModel.openTripDetail(it) },
                             onCreateNewTrip = { viewModel.selectTab(MainTab.AI_PLAN) },
                             onQuickCheckIn = { viewModel.performQuickStamp() },
+                            onMapQuickCheckIn = { place, pCode, pName ->
+                                viewModel.performQuickStamp(place, pCode, pName)
+                            },
+                            onProvinceClick = { prov ->
+                                viewModel.showCityPassport(true, prov)
+                            },
                             onCreateRecapPost = { trip ->
                                 viewModel.publishPost(
                                     "Tổng kết chuyến đi ${trip.title} tuyệt vời cùng Lumina!",
@@ -196,6 +199,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             badges = badges,
                             savedBoards = savedBoards,
                             onOpenTravelCv = { viewModel.showTravelCv(true) },
+                            onOpenSettings = { viewModel.showSettings(true) },
                             onProvinceClick = { viewModel.showCityPassport(true, it) }
                         )
                     }
@@ -330,7 +334,31 @@ fun LuminaApp(viewModel: LuminaViewModel) {
             )
         }
 
-        // 8. Comment Popup Bottom Sheet (Requirement 2)
+        // 8. Settings & Account Management Screen (Requirement)
+        AnimatedVisibility(
+            visible = isShowingSettings,
+            enter = slideInHorizontally(initialOffsetX = { it }),
+            exit = slideOutHorizontally(targetOffsetX = { it })
+        ) {
+            SettingsScreen(
+                userProfile = userProfile,
+                isDarkMode = isDarkMode,
+                appLanguage = appLanguage,
+                userAccounts = userAccounts,
+                currentAccountIndex = currentAccountIndex,
+                onBack = { viewModel.showSettings(false) },
+                onToggleDarkMode = { viewModel.setDarkMode(it) },
+                onSetLanguage = { viewModel.setLanguage(it) },
+                onSwitchAccount = { viewModel.switchAccount(it) },
+                onAddNewAccount = { name, handle -> viewModel.addNewAccount(name, handle) },
+                onUpdateProfile = { name, bio, title -> viewModel.updateProfileInfo(name, bio, title) },
+                onClearCache = { viewModel.clearCache() },
+                onLogout = { viewModel.logout() },
+                onDeleteAccount = { viewModel.deleteAccount() }
+            )
+        }
+
+        // 9. Comment Popup Bottom Sheet (Requirement 2)
         commentPostTarget?.let { post ->
             CommentBottomSheet(
                 post = post,

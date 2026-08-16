@@ -69,13 +69,13 @@ fun LuminaBottomBar(
                     onClick = { onTabSelected(MainTab.HOME) }
                 )
 
-                // Tab 2: MapLibre Interactive Map
+                // Tab 2: AI Plan
                 NavPillItem(
-                    label = "Bản đồ",
-                    iconFilled = Icons.Default.Map,
-                    iconOutlined = Icons.Outlined.Map,
-                    isSelected = currentTab == MainTab.MAP,
-                    onClick = { onTabSelected(MainTab.MAP) }
+                    label = "AI Plan",
+                    iconFilled = Icons.Default.AutoAwesome,
+                    iconOutlined = Icons.Outlined.AutoAwesome,
+                    isSelected = currentTab == MainTab.AI_PLAN,
+                    onClick = { onTabSelected(MainTab.AI_PLAN) }
                 )
 
                 // Tab 3: Central Highlighted Check-in Button (⦿)
@@ -112,16 +112,7 @@ fun LuminaBottomBar(
                     }
                 }
 
-                // Tab 4: AI Plan
-                NavPillItem(
-                    label = "AI Plan",
-                    iconFilled = Icons.Default.AutoAwesome,
-                    iconOutlined = Icons.Outlined.AutoAwesome,
-                    isSelected = currentTab == MainTab.AI_PLAN,
-                    onClick = { onTabSelected(MainTab.AI_PLAN) }
-                )
-
-                // Tab 5: My Trips
+                // Tab 4: My Trips (with embedded Vietnam map)
                 NavPillItem(
                     label = "Chuyến đi",
                     iconFilled = Icons.Default.Luggage,
@@ -130,7 +121,7 @@ fun LuminaBottomBar(
                     onClick = { onTabSelected(MainTab.MY_TRIPS) }
                 )
 
-                // Tab 6: Profile
+                // Tab 5: Profile
                 NavPillItem(
                     label = "Tôi",
                     iconFilled = Icons.Default.Person,

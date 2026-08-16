@@ -41,6 +41,7 @@ fun ProfileScreen(
     badges: List<AchievementBadge>,
     savedBoards: List<SavedBoard>,
     onOpenTravelCv: () -> Unit,
+    onOpenSettings: () -> Unit = {},
     onProvinceClick: (Province) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -70,13 +71,26 @@ fun ProfileScreen(
                         fontFamily = FontFamily.Monospace,
                         color = Brand700
                     )
-                    IconButton(
-                        onClick = onOpenTravelCv,
-                        modifier = Modifier
-                            .size(36.dp)
-                            .background(BgSunken, CircleShape)
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(Icons.Default.CardMembership, contentDescription = "Travel CV", tint = Brand700, modifier = Modifier.size(18.dp))
+                        IconButton(
+                            onClick = onOpenTravelCv,
+                            modifier = Modifier
+                                .size(36.dp)
+                                .background(BgSunken, CircleShape)
+                        ) {
+                            Icon(Icons.Default.CardMembership, contentDescription = "Travel CV", tint = Brand700, modifier = Modifier.size(18.dp))
+                        }
+                        IconButton(
+                            onClick = onOpenSettings,
+                            modifier = Modifier
+                                .size(36.dp)
+                                .background(BgSunken, CircleShape)
+                        ) {
+                            Icon(Icons.Default.Settings, contentDescription = "Cài đặt & Tài khoản", tint = Brand700, modifier = Modifier.size(20.dp))
+                        }
                     }
                 }
 

@@ -15,7 +15,6 @@ enum class MainTab {
     HOME,
     AI_PLAN,
     CHECK_IN,
-    MAP,
     MY_TRIPS,
     PROFILE
 }
@@ -97,6 +96,54 @@ class LuminaViewModel(
 
     private val _isShowingTravelCv = MutableStateFlow(false)
     val isShowingTravelCv: StateFlow<Boolean> = _isShowingTravelCv.asStateFlow()
+
+    private val _isShowingSettings = MutableStateFlow(false)
+    val isShowingSettings: StateFlow<Boolean> = _isShowingSettings.asStateFlow()
+
+    private val _isDarkMode = MutableStateFlow(false)
+    val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
+
+    private val _appLanguage = MutableStateFlow("vi")
+    val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
+
+    private val _userAccounts = MutableStateFlow(
+        listOf(
+            UserProfile(
+                id = "u_1",
+                username = "linh.travels",
+                displayName = "Thảo Linh",
+                avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Gen Z Explorer | Săn hoàng hôn & Foodtour Việt Nam 🇻🇳 ✨",
+                topCityName = "Hà Nội",
+                topCityCheckInCount = 4,
+                visitedProvincesCount = 5,
+                totalProvincesCount = 34,
+                totalDistanceKm = 12500.0,
+                tripsCompletedCount = 18,
+                totalSavesCount = 3420
+            ),
+            UserProfile(
+                id = "u_2",
+                username = "tan.explorer",
+                displayName = "Đức Tân",
+                avatarUrl = "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop",
+                tagTitle = "TREK MASTER",
+                bio = "Chinh phục 63 tỉnh thành • Đam mê cắm trại & flycam 🏕️ 🏔️",
+                topCityName = "Hà Giang",
+                topCityCheckInCount = 8,
+                visitedProvincesCount = 19,
+                totalProvincesCount = 34,
+                totalDistanceKm = 24800.0,
+                tripsCompletedCount = 32,
+                totalSavesCount = 8900
+            )
+        )
+    )
+    val userAccounts: StateFlow<List<UserProfile>> = _userAccounts.asStateFlow()
+
+    private val _currentAccountIndex = MutableStateFlow(0)
+    val currentAccountIndex: StateFlow<Int> = _currentAccountIndex.asStateFlow()
 
     private val _isShowingCommentSheet = MutableStateFlow(false)
     val isShowingCommentSheet: StateFlow<Boolean> = _isShowingCommentSheet.asStateFlow()
@@ -366,5 +413,82 @@ class LuminaViewModel(
             val aiMsg = ChatMessage(isUser = false, text = responseText)
             _chatMessages.value = _chatMessages.value + aiMsg
         }
+    }
+
+    // Settings & Account Management
+    fun showSettings(show: Boolean) {
+        _isShowingSettings.value = show
+    }
+
+    fun setDarkMode(enabled: Boolean) {
+        _isDarkMode.value = enabled
+        showToast(if (enabled) "Đã kích hoạt Giao diện Tối (Dark Mode)" else "Đã chuyển sang Giao diện Sáng (Light Mode)")
+    }
+
+    fun setLanguage(lang: String) {
+        _appLanguage.value = lang
+        showToast(if (lang == "vi") "Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳" else "Language changed to English 🇬🇧")
+    }
+
+    fun switchAccount(index: Int) {
+        if (index in _userAccounts.value.indices) {
+            _currentAccountIndex.value = index
+            val target = _userAccounts.value[index]
+            repository.updateUserProfile(target)
+            showToast("Đã chuyển sang tài khoản @${target.username}")
+        }
+    }
+
+    fun addNewAccount(displayName: String, username: String) {
+        val newAcc = UserProfile(
+            id = "u_${System.currentTimeMillis()}",
+            username = username.lowercase().replace(" ", "."),
+            displayName = displayName,
+            avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop",
+            tagTitle = "NEW EXPLORER",
+            bio = "Bắt đầu hành trình khám phá Việt Nam cùng Lumina ✨",
+            topCityName = "Đà Nẵng",
+            topCityCheckInCount = 1,
+            visitedProvincesCount = 1,
+            totalProvincesCount = 34,
+            totalDistanceKm = 300.0,
+            tripsCompletedCount = 1,
+            totalSavesCount = 12
+        )
+        _userAccounts.value = _userAccounts.value + newAcc
+        _currentAccountIndex.value = _userAccounts.value.size - 1
+        repository.updateUserProfile(newAcc)
+        showToast("Đã tạo và đăng nhập tài khoản @${newAcc.username}")
+    }
+
+    fun updateProfileInfo(displayName: String, bio: String, tagTitle: String) {
+        val current = repository.userProfile.value
+        val updated = current.copy(
+            displayName = displayName,
+            bio = bio,
+            tagTitle = tagTitle
+        )
+        repository.updateUserProfile(updated)
+        val idx = _currentAccountIndex.value
+        val list = _userAccounts.value.toMutableList()
+        if (idx in list.indices) {
+            list[idx] = updated
+            _userAccounts.value = list
+        }
+        showToast("Đã lưu cập nhật hồ sơ!")
+    }
+
+    fun clearCache() {
+        showToast("Đã dọn dẹp sạch 48.6 MB bộ nhớ đệm hình ảnh và dữ liệu tạm!")
+    }
+
+    fun logout() {
+        showToast("Đã đăng xuất tài khoản an toàn.")
+        _isShowingSettings.value = false
+    }
+
+    fun deleteAccount() {
+        showToast("Đã xoá tài khoản và dữ liệu cá nhân.")
+        _isShowingSettings.value = false
     }
 }

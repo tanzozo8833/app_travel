@@ -43,6 +43,10 @@ class LuminaRepository {
     private val _savedBoards = MutableStateFlow<List<SavedBoard>>(SeedData.savedBoards)
     val savedBoards: StateFlow<List<SavedBoard>> = _savedBoards.asStateFlow()
 
+    fun updateUserProfile(user: UserProfile) {
+        _userProfile.value = user
+    }
+
     // Post Interactions
     fun toggleLike(postId: String) {
         _posts.value = _posts.value.map { post ->

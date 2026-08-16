@@ -10,8 +10,7 @@ import coil.memory.MemoryCache
 class LuminaApplication : Application(), ImageLoaderFactory {
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this)
-            .bitmapConfig(Bitmap.Config.ARGB_8888)
-            .allowHardware(false) // Prevents ashmem pinning deprecation log on modern Android runtimes/emulators
+            .allowHardware(true) // Use modern hardware bitmaps on Android Q+ to avoid ashmem pinning deprecation
             .memoryCache {
                 MemoryCache.Builder(this)
                     .maxSizePercent(0.25)
