@@ -143,7 +143,9 @@ fun CheckInScreen(
     // Studio State
     var studioMode by remember { mutableStateOf(CheckInStudioMode.LIVE_CAMERA) }
     var selectedColorMode by remember { mutableStateOf(CheckInColorMode.FILM) }
-    var activePhotoUrl by remember { mutableStateOf(selectedPlace.coverUrl) }
+    var capturedPhotoUri by remember { mutableStateOf<String?>(null) }
+    val hasRealPhoto = capturedPhotoUri != null
+
     var wasCapturedWithFrontCamera by remember { mutableStateOf(false) }
     var userCaption by remember { mutableStateOf("") }
     var showGridGuidelines by remember { mutableStateOf(true) }
@@ -185,7 +187,7 @@ fun CheckInScreen(
         contract = ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
         uri?.let {
-            activePhotoUrl = it.toString()
+            capturedPhotoUri = it.toString()
             wasCapturedWithFrontCamera = false
             studioMode = CheckInStudioMode.CAPTURED_PHOTO
         }
@@ -224,7 +226,7 @@ fun CheckInScreen(
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     isCapturingPhoto = false
-                    activePhotoUrl = photoFile.absolutePath
+                    capturedPhotoUri = photoFile.absolutePath
                     wasCapturedWithFrontCamera = isFrontCamera
                     studioMode = CheckInStudioMode.CAPTURED_PHOTO
                     Log.d("CheckInScreen", "Captured real photo to: ${photoFile.absolutePath}")
@@ -239,42 +241,55 @@ fun CheckInScreen(
         )
     }
 
-    // Process Filter & Save to App Private Storage
+    // Process Filter & Save to App Private Storage (With OOM Safety & Fallback)
     fun processAndExecuteAction(
         isPublishPost: Boolean,
         onComplete: (savedUri: String) -> Unit
     ) {
+        val sourceImage = capturedPhotoUri
+        if (sourceImage == null) {
+            Toast.makeText(context, "Vui lòng chụp ảnh hoặc chọn ảnh từ thư viện trước", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (isProcessingPhoto) return
         isProcessingPhoto = true
-        processingMessage = "Đang áp bộ lọc ${selectedColorMode.title} & lưu ảnh..."
+        processingMessage = "Đang xử lý & áp bộ lọc ${selectedColorMode.title}..."
 
         coroutineScope.launch {
-            val sourceImage = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
-                // If user clicks publish directly from live mode, use place cover or prompt
-                selectedPlace.coverUrl
-            } else {
-                activePhotoUrl
-            }
+            try {
+                val processResult = ImageColorFilterProcessor.processAndSaveImage(
+                    context = context,
+                    imageSource = sourceImage,
+                    colorMode = selectedColorMode,
+                    isMirrored = wasCapturedWithFrontCamera
+                )
 
-            val processResult = ImageColorFilterProcessor.processAndSaveImage(
-                context = context,
-                imageSource = sourceImage,
-                colorMode = selectedColorMode,
-                isMirrored = wasCapturedWithFrontCamera
-            )
+                isProcessingPhoto = false
 
-            isProcessingPhoto = false
-
-            val finalUri = processResult.getOrElse { error ->
-                Log.w("CheckInScreen", "Image filtering fallback due to error: ${error.message}")
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Không thể áp bộ lọc màu, lưu ảnh gốc", Toast.LENGTH_SHORT).show()
+                val finalUri = processResult.getOrElse { error ->
+                    Log.w("CheckInScreen", "Image filtering fallback due to memory/processing error: ${error.message}")
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            context,
+                            "Bộ nhớ máy quá tải khi áp bộ lọc màu, đã lưu ảnh gốc an toàn",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    sourceImage
                 }
-                sourceImage
-            }
 
-            lastSavedPhotoUri = finalUri
-            onComplete(finalUri)
+                lastSavedPhotoUri = finalUri
+                onComplete(finalUri)
+            } catch (t: Throwable) {
+                isProcessingPhoto = false
+                Log.e("CheckInScreen", "Unexpected error in processing", t)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Đã lưu ảnh gốc an toàn", Toast.LENGTH_SHORT).show()
+                }
+                lastSavedPhotoUri = sourceImage
+                onComplete(sourceImage)
+            }
         }
     }
 
@@ -543,15 +558,17 @@ fun CheckInScreen(
                                 }
                             } else {
                                 // REVIEW MODE: Captured/Picked Photo with Live ColorMatrix Filter Preview
-                                AsyncImage(
-                                    model = activePhotoUrl,
-                                    contentDescription = "Locket Photo Preview",
-                                    contentScale = ContentScale.Crop,
-                                    colorFilter = selectedColorMode.getColorFilter(),
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .scale(if (wasCapturedWithFrontCamera) -1f else 1f, 1f)
-                                )
+                                if (capturedPhotoUri != null) {
+                                    AsyncImage(
+                                        model = capturedPhotoUri,
+                                        contentDescription = "Locket Photo Preview",
+                                        contentScale = ContentScale.Crop,
+                                        colorFilter = selectedColorMode.getColorFilter(),
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .scale(if (wasCapturedWithFrontCamera) -1f else 1f, 1f)
+                                    )
+                                }
                             }
 
                             // 3x3 Grid Guidelines Overlay (if active in live mode)
@@ -759,7 +776,7 @@ fun CheckInScreen(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(6.dp))
 
                         // Frame Subtitle bar
                         Text(
@@ -781,7 +798,7 @@ fun CheckInScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 6.dp)
+                    .padding(top = 8.dp, bottom = 2.dp)
             ) {
                 Row(
                     modifier = Modifier
@@ -792,65 +809,65 @@ fun CheckInScreen(
                 ) {
                     Text(
                         text = "CHẾ ĐỘ MÀU (BỘ LỌC PHOTOBOOTH)",
-                        fontSize = 10.sp,
+                        fontSize = 9.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
                         color = Brand700
                     )
                     Text(
                         text = "Lưu thật vào ảnh 1:1",
-                        fontSize = 10.5.sp,
+                        fontSize = 9.5.sp,
                         color = TextSecondary
                     )
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
                 LazyRow(
                     contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     items(CheckInColorMode.values()) { mode ->
                         val isSelected = selectedColorMode == mode
                         Surface(
-                            shape = RoundedCornerShape(14.dp),
+                            shape = RoundedCornerShape(10.dp),
                             color = if (isSelected) Brand700 else BgSurface,
                             border = androidx.compose.foundation.BorderStroke(
                                 1.5.dp,
                                 if (isSelected) Gold500 else Color(0xFFD6DFDB)
                             ),
                             modifier = Modifier
-                                .width(106.dp)
+                                .width(78.dp)
                                 .clickable { selectedColorMode = mode }
                         ) {
                             Column(
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                                modifier = Modifier.padding(horizontal = 4.dp, vertical = 4.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 // Color swatch sample preview
                                 Box(
                                     modifier = Modifier
-                                        .size(24.dp)
+                                        .size(20.dp)
                                         .clip(CircleShape)
                                         .background(Color(mode.samplePreviewColor))
                                         .border(1.dp, if (isSelected) Gold500 else Color.Transparent, CircleShape),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text(text = mode.iconEmoji, fontSize = 12.sp)
+                                    Text(text = mode.iconEmoji, fontSize = 10.sp)
                                 }
 
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(2.dp))
 
                                 Text(
                                     text = mode.title,
-                                    fontSize = 11.5.sp,
+                                    fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = if (isSelected) Color.White else TextPrimary,
                                     maxLines = 1
                                 )
                                 Text(
                                     text = mode.subtext,
-                                    fontSize = 8.5.sp,
+                                    fontSize = 7.5.sp,
                                     color = if (isSelected) Gold100 else TextSecondary,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
@@ -867,7 +884,7 @@ fun CheckInScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
             ) {
                 // In Live Camera Mode: Show Gallery Picker + Large Real Shutter Button + Flip button
                 if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
@@ -889,35 +906,35 @@ fun CheckInScreen(
                                 shape = CircleShape,
                                 color = BgSurface,
                                 border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700),
-                                modifier = Modifier.size(46.dp)
+                                modifier = Modifier.size(42.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Default.PhotoLibrary,
                                         contentDescription = "Tải ảnh từ Thư viện",
                                         tint = Brand700,
-                                        modifier = Modifier.size(22.dp)
+                                        modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(text = "Thư viện", fontSize = 10.5.sp, color = TextPrimary)
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(text = "Thư viện", fontSize = 10.sp, color = TextPrimary)
                         }
 
                         // 2. BIG REAL SHUTTER BUTTON
                         Surface(
                             shape = CircleShape,
                             color = Color.Transparent,
-                            border = androidx.compose.foundation.BorderStroke(4.dp, Gold500),
+                            border = androidx.compose.foundation.BorderStroke(3.5.dp, Gold500),
                             modifier = Modifier
-                                .size(74.dp)
+                                .size(66.dp)
                                 .clickable(enabled = !isCapturingPhoto) {
                                     takeRealPhoto()
                                 }
                         ) {
                             Box(
                                 contentAlignment = Alignment.Center,
-                                modifier = Modifier.padding(6.dp)
+                                modifier = Modifier.padding(5.dp)
                             ) {
                                 Box(
                                     modifier = Modifier
@@ -943,19 +960,19 @@ fun CheckInScreen(
                                 shape = CircleShape,
                                 color = BgSurface,
                                 border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFFD6DFDB)),
-                                modifier = Modifier.size(46.dp)
+                                modifier = Modifier.size(42.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Default.Cameraswitch,
                                         contentDescription = "Đổi Camera",
                                         tint = Brand700,
-                                        modifier = Modifier.size(22.dp)
+                                        modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(text = if (isFrontCamera) "Trước" else "Sau", fontSize = 10.5.sp, color = TextPrimary)
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(text = if (isFrontCamera) "Trước" else "Sau", fontSize = 10.sp, color = TextPrimary)
                         }
                     }
                 }
@@ -1033,7 +1050,39 @@ fun CheckInScreen(
                     maxLines = 3
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // HELPER / REMINDER BANNER IF PHOTO HAS NOT BEEN TAKEN YET
+                if (!hasRealPhoto) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = Gold100.copy(alpha = 0.5f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Gold500.copy(alpha = 0.6f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 10.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CameraAlt,
+                                contentDescription = null,
+                                tint = Brand700,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(
+                                text = "Vui lòng chụp ảnh từ Camera hoặc chọn ảnh từ Thư viện trước khi đóng dấu hay đăng bài.",
+                                fontSize = 12.sp,
+                                color = Brand900,
+                                fontWeight = FontWeight.SemiBold,
+                                lineHeight = 16.sp
+                            )
+                        }
+                    }
+                }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -1047,7 +1096,7 @@ fun CheckInScreen(
                                 showSuccessStampDialog = true
                             }
                         },
-                        enabled = !isProcessingPhoto,
+                        enabled = hasRealPhoto && !isProcessingPhoto,
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier
                             .weight(1f)
@@ -1058,9 +1107,14 @@ fun CheckInScreen(
                             Spacer(modifier = Modifier.width(6.dp))
                             Text("Đang xử lý...", fontSize = 11.5.sp, color = Brand700)
                         } else {
-                            Icon(Icons.Default.Bookmark, contentDescription = null, tint = Brand700, modifier = Modifier.size(16.dp))
+                            Icon(Icons.Default.Bookmark, contentDescription = null, tint = if (hasRealPhoto) Brand700 else TextTertiary, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "Đóng dấu Hộ Chiếu", fontSize = 12.sp, color = Brand700, fontWeight = FontWeight.Bold)
+                            Text(
+                                text = "Đóng dấu Hộ Chiếu",
+                                fontSize = 12.sp,
+                                color = if (hasRealPhoto) Brand700 else TextTertiary,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
 
@@ -1076,7 +1130,7 @@ fun CheckInScreen(
                                 onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", savedUri)
                             }
                         },
-                        enabled = !isProcessingPhoto,
+                        enabled = hasRealPhoto && !isProcessingPhoto,
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier
@@ -1131,8 +1185,6 @@ fun CheckInScreen(
                                 .width(150.dp)
                                 .clickable {
                                     selectedPlace = place
-                                    activePhotoUrl = place.coverUrl
-                                    wasCapturedWithFrontCamera = false
                                 }
                         ) {
                             Column(modifier = Modifier.padding(8.dp)) {

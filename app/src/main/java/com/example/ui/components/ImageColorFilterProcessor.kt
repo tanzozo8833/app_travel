@@ -19,42 +19,76 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.UUID
+import kotlin.math.max
 import kotlin.math.min
 
 object ImageColorFilterProcessor {
 
     private const val TAG = "ImageColorProcessor"
-    private const val MAX_DIMENSION = 1440 // High quality, crisp square image
+    private const val PRIMARY_TARGET_DIMENSION = 1440 // High quality, crisp square image (Stage 1)
+    private const val FALLBACK_TARGET_DIMENSION = 720  // Memory-safe retry dimension (Stage 2)
 
+    /**
+     * Process, crop to 1:1, apply color filter, and save to app-private directory.
+     * Guaranteed not to crash on OutOfMemoryError, with automatic downsampling on load
+     * and fallback retry.
+     */
     suspend fun processAndSaveImage(
         context: Context,
         imageSource: String,
         colorMode: CheckInColorMode,
         isMirrored: Boolean = false
     ): Result<String> = withContext(Dispatchers.IO) {
-        try {
-            // 1. Decode bitmap with orientation correction
-            val decodedBitmap = decodeBitmap(context, imageSource)
-                ?: return@withContext Result.failure(Exception("Không thể đọc tệp ảnh nguồn"))
+        // Attempt 1: High Quality target dimension (1440px)
+        val attempt1 = tryProcessPipeline(context, imageSource, colorMode, isMirrored, PRIMARY_TARGET_DIMENSION)
+        if (attempt1.isSuccess) {
+            return@withContext attempt1
+        }
 
-            // 2. Crop to square (1:1 aspect ratio like Locket)
-            val squareBitmap = cropToSquare(decodedBitmap)
+        val firstError = attempt1.exceptionOrNull()
+        Log.w(TAG, "Primary processing failed (${firstError?.javaClass?.simpleName}: ${firstError?.message}). Retrying with fallback target ($FALLBACK_TARGET_DIMENSION px)...")
 
-            // 3. Scale down if necessary to avoid excessive memory usage
-            val scaledBitmap = if (squareBitmap.width > MAX_DIMENSION) {
-                Bitmap.createScaledBitmap(squareBitmap, MAX_DIMENSION, MAX_DIMENSION, true)
-            } else {
-                squareBitmap
-            }
+        // Force GC to free up memory before retry
+        System.gc()
 
-            // 4. Apply Color Filter and Mirroring if needed
-            val processedBitmap = applyFilterAndTransform(
-                source = scaledBitmap,
+        // Attempt 2: Fallback target dimension (720px)
+        val attempt2 = tryProcessPipeline(context, imageSource, colorMode, isMirrored, FALLBACK_TARGET_DIMENSION)
+        if (attempt2.isSuccess) {
+            Log.d(TAG, "Fallback processing succeeded at $FALLBACK_TARGET_DIMENSION px")
+            return@withContext attempt2
+        }
+
+        Log.e(TAG, "Both processing attempts failed", attempt2.exceptionOrNull())
+        Result.failure(attempt2.exceptionOrNull() ?: Exception("Không thể xử lý ảnh"))
+    }
+
+    private fun tryProcessPipeline(
+        context: Context,
+        imageSource: String,
+        colorMode: CheckInColorMode,
+        isMirrored: Boolean,
+        targetDimension: Int
+    ): Result<String> {
+        var decodedBitmap: Bitmap? = null
+        var squareBitmap: Bitmap? = null
+        var processedBitmap: Bitmap? = null
+
+        return try {
+            // 1. Decode bitmap with inSampleSize calculated BEFORE decoding into memory
+            decodedBitmap = decodeSampledBitmap(context, imageSource, targetDimension)
+                ?: return Result.failure(Exception("Không thể đọc tệp ảnh nguồn"))
+
+            // 2. Crop to square (1:1 aspect ratio)
+            squareBitmap = cropToSquare(decodedBitmap)
+
+            // 3. Apply Color Filter and Mirroring
+            processedBitmap = applyFilterAndTransform(
+                source = squareBitmap,
                 matrixArray = PhotoFilters.getMatrixForMode(colorMode),
                 isMirrored = isMirrored
             )
 
-            // 5. Save to app-private directory (survives gallery deletion, requires no extra permissions)
+            // 4. Save to app-private directory
             val targetDir = File(context.filesDir, "checkin_photos").apply {
                 if (!exists()) mkdirs()
             }
@@ -66,79 +100,188 @@ object ImageColorFilterProcessor {
                 outStream.flush()
             }
 
-            // Clean up temporary bitmaps if they are different references
-            if (decodedBitmap != squareBitmap && !decodedBitmap.isRecycled) {
-                decodedBitmap.recycle()
-            }
-            if (scaledBitmap != squareBitmap && !scaledBitmap.isRecycled) {
-                scaledBitmap.recycle()
-            }
-            if (processedBitmap != scaledBitmap && !processedBitmap.isRecycled) {
-                processedBitmap.recycle()
-            }
-
             val savedUri = Uri.fromFile(targetFile).toString()
-            Log.d(TAG, "Processed and saved image to: $savedUri (Filter: ${colorMode.title})")
+            Log.d(TAG, "Processed and saved image to: $savedUri (Filter: ${colorMode.title}, Target: ${targetDimension}px)")
             Result.success(savedUri)
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to process image filter", e)
-            Result.failure(e)
+        } catch (oom: OutOfMemoryError) {
+            Log.e(TAG, "OutOfMemoryError during image processing pipeline (target: $targetDimension)", oom)
+            Result.failure(Exception("Hết bộ nhớ khi xử lý ảnh: ${oom.message}", oom))
+        } catch (t: Throwable) {
+            Log.e(TAG, "Error during image processing pipeline", t)
+            Result.failure(if (t is Exception) t else Exception(t.message, t))
+        } finally {
+            // Clean up temporary bitmaps safely
+            try {
+                if (decodedBitmap != null && decodedBitmap != squareBitmap && !decodedBitmap.isRecycled) {
+                    decodedBitmap.recycle()
+                }
+                if (squareBitmap != null && squareBitmap != processedBitmap && !squareBitmap.isRecycled) {
+                    squareBitmap.recycle()
+                }
+                if (processedBitmap != null && !processedBitmap.isRecycled) {
+                    processedBitmap.recycle()
+                }
+            } catch (ignored: Throwable) {
+            }
         }
     }
 
-    private fun decodeBitmap(context: Context, source: String): Bitmap? {
+    /**
+     * Measure image dimensions first using inJustDecodeBounds, calculate optimal inSampleSize,
+     * and only then allocate memory for the sampled bitmap.
+     */
+    private fun decodeSampledBitmap(context: Context, source: String, targetDimension: Int): Bitmap? {
         return try {
             when {
                 source.startsWith("content://") -> {
                     val uri = Uri.parse(source)
                     var rotation = 0
+
+                    // Step 1: Read EXIF orientation
                     context.contentResolver.openInputStream(uri)?.use { stream ->
                         try {
                             val exif = ExifInterface(stream)
                             rotation = exifToDegrees(exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL))
-                        } catch (e: Exception) {
-                            Log.w(TAG, "Failed to read EXIF from stream", e)
+                        } catch (e: Throwable) {
+                            Log.w(TAG, "Failed to read EXIF from content stream", e)
                         }
                     }
+
+                    // Step 2: Measure bounds
+                    val boundsOptions = BitmapFactory.Options().apply {
+                        inJustDecodeBounds = true
+                    }
                     context.contentResolver.openInputStream(uri)?.use { stream ->
-                        val bitmap = BitmapFactory.decodeStream(stream)
-                        if (rotation != 0 && bitmap != null) rotateBitmap(bitmap, rotation.toFloat()) else bitmap
+                        BitmapFactory.decodeStream(stream, null, boundsOptions)
+                    }
+
+                    if (boundsOptions.outWidth <= 0 || boundsOptions.outHeight <= 0) {
+                        return null
+                    }
+
+                    // Step 3: Compute inSampleSize
+                    val sampleSize = calculateInSampleSize(boundsOptions, targetDimension)
+
+                    // Step 4: Decode sampled bitmap
+                    val decodeOptions = BitmapFactory.Options().apply {
+                        inSampleSize = sampleSize
+                        inPreferredConfig = Bitmap.Config.ARGB_8888
+                    }
+                    val sampled = context.contentResolver.openInputStream(uri)?.use { stream ->
+                        BitmapFactory.decodeStream(stream, null, decodeOptions)
+                    }
+
+                    if (sampled != null && rotation != 0) {
+                        val rotated = rotateBitmap(sampled, rotation.toFloat())
+                        if (rotated != sampled && !sampled.isRecycled) {
+                            sampled.recycle()
+                        }
+                        rotated
+                    } else {
+                        sampled
                     }
                 }
+
                 source.startsWith("file://") || source.startsWith("/") -> {
                     val filePath = if (source.startsWith("file://")) Uri.parse(source).path ?: source else source
                     var rotation = 0
+
+                    // Step 1: Read EXIF orientation
                     try {
                         val exif = ExifInterface(filePath)
                         rotation = exifToDegrees(exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL))
-                    } catch (e: Exception) {
+                    } catch (e: Throwable) {
                         Log.w(TAG, "Failed to read EXIF from file: $filePath", e)
                     }
-                    val bitmap = BitmapFactory.decodeFile(filePath)
-                    if (rotation != 0 && bitmap != null) rotateBitmap(bitmap, rotation.toFloat()) else bitmap
+
+                    // Step 2: Measure bounds
+                    val boundsOptions = BitmapFactory.Options().apply {
+                        inJustDecodeBounds = true
+                    }
+                    BitmapFactory.decodeFile(filePath, boundsOptions)
+
+                    if (boundsOptions.outWidth <= 0 || boundsOptions.outHeight <= 0) {
+                        return null
+                    }
+
+                    // Step 3: Compute inSampleSize
+                    val sampleSize = calculateInSampleSize(boundsOptions, targetDimension)
+
+                    // Step 4: Decode sampled bitmap
+                    val decodeOptions = BitmapFactory.Options().apply {
+                        inSampleSize = sampleSize
+                        inPreferredConfig = Bitmap.Config.ARGB_8888
+                    }
+                    val sampled = BitmapFactory.decodeFile(filePath, decodeOptions)
+
+                    if (sampled != null && rotation != 0) {
+                        val rotated = rotateBitmap(sampled, rotation.toFloat())
+                        if (rotated != sampled && !sampled.isRecycled) {
+                            sampled.recycle()
+                        }
+                        rotated
+                    } else {
+                        sampled
+                    }
                 }
+
                 source.startsWith("http://") || source.startsWith("https://") -> {
                     val url = URL(source)
                     val connection = url.openConnection() as HttpURLConnection
                     connection.doInput = true
                     connection.connect()
-                    connection.inputStream.use { input ->
-                        BitmapFactory.decodeStream(input)
+                    val bytes = connection.inputStream.use { it.readBytes() }
+
+                    val boundsOptions = BitmapFactory.Options().apply {
+                        inJustDecodeBounds = true
                     }
+                    BitmapFactory.decodeByteArray(bytes, 0, bytes.size, boundsOptions)
+
+                    val sampleSize = calculateInSampleSize(boundsOptions, targetDimension)
+                    val decodeOptions = BitmapFactory.Options().apply {
+                        inSampleSize = sampleSize
+                        inPreferredConfig = Bitmap.Config.ARGB_8888
+                    }
+                    BitmapFactory.decodeByteArray(bytes, 0, bytes.size, decodeOptions)
                 }
+
                 else -> {
                     val file = File(source)
-                    if (file.exists()) {
-                        BitmapFactory.decodeFile(file.absolutePath)
-                    } else {
-                        null
+                    if (!file.exists()) return null
+
+                    val boundsOptions = BitmapFactory.Options().apply {
+                        inJustDecodeBounds = true
                     }
+                    BitmapFactory.decodeFile(file.absolutePath, boundsOptions)
+
+                    val sampleSize = calculateInSampleSize(boundsOptions, targetDimension)
+                    val decodeOptions = BitmapFactory.Options().apply {
+                        inSampleSize = sampleSize
+                        inPreferredConfig = Bitmap.Config.ARGB_8888
+                    }
+                    BitmapFactory.decodeFile(file.absolutePath, decodeOptions)
                 }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error decoding bitmap from source: $source", e)
+        } catch (oom: OutOfMemoryError) {
+            Log.e(TAG, "OutOfMemoryError in decodeSampledBitmap", oom)
+            null
+        } catch (t: Throwable) {
+            Log.e(TAG, "Error decoding bitmap from source: $source", t)
             null
         }
+    }
+
+    private fun calculateInSampleSize(options: BitmapFactory.Options, targetDimension: Int): Int {
+        val rawWidth = options.outWidth
+        val rawHeight = options.outHeight
+        val minRawDim = min(rawWidth, rawHeight)
+
+        var inSampleSize = 1
+        // We want minRawDim / inSampleSize to be roughly targetDimension (keeping high crispness)
+        while ((minRawDim / (inSampleSize * 2)) >= targetDimension) {
+            inSampleSize *= 2
+        }
+        return max(1, inSampleSize)
     }
 
     private fun cropToSquare(bitmap: Bitmap): Bitmap {
@@ -150,7 +293,11 @@ object ImageColorFilterProcessor {
         return if (cropX == 0 && cropY == 0 && width == height) {
             bitmap
         } else {
-            Bitmap.createBitmap(bitmap, cropX, cropY, minDim, minDim)
+            val cropped = Bitmap.createBitmap(bitmap, cropX, cropY, minDim, minDim)
+            if (cropped != bitmap && !bitmap.isRecycled) {
+                bitmap.recycle()
+            }
+            cropped
         }
     }
 
