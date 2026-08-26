@@ -65,13 +65,13 @@ fun PostCard(
         }
     }
 
-    Card(
-        shape = RoundedCornerShape(0.dp),
-        colors = CardDefaults.cardColors(containerColor = BgSurface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    Surface(
+        shape = RoundedCornerShape(14.dp),
+        color = BgSurface,
+        border = androidx.compose.foundation.BorderStroke(0.5.dp, Color(0xFFE4ECE8)),
         modifier = modifier
             .fillMaxWidth()
-            .border(width = 0.5.dp, color = Color(0xFFE4ECE8))
+            .clip(RoundedCornerShape(14.dp))
             .clickable { onPostClick(post) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -145,12 +145,13 @@ fun PostCard(
                 }
             }
 
-            // 2. Photo Content Container with dynamic aspect ratio & double tap detector
+            // 2. Photo Content Container: naturally flexes height to the first photo with rounded corners
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(post.aspectRatio)
-                    .background(BgSunken)
+                    .padding(horizontal = 6.dp, vertical = 2.dp)
+                    .clip(RoundedCornerShape(10.dp))
+                    .wrapContentHeight()
                     .pointerInput(Unit) {
                         detectTapGestures(
                             onTap = { onPostClick(post) },
@@ -162,8 +163,11 @@ fun PostCard(
                 AsyncImage(
                     model = post.mediaUrls.firstOrNull(),
                     contentDescription = post.caption,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .clip(RoundedCornerShape(10.dp))
                 )
 
                 // Multi-photo indicator

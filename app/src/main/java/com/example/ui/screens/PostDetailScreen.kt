@@ -1,5 +1,7 @@
 package com.example.ui.screens
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,17 +23,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.example.data.model.Post
 import com.example.data.model.Trip
 import com.example.ui.components.PostCard
 import com.example.ui.components.TripCard
 import com.example.ui.theme.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun PostDetailScreen(
@@ -50,6 +58,51 @@ fun PostDetailScreen(
     var isFollowed by remember { mutableStateOf(false) }
     val mediaUrls = if (post.mediaUrls.isNotEmpty()) post.mediaUrls else listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
     val pagerState = rememberPagerState(pageCount = { mediaUrls.size })
+
+    val context = LocalContext.current
+    var containerAspectRatio by remember(mediaUrls) { mutableStateOf(post.aspectRatio) }
+
+    // Measure all images in the post to find the tallest/largest photo (minimum aspect ratio = max height)
+    LaunchedEffect(mediaUrls) {
+        withContext(Dispatchers.IO) {
+            try {
+                var minRatio = post.aspectRatio
+                val loader = ImageLoader(context)
+                for (url in mediaUrls) {
+                    var width = -1
+                    var height = -1
+                    if (url.startsWith("content://") || url.startsWith("file://")) {
+                        val uri = Uri.parse(url)
+                        context.contentResolver.openInputStream(uri)?.use { stream ->
+                            val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                            BitmapFactory.decodeStream(stream, null, options)
+                            width = options.outWidth
+                            height = options.outHeight
+                        }
+                    } else if (url.startsWith("http://") || url.startsWith("https://")) {
+                        val request = ImageRequest.Builder(context)
+                            .data(url)
+                            .size(coil.size.Size.ORIGINAL)
+                            .build()
+                        val result = loader.execute(request)
+                        if (result is SuccessResult) {
+                            width = result.drawable.intrinsicWidth
+                            height = result.drawable.intrinsicHeight
+                        }
+                    }
+                    if (width > 0 && height > 0) {
+                        val r = width.toFloat() / height.toFloat()
+                        if (r < minRatio) {
+                            minRatio = r
+                        }
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    containerAspectRatio = minRatio
+                }
+            } catch (_: Exception) {}
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -139,24 +192,29 @@ fun PostDetailScreen(
                 }
             }
 
-            // 2. Photo Carousel with Multi-image Swiper & Dot Indicators
+            // 2. Photo Carousel with Multi-image Swiper & Dot Indicators (Flex height according to largest photo to eliminate jitter)
             item {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(post.aspectRatio)
-                        .background(BgSunken)
+                        .aspectRatio(containerAspectRatio)
+                        .background(Color.Black)
                 ) {
                     HorizontalPager(
                         state = pagerState,
                         modifier = Modifier.fillMaxSize()
                     ) { page ->
-                        AsyncImage(
-                            model = mediaUrls[page],
-                            contentDescription = post.caption,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            AsyncImage(
+                                model = mediaUrls[page],
+                                contentDescription = post.caption,
+                                contentScale = ContentScale.Fit,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
                     }
 
                     // Multi-photo count badge (e.g. 1/4)

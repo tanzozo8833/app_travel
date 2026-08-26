@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -24,14 +25,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.example.data.model.Trip
 import com.example.ui.theme.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 enum class ShareAudience(val label: String, val description: String) {
     PUBLIC("Thế giới", "Mọi người trên Lumina đều có thể xem và lưu"),
@@ -98,6 +105,60 @@ fun CreatePostScreen(
         AspectRatioOption("Dọc Story (9:16)", 0.56f, "Toàn màn hình / Reel")
     )
     var selectedAspectRatio by remember { mutableStateOf(0.8f) }
+
+    val context = LocalContext.current
+    val coverImage = selectedImages.firstOrNull()
+    var lastDetectedCover by remember { mutableStateOf<String?>(null) }
+
+    // Auto-detect aspect ratio from the first (cover) image
+    LaunchedEffect(coverImage) {
+        if (coverImage == null) {
+            lastDetectedCover = null
+            return@LaunchedEffect
+        }
+        if (coverImage != lastDetectedCover) {
+            lastDetectedCover = coverImage
+            withContext(Dispatchers.IO) {
+                try {
+                    var width = -1
+                    var height = -1
+
+                    if (coverImage.startsWith("content://") || coverImage.startsWith("file://")) {
+                        val uri = Uri.parse(coverImage)
+                        context.contentResolver.openInputStream(uri)?.use { stream ->
+                            val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+                            BitmapFactory.decodeStream(stream, null, options)
+                            width = options.outWidth
+                            height = options.outHeight
+                        }
+                    } else if (coverImage.startsWith("http://") || coverImage.startsWith("https://")) {
+                        val loader = ImageLoader(context)
+                        val request = ImageRequest.Builder(context)
+                            .data(coverImage)
+                            .size(coil.size.Size.ORIGINAL)
+                            .build()
+                        val result = loader.execute(request)
+                        if (result is SuccessResult) {
+                            width = result.drawable.intrinsicWidth
+                            height = result.drawable.intrinsicHeight
+                        }
+                    }
+
+                    if (width > 0 && height > 0) {
+                        val rawRatio = width.toFloat() / height.toFloat()
+                        val bestMatch = aspectOptions.minByOrNull { kotlin.math.abs(it.ratio - rawRatio) }
+                        bestMatch?.let {
+                            withContext(Dispatchers.Main) {
+                                selectedAspectRatio = it.ratio
+                            }
+                        }
+                    }
+                } catch (_: Exception) {
+                    // Graceful fallback - keep existing aspect ratio without any error
+                }
+            }
+        }
+    }
 
     // Photo picker launcher up to 20 media
     val photoPickerLauncher = rememberLauncherForActivityResult(

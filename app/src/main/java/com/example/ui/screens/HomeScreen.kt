@@ -90,24 +90,24 @@ fun HomeScreen(
             )
         }
 
-        // 2-Column Staggered Grid (Thác nước không khoảng trống giữa các bài viết):
+        // 2-Column Staggered Grid with rounded post cards and elegant small gap spacing:
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(0.dp),
-            verticalItemSpacing = 0.dp,
-            contentPadding = PaddingValues(start = 0.dp, end = 0.dp, top = 4.dp, bottom = 90.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalItemSpacing = 8.dp,
+            contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 90.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             // 1. Hero Banner: Quick Passport Stamp Prompt
             item(span = StaggeredGridItemSpan.FullLine) {
-                Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)) {
+                Box(modifier = Modifier.padding(vertical = 4.dp)) {
                     HeroCheckInBanner(onQuickCheckIn = onQuickCheckInClick)
                 }
             }
 
             // 2. Province Stories / Stamp Ring Tray
             item(span = StaggeredGridItemSpan.FullLine) {
-                Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)) {
+                Box(modifier = Modifier.padding(vertical = 2.dp)) {
                     ProvinceStoryTray(
                         provinces = provinces,
                         onProvinceClick = onProvinceClick
