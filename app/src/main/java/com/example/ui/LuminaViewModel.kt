@@ -2,14 +2,17 @@ package com.example.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.local.SeedData
+import com.example.LuminaApplication
 import com.example.data.model.*
 import com.example.data.repository.LuminaRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 enum class MainTab {
     HOME,
@@ -52,7 +55,7 @@ data class ChatMessage(
 )
 
 class LuminaViewModel(
-    private val repository: LuminaRepository = LuminaRepository()
+    private val repository: LuminaRepository = LuminaApplication.instance.repository
 ) : ViewModel() {
 
     // Main Navigation
@@ -106,41 +109,11 @@ class LuminaViewModel(
     private val _appLanguage = MutableStateFlow("vi")
     val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
 
-    private val _userAccounts = MutableStateFlow(
-        listOf(
-            UserProfile(
-                id = "u_1",
-                username = "linh.travels",
-                displayName = "Thảo Linh",
-                avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
-                tagTitle = "GEN Z EXPLORER",
-                bio = "Gen Z Explorer | Săn hoàng hôn & Foodtour Việt Nam 🇻🇳 ✨",
-                topCityName = "Hà Nội",
-                topCityCheckInCount = 4,
-                visitedProvincesCount = 5,
-                totalProvincesCount = 34,
-                totalDistanceKm = 12500.0,
-                tripsCompletedCount = 18,
-                totalSavesCount = 3420
-            ),
-            UserProfile(
-                id = "u_2",
-                username = "tan.explorer",
-                displayName = "Đức Tân",
-                avatarUrl = "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop",
-                tagTitle = "TREK MASTER",
-                bio = "Chinh phục 63 tỉnh thành • Đam mê cắm trại & flycam 🏕️ 🏔️",
-                topCityName = "Hà Giang",
-                topCityCheckInCount = 8,
-                visitedProvincesCount = 19,
-                totalProvincesCount = 34,
-                totalDistanceKm = 24800.0,
-                tripsCompletedCount = 32,
-                totalSavesCount = 8900
-            )
-        )
+    val userAccounts: StateFlow<List<UserProfile>> = repository.userProfiles.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
     )
-    val userAccounts: StateFlow<List<UserProfile>> = _userAccounts.asStateFlow()
 
     private val _currentAccountIndex = MutableStateFlow(0)
     val currentAccountIndex: StateFlow<Int> = _currentAccountIndex.asStateFlow()
@@ -148,16 +121,62 @@ class LuminaViewModel(
     private val _isShowingCommentSheet = MutableStateFlow(false)
     val isShowingCommentSheet: StateFlow<Boolean> = _isShowingCommentSheet.asStateFlow()
 
-    // Data streams from repository
-    val posts: StateFlow<List<Post>> = repository.posts
-    val trips: StateFlow<List<Trip>> = repository.trips
-    val provinces: StateFlow<List<Province>> = repository.provinces
-    val places: StateFlow<List<Place>> = repository.places
-    val checkIns: StateFlow<List<CheckInRecord>> = repository.checkIns
-    val badges: StateFlow<List<AchievementBadge>> = repository.badges
-    val notifications: StateFlow<List<NotificationItem>> = repository.notifications
-    val userProfile: StateFlow<UserProfile> = repository.userProfile
-    val savedBoards: StateFlow<List<SavedBoard>> = repository.savedBoards
+    // Data streams directly from Room Database via repository
+    val posts: StateFlow<List<Post>> = repository.posts.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val trips: StateFlow<List<Trip>> = repository.trips.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val provinces: StateFlow<List<Province>> = repository.provinces.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val places: StateFlow<List<Place>> = repository.places.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val checkIns: StateFlow<List<CheckInRecord>> = repository.checkIns.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val badges: StateFlow<List<AchievementBadge>> = repository.badges.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val notifications: StateFlow<List<NotificationItem>> = repository.notifications.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val userProfile: StateFlow<UserProfile> = repository.userProfile.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        UserProfile(
+            id = "u_1",
+            username = "linh.travels",
+            displayName = "Thảo Linh",
+            avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+        )
+    )
+    val savedBoards: StateFlow<List<SavedBoard>> = repository.savedBoards.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
+    val frames: StateFlow<List<LuminaFrame>> = repository.frames.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        emptyList()
+    )
 
     // AI Planning State
     private val _aiWizardState = MutableStateFlow(AiWizardState())
@@ -330,10 +349,9 @@ class LuminaViewModel(
     }
 
     fun duplicateTrip(tripId: String) {
-        val dup = repository.duplicateTrip(tripId)
-        if (dup != null) {
-            showToast("Đã nhân bản chuyến đi thành công!")
+        repository.duplicateTrip(tripId) { dup ->
             _selectedTrip.value = dup
+            showToast("Đã nhân bản chuyến đi thành công!")
         }
     }
 
@@ -341,6 +359,61 @@ class LuminaViewModel(
         repository.deleteTrip(tripId)
         closeTripDetail()
         showToast("Đã xoá chuyến đi.")
+    }
+
+    fun saveManualTrip(trip: Trip) {
+        repository.saveTrip(trip)
+        openTripDetail(trip, editMode = false)
+        showToast("Đã lưu lịch trình thành công!")
+    }
+
+    fun createManualTrip(
+        title: String,
+        destination: String,
+        durationDays: Int,
+        budgetVnd: Long,
+        notes: String
+    ) {
+        val days = (1..durationDays).map { dayNum ->
+            com.example.data.model.TripDay(
+                dayNumber = dayNum,
+                dateText = "Ngày $dayNum",
+                title = "Ngày $dayNum: Khám phá $destination",
+                items = listOf(
+                    com.example.data.model.TripItem(
+                        timeSlot = "08:00 - 10:00",
+                        title = "Ăn sáng & khởi hành tại trung tâm $destination",
+                        description = "Thưởng thức đặc sản địa phương",
+                        locationName = destination,
+                        costVnd = 50000L
+                    ),
+                    com.example.data.model.TripItem(
+                        timeSlot = "14:00 - 17:00",
+                        title = "Tham quan địa điểm nổi bật",
+                        description = "Check-in ngắm cảnh đẹp $destination",
+                        locationName = destination,
+                        costVnd = 100000L
+                    )
+                )
+            )
+        }
+        val newTrip = Trip(
+            id = "trip_manual_${System.currentTimeMillis()}",
+            title = if (title.isNotBlank()) title else "Chuyến đi $destination",
+            destination = destination,
+            provinceCode = "VN",
+            coverUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
+            startDate = "Hôm nay",
+            endDate = "Ngày $durationDays",
+            durationText = "${durationDays}N${durationDays - 1}Đ",
+            totalEstimatedCostVnd = budgetVnd,
+            styleTags = listOf("Tự tạo", "Khám phá"),
+            isAiGenerated = false,
+            days = days
+        )
+        repository.saveTrip(newTrip)
+        openTripDetail(newTrip, editMode = true)
+        showToast("Đã tạo lịch trình thủ công thành công!")
     }
 
     // AI Wizard
@@ -399,15 +472,16 @@ class LuminaViewModel(
     }
 
     // AI Chat
-    fun sendChatMessage(text: String, plugin: String? = null) {
+    fun sendChatMessage(text: String, plugin: String? = null, contextInfo: String? = null) {
         if (text.isBlank()) return
         val userMsg = ChatMessage(isUser = true, text = text)
         _chatMessages.value = _chatMessages.value + userMsg
 
         viewModelScope.launch {
+            val destinationContext = contextInfo ?: _aiWizardState.value.destination
             val responseText = repository.askAi(
                 question = text,
-                destination = _aiWizardState.value.destination,
+                destination = destinationContext,
                 plugin = plugin
             )
             val aiMsg = ChatMessage(isUser = false, text = responseText)
@@ -431,50 +505,28 @@ class LuminaViewModel(
     }
 
     fun switchAccount(index: Int) {
-        if (index in _userAccounts.value.indices) {
+        val accounts = userAccounts.value
+        if (index in accounts.indices) {
             _currentAccountIndex.value = index
-            val target = _userAccounts.value[index]
-            repository.updateUserProfile(target)
+            val target = accounts[index]
+            repository.switchActiveUser(target.id)
             showToast("Đã chuyển sang tài khoản @${target.username}")
         }
     }
 
     fun addNewAccount(displayName: String, username: String) {
-        val newAcc = UserProfile(
-            id = "u_${System.currentTimeMillis()}",
-            username = username.lowercase().replace(" ", "."),
-            displayName = displayName,
-            avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop",
-            tagTitle = "NEW EXPLORER",
-            bio = "Bắt đầu hành trình khám phá Việt Nam cùng Lumina ✨",
-            topCityName = "Đà Nẵng",
-            topCityCheckInCount = 1,
-            visitedProvincesCount = 1,
-            totalProvincesCount = 34,
-            totalDistanceKm = 300.0,
-            tripsCompletedCount = 1,
-            totalSavesCount = 12
-        )
-        _userAccounts.value = _userAccounts.value + newAcc
-        _currentAccountIndex.value = _userAccounts.value.size - 1
-        repository.updateUserProfile(newAcc)
-        showToast("Đã tạo và đăng nhập tài khoản @${newAcc.username}")
+        repository.addNewUser(displayName, username)
+        showToast("Đã tạo và đăng nhập tài khoản mới!")
     }
 
     fun updateProfileInfo(displayName: String, bio: String, tagTitle: String) {
-        val current = repository.userProfile.value
+        val current = userProfile.value
         val updated = current.copy(
             displayName = displayName,
             bio = bio,
             tagTitle = tagTitle
         )
         repository.updateUserProfile(updated)
-        val idx = _currentAccountIndex.value
-        val list = _userAccounts.value.toMutableList()
-        if (idx in list.indices) {
-            list[idx] = updated
-            _userAccounts.value = list
-        }
         showToast("Đã lưu cập nhật hồ sơ!")
     }
 

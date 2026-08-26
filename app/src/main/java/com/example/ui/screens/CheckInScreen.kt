@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.data.local.SeedData
 import com.example.data.model.CheckInRecord
 import com.example.data.model.LuminaFrame
 import com.example.data.model.Place
@@ -46,14 +45,66 @@ fun CheckInScreen(
     provinces: List<Province>,
     places: List<Place>,
     checkIns: List<CheckInRecord>,
+    frames: List<LuminaFrame> = emptyList(),
     onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String) -> Unit,
     onPublishPost: (caption: String, location: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var currentTab by remember { mutableStateOf(CheckInTab.QUICK_STAMP) }
-    var selectedProvince by remember { mutableStateOf(provinces.find { it.code == "LDG" } ?: provinces.first()) }
-    var selectedPlace by remember { mutableStateOf(places.firstOrNull { it.provinceCode == "LDG" } ?: places.first()) }
-    var selectedFrame by remember { mutableStateOf(SeedData.frames.first()) }
+    var selectedProvince by remember(provinces) {
+        mutableStateOf(
+            provinces.find { it.code == "LDG" } ?: provinces.firstOrNull() ?: Province(
+                id = 1,
+                code = "LDG",
+                name = "Tỉnh Lâm Đồng",
+                shortName = "Đà Lạt",
+                region = "Tây Nguyên",
+                centerLat = 11.94,
+                centerLng = 108.45,
+                coverUrl = "",
+                stampSymbol = "🌲",
+                highlightDescription = "",
+                suggestedPlacesCount = 5,
+                visitedPlacesCount = 0,
+                isCompleted = false
+            )
+        )
+    }
+    var selectedPlace by remember(places) {
+        mutableStateOf(
+            places.firstOrNull { it.provinceCode == "LDG" } ?: places.firstOrNull() ?: Place(
+                id = "p_1",
+                provinceId = 2,
+                provinceCode = "LDG",
+                name = "Đồi Chè Cầu Đất",
+                category = com.example.data.model.PlaceCategory.PHOTO,
+                address = "Đà Lạt",
+                description = "Điểm săn mây",
+                coverUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
+                checkinRadiusMeters = 500,
+                isSuggested = true,
+                priceRangeVnd = 50000,
+                tags = listOf("Săn mây"),
+                rating = 4.9,
+                isVisited = false
+            )
+        )
+    }
+    var selectedFrame by remember(frames) {
+        mutableStateOf(
+            frames.firstOrNull() ?: LuminaFrame(
+                id = "frame_1",
+                name = "Quốc Khánh 2/9",
+                badgeLabel = "🇻🇳 Quốc Khánh 2/9",
+                subtitle = "2/9/1945 - 2/9/2026",
+                topTitle = "★ VIỆT NAM TRONG TIM TÔI ★",
+                bottomTagline = "LUMINA PASSPORT",
+                previewColor = 0xFFD93025,
+                provinceCode = null,
+                isSeasonal = true
+            )
+        )
+    }
     var userCaption by remember { mutableStateOf("") }
     var showStampSuccessDialog by remember { mutableStateOf(false) }
 
@@ -407,7 +458,7 @@ fun CheckInScreen(
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        items(SeedData.frames) { frame ->
+                        items(frames) { frame ->
                             val isSelected = selectedFrame.id == frame.id
                             Surface(
                                 shape = RoundedCornerShape(999.dp),

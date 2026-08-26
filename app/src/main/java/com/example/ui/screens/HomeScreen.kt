@@ -74,24 +74,23 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             FeedTabPill(
-                label = "✨ Khám phá",
+                label = "Khám phá",
                 isSelected = currentSubTab == FeedSubTab.EXPLORE,
                 onClick = { onSubTabChanged(FeedSubTab.EXPLORE) }
             )
             FeedTabPill(
-                label = "👥 Đang theo dõi",
+                label = "Đang theo dõi",
                 isSelected = currentSubTab == FeedSubTab.FOLLOWING,
                 onClick = { onSubTabChanged(FeedSubTab.FOLLOWING) }
             )
             FeedTabPill(
-                label = "📍 Gần bạn",
+                label = "Gần bạn",
                 isSelected = currentSubTab == FeedSubTab.NEARBY,
                 onClick = { onSubTabChanged(FeedSubTab.NEARBY) }
             )
         }
 
         // 2-Column Staggered Grid (Thác nước):
-        // Các ô có ảnh dọc hoặc ảnh ngang, ô tiếp theo trong cùng cột tự động fit khít ngay bên dưới
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -129,166 +128,6 @@ fun HomeScreen(
                     onShareClick = onShareClick,
                     onCommentClick = onCommentClick
                 )
-            }
-
-            // 4. Section: Suggestions Below Feed (Gợi ý điểm đến & lộ trình)
-            item(span = StaggeredGridItemSpan.FullLine) {
-                Spacer(modifier = Modifier.height(6.dp))
-                SuggestionsSection(
-                    provinces = provinces,
-                    onProvinceClick = onProvinceClick,
-                    onPlanTripWithAi = onPlanTripWithAi
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun SuggestionsSection(
-    provinces: List<Province>,
-    onProvinceClick: (Province) -> Unit,
-    onPlanTripWithAi: (destination: String) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(BgCanvas)
-            .padding(14.dp)
-    ) {
-        // Header
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "✦", color = Gold500, fontSize = 14.sp)
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = "GỢI Ý ĐIỂM ĐẾN & HÀNH TRÌNH DÀNH CHO BẠN",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        color = Brand700
-                    )
-                }
-                Text(
-                    text = "Dựa trên sở thích săn ảnh & foodtour",
-                    fontSize = 12.sp,
-                    color = TextSecondary
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // Horizontal Recommended Destination Cards
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(vertical = 4.dp)
-        ) {
-            items(provinces.take(6)) { province ->
-                Card(
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = BgSurface),
-                    elevation = CardDefaults.cardElevation(3.dp),
-                    modifier = Modifier
-                        .width(220.dp)
-                        .clickable { onProvinceClick(province) }
-                ) {
-                    Column {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(115.dp)
-                        ) {
-                            AsyncImage(
-                                model = province.coverUrl,
-                                contentDescription = province.name,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = Brand900.copy(alpha = 0.85f),
-                                modifier = Modifier
-                                    .align(Alignment.TopStart)
-                                    .padding(8.dp)
-                            ) {
-                                Text(
-                                    text = "${province.stampSymbol} ${province.region}",
-                                    fontSize = 9.5.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Gold500,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
-
-                        Column(modifier = Modifier.padding(10.dp)) {
-                            Text(
-                                text = province.shortName,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary
-                            )
-                            Text(
-                                text = province.highlightDescription,
-                                fontSize = 10.5.sp,
-                                color = TextSecondary,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Button(
-                                onClick = { onPlanTripWithAi(province.shortName) },
-                                colors = ButtonDefaults.buttonColors(containerColor = Brand700),
-                                shape = RoundedCornerShape(999.dp),
-                                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                                modifier = Modifier.height(28.dp)
-                            ) {
-                                Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(12.dp), tint = Gold500)
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(text = "Lên lịch AI", fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Foodtour & Secret Spot Suggestion Banner
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Brand100),
-            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFCBE0D5)),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(14.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "🍜", fontSize = 28.sp)
-                Spacer(modifier = Modifier.width(12.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Foodtour Món Ngon 3 Miền",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Brand900
-                    )
-                    Text(
-                        text = "Khám phá 20 quán ăn chuẩn vị địa phương có dấu chứng nhận Lumina!",
-                        fontSize = 11.sp,
-                        color = TextSecondary
-                    )
-                }
             }
         }
     }
@@ -348,7 +187,7 @@ private fun HeroCheckInBanner(
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "📍 ĐANG Ở LÂM ĐỒNG",
+                            text = "ĐANG Ở LÂM ĐỒNG",
                             fontSize = 9.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -377,7 +216,7 @@ private fun HeroCheckInBanner(
                     contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp)
                 ) {
                     Text(
-                        text = "Đóng dấu ⦿",
+                        text = "Đóng dấu",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = TextOnGold

@@ -135,7 +135,7 @@ fun PostCard(
 
                     // Location tag
                     Text(
-                        text = "📍 ${post.locationLabel}",
+                        text = post.locationLabel,
                         fontSize = 9.5.sp,
                         color = TextSecondary,
                         maxLines = 1,
@@ -166,22 +166,33 @@ fun PostCard(
                     modifier = Modifier.fillMaxSize()
                 )
 
-                // Multi-photo indicator (▸2)
+                // Multi-photo indicator
                 if (post.mediaUrls.size > 1) {
                     Surface(
                         shape = RoundedCornerShape(999.dp),
-                        color = Color.Black.copy(alpha = 0.55f),
+                        color = Color.Black.copy(alpha = 0.65f),
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                             .padding(8.dp)
                     ) {
-                        Text(
-                            text = "▸${post.mediaUrls.size}",
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.PhotoLibrary,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(11.dp)
+                            )
+                            Spacer(modifier = Modifier.width(3.dp))
+                            Text(
+                                text = "1/${post.mediaUrls.size}",
+                                fontSize = 9.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
                     }
                 }
 

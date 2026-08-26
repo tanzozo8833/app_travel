@@ -5,6 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -17,7 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -29,6 +35,8 @@ import com.example.ui.theme.*
 @Composable
 fun PostDetailScreen(
     post: Post,
+    allPosts: List<Post> = emptyList(),
+    onPostClick: (Post) -> Unit = {},
     onBack: () -> Unit,
     onTripClick: (Trip) -> Unit,
     onLikeClick: (Post) -> Unit,
@@ -39,6 +47,8 @@ fun PostDetailScreen(
     modifier: Modifier = Modifier
 ) {
     var isFollowed by remember { mutableStateOf(false) }
+    val mediaUrls = if (post.mediaUrls.isNotEmpty()) post.mediaUrls else listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
+    val pagerState = rememberPagerState(pageCount = { mediaUrls.size })
 
     Scaffold(
         topBar = {
@@ -63,70 +73,7 @@ fun PostDetailScreen(
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
                     )
-                    IconButton(onClick = { onShareClick(post) }) {
-                        Icon(Icons.Default.Share, contentDescription = "Chia sẻ", tint = TextPrimary)
-                    }
-                }
-            }
-        },
-        bottomBar = {
-            Surface(
-                color = BgSurface,
-                shadowElevation = 8.dp,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .navigationBarsPadding()
-                        .padding(horizontal = 14.dp, vertical = 10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Quick button opening the comment bottom sheet popup
-                    Surface(
-                        shape = RoundedCornerShape(999.dp),
-                        color = BgCanvas,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable { onCommentClick(post) }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.ChatBubbleOutline,
-                                contentDescription = null,
-                                tint = TextSecondary,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Bình luận về bài viết...",
-                                fontSize = 12.5.sp,
-                                color = TextSecondary
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.width(12.dp))
-
-                    // Instant Save/Bookmark
-                    IconButton(
-                        onClick = { onSaveClick(post) },
-                        modifier = Modifier
-                            .size(38.dp)
-                            .background(if (post.isSaved) Brand100 else BgCanvas, CircleShape)
-                    ) {
-                        Icon(
-                            imageVector = if (post.isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
-                            contentDescription = "Lưu bài viết",
-                            tint = if (post.isSaved) Brand700 else TextPrimary,
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
+                    Spacer(modifier = Modifier.size(48.dp))
                 }
             }
         }
@@ -136,8 +83,9 @@ fun PostDetailScreen(
                 .fillMaxSize()
                 .background(BgCanvas)
                 .padding(innerPadding)
+                .padding(bottom = 32.dp)
         ) {
-            // Author header
+            // 1. Author header
             item {
                 Row(
                     modifier = Modifier
@@ -167,7 +115,7 @@ fun PostDetailScreen(
                             color = TextPrimary
                         )
                         Text(
-                            text = "📍 ${post.locationLabel} • ${post.timeAgo}",
+                            text = "${post.locationLabel} • ${post.timeAgo}",
                             fontSize = 11.sp,
                             color = TextSecondary
                         )
@@ -190,7 +138,7 @@ fun PostDetailScreen(
                 }
             }
 
-            // Photo: Flexible ratio matching image
+            // 2. Photo Carousel with Multi-image Swiper & Dot Indicators
             item {
                 Box(
                     modifier = Modifier
@@ -198,21 +146,63 @@ fun PostDetailScreen(
                         .aspectRatio(post.aspectRatio)
                         .background(BgSunken)
                 ) {
-                    AsyncImage(
-                        model = post.mediaUrls.firstOrNull(),
-                        contentDescription = post.caption,
-                        contentScale = ContentScale.Crop,
+                    HorizontalPager(
+                        state = pagerState,
                         modifier = Modifier.fillMaxSize()
-                    )
+                    ) { page ->
+                        AsyncImage(
+                            model = mediaUrls[page],
+                            contentDescription = post.caption,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+
+                    // Multi-photo count badge (e.g. 1/4)
+                    if (mediaUrls.size > 1) {
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = Color.Black.copy(alpha = 0.65f),
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .padding(12.dp)
+                        ) {
+                            Text(
+                                text = "${pagerState.currentPage + 1}/${mediaUrls.size}",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                modifier = Modifier.padding(horizontal = 9.dp, vertical = 4.dp)
+                            )
+                        }
+
+                        // Dot indicators
+                        Row(
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = 12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(5.dp)
+                        ) {
+                            repeat(mediaUrls.size) { index ->
+                                val isCurrent = pagerState.currentPage == index
+                                Box(
+                                    modifier = Modifier
+                                        .size(if (isCurrent) 8.dp else 6.dp)
+                                        .clip(CircleShape)
+                                        .background(if (isCurrent) Gold500 else Color.White.copy(alpha = 0.6f))
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
-            // Action toolbar (Like, Comment popup trigger, Share, Save)
+            // 3. Action toolbar (Like, Comment popup trigger, Share, Save)
             item {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -240,7 +230,7 @@ fun PostDetailScreen(
                             )
                         }
 
-                        // Comment (Clicking opens Popup Bottom Sheet)
+                        // Comment
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.clickable { onCommentClick(post) }
@@ -280,7 +270,7 @@ fun PostDetailScreen(
                         }
                     }
 
-                    // Save Bookmark (Instant state change)
+                    // Save Bookmark
                     IconButton(onClick = { onSaveClick(post) }) {
                         Icon(
                             imageVector = if (post.isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
@@ -292,17 +282,17 @@ fun PostDetailScreen(
                 }
             }
 
-            // Caption
+            // 4. Caption & Tags
             item {
                 Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
                     Text(
                         text = post.caption,
                         fontSize = 14.5.sp,
                         color = TextPrimary,
-                        lineHeight = 21.sp
+                        lineHeight = 22.sp
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         post.tags.forEach { tag ->
@@ -317,7 +307,7 @@ fun PostDetailScreen(
                 }
             }
 
-            // Attached Trip Card
+            // 5. Attached Trip Card
             if (post.attachedTrip != null) {
                 item {
                     Column(
@@ -329,6 +319,7 @@ fun PostDetailScreen(
                             text = "LỊCH TRÌNH ĐƯỢC ĐÍNH KÈM",
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
                             color = Brand700
                         )
                         Spacer(modifier = Modifier.height(6.dp))
@@ -340,14 +331,14 @@ fun PostDetailScreen(
                 }
             }
 
-            // Comments Preview Banner (Clicking opens full comment sheet)
+            // 6. Comments Preview
             item {
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = BgSurface),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(horizontal = 16.dp, vertical = 10.dp)
                         .clickable { onCommentClick(post) }
                 ) {
                     Row(
@@ -359,13 +350,13 @@ fun PostDetailScreen(
                     ) {
                         Column {
                             Text(
-                                text = "💬 Xem ${post.commentCount} bình luận & chia sẻ",
+                                text = "Xem ${post.commentCount} bình luận & thảo luận",
                                 fontSize = 13.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
                             )
                             Text(
-                                text = "Chạm để mở khung bình luận hoặc đặt câu hỏi",
+                                text = "Chạm để mở khung trao đổi hoặc hỏi kinh nghiệm",
                                 fontSize = 11.5.sp,
                                 color = TextSecondary
                             )
@@ -374,6 +365,177 @@ fun PostDetailScreen(
                     }
                 }
             }
+
+            // 7. RELATED POSTS / FEED SUGGESTIONS (Vertical downward list with rich cards)
+            val relatedList = allPosts.filter { it.id != post.id }
+            if (relatedList.isNotEmpty()) {
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Text(
+                            text = "GỢI Ý BÀI VIẾT LIÊN QUAN",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Brand700
+                        )
+                        Text(
+                            text = "Khám phá thêm góc nhìn và mẹo từ các tín đồ xê dịch khác",
+                            fontSize = 11.5.sp,
+                            color = TextSecondary
+                        )
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            relatedList.forEach { relatedPost ->
+                                Card(
+                                    shape = RoundedCornerShape(16.dp),
+                                    colors = CardDefaults.cardColors(containerColor = BgSurface),
+                                    elevation = CardDefaults.cardElevation(2.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { onPostClick(relatedPost) }
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(10.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(width = 110.dp, height = 95.dp)
+                                                .clip(RoundedCornerShape(12.dp))
+                                                .background(BgSunken)
+                                        ) {
+                                            AsyncImage(
+                                                model = relatedPost.mediaUrls.firstOrNull(),
+                                                contentDescription = relatedPost.caption,
+                                                contentScale = ContentScale.Crop,
+                                                modifier = Modifier.fillMaxSize()
+                                            )
+                                            if (relatedPost.mediaUrls.size > 1) {
+                                                Surface(
+                                                    shape = RoundedCornerShape(999.dp),
+                                                    color = Color.Black.copy(alpha = 0.65f),
+                                                    modifier = Modifier
+                                                        .align(Alignment.TopEnd)
+                                                        .padding(4.dp)
+                                                ) {
+                                                    Text(
+                                                        text = "1/${relatedPost.mediaUrls.size}",
+                                                        fontSize = 8.5.sp,
+                                                        fontWeight = FontWeight.Bold,
+                                                        color = Color.White,
+                                                        modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+
+                                        Spacer(modifier = Modifier.width(12.dp))
+
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                            verticalArrangement = Arrangement.spacedBy(3.dp)
+                                        ) {
+                                            Row(
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceBetween,
+                                                modifier = Modifier.fillMaxWidth()
+                                            ) {
+                                                Text(
+                                                    text = relatedPost.authorName,
+                                                    fontSize = 12.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = TextPrimary
+                                                )
+                                                Text(
+                                                    text = relatedPost.timeAgo,
+                                                    fontSize = 10.sp,
+                                                    color = TextSecondary
+                                                )
+                                            }
+
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Icon(
+                                                    imageVector = Icons.Default.LocationOn,
+                                                    contentDescription = null,
+                                                    tint = Brand700,
+                                                    modifier = Modifier.size(12.dp)
+                                                )
+                                                Spacer(modifier = Modifier.width(2.dp))
+                                                Text(
+                                                    text = relatedPost.locationLabel,
+                                                    fontSize = 10.5.sp,
+                                                    color = Brand700,
+                                                    maxLines = 1,
+                                                    overflow = TextOverflow.Ellipsis
+                                                )
+                                            }
+
+                                            Text(
+                                                text = relatedPost.caption,
+                                                fontSize = 11.5.sp,
+                                                color = TextPrimary,
+                                                maxLines = 2,
+                                                overflow = TextOverflow.Ellipsis,
+                                                lineHeight = 16.sp
+                                            )
+
+                                            Row(
+                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                modifier = Modifier.padding(top = 2.dp)
+                                            ) {
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    Icon(
+                                                        imageVector = Icons.Default.Favorite,
+                                                        contentDescription = null,
+                                                        tint = HeartRed,
+                                                        modifier = Modifier.size(12.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(3.dp))
+                                                    Text(
+                                                        text = "${relatedPost.likeCount}",
+                                                        fontSize = 10.sp,
+                                                        fontWeight = FontWeight.Medium,
+                                                        color = TextSecondary
+                                                    )
+                                                }
+
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    Icon(
+                                                        imageVector = Icons.Outlined.ChatBubbleOutline,
+                                                        contentDescription = null,
+                                                        tint = TextSecondary,
+                                                        modifier = Modifier.size(12.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(3.dp))
+                                                    Text(
+                                                        text = "${relatedPost.commentCount}",
+                                                        fontSize = 10.sp,
+                                                        color = TextSecondary
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+

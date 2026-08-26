@@ -1,90 +1,172 @@
 package com.example.data.repository
 
-import com.example.data.local.SeedData
+import com.example.data.local.database.LuminaDatabase
+import com.example.data.local.entity.*
 import com.example.data.model.*
 import com.example.data.remote.GeminiService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-class LuminaRepository {
+class LuminaRepository(
+    private val database: LuminaDatabase
+) {
+    private val scope = CoroutineScope(Dispatchers.IO)
 
-    private val _posts = MutableStateFlow<List<Post>>(SeedData.posts)
-    val posts: StateFlow<List<Post>> = _posts.asStateFlow()
+    // Reactive data streams directly connected to Room Database
+    val posts: Flow<List<Post>> = combine(
+        database.postDao().getAllPostsFlow(),
+        database.tripDao().getAllTripsFlow()
+    ) { postEntities, tripEntities ->
+        val tripsMap = tripEntities.associateBy { it.id }
+        postEntities.map { entity ->
+            val attached = entity.attachedTripId?.let { tripsMap[it]?.toDomainModel() }
+            entity.toDomainModel(attached)
+        }
+    }
 
-    private val _trips = MutableStateFlow<List<Trip>>(SeedData.sampleTrips)
-    val trips: StateFlow<List<Trip>> = _trips.asStateFlow()
+    val trips: Flow<List<Trip>> = database.tripDao().getAllTripsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _provinces = MutableStateFlow<List<Province>>(SeedData.provinces)
-    val provinces: StateFlow<List<Province>> = _provinces.asStateFlow()
+    val provinces: Flow<List<Province>> = database.provinceDao().getAllProvincesFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _places = MutableStateFlow<List<Place>>(SeedData.places)
-    val places: StateFlow<List<Place>> = _places.asStateFlow()
+    val places: Flow<List<Place>> = database.placeDao().getAllPlacesFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _checkIns = MutableStateFlow<List<CheckInRecord>>(SeedData.checkIns)
-    val checkIns: StateFlow<List<CheckInRecord>> = _checkIns.asStateFlow()
+    val checkIns: Flow<List<CheckInRecord>> = database.checkInDao().getAllCheckInsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _badges = MutableStateFlow<List<AchievementBadge>>(SeedData.badges)
-    val badges: StateFlow<List<AchievementBadge>> = _badges.asStateFlow()
+    val badges: Flow<List<AchievementBadge>> = database.badgeDao().getAllBadgesFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _notifications = MutableStateFlow<List<NotificationItem>>(SeedData.notifications)
-    val notifications: StateFlow<List<NotificationItem>> = _notifications.asStateFlow()
+    val notifications: Flow<List<NotificationItem>> = database.notificationDao().getAllNotificationsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _userProfile = MutableStateFlow<UserProfile>(SeedData.defaultProfile)
-    val userProfile: StateFlow<UserProfile> = _userProfile.asStateFlow()
+    val userProfile: Flow<UserProfile> = database.userProfileDao().getActiveProfileFlow().map {
+        it?.toDomainModel() ?: UserProfile(
+            id = "u_1",
+            username = "linh.travels",
+            displayName = "Thảo Linh",
+            avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+        )
+    }
 
-    private val _cityVault = MutableStateFlow<List<CheckInRecord>>(emptyList())
-    val cityVault: StateFlow<List<CheckInRecord>> = _cityVault.asStateFlow()
+    val userProfiles: Flow<List<UserProfile>> = database.userProfileDao().getAllProfilesFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
-    private val _savedBoards = MutableStateFlow<List<SavedBoard>>(SeedData.savedBoards)
-    val savedBoards: StateFlow<List<SavedBoard>> = _savedBoards.asStateFlow()
+    val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
 
+    val savedBoards: Flow<List<SavedBoard>> = database.savedBoardDao().getAllSavedBoardsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
+
+    val frames: Flow<List<LuminaFrame>> = database.frameDao().getAllFramesFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
+
+    fun getCommentsForPost(postId: String): Flow<List<Comment>> {
+        return database.commentDao().getCommentsForPostFlow(postId).map { list ->
+            list.map { it.toDomainModel() }
+        }
+    }
+
+    // Profile updates
     fun updateUserProfile(user: UserProfile) {
-        _userProfile.value = user
+        scope.launch {
+            val entity = UserProfileEntity.fromDomainModel(user, isActive = true)
+            database.userProfileDao().insert(entity)
+        }
+    }
+
+    fun switchActiveUser(userId: String) {
+        scope.launch {
+            database.userProfileDao().setActiveProfile(userId)
+        }
+    }
+
+    fun addNewUser(displayName: String, username: String) {
+        scope.launch {
+            val newAcc = UserProfile(
+                id = "u_${System.currentTimeMillis()}",
+                username = username.lowercase().replace(" ", "."),
+                displayName = displayName,
+                avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop",
+                tagTitle = "NEW EXPLORER",
+                bio = "Bắt đầu hành trình khám phá Việt Nam cùng Lumina ✨",
+                topCityName = "Đà Nẵng",
+                topCityCheckInCount = 1,
+                visitedProvincesCount = 1,
+                totalProvincesCount = 34,
+                totalDistanceKm = 300.0,
+                tripsCompletedCount = 1,
+                totalSavesCount = 12
+            )
+            database.userProfileDao().insert(UserProfileEntity.fromDomainModel(newAcc, isActive = true))
+            database.userProfileDao().setActiveProfile(newAcc.id)
+        }
     }
 
     // Post Interactions
     fun toggleLike(postId: String) {
-        _posts.value = _posts.value.map { post ->
-            if (post.id == postId) {
-                val newLiked = !post.isLiked
-                post.copy(
-                    isLiked = newLiked,
-                    likeCount = if (newLiked) post.likeCount + 1 else post.likeCount - 1
-                )
-            } else post
+        scope.launch {
+            val post = database.postDao().getPostById(postId) ?: return@launch
+            val newLiked = !post.isLiked
+            val newLikeCount = if (newLiked) post.likeCount + 1 else (post.likeCount - 1).coerceAtLeast(0)
+            database.postDao().updateLikeStatus(postId, newLiked, newLikeCount)
         }
     }
 
     fun toggleSave(postId: String) {
-        _posts.value = _posts.value.map { post ->
-            if (post.id == postId) {
-                val newSaved = !post.isSaved
-                post.copy(
-                    isSaved = newSaved,
-                    saveCount = if (newSaved) post.saveCount + 1 else post.saveCount - 1
-                )
-            } else post
+        scope.launch {
+            val post = database.postDao().getPostById(postId) ?: return@launch
+            val newSaved = !post.isSaved
+            val newSaveCount = if (newSaved) post.saveCount + 1 else (post.saveCount - 1).coerceAtLeast(0)
+            database.postDao().updateSaveStatus(postId, newSaved, newSaveCount)
         }
     }
 
     fun sharePost(postId: String) {
-        _posts.value = _posts.value.map { post ->
-            if (post.id == postId) {
-                post.copy(shareCount = post.shareCount + 1)
-            } else post
+        scope.launch {
+            database.postDao().incrementShareCount(postId)
         }
     }
 
     fun addComment(postId: String, content: String) {
-        _posts.value = _posts.value.map { post ->
-            if (post.id == postId) {
-                post.copy(commentCount = post.commentCount + 1)
-            } else post
+        scope.launch {
+            val activeUser = database.userProfileDao().getActiveProfile()?.toDomainModel()
+            val authorName = activeUser?.displayName ?: "Thảo Linh"
+            val authorHandle = activeUser?.username ?: "linh.travels"
+            val authorAvatar = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop"
+
+            val comment = Comment(
+                id = "c_${UUID.randomUUID()}",
+                postId = postId,
+                authorName = authorName,
+                authorHandle = authorHandle,
+                authorAvatarUrl = authorAvatar,
+                content = content,
+                timeAgo = "Vừa xong",
+                likeCount = 0,
+                isLiked = false
+            )
+            database.commentDao().insert(CommentEntity.fromDomainModel(comment))
+            database.postDao().incrementCommentCount(postId)
         }
     }
 
@@ -95,11 +177,12 @@ class LuminaRepository {
         provinceCode: String,
         attachedTrip: Trip? = null
     ): Post {
+        val newPostId = "post_${UUID.randomUUID()}"
         val newPost = Post(
-            id = "post_${UUID.randomUUID()}",
-            authorName = _userProfile.value.displayName,
-            authorHandle = _userProfile.value.username,
-            authorAvatarUrl = _userProfile.value.avatarUrl,
+            id = newPostId,
+            authorName = "Thảo Linh",
+            authorHandle = "linh.travels",
+            authorAvatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
             hasRecentCheckIn = true,
             locationLabel = locationLabel,
             provinceCode = provinceCode,
@@ -117,7 +200,35 @@ class LuminaRepository {
             isLiked = true,
             tags = listOf("Lumina", "VietnamTravel", "GenZ")
         )
-        _posts.value = listOf(newPost) + _posts.value
+
+        scope.launch {
+            val activeUser = database.userProfileDao().getActiveProfile()
+            val entity = PostEntity(
+                id = newPost.id,
+                userId = activeUser?.id ?: "u_1",
+                authorName = activeUser?.displayName ?: "Thảo Linh",
+                authorHandle = activeUser?.username ?: "linh.travels",
+                authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
+                hasRecentCheckIn = true,
+                locationLabel = locationLabel,
+                provinceCode = provinceCode,
+                timeAgo = "Vừa xong",
+                caption = caption,
+                mediaUrls = newPost.mediaUrls,
+                aspectRatio = 0.82f,
+                attachedTripId = attachedTrip?.id,
+                likeCount = 1,
+                commentCount = 0,
+                saveCount = 0,
+                shareCount = 0,
+                isLiked = true,
+                isSaved = false,
+                tags = newPost.tags,
+                createdAt = System.currentTimeMillis()
+            )
+            database.postDao().insert(entity)
+        }
+
         return newPost
     }
 
@@ -144,72 +255,110 @@ class LuminaRepository {
             trustScore = 1.0f
         )
 
-        _checkIns.value = listOf(record) + _checkIns.value
+        scope.launch {
+            val activeUser = database.userProfileDao().getActiveProfile()
+            val userId = activeUser?.id ?: "u_1"
 
-        // Update province visited count
-        _provinces.value = _provinces.value.map { prov ->
-            if (prov.code == provinceCode) {
-                val newVisited = (prov.visitedPlacesCount + 1).coerceAtMost(prov.suggestedPlacesCount)
-                prov.copy(
-                    visitedPlacesCount = newVisited,
-                    isCompleted = newVisited >= prov.suggestedPlacesCount
-                )
-            } else prov
+            // 1. Insert check-in record
+            database.checkInDao().insert(CheckInEntity.fromDomainModel(record, userId = userId))
+
+            // 2. Mark place as visited
+            database.placeDao().markAsVisitedByName(placeName, provinceCode)
+
+            // 3. Update province visited count
+            val province = database.provinceDao().getProvinceByCode(provinceCode)
+            if (province != null) {
+                val newVisited = (province.visitedPlacesCount + 1).coerceAtMost(province.suggestedPlacesCount)
+                val isComp = newVisited >= province.suggestedPlacesCount
+                database.provinceDao().updateProgress(provinceCode, newVisited, isComp)
+            }
+
+            // 4. Update user profile stats
+            val allProvinces = database.provinceDao().getAllProvinces()
+            val visitedCount = allProvinces.count { it.visitedPlacesCount > 0 }
+            database.userProfileDao().updateStatsAfterCheckIn(userId, visitedCount, 120.0)
+
+            // 5. Check & Update Badges
+            val totalCheckIns = database.checkInDao().getCount()
+            if (totalCheckIns >= 1) {
+                database.badgeDao().updateProgress("first_stamp", 1, true, dateFormat.format(now))
+            }
+            if (visitedCount >= 5) {
+                database.badgeDao().updateProgress("province_5", visitedCount, true, dateFormat.format(now))
+            }
+            if (visitedCount >= 10) {
+                database.badgeDao().updateProgress("province_10", visitedCount, visitedCount >= 10, if (visitedCount >= 10) dateFormat.format(now) else null)
+            }
+
+            // 6. Trigger notification
+            val notif = NotificationEntity(
+                id = "notif_${UUID.randomUUID()}",
+                userId = userId,
+                isSocial = false,
+                title = "Đóng dấu thành công!",
+                message = "Bạn vừa đóng dấu tại $placeName ($provinceName). Hộ chiếu đã được cập nhật.",
+                timeAgo = "Vừa xong",
+                actionType = "checkin_success",
+                isRead = false,
+                createdAt = System.currentTimeMillis()
+            )
+            database.notificationDao().insert(notif)
         }
-
-        // Update profile
-        val visitedProvCount = _provinces.value.count { it.visitedPlacesCount > 0 }
-        _userProfile.value = _userProfile.value.copy(
-            visitedProvincesCount = visitedProvCount,
-            totalDistanceKm = _userProfile.value.totalDistanceKm + 120.0
-        )
-
-        // Trigger notification
-        val notif = NotificationItem(
-            id = "notif_${UUID.randomUUID()}",
-            isSocial = false,
-            title = "Đóng dấu thành công!",
-            message = "Bạn vừa đóng dấu tại $placeName ($provinceName). Hộ chiếu đã được cập nhật.",
-            timeAgo = "Vừa xong",
-            actionType = "checkin_success"
-        )
-        _notifications.value = listOf(notif) + _notifications.value
 
         return record
     }
 
     fun saveToCityVault(checkInRecord: CheckInRecord) {
-        _cityVault.value = listOf(checkInRecord) + _cityVault.value
+        scope.launch {
+            database.checkInDao().updateCityVaultStatus(checkInRecord.id, true)
+        }
     }
 
     // Trip Management
     fun saveTrip(trip: Trip) {
-        val existingIndex = _trips.value.indexOfFirst { it.id == trip.id }
-        if (existingIndex >= 0) {
-            val updated = _trips.value.toMutableList()
-            updated[existingIndex] = trip
-            _trips.value = updated
-        } else {
-            _trips.value = listOf(trip) + _trips.value
-            _userProfile.value = _userProfile.value.copy(
-                tripsCompletedCount = _userProfile.value.tripsCompletedCount + 1
-            )
+        scope.launch {
+            val activeUser = database.userProfileDao().getActiveProfile()
+            val userId = activeUser?.id ?: "u_1"
+            val entity = TripEntity.fromDomainModel(trip, userId = userId)
+            database.tripDao().insert(entity)
+            database.userProfileDao().incrementTripsCompleted(userId)
         }
     }
 
-    fun duplicateTrip(tripId: String): Trip? {
-        val original = _trips.value.find { it.id == tripId } ?: return null
-        val duplicated = original.copy(
-            id = "trip_${UUID.randomUUID()}",
-            title = "${original.title} (Bản sao)",
-            status = TripStatus.UPCOMING
-        )
-        _trips.value = listOf(duplicated) + _trips.value
-        return duplicated
+    fun duplicateTrip(tripId: String, onDuplicated: (Trip) -> Unit = {}) {
+        scope.launch {
+            val originalEntity = database.tripDao().getTripById(tripId) ?: return@launch
+            val original = originalEntity.toDomainModel()
+            val duplicated = original.copy(
+                id = "trip_${UUID.randomUUID()}",
+                title = "${original.title} (Bản sao)",
+                status = TripStatus.UPCOMING
+            )
+            val entity = TripEntity.fromDomainModel(duplicated, userId = originalEntity.userId)
+            database.tripDao().insert(entity)
+            withContext(Dispatchers.Main) {
+                onDuplicated(duplicated)
+            }
+        }
     }
 
     fun deleteTrip(tripId: String) {
-        _trips.value = _trips.value.filter { it.id != tripId }
+        scope.launch {
+            database.tripDao().deleteById(tripId)
+        }
+    }
+
+    // Notifications
+    fun markNotificationAsRead(id: String) {
+        scope.launch {
+            database.notificationDao().markAsRead(id)
+        }
+    }
+
+    fun markAllNotificationsAsRead() {
+        scope.launch {
+            database.notificationDao().markAllAsRead()
+        }
     }
 
     // AI Generation
@@ -236,14 +385,14 @@ class LuminaRepository {
     }
 
     // Search filter
-    fun search(query: String): List<Place> {
-        val q = query.trim().lowercase()
-        if (q.isBlank()) return _places.value
-        return _places.value.filter {
-            it.name.lowercase().contains(q) ||
-            it.address.lowercase().contains(q) ||
-            it.tags.any { tag -> tag.lowercase().contains(q) } ||
-            it.description.lowercase().contains(q)
+    fun search(query: String): Flow<List<Place>> {
+        val q = query.trim()
+        return if (q.isBlank()) {
+            places
+        } else {
+            database.placeDao().searchPlacesFlow(q).map { list ->
+                list.map { it.toDomainModel() }
+            }
         }
     }
 }

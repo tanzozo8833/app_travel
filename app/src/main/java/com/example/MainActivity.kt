@@ -67,6 +67,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val notifications by viewModel.notifications.collectAsState()
     val userProfile by viewModel.userProfile.collectAsState()
     val savedBoards by viewModel.savedBoards.collectAsState()
+    val frames by viewModel.frames.collectAsState()
 
     val selectedPost by viewModel.selectedPost.collectAsState()
     val selectedTrip by viewModel.selectedTrip.collectAsState()
@@ -150,7 +151,15 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                                 viewModel.updateAiWizard(dest, days, budget, group, styles, notes)
                             },
                             onGeneratePlan = { viewModel.generateAiPlan() },
-                            onSendMessage = { text, plugin -> viewModel.sendChatMessage(text, plugin) },
+                            onCreateManualPlan = { title, dest, days, budget, notes ->
+                                viewModel.createManualTrip(title, dest, days, budget, notes)
+                            },
+                            onSaveManualTrip = { trip ->
+                                viewModel.saveManualTrip(trip)
+                            },
+                            onSendMessage = { text, plugin, context ->
+                                viewModel.sendChatMessage(text, plugin, context)
+                            },
                             onViewTrip = { viewModel.openTripDetail(it) }
                         )
                     }
@@ -159,6 +168,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             provinces = provinces,
                             places = places,
                             checkIns = checkIns,
+                            frames = frames,
                             onQuickCheckIn = { place, pCode, pName ->
                                 viewModel.performQuickStamp(place, pCode, pName)
                             },
@@ -218,6 +228,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
             selectedPost?.let { post ->
                 PostDetailScreen(
                     post = post,
+                    allPosts = posts,
+                    onPostClick = { viewModel.openPostDetail(it) },
                     onBack = { viewModel.closePostDetail() },
                     onTripClick = { viewModel.openTripDetail(it) },
                     onLikeClick = { viewModel.toggleLike(it.id) },
