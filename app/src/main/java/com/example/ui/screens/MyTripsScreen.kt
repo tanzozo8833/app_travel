@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.model.CheckInRecord
+import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.data.model.Trip
 import com.example.data.model.TripStatus
@@ -36,6 +37,7 @@ enum class TripViewMode {
 fun MyTripsScreen(
     trips: List<Trip>,
     provinces: List<Province>,
+    places: List<Place> = emptyList(),
     checkIns: List<CheckInRecord>,
     currentSubTab: TripSubTab,
     onSubTabChanged: (TripSubTab) -> Unit,
@@ -123,6 +125,7 @@ fun MyTripsScreen(
         if (viewMode == TripViewMode.VIETNAM_MAP) {
             // Render the Full Interactive Map
             InteractiveMapScreen(
+                places = places,
                 provinces = provinces,
                 checkIns = checkIns,
                 onQuickCheckIn = onMapQuickCheckIn,

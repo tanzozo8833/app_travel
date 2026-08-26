@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
 import com.example.data.model.CheckInRecord
+import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.ui.theme.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -76,8 +77,20 @@ data class NearbyMatchedPlace(
     val stampSymbol: String
 )
 
+private fun calculateDistanceMeters(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Int {
+    val r = 6371000.0 // Earth radius in meters
+    val dLat = Math.toRadians(lat2 - lat1)
+    val dLng = Math.toRadians(lng2 - lng1)
+    val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2)
+    val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    return (r * c).toInt()
+}
+
 @Composable
 fun InteractiveMapScreen(
+    places: List<Place>,
     provinces: List<Province>,
     checkIns: List<CheckInRecord>,
     onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String) -> Unit,
@@ -131,221 +144,49 @@ fun InteractiveMapScreen(
         )
     }
 
-    // Markers List (Visited and Suggested Unvisited)
-    val allMarkers = remember {
-        mutableStateListOf(
-            // Visited places (Đặc, màu thương hiệu Lumina/Gold, ảnh thật, con dấu)
-            MapMarkerItem(
-                id = "m_hgg",
-                title = "Đèo Mã Pí Lèng & Sông Nho Quế",
-                provinceName = "Hà Giang",
-                provinceCode = "HGG",
-                region = "Bắc",
-                lat = 23.2389,
-                lng = 105.4180,
-                photoUrl = "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "22/07/2026",
-                stampSymbol = "🏔",
-                highlightTag = "Tứ đại đỉnh đèo"
-            ),
-            MapMarkerItem(
-                id = "m_hn",
-                title = "Văn Miếu - Hồ Hoàn Kiếm",
-                provinceName = "Hà Nội",
-                provinceCode = "HN",
-                region = "Bắc",
-                lat = 21.0285,
-                lng = 105.8542,
-                photoUrl = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "15/08/2026",
-                stampSymbol = "🏛",
-                highlightTag = "Thủ đô ngàn năm"
-            ),
-            MapMarkerItem(
-                id = "m_qnh",
-                title = "Vịnh Hạ Long Kỳ Quan",
-                provinceName = "Quảng Ninh",
-                provinceCode = "QNH",
-                region = "Bắc",
-                lat = 20.9101,
-                lng = 107.0843,
-                photoUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "08/08/2026",
-                stampSymbol = "⛵",
-                highlightTag = "Kỳ quan Thế giới"
-            ),
-            MapMarkerItem(
-                id = "m_nbh",
-                title = "Tràng An - Tam Cốc",
-                provinceName = "Ninh Bình",
-                provinceCode = "NBH",
-                region = "Bắc",
-                lat = 20.2506,
-                lng = 105.9745,
-                photoUrl = "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "10/08/2026",
-                stampSymbol = "🚣",
-                highlightTag = "Di sản Kép UNESCO"
-            ),
-            MapMarkerItem(
-                id = "m_tth",
-                title = "Đại Nội Kinh Thành Huế",
-                provinceName = "Thừa Thiên Huế",
-                provinceCode = "TTH",
-                region = "Trung",
-                lat = 16.4637,
-                lng = 107.5909,
-                photoUrl = "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "18/06/2026",
-                stampSymbol = "🏯",
-                highlightTag = "Cố đô Di sản"
-            ),
-            MapMarkerItem(
-                id = "m_dng",
-                title = "Cầu Vàng Bà Nà Hills",
-                provinceName = "Đà Nẵng",
-                provinceCode = "DNG",
-                region = "Trung",
-                lat = 15.9989,
-                lng = 107.9961,
-                photoUrl = "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "16/06/2026",
-                stampSymbol = "🌉",
-                highlightTag = "Thành phố đáng sống"
-            ),
-            MapMarkerItem(
-                id = "m_qnm",
-                title = "Phố Cổ Hội An",
-                provinceName = "Quảng Nam",
-                provinceCode = "QNM",
-                region = "Trung",
-                lat = 15.8801,
-                lng = 108.3380,
-                photoUrl = "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "14/06/2026",
-                stampSymbol = "🏮",
-                highlightTag = "Đèn lồng cổ kính"
-            ),
-            MapMarkerItem(
-                id = "m_ldg",
-                title = "Đồi Chè Cầu Đất & Săn Mây",
-                provinceName = "Lâm Đồng",
-                provinceCode = "LDG",
-                region = "Tây Nguyên",
-                lat = 11.9056,
-                lng = 108.5583,
-                photoUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "12/09/2026",
-                stampSymbol = "🌲",
-                highlightTag = "Xứ sở ngàn hoa"
-            ),
-            MapMarkerItem(
-                id = "m_hcm",
-                title = "Nhà Thờ Đức Bà & Bến Bạch Đằng",
-                provinceName = "TP. Hồ Chí Minh",
-                provinceCode = "HCM",
-                region = "Nam",
-                lat = 10.7798,
-                lng = 106.6990,
-                photoUrl = "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "05/09/2026",
-                stampSymbol = "🏙",
-                highlightTag = "Hòn ngọc Viễn Đông"
-            ),
-            MapMarkerItem(
-                id = "m_kgg",
-                title = "Bãi Sao & Hòn Thơm",
-                provinceName = "Kiên Giang",
-                provinceCode = "KGG",
-                region = "Biển Đảo",
-                lat = 10.2899,
-                lng = 103.9840,
-                photoUrl = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop",
-                isVisited = true,
-                visitedDate = "02/05/2026",
-                stampSymbol = "🏝",
-                highlightTag = "Đảo Ngọc Phú Quốc"
-            ),
+    // Dynamic Markers derived directly from real places, provinces, and checkIns
+    val allMarkers = remember(places, provinces, checkIns) {
+        places.map { place ->
+            val province = provinces.find { it.code.equals(place.provinceCode, ignoreCase = true) || it.id == place.provinceId }
+            val matchingCheckIn = checkIns.find { checkIn ->
+                checkIn.placeName.equals(place.name, ignoreCase = true) ||
+                (checkIn.provinceCode.equals(place.provinceCode, ignoreCase = true) && checkIn.placeName.contains(place.name, ignoreCase = true))
+            }
+            val isVisited = place.isVisited || (matchingCheckIn != null)
+            val visitedDate = matchingCheckIn?.formattedDate ?: "16/08/2026"
 
-            // Suggested Unvisited Places (Rỗng, mờ, viền nét đứt, gợi ý hành trình)
+            val lat = if (place.lat != 0.0) place.lat else (province?.centerLat ?: 16.0)
+            val lng = if (place.lng != 0.0) place.lng else (province?.centerLng ?: 107.5)
+
             MapMarkerItem(
-                id = "m_sapa",
-                title = "Đỉnh Fansipan Nóc Nhà Đông Dương",
-                provinceName = "Lào Cai",
-                provinceCode = "LCI",
-                region = "Bắc",
-                lat = 22.3034,
-                lng = 103.7753,
-                photoUrl = "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=400&auto=format&fit=crop",
-                isVisited = false,
-                stampSymbol = "⛰️",
-                highlightTag = "Gợi ý khám phá"
-            ),
-            MapMarkerItem(
-                id = "m_qb",
-                title = "Động Phong Nha - Kẻ Bàng",
-                provinceName = "Quảng Bình",
-                provinceCode = "QBH",
-                region = "Trung",
-                lat = 17.5855,
-                lng = 106.2829,
-                photoUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&auto=format&fit=crop",
-                isVisited = false,
-                stampSymbol = "🦇",
-                highlightTag = "Gợi ý khám phá"
-            ),
-            MapMarkerItem(
-                id = "m_py",
-                title = "Gành Đá Đĩa & Mũi Điện",
-                provinceName = "Phú Yên",
-                provinceCode = "PYE",
-                region = "Trung",
-                lat = 13.3533,
-                lng = 109.2972,
-                photoUrl = "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop",
-                isVisited = false,
-                stampSymbol = "🌊",
-                highlightTag = "Gợi ý khám phá"
-            ),
-            MapMarkerItem(
-                id = "m_nt",
-                title = "Tháp Bà Ponagar & Vịnh Nha Trang",
-                provinceName = "Khánh Hòa",
-                provinceCode = "KHA",
-                region = "Trung",
-                lat = 12.2605,
-                lng = 109.1956,
-                photoUrl = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop",
-                isVisited = false,
-                stampSymbol = "🕌",
-                highlightTag = "Gợi ý khám phá"
-            ),
-            MapMarkerItem(
-                id = "m_cd",
-                title = "Nghĩa trang Hàng Dương & Côn Đảo",
-                provinceName = "Bà Rịa - Vũng Tàu",
-                provinceCode = "BRV",
-                region = "Biển Đảo",
-                lat = 8.6833,
-                lng = 106.6000,
-                photoUrl = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop",
-                isVisited = false,
-                stampSymbol = "🕊️",
-                highlightTag = "Gợi ý khám phá"
+                id = place.id,
+                title = place.name,
+                provinceName = province?.shortName ?: province?.name ?: place.provinceCode,
+                provinceCode = place.provinceCode,
+                region = province?.region ?: "Bắc",
+                lat = lat,
+                lng = lng,
+                photoUrl = place.coverUrl,
+                isVisited = isVisited,
+                visitedDate = visitedDate,
+                stampSymbol = province?.stampSymbol ?: place.category.iconEmoji,
+                highlightTag = place.tags.firstOrNull() ?: place.category.titleVi,
+                checkinRadiusMeters = place.checkinRadiusMeters
             )
-        )
+        }
     }
 
-    val displayMarkers = remember(selectedRegionFilter, allMarkers.toList()) {
+    // Keep selectedMarker in sync with reactive updates (e.g. when check-in happens)
+    LaunchedEffect(allMarkers) {
+        selectedMarker?.let { current ->
+            val updated = allMarkers.find { it.id == current.id || (it.title == current.title && it.provinceCode == current.provinceCode) }
+            if (updated != null) {
+                selectedMarker = updated
+            }
+        }
+    }
+
+    val displayMarkers = remember(selectedRegionFilter, allMarkers) {
         if (selectedRegionFilter == "Tất cả") {
             allMarkers
         } else {
@@ -1004,15 +845,6 @@ fun InteractiveMapScreen(
                                 Button(
                                     onClick = {
                                         onQuickCheckIn(marker.title, marker.provinceCode, marker.provinceName)
-                                        // Update marker status in local list
-                                        val idx = allMarkers.indexOfFirst { it.id == marker.id }
-                                        if (idx != -1) {
-                                            allMarkers[idx] = allMarkers[idx].copy(
-                                                isVisited = true,
-                                                visitedDate = "16/08/2026"
-                                            )
-                                        }
-                                        selectedMarker = selectedMarker?.copy(isVisited = true, visitedDate = "16/08/2026")
                                     },
                                     colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                                     shape = RoundedCornerShape(999.dp),
@@ -1042,32 +874,11 @@ fun InteractiveMapScreen(
     // ==========================================
     if (showGpsCheckInDialog) {
         GpsSpatialCheckInDialog(
+            places = places,
             provinces = provinces,
             onDismiss = { showGpsCheckInDialog = false },
             onConfirmCheckIn = { matchedPlace ->
                 onQuickCheckIn(matchedPlace.name, matchedPlace.provinceCode, matchedPlace.provinceName)
-                // Add marker to visited list if not yet
-                val existingIdx = allMarkers.indexOfFirst { it.title == matchedPlace.name }
-                if (existingIdx != -1) {
-                    allMarkers[existingIdx] = allMarkers[existingIdx].copy(isVisited = true, visitedDate = "16/08/2026")
-                } else {
-                    allMarkers.add(
-                        MapMarkerItem(
-                            id = "m_${System.currentTimeMillis()}",
-                            title = matchedPlace.name,
-                            provinceName = matchedPlace.provinceName,
-                            provinceCode = matchedPlace.provinceCode,
-                            region = "Tây Nguyên",
-                            lat = 11.9404,
-                            lng = 108.4583,
-                            photoUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&auto=format&fit=crop",
-                            isVisited = true,
-                            visitedDate = "16/08/2026",
-                            stampSymbol = matchedPlace.stampSymbol,
-                            highlightTag = "Check-in GPS Thực tế"
-                        )
-                    )
-                }
                 showGpsCheckInDialog = false
             }
         )
@@ -1076,31 +887,47 @@ fun InteractiveMapScreen(
 
 @Composable
 fun GpsSpatialCheckInDialog(
+    places: List<Place>,
     provinces: List<Province>,
     onDismiss: () -> Unit,
     onConfirmCheckIn: (NearbyMatchedPlace) -> Unit
 ) {
     var isLocating by remember { mutableStateOf(true) }
+    // User GPS location (Đà Lạt center coordinates)
     val detectedLat by remember { mutableDoubleStateOf(11.9404) }
     val detectedLng by remember { mutableDoubleStateOf(108.4583) }
     val accuracyMeters by remember { mutableIntStateOf(4) }
     var selectedMatch by remember { mutableStateOf<NearbyMatchedPlace?>(null) }
 
-    // Simulated 5 nearest places matching ST_DWithin + ST_Distance
-    val nearbyCandidates = remember {
-        listOf(
-            NearbyMatchedPlace("p_1", "Đồi Chè Cầu Đất & Săn Mây", "Lâm Đồng", "LDG", 42, true, "🌲"),
-            NearbyMatchedPlace("p_2", "Hồ Tuyền Lâm & Thiền Viện Trúc Lâm", "Lâm Đồng", "LDG", 180, true, "🌸"),
-            NearbyMatchedPlace("p_3", "Quảng Trường Lâm Viên & Hoa Dã Quỳ", "Lâm Đồng", "LDG", 320, false, "🌼"),
-            NearbyMatchedPlace("p_4", "Thác Datanla & Máng trượt rừng", "Lâm Đồng", "LDG", 510, false, "💦"),
-            NearbyMatchedPlace("p_5", "Ga Xe Lửa Cổ Đà Lạt", "Lâm Đồng", "LDG", 850, false, "🚂")
-        )
+    // Compute nearest places dynamically from real database places
+    val nearbyCandidates = remember(places, provinces, detectedLat, detectedLng) {
+        if (places.isEmpty()) {
+            emptyList()
+        } else {
+            places.map { place ->
+                val province = provinces.find { it.code.equals(place.provinceCode, ignoreCase = true) || it.id == place.provinceId }
+                val pLat = if (place.lat != 0.0) place.lat else (province?.centerLat ?: 11.9404)
+                val pLng = if (place.lng != 0.0) place.lng else (province?.centerLng ?: 108.4583)
+                val distance = calculateDistanceMeters(detectedLat, detectedLng, pLat, pLng)
+                NearbyMatchedPlace(
+                    id = place.id,
+                    name = place.name,
+                    provinceName = province?.shortName ?: province?.name ?: place.provinceCode,
+                    provinceCode = place.provinceCode,
+                    distanceMeters = distance,
+                    isMatchWithinRadius = distance <= place.checkinRadiusMeters.coerceAtLeast(300),
+                    stampSymbol = province?.stampSymbol ?: place.category.iconEmoji
+                )
+            }.sortedBy { it.distanceMeters }.take(5)
+        }
     }
 
-    LaunchedEffect(Unit) {
-        delay(1600)
+    LaunchedEffect(nearbyCandidates) {
+        delay(1200)
         isLocating = false
-        selectedMatch = nearbyCandidates.first()
+        if (selectedMatch == null && nearbyCandidates.isNotEmpty()) {
+            selectedMatch = nearbyCandidates.first()
+        }
     }
 
     Dialog(onDismissRequest = onDismiss) {
@@ -1168,7 +995,7 @@ fun GpsSpatialCheckInDialog(
                             color = TextPrimary
                         )
                         Text(
-                            text = "expo-location getCurrentPosition (~2s)",
+                            text = "GPS Hardware Accurate (~2s)",
                             fontSize = 10.sp,
                             fontFamily = FontFamily.Monospace,
                             color = TextSecondary
@@ -1215,7 +1042,7 @@ fun GpsSpatialCheckInDialog(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Khớp ST_DWithin (Radius 250m) - 5 Địa điểm gần nhất:",
+                        text = "Khớp ST_DWithin (Radius 250m) - Địa điểm gần nhất:",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary

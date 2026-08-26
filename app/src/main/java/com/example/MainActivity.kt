@@ -181,6 +181,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                         MyTripsScreen(
                             trips = trips,
                             provinces = provinces,
+                            places = places,
                             checkIns = checkIns,
                             currentSubTab = tripSubTab,
                             onSubTabChanged = { viewModel.setTripSubTab(it) },
