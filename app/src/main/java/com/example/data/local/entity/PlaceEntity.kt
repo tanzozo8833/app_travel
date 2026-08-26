@@ -80,11 +80,13 @@ data class PlaceEntity(
         priceRangeVnd = priceRangeVnd,
         tags = tags,
         rating = rating,
-        isVisited = isVisited
+        isVisited = isVisited,
+        lat = lat,
+        lng = lng
     )
 
     companion object {
-        fun fromDomainModel(model: Place, lat: Double = 0.0, lng: Double = 0.0): PlaceEntity = PlaceEntity(
+        fun fromDomainModel(model: Place, lat: Double = model.lat, lng: Double = model.lng): PlaceEntity = PlaceEntity(
             id = model.id,
             provinceId = model.provinceId,
             provinceCode = model.provinceCode,

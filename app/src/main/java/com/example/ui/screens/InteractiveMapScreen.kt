@@ -1,38 +1,25 @@
 package com.example.ui.screens
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Fill
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -40,9 +27,13 @@ import coil.compose.AsyncImage
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Province
 import com.example.ui.theme.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.maps.android.compose.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.*
 
 enum class MapLayerStyle {
     TERRAIN,   // Địa hình sinh thái Xanh
@@ -95,20 +86,52 @@ fun InteractiveMapScreen(
 ) {
     val coroutineScope = rememberCoroutineScope()
     var layerStyle by remember { mutableStateOf(MapLayerStyle.TERRAIN) }
-    var zoomScale by remember { mutableFloatStateOf(1.0f) }
-    var panOffset by remember { mutableStateOf(Offset(0f, 0f)) }
     var selectedMarker by remember { mutableStateOf<MapMarkerItem?>(null) }
     var selectedRegionFilter by remember { mutableStateOf("Tất cả") }
     var showSpatialDebugHud by remember { mutableStateOf(false) }
     var showGpsCheckInDialog by remember { mutableStateOf(false) }
 
     // Map bounds in Vietnam (EPSG:4326)
-    val minLat = 8.0
-    val maxLat = 23.6
-    val minLng = 101.8
-    val maxLng = 114.8
+    val vietnamBounds = remember {
+        LatLngBounds(
+            LatLng(8.0, 101.8),  // Southwest bound
+            LatLng(23.6, 114.8)  // Northeast bound
+        )
+    }
 
-    // Markers List (Both Visited and Suggested Unvisited)
+    // Google Maps Camera initialization
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(LatLng(16.0, 107.5), 5.2f)
+    }
+
+    // Map properties & UI Settings
+    val mapProperties = remember(layerStyle) {
+        MapProperties(
+            latLngBoundsForCameraTarget = vietnamBounds,
+            minZoomPreference = 4.5f,
+            maxZoomPreference = 18f,
+            mapType = when (layerStyle) {
+                MapLayerStyle.TERRAIN -> MapType.TERRAIN
+                MapLayerStyle.SATELLITE -> MapType.SATELLITE
+                MapLayerStyle.CLASSIC -> MapType.NORMAL
+            }
+        )
+    }
+
+    val mapUiSettings = remember {
+        MapUiSettings(
+            zoomControlsEnabled = false,
+            mapToolbarEnabled = false,
+            myLocationButtonEnabled = false,
+            compassEnabled = true,
+            rotationGesturesEnabled = true,
+            scrollGesturesEnabled = true,
+            tiltGesturesEnabled = true,
+            zoomGesturesEnabled = true
+        )
+    }
+
+    // Markers List (Visited and Suggested Unvisited)
     val allMarkers = remember {
         mutableStateListOf(
             // Visited places (Đặc, màu thương hiệu Lumina/Gold, ảnh thật, con dấu)
@@ -118,8 +141,8 @@ fun InteractiveMapScreen(
                 provinceName = "Hà Giang",
                 provinceCode = "HGG",
                 region = "Bắc",
-                lat = 22.8233,
-                lng = 104.9839,
+                lat = 23.2389,
+                lng = 105.4180,
                 photoUrl = "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=400&auto=format&fit=crop",
                 isVisited = true,
                 visitedDate = "22/07/2026",
@@ -188,8 +211,8 @@ fun InteractiveMapScreen(
                 provinceName = "Đà Nẵng",
                 provinceCode = "DNG",
                 region = "Trung",
-                lat = 16.0544,
-                lng = 108.2022,
+                lat = 15.9989,
+                lng = 107.9961,
                 photoUrl = "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400&auto=format&fit=crop",
                 isVisited = true,
                 visitedDate = "16/06/2026",
@@ -216,8 +239,8 @@ fun InteractiveMapScreen(
                 provinceName = "Lâm Đồng",
                 provinceCode = "LDG",
                 region = "Tây Nguyên",
-                lat = 11.9404,
-                lng = 108.4583,
+                lat = 11.9056,
+                lng = 108.5583,
                 photoUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&auto=format&fit=crop",
                 isVisited = true,
                 visitedDate = "12/09/2026",
@@ -230,8 +253,8 @@ fun InteractiveMapScreen(
                 provinceName = "TP. Hồ Chí Minh",
                 provinceCode = "HCM",
                 region = "Nam",
-                lat = 10.8231,
-                lng = 106.6297,
+                lat = 10.7798,
+                lng = 106.6990,
                 photoUrl = "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&auto=format&fit=crop",
                 isVisited = true,
                 visitedDate = "05/09/2026",
@@ -330,15 +353,14 @@ fun InteractiveMapScreen(
         }
     }
 
-    // Dynamic Zoom Clustering (Simulating ST_ClusterDBSCAN)
-    // When zoom is low (< 1.35f), group markers into regional/provincial clusters
-    val isClusteredMode = zoomScale < 1.35f
+    // Dynamic Zoom Clustering based on cameraPositionState.position.zoom (< 6.5f)
+    val currentZoom = cameraPositionState.position.zoom
+    val isClusteredMode = currentZoom < 6.5f
 
     val clusters = remember(displayMarkers, isClusteredMode) {
         if (!isClusteredMode) {
             emptyList()
         } else {
-            // Group by province/region for cluster blobs
             val grouped = displayMarkers.groupBy { it.provinceName }
             grouped.map { (provName, items) ->
                 val avgLat = items.map { it.lat }.average()
@@ -355,360 +377,199 @@ fun InteractiveMapScreen(
         }
     }
 
-    val bgGradient = when (layerStyle) {
-        MapLayerStyle.TERRAIN -> listOf(Color(0xFF0D251D), Color(0xFF061712), Color(0xFF030D0A))
-        MapLayerStyle.SATELLITE -> listOf(Color(0xFF05131E), Color(0xFF020B12), Color(0xFF01060A))
-        MapLayerStyle.CLASSIC -> listOf(Color(0xFF142421), Color(0xFF0B1715), Color(0xFF050C0A))
+    // Track points for visited route polyline
+    val visitedTrackLatLngs = remember(displayMarkers) {
+        displayMarkers.filter { it.isVisited }.map { LatLng(it.lat, it.lng) }
     }
 
-    val landColor = when (layerStyle) {
-        MapLayerStyle.TERRAIN -> Color(0xFF1B4D3E)
-        MapLayerStyle.SATELLITE -> Color(0xFF113247)
-        MapLayerStyle.CLASSIC -> Color(0xFF2C443B)
-    }
-
-    val landBorderColor = when (layerStyle) {
-        MapLayerStyle.TERRAIN -> Color(0xFF38967B)
-        MapLayerStyle.SATELLITE -> Color(0xFF3498DB)
-        MapLayerStyle.CLASSIC -> Gold500
-    }
-
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Brush.verticalGradient(bgGradient))
-    ) {
-        // Map Canvas with Gestures
-        BoxWithConstraints(
-            modifier = Modifier
-                .fillMaxSize()
-                .pointerInput(Unit) {
-                    detectTransformGestures { _, pan, zoom, _ ->
-                        zoomScale = (zoomScale * zoom).coerceIn(0.85f, 4.0f)
-                        panOffset = Offset(
-                            x = panOffset.x + pan.x,
-                            y = panOffset.y + pan.y
-                        )
-                    }
-                }
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onDoubleTap = {
-                            zoomScale = if (zoomScale > 1.5f) 1.0f else 2.2f
-                        },
-                        onTap = {
-                            selectedMarker = null
-                        }
-                    )
-                }
+    Box(modifier = modifier.fillMaxSize()) {
+        // ==========================================
+        // 1. GoogleMap COMPOSABLE CONTAINER
+        // ==========================================
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState,
+            properties = mapProperties,
+            uiSettings = mapUiSettings,
+            onMapClick = {
+                selectedMarker = null
+            }
         ) {
-            val canvasWidth = constraints.maxWidth.toFloat()
-            val canvasHeight = constraints.maxHeight.toFloat()
-
-            // Function to map lat/lng to screen pixels
-            fun projectCoordinates(lat: Double, lng: Double): Offset {
-                val normX = ((lng - minLng) / (maxLng - minLng)).toFloat()
-                val normY = (1.0f - ((lat - minLat) / (maxLat - minLat)).toFloat())
-
-                val basePaddingX = canvasWidth * 0.08f
-                val basePaddingY = canvasHeight * 0.06f
-                val usableW = canvasWidth * 0.84f
-                val usableH = canvasHeight * 0.88f
-
-                val rawX = basePaddingX + normX * usableW
-                val rawY = basePaddingY + normY * usableH
-
-                val centerX = canvasWidth / 2f
-                val centerY = canvasHeight / 2f
-
-                val transformedX = centerX + (rawX - centerX + panOffset.x) * zoomScale
-                val transformedY = centerY + (rawY - centerY + panOffset.y) * zoomScale
-
-                return Offset(transformedX, transformedY)
+            // Check-in Radius Circle for selected marker
+            selectedMarker?.let { marker ->
+                Circle(
+                    center = LatLng(marker.lat, marker.lng),
+                    radius = marker.checkinRadiusMeters.toDouble(),
+                    fillColor = Brand500.copy(alpha = 0.25f),
+                    strokeColor = Gold500,
+                    strokeWidth = 3f
+                )
             }
 
-            // Draw Base Vietnam Map & Travel Tracks
-            Canvas(modifier = Modifier.fillMaxSize()) {
-                // 1. Coordinate Grid Lines (OSM Tile Coordinate representation)
-                val gridColor = Color(0x144ECBA5)
-                for (i in 0..12) {
-                    val y = i * (canvasHeight / 12f)
-                    drawLine(
-                        color = gridColor,
-                        start = Offset(0f, y),
-                        end = Offset(canvasWidth, y),
-                        strokeWidth = 1f
-                    )
-                }
-                for (i in 0..10) {
-                    val x = i * (canvasWidth / 10f)
-                    drawLine(
-                        color = gridColor,
-                        start = Offset(x, 0f),
-                        end = Offset(x, canvasHeight),
-                        strokeWidth = 1f
-                    )
-                }
-
-                // 2. Vietnam Landmass S-Shape Polygon
-                val vietnamCoastlineCoords = listOf(
-                    Pair(22.8, 102.2), // Tây Bắc (Điện Biên)
-                    Pair(23.4, 105.0), // Hà Giang (Cực Bắc Lũng Cú)
-                    Pair(22.7, 106.7), // Cao Bằng
-                    Pair(21.5, 107.9), // Móng Cái - Quảng Ninh
-                    Pair(20.8, 106.8), // Hải Phòng
-                    Pair(20.0, 106.0), // Nam Định - Ninh Bình
-                    Pair(19.3, 105.8), // Thanh Hóa
-                    Pair(18.7, 105.7), // Nghệ An - Hà Tĩnh
-                    Pair(17.5, 106.6), // Quảng Bình (Đồng Hới)
-                    Pair(16.8, 107.1), // Quảng Trị
-                    Pair(16.5, 107.6), // Thừa Thiên Huế
-                    Pair(16.1, 108.2), // Đà Nẵng
-                    Pair(15.9, 108.4), // Hội An - Quảng Nam
-                    Pair(15.1, 108.8), // Quảng Ngãi
-                    Pair(13.8, 109.2), // Quy Nhơn - Bình Định
-                    Pair(13.1, 109.3), // Phú Yên (Cực Đông Mũi Điện)
-                    Pair(12.3, 109.2), // Nha Trang - Khánh Hòa
-                    Pair(11.6, 109.0), // Ninh Thuận
-                    Pair(10.9, 108.1), // Bình Thuận (Mũi Né)
-                    Pair(10.4, 107.1), // Bà Rịa - Vũng Tàu
-                    Pair(10.7, 106.7), // TP. Hồ Chí Minh
-                    Pair(10.3, 106.4), // Tiền Giang - Bến Tre
-                    Pair(9.6, 106.6),  // Sóc Trăng
-                    Pair(9.2, 105.7),  // Bạc Liêu
-                    Pair(8.6, 104.7),  // Cực Nam Đất Mũi Cà Mau
-                    Pair(9.2, 104.8),  // Rạch Giá - Kiên Giang
-                    Pair(10.4, 104.5), // Hà Tiên
-                    Pair(11.0, 105.2), // An Giang - Đồng Tháp
-                    Pair(11.5, 106.0), // Tây Ninh
-                    Pair(12.0, 107.5), // Đắk Nông
-                    Pair(13.0, 107.8), // Đắk Lắk
-                    Pair(14.0, 107.6), // Gia Lai
-                    Pair(14.8, 107.7), // Kon Tum (Ngã ba Đông Dương)
-                    Pair(16.0, 107.3), // Tây Thừa Thiên Huế
-                    Pair(17.0, 106.3), // Tây Quảng Bình
-                    Pair(18.2, 105.4), // Tây Hà Tĩnh
-                    Pair(19.0, 104.8), // Tây Nghệ An
-                    Pair(20.5, 104.0), // Sơn La - Mộc Châu
-                    Pair(21.4, 103.0), // Điện Biên Phủ
-                    Pair(22.8, 102.2)  // Đóng vòng khép kín
+            // GPS Travel Route Polyline (2 layers: outer glow + inner bright)
+            if (visitedTrackLatLngs.size > 1) {
+                // Outer glowing line
+                Polyline(
+                    points = visitedTrackLatLngs,
+                    color = Gold500.copy(alpha = 0.45f),
+                    width = 14f,
+                    geodesic = true
                 )
-
-                val landPath = Path()
-                vietnamCoastlineCoords.forEachIndexed { index, (lat, lng) ->
-                    val pt = projectCoordinates(lat, lng)
-                    if (index == 0) landPath.moveTo(pt.x, pt.y) else landPath.lineTo(pt.x, pt.y)
-                }
-                landPath.close()
-
-                // Draw filled Vietnam landmass with shadow
-                drawPath(
-                    path = landPath,
-                    color = landColor,
-                    style = Fill
+                // Inner sharp route line
+                Polyline(
+                    points = visitedTrackLatLngs,
+                    color = Gold500,
+                    width = 5f,
+                    geodesic = true
                 )
-                // Draw landmass outline border
-                drawPath(
-                    path = landPath,
-                    color = landBorderColor,
-                    style = Stroke(width = 2.2f * zoomScale)
-                )
+            }
 
-                // 3. Sovereign Islands & Archipelagos (Hoàng Sa & Trường Sa)
-                // Đảo Phú Quốc
-                val phuQuocCenter = projectCoordinates(10.28, 103.98)
-                drawOval(
-                    color = landColor,
-                    topLeft = Offset(phuQuocCenter.x - 12f * zoomScale, phuQuocCenter.y - 18f * zoomScale),
-                    size = androidx.compose.ui.geometry.Size(24f * zoomScale, 36f * zoomScale)
-                )
-                drawOval(
-                    color = landBorderColor,
-                    topLeft = Offset(phuQuocCenter.x - 12f * zoomScale, phuQuocCenter.y - 18f * zoomScale),
-                    size = androidx.compose.ui.geometry.Size(24f * zoomScale, 36f * zoomScale),
-                    style = Stroke(width = 1.5f * zoomScale)
-                )
-
-                // Côn Đảo
-                val conDaoCenter = projectCoordinates(8.68, 106.60)
-                drawCircle(color = landColor, radius = 6f * zoomScale, center = conDaoCenter)
-                drawCircle(color = landBorderColor, radius = 6f * zoomScale, center = conDaoCenter, style = Stroke(width = 1.2f))
-
-                // Đảo Lý Sơn
-                val lySonCenter = projectCoordinates(15.38, 109.12)
-                drawCircle(color = landColor, radius = 5f * zoomScale, center = lySonCenter)
-                drawCircle(color = landBorderColor, radius = 5f * zoomScale, center = lySonCenter, style = Stroke(width = 1.2f))
-
-                // Quần đảo Hoàng Sa (TP. Đà Nẵng) 🇻🇳
-                val hoangSaCenter = projectCoordinates(16.5, 112.2)
-                drawCircle(color = Color(0xFFE53935).copy(alpha = 0.25f), radius = 22f * zoomScale, center = hoangSaCenter)
-                drawCircle(color = Color(0xFFE53935), radius = 7f * zoomScale, center = hoangSaCenter)
-                drawCircle(color = Gold500, radius = 3.5f * zoomScale, center = hoangSaCenter)
-
-                // Quần đảo Trường Sa (T. Khánh Hòa) 🇻🇳
-                val truongSaCenter = projectCoordinates(10.0, 114.2)
-                drawCircle(color = Color(0xFFE53935).copy(alpha = 0.25f), radius = 26f * zoomScale, center = truongSaCenter)
-                drawCircle(color = Color(0xFFE53935), radius = 7f * zoomScale, center = truongSaCenter)
-                drawCircle(color = Gold500, radius = 3.5f * zoomScale, center = truongSaCenter)
-
-                // 4. GPS Route Polyline connecting visited check-in points
-                val trackPoints = displayMarkers.filter { it.isVisited }.map { projectCoordinates(it.lat, it.lng) }
-                if (trackPoints.size > 1) {
-                    val routePath = Path()
-                    routePath.moveTo(trackPoints.first().x, trackPoints.first().y)
-                    for (i in 1 until trackPoints.size) {
-                        routePath.lineTo(trackPoints[i].x, trackPoints[i].y)
+            // Sovereign Islands Overlay Markers (Hoàng Sa & Trường Sa) 🇻🇳
+            // Quần đảo Hoàng Sa (16.5, 112.0)
+            MarkerComposable(
+                keys = arrayOf("sovereignty_hoang_sa"),
+                state = rememberMarkerState(position = LatLng(16.5, 112.0)),
+                title = "Quần đảo Hoàng Sa (TP. Đà Nẵng)",
+                onClick = { true }
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xF0082019),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Gold500),
+                    shadowElevation = 6.dp
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(horizontal = 7.dp, vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = "🇻🇳 Q.Đ HOÀNG SA",
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color.White
+                        )
+                        Text(
+                            text = "(TP. Đà Nẵng)",
+                            fontSize = 7.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Gold500
+                        )
                     }
-
-                    // Outer glowing route line
-                    drawPath(
-                        path = routePath,
-                        color = Gold500.copy(alpha = 0.4f),
-                        style = Stroke(
-                            width = 6f * zoomScale,
-                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(25f, 15f), 0f)
-                        )
-                    )
-
-                    // Inner bright route line
-                    drawPath(
-                        path = routePath,
-                        color = Gold500,
-                        style = Stroke(
-                            width = 2.5f * zoomScale,
-                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 15f), 0f)
-                        )
-                    )
                 }
             }
 
-            // Islands Sovereignty Overlay Badges (Hoàng Sa & Trường Sa)
-            val hoangSaPos = projectCoordinates(16.5, 112.2)
-            val truongSaPos = projectCoordinates(10.0, 114.2)
-
-            // Hoàng Sa Badge
-            Box(
-                modifier = Modifier
-                    .offset(
-                        x = (hoangSaPos.x / (canvasWidth / constraints.maxWidth)).dp - 40.dp,
-                        y = (hoangSaPos.y / (canvasHeight / constraints.maxHeight)).dp - 32.dp
-                    )
-                    .background(Color(0xDD082019), RoundedCornerShape(6.dp))
-                    .border(1.dp, Gold500.copy(alpha = 0.6f), RoundedCornerShape(6.dp))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
+            // Quần đảo Trường Sa (10.0, 114.0)
+            MarkerComposable(
+                keys = arrayOf("sovereignty_truong_sa"),
+                state = rememberMarkerState(position = LatLng(10.0, 114.0)),
+                title = "Quần đảo Trường Sa (T. Khánh Hòa)",
+                onClick = { true }
             ) {
-                Text(
-                    text = "🇻🇳 Q.Đ Hoàng Sa\n(TP. Đà Nẵng)",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    lineHeight = 10.sp
-                )
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xF0082019),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Gold500),
+                    shadowElevation = 6.dp
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(horizontal = 7.dp, vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = "🇻🇳 Q.Đ TRƯỜNG SA",
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color.White
+                        )
+                        Text(
+                            text = "(T. Khánh Hòa)",
+                            fontSize = 7.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Gold500
+                        )
+                    }
+                }
             }
 
-            // Trường Sa Badge
-            Box(
-                modifier = Modifier
-                    .offset(
-                        x = (truongSaPos.x / (canvasWidth / constraints.maxWidth)).dp - 40.dp,
-                        y = (truongSaPos.y / (canvasHeight / constraints.maxHeight)).dp - 32.dp
-                    )
-                    .background(Color(0xDD082019), RoundedCornerShape(6.dp))
-                    .border(1.dp, Gold500.copy(alpha = 0.6f), RoundedCornerShape(6.dp))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
-            ) {
-                Text(
-                    text = "🇻🇳 Q.Đ Trường Sa\n(T. Khánh Hòa)",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    lineHeight = 10.sp
-                )
-            }
-
-            // 5. Render Clusters (ST_ClusterDBSCAN Mode when zoom is out) OR Individual Markers
+            // Clusters (when zoom < 6.5f) OR Individual Markers (when zoom >= 6.5f)
             if (isClusteredMode) {
-                // Render Cluster Blobs
                 clusters.forEach { cluster ->
-                    val pos = projectCoordinates(cluster.lat, cluster.lng)
                     val visitedCount = cluster.markers.count { it.isVisited }
                     val totalCount = cluster.markers.size
 
-                    Box(
-                        modifier = Modifier
-                            .offset(
-                                x = (pos.x / (canvasWidth / constraints.maxWidth)).dp - 45.dp,
-                                y = (pos.y / (canvasHeight / constraints.maxHeight)).dp - 20.dp
-                            )
-                            .shadow(8.dp, RoundedCornerShape(999.dp))
-                            .clip(RoundedCornerShape(999.dp))
-                            .background(
-                                Brush.horizontalGradient(
-                                    listOf(Brand700, Color(0xFF03281E))
-                                )
-                            )
-                            .border(1.5.dp, Gold500, RoundedCornerShape(999.dp))
-                            .clickable {
-                                // Tapping a cluster centers & zooms into individual markers
-                                coroutineScope.launch {
-                                    zoomScale = 1.8f
-                                    panOffset = Offset(
-                                        -(pos.x - canvasWidth / 2f) / 1.5f,
-                                        -(pos.y - canvasHeight / 2f) / 1.5f
+                    MarkerComposable(
+                        keys = arrayOf<Any>(cluster.id, visitedCount, totalCount),
+                        state = rememberMarkerState(position = LatLng(cluster.lat, cluster.lng)),
+                        title = cluster.name,
+                        onClick = {
+                            coroutineScope.launch {
+                                cameraPositionState.animate(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(cluster.lat, cluster.lng),
+                                        7.8f
                                     )
-                                }
+                                )
                             }
-                            .padding(horizontal = 10.dp, vertical = 5.dp)
+                            true
+                        }
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = Brand700,
+                            border = androidx.compose.foundation.BorderStroke(1.5.dp, Gold500),
+                            shadowElevation = 8.dp
                         ) {
-                            Text(text = "🟢", fontSize = 9.sp)
-                            Text(
-                                text = "${cluster.name} · $visitedCount/$totalCount",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                            Icon(
-                                Icons.Default.ZoomIn,
-                                contentDescription = "Zoom",
-                                tint = Gold500,
-                                modifier = Modifier.size(13.dp)
-                            )
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
+                            ) {
+                                Text(text = "🟢", fontSize = 9.sp)
+                                Text(
+                                    text = "${cluster.name} · $visitedCount/$totalCount",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                                Icon(
+                                    Icons.Default.ZoomIn,
+                                    contentDescription = "Zoom",
+                                    tint = Gold500,
+                                    modifier = Modifier.size(13.dp)
+                                )
+                            }
                         }
                     }
                 }
             } else {
-                // Render Individual Interactive Markers (Visited vs Suggested)
+                // Individual Markers
                 displayMarkers.forEach { marker ->
-                    val pos = projectCoordinates(marker.lat, marker.lng)
                     val isSelected = selectedMarker?.id == marker.id
                     val markerSize = if (isSelected) 56.dp else 44.dp
 
-                    Box(
-                        modifier = Modifier
-                            .offset(
-                                x = (pos.x / (canvasWidth / constraints.maxWidth)).dp - (markerSize / 2),
-                                y = (pos.y / (canvasHeight / constraints.maxHeight)).dp - (markerSize / 2)
-                            )
-                            .size(markerSize)
-                            .clickable { selectedMarker = marker }
+                    MarkerComposable(
+                        keys = arrayOf<Any>(marker.id, isSelected, marker.isVisited),
+                        state = rememberMarkerState(position = LatLng(marker.lat, marker.lng)),
+                        title = marker.title,
+                        snippet = marker.provinceName,
+                        onClick = {
+                            selectedMarker = marker
+                            true
+                        }
                     ) {
                         if (marker.isVisited) {
-                            // 6a. VISITED MARKER: Đặc, màu thương hiệu Lumina, ảnh check-in thật, con dấu
+                            // Visited Marker: Circular Image with Gold border and Stamp Emblem
                             Box(
                                 contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier.size(markerSize)
                             ) {
-                                // Pulse glow ring
+                                // Outer glow circle
                                 Box(
                                     modifier = Modifier
                                         .size(markerSize)
                                         .clip(CircleShape)
                                         .background(
-                                            if (isSelected) Gold500.copy(alpha = 0.65f) else Brand500.copy(alpha = 0.4f)
+                                            if (isSelected) Gold500.copy(alpha = 0.7f) else Brand500.copy(alpha = 0.4f)
                                         )
                                 )
 
@@ -727,7 +588,7 @@ fun InteractiveMapScreen(
                                         )
                                 )
 
-                                // Stamp badge emblem on bottom right
+                                // Stamp badge emblem
                                 Surface(
                                     shape = CircleShape,
                                     color = Brand900,
@@ -746,43 +607,25 @@ fun InteractiveMapScreen(
                                 }
                             }
                         } else {
-                            // 6b. SUGGESTED UNVISITED MARKER: Rỗng (hollow), mờ (translucent), viền nét đứt
+                            // Suggested Unvisited Marker: Translucent circle with plus icon
                             Box(
                                 contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier.size(markerSize)
                             ) {
-                                // Dashed border ring canvas
-                                Canvas(modifier = Modifier.fillMaxSize()) {
-                                    drawCircle(
-                                        color = Color(0x33FFFFFF),
-                                        radius = (size.minDimension / 2) - 4f,
-                                        style = Fill
-                                    )
-                                    drawCircle(
-                                        color = Gold500.copy(alpha = 0.8f),
-                                        radius = (size.minDimension / 2) - 4f,
-                                        style = Stroke(
-                                            width = 2f,
-                                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(12f, 8f), 0f)
-                                        )
-                                    )
-                                }
-
-                                // Inner discovery icon
-                                Box(
-                                    contentAlignment = Alignment.Center,
-                                    modifier = Modifier
-                                        .size(markerSize - 14.dp)
-                                        .clip(CircleShape)
-                                        .background(Color(0xCC082019))
+                                Surface(
+                                    shape = CircleShape,
+                                    color = Color(0xCC082019),
+                                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Gold500),
+                                    modifier = Modifier.size(markerSize - 6.dp)
                                 ) {
-                                    Text(
-                                        text = marker.stampSymbol,
-                                        fontSize = 13.sp
-                                    )
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Text(
+                                            text = marker.stampSymbol,
+                                            fontSize = 14.sp
+                                        )
+                                    }
                                 }
 
-                                // Plus icon badge
                                 Surface(
                                     shape = CircleShape,
                                     color = Gold500,
@@ -806,7 +649,9 @@ fun InteractiveMapScreen(
             }
         }
 
-        // Top Control Overlay: Title & Spatial Status
+        // ==========================================
+        // 2. TOP CONTROL OVERLAY
+        // ==========================================
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -832,7 +677,7 @@ fun InteractiveMapScreen(
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = "🗺️ MAPLIBRE + OSM TILES",
+                                    text = "🗺️ GOOGLE MAPS ENGINE",
                                     fontSize = 9.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -844,7 +689,7 @@ fun InteractiveMapScreen(
                                     color = if (isClusteredMode) Color(0x33FFA726) else Color(0x334CAF50)
                                 ) {
                                     Text(
-                                        text = if (isClusteredMode) "DBSCAN Cluster" else "Point View",
+                                        text = if (isClusteredMode) "Cluster Mode" else "Point View",
                                         fontSize = 8.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = if (isClusteredMode) Color(0xFFFFB74D) else Color(0xFF81C784),
@@ -885,7 +730,7 @@ fun InteractiveMapScreen(
                                 text = when (layerStyle) {
                                     MapLayerStyle.TERRAIN -> "Địa hình"
                                     MapLayerStyle.SATELLITE -> "Vệ tinh"
-                                    MapLayerStyle.CLASSIC -> "Cổ điển"
+                                    MapLayerStyle.CLASSIC -> "Mặc định"
                                 },
                                 fontSize = 9.5.sp,
                                 fontWeight = FontWeight.Bold,
@@ -941,7 +786,9 @@ fun InteractiveMapScreen(
             }
         }
 
-        // Floating Zoom Controls (+ / - / Spatial HUD / Reset VN) on right side
+        // ==========================================
+        // 3. FLOATING CONTROLS (+ / - / HUD / RESET)
+        // ==========================================
         Column(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -956,7 +803,11 @@ fun InteractiveMapScreen(
                 shadowElevation = 6.dp,
                 modifier = Modifier
                     .size(38.dp)
-                    .clickable { zoomScale = (zoomScale + 0.35f).coerceAtMost(4.0f) }
+                    .clickable {
+                        coroutineScope.launch {
+                            cameraPositionState.animate(CameraUpdateFactory.zoomIn())
+                        }
+                    }
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Default.Add, contentDescription = "Zoom in", tint = Color.White, modifier = Modifier.size(16.dp))
@@ -971,7 +822,11 @@ fun InteractiveMapScreen(
                 shadowElevation = 6.dp,
                 modifier = Modifier
                     .size(38.dp)
-                    .clickable { zoomScale = (zoomScale - 0.35f).coerceAtLeast(0.85f) }
+                    .clickable {
+                        coroutineScope.launch {
+                            cameraPositionState.animate(CameraUpdateFactory.zoomOut())
+                        }
+                    }
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Default.Remove, contentDescription = "Zoom out", tint = Color.White, modifier = Modifier.size(16.dp))
@@ -1007,8 +862,14 @@ fun InteractiveMapScreen(
                 modifier = Modifier
                     .size(38.dp)
                     .clickable {
-                        zoomScale = 1.0f
-                        panOffset = Offset(0f, 0f)
+                        coroutineScope.launch {
+                            cameraPositionState.animate(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(16.0, 107.5),
+                                    5.2f
+                                )
+                            )
+                        }
                     }
             ) {
                 Box(contentAlignment = Alignment.Center) {
@@ -1017,7 +878,9 @@ fun InteractiveMapScreen(
             }
         }
 
-        // Spatial Engine Info HUD (Point 4 & 5 Demonstration)
+        // ==========================================
+        // 4. SPATIAL ENGINE INFO HUD
+        // ==========================================
         AnimatedVisibility(
             visible = showSpatialDebugHud,
             enter = fadeIn() + slideInVertically(),
@@ -1039,7 +902,7 @@ fun InteractiveMapScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "🛰️ POSTGIS SPATIAL ENGINE",
+                            text = "🛰️ POSTGIS & GOOGLE MAPS SPATIAL ENGINE",
                             fontSize = 9.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -1051,10 +914,10 @@ fun InteractiveMapScreen(
                     }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "• Bounding Box: ST_Intersects(location, ST_MakeEnvelope(minX, minY, maxX, maxY, 4326))\n" +
-                                "• Clustering: ST_ClusterDBSCAN(location, eps=0.45, minpoints=1)\n" +
-                                "• Zoom Scale: ${String.format("%.2f", zoomScale)}x → ${if (isClusteredMode) "Blob mode (DBSCAN)" else "Point mode"}\n" +
-                                "• Sovereign Markers: 🇻🇳 Hoàng Sa (16.5°N, 112.2°E), Trường Sa (10.0°N, 114.2°E)",
+                        text = "• Bounding Box: ST_Intersects(location, ST_MakeEnvelope(101.8, 8.0, 114.8, 23.6, 4326))\n" +
+                                "• Clustering: Dynamic Zoom Trigger (< 6.5f → Region Grouping)\n" +
+                                "• Current Camera Zoom: ${String.format("%.2f", currentZoom)}x → ${if (isClusteredMode) "Cluster Mode" else "Point Mode"}\n" +
+                                "• Sovereign Badges: 🇻🇳 Hoàng Sa (16.5°N, 112.0°E), Trường Sa (10.0°N, 114.0°E)",
                         fontSize = 9.sp,
                         fontFamily = FontFamily.Monospace,
                         color = Color(0xFFBEDBD0),
@@ -1064,7 +927,9 @@ fun InteractiveMapScreen(
             }
         }
 
-        // Selected Pin Preview Drawer at Bottom
+        // ==========================================
+        // 5. SELECTED PIN PREVIEW DRAWER AT BOTTOM
+        // ==========================================
         AnimatedVisibility(
             visible = selectedMarker != null,
             enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
@@ -1172,7 +1037,9 @@ fun InteractiveMapScreen(
         }
     }
 
-    // Spatial Check-in Dialog (Demonstrating Steps 1, 2, 3)
+    // ==========================================
+    // 6. SPATIAL CHECK-IN DIALOG
+    // ==========================================
     if (showGpsCheckInDialog) {
         GpsSpatialCheckInDialog(
             provinces = provinces,
@@ -1214,9 +1081,9 @@ fun GpsSpatialCheckInDialog(
     onConfirmCheckIn: (NearbyMatchedPlace) -> Unit
 ) {
     var isLocating by remember { mutableStateOf(true) }
-    var detectedLat by remember { mutableDoubleStateOf(11.9404) }
-    var detectedLng by remember { mutableDoubleStateOf(108.4583) }
-    var accuracyMeters by remember { mutableIntStateOf(4) }
+    val detectedLat by remember { mutableDoubleStateOf(11.9404) }
+    val detectedLng by remember { mutableDoubleStateOf(108.4583) }
+    val accuracyMeters by remember { mutableIntStateOf(4) }
     var selectedMatch by remember { mutableStateOf<NearbyMatchedPlace?>(null) }
 
     // Simulated 5 nearest places matching ST_DWithin + ST_Distance
@@ -1231,7 +1098,6 @@ fun GpsSpatialCheckInDialog(
     }
 
     LaunchedEffect(Unit) {
-        // Step 1: expo-location getCurrentPosition (~2s)
         delay(1600)
         isLocating = false
         selectedMatch = nearbyCandidates.first()
@@ -1287,7 +1153,6 @@ fun GpsSpatialCheckInDialog(
                 Spacer(modifier = Modifier.height(14.dp))
 
                 if (isLocating) {
-                    // Step 1 Loading State
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1310,8 +1175,6 @@ fun GpsSpatialCheckInDialog(
                         )
                     }
                 } else {
-                    // Step 2 & 3: Results from ST_DWithin + ST_Contains
-                    // GPS Coordinates Box
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1325,7 +1188,7 @@ fun GpsSpatialCheckInDialog(
                         ) {
                             Column {
                                 Text(
-                                    text = "Toạ độ WGS84: ${detectedLat}, ${detectedLng}",
+                                    text = "Toạ độ WGS84: $detectedLat, $detectedLng",
                                     fontSize = 10.5.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
@@ -1360,7 +1223,6 @@ fun GpsSpatialCheckInDialog(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Top 5 Matched Candidates
                     Column(
                         verticalArrangement = Arrangement.spacedBy(6.dp),
                         modifier = Modifier.fillMaxWidth()
@@ -1415,7 +1277,6 @@ fun GpsSpatialCheckInDialog(
 
                     Spacer(modifier = Modifier.height(14.dp))
 
-                    // Confirm Check-in Button
                     selectedMatch?.let { match ->
                         Button(
                             onClick = { onConfirmCheckIn(match) },

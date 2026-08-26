@@ -30,7 +30,9 @@ data class Place(
     val priceRangeVnd: Long = 50000,
     val tags: List<String> = emptyList(),
     val rating: Double = 4.8,
-    val isVisited: Boolean = false
+    val isVisited: Boolean = false,
+    val lat: Double = 0.0,
+    val lng: Double = 0.0
 )
 
 enum class PlaceCategory(val titleVi: String, val iconEmoji: String) {

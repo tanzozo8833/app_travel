@@ -101,6 +101,8 @@ dependencies {
   implementation(libs.coil.compose)
   implementation(libs.converter.moshi)
   implementation(libs.firebase.ai)
+  implementation(libs.maps.compose)
+  implementation(libs.play.services.maps)
   // Uncomment to use Firestore:
   // implementation(libs.firebase.firestore)
 
