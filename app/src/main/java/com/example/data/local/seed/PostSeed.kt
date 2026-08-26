@@ -21,7 +21,7 @@ object PostSeed {
                 "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop",
                 "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop"
             ),
-            aspectRatio = 0.85f,
+            aspectRatio = 0.8f,
             attachedTripId = "trip_dalat_3n2d",
             likeCount = 284,
             commentCount = 38,
@@ -48,7 +48,7 @@ object PostSeed {
                 "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop",
                 "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&auto=format&fit=crop"
             ),
-            aspectRatio = 0.85f,
+            aspectRatio = 1.45f,
             attachedTripId = "trip_hagiang_4n3d",
             likeCount = 512,
             commentCount = 64,
@@ -75,7 +75,7 @@ object PostSeed {
                 "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
                 "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&auto=format&fit=crop"
             ),
-            aspectRatio = 0.85f,
+            aspectRatio = 1.0f,
             attachedTripId = null,
             likeCount = 189,
             commentCount = 19,
@@ -102,7 +102,7 @@ object PostSeed {
                 "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop",
                 "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop"
             ),
-            aspectRatio = 0.85f,
+            aspectRatio = 1.55f,
             attachedTripId = "trip_danang_3n2d",
             likeCount = 423,
             commentCount = 52,

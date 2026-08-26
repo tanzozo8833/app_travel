@@ -172,8 +172,14 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             onQuickCheckIn = { place, pCode, pName ->
                                 viewModel.performQuickStamp(place, pCode, pName)
                             },
-                            onPublishPost = { caption, loc ->
-                                viewModel.publishPost(caption, loc, null)
+                            onPublishPost = { caption, loc, photoUrl ->
+                                viewModel.publishPost(
+                                    caption = caption,
+                                    location = loc,
+                                    trip = null,
+                                    mediaUrls = if (photoUrl.isNotBlank()) listOf(photoUrl) else emptyList(),
+                                    aspectRatio = 1.0f
+                                )
                             }
                         )
                     }
@@ -272,8 +278,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
             CreatePostScreen(
                 trips = trips,
                 onClose = { viewModel.showCreatePost(false) },
-                onPublish = { caption, loc, trip, mediaUrls ->
-                    viewModel.publishPost(caption, loc, trip, mediaUrls)
+                onPublish = { caption, loc, trip, mediaUrls, aspectRatio ->
+                    viewModel.publishPost(caption, loc, trip, mediaUrls, aspectRatio)
                 }
             )
         }

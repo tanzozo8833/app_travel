@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.data.model.Post
 import com.example.data.model.Trip
+import com.example.ui.components.PostCard
 import com.example.ui.components.TripCard
 import com.example.ui.theme.*
 
@@ -366,168 +367,67 @@ fun PostDetailScreen(
                 }
             }
 
-            // 7. RELATED POSTS / FEED SUGGESTIONS (Vertical downward list with rich cards)
+            // 7. RELATED POSTS / FEED SUGGESTIONS (Format identical to feed layout with 0 spacing)
             val relatedList = allPosts.filter { it.id != post.id }
             if (relatedList.isNotEmpty()) {
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(
-                            text = "GỢI Ý BÀI VIẾT LIÊN QUAN",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace,
-                            color = Brand700
-                        )
-                        Text(
-                            text = "Khám phá thêm góc nhìn và mẹo từ các tín đồ xê dịch khác",
-                            fontSize = 11.5.sp,
-                            color = TextSecondary
-                        )
+                        Column(modifier = Modifier.padding(horizontal = 14.dp)) {
+                            Text(
+                                text = "GỢI Ý BÀI VIẾT LIÊN QUAN",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Brand700
+                            )
+                            Text(
+                                text = "Khám phá thêm góc nhìn và mẹo từ các tín đồ xê dịch khác",
+                                fontSize = 11.5.sp,
+                                color = TextSecondary
+                            )
+                        }
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
 
+                        // 2-Column paired feed stream with zero spacing
+                        val chunked = relatedList.chunked(2)
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(0.dp)
                         ) {
-                            relatedList.forEach { relatedPost ->
-                                Card(
-                                    shape = RoundedCornerShape(16.dp),
-                                    colors = CardDefaults.cardColors(containerColor = BgSurface),
-                                    elevation = CardDefaults.cardElevation(2.dp),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .clickable { onPostClick(relatedPost) }
+                            chunked.forEach { pair ->
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(0.dp)
                                 ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(10.dp),
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Box(
-                                            modifier = Modifier
-                                                .size(width = 110.dp, height = 95.dp)
-                                                .clip(RoundedCornerShape(12.dp))
-                                                .background(BgSunken)
-                                        ) {
-                                            AsyncImage(
-                                                model = relatedPost.mediaUrls.firstOrNull(),
-                                                contentDescription = relatedPost.caption,
-                                                contentScale = ContentScale.Crop,
-                                                modifier = Modifier.fillMaxSize()
+                                    Box(modifier = Modifier.weight(1f)) {
+                                        PostCard(
+                                            post = pair[0],
+                                            onPostClick = onPostClick,
+                                            onTripClick = onTripClick,
+                                            onLikeClick = onLikeClick,
+                                            onSaveClick = onSaveClick,
+                                            onShareClick = onShareClick,
+                                            onCommentClick = onCommentClick
+                                        )
+                                    }
+                                    if (pair.size > 1) {
+                                        Box(modifier = Modifier.weight(1f)) {
+                                            PostCard(
+                                                post = pair[1],
+                                                onPostClick = onPostClick,
+                                                onTripClick = onTripClick,
+                                                onLikeClick = onLikeClick,
+                                                onSaveClick = onSaveClick,
+                                                onShareClick = onShareClick,
+                                                onCommentClick = onCommentClick
                                             )
-                                            if (relatedPost.mediaUrls.size > 1) {
-                                                Surface(
-                                                    shape = RoundedCornerShape(999.dp),
-                                                    color = Color.Black.copy(alpha = 0.65f),
-                                                    modifier = Modifier
-                                                        .align(Alignment.TopEnd)
-                                                        .padding(4.dp)
-                                                ) {
-                                                    Text(
-                                                        text = "1/${relatedPost.mediaUrls.size}",
-                                                        fontSize = 8.5.sp,
-                                                        fontWeight = FontWeight.Bold,
-                                                        color = Color.White,
-                                                        modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)
-                                                    )
-                                                }
-                                            }
                                         }
-
-                                        Spacer(modifier = Modifier.width(12.dp))
-
-                                        Column(
-                                            modifier = Modifier.weight(1f),
-                                            verticalArrangement = Arrangement.spacedBy(3.dp)
-                                        ) {
-                                            Row(
-                                                verticalAlignment = Alignment.CenterVertically,
-                                                horizontalArrangement = Arrangement.SpaceBetween,
-                                                modifier = Modifier.fillMaxWidth()
-                                            ) {
-                                                Text(
-                                                    text = relatedPost.authorName,
-                                                    fontSize = 12.sp,
-                                                    fontWeight = FontWeight.Bold,
-                                                    color = TextPrimary
-                                                )
-                                                Text(
-                                                    text = relatedPost.timeAgo,
-                                                    fontSize = 10.sp,
-                                                    color = TextSecondary
-                                                )
-                                            }
-
-                                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                                Icon(
-                                                    imageVector = Icons.Default.LocationOn,
-                                                    contentDescription = null,
-                                                    tint = Brand700,
-                                                    modifier = Modifier.size(12.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(2.dp))
-                                                Text(
-                                                    text = relatedPost.locationLabel,
-                                                    fontSize = 10.5.sp,
-                                                    color = Brand700,
-                                                    maxLines = 1,
-                                                    overflow = TextOverflow.Ellipsis
-                                                )
-                                            }
-
-                                            Text(
-                                                text = relatedPost.caption,
-                                                fontSize = 11.5.sp,
-                                                color = TextPrimary,
-                                                maxLines = 2,
-                                                overflow = TextOverflow.Ellipsis,
-                                                lineHeight = 16.sp
-                                            )
-
-                                            Row(
-                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                                verticalAlignment = Alignment.CenterVertically,
-                                                modifier = Modifier.padding(top = 2.dp)
-                                            ) {
-                                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                                    Icon(
-                                                        imageVector = Icons.Default.Favorite,
-                                                        contentDescription = null,
-                                                        tint = HeartRed,
-                                                        modifier = Modifier.size(12.dp)
-                                                    )
-                                                    Spacer(modifier = Modifier.width(3.dp))
-                                                    Text(
-                                                        text = "${relatedPost.likeCount}",
-                                                        fontSize = 10.sp,
-                                                        fontWeight = FontWeight.Medium,
-                                                        color = TextSecondary
-                                                    )
-                                                }
-
-                                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                                    Icon(
-                                                        imageVector = Icons.Outlined.ChatBubbleOutline,
-                                                        contentDescription = null,
-                                                        tint = TextSecondary,
-                                                        modifier = Modifier.size(12.dp)
-                                                    )
-                                                    Spacer(modifier = Modifier.width(3.dp))
-                                                    Text(
-                                                        text = "${relatedPost.commentCount}",
-                                                        fontSize = 10.sp,
-                                                        color = TextSecondary
-                                                    )
-                                                }
-                                            }
-                                        }
+                                    } else {
+                                        Spacer(modifier = Modifier.weight(1f))
                                     }
                                 }
                             }

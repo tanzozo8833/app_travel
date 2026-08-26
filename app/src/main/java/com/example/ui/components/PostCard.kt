@@ -66,11 +66,12 @@ fun PostCard(
     }
 
     Card(
-        shape = RoundedCornerShape(18.dp),
+        shape = RoundedCornerShape(0.dp),
         colors = CardDefaults.cardColors(containerColor = BgSurface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = modifier
             .fillMaxWidth()
+            .border(width = 0.5.dp, color = Color(0xFFE4ECE8))
             .clickable { onPostClick(post) }
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -79,7 +80,7 @@ fun PostCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 8.dp),
+                    .padding(horizontal = 8.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Avatar with 24h gold check-in ring
@@ -89,23 +90,23 @@ fun PostCard(
                         contentDescription = post.authorName,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(28.dp)
+                            .size(26.dp)
                             .clip(CircleShape)
                             .border(
-                                width = if (post.hasRecentCheckIn) 1.8.dp else 0.5.dp,
+                                width = if (post.hasRecentCheckIn) 1.5.dp else 0.5.dp,
                                 color = if (post.hasRecentCheckIn) Gold500 else Color(0xFFD3DCD5),
                                 shape = CircleShape
                             )
                     )
                 }
 
-                Spacer(modifier = Modifier.width(6.dp))
+                Spacer(modifier = Modifier.width(5.dp))
 
                 Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = post.authorName,
-                            fontSize = 12.sp,
+                            fontSize = 11.5.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary,
                             maxLines = 1,
@@ -114,7 +115,7 @@ fun PostCard(
 
                         // Trip Attached Pill
                         if (post.attachedTrip != null) {
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(3.dp))
                             Surface(
                                 shape = RoundedCornerShape(999.dp),
                                 color = Brand100,
@@ -124,10 +125,10 @@ fun PostCard(
                             ) {
                                 Text(
                                     text = "Trip",
-                                    fontSize = 8.5.sp,
+                                    fontSize = 8.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Brand700,
-                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp)
+                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
                                 )
                             }
                         }
@@ -136,7 +137,7 @@ fun PostCard(
                     // Location tag
                     Text(
                         text = post.locationLabel,
-                        fontSize = 9.5.sp,
+                        fontSize = 9.sp,
                         color = TextSecondary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -144,12 +145,11 @@ fun PostCard(
                 }
             }
 
-            // 2. Photo Content Container with double tap detector
+            // 2. Photo Content Container with dynamic aspect ratio & double tap detector
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(post.aspectRatio)
-                    .clip(RoundedCornerShape(12.dp))
                     .background(BgSunken)
                     .pointerInput(Unit) {
                         detectTapGestures(
@@ -173,22 +173,22 @@ fun PostCard(
                         color = Color.Black.copy(alpha = 0.65f),
                         modifier = Modifier
                             .align(Alignment.TopEnd)
-                            .padding(8.dp)
+                            .padding(6.dp)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp)
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.PhotoLibrary,
                                 contentDescription = null,
                                 tint = Color.White,
-                                modifier = Modifier.size(11.dp)
+                                modifier = Modifier.size(10.dp)
                             )
-                            Spacer(modifier = Modifier.width(3.dp))
+                            Spacer(modifier = Modifier.width(2.dp))
                             Text(
                                 text = "1/${post.mediaUrls.size}",
-                                fontSize = 9.5.sp,
+                                fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
                             )
@@ -214,12 +214,12 @@ fun PostCard(
             if (post.caption.isNotBlank()) {
                 Text(
                     text = post.caption,
-                    fontSize = 11.5.sp,
+                    fontSize = 11.sp,
                     color = TextPrimary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    lineHeight = 15.sp,
-                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                    lineHeight = 14.5.sp,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp)
                 )
             }
 
@@ -227,7 +227,7 @@ fun PostCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                    .padding(horizontal = 6.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -240,12 +240,12 @@ fun PostCard(
                         imageVector = if (post.isLiked) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
                         contentDescription = "Thích",
                         tint = if (post.isLiked) HeartRed else TextSecondary,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(15.dp)
                     )
-                    Spacer(modifier = Modifier.width(3.dp))
+                    Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = "${post.likeCount}",
-                        fontSize = 10.sp,
+                        fontSize = 9.5.sp,
                         fontWeight = FontWeight.Medium,
                         color = if (post.isLiked) HeartRed else TextSecondary
                     )
@@ -260,12 +260,12 @@ fun PostCard(
                         imageVector = Icons.Outlined.Share,
                         contentDescription = "Chia sẻ",
                         tint = TextSecondary,
-                        modifier = Modifier.size(15.dp)
+                        modifier = Modifier.size(14.dp)
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = "${post.shareCount}",
-                        fontSize = 10.sp,
+                        fontSize = 9.5.sp,
                         color = TextSecondary
                     )
                 }
@@ -279,12 +279,12 @@ fun PostCard(
                         imageVector = Icons.Outlined.ChatBubbleOutline,
                         contentDescription = "Bình luận",
                         tint = TextSecondary,
-                        modifier = Modifier.size(15.dp)
+                        modifier = Modifier.size(14.dp)
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = "${post.commentCount}",
-                        fontSize = 10.sp,
+                        fontSize = 9.5.sp,
                         color = TextSecondary
                     )
                 }
@@ -298,12 +298,12 @@ fun PostCard(
                         imageVector = if (post.isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
                         contentDescription = "Lưu",
                         tint = if (post.isSaved) Brand700 else TextSecondary,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(15.dp)
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
                         text = "${post.saveCount}",
-                        fontSize = 10.sp,
+                        fontSize = 9.5.sp,
                         color = if (post.isSaved) Brand700 else TextSecondary
                     )
                 }

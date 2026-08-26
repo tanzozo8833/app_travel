@@ -1,10 +1,15 @@
 package com.example.ui.screens
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,17 +18,23 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -31,13 +42,18 @@ import com.example.data.model.CheckInRecord
 import com.example.data.model.LuminaFrame
 import com.example.data.model.Place
 import com.example.data.model.Province
+import com.example.ui.components.CheckInColorMode
 import com.example.ui.components.PhotoFilters
 import com.example.ui.components.StampBadge
 import com.example.ui.theme.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
-enum class CheckInTab {
-    QUICK_STAMP,
-    FRAME_STUDIO
+enum class CheckInStudioMode {
+    LIVE_CAMERA,
+    CAPTURED_PHOTO
 }
 
 @Composable
@@ -47,10 +63,11 @@ fun CheckInScreen(
     checkIns: List<CheckInRecord>,
     frames: List<LuminaFrame> = emptyList(),
     onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String) -> Unit,
-    onPublishPost: (caption: String, location: String) -> Unit,
+    onPublishPost: (caption: String, location: String, photoUrl: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var currentTab by remember { mutableStateOf(CheckInTab.QUICK_STAMP) }
+    val coroutineScope = rememberCoroutineScope()
+
     var selectedProvince by remember(provinces) {
         mutableStateOf(
             provinces.find { it.code == "LDG" } ?: provinces.firstOrNull() ?: Province(
@@ -70,6 +87,7 @@ fun CheckInScreen(
             )
         )
     }
+
     var selectedPlace by remember(places) {
         mutableStateOf(
             places.firstOrNull { it.provinceCode == "LDG" } ?: places.firstOrNull() ?: Place(
@@ -78,8 +96,8 @@ fun CheckInScreen(
                 provinceCode = "LDG",
                 name = "Đồi Chè Cầu Đất",
                 category = com.example.data.model.PlaceCategory.PHOTO,
-                address = "Đà Lạt",
-                description = "Điểm săn mây",
+                address = "Đà Lạt, Lâm Đồng",
+                description = "Điểm săn mây và check-in lý tưởng",
                 coverUrl = "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
                 checkinRadiusMeters = 500,
                 isSuggested = true,
@@ -90,549 +108,950 @@ fun CheckInScreen(
             )
         )
     }
+
+    // Default sample scenes for live camera feed simulation
+    val sampleScenes = listOf(
+        Pair("Đồi Chè Săn Mây", "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop"),
+        Pair("Đỉnh Mã Pí Lèng", "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=800&auto=format&fit=crop"),
+        Pair("Cà Phê Phố Cổ", "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop"),
+        Pair("Cầu Vàng Bà Nà", "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800&auto=format&fit=crop"),
+        Pair("Hoàng Hôn Biển", "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop"),
+        Pair("Rừng Thông Đà Lạt", "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop")
+    )
+    var currentSceneIndex by remember { mutableStateOf(0) }
+
+    // Studio State
+    var studioMode by remember { mutableStateOf(CheckInStudioMode.LIVE_CAMERA) }
+    var selectedColorMode by remember { mutableStateOf(CheckInColorMode.FILM) }
+    var activePhotoUrl by remember { mutableStateOf(selectedPlace.coverUrl) }
+    var userCaption by remember { mutableStateOf("") }
+    var showGridGuidelines by remember { mutableStateOf(true) }
+    var isFrontCamera by remember { mutableStateOf(false) }
+    var flashMode by remember { mutableStateOf("AUTO") } // AUTO, ON, OFF
+    var showShutterFlash by remember { mutableStateOf(false) }
+    var showFocusRing by remember { mutableStateOf(false) }
+    var showSuccessStampDialog by remember { mutableStateOf(false) }
+
+    // Frame selection
     var selectedFrame by remember(frames) {
         mutableStateOf(
             frames.firstOrNull() ?: LuminaFrame(
-                id = "frame_1",
-                name = "Quốc Khánh 2/9",
-                badgeLabel = "🇻🇳 Quốc Khánh 2/9",
-                subtitle = "2/9/1945 - 2/9/2026",
-                topTitle = "★ VIỆT NAM TRONG TIM TÔI ★",
-                bottomTagline = "LUMINA PASSPORT",
-                previewColor = 0xFFD93025,
+                id = "frame_90s_polaroid",
+                name = "Locket Classic",
+                badgeLabel = "📷 Locket Classic",
+                subtitle = "LOCKET TRAVEL DIARY · 2026",
+                topTitle = "★ LUMINA LOCKET ★",
+                bottomTagline = "GEN Z FOOTPRINT PASSPORT",
+                previewColor = 0xFF1B2A26,
                 provinceCode = null,
-                isSeasonal = true
+                isSeasonal = false
             )
         )
     }
-    var userCaption by remember { mutableStateOf("") }
-    var showStampSuccessDialog by remember { mutableStateOf(false) }
+
+    // Photo picker launcher from user's gallery
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        uri?.let {
+            activePhotoUrl = it.toString()
+            studioMode = CheckInStudioMode.CAPTURED_PHOTO
+        }
+    }
+
+    // Live Date/Time Formatter
+    val currentTimeString = remember {
+        val sdf = SimpleDateFormat("HH:mm • dd/MM/yyyy", Locale.getDefault())
+        sdf.format(Date())
+    }
+
+    // Shutter Trigger action with flash effect
+    fun triggerShutter() {
+        coroutineScope.launch {
+            showShutterFlash = true
+            delay(120)
+            showShutterFlash = false
+            studioMode = CheckInStudioMode.CAPTURED_PHOTO
+        }
+    }
 
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .background(BgCanvas),
-        contentPadding = PaddingValues(bottom = 90.dp)
+        contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        // Top Header
+        // 1. Header with Locket Style Branding
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = "LOCKET CAMERA & STAMP",
+                                fontSize = 10.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = Brand700,
+                                letterSpacing = 0.8.sp
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed.copy(alpha = 0.15f) else Brand100
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "LIVE 1:1" else "ĐÃ CHỤP",
+                                        fontSize = 8.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
+                                    )
+                                }
+                            }
+                        }
+                        Text(
+                            text = "Chụp Ảnh & Đóng Dấu Dấu Chân",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = TextPrimary
+                        )
+                    }
+
+                    // Mode Switcher / Reset button
+                    if (studioMode == CheckInStudioMode.CAPTURED_PHOTO) {
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = Brand100,
+                            modifier = Modifier.clickable {
+                                studioMode = CheckInStudioMode.LIVE_CAMERA
+                            }
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                            ) {
+                                Icon(Icons.Default.Refresh, contentDescription = "Chụp lại", tint = Brand700, modifier = Modifier.size(14.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(
+                                    text = "Chụp lại",
+                                    fontSize = 11.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Brand700
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. MAIN SQUARE LOCKET CAMERA VIEWPORT (1:1 Aspect Ratio)
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                // Outer Locket Bezel Frame with smooth 28.dp rounded corner
+                Surface(
+                    shape = RoundedCornerShape(28.dp),
+                    color = Color(selectedFrame.previewColor),
+                    shadowElevation = 8.dp,
+                    border = androidx.compose.foundation.BorderStroke(
+                        width = 3.dp,
+                        brush = Brush.verticalGradient(
+                            listOf(
+                                Gold500.copy(alpha = 0.8f),
+                                Color(selectedFrame.previewColor),
+                                Color.Black.copy(alpha = 0.6f)
+                            )
+                        )
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp)
+                    ) {
+                        // Top Header inside Locket Frame (Location + Time)
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 4.dp, vertical = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = Color.Black.copy(alpha = 0.55f)
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.LocationOn,
+                                        contentDescription = null,
+                                        tint = Gold500,
+                                        modifier = Modifier.size(12.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(3.dp))
+                                    Text(
+                                        text = "${selectedPlace.name} · ${selectedProvince.shortName}",
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.White,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = Color.Black.copy(alpha = 0.55f)
+                            ) {
+                                Text(
+                                    text = currentTimeString,
+                                    fontSize = 9.sp,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = Gold100,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // SQUARE 1:1 MEDIA CONTAINER (Supports Live Filter in real-time)
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(1.0f) // 1:1 SQUARE LOCKET RATIO
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color(0xFF0F1A17))
+                                .pointerInput(Unit) {
+                                    detectTapGestures {
+                                        showFocusRing = true
+                                        coroutineScope.launch {
+                                            delay(1000)
+                                            showFocusRing = false
+                                        }
+                                    }
+                                }
+                        ) {
+                            // Viewport Image (Live Camera simulation / Chosen Photo) with CSS/ColorMatrix Filter
+                            AsyncImage(
+                                model = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                                    sampleScenes[currentSceneIndex].second
+                                } else {
+                                    activePhotoUrl
+                                },
+                                contentDescription = "Locket Viewfinder",
+                                contentScale = ContentScale.Crop,
+                                colorFilter = selectedColorMode.getColorFilter(),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .scale(if (isFrontCamera) -1f else 1f, 1f) // Mirror for selfie
+                            )
+
+                            // 3x3 Grid Guidelines Overlay (if active)
+                            if (showGridGuidelines && studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                                Column(modifier = Modifier.fillMaxSize()) {
+                                    Box(modifier = Modifier.weight(1f).fillMaxWidth().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                    Box(modifier = Modifier.weight(1f).fillMaxWidth().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                    Box(modifier = Modifier.weight(1f).fillMaxWidth().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                }
+                                Row(modifier = Modifier.fillMaxSize()) {
+                                    Box(modifier = Modifier.weight(1f).fillMaxHeight().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                    Box(modifier = Modifier.weight(1f).fillMaxHeight().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                    Box(modifier = Modifier.weight(1f).fillMaxHeight().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
+                                }
+                            }
+
+                            // Tap to Focus Ring (Yellow Animated Box)
+                            if (showFocusRing) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(60.dp)
+                                        .align(Alignment.Center)
+                                        .border(1.5.dp, Gold500, RoundedCornerShape(8.dp))
+                                )
+                            }
+
+                            // Live Shutter Flash effect
+                            if (showShutterFlash) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(Color.White)
+                                )
+                            }
+
+                            // Top In-Screen Badges (Color Mode indicator + Flash/Flip shortcuts)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .align(Alignment.TopCenter)
+                                    .padding(8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                // Active Color Filter Pill
+                                Surface(
+                                    shape = RoundedCornerShape(999.dp),
+                                    color = Color.Black.copy(alpha = 0.7f),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, Gold500)
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                    ) {
+                                        Text(text = selectedColorMode.iconEmoji, fontSize = 11.sp)
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(
+                                            text = selectedColorMode.title,
+                                            fontSize = 10.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
+                                    }
+                                }
+
+                                // Quick camera toggles
+                                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    // Grid Toggle
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = if (showGridGuidelines) Gold500 else Color.Black.copy(alpha = 0.6f),
+                                        modifier = Modifier
+                                            .size(28.dp)
+                                            .clickable { showGridGuidelines = !showGridGuidelines }
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = Icons.Default.GridOn,
+                                                contentDescription = "Grid",
+                                                tint = if (showGridGuidelines) TextOnGold else Color.White,
+                                                modifier = Modifier.size(14.dp)
+                                            )
+                                        }
+                                    }
+
+                                    // Flash toggle
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = Color.Black.copy(alpha = 0.6f),
+                                        modifier = Modifier
+                                            .size(28.dp)
+                                            .clickable {
+                                                flashMode = when (flashMode) {
+                                                    "AUTO" -> "ON"
+                                                    "ON" -> "OFF"
+                                                    else -> "AUTO"
+                                                }
+                                            }
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = if (flashMode == "OFF") Icons.Outlined.FlashOff else Icons.Default.FlashOn,
+                                                contentDescription = "Flash",
+                                                tint = if (flashMode == "ON") Gold500 else Color.White,
+                                                modifier = Modifier.size(14.dp)
+                                            )
+                                        }
+                                    }
+
+                                    // Flip camera (Front/Back)
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = Color.Black.copy(alpha = 0.6f),
+                                        modifier = Modifier
+                                            .size(28.dp)
+                                            .clickable { isFrontCamera = !isFrontCamera }
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = Icons.Default.FlipCameraAndroid,
+                                                contentDescription = "Flip Camera",
+                                                tint = Color.White,
+                                                modifier = Modifier.size(14.dp)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Bottom Locket Stamp Badge (Watermark & Footprint seal)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .align(Alignment.BottomCenter)
+                                    .background(
+                                        Brush.verticalGradient(
+                                            listOf(Color.Transparent, Color.Black.copy(alpha = 0.75f))
+                                        )
+                                    )
+                                    .padding(horizontal = 10.dp, vertical = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    StampBadge(
+                                        provinceCode = selectedProvince.code,
+                                        provinceShortName = selectedProvince.shortName,
+                                        dateText = "2026",
+                                        symbolEmoji = selectedProvince.stampSymbol,
+                                        size = 32.dp
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Column {
+                                        Text(
+                                            text = selectedFrame.topTitle,
+                                            fontSize = 8.5.sp,
+                                            fontWeight = FontWeight.ExtraBold,
+                                            fontFamily = FontFamily.Monospace,
+                                            color = Gold500,
+                                            letterSpacing = 0.5.sp
+                                        )
+                                        Text(
+                                            text = selectedFrame.bottomTagline,
+                                            fontSize = 7.5.sp,
+                                            color = Color.White.copy(alpha = 0.8f)
+                                        )
+                                    }
+                                }
+
+                                Surface(
+                                    shape = RoundedCornerShape(999.dp),
+                                    color = Color(0x334CAF50)
+                                ) {
+                                    Text(
+                                        text = "GPS 100%",
+                                        fontSize = 8.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color(0xFF81C784),
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        // Frame Subtitle bar
+                        Text(
+                            text = selectedFrame.subtitle,
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Gold100,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+        }
+
+        // 3. COLOR MODE PRESETS STRIP (Áp dụng trực tiếp lên luồng video & ảnh đã chụp)
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp, bottom = 6.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "COLOR MODE (BỘ LỌC MÀU PHOTOBOOTH)",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Brand700
+                        )
+                    }
+                    Text(
+                        text = "Áp dụng trực tiếp 1:1",
+                        fontSize = 10.5.sp,
+                        color = TextSecondary
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(CheckInColorMode.values()) { mode ->
+                        val isSelected = selectedColorMode == mode
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = if (isSelected) Brand700 else BgSurface,
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.5.dp,
+                                if (isSelected) Gold500 else Color(0xFFD6DFDB)
+                            ),
+                            modifier = Modifier
+                                .width(106.dp)
+                                .clickable { selectedColorMode = mode }
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                // Color swatch sample preview
+                                Box(
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(mode.samplePreviewColor))
+                                        .border(1.dp, if (isSelected) Gold500 else Color.Transparent, CircleShape),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(text = mode.iconEmoji, fontSize = 12.sp)
+                                }
+
+                                Spacer(modifier = Modifier.height(4.dp))
+
+                                Text(
+                                    text = mode.title,
+                                    fontSize = 11.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSelected) Color.White else TextPrimary,
+                                    maxLines = 1
+                                )
+                                Text(
+                                    text = mode.subtext,
+                                    fontSize = 8.5.sp,
+                                    color = if (isSelected) Gold100 else TextSecondary,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 4. CAMERA CONTROLS: SHUTTER & GALLERY PICKER & SCENE PRESETS
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+            ) {
+                // If in live camera mode: Show large shutter + scene presets
+                if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                    // Quick scenic view selector (chuyển cảnh giả lập camera chân thực)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "GÓC CHỤP GỢI Ý",
+                            fontSize = 9.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = TextSecondary
+                        )
+                        Text(
+                            text = "Đổi cảnh nhanh",
+                            fontSize = 10.sp,
+                            color = Brand700,
+                            modifier = Modifier.clickable {
+                                currentSceneIndex = (currentSceneIndex + 1) % sampleScenes.size
+                            }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        items(sampleScenes.indices.toList()) { index ->
+                            val isCurrent = currentSceneIndex == index
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = if (isCurrent) Brand100 else BgSurface,
+                                border = androidx.compose.foundation.BorderStroke(
+                                    1.dp,
+                                    if (isCurrent) Brand700 else Color(0xFFD6DFDB)
+                                ),
+                                modifier = Modifier.clickable {
+                                    currentSceneIndex = index
+                                }
+                            ) {
+                                Text(
+                                    text = sampleScenes[index].first,
+                                    fontSize = 10.5.sp,
+                                    fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
+                                    color = if (isCurrent) Brand700 else TextPrimary,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    // Shutter Bar: [Gallery Upload] [BIG SHUTTER BUTTON] [Switch Scene]
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // 1. Gallery Upload Button
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.clickable {
+                                photoPickerLauncher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
+                            }
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = BgSurface,
+                                border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700),
+                                modifier = Modifier.size(46.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.PhotoLibrary,
+                                        contentDescription = "Tải ảnh lên",
+                                        tint = Brand700,
+                                        modifier = Modifier.size(22.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(text = "Tải ảnh", fontSize = 10.5.sp, color = TextPrimary)
+                        }
+
+                        // 2. BIG SHUTTER BUTTON
+                        Surface(
+                            shape = CircleShape,
+                            color = Color.Transparent,
+                            border = androidx.compose.foundation.BorderStroke(4.dp, Gold500),
+                            modifier = Modifier
+                                .size(74.dp)
+                                .clickable { triggerShutter() }
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.padding(6.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .clip(CircleShape)
+                                        .background(
+                                            Brush.radialGradient(
+                                                listOf(Color.White, Gold500)
+                                            )
+                                        )
+                                )
+                            }
+                        }
+
+                        // 3. Next Scene Button
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.clickable {
+                                currentSceneIndex = (currentSceneIndex + 1) % sampleScenes.size
+                            }
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = BgSurface,
+                                border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFFD6DFDB)),
+                                modifier = Modifier.size(46.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.AutoAwesome,
+                                        contentDescription = "Đổi cảnh",
+                                        tint = Gold500,
+                                        modifier = Modifier.size(22.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(text = "Đổi cảnh", fontSize = 10.5.sp, color = TextPrimary)
+                        }
+                    }
+                }
+            }
+        }
+
+        // 5. LOCKET FRAME STYLES SELECTOR
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+            ) {
                 Text(
-                    text = "PASSPORT CHECK-IN & KHUNG ẢNH",
-                    fontSize = 11.sp,
+                    text = "CHỌN KIỂU VIỀN KHUNG LOCKET",
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
-                    color = Brand700,
-                    letterSpacing = 0.8.sp
+                    color = Brand700
                 )
-                Text(
-                    text = "Đóng dấu Hộ Chiếu Dấu Chân",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    color = TextPrimary
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(frames) { frame ->
+                        val isSelected = selectedFrame.id == frame.id
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = if (isSelected) Color(frame.previewColor) else BgSurface,
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.5.dp,
+                                if (isSelected) Gold500 else Color(0xFFD6DFDB)
+                            ),
+                            modifier = Modifier.clickable { selectedFrame = frame }
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(10.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(frame.previewColor))
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = frame.badgeLabel,
+                                    fontSize = 11.5.sp,
+                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                    color = if (isSelected) Color.White else TextPrimary
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 6. CAPTION & CHECK-IN PUBLISH ACTIONS
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                OutlinedTextField(
+                    value = userCaption,
+                    onValueChange = { userCaption = it },
+                    placeholder = { Text("Viết cảm nghĩ về khoảnh khắc check-in này... #locket #checkin", fontSize = 12.sp) },
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 3
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Tab Switcher
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(BgSunken, RoundedCornerShape(999.dp))
-                        .padding(4.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Surface(
+                    // Save to Passport
+                    OutlinedButton(
+                        onClick = {
+                            onQuickCheckIn(selectedPlace.name, selectedProvince.code, selectedProvince.shortName)
+                            showSuccessStampDialog = true
+                        },
                         shape = RoundedCornerShape(999.dp),
-                        color = if (currentTab == CheckInTab.QUICK_STAMP) Brand700 else Color.Transparent,
                         modifier = Modifier
                             .weight(1f)
-                            .clickable { currentTab = CheckInTab.QUICK_STAMP }
+                            .height(48.dp)
                     ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        ) {
-                            Text(
-                                text = "⦿ Đóng dấu tức thì",
-                                fontSize = 12.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (currentTab == CheckInTab.QUICK_STAMP) Color.White else TextSecondary
-                            )
-                        }
+                        Icon(Icons.Default.Bookmark, contentDescription = null, tint = Brand700, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "Đóng dấu Hộ Chiếu", fontSize = 12.sp, color = Brand700, fontWeight = FontWeight.Bold)
                     }
 
-                    Surface(
+                    // Publish to Community Feed
+                    Button(
+                        onClick = {
+                            val finalPhoto = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                                sampleScenes[currentSceneIndex].second
+                            } else {
+                                activePhotoUrl
+                            }
+                            val caption = if (userCaption.isNotBlank()) userCaption else "Check-in Locket tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
+                            onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", finalPhoto)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp),
-                        color = if (currentTab == CheckInTab.FRAME_STUDIO) Brand700 else Color.Transparent,
                         modifier = Modifier
                             .weight(1f)
-                            .clickable { currentTab = CheckInTab.FRAME_STUDIO }
+                            .height(48.dp)
                     ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        ) {
-                            Text(
-                                text = "📸 Khung ảnh & Bộ lọc màu",
-                                fontSize = 12.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (currentTab == CheckInTab.FRAME_STUDIO) Color.White else TextSecondary
-                            )
-                        }
+                        Icon(Icons.Default.Send, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "Đăng Locket Feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
         }
 
-        if (currentTab == CheckInTab.QUICK_STAMP) {
-            // TAB 1: QUICK STAMP SECTION
-            item {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+        // 7. NEARBY SUGGESTED PLACES SELECTOR
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                Text(
+                    text = "ĐỊA ĐIỂM SĂN DẤU GẦN BẠN (${selectedProvince.shortName.uppercase()})",
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    color = Brand700
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                val provincePlaces = places.filter { it.provinceCode == selectedProvince.code }
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    // GPS Location Detection Card
-                    Card(
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = Brand900),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .shadow(6.dp, RoundedCornerShape(20.dp))
-                    ) {
-                        Box(
+                    items(provincePlaces) { place ->
+                        val isSelected = selectedPlace.id == place.id
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = if (isSelected) Brand100 else BgSurface,
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.5.dp,
+                                if (isSelected) Brand700 else Color(0xFFD6DFDB)
+                            ),
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .background(
-                                    Brush.verticalGradient(
-                                        listOf(Brand900, Color(0xFF03221B))
-                                    )
-                                )
-                                .padding(16.dp)
+                                .width(150.dp)
+                                .clickable {
+                                    selectedPlace = place
+                                    activePhotoUrl = place.coverUrl
+                                }
                         ) {
-                            Column {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(Icons.Default.LocationOn, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = "GPS CHECK-IN ENGINE",
-                                            fontSize = 9.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            fontFamily = FontFamily.Monospace,
-                                            color = Gold500
-                                        )
-                                    }
-
-                                    Surface(
-                                        shape = RoundedCornerShape(999.dp),
-                                        color = Color(0x334CAF50)
-                                    ) {
-                                        Text(
-                                            text = "● Độ tin cậy: 100%",
-                                            fontSize = 10.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = Color(0xFF81C784),
-                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
-                                        )
-                                    }
-                                }
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
-                                Text(
-                                    text = selectedPlace.name,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color.White
-                                )
-                                Text(
-                                    text = "${selectedPlace.address} · Bán kính 200m",
-                                    fontSize = 12.sp,
-                                    color = Color(0xFFBEDBD0)
-                                )
-
-                                Spacer(modifier = Modifier.height(16.dp))
-
-                                // Stamp Badge Showcase
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    StampBadge(
-                                        provinceCode = selectedProvince.code,
-                                        provinceShortName = selectedProvince.shortName,
-                                        dateText = "15/08/2026",
-                                        symbolEmoji = selectedProvince.stampSymbol,
-                                        size = 96.dp,
-                                        isEarned = true,
-                                        animateDrop = false
-                                    )
-                                }
-
-                                Spacer(modifier = Modifier.height(16.dp))
-
-                                // Big Stamp Button
-                                Button(
-                                    onClick = {
-                                        onQuickCheckIn(selectedPlace.name, selectedProvince.code, selectedProvince.shortName)
-                                        showStampSuccessDialog = true
-                                    },
-                                    colors = ButtonDefaults.buttonColors(containerColor = Gold500),
-                                    shape = RoundedCornerShape(999.dp),
+                            Column(modifier = Modifier.padding(8.dp)) {
+                                Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(50.dp)
+                                        .height(80.dp)
+                                        .clip(RoundedCornerShape(8.dp))
                                 ) {
-                                    Text(
-                                        text = "ĐÓNG DẤU VÀO HỘ CHIẾU NGAY ⦿",
-                                        fontSize = 13.5.sp,
-                                        fontWeight = FontWeight.ExtraBold,
-                                        color = TextOnGold
+                                    AsyncImage(
+                                        model = place.coverUrl,
+                                        contentDescription = place.name,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier.fillMaxSize()
                                     )
                                 }
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    // Places near you carousel
-                    Text(
-                        text = "ĐỊA ĐIỂM GỢI Ý TẠI ${selectedProvince.shortName.uppercase()}",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        color = Brand700,
-                        letterSpacing = 0.5.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    val provincePlaces = places.filter { it.provinceCode == selectedProvince.code }
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(provincePlaces) { place ->
-                            val isSelected = selectedPlace.id == place.id
-                            Surface(
-                                shape = RoundedCornerShape(16.dp),
-                                color = if (isSelected) Brand100 else BgSurface,
-                                border = androidx.compose.foundation.BorderStroke(
-                                    1.5.dp,
-                                    if (isSelected) Brand700 else Color(0xFFD6DFDB)
-                                ),
-                                modifier = Modifier
-                                    .width(160.dp)
-                                    .clickable { selectedPlace = place }
-                            ) {
-                                Column(modifier = Modifier.padding(10.dp)) {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(90.dp)
-                                            .clip(RoundedCornerShape(10.dp))
-                                    ) {
-                                        AsyncImage(
-                                            model = place.coverUrl,
-                                            contentDescription = place.name,
-                                            contentScale = ContentScale.Crop,
-                                            modifier = Modifier.fillMaxSize()
-                                        )
-                                        Surface(
-                                            shape = RoundedCornerShape(999.dp),
-                                            color = Color.Black.copy(alpha = 0.6f),
-                                            modifier = Modifier
-                                                .align(Alignment.TopStart)
-                                                .padding(4.dp)
-                                        ) {
-                                            Text(
-                                                text = "${place.category.iconEmoji} ${place.category.titleVi}",
-                                                fontSize = 8.5.sp,
-                                                color = Color.White,
-                                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                            )
-                                        }
-                                    }
-                                    Spacer(modifier = Modifier.height(6.dp))
-                                    Text(
-                                        text = place.name,
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = TextPrimary,
-                                        maxLines = 1
-                                    )
-                                    Text(
-                                        text = "${place.priceRangeVnd / 1000}k • ~${place.checkinRadiusMeters}m",
-                                        fontSize = 10.sp,
-                                        color = TextSecondary
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    // Recent Stamps Row
-                    Text(
-                        text = "LỊCH SỬ DẤU CHÂN GẦN ĐÂY",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        color = Brand700,
-                        letterSpacing = 0.5.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(checkIns) { chk ->
-                            Surface(
-                                shape = RoundedCornerShape(14.dp),
-                                color = BgSurface,
-                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
-                                modifier = Modifier.width(130.dp)
-                            ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.padding(10.dp)
-                                ) {
-                                    StampBadge(
-                                        provinceCode = chk.provinceCode,
-                                        provinceShortName = chk.provinceName,
-                                        dateText = chk.formattedDate,
-                                        symbolEmoji = "★",
-                                        size = 54.dp
-                                    )
-                                    Spacer(modifier = Modifier.height(6.dp))
-                                    Text(
-                                        text = chk.placeName,
-                                        fontSize = 10.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = TextPrimary,
-                                        maxLines = 1
-                                    )
-                                    Text(
-                                        text = chk.formattedDate,
-                                        fontSize = 9.sp,
-                                        color = TextSecondary
-                                    )
-                                }
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Text(
+                                    text = place.name,
+                                    fontSize = 11.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary,
+                                    maxLines = 1
+                                )
+                                Text(
+                                    text = "${place.priceRangeVnd / 1000}k · ${place.category.titleVi}",
+                                    fontSize = 9.5.sp,
+                                    color = TextSecondary
+                                )
                             }
                         }
                     }
                 }
             }
-        } else {
-            // TAB 2: FRAME STUDIO SECTION (Both Frame and Photo Color Tone change together!)
-            item {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+        }
+    }
+
+    // Success Stamp Drop Dialog
+    if (showSuccessStampDialog) {
+        AlertDialog(
+            onDismissRequest = { showSuccessStampDialog = false },
+            confirmButton = {
+                Button(
+                    onClick = { showSuccessStampDialog = false },
+                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                    shape = RoundedCornerShape(999.dp)
                 ) {
-                    // Frame Selection Pills
-                    Text(
-                        text = "CHỌN KHUNG ẢNH & BỘ LỌC MÀU NGHỆ THUẬT",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        color = Brand700,
-                        letterSpacing = 0.5.sp
+                    Text("Tuyệt vời!")
+                }
+            },
+            title = {
+                Text(
+                    text = "🎉 ĐÃ ĐÓNG DẤU HỘ CHIẾU",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    color = Brand700,
+                    fontFamily = FontFamily.Monospace
+                )
+            },
+            text = {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    StampBadge(
+                        provinceCode = selectedProvince.code,
+                        provinceShortName = selectedProvince.shortName,
+                        dateText = "2026",
+                        symbolEmoji = selectedProvince.stampSymbol,
+                        size = 80.dp,
+                        isEarned = true,
+                        animateDrop = true
                     )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(frames) { frame ->
-                            val isSelected = selectedFrame.id == frame.id
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = if (isSelected) Brand700 else BgSurface,
-                                border = androidx.compose.foundation.BorderStroke(
-                                    1.dp,
-                                    if (isSelected) Gold500 else Color(0xFFD6DFDB)
-                                ),
-                                modifier = Modifier.clickable { selectedFrame = frame }
-                            ) {
-                                Text(
-                                    text = frame.badgeLabel,
-                                    fontSize = 12.sp,
-                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                    color = if (isSelected) Color.White else TextPrimary,
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-                                )
-                            }
-                        }
-                    }
-
                     Spacer(modifier = Modifier.height(10.dp))
-
-                    // Color Tone Label Badge
-                    Surface(
-                        shape = RoundedCornerShape(999.dp),
-                        color = Brand100,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFC8DEC9))
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                        ) {
-                            Text(text = "🎨 Đang áp dụng: ", fontSize = 11.sp, color = TextSecondary)
-                            Text(
-                                text = PhotoFilters.getFilterName(selectedFrame.id),
-                                fontSize = 11.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Brand900
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    // Frame Live Visual Card Preview (Transforms both frame and inner photo color matrix!)
-                    Card(
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = BgSurface),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp)
-                        ) {
-                            // Framed Photo Simulation Canvas
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(0.85f)
-                                    .clip(RoundedCornerShape(14.dp))
-                                    .background(Color(selectedFrame.previewColor))
-                                    .padding(10.dp)
-                            ) {
-                                // Inner Image with dynamic color filter matching the frame
-                                AsyncImage(
-                                    model = selectedPlace.coverUrl,
-                                    contentDescription = selectedFrame.name,
-                                    contentScale = ContentScale.Crop,
-                                    colorFilter = PhotoFilters.getFilterForFrame(selectedFrame.id),
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .clip(RoundedCornerShape(10.dp))
-                                )
-
-                                // Frame Top Title Overlay
-                                Surface(
-                                    shape = RoundedCornerShape(6.dp),
-                                    color = Color.Black.copy(alpha = 0.65f),
-                                    modifier = Modifier
-                                        .align(Alignment.TopCenter)
-                                        .padding(top = 10.dp)
-                                ) {
-                                    Text(
-                                        text = selectedFrame.topTitle,
-                                        fontSize = 9.sp,
-                                        fontWeight = FontWeight.ExtraBold,
-                                        fontFamily = FontFamily.Monospace,
-                                        color = Gold500,
-                                        letterSpacing = 0.8.sp,
-                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp)
-                                    )
-                                }
-
-                                // Frame Bottom Stamp Seal & Tagline
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier
-                                        .align(Alignment.BottomCenter)
-                                        .fillMaxWidth()
-                                        .background(
-                                            Brush.verticalGradient(
-                                                listOf(Color.Transparent, Color.Black.copy(alpha = 0.85f))
-                                            )
-                                        )
-                                        .padding(10.dp)
-                                ) {
-                                    Text(
-                                        text = selectedFrame.subtitle,
-                                        fontSize = 10.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.White
-                                    )
-                                    Text(
-                                        text = selectedFrame.bottomTagline,
-                                        fontSize = 8.sp,
-                                        fontFamily = FontFamily.Monospace,
-                                        color = Gold100
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(12.dp))
-
-                            // Caption textfield
-                            OutlinedTextField(
-                                value = userCaption,
-                                onValueChange = { userCaption = it },
-                                placeholder = { Text("Thêm cảm nghĩ về khoảnh khắc này...", fontSize = 12.sp) },
-                                shape = RoundedCornerShape(12.dp),
-                                modifier = Modifier.fillMaxWidth(),
-                                maxLines = 2
-                            )
-
-                            Spacer(modifier = Modifier.height(12.dp))
-
-                            // Actions
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                OutlinedButton(
-                                    onClick = {
-                                        // Save to Vault
-                                        onQuickCheckIn(selectedPlace.name, selectedProvince.code, selectedProvince.shortName)
-                                    },
-                                    shape = RoundedCornerShape(999.dp),
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Icon(Icons.Default.Bookmark, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(text = "Lưu City Vault", fontSize = 11.5.sp)
-                                }
-
-                                Button(
-                                    onClick = {
-                                        val caption = if (userCaption.isNotBlank()) userCaption else "Check-in ${selectedPlace.name} với khung ${selectedFrame.name} ✨"
-                                        onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}")
-                                    },
-                                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
-                                    shape = RoundedCornerShape(999.dp),
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Icon(Icons.Default.Send, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(text = "Đăng Feed ➔", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
-                                }
-                            }
-                        }
-                    }
+                    Text(
+                        text = "Đã lưu dấu chân tại ${selectedPlace.name} với khung Locket và bộ lọc ${selectedColorMode.title} vào Hộ Chiếu Dấu Chân!",
+                        fontSize = 12.sp,
+                        textAlign = TextAlign.Center,
+                        color = TextPrimary
+                    )
                 }
-            }
-        }
+            },
+            shape = RoundedCornerShape(20.dp),
+            containerColor = BgSurface
+        )
     }
 }

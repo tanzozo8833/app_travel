@@ -175,7 +175,8 @@ class LuminaRepository(
         mediaUrls: List<String>,
         locationLabel: String,
         provinceCode: String,
-        attachedTrip: Trip? = null
+        attachedTrip: Trip? = null,
+        aspectRatio: Float = 0.82f
     ): Post {
         val newPostId = "post_${UUID.randomUUID()}"
         val newPost = Post(
@@ -191,7 +192,7 @@ class LuminaRepository(
             mediaUrls = mediaUrls.ifEmpty {
                 listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
             },
-            aspectRatio = 0.82f,
+            aspectRatio = aspectRatio,
             attachedTrip = attachedTrip,
             likeCount = 1,
             commentCount = 0,
@@ -215,7 +216,7 @@ class LuminaRepository(
                 timeAgo = "Vừa xong",
                 caption = caption,
                 mediaUrls = newPost.mediaUrls,
-                aspectRatio = 0.82f,
+                aspectRatio = aspectRatio,
                 attachedTripId = attachedTrip?.id,
                 likeCount = 1,
                 commentCount = 0,

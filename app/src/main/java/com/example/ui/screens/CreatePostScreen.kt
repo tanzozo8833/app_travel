@@ -39,26 +39,65 @@ enum class ShareAudience(val label: String, val description: String) {
     ONLY_ME("Chỉ mình tôi", "Lưu vào nhật ký du lịch riêng tư")
 }
 
+data class AspectRatioOption(
+    val label: String,
+    val ratio: Float,
+    val subtext: String
+)
+
 @Composable
 fun CreatePostScreen(
     trips: List<Trip>,
     onClose: () -> Unit,
-    onPublish: (caption: String, location: String, attachedTrip: Trip?, mediaUrls: List<String>) -> Unit,
+    onPublish: (caption: String, location: String, attachedTrip: Trip?, mediaUrls: List<String>, aspectRatio: Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var caption by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("Đà Lạt, Lâm Đồng") }
     var selectedAudience by remember { mutableStateOf(ShareAudience.PUBLIC) }
 
+    val sampleMediaPool = listOf(
+        "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop", // Đà Lạt
+        "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&auto=format&fit=crop", // Cafe
+        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop", // Đỉnh núi
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop", // Hoàng hôn
+        "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=800&auto=format&fit=crop", // Hà Giang
+        "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&auto=format&fit=crop", // Thác nước
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop", // Cà phê trứng
+        "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800&auto=format&fit=crop", // Cầu Vàng
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop", // Biển
+        "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&auto=format&fit=crop", // Hoàng hôn biển
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop", // Đô thị đêm
+        "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&auto=format&fit=crop", // Hồ nước
+        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop", // Road trip
+        "https://images.unsplash.com/photo-1508672019048-805b876b67e2?w=800&auto=format&fit=crop", // Du lịch
+        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop", // Bản đồ
+        "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=800&auto=format&fit=crop", // Đi bộ trekking
+        "https://images.unsplash.com/photo-1517824806704-9040b037703b?w=800&auto=format&fit=crop", // Cắm trại
+        "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&auto=format&fit=crop", // Cảnh sắc
+        "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&auto=format&fit=crop", // Khinh khí cầu
+        "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&auto=format&fit=crop"  // Đảo
+    )
+
     // Uploaded photos list (Supports up to 20 media)
     var selectedImages by remember {
         mutableStateOf(
             listOf(
-                "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&auto=format&fit=crop"
+                sampleMediaPool[0],
+                sampleMediaPool[1]
             )
         )
     }
+
+    // Aspect ratio options for the first (cover) image layout
+    val aspectOptions = listOf(
+        AspectRatioOption("Ảnh Dọc (4:5)", 0.8f, "Chuẩn feed Instagram / Pinterest"),
+        AspectRatioOption("Ảnh Ngang (16:9)", 1.77f, "Khung cảnh rộng / Panorama"),
+        AspectRatioOption("Ảnh Ngang (4:3)", 1.33f, "Ảnh máy ảnh phong cảnh"),
+        AspectRatioOption("Ảnh Vuông (1:1)", 1.0f, "Cân đối cổ điển"),
+        AspectRatioOption("Dọc Story (9:16)", 0.56f, "Toàn màn hình / Reel")
+    )
+    var selectedAspectRatio by remember { mutableStateOf(0.8f) }
 
     // Photo picker launcher up to 20 media
     val photoPickerLauncher = rememberLauncherForActivityResult(
@@ -95,6 +134,15 @@ fun CreatePostScreen(
         }
     }
 
+    fun addSampleBatch(count: Int) {
+        val currentCount = selectedImages.size
+        val available = sampleMediaPool.filterNot { it in selectedImages }
+        val toAdd = available.take((20 - currentCount).coerceAtMost(count))
+        if (toAdd.isNotEmpty()) {
+            selectedImages = (selectedImages + toAdd).take(20)
+        }
+    }
+
     Scaffold(
         topBar = {
             Surface(
@@ -112,17 +160,24 @@ fun CreatePostScreen(
                     IconButton(onClick = onClose) {
                         Icon(Icons.Default.Close, contentDescription = "Huỷ", tint = TextPrimary)
                     }
-                    Text(
-                        text = "Tạo Bài Viết Mới",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = TextPrimary
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "Tạo Bài Viết Mới",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = TextPrimary
+                        )
+                        Text(
+                            text = "Đã chọn ${selectedImages.size}/20 media",
+                            fontSize = 10.5.sp,
+                            color = if (selectedImages.size == 20) Gold500 else TextSecondary
+                        )
+                    }
                     Button(
                         onClick = {
                             if (caption.isNotBlank()) {
                                 val tripToAttach = if (tripAttachmentMode == 1) selectedTrip else null
-                                onPublish(caption, location, tripToAttach, selectedImages)
+                                onPublish(caption, location, tripToAttach, selectedImages, selectedAspectRatio)
                             }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
@@ -200,7 +255,7 @@ fun CreatePostScreen(
                 }
             }
 
-            // 2. Media Upload & Reorder (Limit up to 20 media + Cover Badge)
+            // 2. Media Upload & Reorder (Limit up to 20 media + Quick Presets)
             item {
                 Column {
                     Row(
@@ -209,20 +264,72 @@ fun CreatePostScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "ẢNH BÀI VIẾT (${selectedImages.size}/20)",
+                            text = "MEDIA TẢI LÊN (${selectedImages.size}/20)",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
                             color = Brand700
                         )
                         Text(
-                            text = "Ảnh đầu tiên là ảnh bìa trên feed",
+                            text = "Ảnh đầu tiên làm bìa hiển thị trên feed",
                             fontSize = 10.5.sp,
                             color = TextSecondary
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    // Quick batch adders
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = Brand100,
+                            modifier = Modifier.clickable { addSampleBatch(5) }
+                        ) {
+                            Text(
+                                text = "+5 ảnh mẫu",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Brand700,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = Brand100,
+                            modifier = Modifier.clickable { addSampleBatch(10) }
+                        ) {
+                            Text(
+                                text = "+10 ảnh phong cảnh",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Brand700,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+
+                        if (selectedImages.size < 20) {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = Gold500.copy(alpha = 0.15f),
+                                modifier = Modifier.clickable { addSampleBatch(20) }
+                            ) {
+                                Text(
+                                    text = "Đủ 20 ảnh tối đa",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextOnGold,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     LazyRow(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -260,13 +367,13 @@ fun CreatePostScreen(
                                         )
                                         Spacer(modifier = Modifier.height(4.dp))
                                         Text(
-                                            text = "Thêm ảnh",
+                                            text = "Thêm ảnh/video",
                                             fontSize = 11.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = Brand700
                                         )
                                         Text(
-                                            text = "Tối đa 20 ảnh",
+                                            text = "Tối đa 20 media",
                                             fontSize = 9.sp,
                                             color = TextSecondary
                                         )
@@ -312,7 +419,7 @@ fun CreatePostScreen(
                                             }
                                     ) {
                                         Text(
-                                            text = if (isCover) "Ảnh bìa Feed" else "Đặt làm bìa",
+                                            text = if (isCover) "★ Ảnh bìa Feed" else "Đặt làm bìa",
                                             fontSize = 8.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isCover) TextOnGold else Color.White,
@@ -390,7 +497,68 @@ fun CreatePostScreen(
                 }
             }
 
-            // 3. Caption Field
+            // 3. Aspect Ratio Selector (Kích cỡ hiển thị bài viết bên ngoài feed: Dọc, Ngang, Vuông)
+            item {
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "ĐỊNH DẠNG KHUNG ẢNH BÌA FEED",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Brand700
+                        )
+                        Text(
+                            text = "Tùy biến theo ảnh đầu tiên (Ngang / Dọc)",
+                            fontSize = 10.5.sp,
+                            color = TextSecondary
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(vertical = 2.dp)
+                    ) {
+                        items(aspectOptions) { option ->
+                            val isSelected = (selectedAspectRatio - option.ratio) in -0.05f..0.05f
+                            Surface(
+                                shape = RoundedCornerShape(12.dp),
+                                color = if (isSelected) Brand700 else BgSurface,
+                                border = androidx.compose.foundation.BorderStroke(
+                                    1.dp,
+                                    if (isSelected) Gold500 else Color(0xFFD6DFDB)
+                                ),
+                                modifier = Modifier.clickable { selectedAspectRatio = option.ratio }
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = option.label,
+                                        fontSize = 11.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isSelected) Color.White else TextPrimary
+                                    )
+                                    Text(
+                                        text = option.subtext,
+                                        fontSize = 9.sp,
+                                        color = if (isSelected) Gold500 else TextSecondary
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 4. Caption Field
             item {
                 Column {
                     Text(
@@ -413,7 +581,7 @@ fun CreatePostScreen(
                 }
             }
 
-            // 4. Location Selector with Autocomplete Dropdown
+            // 5. Location Selector with Autocomplete Dropdown
             item {
                 val sampleLocations = listOf(
                     "Đà Lạt, Lâm Đồng",
@@ -527,7 +695,7 @@ fun CreatePostScreen(
                 }
             }
 
-            // 5. Attach Trip: 3 Vertical Items Layout (UI Dọc 3 Mục)
+            // 6. Attach Trip: 3 Vertical Items Layout (UI Dọc 3 Mục)
             item {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
@@ -646,7 +814,7 @@ fun CreatePostScreen(
                                                     modifier = Modifier
                                                         .fillMaxWidth()
                                                         .padding(horizontal = 10.dp, vertical = 8.dp),
-                                                    verticalAlignment = Alignment.CenterVertically
+                                                     verticalAlignment = Alignment.CenterVertically
                                                 ) {
                                                     AsyncImage(
                                                         model = trip.coverUrl,

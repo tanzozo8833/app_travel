@@ -308,7 +308,8 @@ class LuminaViewModel(
         caption: String,
         location: String,
         trip: Trip?,
-        mediaUrls: List<String> = emptyList()
+        mediaUrls: List<String> = emptyList(),
+        aspectRatio: Float = 0.8f
     ) {
         repository.createPost(
             caption = caption,
@@ -317,7 +318,8 @@ class LuminaViewModel(
             },
             locationLabel = location,
             provinceCode = "LDG",
-            attachedTrip = trip
+            attachedTrip = trip,
+            aspectRatio = aspectRatio
         )
         showCreatePost(false)
         showToast("Đã chia sẻ chuyến đi lên cộng đồng Lumina!")

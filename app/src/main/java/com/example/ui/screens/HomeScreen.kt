@@ -90,25 +90,29 @@ fun HomeScreen(
             )
         }
 
-        // 2-Column Staggered Grid (Thác nước):
+        // 2-Column Staggered Grid (Thác nước không khoảng trống giữa các bài viết):
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalItemSpacing = 10.dp,
-            contentPadding = PaddingValues(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 90.dp),
+            horizontalArrangement = Arrangement.spacedBy(0.dp),
+            verticalItemSpacing = 0.dp,
+            contentPadding = PaddingValues(start = 0.dp, end = 0.dp, top = 4.dp, bottom = 90.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             // 1. Hero Banner: Quick Passport Stamp Prompt
             item(span = StaggeredGridItemSpan.FullLine) {
-                HeroCheckInBanner(onQuickCheckIn = onQuickCheckInClick)
+                Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)) {
+                    HeroCheckInBanner(onQuickCheckIn = onQuickCheckInClick)
+                }
             }
 
             // 2. Province Stories / Stamp Ring Tray
             item(span = StaggeredGridItemSpan.FullLine) {
-                ProvinceStoryTray(
-                    provinces = provinces,
-                    onProvinceClick = onProvinceClick
-                )
+                Box(modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)) {
+                    ProvinceStoryTray(
+                        provinces = provinces,
+                        onProvinceClick = onProvinceClick
+                    )
+                }
             }
 
             // 3. Filtered Posts: 2-Column Staggered Waterfall Layout
