@@ -169,8 +169,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             places = places,
                             checkIns = checkIns,
                             frames = frames,
-                            onQuickCheckIn = { place, pCode, pName ->
-                                viewModel.performQuickStamp(place, pCode, pName)
+                            onQuickCheckIn = { place, pCode, pName, photoUrl ->
+                                viewModel.performQuickStamp(place, pCode, pName, photoUrl)
                             },
                             onPublishPost = { caption, loc, photoUrl ->
                                 viewModel.publishPost(

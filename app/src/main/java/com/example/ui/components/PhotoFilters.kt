@@ -77,95 +77,96 @@ enum class CheckInColorMode(
         DALAT_MIST -> PhotoFilters.DalatMist
         CYBERPUNK -> PhotoFilters.Cyberpunk
     }
+
+    fun getFloatMatrix(): FloatArray? = PhotoFilters.getMatrixForMode(this)
 }
 
 object PhotoFilters {
 
-    val Normal = ColorFilter.colorMatrix(ColorMatrix())
+    val MATRIX_ORIGINAL = floatArrayOf(
+        1f, 0f, 0f, 0f, 0f,
+        0f, 1f, 0f, 0f, 0f,
+        0f, 0f, 1f, 0f, 0f,
+        0f, 0f, 0f, 1f, 0f
+    )
 
     // 1. Film 35mm: Warm analog glow, rich contrast, soft golden-amber highlights
-    val WarmFilm35mm = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                1.18f, 0.08f, 0.02f, 0f, 18f,
-                0.04f, 1.10f, 0.04f, 0f, 12f,
-                0.02f, 0.04f, 0.88f, 0f, -8f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_FILM = floatArrayOf(
+        1.18f, 0.08f, 0.02f, 0f, 18f,
+        0.04f, 1.10f, 0.04f, 0f, 12f,
+        0.02f, 0.04f, 0.88f, 0f, -8f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 2. Photobooth Noir B&W: Crisp, high-contrast monochrome with balanced luminosity
-    val PhotoboothMonochrome = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                0.35f, 0.50f, 0.15f, 0f, 5f,
-                0.35f, 0.50f, 0.15f, 0f, 5f,
-                0.35f, 0.50f, 0.15f, 0f, 5f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_BLACK_AND_WHITE = floatArrayOf(
+        0.35f, 0.50f, 0.15f, 0f, 5f,
+        0.35f, 0.50f, 0.15f, 0f, 5f,
+        0.35f, 0.50f, 0.15f, 0f, 5f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 3. Màu Tươi (Vivid / Bright Pop): Enhanced saturation & crisp dynamic range
-    val VibrantVietnam = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                1.32f, -0.08f, -0.04f, 0f, 12f,
-                -0.06f, 1.25f, -0.04f, 0f, 8f,
-                -0.04f, -0.06f, 1.22f, 0f, 10f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_VIVID = floatArrayOf(
+        1.32f, -0.08f, -0.04f, 0f, 12f,
+        -0.06f, 1.25f, -0.04f, 0f, 8f,
+        -0.04f, -0.06f, 1.22f, 0f, 10f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 4. Tone Trắng Hồng (Rosy White Photobooth): Soft glow, bright skin tones, rosy tint
-    val RosyWhitePhotobooth = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                1.22f, 0.06f, 0.06f, 0f, 25f,
-                0.04f, 1.12f, 0.04f, 0f, 18f,
-                0.06f, 0.04f, 1.16f, 0f, 22f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_ROSY_WHITE = floatArrayOf(
+        1.22f, 0.06f, 0.06f, 0f, 25f,
+        0.04f, 1.12f, 0.04f, 0f, 18f,
+        0.06f, 0.04f, 1.16f, 0f, 22f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 5. Vintage 90s Sepia: Retro nostalgic warm tint
-    val VintageSepia90s = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                1.20f, 0.12f, 0.00f, 0f, 22f,
-                0.08f, 1.08f, 0.02f, 0f, 14f,
-                0.00f, 0.06f, 0.82f, 0f, -12f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_VINTAGE = floatArrayOf(
+        1.20f, 0.12f, 0.00f, 0f, 22f,
+        0.08f, 1.08f, 0.02f, 0f, 14f,
+        0.00f, 0.06f, 0.82f, 0f, -12f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 6. Sương Mù Đà Lạt: Cool mist & pine green
-    val DalatMist = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                0.86f, 0.10f, 0.04f, 0f, -6f,
-                0.04f, 1.16f, 0.10f, 0f, 10f,
-                0.08f, 0.14f, 1.22f, 0f, 16f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_DALAT_MIST = floatArrayOf(
+        0.86f, 0.10f, 0.04f, 0f, -6f,
+        0.04f, 1.16f, 0.10f, 0f, 10f,
+        0.08f, 0.14f, 1.22f, 0f, 16f,
+        0f, 0f, 0f, 1f, 0f
     )
 
     // 7. Cyberpunk Neon
-    val Cyberpunk = ColorFilter.colorMatrix(
-        ColorMatrix(
-            floatArrayOf(
-                1.25f, 0.00f, 0.20f, 0f, 12f,
-                0.00f, 1.15f, 0.30f, 0f, 6f,
-                0.20f, 0.20f, 1.38f, 0f, 28f,
-                0f, 0f, 0f, 1f, 0f
-            )
-        )
+    val MATRIX_CYBERPUNK = floatArrayOf(
+        1.25f, 0.00f, 0.20f, 0f, 12f,
+        0.00f, 1.15f, 0.30f, 0f, 6f,
+        0.20f, 0.20f, 1.38f, 0f, 28f,
+        0f, 0f, 0f, 1f, 0f
     )
+
+    val Normal = ColorFilter.colorMatrix(ColorMatrix(MATRIX_ORIGINAL))
+    val WarmFilm35mm = ColorFilter.colorMatrix(ColorMatrix(MATRIX_FILM))
+    val PhotoboothMonochrome = ColorFilter.colorMatrix(ColorMatrix(MATRIX_BLACK_AND_WHITE))
+    val VibrantVietnam = ColorFilter.colorMatrix(ColorMatrix(MATRIX_VIVID))
+    val RosyWhitePhotobooth = ColorFilter.colorMatrix(ColorMatrix(MATRIX_ROSY_WHITE))
+    val VintageSepia90s = ColorFilter.colorMatrix(ColorMatrix(MATRIX_VINTAGE))
+    val DalatMist = ColorFilter.colorMatrix(ColorMatrix(MATRIX_DALAT_MIST))
+    val Cyberpunk = ColorFilter.colorMatrix(ColorMatrix(MATRIX_CYBERPUNK))
+
+    fun getMatrixForMode(mode: CheckInColorMode): FloatArray? {
+        return when (mode) {
+            CheckInColorMode.ORIGINAL -> null
+            CheckInColorMode.FILM -> MATRIX_FILM
+            CheckInColorMode.BLACK_AND_WHITE -> MATRIX_BLACK_AND_WHITE
+            CheckInColorMode.VIVID -> MATRIX_VIVID
+            CheckInColorMode.ROSY_WHITE -> MATRIX_ROSY_WHITE
+            CheckInColorMode.VINTAGE -> MATRIX_VINTAGE
+            CheckInColorMode.DALAT_MIST -> MATRIX_DALAT_MIST
+            CheckInColorMode.CYBERPUNK -> MATRIX_CYBERPUNK
+        }
+    }
 
     fun getFilterForFrame(frameId: String): ColorFilter {
         return when (frameId) {

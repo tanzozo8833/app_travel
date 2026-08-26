@@ -1,9 +1,17 @@
 package com.example.ui.screens
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.provider.Settings
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -25,29 +33,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import com.example.data.model.CheckInRecord
 import com.example.data.model.LuminaFrame
 import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.ui.components.CheckInColorMode
-import com.example.ui.components.PhotoFilters
+import com.example.ui.components.ImageColorFilterProcessor
+import com.example.ui.components.RealCameraPreview
 import com.example.ui.components.StampBadge
 import com.example.ui.theme.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,10 +74,11 @@ fun CheckInScreen(
     places: List<Place>,
     checkIns: List<CheckInRecord>,
     frames: List<LuminaFrame> = emptyList(),
-    onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String) -> Unit,
+    onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String, photoUrl: String?) -> Unit,
     onPublishPost: (caption: String, location: String, photoUrl: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
     var selectedProvince by remember(provinces) {
@@ -109,28 +122,46 @@ fun CheckInScreen(
         )
     }
 
-    // Default sample scenes for live camera feed simulation
-    val sampleScenes = listOf(
-        Pair("Đồi Chè Săn Mây", "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop"),
-        Pair("Đỉnh Mã Pí Lèng", "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=800&auto=format&fit=crop"),
-        Pair("Cà Phê Phố Cổ", "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop"),
-        Pair("Cầu Vàng Bà Nà", "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800&auto=format&fit=crop"),
-        Pair("Hoàng Hôn Biển", "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop"),
-        Pair("Rừng Thông Đà Lạt", "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop")
-    )
-    var currentSceneIndex by remember { mutableStateOf(0) }
+    // Camera State
+    var hasCameraPermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        )
+    }
+    var permissionRequested by remember { mutableStateOf(false) }
+
+    val cameraPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        hasCameraPermission = isGranted
+        permissionRequested = true
+        if (!isGranted) {
+            Toast.makeText(context, "Cần cấp quyền Camera để chụp ảnh check-in", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     // Studio State
     var studioMode by remember { mutableStateOf(CheckInStudioMode.LIVE_CAMERA) }
     var selectedColorMode by remember { mutableStateOf(CheckInColorMode.FILM) }
     var activePhotoUrl by remember { mutableStateOf(selectedPlace.coverUrl) }
+    var wasCapturedWithFrontCamera by remember { mutableStateOf(false) }
     var userCaption by remember { mutableStateOf("") }
     var showGridGuidelines by remember { mutableStateOf(true) }
     var isFrontCamera by remember { mutableStateOf(false) }
     var flashMode by remember { mutableStateOf("AUTO") } // AUTO, ON, OFF
     var showShutterFlash by remember { mutableStateOf(false) }
     var showFocusRing by remember { mutableStateOf(false) }
+    var isCapturingPhoto by remember { mutableStateOf(false) }
+    var isProcessingPhoto by remember { mutableStateOf(false) }
+    var processingMessage by remember { mutableStateOf("Đang áp bộ lọc màu...") }
     var showSuccessStampDialog by remember { mutableStateOf(false) }
+    var lastSavedPhotoUri by remember { mutableStateOf<String?>(null) }
+
+    val imageCapture = remember {
+        ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .build()
+    }
 
     // Frame selection
     var selectedFrame by remember(frames) {
@@ -155,6 +186,7 @@ fun CheckInScreen(
     ) { uri: Uri? ->
         uri?.let {
             activePhotoUrl = it.toString()
+            wasCapturedWithFrontCamera = false
             studioMode = CheckInStudioMode.CAPTURED_PHOTO
         }
     }
@@ -165,13 +197,84 @@ fun CheckInScreen(
         sdf.format(Date())
     }
 
-    // Shutter Trigger action with flash effect
-    fun triggerShutter() {
+    // Real Camera Shutter Capture
+    fun takeRealPhoto() {
+        if (!hasCameraPermission) {
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            return
+        }
+
+        if (isCapturingPhoto || isProcessingPhoto) return
+        isCapturingPhoto = true
+
         coroutineScope.launch {
             showShutterFlash = true
-            delay(120)
+            delay(100)
             showShutterFlash = false
-            studioMode = CheckInStudioMode.CAPTURED_PHOTO
+        }
+
+        val cacheDir = File(context.cacheDir, "camera_captures").apply { if (!exists()) mkdirs() }
+        val photoFile = File(cacheDir, "photo_${System.currentTimeMillis()}.jpg")
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        val mainExecutor = ContextCompat.getMainExecutor(context)
+        imageCapture.takePicture(
+            outputOptions,
+            mainExecutor,
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    isCapturingPhoto = false
+                    activePhotoUrl = photoFile.absolutePath
+                    wasCapturedWithFrontCamera = isFrontCamera
+                    studioMode = CheckInStudioMode.CAPTURED_PHOTO
+                    Log.d("CheckInScreen", "Captured real photo to: ${photoFile.absolutePath}")
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    isCapturingPhoto = false
+                    Log.e("CheckInScreen", "Real photo capture failed", exception)
+                    Toast.makeText(context, "Chụp ảnh không thành công, vui lòng thử lại", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    // Process Filter & Save to App Private Storage
+    fun processAndExecuteAction(
+        isPublishPost: Boolean,
+        onComplete: (savedUri: String) -> Unit
+    ) {
+        if (isProcessingPhoto) return
+        isProcessingPhoto = true
+        processingMessage = "Đang áp bộ lọc ${selectedColorMode.title} & lưu ảnh..."
+
+        coroutineScope.launch {
+            val sourceImage = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                // If user clicks publish directly from live mode, use place cover or prompt
+                selectedPlace.coverUrl
+            } else {
+                activePhotoUrl
+            }
+
+            val processResult = ImageColorFilterProcessor.processAndSaveImage(
+                context = context,
+                imageSource = sourceImage,
+                colorMode = selectedColorMode,
+                isMirrored = wasCapturedWithFrontCamera
+            )
+
+            isProcessingPhoto = false
+
+            val finalUri = processResult.getOrElse { error ->
+                Log.w("CheckInScreen", "Image filtering fallback due to error: ${error.message}")
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Không thể áp bộ lọc màu, lưu ảnh gốc", Toast.LENGTH_SHORT).show()
+                }
+                sourceImage
+            }
+
+            lastSavedPhotoUri = finalUri
+            onComplete(finalUri)
         }
     }
 
@@ -181,7 +284,7 @@ fun CheckInScreen(
             .background(BgCanvas),
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        // 1. Header with Locket Style Branding
+        // 1. Header with Locket Style Branding & Retake Switch
         item {
             Column(
                 modifier = Modifier
@@ -220,7 +323,7 @@ fun CheckInScreen(
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "LIVE 1:1" else "ĐÃ CHỤP",
+                                        text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else "XEM LẠI ẢNH",
                                         fontSize = 8.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
@@ -236,7 +339,7 @@ fun CheckInScreen(
                         )
                     }
 
-                    // Mode Switcher / Reset button
+                    // Retake / Switch back to live camera
                     if (studioMode == CheckInStudioMode.CAPTURED_PHOTO) {
                         Surface(
                             shape = RoundedCornerShape(999.dp),
@@ -343,7 +446,7 @@ fun CheckInScreen(
 
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        // SQUARE 1:1 MEDIA CONTAINER (Supports Live Filter in real-time)
+                        // SQUARE 1:1 MEDIA CONTAINER
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -360,22 +463,98 @@ fun CheckInScreen(
                                     }
                                 }
                         ) {
-                            // Viewport Image (Live Camera simulation / Chosen Photo) with CSS/ColorMatrix Filter
-                            AsyncImage(
-                                model = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
-                                    sampleScenes[currentSceneIndex].second
+                            if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                                if (hasCameraPermission) {
+                                    // REAL CAMERAX PREVIEW
+                                    RealCameraPreview(
+                                        isFrontCamera = isFrontCamera,
+                                        flashMode = flashMode,
+                                        imageCapture = imageCapture,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
                                 } else {
-                                    activePhotoUrl
-                                },
-                                contentDescription = "Locket Viewfinder",
-                                contentScale = ContentScale.Crop,
-                                colorFilter = selectedColorMode.getColorFilter(),
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .scale(if (isFrontCamera) -1f else 1f, 1f) // Mirror for selfie
-                            )
+                                    // CAMERA PERMISSION REQUEST & EXPLANATION OVERLAY
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(Color(0xFF14241F))
+                                            .padding(20.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center
+                                    ) {
+                                        Surface(
+                                            shape = CircleShape,
+                                            color = Gold500.copy(alpha = 0.2f),
+                                            modifier = Modifier.size(54.dp)
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Icon(
+                                                    imageVector = Icons.Default.CameraAlt,
+                                                    contentDescription = null,
+                                                    tint = Gold500,
+                                                    modifier = Modifier.size(28.dp)
+                                                )
+                                            }
+                                        }
+                                        Spacer(modifier = Modifier.height(10.dp))
+                                        Text(
+                                            text = "Mở Camera Thật",
+                                            fontSize = 15.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Cần cấp quyền Camera để chụp ảnh check-in Locket chân thực trước mặt bạn.",
+                                            fontSize = 11.5.sp,
+                                            color = Color.White.copy(alpha = 0.8f),
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                            Button(
+                                                onClick = {
+                                                    cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                                                },
+                                                colors = ButtonDefaults.buttonColors(containerColor = Gold500),
+                                                shape = RoundedCornerShape(999.dp),
+                                                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp)
+                                            ) {
+                                                Text("Bật Camera", fontSize = 11.5.sp, color = TextOnGold, fontWeight = FontWeight.Bold)
+                                            }
 
-                            // 3x3 Grid Guidelines Overlay (if active)
+                                            if (permissionRequested) {
+                                                OutlinedButton(
+                                                    onClick = {
+                                                        val intent = Intent(
+                                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                                            Uri.fromParts("package", context.packageName, null)
+                                                        )
+                                                        context.startActivity(intent)
+                                                    },
+                                                    shape = RoundedCornerShape(999.dp),
+                                                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                                                ) {
+                                                    Text("Cài Đặt", fontSize = 11.5.sp, color = Color.White)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                // REVIEW MODE: Captured/Picked Photo with Live ColorMatrix Filter Preview
+                                AsyncImage(
+                                    model = activePhotoUrl,
+                                    contentDescription = "Locket Photo Preview",
+                                    contentScale = ContentScale.Crop,
+                                    colorFilter = selectedColorMode.getColorFilter(),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .scale(if (wasCapturedWithFrontCamera) -1f else 1f, 1f)
+                                )
+                            }
+
+                            // 3x3 Grid Guidelines Overlay (if active in live mode)
                             if (showGridGuidelines && studioMode == CheckInStudioMode.LIVE_CAMERA) {
                                 Column(modifier = Modifier.fillMaxSize()) {
                                     Box(modifier = Modifier.weight(1f).fillMaxWidth().border(0.5.dp, Color.White.copy(alpha = 0.25f)))
@@ -438,66 +617,89 @@ fun CheckInScreen(
                                     }
                                 }
 
-                                // Quick camera toggles
-                                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    // Grid Toggle
-                                    Surface(
-                                        shape = CircleShape,
-                                        color = if (showGridGuidelines) Gold500 else Color.Black.copy(alpha = 0.6f),
-                                        modifier = Modifier
-                                            .size(28.dp)
-                                            .clickable { showGridGuidelines = !showGridGuidelines }
-                                    ) {
-                                        Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = Icons.Default.GridOn,
-                                                contentDescription = "Grid",
-                                                tint = if (showGridGuidelines) TextOnGold else Color.White,
-                                                modifier = Modifier.size(14.dp)
-                                            )
-                                        }
-                                    }
-
-                                    // Flash toggle
-                                    Surface(
-                                        shape = CircleShape,
-                                        color = Color.Black.copy(alpha = 0.6f),
-                                        modifier = Modifier
-                                            .size(28.dp)
-                                            .clickable {
-                                                flashMode = when (flashMode) {
-                                                    "AUTO" -> "ON"
-                                                    "ON" -> "OFF"
-                                                    else -> "AUTO"
-                                                }
+                                // Quick camera toggles (Active in live mode)
+                                if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
+                                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        // Grid Toggle
+                                        Surface(
+                                            shape = CircleShape,
+                                            color = if (showGridGuidelines) Gold500 else Color.Black.copy(alpha = 0.6f),
+                                            modifier = Modifier
+                                                .size(28.dp)
+                                                .clickable { showGridGuidelines = !showGridGuidelines }
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Icon(
+                                                    imageVector = Icons.Default.GridOn,
+                                                    contentDescription = "Grid",
+                                                    tint = if (showGridGuidelines) TextOnGold else Color.White,
+                                                    modifier = Modifier.size(14.dp)
+                                                )
                                             }
-                                    ) {
-                                        Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = if (flashMode == "OFF") Icons.Outlined.FlashOff else Icons.Default.FlashOn,
-                                                contentDescription = "Flash",
-                                                tint = if (flashMode == "ON") Gold500 else Color.White,
-                                                modifier = Modifier.size(14.dp)
-                                            )
+                                        }
+
+                                        // Flash toggle
+                                        Surface(
+                                            shape = CircleShape,
+                                            color = Color.Black.copy(alpha = 0.6f),
+                                            modifier = Modifier
+                                                .size(28.dp)
+                                                .clickable {
+                                                    flashMode = when (flashMode) {
+                                                        "AUTO" -> "ON"
+                                                        "ON" -> "OFF"
+                                                        else -> "AUTO"
+                                                    }
+                                                }
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Icon(
+                                                    imageVector = if (flashMode == "OFF") Icons.Outlined.FlashOff else Icons.Default.FlashOn,
+                                                    contentDescription = "Flash",
+                                                    tint = if (flashMode == "ON") Gold500 else Color.White,
+                                                    modifier = Modifier.size(14.dp)
+                                                )
+                                            }
+                                        }
+
+                                        // Flip camera (Front/Back)
+                                        Surface(
+                                            shape = CircleShape,
+                                            color = Color.Black.copy(alpha = 0.6f),
+                                            modifier = Modifier
+                                                .size(28.dp)
+                                                .clickable { isFrontCamera = !isFrontCamera }
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Icon(
+                                                    imageVector = Icons.Default.FlipCameraAndroid,
+                                                    contentDescription = "Flip Camera",
+                                                    tint = Color.White,
+                                                    modifier = Modifier.size(14.dp)
+                                                )
+                                            }
                                         }
                                     }
+                                }
+                            }
 
-                                    // Flip camera (Front/Back)
-                                    Surface(
-                                        shape = CircleShape,
-                                        color = Color.Black.copy(alpha = 0.6f),
-                                        modifier = Modifier
-                                            .size(28.dp)
-                                            .clickable { isFrontCamera = !isFrontCamera }
-                                    ) {
-                                        Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = Icons.Default.FlipCameraAndroid,
-                                                contentDescription = "Flip Camera",
-                                                tint = Color.White,
-                                                modifier = Modifier.size(14.dp)
-                                            )
-                                        }
+                            // Processing Spinner Overlay
+                            if (isProcessingPhoto) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(Color.Black.copy(alpha = 0.7f)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                        CircularProgressIndicator(color = Gold500, modifier = Modifier.size(36.dp))
+                                        Spacer(modifier = Modifier.height(10.dp))
+                                        Text(
+                                            text = processingMessage,
+                                            fontSize = 11.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.White
+                                        )
                                     }
                                 }
                             }
@@ -547,7 +749,7 @@ fun CheckInScreen(
                                     color = Color(0x334CAF50)
                                 ) {
                                     Text(
-                                        text = "GPS 100%",
+                                        text = "LOCKET 1:1",
                                         fontSize = 8.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color(0xFF81C784),
@@ -574,7 +776,7 @@ fun CheckInScreen(
             }
         }
 
-        // 3. COLOR MODE PRESETS STRIP (Áp dụng trực tiếp lên luồng video & ảnh đã chụp)
+        // 3. COLOR MODE PRESETS STRIP (Áp dụng thật vào ảnh khi lưu)
         item {
             Column(
                 modifier = Modifier
@@ -588,17 +790,15 @@ fun CheckInScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "COLOR MODE (BỘ LỌC MÀU PHOTOBOOTH)",
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace,
-                            color = Brand700
-                        )
-                    }
                     Text(
-                        text = "Áp dụng trực tiếp 1:1",
+                        text = "CHẾ ĐỘ MÀU (BỘ LỌC PHOTOBOOTH)",
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.Monospace,
+                        color = Brand700
+                    )
+                    Text(
+                        text = "Lưu thật vào ảnh 1:1",
                         fontSize = 10.5.sp,
                         color = TextSecondary
                     )
@@ -662,70 +862,15 @@ fun CheckInScreen(
             }
         }
 
-        // 4. CAMERA CONTROLS: SHUTTER & GALLERY PICKER & SCENE PRESETS
+        // 4. CAMERA CONTROLS: SHUTTER & GALLERY PICKER
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 10.dp)
             ) {
-                // If in live camera mode: Show large shutter + scene presets
+                // In Live Camera Mode: Show Gallery Picker + Large Real Shutter Button + Flip button
                 if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
-                    // Quick scenic view selector (chuyển cảnh giả lập camera chân thực)
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "GÓC CHỤP GỢI Ý",
-                            fontSize = 9.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace,
-                            color = TextSecondary
-                        )
-                        Text(
-                            text = "Đổi cảnh nhanh",
-                            fontSize = 10.sp,
-                            color = Brand700,
-                            modifier = Modifier.clickable {
-                                currentSceneIndex = (currentSceneIndex + 1) % sampleScenes.size
-                            }
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(6.dp))
-
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        items(sampleScenes.indices.toList()) { index ->
-                            val isCurrent = currentSceneIndex == index
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = if (isCurrent) Brand100 else BgSurface,
-                                border = androidx.compose.foundation.BorderStroke(
-                                    1.dp,
-                                    if (isCurrent) Brand700 else Color(0xFFD6DFDB)
-                                ),
-                                modifier = Modifier.clickable {
-                                    currentSceneIndex = index
-                                }
-                            ) {
-                                Text(
-                                    text = sampleScenes[index].first,
-                                    fontSize = 10.5.sp,
-                                    fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
-                                    color = if (isCurrent) Brand700 else TextPrimary,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(14.dp))
-
-                    // Shutter Bar: [Gallery Upload] [BIG SHUTTER BUTTON] [Switch Scene]
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -749,24 +894,26 @@ fun CheckInScreen(
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Default.PhotoLibrary,
-                                        contentDescription = "Tải ảnh lên",
+                                        contentDescription = "Tải ảnh từ Thư viện",
                                         tint = Brand700,
                                         modifier = Modifier.size(22.dp)
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text(text = "Tải ảnh", fontSize = 10.5.sp, color = TextPrimary)
+                            Text(text = "Thư viện", fontSize = 10.5.sp, color = TextPrimary)
                         }
 
-                        // 2. BIG SHUTTER BUTTON
+                        // 2. BIG REAL SHUTTER BUTTON
                         Surface(
                             shape = CircleShape,
                             color = Color.Transparent,
                             border = androidx.compose.foundation.BorderStroke(4.dp, Gold500),
                             modifier = Modifier
                                 .size(74.dp)
-                                .clickable { triggerShutter() }
+                                .clickable(enabled = !isCapturingPhoto) {
+                                    takeRealPhoto()
+                                }
                         ) {
                             Box(
                                 contentAlignment = Alignment.Center,
@@ -785,11 +932,11 @@ fun CheckInScreen(
                             }
                         }
 
-                        // 3. Next Scene Button
+                        // 3. Flip Camera Button
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier.clickable {
-                                currentSceneIndex = (currentSceneIndex + 1) % sampleScenes.size
+                                isFrontCamera = !isFrontCamera
                             }
                         ) {
                             Surface(
@@ -800,15 +947,15 @@ fun CheckInScreen(
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
-                                        imageVector = Icons.Default.AutoAwesome,
-                                        contentDescription = "Đổi cảnh",
-                                        tint = Gold500,
+                                        imageVector = Icons.Default.Cameraswitch,
+                                        contentDescription = "Đổi Camera",
+                                        tint = Brand700,
                                         modifier = Modifier.size(22.dp)
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text(text = "Đổi cảnh", fontSize = 10.5.sp, color = TextPrimary)
+                            Text(text = if (isFrontCamera) "Trước" else "Sau", fontSize = 10.5.sp, color = TextPrimary)
                         }
                     }
                 }
@@ -895,39 +1042,56 @@ fun CheckInScreen(
                     // Save to Passport
                     OutlinedButton(
                         onClick = {
-                            onQuickCheckIn(selectedPlace.name, selectedProvince.code, selectedProvince.shortName)
-                            showSuccessStampDialog = true
+                            processAndExecuteAction(isPublishPost = false) { savedUri ->
+                                onQuickCheckIn(selectedPlace.name, selectedProvince.code, selectedProvince.shortName, savedUri)
+                                showSuccessStampDialog = true
+                            }
                         },
+                        enabled = !isProcessingPhoto,
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier
                             .weight(1f)
                             .height(48.dp)
                     ) {
-                        Icon(Icons.Default.Bookmark, contentDescription = null, tint = Brand700, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Đóng dấu Hộ Chiếu", fontSize = 12.sp, color = Brand700, fontWeight = FontWeight.Bold)
+                        if (isProcessingPhoto) {
+                            CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Brand700, strokeWidth = 2.dp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Đang xử lý...", fontSize = 11.5.sp, color = Brand700)
+                        } else {
+                            Icon(Icons.Default.Bookmark, contentDescription = null, tint = Brand700, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = "Đóng dấu Hộ Chiếu", fontSize = 12.sp, color = Brand700, fontWeight = FontWeight.Bold)
+                        }
                     }
 
                     // Publish to Community Feed
                     Button(
                         onClick = {
-                            val finalPhoto = if (studioMode == CheckInStudioMode.LIVE_CAMERA) {
-                                sampleScenes[currentSceneIndex].second
-                            } else {
-                                activePhotoUrl
+                            processAndExecuteAction(isPublishPost = true) { savedUri ->
+                                val caption = if (userCaption.isNotBlank()) {
+                                    userCaption
+                                } else {
+                                    "Check-in Locket tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
+                                }
+                                onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", savedUri)
                             }
-                            val caption = if (userCaption.isNotBlank()) userCaption else "Check-in Locket tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
-                            onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", finalPhoto)
                         },
+                        enabled = !isProcessingPhoto,
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier
                             .weight(1f)
                             .height(48.dp)
                     ) {
-                        Icon(Icons.Default.Send, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Đăng Locket Feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        if (isProcessingPhoto) {
+                            CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White, strokeWidth = 2.dp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Đang đăng...", fontSize = 11.5.sp, color = Color.White)
+                        } else {
+                            Icon(Icons.Default.Send, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = "Đăng Locket Feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        }
                     }
                 }
             }
@@ -968,6 +1132,7 @@ fun CheckInScreen(
                                 .clickable {
                                     selectedPlace = place
                                     activePhotoUrl = place.coverUrl
+                                    wasCapturedWithFrontCamera = false
                                 }
                         ) {
                             Column(modifier = Modifier.padding(8.dp)) {
