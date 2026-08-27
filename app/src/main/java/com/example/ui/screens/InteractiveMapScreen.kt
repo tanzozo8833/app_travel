@@ -1,5 +1,15 @@
 package com.example.ui.screens
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.net.Uri
+import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,24 +27,32 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.ui.theme.*
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.maps.android.compose.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 
 enum class MapLayerStyle {
     TERRAIN,   // Địa hình sinh thái Xanh
@@ -77,7 +95,7 @@ data class NearbyMatchedPlace(
     val stampSymbol: String
 )
 
-private fun calculateDistanceMeters(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Int {
+fun calculateDistanceMeters(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Int {
     val r = 6371000.0 // Earth radius in meters
     val dLat = Math.toRadians(lat2 - lat1)
     val dLng = Math.toRadians(lng2 - lng1)
@@ -223,7 +241,7 @@ fun InteractiveMapScreen(
         displayMarkers.filter { it.isVisited }.map { LatLng(it.lat, it.lng) }
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(modifier = modifier) {
         // ==========================================
         // 1. GoogleMap COMPOSABLE CONTAINER
         // ==========================================
@@ -892,22 +910,107 @@ fun GpsSpatialCheckInDialog(
     onDismiss: () -> Unit,
     onConfirmCheckIn: (NearbyMatchedPlace) -> Unit
 ) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+
     var isLocating by remember { mutableStateOf(true) }
-    // User GPS location (Đà Lạt center coordinates)
-    val detectedLat by remember { mutableDoubleStateOf(11.9404) }
-    val detectedLng by remember { mutableDoubleStateOf(108.4583) }
-    val accuracyMeters by remember { mutableIntStateOf(4) }
+    var locationError by remember { mutableStateOf<String?>(null) }
+    var detectedLat by remember { mutableDoubleStateOf(0.0) }
+    var detectedLng by remember { mutableDoubleStateOf(0.0) }
+    var accuracyMeters by remember { mutableFloatStateOf(10f) }
     var selectedMatch by remember { mutableStateOf<NearbyMatchedPlace?>(null) }
 
-    // Compute nearest places dynamically from real database places
-    val nearbyCandidates = remember(places, provinces, detectedLat, detectedLng) {
-        if (places.isEmpty()) {
+    val hasLocationPermission = remember {
+        ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { perms ->
+        val granted = perms[Manifest.permission.ACCESS_FINE_LOCATION] == true || perms[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        if (!granted) {
+            isLocating = false
+            locationError = "Chưa có quyền vị trí. Vui lòng cấp quyền để quét địa điểm gần bạn."
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        if (!hasLocationPermission) {
+            permissionLauncher.launch(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            )
+        }
+
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
+        val isGpsEnabled = locationManager?.let {
+            try {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    it.isLocationEnabled
+                } else {
+                    it.isProviderEnabled(LocationManager.GPS_PROVIDER) || it.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                }
+            } catch (e: Exception) {
+                false
+            }
+        } ?: false
+
+        if (!isGpsEnabled) {
+            isLocating = false
+            locationError = "Dịch vụ vị trí đang tắt. Vui lòng bật GPS trên máy."
+            return@LaunchedEffect
+        }
+
+        try {
+            var foundLoc: Location? = null
+            val cancelToken = CancellationTokenSource()
+            withTimeoutOrNull(9000L) {
+                try {
+                    val task = fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cancelToken.token)
+                    foundLoc = withContext(Dispatchers.IO) {
+                        com.google.android.gms.tasks.Tasks.await(task)
+                    }
+                } catch (e: Exception) {
+                    // Ignore
+                }
+            }
+
+            if (foundLoc == null) {
+                try {
+                    val lastTask = fusedLocationClient.lastLocation
+                    foundLoc = withContext(Dispatchers.IO) {
+                        com.google.android.gms.tasks.Tasks.await(lastTask)
+                    }
+                } catch (e: Exception) {
+                    // Ignore
+                }
+            }
+
+            if (foundLoc != null) {
+                detectedLat = foundLoc!!.latitude
+                detectedLng = foundLoc!!.longitude
+                accuracyMeters = if (foundLoc!!.hasAccuracy()) foundLoc!!.accuracy else 15f
+                isLocating = false
+            } else {
+                isLocating = false
+                locationError = "Không bắt được tín hiệu GPS thực tế (có thể do đang ở trong nhà). Vui lòng thử lại ở nơi thoáng hơn."
+            }
+        } catch (e: Exception) {
+            isLocating = false
+            locationError = "Lỗi kết nối định vị: ${e.localizedMessage ?: "Lỗi GPS"}"
+        }
+    }
+
+    // Compute nearest places dynamically from real database places and real device coordinates
+    val nearbyCandidates = remember(places, provinces, detectedLat, detectedLng, isLocating) {
+        if (places.isEmpty() || isLocating || (detectedLat == 0.0 && detectedLng == 0.0)) {
             emptyList()
         } else {
             places.map { place ->
                 val province = provinces.find { it.code.equals(place.provinceCode, ignoreCase = true) || it.id == place.provinceId }
-                val pLat = if (place.lat != 0.0) place.lat else (province?.centerLat ?: 11.9404)
-                val pLng = if (place.lng != 0.0) place.lng else (province?.centerLng ?: 108.4583)
+                val pLat = if (place.lat != 0.0) place.lat else (province?.centerLat ?: 0.0)
+                val pLng = if (place.lng != 0.0) place.lng else (province?.centerLng ?: 0.0)
                 val distance = calculateDistanceMeters(detectedLat, detectedLng, pLat, pLng)
                 NearbyMatchedPlace(
                     id = place.id,
@@ -923,8 +1026,6 @@ fun GpsSpatialCheckInDialog(
     }
 
     LaunchedEffect(nearbyCandidates) {
-        delay(1200)
-        isLocating = false
         if (selectedMatch == null && nearbyCandidates.isNotEmpty()) {
             selectedMatch = nearbyCandidates.first()
         }
@@ -957,7 +1058,7 @@ fun GpsSpatialCheckInDialog(
                         Spacer(modifier = Modifier.width(8.dp))
                         Column {
                             Text(
-                                text = "SPATIAL CHECK-IN ENGINE",
+                                text = "ĐỊNH VỊ VỊ TRÍ THỰC TẾ",
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -989,19 +1090,51 @@ fun GpsSpatialCheckInDialog(
                         CircularProgressIndicator(color = Brand700, modifier = Modifier.size(40.dp))
                         Spacer(modifier = Modifier.height(14.dp))
                         Text(
-                            text = "Đang lấy toạ độ GPS foreground...",
+                            text = "Đang đọc toạ độ GPS thực tế từ máy...",
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
                         )
                         Text(
-                            text = "GPS Hardware Accurate (~2s)",
+                            text = "Truy vấn chip định vị chính xác",
                             fontSize = 10.sp,
                             fontFamily = FontFamily.Monospace,
                             color = TextSecondary
                         )
                     }
+                } else if (locationError != null) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFFFFF3E0), RoundedCornerShape(12.dp))
+                            .padding(14.dp)
+                    ) {
+                        Text(
+                            text = locationError ?: "Lỗi GPS",
+                            fontSize = 11.5.sp,
+                            color = Color(0xFFE65100),
+                            lineHeight = 16.sp
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Button(
+                                onClick = {
+                                    val intent = Intent(
+                                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.fromParts("package", context.packageName, null)
+                                    )
+                                    context.startActivity(intent)
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                            ) {
+                                Text("Cài Đặt Quyền", fontSize = 11.sp, color = Color.White)
+                            }
+                        }
+                    }
                 } else {
+                    val nearestProv = provinces.minByOrNull { calculateDistanceMeters(detectedLat, detectedLng, it.centerLat, it.centerLng) }
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1015,21 +1148,21 @@ fun GpsSpatialCheckInDialog(
                         ) {
                             Column {
                                 Text(
-                                    text = "Toạ độ WGS84: $detectedLat, $detectedLng",
+                                    text = "Toạ độ: ${"%.4f".format(detectedLat)}° N, ${"%.4f".format(detectedLng)}° E",
                                     fontSize = 10.5.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
                                     color = TextPrimary
                                 )
                                 Text(
-                                    text = "Độ chính xác: ±${accuracyMeters}m • ST_Contains: Lâm Đồng (LDG)",
+                                    text = "Sai số: ±${accuracyMeters.toInt()}m • Khu vực: ${nearestProv?.shortName ?: "Việt Nam"}",
                                     fontSize = 9.5.sp,
                                     color = TextSecondary
                                 )
                             }
                             Surface(shape = RoundedCornerShape(999.dp), color = Color(0xFFE8F5E9)) {
                                 Text(
-                                    text = "GPS Khóa 🔒",
+                                    text = "GPS Thật 🔒",
                                     fontSize = 9.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2E7D32),
@@ -1042,7 +1175,7 @@ fun GpsSpatialCheckInDialog(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Khớp ST_DWithin (Radius 250m) - Địa điểm gần nhất:",
+                        text = "Địa điểm gần tọa độ thực của bạn nhất:",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
@@ -1050,53 +1183,63 @@ fun GpsSpatialCheckInDialog(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(6.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        nearbyCandidates.forEach { place ->
-                            val isSelected = selectedMatch?.id == place.id
-                            Surface(
-                                shape = RoundedCornerShape(10.dp),
-                                color = if (isSelected) Brand100 else BgCanvas,
-                                border = androidx.compose.foundation.BorderStroke(
-                                    1.dp,
-                                    if (isSelected) Brand700 else Color(0xFFE0E0E0)
-                                ),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable { selectedMatch = place }
-                            ) {
-                                Row(
+                    if (nearbyCandidates.isEmpty()) {
+                        Text(
+                            text = "Không tìm thấy địa điểm trong dữ liệu gần toạ độ này.",
+                            fontSize = 11.sp,
+                            color = TextSecondary,
+                            modifier = Modifier.padding(vertical = 12.dp)
+                        )
+                    } else {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            nearbyCandidates.forEach { place ->
+                                val isSelected = selectedMatch?.id == place.id
+                                Surface(
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = if (isSelected) Brand100 else BgCanvas,
+                                    border = androidx.compose.foundation.BorderStroke(
+                                        1.dp,
+                                        if (isSelected) Brand700 else Color(0xFFE0E0E0)
+                                    ),
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(horizontal = 10.dp, vertical = 7.dp),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
+                                        .clickable { selectedMatch = place }
                                 ) {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(text = place.stampSymbol, fontSize = 16.sp)
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                        Column {
-                                            Text(
-                                                text = place.name,
-                                                fontSize = 12.sp,
-                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                                color = if (isSelected) Brand700 else TextPrimary
-                                            )
-                                            Text(
-                                                text = "Cách ${place.distanceMeters}m • ${if (place.isMatchWithinRadius) "Trong bán kính khớp" else "Khoảng cách xa hơn"}",
-                                                fontSize = 9.5.sp,
-                                                color = if (place.isMatchWithinRadius) Brand700 else TextSecondary
-                                            )
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 10.dp, vertical = 7.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text(text = place.stampSymbol, fontSize = 16.sp)
+                                            Spacer(modifier = Modifier.width(8.dp))
+                                            Column {
+                                                Text(
+                                                    text = place.name,
+                                                    fontSize = 12.sp,
+                                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                                    color = if (isSelected) Brand700 else TextPrimary
+                                                )
+                                                val distStr = if (place.distanceMeters < 1000) "${place.distanceMeters}m" else "${"%.1f".format(place.distanceMeters / 1000.0)}km"
+                                                Text(
+                                                    text = "Cách $distStr • ${if (place.isMatchWithinRadius) "Trong bán kính khớp" else "Khoảng cách xa hơn"}",
+                                                    fontSize = 9.5.sp,
+                                                    color = if (place.isMatchWithinRadius) Brand700 else TextSecondary
+                                                )
+                                            }
                                         }
-                                    }
 
-                                    RadioButton(
-                                        selected = isSelected,
-                                        onClick = { selectedMatch = place },
-                                        colors = RadioButtonDefaults.colors(selectedColor = Brand700)
-                                    )
+                                        RadioButton(
+                                            selected = isSelected,
+                                            onClick = { selectedMatch = place },
+                                            colors = RadioButtonDefaults.colors(selectedColor = Brand700)
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -1114,7 +1257,7 @@ fun GpsSpatialCheckInDialog(
                                 .height(44.dp)
                         ) {
                             Text(
-                                text = "Lưu Check-in & Đóng Dấu (Point 4326) ⦿",
+                                text = "Lưu Check-in & Đóng Dấu Tại ${match.provinceName} ⦿",
                                 fontSize = 12.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White

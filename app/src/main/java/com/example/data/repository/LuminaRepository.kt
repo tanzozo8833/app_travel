@@ -277,7 +277,7 @@ class LuminaRepository(
             // 4. Update user profile stats
             val allProvinces = database.provinceDao().getAllProvinces()
             val visitedCount = allProvinces.count { it.visitedPlacesCount > 0 }
-            database.userProfileDao().updateStatsAfterCheckIn(userId, visitedCount, 120.0)
+            database.userProfileDao().updateStatsAfterCheckIn(userId, visitedCount, 0.0)
 
             // 5. Check & Update Badges
             val totalCheckIns = database.checkInDao().getCount()

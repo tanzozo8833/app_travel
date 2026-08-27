@@ -222,8 +222,8 @@ fun TravelCvDialog(
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
                                 CvStatBlock("TỈNH THÀNH", "${userProfile.visitedProvincesCount}/${userProfile.totalProvincesCount}")
-                                CvStatBlock("QUÃNG ĐƯỜNG", "${userProfile.totalDistanceKm.toInt()} km")
                                 CvStatBlock("CHUYẾN ĐI", "${userProfile.tripsCompletedCount}")
+                                CvStatBlock("LƯỢT LƯU", "${userProfile.totalSavesCount}")
                                 CvStatBlock("TOP CITY", userProfile.topCityName)
                             }
 

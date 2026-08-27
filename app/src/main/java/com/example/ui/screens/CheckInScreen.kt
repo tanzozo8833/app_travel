@@ -1,8 +1,11 @@
 package com.example.ui.screens
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
@@ -56,10 +59,15 @@ import com.example.ui.components.RealCameraPreview
 import com.example.ui.components.StampBadge
 import com.example.ui.components.VietnamMapGraphic
 import com.example.ui.theme.*
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,6 +80,24 @@ enum class StampScreenTab {
 enum class CheckInStudioMode {
     LIVE_CAMERA,
     CAPTURED_PHOTO
+}
+
+sealed class RealGpsState {
+    object Idle : RealGpsState()
+    object PermissionRequired : RealGpsState()
+    object PermissionDenied : RealGpsState()
+    object LocationDisabled : RealGpsState()
+    object Searching : RealGpsState()
+    data class Success(
+        val latitude: Double,
+        val longitude: Double,
+        val accuracyMeters: Float,
+        val timestamp: Long,
+        val detectedProvince: Province?,
+        val nearestPlace: Place?,
+        val distanceToNearestPlaceMeters: Int
+    ) : RealGpsState()
+    data class Error(val message: String) : RealGpsState()
 }
 
 @Composable
@@ -304,6 +330,188 @@ fun CheckInScreen(
     var isRefreshingGps by remember { mutableStateOf(false) }
     var showAllProvincesList by remember { mutableStateOf(false) }
     var selectedRegionFilter by remember { mutableStateOf("ALL") }
+
+    // GPS and Real Location Services Management
+    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+    var realGpsState by remember { mutableStateOf<RealGpsState>(RealGpsState.Idle) }
+    var locationJob by remember { mutableStateOf<Job?>(null) }
+    var locationPermissionRequested by remember { mutableStateOf(false) }
+
+    fun isGpsServiceEnabled(): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager ?: return false
+        return try {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                locationManager.isLocationEnabled
+            } else {
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            }
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun stopLocationTracking() {
+        locationJob?.cancel()
+        locationJob = null
+    }
+
+    fun fetchRealLocation(isManualRefresh: Boolean = false) {
+        val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+        if (!hasFine && !hasCoarse) {
+            if (locationPermissionRequested) {
+                realGpsState = RealGpsState.PermissionDenied
+            } else {
+                realGpsState = RealGpsState.PermissionRequired
+            }
+            return
+        }
+
+        if (!isGpsServiceEnabled()) {
+            realGpsState = RealGpsState.LocationDisabled
+            return
+        }
+
+        stopLocationTracking()
+        realGpsState = RealGpsState.Searching
+        if (isManualRefresh) {
+            isRefreshingGps = true
+        }
+
+        locationJob = coroutineScope.launch {
+            try {
+                var foundLocation: Location? = null
+                val cancellationTokenSource = CancellationTokenSource()
+
+                // 1. Try high-accuracy current location with timeout
+                withTimeoutOrNull(10000L) {
+                    try {
+                        val task = fusedLocationClient.getCurrentLocation(
+                            Priority.PRIORITY_HIGH_ACCURACY,
+                            cancellationTokenSource.token
+                        )
+                        val loc = withContext(Dispatchers.IO) {
+                            com.google.android.gms.tasks.Tasks.await(task)
+                        }
+                        if (loc != null) {
+                            foundLocation = loc
+                        }
+                    } catch (e: Exception) {
+                        Log.w("CheckInScreen", "getCurrentLocation error: ${e.message}")
+                    }
+                }
+
+                // 2. Fallback to recent lastLocation if available within 5 mins
+                if (foundLocation == null) {
+                    try {
+                        val lastLocTask = fusedLocationClient.lastLocation
+                        val lastLoc = withContext(Dispatchers.IO) {
+                            com.google.android.gms.tasks.Tasks.await(lastLocTask)
+                        }
+                        if (lastLoc != null && (System.currentTimeMillis() - lastLoc.time) < 300_000L) {
+                            foundLocation = lastLoc
+                        }
+                    } catch (e: Exception) {
+                        Log.w("CheckInScreen", "lastLocation error: ${e.message}")
+                    }
+                }
+
+                val location = foundLocation
+                if (location != null) {
+                    val lat = location.latitude
+                    val lng = location.longitude
+                    val accuracy = if (location.hasAccuracy()) location.accuracy else 10f
+                    val timestamp = location.time
+
+                    // Find nearest province
+                    val nearestProvince = provinces.minByOrNull { prov ->
+                        calculateDistanceMeters(lat, lng, prov.centerLat, prov.centerLng)
+                    }
+
+                    // Find nearest place
+                    val nearestPlace = places.minByOrNull { place ->
+                        val pLat = if (place.lat != 0.0) place.lat else (provinces.find { it.code == place.provinceCode }?.centerLat ?: 0.0)
+                        val pLng = if (place.lng != 0.0) place.lng else (provinces.find { it.code == place.provinceCode }?.centerLng ?: 0.0)
+                        calculateDistanceMeters(lat, lng, pLat, pLng)
+                    }
+
+                    val distanceToNearest = if (nearestPlace != null) {
+                        val pLat = if (nearestPlace.lat != 0.0) nearestPlace.lat else (provinces.find { it.code == nearestPlace.provinceCode }?.centerLat ?: 0.0)
+                        val pLng = if (nearestPlace.lng != 0.0) nearestPlace.lng else (provinces.find { it.code == nearestPlace.provinceCode }?.centerLng ?: 0.0)
+                        calculateDistanceMeters(lat, lng, pLat, pLng)
+                    } else 0
+
+                    realGpsState = RealGpsState.Success(
+                        latitude = lat,
+                        longitude = lng,
+                        accuracyMeters = accuracy,
+                        timestamp = timestamp,
+                        detectedProvince = nearestProvince,
+                        nearestPlace = nearestPlace,
+                        distanceToNearestPlaceMeters = distanceToNearest
+                    )
+
+                    // Auto-sync selected province
+                    if (nearestProvince != null) {
+                        selectedProvince = nearestProvince
+                    }
+                    if (nearestPlace != null) {
+                        selectedPlace = nearestPlace
+                    }
+
+                    if (isManualRefresh) {
+                        Toast.makeText(context, "Đã cập nhật vị trí GPS thật (±${accuracy.toInt()}m)", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    realGpsState = RealGpsState.Error("Không bắt được tín hiệu GPS (có thể do đang ở trong nhà). Vui lòng thử lại ở khu vực thoáng đãng hơn.")
+                }
+            } catch (e: Exception) {
+                Log.e("CheckInScreen", "Error getting location", e)
+                realGpsState = RealGpsState.Error("Không thể lấy vị trí: ${e.localizedMessage ?: "Lỗi GPS"}")
+            } finally {
+                isRefreshingGps = false
+            }
+        }
+    }
+
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        locationPermissionRequested = true
+        val fineGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val coarseGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        if (fineGranted || coarseGranted) {
+            fetchRealLocation()
+        } else {
+            realGpsState = RealGpsState.PermissionDenied
+        }
+    }
+
+    // BATTERY EFFICIENCY: Stop GPS tracking immediately when leaving VIEW_STAMPS tab or screen
+    DisposableEffect(currentSubTab) {
+        if (currentSubTab == StampScreenTab.VIEW_STAMPS) {
+            val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (hasFine || hasCoarse) {
+                fetchRealLocation()
+            } else {
+                realGpsState = RealGpsState.PermissionRequired
+                locationPermissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
+            }
+        } else {
+            stopLocationTracking()
+        }
+        onDispose {
+            stopLocationTracking()
+        }
+    }
 
     val visitedProvinces = remember(provinces) { provinces.filter { it.visitedPlacesCount > 0 } }
     val totalStampsCount = remember(provinces) { provinces.sumOf { it.visitedPlacesCount } }
@@ -1521,16 +1729,25 @@ fun CheckInScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
+                                val indicatorColor = when (realGpsState) {
+                                    is RealGpsState.Success -> Color(0xFF2E7D32)
+                                    is RealGpsState.Searching -> Color(0xFFF57C00)
+                                    else -> HeartRed
+                                }
                                 Surface(
                                     shape = CircleShape,
-                                    color = HeartRed.copy(alpha = 0.15f),
+                                    color = indicatorColor.copy(alpha = 0.15f),
                                     modifier = Modifier.size(28.dp)
                                 ) {
                                     Box(contentAlignment = Alignment.Center) {
                                         Icon(
-                                            imageVector = Icons.Default.Sensors,
+                                            imageVector = when (realGpsState) {
+                                                is RealGpsState.Success -> Icons.Default.GpsFixed
+                                                is RealGpsState.Searching -> Icons.Default.Sensors
+                                                else -> Icons.Default.GpsOff
+                                            },
                                             contentDescription = null,
-                                            tint = HeartRed,
+                                            tint = indicatorColor,
                                             modifier = Modifier.size(16.dp)
                                         )
                                     }
@@ -1538,14 +1755,25 @@ fun CheckInScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column {
                                     Text(
-                                        text = "GPS REAL-TIME TELEMETRY",
+                                        text = "VỊ TRÍ GPS THỰC TẾ",
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
                                         fontFamily = FontFamily.Monospace,
                                         color = Brand700
                                     )
                                     Text(
-                                        text = "Vệ tinh GNSS: Đang trực tuyến (18/24 vệ tinh)",
+                                        text = when (val state = realGpsState) {
+                                            is RealGpsState.Success -> {
+                                                val timeStr = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date(state.timestamp))
+                                                "Cập nhật lúc: $timeStr • Sai số: ±${state.accuracyMeters.toInt()}m"
+                                            }
+                                            is RealGpsState.Searching -> "Đang nhận tín hiệu chip GPS..."
+                                            is RealGpsState.LocationDisabled -> "Dịch vụ vị trí đang tắt"
+                                            is RealGpsState.PermissionDenied -> "Chưa cấp quyền vị trí"
+                                            is RealGpsState.PermissionRequired -> "Cần cấp quyền truy cập vị trí"
+                                            is RealGpsState.Error -> "Mất tín hiệu GPS"
+                                            RealGpsState.Idle -> "Chưa quét vị trí"
+                                        },
                                         fontSize = 9.5.sp,
                                         color = TextSecondary
                                     )
@@ -1557,12 +1785,7 @@ fun CheckInScreen(
                                 shape = RoundedCornerShape(999.dp),
                                 color = Brand100,
                                 modifier = Modifier.clickable {
-                                    isRefreshingGps = true
-                                    coroutineScope.launch {
-                                        delay(800)
-                                        isRefreshingGps = false
-                                        Toast.makeText(context, "Đã cập nhật tọa độ GPS thời gian thực!", Toast.LENGTH_SHORT).show()
-                                    }
+                                    fetchRealLocation(isManualRefresh = true)
                                 }
                             ) {
                                 Row(
@@ -1577,7 +1800,7 @@ fun CheckInScreen(
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = if (isRefreshingGps) "Đang dò..." else "Quét lại GPS",
+                                        text = if (isRefreshingGps || realGpsState is RealGpsState.Searching) "Đang dò..." else "Quét lại GPS",
                                         fontSize = 9.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Brand700
@@ -1588,87 +1811,319 @@ fun CheckInScreen(
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        // GPS Coordinate Display
-                        Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = BgSunken,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column {
-                                    Text(
-                                        text = "TỌA ĐỘ HIỆN TẠI",
-                                        fontSize = 8.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        fontFamily = FontFamily.Monospace,
-                                        color = TextSecondary
+                        // Dynamic Content Based on RealGpsState
+                        when (val state = realGpsState) {
+                            is RealGpsState.Searching -> {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(BgSunken, RoundedCornerShape(12.dp))
+                                        .padding(16.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    CircularProgressIndicator(
+                                        color = Brand700,
+                                        modifier = Modifier.size(24.dp),
+                                        strokeWidth = 2.5.dp
                                     )
+                                    Spacer(modifier = Modifier.height(8.dp))
                                     Text(
-                                        text = "11.9404° N, 108.4583° E",
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Bold,
+                                        text = "Đang đọc tọa độ thực từ chip GPS của máy...",
+                                        fontSize = 11.5.sp,
+                                        fontWeight = FontWeight.Medium,
                                         color = TextPrimary
                                     )
                                 }
-                                Column(horizontalAlignment = Alignment.End) {
+                            }
+                            is RealGpsState.PermissionRequired, is RealGpsState.PermissionDenied -> {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(Color(0xFFFFF8E1), RoundedCornerShape(12.dp))
+                                        .padding(12.dp)
+                                ) {
                                     Text(
-                                        text = "KHU VỰC NHẬN DIỆN",
-                                        fontSize = 8.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        fontFamily = FontFamily.Monospace,
-                                        color = TextSecondary
+                                        text = "Ứng dụng cần quyền vị trí chính xác để nhận diện địa phương bạn đang du lịch và mở khóa Stamp thật.",
+                                        fontSize = 11.sp,
+                                        color = Color(0xFF8D6E63),
+                                        lineHeight = 15.sp
                                     )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Button(
+                                            onClick = {
+                                                locationPermissionLauncher.launch(
+                                                    arrayOf(
+                                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                                        Manifest.permission.ACCESS_COARSE_LOCATION
+                                                    )
+                                                )
+                                            },
+                                            colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                            shape = RoundedCornerShape(8.dp),
+                                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                                        ) {
+                                            Text("Cấp Quyền Vị Trí", fontSize = 11.sp, color = Color.White)
+                                        }
+
+                                        OutlinedButton(
+                                            onClick = {
+                                                val intent = Intent(
+                                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                                    Uri.fromParts("package", context.packageName, null)
+                                                )
+                                                context.startActivity(intent)
+                                            },
+                                            shape = RoundedCornerShape(8.dp),
+                                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp)
+                                        ) {
+                                            Text("Cài Đặt App", fontSize = 11.sp, color = Brand700)
+                                        }
+                                    }
+                                }
+                            }
+                            is RealGpsState.LocationDisabled -> {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(Color(0xFFFFEBEE), RoundedCornerShape(12.dp))
+                                        .padding(12.dp)
+                                ) {
                                     Text(
-                                        text = "${selectedProvince.shortName} (${selectedProvince.code})",
+                                        text = "Dịch vụ định vị (GPS) trên thiết bị đang tắt. Vui lòng bật vị trí để quét tọa độ thực.",
+                                        fontSize = 11.sp,
+                                        color = Color(0xFFC62828),
+                                        lineHeight = 15.sp
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Button(
+                                        onClick = {
+                                            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                            context.startActivity(intent)
+                                        },
+                                        colors = ButtonDefaults.buttonColors(containerColor = HeartRed),
+                                        shape = RoundedCornerShape(8.dp),
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                                    ) {
+                                        Text("Bật Vị Trí Trong Cài Đặt", fontSize = 11.sp, color = Color.White)
+                                    }
+                                }
+                            }
+                            is RealGpsState.Error -> {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(Color(0xFFFFF3E0), RoundedCornerShape(12.dp))
+                                        .padding(12.dp)
+                                ) {
+                                    Text(
+                                        text = state.message,
+                                        fontSize = 11.sp,
+                                        color = Color(0xFFE65100),
+                                        lineHeight = 15.sp
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Button(
+                                        onClick = { fetchRealLocation(isManualRefresh = true) },
+                                        colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                        shape = RoundedCornerShape(8.dp),
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                                    ) {
+                                        Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(14.dp), tint = Gold500)
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text("Thử Quét Lại", fontSize = 11.sp, color = Color.White)
+                                    }
+                                }
+                            }
+                            is RealGpsState.Success -> {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = BgSunken,
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            Column {
+                                                Text(
+                                                    text = "TỌA ĐỘ HIỆN TẠI (WGS84)",
+                                                    fontSize = 8.5.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    fontFamily = FontFamily.Monospace,
+                                                    color = TextSecondary
+                                                )
+                                                Text(
+                                                    text = "${"%.4f".format(state.latitude)}° N, ${"%.4f".format(state.longitude)}° E",
+                                                    fontSize = 12.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = TextPrimary
+                                                )
+                                            }
+                                            Column(horizontalAlignment = Alignment.End) {
+                                                Text(
+                                                    text = "KHU VỰC NHẬN DIỆN",
+                                                    fontSize = 8.5.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    fontFamily = FontFamily.Monospace,
+                                                    color = TextSecondary
+                                                )
+                                                Text(
+                                                    text = "${state.detectedProvince?.shortName ?: selectedProvince.shortName} (${state.detectedProvince?.code ?: selectedProvince.code})",
+                                                    fontSize = 12.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Brand700
+                                                )
+                                            }
+                                        }
+
+                                        if (state.nearestPlace != null) {
+                                            Spacer(modifier = Modifier.height(4.dp))
+                                            HorizontalDivider(thickness = 0.5.dp, color = Color(0xFFD6DFDB))
+                                            Spacer(modifier = Modifier.height(4.dp))
+                                            Row(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                horizontalArrangement = Arrangement.SpaceBetween,
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                Text(
+                                                    text = "Gần: ${state.nearestPlace.name}",
+                                                    fontSize = 10.5.sp,
+                                                    fontWeight = FontWeight.Medium,
+                                                    color = TextPrimary,
+                                                    maxLines = 1,
+                                                    overflow = TextOverflow.Ellipsis,
+                                                    modifier = Modifier.weight(1f)
+                                                )
+                                                val distText = if (state.distanceToNearestPlaceMeters < 1000) {
+                                                    "${state.distanceToNearestPlaceMeters}m"
+                                                } else {
+                                                    "${"%.1f".format(state.distanceToNearestPlaceMeters / 1000.0)}km"
+                                                }
+                                                Text(
+                                                    text = "Khoảng cách: $distText",
+                                                    fontSize = 9.5.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Brand700
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.height(8.dp))
+
+                                // Quick Stamp Button at real GPS
+                                val targetProvince = state.detectedProvince ?: selectedProvince
+                                val targetPlaceName = state.nearestPlace?.name ?: "Vị trí GPS thực tế (${targetProvince.shortName})"
+                                Button(
+                                    onClick = {
+                                        onQuickCheckIn(targetPlaceName, targetProvince.code, targetProvince.shortName, null)
+                                        showSuccessStampDialog = true
+                                    },
+                                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                    shape = RoundedCornerShape(12.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Icon(Icons.Default.BookmarkAdded, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = "Đóng Dấu Tại ${targetProvince.shortName}",
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Brand700
+                                        color = Color.White
                                     )
                                 }
                             }
-                        }
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        // Quick Stamp Button at current GPS
-                        Button(
-                            onClick = {
-                                onQuickCheckIn("Trung tâm ${selectedProvince.shortName} (GPS Real-time)", selectedProvince.code, selectedProvince.shortName, null)
-                                showSuccessStampDialog = true
-                            },
-                            colors = ButtonDefaults.buttonColors(containerColor = Brand700),
-                            shape = RoundedCornerShape(12.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Icon(Icons.Default.BookmarkAdded, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Đóng Dấu Nhanh Tại Tọa Độ Này",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
+                            RealGpsState.Idle -> {
+                                Button(
+                                    onClick = { fetchRealLocation(isManualRefresh = true) },
+                                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                    shape = RoundedCornerShape(12.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Icon(Icons.Default.GpsFixed, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = "Bắt Đầu Quét Vị Trí GPS Thật",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.White
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
         }
 
-        // 3. VIETNAM INTERACTIVE MAP
+        // 3. VIETNAM REAL GOOGLE MAP (Same component as MyTripsScreen)
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
-                VietnamMapGraphic(
-                    provinces = provinces,
-                    onProvinceClick = onProvinceClick
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = "BẢN ĐỒ DẤU CHÂN VIỆT NAM (GOOGLE MAPS)",
+                            fontSize = 10.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Brand700,
+                            letterSpacing = 0.5.sp
+                        )
+                        Text(
+                            text = "Bản đồ vệ tinh/địa hình trực quan & điểm check-in",
+                            fontSize = 12.sp,
+                            color = TextSecondary
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(999.dp),
+                        color = Gold500.copy(alpha = 0.18f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Gold500)
+                    ) {
+                        Text(
+                            text = "🗺️ Google Map Live",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Brand700,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Surface(
+                    shape = RoundedCornerShape(18.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700.copy(alpha = 0.35f)),
+                    shadowElevation = 4.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(480.dp)
+                        .clip(RoundedCornerShape(18.dp))
+                ) {
+                    InteractiveMapScreen(
+                        places = places,
+                        provinces = provinces,
+                        checkIns = checkIns,
+                        onQuickCheckIn = { pName, pCode, provName ->
+                            onQuickCheckIn(pName, pCode, provName, null)
+                        },
+                        onProvinceClick = onProvinceClick,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
         }
 

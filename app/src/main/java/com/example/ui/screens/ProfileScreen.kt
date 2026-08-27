@@ -194,14 +194,18 @@ fun ProfileScreen(
                         border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
+                        val totalProvincesCount = if (provinces.isNotEmpty()) provinces.size else userProfile.totalProvincesCount
+                        val totalVisitedProvinces = provinces.count { it.visitedPlacesCount > 0 }.coerceAtLeast(userProfile.visitedProvincesCount)
+                        val totalStamps = provinces.sumOf { it.visitedPlacesCount }
+
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(12.dp),
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
-                            ProfileStatItem("Tỉnh thành", "${userProfile.visitedProvincesCount}/${userProfile.totalProvincesCount}")
-                            ProfileStatItem("Quãng đường", "${userProfile.totalDistanceKm.toInt()} km")
+                            ProfileStatItem("Tỉnh thành", "$totalVisitedProvinces/$totalProvincesCount")
+                            ProfileStatItem("Con dấu", "$totalStamps")
                             ProfileStatItem("Chuyến đi", "${userProfile.tripsCompletedCount}")
                             ProfileStatItem("Lượt lưu", "${userProfile.totalSavesCount}")
                         }

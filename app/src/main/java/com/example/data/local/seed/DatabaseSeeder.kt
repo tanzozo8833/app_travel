@@ -12,48 +12,32 @@ object DatabaseSeeder {
     fun seedDatabase(database: LuminaDatabase, scope: CoroutineScope = CoroutineScope(Dispatchers.IO)) {
         scope.launch {
             try {
-                // Check if already seeded
-                if (database.provinceDao().getCount() > 0) {
-                    Log.d(TAG, "Database already contains data, skipping seed.")
-                    return@launch
+                val currentProvinceCount = database.provinceDao().getCount()
+                
+                if (currentProvinceCount == 0) {
+                    Log.d(TAG, "Starting full database seeding...")
+                    database.provinceDao().insertAll(ProvinceSeed.data)
+                    database.placeDao().insertAll(PlaceSeed.data)
+                    database.userProfileDao().insertAll(UserProfileSeed.data)
+                    database.tripDao().insertAll(TripSeed.data)
+                    database.postDao().insertAll(PostSeed.data)
+                    database.commentDao().insertAll(CommentSeed.data)
+                    database.checkInDao().insertAll(CheckInSeed.data)
+                    database.badgeDao().insertAll(BadgeSeed.data)
+                    database.frameDao().insertAll(FrameSeed.data)
+                    database.notificationDao().insertAll(NotificationSeed.data)
+                    database.savedBoardDao().insertAll(SavedBoardSeed.data)
+                    Log.d(TAG, "Full database seeding completed with 34 provinces.")
+                } else if (currentProvinceCount < ProvinceSeed.data.size) {
+                    Log.d(TAG, "Database has $currentProvinceCount provinces. Updating to ${ProvinceSeed.data.size} provinces...")
+                    database.provinceDao().insertAll(ProvinceSeed.data)
+                    database.placeDao().insertAll(PlaceSeed.data)
+                    database.frameDao().insertAll(FrameSeed.data)
+                    database.badgeDao().insertAll(BadgeSeed.data)
+                    Log.d(TAG, "Database successfully updated to 34 provinces.")
+                } else {
+                    Log.d(TAG, "Database already contains $currentProvinceCount provinces.")
                 }
-
-                Log.d(TAG, "Starting comprehensive database seeding...")
-
-                // 1. Seed Provinces
-                database.provinceDao().insertAll(ProvinceSeed.data)
-
-                // 2. Seed Places
-                database.placeDao().insertAll(PlaceSeed.data)
-
-                // 3. Seed User Profiles
-                database.userProfileDao().insertAll(UserProfileSeed.data)
-
-                // 4. Seed Trips
-                database.tripDao().insertAll(TripSeed.data)
-
-                // 5. Seed Posts
-                database.postDao().insertAll(PostSeed.data)
-
-                // 6. Seed Comments
-                database.commentDao().insertAll(CommentSeed.data)
-
-                // 7. Seed Check-ins
-                database.checkInDao().insertAll(CheckInSeed.data)
-
-                // 8. Seed Badges
-                database.badgeDao().insertAll(BadgeSeed.data)
-
-                // 9. Seed Frames
-                database.frameDao().insertAll(FrameSeed.data)
-
-                // 10. Seed Notifications
-                database.notificationDao().insertAll(NotificationSeed.data)
-
-                // 11. Seed Saved Boards
-                database.savedBoardDao().insertAll(SavedBoardSeed.data)
-
-                Log.d(TAG, "Database seeding completed successfully.")
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to seed database", e)
             }

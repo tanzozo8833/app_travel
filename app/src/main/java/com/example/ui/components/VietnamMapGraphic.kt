@@ -104,21 +104,21 @@ fun VietnamMapGraphic(
                     // Region 1: Northern Vietnam (Bắc Bộ)
                     RegionMapRow(
                         regionName = "MIỀN BẮC",
-                        provinces = provinces.filter { it.region == "Bắc" },
+                        provinces = provinces.filter { it.region.contains("Bắc", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
 
                     // Region 2: Central Vietnam (Trung Bộ)
                     RegionMapRow(
                         regionName = "MIỀN TRUNG",
-                        provinces = provinces.filter { it.region == "Trung" },
+                        provinces = provinces.filter { it.region.contains("Trung", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
 
                     // Region 3: Central Highlands & South (Tây Nguyên & Nam Bộ)
                     RegionMapRow(
                         regionName = "TÂY NGUYÊN & NAM BỘ",
-                        provinces = provinces.filter { it.region in listOf("Tây Nguyên", "Nam") },
+                        provinces = provinces.filter { it.region.contains("Tây Nguyên", ignoreCase = true) || it.region.contains("Nam", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
                 }
@@ -133,15 +133,26 @@ fun VietnamMapGraphic(
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            // Dynamic Regional Stats Calculations
+            val northProvinces = provinces.filter { it.region.contains("Bắc", ignoreCase = true) }
+            val centralProvinces = provinces.filter { it.region.contains("Trung", ignoreCase = true) }
+            val highlandsProvinces = provinces.filter { it.region.contains("Tây Nguyên", ignoreCase = true) }
+            val southProvinces = provinces.filter { it.region.contains("Nam", ignoreCase = true) }
+
+            val northVisited = northProvinces.count { it.visitedPlacesCount > 0 }
+            val centralVisited = centralProvinces.count { it.visitedPlacesCount > 0 }
+            val highlandsVisited = highlandsProvinces.count { it.visitedPlacesCount > 0 }
+            val southVisited = southProvinces.count { it.visitedPlacesCount > 0 }
+
             // Stats footer bar
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                MapStatItem(label = "Miền Bắc", count = "2/11")
-                MapStatItem(label = "Miền Trung", count = "2/10")
-                MapStatItem(label = "Tây Nguyên", count = "1/5")
-                MapStatItem(label = "Miền Nam", count = "0/8")
+                MapStatItem(label = "Miền Bắc", count = "$northVisited/${northProvinces.size}")
+                MapStatItem(label = "Miền Trung", count = "$centralVisited/${centralProvinces.size}")
+                MapStatItem(label = "Tây Nguyên", count = "$highlandsVisited/${highlandsProvinces.size}")
+                MapStatItem(label = "Miền Nam", count = "$southVisited/${southProvinces.size}")
             }
         }
     }
