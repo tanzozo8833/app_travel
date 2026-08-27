@@ -19,7 +19,7 @@ class LuminaApplication : Application(), ImageLoaderFactory {
     }
 
     val repository: LuminaRepository by lazy {
-        LuminaRepository(database)
+        LuminaRepository(database, this)
     }
 
     override fun onCreate() {

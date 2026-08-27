@@ -18,7 +18,7 @@ object UserProfileSeed {
             totalDistanceKm = 12500.0,
             tripsCompletedCount = 18,
             totalSavesCount = 3420,
-            isActive = true
+            isActive = false
         ),
         UserProfileEntity(
             id = "u_2",

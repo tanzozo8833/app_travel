@@ -1,8 +1,10 @@
 package com.example.ui
 
+import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LuminaApplication
+import com.example.data.auth.AuthResult
 import com.example.data.model.*
 import com.example.data.repository.LuminaRepository
 import kotlinx.coroutines.delay
@@ -57,6 +59,17 @@ data class ChatMessage(
 class LuminaViewModel(
     private val repository: LuminaRepository = LuminaApplication.instance.repository
 ) : ViewModel() {
+
+    // Authentication State
+    val isLoggedIn: StateFlow<Boolean> = repository.isLoggedIn
+    private val _isLoggingIn = MutableStateFlow(false)
+    val isLoggingIn: StateFlow<Boolean> = _isLoggingIn.asStateFlow()
+
+    private val _loginError = MutableStateFlow<String?>(null)
+    val loginError: StateFlow<String?> = _loginError.asStateFlow()
+
+    private val _loginErrorIsNetwork = MutableStateFlow(false)
+    val loginErrorIsNetwork: StateFlow<Boolean> = _loginErrorIsNetwork.asStateFlow()
 
     // Main Navigation
     private val _currentTab = MutableStateFlow(MainTab.HOME)
@@ -508,6 +521,60 @@ class LuminaViewModel(
         }
     }
 
+    // Google Sign-In & Session Handling
+    fun signInWithGoogle(activity: Activity) {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.signInWithGoogle(activity)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = null
+                        showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                        // Do not show error banner on user cancel
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = result.message
+                        _loginErrorIsNetwork.value = result.isNetworkError
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Đã xảy ra lỗi không mong muốn: ${e.localizedMessage ?: "Vui lòng thử lại"}"
+            }
+        }
+    }
+
+    fun signInWithDirectEmail(email: String, displayName: String, avatarUrl: String = "") {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+
+        viewModelScope.launch {
+            try {
+                val profile = repository.signInDirect(email, displayName, avatarUrl)
+                _isLoggingIn.value = false
+                showToast("Đăng nhập thành công với tài khoản ${profile.displayName}!")
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Lỗi khi đăng nhập: ${e.localizedMessage}"
+            }
+        }
+    }
+
+    fun clearLoginError() {
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+    }
+
     // Settings & Account Management
     fun showSettings(show: Boolean) {
         _isShowingSettings.value = show
@@ -546,6 +613,7 @@ class LuminaViewModel(
             tagTitle = tagTitle
         )
         repository.updateUserProfile(updated)
+        repository.authManager.updateSavedUserProfile(updated)
         showToast("Đã lưu cập nhật hồ sơ!")
     }
 
@@ -554,12 +622,15 @@ class LuminaViewModel(
     }
 
     fun logout() {
-        showToast("Đã đăng xuất tài khoản an toàn.")
-        _isShowingSettings.value = false
+        viewModelScope.launch {
+            repository.logout()
+            _isShowingSettings.value = false
+            showToast("Đã đăng xuất tài khoản.")
+        }
     }
 
     fun deleteAccount() {
-        showToast("Đã xoá tài khoản và dữ liệu cá nhân.")
+        showToast("Chức năng xoá tài khoản sẽ được hỗ trợ trong bản cập nhật kế tiếp.")
         _isShowingSettings.value = false
     }
 }

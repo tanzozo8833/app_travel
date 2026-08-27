@@ -55,7 +55,7 @@ object PostSeed {
             saveCount = 210,
             shareCount = 89,
             isLiked = false,
-            isSaved = false,
+            isSaved = true,
             tags = listOf("HaGiang", "LungCu", "VietnamTravel", "MaPiLeng"),
             createdAt = System.currentTimeMillis() - 18000000
         ),
@@ -112,7 +112,58 @@ object PostSeed {
             isSaved = true,
             tags = listOf("DaNang", "CauVang", "BaNaHills", "MyKhe"),
             createdAt = System.currentTimeMillis() - 172800000
+        ),
+        PostEntity(
+            id = "post_5",
+            userId = "u_5",
+            authorName = "Hương Giang",
+            authorHandle = "giang.travel",
+            authorAvatarUrl = "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop",
+            hasRecentCheckIn = true,
+            locationLabel = "Ninh Bình",
+            provinceCode = "NBH",
+            timeAgo = "3 ngày trước",
+            caption = "Tràng An non nước hữu tình, chèo thuyền xuyên qua các hang động kỳ ảo và ngắm lúa chín vàng óng bên dòng sông Ngô Đồng.",
+            mediaUrls = listOf(
+                "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop"
+            ),
+            aspectRatio = 1.0f,
+            attachedTripId = null,
+            likeCount = 339,
+            commentCount = 28,
+            saveCount = 185,
+            shareCount = 41,
+            isLiked = true,
+            isSaved = true,
+            tags = listOf("NinhBinh", "TrangAn", "HangMua", "TamCoc"),
+            createdAt = System.currentTimeMillis() - 259200000
+        ),
+        PostEntity(
+            id = "post_6",
+            userId = "u_6",
+            authorName = "Hoàng Long",
+            authorHandle = "long.wander",
+            authorAvatarUrl = "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop",
+            hasRecentCheckIn = false,
+            locationLabel = "Phú Quốc, Kiên Giang",
+            provinceCode = "KGG",
+            timeAgo = "4 ngày trước",
+            caption = "Hoàng hôn Sunset Sanato Phú Quốc chưa bao giờ làm du khách thất vọng. Biển trong vắt cát trắng mịn như nhung.",
+            mediaUrls = listOf(
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800&auto=format&fit=crop"
+            ),
+            aspectRatio = 1.2f,
+            attachedTripId = null,
+            likeCount = 612,
+            commentCount = 74,
+            saveCount = 288,
+            shareCount = 112,
+            isLiked = true,
+            isSaved = true,
+            tags = listOf("PhuQuoc", "Sunset", "Beach", "KienGiang"),
+            createdAt = System.currentTimeMillis() - 345600000
         )
     )
 }
-

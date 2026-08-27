@@ -42,8 +42,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val isDark by viewModel.isDarkMode.collectAsState()
+            val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+            val isLoggingIn by viewModel.isLoggingIn.collectAsState()
+            val loginError by viewModel.loginError.collectAsState()
+            val loginErrorIsNetwork by viewModel.loginErrorIsNetwork.collectAsState()
+
             LuminaTheme(darkTheme = isDark) {
-                LuminaApp(viewModel = viewModel)
+                if (!isLoggedIn) {
+                    LoginScreen(
+                        isLoading = isLoggingIn,
+                        errorMessage = loginError,
+                        isNetworkError = loginErrorIsNetwork,
+                        onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
+                        onDirectSignIn = { email, name, avatar -> viewModel.signInWithDirectEmail(email, name, avatar) },
+                        onClearError = { viewModel.clearLoginError() }
+                    )
+                } else {
+                    LuminaApp(viewModel = viewModel)
+                }
             }
         }
     }
@@ -231,11 +247,17 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                         ProfileScreen(
                             userProfile = userProfile,
                             provinces = provinces,
-                            badges = badges,
-                            savedBoards = savedBoards,
+                            trips = trips,
+                            posts = posts,
+                            checkIns = checkIns,
+                            places = places,
                             onOpenTravelCv = { viewModel.showTravelCv(true) },
                             onOpenSettings = { viewModel.showSettings(true) },
-                            onProvinceClick = { viewModel.showCityPassport(true, it) }
+                            onProvinceClick = { viewModel.showCityPassport(true, it) },
+                            onTripClick = { viewModel.openTripDetail(it) },
+                            onPostClick = { viewModel.openPostDetail(it) },
+                            onCreateTrip = { viewModel.selectTab(MainTab.AI_PLAN) },
+                            onExploreFeed = { viewModel.selectTab(MainTab.HOME) }
                         )
                     }
                 }
@@ -381,13 +403,9 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                 userProfile = userProfile,
                 isDarkMode = isDarkMode,
                 appLanguage = appLanguage,
-                userAccounts = userAccounts,
-                currentAccountIndex = currentAccountIndex,
                 onBack = { viewModel.showSettings(false) },
                 onToggleDarkMode = { viewModel.setDarkMode(it) },
                 onSetLanguage = { viewModel.setLanguage(it) },
-                onSwitchAccount = { viewModel.switchAccount(it) },
-                onAddNewAccount = { name, handle -> viewModel.addNewAccount(name, handle) },
                 onUpdateProfile = { name, bio, title -> viewModel.updateProfileInfo(name, bio, title) },
                 onClearCache = { viewModel.clearCache() },
                 onLogout = { viewModel.logout() },

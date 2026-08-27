@@ -35,13 +35,9 @@ fun SettingsScreen(
     userProfile: UserProfile,
     isDarkMode: Boolean,
     appLanguage: String,
-    userAccounts: List<UserProfile>,
-    currentAccountIndex: Int,
     onBack: () -> Unit,
     onToggleDarkMode: (Boolean) -> Unit,
     onSetLanguage: (String) -> Unit,
-    onSwitchAccount: (Int) -> Unit,
-    onAddNewAccount: (displayName: String, username: String) -> Unit,
     onUpdateProfile: (displayName: String, bio: String, tagTitle: String) -> Unit,
     onClearCache: () -> Unit,
     onLogout: () -> Unit,
@@ -49,7 +45,6 @@ fun SettingsScreen(
     modifier: Modifier = Modifier
 ) {
     var showEditProfileDialog by remember { mutableStateOf(false) }
-    var showAddAccountDialog by remember { mutableStateOf(false) }
     var showLogoutConfirmDialog by remember { mutableStateOf(false) }
     var showDeleteAccountConfirmDialog by remember { mutableStateOf(false) }
     var showCurrencyDialog by remember { mutableStateOf(false) }
@@ -203,99 +198,7 @@ fun SettingsScreen(
                 }
             }
 
-            // 2. Chuyển đổi tài khoản (Switch Accounts)
-            item {
-                SettingsSectionContainer(title = "TÀI KHOẢN DU LỊCH") {
-                    userAccounts.forEachIndexed { index, account ->
-                        val isCurrent = index == currentAccountIndex
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onSwitchAccount(index) }
-                                .padding(horizontal = 14.dp, vertical = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            AsyncImage(
-                                model = account.avatarUrl,
-                                contentDescription = account.displayName,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(CircleShape)
-                                    .border(
-                                        if (isCurrent) 2.dp else 1.dp,
-                                        if (isCurrent) Brand700 else Color.LightGray,
-                                        CircleShape
-                                    )
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = account.displayName,
-                                    fontSize = 13.5.sp,
-                                    fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Medium,
-                                    color = TextPrimary
-                                )
-                                Text(
-                                    text = "@${account.username} • ${account.tagTitle}",
-                                    fontSize = 11.sp,
-                                    color = TextSecondary
-                                )
-                            }
-                            if (isCurrent) {
-                                Surface(
-                                    shape = RoundedCornerShape(999.dp),
-                                    color = Brand100
-                                ) {
-                                    Text(
-                                        text = "Đang dùng",
-                                        fontSize = 10.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Brand700,
-                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                                    )
-                                }
-                            }
-                        }
-                        if (index < userAccounts.size - 1) {
-                            HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
-                        }
-                    }
-
-                    HorizontalDivider(color = Color(0xFFEFF4F1))
-
-                    // Add new account button
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { showAddAccountDialog = true }
-                            .padding(horizontal = 14.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Surface(
-                            shape = CircleShape,
-                            color = Brand100,
-                            modifier = Modifier.size(36.dp)
-                        ) {
-                            Icon(
-                                Icons.Default.Add,
-                                contentDescription = null,
-                                tint = Brand700,
-                                modifier = Modifier.padding(8.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Text(
-                            text = "Thêm tài khoản du lịch mới",
-                            fontSize = 13.5.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Brand700
-                        )
-                    }
-                }
-            }
-
-            // 3. Giao diện & Chế độ sáng/tối (Dark / Light Mode)
+            // 2. Giao diện & Chế độ sáng/tối (Dark / Light Mode)
             item {
                 SettingsSectionContainer(title = "GIAO DIỆN & HIỂN THỊ") {
                     SettingsSwitchRow(
@@ -553,68 +456,7 @@ fun SettingsScreen(
         )
     }
 
-    // Dialog 2: Thêm tài khoản du lịch mới
-    if (showAddAccountDialog) {
-        var newName by remember { mutableStateOf("") }
-        var newUsername by remember { mutableStateOf("") }
-
-        AlertDialog(
-            onDismissRequest = { showAddAccountDialog = false },
-            title = {
-                Text(
-                    text = "Thêm Tài Khoản Mới",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-            },
-            text = {
-                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Text(
-                        text = "Tạo hoặc liên kết thêm một tài khoản du lịch để lưu trữ các hành trình riêng biệt.",
-                        fontSize = 12.5.sp,
-                        color = TextSecondary
-                    )
-                    OutlinedTextField(
-                        value = newName,
-                        onValueChange = { newName = it },
-                        label = { Text("Họ và tên") },
-                        placeholder = { Text("Ví dụ: Nguyễn Văn A") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    OutlinedTextField(
-                        value = newUsername,
-                        onValueChange = { newUsername = it },
-                        label = { Text("Tên người dùng (@username)") },
-                        placeholder = { Text("Ví dụ: vana.travel") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        if (newName.isNotBlank() && newUsername.isNotBlank()) {
-                            onAddNewAccount(newName, newUsername)
-                            showAddAccountDialog = false
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
-                    enabled = newName.isNotBlank() && newUsername.isNotBlank()
-                ) {
-                    Text("Tạo & Chuyển tài khoản")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showAddAccountDialog = false }) {
-                    Text("Huỷ")
-                }
-            }
-        )
-    }
-
-    // Dialog 3: Xác nhận đăng xuất
+    // Dialog 2: Xác nhận đăng xuất
     if (showLogoutConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showLogoutConfirmDialog = false },

@@ -1,5 +1,9 @@
 package com.example.data.repository
 
+import android.app.Activity
+import android.content.Context
+import com.example.data.auth.AuthManager
+import com.example.data.auth.AuthResult
 import com.example.data.local.database.LuminaDatabase
 import com.example.data.local.entity.*
 import com.example.data.model.*
@@ -15,9 +19,13 @@ import java.util.Locale
 import java.util.UUID
 
 class LuminaRepository(
-    private val database: LuminaDatabase
+    private val database: LuminaDatabase,
+    private val context: Context
 ) {
     private val scope = CoroutineScope(Dispatchers.IO)
+    val authManager = AuthManager(context)
+
+    val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
 
     // Reactive data streams directly connected to Room Database
     val posts: Flow<List<Post>> = combine(
@@ -55,17 +63,41 @@ class LuminaRepository(
         list.map { it.toDomainModel() }
     }
 
-    val userProfile: Flow<UserProfile> = database.userProfileDao().getActiveProfileFlow().map {
-        it?.toDomainModel() ?: UserProfile(
-            id = "u_1",
-            username = "linh.travels",
-            displayName = "Thảo Linh",
+    val userProfile: Flow<UserProfile> = database.userProfileDao().getActiveProfileFlow().map { entity ->
+        entity?.toDomainModel() ?: authManager.currentAuthUser.value ?: UserProfile(
+            id = "google_user",
+            username = "traveler",
+            displayName = "Lữ khách Lumina",
             avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
         )
     }
 
     val userProfiles: Flow<List<UserProfile>> = database.userProfileDao().getAllProfilesFlow().map { list ->
         list.map { it.toDomainModel() }
+    }
+
+    // Google Sign-In & Authentication
+    suspend fun signInWithGoogle(activity: Activity): AuthResult {
+        val result = authManager.signInWithGoogle(activity)
+        if (result is AuthResult.Success) {
+            val entity = UserProfileEntity.fromDomainModel(result.userProfile, isActive = true)
+            database.userProfileDao().insert(entity)
+            database.userProfileDao().setActiveProfile(result.userProfile.id)
+        }
+        return result
+    }
+
+    suspend fun signInDirect(email: String, displayName: String, avatarUrl: String = ""): UserProfile {
+        val profile = authManager.signInDirect(email, displayName, avatarUrl)
+        val entity = UserProfileEntity.fromDomainModel(profile, isActive = true)
+        database.userProfileDao().insert(entity)
+        database.userProfileDao().setActiveProfile(profile.id)
+        return profile
+    }
+
+    suspend fun logout() {
+        authManager.logout()
+        database.userProfileDao().setActiveProfile("")
     }
 
     val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->
