@@ -60,16 +60,7 @@ fun LuminaBottomBar(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Tab 1: Home Feed
-                NavPillItem(
-                    label = "Feed",
-                    iconFilled = Icons.Default.Home,
-                    iconOutlined = Icons.Outlined.Home,
-                    isSelected = currentTab == MainTab.HOME,
-                    onClick = { onTabSelected(MainTab.HOME) }
-                )
-
-                // Tab 2: AI Plan
+                // Tab 1: AI Plan
                 NavPillItem(
                     label = "AI Plan",
                     iconFilled = Icons.Default.AutoAwesome,
@@ -78,47 +69,31 @@ fun LuminaBottomBar(
                     onClick = { onTabSelected(MainTab.AI_PLAN) }
                 )
 
-                // Tab 3: Central Highlighted Check-in Button (⦿)
-                Box(
-                    modifier = Modifier
-                        .offset(y = (-4).dp)
-                        .size(52.dp)
-                        .shadow(8.dp, CircleShape)
-                        .clip(CircleShape)
-                        .background(
-                            Brush.linearGradient(
-                                listOf(Brand700, Brand900)
-                            )
-                        )
-                        .border(2.dp, Gold500, CircleShape)
-                        .clickable { onTabSelected(MainTab.CHECK_IN) },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "⦿",
-                            fontSize = 18.sp,
-                            color = Gold500
-                        )
-                        Text(
-                            text = "STAMP",
-                            fontSize = 6.5.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.White
-                        )
-                    }
-                }
-
-                // Tab 4: My Trips (with embedded Vietnam map)
+                // Tab 2: Chuyến đi
                 NavPillItem(
                     label = "Chuyến đi",
                     iconFilled = Icons.Default.Luggage,
                     iconOutlined = Icons.Outlined.Luggage,
                     isSelected = currentTab == MainTab.MY_TRIPS,
                     onClick = { onTabSelected(MainTab.MY_TRIPS) }
+                )
+
+                // Tab 3: Bảng Home Feed
+                NavPillItem(
+                    label = "Feed",
+                    iconFilled = Icons.Default.Home,
+                    iconOutlined = Icons.Outlined.Home,
+                    isSelected = currentTab == MainTab.HOME,
+                    onClick = { onTabSelected(MainTab.HOME) }
+                )
+
+                // Tab 4: Stamp
+                NavPillItem(
+                    label = "Stamp",
+                    iconFilled = Icons.Default.CameraAlt,
+                    iconOutlined = Icons.Outlined.CameraAlt,
+                    isSelected = currentTab == MainTab.CHECK_IN,
+                    onClick = { onTabSelected(MainTab.CHECK_IN) }
                 )
 
                 // Tab 5: Profile

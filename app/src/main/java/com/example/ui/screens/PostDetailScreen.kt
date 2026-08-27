@@ -409,7 +409,7 @@ fun PostDetailScreen(
                     ) {
                         Column {
                             Text(
-                                text = "Xem ${post.commentCount} bình luận & thảo luận",
+                                text = "Xem ${post.commentCount} bình luận",
                                 fontSize = 13.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary

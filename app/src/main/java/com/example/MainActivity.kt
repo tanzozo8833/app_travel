@@ -180,6 +180,9 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                                     mediaUrls = if (photoUrl.isNotBlank()) listOf(photoUrl) else emptyList(),
                                     aspectRatio = 1.0f
                                 )
+                            },
+                            onProvinceClick = { prov ->
+                                viewModel.showCityPassport(true, prov)
                             }
                         )
                     }

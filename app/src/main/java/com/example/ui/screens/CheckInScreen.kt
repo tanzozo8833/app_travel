@@ -54,6 +54,7 @@ import com.example.ui.components.CheckInColorMode
 import com.example.ui.components.ImageColorFilterProcessor
 import com.example.ui.components.RealCameraPreview
 import com.example.ui.components.StampBadge
+import com.example.ui.components.VietnamMapGraphic
 import com.example.ui.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -62,6 +63,11 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
+enum class StampScreenTab {
+    CAPTURE,
+    VIEW_STAMPS
+}
 
 enum class CheckInStudioMode {
     LIVE_CAMERA,
@@ -76,6 +82,7 @@ fun CheckInScreen(
     frames: List<LuminaFrame> = emptyList(),
     onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String, photoUrl: String?) -> Unit,
     onPublishPost: (caption: String, location: String, photoUrl: String) -> Unit,
+    onProvinceClick: (Province) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -293,94 +300,200 @@ fun CheckInScreen(
         }
     }
 
+    var currentSubTab by remember { mutableStateOf(StampScreenTab.CAPTURE) }
+    var isRefreshingGps by remember { mutableStateOf(false) }
+    var showAllProvincesList by remember { mutableStateOf(false) }
+    var selectedRegionFilter by remember { mutableStateOf("ALL") }
+
+    val visitedProvinces = remember(provinces) { provinces.filter { it.visitedPlacesCount > 0 } }
+    val totalStampsCount = remember(provinces) { provinces.sumOf { it.visitedPlacesCount } }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .background(BgCanvas),
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        // 1. Header with Locket Style Branding & Retake Switch
+        // TOP SUB-TAB SWITCHER (Chụp Stamp vs Xem Stamp)
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = BgSunken,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(
-                                text = "LOCKET CAMERA & STAMP",
-                                fontSize = 10.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                fontFamily = FontFamily.Monospace,
-                                color = Brand700,
-                                letterSpacing = 0.8.sp
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed.copy(alpha = 0.15f) else Brand100
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(6.dp)
-                                            .clip(CircleShape)
-                                            .background(if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700)
-                                    )
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(
-                                        text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else "XEM LẠI ẢNH",
-                                        fontSize = 8.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
-                                    )
-                                }
-                            }
-                        }
-                        Text(
-                            text = "Chụp Ảnh & Đóng Dấu Dấu Chân",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = TextPrimary
-                        )
-                    }
-
-                    // Retake / Switch back to live camera
-                    if (studioMode == CheckInStudioMode.CAPTURED_PHOTO) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
                         Surface(
-                            shape = RoundedCornerShape(999.dp),
-                            color = Brand100,
-                            modifier = Modifier.clickable {
-                                studioMode = CheckInStudioMode.LIVE_CAMERA
-                            }
+                            shape = RoundedCornerShape(12.dp),
+                            color = if (currentSubTab == StampScreenTab.CAPTURE) Brand700 else Color.Transparent,
+                            modifier = Modifier
+                                .weight(1f)
+                                .clickable { currentSubTab = StampScreenTab.CAPTURE }
                         ) {
                             Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                                modifier = Modifier.padding(vertical = 10.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(Icons.Default.Refresh, contentDescription = "Chụp lại", tint = Brand700, modifier = Modifier.size(14.dp))
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(
-                                    text = "Chụp lại",
-                                    fontSize = 11.5.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Brand700
+                                Icon(
+                                    imageVector = Icons.Default.CameraAlt,
+                                    contentDescription = null,
+                                    tint = if (currentSubTab == StampScreenTab.CAPTURE) Gold500 else TextSecondary,
+                                    modifier = Modifier.size(16.dp)
                                 )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Chụp Stamp",
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (currentSubTab == StampScreenTab.CAPTURE) Color.White else TextPrimary
+                                )
+                            }
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = if (currentSubTab == StampScreenTab.VIEW_STAMPS) Brand700 else Color.Transparent,
+                            modifier = Modifier
+                                .weight(1f)
+                                .clickable { currentSubTab = StampScreenTab.VIEW_STAMPS }
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(vertical = 10.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.CollectionsBookmark,
+                                    contentDescription = null,
+                                    tint = if (currentSubTab == StampScreenTab.VIEW_STAMPS) Gold500 else TextSecondary,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Xem Stamp",
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (currentSubTab == StampScreenTab.VIEW_STAMPS) Color.White else TextPrimary
+                                )
+                                if (visitedProvinces.isNotEmpty()) {
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Surface(
+                                        shape = RoundedCornerShape(999.dp),
+                                        color = if (currentSubTab == StampScreenTab.VIEW_STAMPS) Gold500 else Brand100
+                                    ) {
+                                        Text(
+                                            text = "${visitedProvinces.size}",
+                                            fontSize = 9.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (currentSubTab == StampScreenTab.VIEW_STAMPS) TextOnGold else Brand700,
+                                            modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
+        // =========================================================================
+        // TAB 1: CHỤP STAMP (LOCKET STUDIO CAMERA & QUICK CHECK-IN)
+        // =========================================================================
+        if (currentSubTab == StampScreenTab.CAPTURE) {
+            // 1. Header with Locket Style Branding & Retake Switch
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 6.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = "LOCKET CAMERA & STAMP",
+                                    fontSize = 10.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = Brand700,
+                                    letterSpacing = 0.8.sp
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(999.dp),
+                                    color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed.copy(alpha = 0.15f) else Brand100
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(6.dp)
+                                                .clip(CircleShape)
+                                                .background(if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700)
+                                        )
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(
+                                            text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else "XEM LẠI ẢNH",
+                                            fontSize = 8.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
+                                        )
+                                    }
+                                }
+                            }
+                            Text(
+                                text = "Chụp Ảnh & Đóng Dấu Dấu Chân",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = TextPrimary
+                            )
+                        }
+
+                        // Retake / Switch back to live camera
+                        if (studioMode == CheckInStudioMode.CAPTURED_PHOTO) {
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = Brand100,
+                                modifier = Modifier.clickable {
+                                    studioMode = CheckInStudioMode.LIVE_CAMERA
+                                }
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                                ) {
+                                    Icon(Icons.Default.Refresh, contentDescription = "Chụp lại", tint = Brand700, modifier = Modifier.size(14.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = "Chụp lại",
+                                        fontSize = 11.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Brand700
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
         // 2. MAIN SQUARE LOCKET CAMERA VIEWPORT (1:1 Aspect Ratio)
         item {
@@ -1220,7 +1333,681 @@ fun CheckInScreen(
                 }
             }
         }
+    } else {
+        // =========================================================================
+        // TAB 2: XEM STAMP (GPS REAL-TIME, BẢN ĐỒ VIỆT NAM, 34 TỈNH THÀNH & GRID DẤU)
+        // =========================================================================
+
+        // 1. STATS & PASSPORT SUMMARY
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+            ) {
+                Text(
+                    text = "CUỐN HỘ CHIẾU DẤU CHÂN VIỆT NAM",
+                    fontSize = 10.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    color = Brand700,
+                    letterSpacing = 0.8.sp
+                )
+                Text(
+                    text = "Hành Trình Chinh Phục 34 Tỉnh Thành",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = TextPrimary
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // 2 Summary Metric Cards
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    // Cities Visited Card
+                    Surface(
+                        shape = RoundedCornerShape(16.dp),
+                        color = BgSurface,
+                        border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700.copy(alpha = 0.3f)),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "THÀNH PHỐ",
+                                    fontSize = 9.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = TextSecondary
+                                )
+                                Icon(
+                                    imageVector = Icons.Default.LocationCity,
+                                    contentDescription = null,
+                                    tint = Brand700,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Row(verticalAlignment = Alignment.Bottom) {
+                                Text(
+                                    text = "${visitedProvinces.size}",
+                                    fontSize = 22.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = Brand700
+                                )
+                                Text(
+                                    text = " / ${provinces.size} đã đi",
+                                    fontSize = 11.5.sp,
+                                    color = TextSecondary,
+                                    modifier = Modifier.padding(bottom = 2.dp, start = 4.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // Stamps Collected Card
+                    Surface(
+                        shape = RoundedCornerShape(16.dp),
+                        color = BgSurface,
+                        border = androidx.compose.foundation.BorderStroke(1.5.dp, Gold500.copy(alpha = 0.5f)),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "CON DẤU",
+                                    fontSize = 9.5.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = FontFamily.Monospace,
+                                    color = TextSecondary
+                                )
+                                Icon(
+                                    imageVector = Icons.Default.Bookmark,
+                                    contentDescription = null,
+                                    tint = Gold500,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Row(verticalAlignment = Alignment.Bottom) {
+                                Text(
+                                    text = "$totalStampsCount",
+                                    fontSize = 22.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = Gold500
+                                )
+                                Text(
+                                    text = " con dấu đã thu",
+                                    fontSize = 11.5.sp,
+                                    color = TextSecondary,
+                                    modifier = Modifier.padding(bottom = 2.dp, start = 4.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Progress Bar
+                val progress = if (provinces.isNotEmpty()) visitedProvinces.size.toFloat() / provinces.size.toFloat() else 0f
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = BgSurface,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Tiến độ hoàn thành Hộ Chiếu",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = TextPrimary
+                            )
+                            Text(
+                                text = "${(progress * 100).toInt()}%",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Brand700
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(6.dp))
+                        LinearProgressIndicator(
+                            progress = { progress },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(6.dp)
+                                .clip(RoundedCornerShape(3.dp)),
+                            color = Gold500,
+                            trackColor = BgSunken
+                        )
+                    }
+                }
+            }
+        }
+
+        // 2. GPS REAL-TIME TELEMETRY & ACTIONS
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(18.dp),
+                    color = BgSurface,
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700.copy(alpha = 0.4f)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(14.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = HeartRed.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(28.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.Sensors,
+                                            contentDescription = null,
+                                            tint = HeartRed,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Column {
+                                    Text(
+                                        text = "GPS REAL-TIME TELEMETRY",
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = Brand700
+                                    )
+                                    Text(
+                                        text = "Vệ tinh GNSS: Đang trực tuyến (18/24 vệ tinh)",
+                                        fontSize = 9.5.sp,
+                                        color = TextSecondary
+                                    )
+                                }
+                            }
+
+                            // Refresh GPS Button
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = Brand100,
+                                modifier = Modifier.clickable {
+                                    isRefreshingGps = true
+                                    coroutineScope.launch {
+                                        delay(800)
+                                        isRefreshingGps = false
+                                        Toast.makeText(context, "Đã cập nhật tọa độ GPS thời gian thực!", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.GpsFixed,
+                                        contentDescription = "Quét GPS",
+                                        tint = Brand700,
+                                        modifier = Modifier.size(12.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = if (isRefreshingGps) "Đang dò..." else "Quét lại GPS",
+                                        fontSize = 9.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Brand700
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        // GPS Coordinate Display
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = BgSunken,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column {
+                                    Text(
+                                        text = "TỌA ĐỘ HIỆN TẠI",
+                                        fontSize = 8.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = TextSecondary
+                                    )
+                                    Text(
+                                        text = "11.9404° N, 108.4583° E",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = TextPrimary
+                                    )
+                                }
+                                Column(horizontalAlignment = Alignment.End) {
+                                    Text(
+                                        text = "KHU VỰC NHẬN DIỆN",
+                                        fontSize = 8.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        fontFamily = FontFamily.Monospace,
+                                        color = TextSecondary
+                                    )
+                                    Text(
+                                        text = "${selectedProvince.shortName} (${selectedProvince.code})",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Brand700
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // Quick Stamp Button at current GPS
+                        Button(
+                            onClick = {
+                                onQuickCheckIn("Trung tâm ${selectedProvince.shortName} (GPS Real-time)", selectedProvince.code, selectedProvince.shortName, null)
+                                showSuccessStampDialog = true
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(Icons.Default.BookmarkAdded, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Đóng Dấu Nhanh Tại Tọa Độ Này",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        // 3. VIETNAM INTERACTIVE MAP
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+            ) {
+                VietnamMapGraphic(
+                    provinces = provinces,
+                    onProvinceClick = onProvinceClick
+                )
+            }
+        }
+
+        // 4. VERTICAL LIST OF 34 PROVINCES (Show 5 + "Xem thêm" expander)
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = "DANH SÁCH 34 TỈNH THÀNH VIỆT NAM",
+                            fontSize = 10.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace,
+                            color = Brand700,
+                            letterSpacing = 0.5.sp
+                        )
+                        Text(
+                            text = "Chạm tỉnh thành để xem bộ con dấu",
+                            fontSize = 12.sp,
+                            color = TextSecondary
+                        )
+                    }
+                    Surface(
+                        shape = RoundedCornerShape(999.dp),
+                        color = Brand100
+                    ) {
+                        Text(
+                            text = "${visitedProvinces.size}/${provinces.size} Đã đi",
+                            fontSize = 10.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Brand700,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                val displayedProvinces = if (showAllProvincesList) provinces else provinces.take(5)
+
+                displayedProvinces.forEach { prov ->
+                    val isVisited = prov.visitedPlacesCount > 0
+                    Surface(
+                        shape = RoundedCornerShape(14.dp),
+                        color = BgSurface,
+                        border = androidx.compose.foundation.BorderStroke(
+                            1.dp,
+                            if (isVisited) Gold500.copy(alpha = 0.6f) else Color(0xFFD6DFDB)
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clickable { onProvinceClick(prov) }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                // Symbol Badge
+                                Surface(
+                                    shape = CircleShape,
+                                    color = if (isVisited) Gold500.copy(alpha = 0.15f) else BgSunken,
+                                    border = androidx.compose.foundation.BorderStroke(
+                                        1.dp,
+                                        if (isVisited) Gold500 else Color(0xFFD6DFDB)
+                                    ),
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Text(text = prov.stampSymbol, fontSize = 18.sp)
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Column {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(
+                                            text = prov.shortName,
+                                            fontSize = 13.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = TextPrimary
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Surface(
+                                            shape = RoundedCornerShape(4.dp),
+                                            color = BgSunken
+                                        ) {
+                                            Text(
+                                                text = prov.region,
+                                                fontSize = 9.sp,
+                                                color = TextSecondary,
+                                                modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                                            )
+                                        }
+                                    }
+                                    Text(
+                                        text = prov.name,
+                                        fontSize = 10.5.sp,
+                                        color = TextSecondary,
+                                        maxLines = 1
+                                    )
+                                    Text(
+                                        text = if (isVisited) "Đã check-in ${prov.visitedPlacesCount}/${prov.suggestedPlacesCount} điểm" else "Chưa mở khoá (0/${prov.suggestedPlacesCount} điểm)",
+                                        fontSize = 10.sp,
+                                        color = if (isVisited) Brand700 else TextTertiary,
+                                        fontWeight = if (isVisited) FontWeight.SemiBold else FontWeight.Normal
+                                    )
+                                }
+                            }
+
+                            // Action Button
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = if (isVisited) Brand700 else BgSunken,
+                                modifier = Modifier.clickable { onProvinceClick(prov) }
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = if (isVisited) "Xem stamp" else "Mở khoá",
+                                        fontSize = 10.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isVisited) Color.White else TextSecondary
+                                    )
+                                    Spacer(modifier = Modifier.width(2.dp))
+                                    Icon(
+                                        imageVector = Icons.Default.ChevronRight,
+                                        contentDescription = null,
+                                        tint = if (isVisited) Color.White else TextSecondary,
+                                        modifier = Modifier.size(12.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                // Expand / Collapse Button
+                if (provinces.size > 5) {
+                    OutlinedButton(
+                        onClick = { showAllProvincesList = !showAllProvincesList },
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = if (showAllProvincesList) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                            contentDescription = null,
+                            tint = Brand700,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = if (showAllProvincesList) "Thu gọn danh sách" else "Xem thêm toàn bộ ${provinces.size} tỉnh thành (${provinces.size - 5} tỉnh còn lại) ▼",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Brand700
+                        )
+                    }
+                }
+            }
+        }
+
+        // 5. CIRCULAR STAMP GRID (TRANSFERRED FROM PROFILE)
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                Text(
+                    text = "BỘ SƯU TẬP CON DẤU Ô TRÒN (PASSPORT)",
+                    fontSize = 10.5.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    color = Brand700,
+                    letterSpacing = 0.8.sp
+                )
+                Text(
+                    text = "Cuốn Hộ Chiếu Dấu Chân Tròn",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = TextPrimary
+                )
+                Text(
+                    text = "Chạm vào từng con dấu tròn để mở trang hộ chiếu dấu chân",
+                    fontSize = 11.sp,
+                    color = TextSecondary
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Region Filter Chips Row
+                val regionFilters = listOf(
+                    "ALL" to "Tất cả (${provinces.size})",
+                    "EARNED" to "Đã có (${visitedProvinces.size})",
+                    "Bắc" to "Miền Bắc",
+                    "Trung" to "Miền Trung",
+                    "Tây Nguyên" to "Tây Nguyên",
+                    "Nam" to "Miền Nam"
+                )
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(regionFilters) { (filterKey, filterLabel) ->
+                        val isSelected = selectedRegionFilter == filterKey
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = if (isSelected) Brand700 else BgSurface,
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.dp,
+                                if (isSelected) Gold500 else Color(0xFFD6DFDB)
+                            ),
+                            modifier = Modifier.clickable { selectedRegionFilter = filterKey }
+                        ) {
+                            Text(
+                                text = filterLabel,
+                                fontSize = 11.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                color = if (isSelected) Color.White else TextPrimary,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                // Filtered Provinces List for Grid
+                val filteredForGrid = when (selectedRegionFilter) {
+                    "EARNED" -> provinces.filter { it.visitedPlacesCount > 0 }
+                    "Bắc" -> provinces.filter { it.region.contains("Bắc", ignoreCase = true) }
+                    "Trung" -> provinces.filter { it.region.contains("Trung", ignoreCase = true) }
+                    "Tây Nguyên" -> provinces.filter { it.region.contains("Tây Nguyên", ignoreCase = true) }
+                    "Nam" -> provinces.filter { it.region.contains("Nam", ignoreCase = true) }
+                    else -> provinces
+                }
+
+                // Render in 3-column chunked rows
+                val chunkedProvinces = filteredForGrid.chunked(3)
+
+                chunkedProvinces.forEach { rowProvinces ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        rowProvinces.forEach { prov ->
+                            val isEarned = prov.visitedPlacesCount > 0
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clickable { onProvinceClick(prov) }
+                            ) {
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier.size(76.dp)
+                                ) {
+                                    StampBadge(
+                                        provinceCode = prov.code,
+                                        provinceShortName = prov.shortName,
+                                        dateText = if (isEarned) "2026" else "---",
+                                        symbolEmoji = prov.stampSymbol,
+                                        size = 72.dp,
+                                        isEarned = isEarned,
+                                        animateDrop = false
+                                    )
+
+                                    // Lock indicator for unvisited provinces
+                                    if (!isEarned) {
+                                        Surface(
+                                            shape = CircleShape,
+                                            color = Color.Black.copy(alpha = 0.55f),
+                                            modifier = Modifier.size(24.dp)
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Icon(
+                                                    imageVector = Icons.Default.Lock,
+                                                    contentDescription = "Chưa mở khoá",
+                                                    tint = Color.White,
+                                                    modifier = Modifier.size(12.dp)
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Spacer(modifier = Modifier.height(4.dp))
+
+                                Text(
+                                    text = prov.shortName,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isEarned) TextPrimary else TextSecondary,
+                                    maxLines = 1,
+                                    textAlign = TextAlign.Center
+                                )
+
+                                Text(
+                                    text = if (isEarned) "${prov.visitedPlacesCount} điểm" else "Khóa",
+                                    fontSize = 9.sp,
+                                    color = if (isEarned) Brand700 else TextTertiary,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+
+                        // Fill remaining slots in row if less than 3
+                        val remaining = 3 - rowProvinces.size
+                        repeat(remaining) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+        }
     }
+}
 
     // Success Stamp Drop Dialog
     if (showSuccessStampDialog) {

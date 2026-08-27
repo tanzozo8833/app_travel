@@ -29,6 +29,9 @@ fun VietnamMapGraphic(
     onProvinceClick: (Province) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+    val visitedCount = provinces.count { it.visitedPlacesCount > 0 }
+    val totalCount = if (provinces.isNotEmpty()) provinces.size else 34
+
     Card(
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = Brand900),
@@ -57,7 +60,7 @@ fun VietnamMapGraphic(
                         letterSpacing = 0.5.sp
                     )
                     Text(
-                        text = "Đã check-in 5 / 34 tỉnh thành",
+                        text = "Đã check-in $visitedCount / $totalCount tỉnh thành",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = TextOnBrand

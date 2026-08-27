@@ -67,6 +67,10 @@ fun AiPlanScreen(
     var destinationInput by remember(wizardState.destination) { mutableStateOf(wizardState.destination) }
     var durationDaysInput by remember(wizardState.durationDays) { mutableStateOf(wizardState.durationDays.toString()) }
     var budgetInput by remember(wizardState.budgetVnd) { mutableStateOf(wizardState.budgetVnd.toString()) }
+    var groupPeopleInput by remember(wizardState.groupType) {
+        val digits = wizardState.groupType.filter { it.isDigit() }
+        mutableStateOf(if (digits.isNotBlank()) digits else "2")
+    }
     var customNotesInput by remember(wizardState.customNotes) { mutableStateOf(wizardState.customNotes) }
 
     // Manual plan state with rich days & activities list (Giống hệt UI xem/chỉnh sửa lịch trình)
@@ -482,10 +486,10 @@ fun AiPlanScreen(
                                 )
                             }
 
-                            // 4. Companion & Style tags
+                            // 4. Group Size (Number of people input)
                             Column {
                                 Text(
-                                    text = "BẠN ĐỒNG HÀNH",
+                                    text = "SỐ LƯỢNG NGƯỜI",
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -494,34 +498,53 @@ fun AiPlanScreen(
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    groupTypes.forEach { gType ->
-                                        val isSelected = wizardState.groupType == gType
-                                        Surface(
-                                            shape = RoundedCornerShape(10.dp),
-                                            color = if (isSelected) Brand700 else BgCanvas,
-                                            border = androidx.compose.foundation.BorderStroke(
-                                                1.dp,
-                                                if (isSelected) Gold500 else Color(0xFFD6DFDB)
-                                            ),
-                                            modifier = Modifier
-                                                .weight(1f)
-                                                .clickable {
-                                                    onUpdateWizard(null, null, null, gType, null, null)
-                                                }
+                                    OutlinedTextField(
+                                        value = groupPeopleInput,
+                                        onValueChange = { input ->
+                                            val digits = input.filter { it.isDigit() }
+                                            groupPeopleInput = digits
+                                            val count = digits.toIntOrNull() ?: 1
+                                            onUpdateWizard(null, null, null, "$count người", null, null)
+                                        },
+                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                        leadingIcon = { Icon(Icons.Default.Group, contentDescription = null, tint = Brand700) },
+                                        label = { Text("Số người tham gia") },
+                                        placeholder = { Text("Ví dụ: 1, 2, 4, 8...") },
+                                        shape = RoundedCornerShape(12.dp),
+                                        singleLine = true,
+                                        modifier = Modifier.weight(1f)
+                                    )
+
+                                    // Quick stepper buttons (- and +)
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        FilledTonalIconButton(
+                                            onClick = {
+                                                val current = groupPeopleInput.toIntOrNull() ?: 2
+                                                val newCount = (current - 1).coerceAtLeast(1)
+                                                groupPeopleInput = newCount.toString()
+                                                onUpdateWizard(null, null, null, "$newCount người", null, null)
+                                            },
+                                            modifier = Modifier.size(46.dp)
                                         ) {
-                                            Box(
-                                                contentAlignment = Alignment.Center,
-                                                modifier = Modifier.padding(vertical = 8.dp)
-                                            ) {
-                                                Text(
-                                                    text = gType,
-                                                    fontSize = 11.sp,
-                                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                                    color = if (isSelected) Color.White else TextPrimary
-                                                )
-                                            }
+                                            Icon(Icons.Default.Remove, contentDescription = "Giảm", tint = Brand700)
+                                        }
+
+                                        FilledTonalIconButton(
+                                            onClick = {
+                                                val current = groupPeopleInput.toIntOrNull() ?: 2
+                                                val newCount = current + 1
+                                                groupPeopleInput = newCount.toString()
+                                                onUpdateWizard(null, null, null, "$newCount người", null, null)
+                                            },
+                                            modifier = Modifier.size(46.dp)
+                                        ) {
+                                            Icon(Icons.Default.Add, contentDescription = "Tăng", tint = Brand700)
                                         }
                                     }
                                 }
