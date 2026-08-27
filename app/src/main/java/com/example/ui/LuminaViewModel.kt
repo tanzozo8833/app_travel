@@ -85,6 +85,12 @@ class LuminaViewModel(
     private val _isShowingFrameCam = MutableStateFlow(false)
     val isShowingFrameCam: StateFlow<Boolean> = _isShowingFrameCam.asStateFlow()
 
+    private val _targetedStampPlace = MutableStateFlow<Place?>(null)
+    val targetedStampPlace: StateFlow<Place?> = _targetedStampPlace.asStateFlow()
+
+    private val _targetedStampProvince = MutableStateFlow<Province?>(null)
+    val targetedStampProvince: StateFlow<Province?> = _targetedStampProvince.asStateFlow()
+
     private val _isShowingSearch = MutableStateFlow(false)
     val isShowingSearch: StateFlow<Boolean> = _isShowingSearch.asStateFlow()
 
@@ -245,6 +251,17 @@ class LuminaViewModel(
 
     fun showNotifications(show: Boolean) {
         _isShowingNotifications.value = show
+    }
+
+    fun openStampStudioWithPlace(place: Place?, province: Province?) {
+        _targetedStampPlace.value = place
+        _targetedStampProvince.value = province
+        selectTab(MainTab.CHECK_IN)
+    }
+
+    fun clearTargetedStamp() {
+        _targetedStampPlace.value = null
+        _targetedStampProvince.value = null
     }
 
     fun showCityPassport(show: Boolean, province: Province? = null) {

@@ -106,6 +106,8 @@ fun CheckInScreen(
     places: List<Place>,
     checkIns: List<CheckInRecord>,
     frames: List<LuminaFrame> = emptyList(),
+    initialProvince: Province? = null,
+    initialPlace: Place? = null,
     onQuickCheckIn: (placeName: String, provinceCode: String, provinceName: String, photoUrl: String?) -> Unit,
     onPublishPost: (caption: String, location: String, photoUrl: String) -> Unit,
     onProvinceClick: (Province) -> Unit = {},
@@ -114,9 +116,9 @@ fun CheckInScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    var selectedProvince by remember(provinces) {
+    var selectedProvince by remember(provinces, initialProvince) {
         mutableStateOf(
-            provinces.find { it.code == "LDG" } ?: provinces.firstOrNull() ?: Province(
+            initialProvince ?: provinces.find { it.code == "LDG" } ?: provinces.firstOrNull() ?: Province(
                 id = 1,
                 code = "LDG",
                 name = "Tỉnh Lâm Đồng",
@@ -134,9 +136,9 @@ fun CheckInScreen(
         )
     }
 
-    var selectedPlace by remember(places) {
+    var selectedPlace by remember(places, initialPlace) {
         mutableStateOf(
-            places.firstOrNull { it.provinceCode == "LDG" } ?: places.firstOrNull() ?: Place(
+            initialPlace ?: places.firstOrNull { it.provinceCode == "LDG" } ?: places.firstOrNull() ?: Place(
                 id = "p_1",
                 provinceId = 2,
                 provinceCode = "LDG",
@@ -153,6 +155,15 @@ fun CheckInScreen(
                 isVisited = false
             )
         )
+    }
+
+    LaunchedEffect(initialProvince, initialPlace) {
+        if (initialProvince != null) {
+            selectedProvince = initialProvince
+        }
+        if (initialPlace != null) {
+            selectedPlace = initialPlace
+        }
     }
 
     // Camera State
@@ -203,10 +214,10 @@ fun CheckInScreen(
         mutableStateOf(
             frames.firstOrNull() ?: LuminaFrame(
                 id = "frame_90s_polaroid",
-                name = "Locket Classic",
-                badgeLabel = "📷 Locket Classic",
-                subtitle = "LOCKET TRAVEL DIARY · 2026",
-                topTitle = "★ LUMINA LOCKET ★",
+                name = "Cổ điển",
+                badgeLabel = "📷 Cổ điển",
+                subtitle = "TRAVEL DIARY · 2026",
+                topTitle = "★ LUMINA PASSPORT ★",
                 bottomTagline = "GEN Z FOOTPRINT PASSPORT",
                 previewColor = 0xFF1B2A26,
                 provinceCode = null,
@@ -617,10 +628,10 @@ fun CheckInScreen(
         }
 
         // =========================================================================
-        // TAB 1: CHỤP STAMP (LOCKET STUDIO CAMERA & QUICK CHECK-IN)
+        // TAB 1: CHỤP STAMP (STUDIO CAMERA & QUICK CHECK-IN)
         // =========================================================================
         if (currentSubTab == StampScreenTab.CAPTURE) {
-            // 1. Header with Locket Style Branding & Retake Switch
+            // 1. Header with Camera Branding & Retake Switch
             item {
                 Column(
                     modifier = Modifier
@@ -635,7 +646,7 @@ fun CheckInScreen(
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = "LOCKET CAMERA & STAMP",
+                                    text = "CAMERA & STAMP",
                                     fontSize = 10.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -703,14 +714,14 @@ fun CheckInScreen(
                 }
             }
 
-        // 2. MAIN SQUARE LOCKET CAMERA VIEWPORT (1:1 Aspect Ratio)
+        // 2. MAIN SQUARE CAMERA VIEWPORT (1:1 Aspect Ratio)
         item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                // Outer Locket Bezel Frame with smooth 28.dp rounded corner
+                // Outer Bezel Frame with smooth 28.dp rounded corner
                 Surface(
                     shape = RoundedCornerShape(28.dp),
                     color = Color(selectedFrame.previewColor),
@@ -732,7 +743,7 @@ fun CheckInScreen(
                             .fillMaxWidth()
                             .padding(12.dp)
                     ) {
-                        // Top Header inside Locket Frame (Location + Time)
+                        // Top Header inside Frame (Location + Time)
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -786,7 +797,7 @@ fun CheckInScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .aspectRatio(1.0f) // 1:1 SQUARE LOCKET RATIO
+                                .aspectRatio(1.0f) // 1:1 SQUARE RATIO
                                 .clip(RoundedCornerShape(20.dp))
                                 .background(Color(0xFF0F1A17))
                                 .pointerInput(Unit) {
@@ -841,7 +852,7 @@ fun CheckInScreen(
                                         )
                                         Spacer(modifier = Modifier.height(4.dp))
                                         Text(
-                                            text = "Cần cấp quyền Camera để chụp ảnh check-in Locket chân thực trước mặt bạn.",
+                                            text = "Cần cấp quyền Camera để chụp ảnh check-in chân thực trước mặt bạn.",
                                             fontSize = 11.5.sp,
                                             color = Color.White.copy(alpha = 0.8f),
                                             textAlign = TextAlign.Center
@@ -882,7 +893,7 @@ fun CheckInScreen(
                                 if (capturedPhotoUri != null) {
                                     AsyncImage(
                                         model = capturedPhotoUri,
-                                        contentDescription = "Locket Photo Preview",
+                                        contentDescription = "Photo Preview",
                                         contentScale = ContentScale.Crop,
                                         colorFilter = selectedColorMode.getColorFilter(),
                                         modifier = Modifier
@@ -1042,7 +1053,7 @@ fun CheckInScreen(
                                 }
                             }
 
-                            // Bottom Locket Stamp Badge (Watermark & Footprint seal)
+                            // Bottom Stamp Badge (Watermark & Footprint seal)
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -1087,7 +1098,7 @@ fun CheckInScreen(
                                     color = Color(0x334CAF50)
                                 ) {
                                     Text(
-                                        text = "LOCKET 1:1",
+                                        text = "STAMP 1:1",
                                         fontSize = 8.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color(0xFF81C784),
@@ -1300,7 +1311,7 @@ fun CheckInScreen(
             }
         }
 
-        // 5. LOCKET FRAME STYLES SELECTOR
+        // 5. FRAME STYLES SELECTOR
         item {
             Column(
                 modifier = Modifier
@@ -1308,7 +1319,7 @@ fun CheckInScreen(
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
                 Text(
-                    text = "CHỌN KIỂU VIỀN KHUNG LOCKET",
+                    text = "CHỌN KIỂU VIỀN KHUNG",
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -1365,7 +1376,7 @@ fun CheckInScreen(
                 OutlinedTextField(
                     value = userCaption,
                     onValueChange = { userCaption = it },
-                    placeholder = { Text("Viết cảm nghĩ về khoảnh khắc check-in này... #locket #checkin", fontSize = 12.sp) },
+                    placeholder = { Text("Viết cảm nghĩ về khoảnh khắc check-in này... #vietnam #checkin", fontSize = 12.sp) },
                     shape = RoundedCornerShape(14.dp),
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 3
@@ -1446,7 +1457,7 @@ fun CheckInScreen(
                                 val caption = if (userCaption.isNotBlank()) {
                                     userCaption
                                 } else {
-                                    "Check-in Locket tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
+                                    "Check-in tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
                                 }
                                 onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", savedUri)
                             }
@@ -1465,7 +1476,7 @@ fun CheckInScreen(
                         } else {
                             Icon(Icons.Default.Send, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "Đăng Locket Feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(text = "Đăng feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -2502,7 +2513,7 @@ fun CheckInScreen(
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Đã lưu dấu chân tại ${selectedPlace.name} với khung Locket và bộ lọc ${selectedColorMode.title} vào Hộ Chiếu Dấu Chân!",
+                        text = "Đã lưu dấu chân tại ${selectedPlace.name} với khung ${selectedFrame.name} và bộ lọc ${selectedColorMode.title} vào Hộ Chiếu Dấu Chân!",
                         fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         color = TextPrimary

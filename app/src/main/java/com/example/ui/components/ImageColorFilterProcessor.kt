@@ -92,7 +92,7 @@ object ImageColorFilterProcessor {
             val targetDir = File(context.filesDir, "checkin_photos").apply {
                 if (!exists()) mkdirs()
             }
-            val fileName = "locket_stamp_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(6)}.jpg"
+            val fileName = "stamp_photo_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(6)}.jpg"
             val targetFile = File(targetDir, fileName)
 
             FileOutputStream(targetFile).use { outStream ->

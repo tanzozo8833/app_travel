@@ -86,6 +86,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
 
     val aiWizardState by viewModel.aiWizardState.collectAsState()
     val chatMessages by viewModel.chatMessages.collectAsState()
+    val targetedStampPlace by viewModel.targetedStampPlace.collectAsState()
+    val targetedStampProvince by viewModel.targetedStampProvince.collectAsState()
     val stampDropTrigger by viewModel.stampDropTrigger.collectAsState()
     val toastMessage by viewModel.toastMessage.collectAsState()
 
@@ -127,6 +129,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                         HomeScreen(
                             posts = posts,
                             provinces = provinces,
+                            places = places,
+                            checkIns = checkIns,
                             currentSubTab = feedSubTab,
                             onSubTabChanged = { viewModel.setFeedSubTab(it) },
                             onPostClick = { viewModel.openPostDetail(it) },
@@ -135,7 +139,16 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             onSaveClick = { viewModel.toggleSave(it.id) },
                             onShareClick = { viewModel.sharePost(it.id) },
                             onCommentClick = { post -> commentPostTarget = post },
-                            onQuickCheckInClick = { viewModel.performQuickStamp() },
+                            onQuickCheckInClick = { detectedPlace, detectedProvince ->
+                                val placeName = detectedPlace?.name ?: "Vị trí GPS thực tế"
+                                val provCode = detectedProvince?.code ?: "LDG"
+                                val provName = detectedProvince?.shortName ?: "Lâm Đồng"
+                                val photoUrl = detectedPlace?.coverUrl ?: ""
+                                viewModel.performQuickStamp(placeName, provCode, provName, photoUrl)
+                            },
+                            onOpenStampCamera = { detectedPlace, detectedProvince ->
+                                viewModel.openStampStudioWithPlace(detectedPlace, detectedProvince)
+                            },
                             onProvinceClick = { viewModel.showCityPassport(true, it) },
                             onPlanTripWithAi = { dest ->
                                 viewModel.updateAiWizard(destination = dest)
@@ -169,6 +182,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             places = places,
                             checkIns = checkIns,
                             frames = frames,
+                            initialProvince = targetedStampProvince,
+                            initialPlace = targetedStampPlace,
                             onQuickCheckIn = { place, pCode, pName, photoUrl ->
                                 viewModel.performQuickStamp(place, pCode, pName, photoUrl)
                             },

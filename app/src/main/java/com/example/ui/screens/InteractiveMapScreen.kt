@@ -236,11 +236,6 @@ fun InteractiveMapScreen(
         }
     }
 
-    // Track points for visited route polyline
-    val visitedTrackLatLngs = remember(displayMarkers) {
-        displayMarkers.filter { it.isVisited }.map { LatLng(it.lat, it.lng) }
-    }
-
     Box(modifier = modifier) {
         // ==========================================
         // 1. GoogleMap COMPOSABLE CONTAINER
@@ -262,24 +257,6 @@ fun InteractiveMapScreen(
                     fillColor = Brand500.copy(alpha = 0.25f),
                     strokeColor = Gold500,
                     strokeWidth = 3f
-                )
-            }
-
-            // GPS Travel Route Polyline (2 layers: outer glow + inner bright)
-            if (visitedTrackLatLngs.size > 1) {
-                // Outer glowing line
-                Polyline(
-                    points = visitedTrackLatLngs,
-                    color = Gold500.copy(alpha = 0.45f),
-                    width = 14f,
-                    geodesic = true
-                )
-                // Inner sharp route line
-                Polyline(
-                    points = visitedTrackLatLngs,
-                    color = Gold500,
-                    width = 5f,
-                    geodesic = true
                 )
             }
 
