@@ -17,5 +17,4 @@ local.properties
 .env
 debug.keystore
 
-.env.example
 .idea/
