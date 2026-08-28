@@ -103,7 +103,9 @@ dependencies {
   implementation(libs.firebase.ai)
   implementation(libs.maps.compose)
   implementation(libs.play.services.maps)
-  // Uncomment to use Firestore:
+  // Firebase & Google Services
+  implementation(libs.firebase.analytics)
+  implementation(libs.firebase.auth)
   // implementation(libs.firebase.firestore)
 
   // Credential Manager & Google Sign-In

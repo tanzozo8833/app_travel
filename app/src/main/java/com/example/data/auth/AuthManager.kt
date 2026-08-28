@@ -17,7 +17,10 @@ import com.example.data.model.UserProfile
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -142,6 +145,16 @@ class AuthManager(private val context: Context) {
                     bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
                 )
 
+                // Try signing into Firebase Auth with the Google ID Token
+                try {
+                    val firebaseAuth = FirebaseAuth.getInstance()
+                    val authCredential = GoogleAuthProvider.getCredential(googleIdToken.idToken, null)
+                    firebaseAuth.signInWithCredential(authCredential).await()
+                    Log.d(TAG, "Successfully authenticated with Firebase Auth!")
+                } catch (firebaseEx: Exception) {
+                    Log.w(TAG, "Firebase Auth sign-in non-blocking warning: ${firebaseEx.message}")
+                }
+
                 saveSession(profile, email)
                 return@withContext AuthResult.Success(profile, email)
             } else {
@@ -217,6 +230,12 @@ class AuthManager(private val context: Context) {
             )
         } catch (e: Exception) {
             Log.w(TAG, "Failed to clear credential manager state", e)
+        }
+
+        try {
+            FirebaseAuth.getInstance().signOut()
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to sign out of Firebase Auth", e)
         }
 
         prefs.edit().clear().apply()
