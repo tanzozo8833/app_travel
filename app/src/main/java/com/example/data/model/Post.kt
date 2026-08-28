@@ -4,6 +4,7 @@ import java.util.UUID
 
 data class Post(
     val id: String = UUID.randomUUID().toString(),
+    val userId: String = "u_1",
     val authorName: String,
     val authorHandle: String,
     val authorAvatarUrl: String,
@@ -27,6 +28,7 @@ data class Post(
 data class Comment(
     val id: String = UUID.randomUUID().toString(),
     val postId: String,
+    val userId: String = "u_1",
     val authorName: String,
     val authorHandle: String,
     val authorAvatarUrl: String,

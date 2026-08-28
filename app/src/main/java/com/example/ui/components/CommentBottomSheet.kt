@@ -26,48 +26,19 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.data.model.Comment
 import com.example.data.model.Post
+import com.example.data.model.UserProfile
 import com.example.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CommentBottomSheet(
     post: Post,
+    comments: List<Comment> = emptyList(),
+    currentUserProfile: UserProfile? = null,
     onDismiss: () -> Unit,
     onAddComment: (postId: String, text: String) -> Unit
 ) {
     var inputText by remember { mutableStateOf("") }
-
-    val sampleComments = remember(post.id) {
-        mutableStateListOf(
-            Comment(
-                postId = post.id,
-                authorName = "Minh Trí",
-                authorHandle = "tri.wanderer",
-                authorAvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop",
-                content = "Góc chụp này đỉnh thật sự! Bạn canh lúc mấy giờ sáng thế ạ?",
-                timeAgo = "15 phút trước",
-                likeCount = 8
-            ),
-            Comment(
-                postId = post.id,
-                authorName = "Khánh Vy",
-                authorHandle = "vy.explorer",
-                authorAvatarUrl = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop",
-                content = "Mê Việt Nam mình quá đi mất 🇻🇳 Tuần tới mình cũng lên lịch trình giống bạn!",
-                timeAgo = "1 giờ trước",
-                likeCount = 12
-            ),
-            Comment(
-                postId = post.id,
-                authorName = "Đức Anh",
-                authorHandle = "anh.vietnam",
-                authorAvatarUrl = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop",
-                content = "Đồ ăn ở đây giá cả thế nào bạn ơi? Có cần book trước không?",
-                timeAgo = "3 giờ trước",
-                likeCount = 4
-            )
-        )
-    }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -98,7 +69,7 @@ fun CommentBottomSheet(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Bình luận (${sampleComments.size})",
+                    text = "Bình luận (${comments.size})",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary
@@ -111,74 +82,91 @@ fun CommentBottomSheet(
             HorizontalDivider(color = Color(0xFFE8EFEA))
 
             // Comments list
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-                contentPadding = PaddingValues(vertical = 12.dp)
-            ) {
-                items(sampleComments) { comment ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        AsyncImage(
-                            model = comment.authorAvatarUrl,
-                            contentDescription = comment.authorName,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(36.dp)
-                                .clip(CircleShape)
-                        )
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(
-                                    text = comment.authorName,
-                                    fontSize = 12.5.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = TextPrimary
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = "• ${comment.timeAgo}",
-                                    fontSize = 10.sp,
-                                    color = TextSecondary
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(2.dp))
-                            Text(
-                                text = comment.content,
-                                fontSize = 13.sp,
-                                color = TextPrimary,
-                                lineHeight = 18.sp
-                            )
-                        }
-
-                        // Like comment
-                        var isLiked by remember { mutableStateOf(comment.isLiked) }
-                        var likeCount by remember { mutableIntStateOf(comment.likeCount) }
-
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.clickable {
-                                isLiked = !isLiked
-                                likeCount += if (isLiked) 1 else -1
-                            }
+            if (comments.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ cảm nghĩ!",
+                        fontSize = 13.sp,
+                        color = TextSecondary,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                    contentPadding = PaddingValues(vertical = 12.dp)
+                ) {
+                    items(comments, key = { it.id }) { comment ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            Icon(
-                                imageVector = if (isLiked) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
-                                contentDescription = null,
-                                tint = if (isLiked) HeartRed else TextSecondary,
-                                modifier = Modifier.size(14.dp)
+                            AsyncImage(
+                                model = comment.authorAvatarUrl,
+                                contentDescription = comment.authorName,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
                             )
-                            if (likeCount > 0) {
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text(
+                                        text = comment.authorName,
+                                        fontSize = 12.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = TextPrimary
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(
+                                        text = "• ${comment.timeAgo}",
+                                        fontSize = 10.sp,
+                                        color = TextSecondary
+                                    )
+                                }
+                                Spacer(modifier = Modifier.height(2.dp))
                                 Text(
-                                    text = "$likeCount",
-                                    fontSize = 9.sp,
-                                    color = if (isLiked) HeartRed else TextSecondary
+                                    text = comment.content,
+                                    fontSize = 13.sp,
+                                    color = TextPrimary,
+                                    lineHeight = 18.sp
                                 )
+                            }
+
+                            // Like comment
+                            var isLiked by remember { mutableStateOf(comment.isLiked) }
+                            var likeCount by remember { mutableIntStateOf(comment.likeCount) }
+
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.clickable {
+                                    isLiked = !isLiked
+                                    likeCount += if (isLiked) 1 else -1
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = if (isLiked) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
+                                    contentDescription = null,
+                                    tint = if (isLiked) HeartRed else TextSecondary,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                if (likeCount > 0) {
+                                    Text(
+                                        text = "$likeCount",
+                                        fontSize = 9.sp,
+                                        color = if (isLiked) HeartRed else TextSecondary
+                                    )
+                                }
                             }
                         }
                     }
@@ -197,6 +185,18 @@ fun CommentBottomSheet(
                         .padding(horizontal = 14.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (currentUserProfile != null) {
+                        AsyncImage(
+                            model = currentUserProfile.avatarUrl,
+                            contentDescription = currentUserProfile.displayName,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(CircleShape)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+
                     OutlinedTextField(
                         value = inputText,
                         onValueChange = { inputText = it },
@@ -211,18 +211,6 @@ fun CommentBottomSheet(
                     IconButton(
                         onClick = {
                             if (inputText.isNotBlank()) {
-                                sampleComments.add(
-                                    0,
-                                    Comment(
-                                        postId = post.id,
-                                        authorName = "Thảo Linh",
-                                        authorHandle = "linh.travels",
-                                        authorAvatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
-                                        content = inputText,
-                                        timeAgo = "Vừa xong",
-                                        likeCount = 0
-                                    )
-                                )
                                 onAddComment(post.id, inputText)
                                 inputText = ""
                             }

@@ -7,6 +7,7 @@ object CommentSeed {
         CommentEntity(
             id = "c_1",
             postId = "post_1",
+            userId = "u_2",
             authorName = "Minh Trí",
             authorHandle = "tri.wanderer",
             authorAvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop",
@@ -19,6 +20,7 @@ object CommentSeed {
         CommentEntity(
             id = "c_2",
             postId = "post_1",
+            userId = "u_3",
             authorName = "Khánh Vy",
             authorHandle = "vy.explorer",
             authorAvatarUrl = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop",
@@ -31,6 +33,7 @@ object CommentSeed {
         CommentEntity(
             id = "c_3",
             postId = "post_2",
+            userId = "u_1",
             authorName = "Thảo Linh",
             authorHandle = "linh.travels",
             authorAvatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",

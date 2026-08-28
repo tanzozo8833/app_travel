@@ -68,6 +68,7 @@ data class CheckInEntity(
 ) {
     fun toDomainModel(): CheckInRecord = CheckInRecord(
         id = id,
+        userId = userId,
         placeName = placeName,
         provinceName = provinceName,
         provinceCode = provinceCode,
@@ -84,9 +85,9 @@ data class CheckInEntity(
     )
 
     companion object {
-        fun fromDomainModel(model: CheckInRecord, userId: String = "u_1", isInVault: Boolean = false): CheckInEntity = CheckInEntity(
+        fun fromDomainModel(model: CheckInRecord, userId: String = model.userId, isInVault: Boolean = false): CheckInEntity = CheckInEntity(
             id = model.id,
-            userId = userId,
+            userId = if (model.userId.isNotBlank()) model.userId else userId,
             placeName = model.placeName,
             provinceName = model.provinceName,
             provinceCode = model.provinceCode,

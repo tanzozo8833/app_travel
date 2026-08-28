@@ -11,6 +11,7 @@ import java.util.UUID
     tableName = "comments",
     indices = [
         Index(value = ["post_id"]),
+        Index(value = ["user_id"]),
         Index(value = ["created_at"])
     ]
 )
@@ -21,6 +22,9 @@ data class CommentEntity(
 
     @ColumnInfo(name = "post_id")
     val postId: String,
+
+    @ColumnInfo(name = "user_id")
+    val userId: String = "u_1",
 
     @ColumnInfo(name = "author_name")
     val authorName: String,
@@ -49,6 +53,7 @@ data class CommentEntity(
     fun toDomainModel(): Comment = Comment(
         id = id,
         postId = postId,
+        userId = userId,
         authorName = authorName,
         authorHandle = authorHandle,
         authorAvatarUrl = authorAvatarUrl,
@@ -60,9 +65,10 @@ data class CommentEntity(
     )
 
     companion object {
-        fun fromDomainModel(model: Comment, createdAt: Long = System.currentTimeMillis()): CommentEntity = CommentEntity(
+        fun fromDomainModel(model: Comment, userId: String = model.userId, createdAt: Long = System.currentTimeMillis()): CommentEntity = CommentEntity(
             id = model.id,
             postId = model.postId,
+            userId = if (model.userId.isNotBlank()) model.userId else userId,
             authorName = model.authorName,
             authorHandle = model.authorHandle,
             authorAvatarUrl = model.authorAvatarUrl,

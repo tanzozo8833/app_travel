@@ -76,6 +76,7 @@ data class TripEntity(
 ) {
     fun toDomainModel(): Trip = Trip(
         id = id,
+        userId = userId,
         title = title,
         destination = destination,
         provinceCode = provinceCode,
@@ -94,9 +95,9 @@ data class TripEntity(
     )
 
     companion object {
-        fun fromDomainModel(model: Trip, userId: String = "u_1"): TripEntity = TripEntity(
+        fun fromDomainModel(model: Trip, userId: String = model.userId): TripEntity = TripEntity(
             id = model.id,
-            userId = userId,
+            userId = if (model.userId.isNotBlank()) model.userId else userId,
             title = model.title,
             destination = model.destination,
             provinceCode = model.provinceCode,

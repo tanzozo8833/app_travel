@@ -4,6 +4,7 @@ import java.util.UUID
 
 data class CheckInRecord(
     val id: String = UUID.randomUUID().toString(),
+    val userId: String = "u_1",
     val placeName: String,
     val provinceName: String,
     val provinceCode: String,

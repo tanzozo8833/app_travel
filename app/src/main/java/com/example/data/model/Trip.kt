@@ -4,6 +4,7 @@ import java.util.UUID
 
 data class Trip(
     val id: String = UUID.randomUUID().toString(),
+    val userId: String = "u_1",
     val title: String,
     val destination: String,
     val provinceCode: String,

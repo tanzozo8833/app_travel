@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -412,8 +413,12 @@ fun LuminaApp(viewModel: LuminaViewModel) {
 
         // 9. Comment Popup Bottom Sheet (Requirement 2)
         commentPostTarget?.let { post ->
+            val commentsForPost by viewModel.getCommentsForPost(post.id)
+                .collectAsStateWithLifecycle(initialValue = emptyList())
             CommentBottomSheet(
                 post = post,
+                comments = commentsForPost,
+                currentUserProfile = userProfile,
                 onDismiss = { commentPostTarget = null },
                 onAddComment = { pId, content ->
                     viewModel.addComment(pId, content)

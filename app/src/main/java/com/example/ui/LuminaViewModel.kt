@@ -8,6 +8,7 @@ import com.example.data.auth.AuthResult
 import com.example.data.model.*
 import com.example.data.repository.LuminaRepository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -324,6 +325,8 @@ class LuminaViewModel(
         }
         showToast("Đã đăng bình luận!")
     }
+
+    fun getCommentsForPost(postId: String): Flow<List<Comment>> = repository.getCommentsForPost(postId)
 
     fun publishPost(
         caption: String,

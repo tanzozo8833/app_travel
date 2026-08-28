@@ -83,6 +83,7 @@ data class PostEntity(
 ) {
     fun toDomainModel(attachedTrip: Trip? = null): Post = Post(
         id = id,
+        userId = userId,
         authorName = authorName,
         authorHandle = authorHandle,
         authorAvatarUrl = authorAvatarUrl,
@@ -104,9 +105,9 @@ data class PostEntity(
     )
 
     companion object {
-        fun fromDomainModel(model: Post, userId: String = "u_1", createdAt: Long = System.currentTimeMillis()): PostEntity = PostEntity(
+        fun fromDomainModel(model: Post, userId: String = model.userId, createdAt: Long = System.currentTimeMillis()): PostEntity = PostEntity(
             id = model.id,
-            userId = userId,
+            userId = if (model.userId.isNotBlank()) model.userId else userId,
             authorName = model.authorName,
             authorHandle = model.authorHandle,
             authorAvatarUrl = model.authorAvatarUrl,

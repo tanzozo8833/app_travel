@@ -80,9 +80,38 @@ class LuminaRepository(
     suspend fun signInWithGoogle(activity: Activity): AuthResult {
         val result = authManager.signInWithGoogle(activity)
         if (result is AuthResult.Success) {
-            val entity = UserProfileEntity.fromDomainModel(result.userProfile, isActive = true)
-            database.userProfileDao().insert(entity)
-            database.userProfileDao().setActiveProfile(result.userProfile.id)
+            val existing = database.userProfileDao().getProfileById(result.userProfile.id)
+            if (existing != null) {
+                // Update profile name, username and avatar, but preserve user's real stats and custom bio/tag
+                val updated = existing.copy(
+                    displayName = result.userProfile.displayName,
+                    avatarUrl = result.userProfile.avatarUrl,
+                    username = result.userProfile.username,
+                    isActive = true
+                )
+                database.userProfileDao().update(updated)
+                database.userProfileDao().setActiveProfile(result.userProfile.id)
+            } else {
+                // First-time login: create new user profile using Google account ID, marked as active
+                val entity = UserProfileEntity(
+                    id = result.userProfile.id,
+                    username = result.userProfile.username,
+                    displayName = result.userProfile.displayName,
+                    avatarUrl = result.userProfile.avatarUrl,
+                    tagTitle = result.userProfile.tagTitle,
+                    bio = result.userProfile.bio,
+                    topCityName = "",
+                    topCityCheckInCount = 0,
+                    visitedProvincesCount = 0,
+                    totalProvincesCount = 34,
+                    totalDistanceKm = 0.0,
+                    tripsCompletedCount = 0,
+                    totalSavesCount = 0,
+                    isActive = true
+                )
+                database.userProfileDao().insert(entity)
+                database.userProfileDao().setActiveProfile(result.userProfile.id)
+            }
         }
         return result
     }
@@ -146,13 +175,15 @@ class LuminaRepository(
     fun addComment(postId: String, content: String) {
         scope.launch {
             val activeUser = database.userProfileDao().getActiveProfile()?.toDomainModel()
-            val authorName = activeUser?.displayName ?: "Thảo Linh"
-            val authorHandle = activeUser?.username ?: "linh.travels"
+            val userId = activeUser?.id ?: "u_1"
+            val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
+            val authorHandle = activeUser?.username ?: "traveler"
             val authorAvatar = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop"
 
             val comment = Comment(
                 id = "c_${UUID.randomUUID()}",
                 postId = postId,
+                userId = userId,
                 authorName = authorName,
                 authorHandle = authorHandle,
                 authorAvatarUrl = authorAvatar,
@@ -161,7 +192,7 @@ class LuminaRepository(
                 likeCount = 0,
                 isLiked = false
             )
-            database.commentDao().insert(CommentEntity.fromDomainModel(comment))
+            database.commentDao().insert(CommentEntity.fromDomainModel(comment, userId = userId))
             database.postDao().incrementCommentCount(postId)
         }
     }
@@ -175,10 +206,45 @@ class LuminaRepository(
         aspectRatio: Float = 0.82f
     ): Post {
         val newPostId = "post_${UUID.randomUUID()}"
-        val newPost = Post(
+        scope.launch {
+            val activeUser = database.userProfileDao().getActiveProfile()
+            val userId = activeUser?.id ?: "u_1"
+            val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
+            val authorHandle = activeUser?.username ?: "traveler"
+            val authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop"
+
+            val entity = PostEntity(
+                id = newPostId,
+                userId = userId,
+                authorName = authorName,
+                authorHandle = authorHandle,
+                authorAvatarUrl = authorAvatarUrl,
+                hasRecentCheckIn = true,
+                locationLabel = locationLabel,
+                provinceCode = provinceCode,
+                timeAgo = "Vừa xong",
+                caption = caption,
+                mediaUrls = mediaUrls.ifEmpty {
+                    listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
+                },
+                aspectRatio = aspectRatio,
+                attachedTripId = attachedTrip?.id,
+                likeCount = 1,
+                commentCount = 0,
+                saveCount = 0,
+                shareCount = 0,
+                isLiked = true,
+                isSaved = false,
+                tags = listOf("Lumina", "VietnamTravel", "GenZ"),
+                createdAt = System.currentTimeMillis()
+            )
+            database.postDao().insert(entity)
+        }
+
+        return Post(
             id = newPostId,
-            authorName = "Thảo Linh",
-            authorHandle = "linh.travels",
+            authorName = "Lữ khách Lumina",
+            authorHandle = "traveler",
             authorAvatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
             hasRecentCheckIn = true,
             locationLabel = locationLabel,
@@ -197,36 +263,6 @@ class LuminaRepository(
             isLiked = true,
             tags = listOf("Lumina", "VietnamTravel", "GenZ")
         )
-
-        scope.launch {
-            val activeUser = database.userProfileDao().getActiveProfile()
-            val entity = PostEntity(
-                id = newPost.id,
-                userId = activeUser?.id ?: "u_1",
-                authorName = activeUser?.displayName ?: "Thảo Linh",
-                authorHandle = activeUser?.username ?: "linh.travels",
-                authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
-                hasRecentCheckIn = true,
-                locationLabel = locationLabel,
-                provinceCode = provinceCode,
-                timeAgo = "Vừa xong",
-                caption = caption,
-                mediaUrls = newPost.mediaUrls,
-                aspectRatio = aspectRatio,
-                attachedTripId = attachedTrip?.id,
-                likeCount = 1,
-                commentCount = 0,
-                saveCount = 0,
-                shareCount = 0,
-                isLiked = true,
-                isSaved = false,
-                tags = newPost.tags,
-                createdAt = System.currentTimeMillis()
-            )
-            database.postDao().insert(entity)
-        }
-
-        return newPost
     }
 
     // Check-in Engine
@@ -270,21 +306,21 @@ class LuminaRepository(
                 database.provinceDao().updateProgress(provinceCode, newVisited, isComp)
             }
 
-            // 4. Update user profile stats
-            val allProvinces = database.provinceDao().getAllProvinces()
-            val visitedCount = allProvinces.count { it.visitedPlacesCount > 0 }
-            database.userProfileDao().updateStatsAfterCheckIn(userId, visitedCount, 0.0)
+            // 4. Update user profile stats specifically for this active user
+            val allUserCheckIns = database.checkInDao().getAllCheckInsFlow().first().filter { it.userId == userId }
+            val userVisitedProvincesCount = allUserCheckIns.map { it.provinceCode }.distinct().size
+            database.userProfileDao().updateStatsAfterCheckIn(userId, userVisitedProvincesCount, 0.0)
 
             // 5. Check & Update Badges
-            val totalCheckIns = database.checkInDao().getCount()
+            val totalCheckIns = allUserCheckIns.size
             if (totalCheckIns >= 1) {
                 database.badgeDao().updateProgress("first_stamp", 1, true, dateFormat.format(now))
             }
-            if (visitedCount >= 5) {
-                database.badgeDao().updateProgress("province_5", visitedCount, true, dateFormat.format(now))
+            if (userVisitedProvincesCount >= 5) {
+                database.badgeDao().updateProgress("province_5", userVisitedProvincesCount, true, dateFormat.format(now))
             }
-            if (visitedCount >= 10) {
-                database.badgeDao().updateProgress("province_10", visitedCount, visitedCount >= 10, if (visitedCount >= 10) dateFormat.format(now) else null)
+            if (userVisitedProvincesCount >= 10) {
+                database.badgeDao().updateProgress("province_10", userVisitedProvincesCount, userVisitedProvincesCount >= 10, if (userVisitedProvincesCount >= 10) dateFormat.format(now) else null)
             }
 
             // 6. Trigger notification
