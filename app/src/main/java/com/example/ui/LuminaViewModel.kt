@@ -72,6 +72,9 @@ class LuminaViewModel(
     private val _loginErrorIsNetwork = MutableStateFlow(false)
     val loginErrorIsNetwork: StateFlow<Boolean> = _loginErrorIsNetwork.asStateFlow()
 
+    private val _loginCanFallbackToBrowser = MutableStateFlow(false)
+    val loginCanFallbackToBrowser: StateFlow<Boolean> = _loginCanFallbackToBrowser.asStateFlow()
+
     // Main Navigation
     private val _currentTab = MutableStateFlow(MainTab.HOME)
     val currentTab: StateFlow<MainTab> = _currentTab.asStateFlow()
@@ -521,28 +524,69 @@ class LuminaViewModel(
         _isLoggingIn.value = true
         _loginError.value = null
         _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
 
         viewModelScope.launch {
             try {
-                when (val result = repository.signInWithGoogle(activity)) {
+                when (val result = repository.signInWithGoogle(activity, allowBrowserFallback = true)) {
                     is AuthResult.Success -> {
                         _isLoggingIn.value = false
                         _loginError.value = null
+                        _loginCanFallbackToBrowser.value = false
                         showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
                     }
                     is AuthResult.Cancelled -> {
                         _isLoggingIn.value = false
+                        _loginCanFallbackToBrowser.value = false
                         // Do not show error banner on user cancel
                     }
                     is AuthResult.Error -> {
                         _isLoggingIn.value = false
                         _loginError.value = result.message
                         _loginErrorIsNetwork.value = result.isNetworkError
+                        _loginCanFallbackToBrowser.value = result.canFallbackToBrowser || result.isNoCredential
                     }
                 }
             } catch (e: Exception) {
                 _isLoggingIn.value = false
                 _loginError.value = "Đã xảy ra lỗi không mong muốn: ${e.localizedMessage ?: "Vui lòng thử lại"}"
+                _loginCanFallbackToBrowser.value = true
+            }
+        }
+    }
+
+    fun signInWithGoogleBrowser(activity: Activity) {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.signInWithGoogleBrowser(activity)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = null
+                        _loginCanFallbackToBrowser.value = false
+                        showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                        _loginCanFallbackToBrowser.value = false
+                        // User cancelled or closed browser cleanly
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = result.message
+                        _loginErrorIsNetwork.value = result.isNetworkError
+                        _loginCanFallbackToBrowser.value = false
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Lỗi khi mở trình duyệt: ${e.localizedMessage ?: "Vui lòng thử lại"}"
+                _loginCanFallbackToBrowser.value = false
             }
         }
     }
@@ -550,6 +594,7 @@ class LuminaViewModel(
     fun clearLoginError() {
         _loginError.value = null
         _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
     }
 
     // Settings & Account Management

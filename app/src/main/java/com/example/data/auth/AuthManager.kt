@@ -1,6 +1,7 @@
 package com.example.data.auth
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
@@ -15,9 +16,12 @@ import androidx.credentials.exceptions.NoCredentialException
 import com.example.data.model.UserProfile
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +34,12 @@ import java.util.UUID
 sealed class AuthResult {
     data class Success(val userProfile: UserProfile, val email: String) : AuthResult()
     data object Cancelled : AuthResult()
-    data class Error(val message: String, val isNetworkError: Boolean = false, val isNoCredential: Boolean = false) : AuthResult()
+    data class Error(
+        val message: String,
+        val isNetworkError: Boolean = false,
+        val isNoCredential: Boolean = false,
+        val canFallbackToBrowser: Boolean = false
+    ) : AuthResult()
 }
 
 class AuthManager(private val context: Context) {
@@ -142,22 +151,31 @@ class AuthManager(private val context: Context) {
         )
     }
 
-    suspend fun signInWithGoogle(activity: Activity): AuthResult = withContext(Dispatchers.IO) {
-        // 1. Check default_web_client_id from google-services.json
-        val webClientId = getWebClientId()
-        if (webClientId.isNullOrBlank()) {
-            Log.e(TAG, "Missing default_web_client_id string resource")
-            return@withContext AuthResult.Error(
-                message = "Ứng dụng chưa được cấu hình đăng nhập. Vui lòng kiểm tra file google-services.json."
-            )
-        }
-
-        // 2. Check network connectivity
+    /**
+     * Primary Sign-In Method: Uses CredentialManager (One-Tap / Google Play Services).
+     * If Google Play Services is missing or no accounts exist on the device, it automatically
+     * falls back to Browser-based OAuth so users are never blocked.
+     */
+    suspend fun signInWithGoogle(activity: Activity, allowBrowserFallback: Boolean = true): AuthResult = withContext(Dispatchers.IO) {
+        // 1. Check network connectivity
         if (!isNetworkAvailable()) {
             return@withContext AuthResult.Error(
                 message = "Không có kết nối mạng. Vui lòng kiểm tra Wi-Fi hoặc 4G và thử lại.",
                 isNetworkError = true
             )
+        }
+
+        // 2. Check default_web_client_id from google-services.json
+        val webClientId = getWebClientId()
+        if (webClientId.isNullOrBlank()) {
+            Log.w(TAG, "Missing default_web_client_id string resource. Attempting browser fallback directly.")
+            if (allowBrowserFallback) {
+                return@withContext signInWithGoogleBrowserInternal(activity)
+            } else {
+                return@withContext AuthResult.Error(
+                    message = "Ứng dụng chưa được cấu hình Client ID. Vui lòng thử đăng nhập bằng trình duyệt web."
+                )
+            }
         }
 
         try {
@@ -216,31 +234,154 @@ class AuthManager(private val context: Context) {
                 saveSession(profile, email)
                 return@withContext AuthResult.Success(profile, email)
             } else {
-                return@withContext AuthResult.Error("Loại xác thực không được hỗ trợ. Vui lòng thử lại.")
+                if (allowBrowserFallback) {
+                    Log.d(TAG, "Unsupported credential type, attempting browser fallback...")
+                    return@withContext signInWithGoogleBrowserInternal(activity)
+                }
+                return@withContext AuthResult.Error("Loại xác thực không được hỗ trợ. Vui lòng thử đăng nhập bằng trình duyệt.")
             }
         } catch (e: GetCredentialCancellationException) {
-            Log.d(TAG, "User cancelled Google Sign-In", e)
+            Log.d(TAG, "User cancelled Google Sign-In dialog", e)
             return@withContext AuthResult.Cancelled
         } catch (e: NoCredentialException) {
-            Log.w(TAG, "No Google accounts available on device or Play Services not configured", e)
+            Log.w(TAG, "No Google accounts on device or Play Services missing. Switching to Browser OAuth fallback...", e)
+            if (allowBrowserFallback) {
+                return@withContext signInWithGoogleBrowserInternal(activity)
+            }
             return@withContext AuthResult.Error(
-                message = "Không tìm thấy tài khoản Google trên thiết bị hoặc Google Play Services chưa sẵn sàng.",
-                isNoCredential = true
+                message = "Không tìm thấy tài khoản Google trên thiết bị. Bạn có thể sử dụng nút 'Đăng nhập qua trình duyệt'.",
+                isNoCredential = true,
+                canFallbackToBrowser = true
             )
         } catch (e: GetCredentialException) {
-            Log.e(TAG, "Credential Manager error: ${e.type}", e)
-            val errorMsg = when {
-                e.message?.contains("network", ignoreCase = true) == true ->
-                    "Lỗi kết nối mạng khi liên hệ máy chủ Google. Vui lòng thử lại."
-                e.message?.contains("16:") == true || e.message?.contains("CANCELED") == true ->
-                    return@withContext AuthResult.Cancelled
-                else ->
-                    "Đăng nhập Google không thành công (${e.message ?: "Mã lỗi: ${e.type}"}). Vui lòng thử lại."
+            Log.e(TAG, "Credential Manager error: ${e.type} - ${e.message}", e)
+            val msg = e.message?.lowercase() ?: ""
+            if (msg.contains("16:") || msg.contains("canceled") || msg.contains("cancelled")) {
+                // User dismissed or canceled
+                return@withContext AuthResult.Cancelled
             }
-            return@withContext AuthResult.Error(errorMsg)
+            // If Play Services issue or no credential found, automatically fallback
+            if (allowBrowserFallback && (msg.contains("play services") || msg.contains("unavailable") || msg.contains("not found") || msg.contains("developer_error") || msg.contains("api_not_connected"))) {
+                Log.w(TAG, "Play Services error encountered. Auto-falling back to browser login...")
+                return@withContext signInWithGoogleBrowserInternal(activity)
+            }
+            val errorMsg = if (msg.contains("network")) {
+                "Lỗi kết nối mạng khi liên hệ máy chủ Google. Vui lòng kiểm tra kết nối mạng."
+            } else {
+                "Đăng nhập nhanh không thành công (${e.message ?: "Mã lỗi: ${e.type}"}). Bạn có thể chuyển sang đăng nhập qua trình duyệt."
+            }
+            return@withContext AuthResult.Error(errorMsg, canFallbackToBrowser = true)
         } catch (e: Exception) {
-            Log.e(TAG, "Unexpected sign in exception", e)
-            return@withContext AuthResult.Error("Đã xảy ra sự cố khi xác thực Firebase: ${e.localizedMessage ?: "Vui lòng thử lại"}")
+            Log.e(TAG, "Unexpected exception during primary sign-in", e)
+            if (allowBrowserFallback) {
+                Log.w(TAG, "Fallback to browser sign-in after unexpected primary sign-in error...")
+                return@withContext signInWithGoogleBrowserInternal(activity)
+            }
+            return@withContext AuthResult.Error(
+                message = "Đã xảy ra sự cố: ${e.localizedMessage ?: "Vui lòng thử lại"}",
+                canFallbackToBrowser = true
+            )
+        }
+    }
+
+    /**
+     * Fallback & Alternative Sign-In Method:
+     * Opens official Google Sign-In in web browser / Custom Tabs via Firebase OAuthProvider.
+     * Works on any Android device with or without Google Play Services.
+     * Resolves to the exact same unified Google User ID and profile data.
+     */
+    suspend fun signInWithGoogleBrowser(activity: Activity): AuthResult = withContext(Dispatchers.IO) {
+        signInWithGoogleBrowserInternal(activity)
+    }
+
+    private suspend fun signInWithGoogleBrowserInternal(activity: Activity): AuthResult {
+        // 1. Check network connectivity
+        if (!isNetworkAvailable()) {
+            return AuthResult.Error(
+                message = "Không có kết nối mạng. Vui lòng kiểm tra Wi-Fi hoặc 4G và thử lại.",
+                isNetworkError = true
+            )
+        }
+
+        try {
+            Log.d(TAG, "Starting Browser-based Google OAuth via Firebase OAuthProvider...")
+            val provider = OAuthProvider.newBuilder("google.com")
+            provider.scopes = listOf("profile", "email")
+            provider.addCustomParameter("prompt", "select_account")
+
+            // Check if there is an in-flight pending auth result from previous activity recreation
+            val pendingResultTask = firebaseAuth.pendingAuthResult
+            val authResult = if (pendingResultTask != null) {
+                pendingResultTask.await()
+            } else {
+                firebaseAuth.startActivityForSignInWithProvider(activity, provider.build()).await()
+            }
+
+            val firebaseUser = authResult.user
+                ?: throw IllegalStateException("Không nhận được dữ liệu xác thực từ Google Web OAuth.")
+
+            val email = firebaseUser.email ?: ""
+            val displayName = firebaseUser.displayName?.ifBlank { null }
+                ?: email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+            val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
+            val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
+
+            val profile = UserProfile(
+                id = "google_${firebaseUser.uid}",
+                username = username,
+                displayName = displayName,
+                avatarUrl = avatarUrl.ifBlank {
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+                },
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            )
+
+            saveSession(profile, email)
+            Log.d(TAG, "Browser sign-in successful for user: ${profile.displayName} (UID: ${firebaseUser.uid})")
+            return AuthResult.Success(profile, email)
+        } catch (e: ActivityNotFoundException) {
+            Log.e(TAG, "No browser application installed on device", e)
+            return AuthResult.Error(
+                message = "Không tìm thấy trình duyệt web trên thiết bị để mở trang đăng nhập Google. Vui lòng cài đặt Chrome hoặc một trình duyệt bất kỳ rồi thử lại."
+            )
+        } catch (e: FirebaseAuthException) {
+            Log.w(TAG, "FirebaseAuthException during browser sign-in: ${e.errorCode} - ${e.message}", e)
+            val msg = e.message?.lowercase() ?: ""
+            if (e.errorCode == "ERROR_WEB_CONTEXT_CANCELED" ||
+                msg.contains("canceled") ||
+                msg.contains("cancelled") ||
+                msg.contains("closed") ||
+                msg.contains("user cancelled")
+            ) {
+                // User cleanly closed browser or pressed back
+                return AuthResult.Cancelled
+            }
+            if (e is FirebaseNetworkException || msg.contains("network") || msg.contains("timeout")) {
+                return AuthResult.Error(
+                    message = "Lỗi kết nối mạng khi tải trang đăng nhập Google. Vui lòng kiểm tra lại đường truyền mạng.",
+                    isNetworkError = true
+                )
+            }
+            return AuthResult.Error("Đăng nhập qua trình duyệt thất bại: ${e.localizedMessage ?: "Vui lòng thử lại."}")
+        } catch (e: Exception) {
+            Log.e(TAG, "General exception during browser sign-in", e)
+            val msg = e.message?.lowercase() ?: ""
+            if (e is ActivityNotFoundException || e.cause is ActivityNotFoundException || msg.contains("no activity found") || msg.contains("browser")) {
+                return AuthResult.Error(
+                    message = "Không tìm thấy trình duyệt web trên thiết bị để mở trang đăng nhập Google. Vui lòng cài đặt Chrome rồi thử lại."
+                )
+            }
+            if (msg.contains("canceled") || msg.contains("cancelled") || msg.contains("closed")) {
+                return AuthResult.Cancelled
+            }
+            if (msg.contains("network") || msg.contains("timeout")) {
+                return AuthResult.Error(
+                    message = "Lỗi kết nối mạng trong quá trình mở trình duyệt. Vui lòng thử lại.",
+                    isNetworkError = true
+                )
+            }
+            return AuthResult.Error("Đã xảy ra sự cố khi đăng nhập bằng trình duyệt: ${e.localizedMessage ?: "Vui lòng thử lại."}")
         }
     }
 

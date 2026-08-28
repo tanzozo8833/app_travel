@@ -77,8 +77,19 @@ class LuminaRepository(
     }
 
     // Google Sign-In & Authentication
-    suspend fun signInWithGoogle(activity: Activity): AuthResult {
-        val result = authManager.signInWithGoogle(activity)
+    suspend fun signInWithGoogle(activity: Activity, allowBrowserFallback: Boolean = true): AuthResult {
+        val result = authManager.signInWithGoogle(activity, allowBrowserFallback = allowBrowserFallback)
+        handleAuthSuccess(result)
+        return result
+    }
+
+    suspend fun signInWithGoogleBrowser(activity: Activity): AuthResult {
+        val result = authManager.signInWithGoogleBrowser(activity)
+        handleAuthSuccess(result)
+        return result
+    }
+
+    private suspend fun handleAuthSuccess(result: AuthResult) {
         if (result is AuthResult.Success) {
             val existing = database.userProfileDao().getProfileById(result.userProfile.id)
             if (existing != null) {
@@ -113,7 +124,6 @@ class LuminaRepository(
                 database.userProfileDao().setActiveProfile(result.userProfile.id)
             }
         }
-        return result
     }
 
     suspend fun logout() {

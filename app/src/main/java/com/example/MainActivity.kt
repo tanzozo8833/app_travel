@@ -47,6 +47,7 @@ class MainActivity : ComponentActivity() {
             val isLoggingIn by viewModel.isLoggingIn.collectAsState()
             val loginError by viewModel.loginError.collectAsState()
             val loginErrorIsNetwork by viewModel.loginErrorIsNetwork.collectAsState()
+            val loginCanFallbackToBrowser by viewModel.loginCanFallbackToBrowser.collectAsState()
 
             LuminaTheme(darkTheme = isDark) {
                 if (!isLoggedIn) {
@@ -54,7 +55,9 @@ class MainActivity : ComponentActivity() {
                         isLoading = isLoggingIn,
                         errorMessage = loginError,
                         isNetworkError = loginErrorIsNetwork,
+                        canFallbackToBrowser = loginCanFallbackToBrowser,
                         onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
+                        onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
                         onClearError = { viewModel.clearLoginError() }
                     )
                 } else {
