@@ -59,6 +59,14 @@ data class ChatMessage(
     val attachedPlace: Place? = null
 )
 
+data class UserProfileTarget(
+    val userId: String = "",
+    val username: String = "",
+    val displayName: String = "",
+    val avatarUrl: String = "",
+    val bio: String = ""
+)
+
 class LuminaViewModel(
     private val repository: LuminaRepository = LuminaApplication.instance.repository
 ) : ViewModel() {
@@ -127,6 +135,9 @@ class LuminaViewModel(
 
     private val _isShowingSettings = MutableStateFlow(false)
     val isShowingSettings: StateFlow<Boolean> = _isShowingSettings.asStateFlow()
+
+    private val _selectedUserProfileTarget = MutableStateFlow<UserProfileTarget?>(null)
+    val selectedUserProfileTarget: StateFlow<UserProfileTarget?> = _selectedUserProfileTarget.asStateFlow()
 
     private val _isDarkMode = MutableStateFlow(false)
     val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
@@ -316,6 +327,35 @@ class LuminaViewModel(
     fun showTravelCv(show: Boolean) {
         _isShowingTravelCv.value = show
     }
+
+    fun openUserProfile(
+        userId: String,
+        username: String = "",
+        displayName: String = "",
+        avatarUrl: String = "",
+        bio: String = ""
+    ) {
+        _selectedUserProfileTarget.value = UserProfileTarget(
+            userId = userId,
+            username = username.removePrefix("@"),
+            displayName = displayName,
+            avatarUrl = avatarUrl,
+            bio = bio
+        )
+    }
+
+    fun closeUserProfile() {
+        _selectedUserProfileTarget.value = null
+    }
+
+    fun getUserProfileFlow(userId: String, username: String): Flow<UserProfile?> =
+        repository.getUserProfileFlow(userId, username)
+
+    fun getUserFollowerCountFlow(userId: String): Flow<Int> =
+        repository.getFollowerCountFlow(userId)
+
+    fun getUserFollowingCountFlow(userId: String): Flow<Int> =
+        repository.getFollowingCountFlow(userId)
 
     fun showCommentSheet(show: Boolean) {
         _isShowingCommentSheet.value = show
@@ -647,6 +687,105 @@ class LuminaViewModel(
                 _isLoggingIn.value = false
                 _loginError.value = "Lỗi khi mở trình duyệt: ${e.localizedMessage ?: "Vui lòng thử lại"}"
                 _loginCanFallbackToBrowser.value = false
+            }
+        }
+    }
+
+    fun signInWithEmail(email: String, password: String) {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.signInWithEmail(email, password)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = null
+                        _loginCanFallbackToBrowser.value = false
+                        showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = result.message
+                        _loginErrorIsNetwork.value = result.isNetworkError
+                        _loginCanFallbackToBrowser.value = false
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Lỗi đăng nhập: ${e.localizedMessage ?: "Vui lòng thử lại"}"
+            }
+        }
+    }
+
+    fun signUpWithEmail(email: String, password: String, displayName: String) {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.signUpWithEmail(email, password, displayName)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = null
+                        _loginCanFallbackToBrowser.value = false
+                        showToast("Đăng ký thành công! Chào mừng ${result.userProfile.displayName} đến với Lumina 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = result.message
+                        _loginErrorIsNetwork.value = result.isNetworkError
+                        _loginCanFallbackToBrowser.value = false
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Lỗi đăng ký: ${e.localizedMessage ?: "Vui lòng thử lại"}"
+            }
+        }
+    }
+
+    fun signInAsGuest(customName: String = "Lữ khách Khám Phá") {
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        _loginErrorIsNetwork.value = false
+        _loginCanFallbackToBrowser.value = false
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.signInAsGuest(customName)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = null
+                        _loginCanFallbackToBrowser.value = false
+                        showToast("Bắt đầu hành trình với tư cách ${result.userProfile.displayName} 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        _loginError.value = result.message
+                        _loginErrorIsNetwork.value = result.isNetworkError
+                        _loginCanFallbackToBrowser.value = false
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                _loginError.value = "Lỗi kích hoạt: ${e.localizedMessage ?: "Vui lòng thử lại"}"
             }
         }
     }

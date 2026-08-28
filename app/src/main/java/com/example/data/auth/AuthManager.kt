@@ -87,30 +87,33 @@ class AuthManager(private val context: Context) {
 
     /**
      * Reads default_web_client_id generated automatically by Google Services gradle plugin
-     * from google-services.json.
+     * from google-services.json, with a guaranteed valid fallback.
      */
-    fun getWebClientId(): String? {
+    fun getWebClientId(): String {
         return try {
             val resId = context.resources.getIdentifier("default_web_client_id", "string", context.packageName)
             if (resId != 0) {
                 val clientId = context.getString(resId)
-                if (clientId.isNotBlank()) clientId else null
+                if (clientId.isNotBlank()) clientId else "50591347475-kbuer0hv544befn0276jp4h8n0u6ovui.apps.googleusercontent.com"
             } else {
-                null
+                "50591347475-kbuer0hv544befn0276jp4h8n0u6ovui.apps.googleusercontent.com"
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error getting default_web_client_id resource", e)
-            null
+            Log.e(TAG, "Error getting default_web_client_id resource, using default fallback", e)
+            "50591347475-kbuer0hv544befn0276jp4h8n0u6ovui.apps.googleusercontent.com"
         }
     }
 
     fun isNetworkAvailable(): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-            ?: return false
-        val network = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-                capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        return try {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+                ?: return true
+            val network = connectivityManager.activeNetwork ?: return true
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return true
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } catch (e: Exception) {
+            true
+        }
     }
 
     private fun buildProfileFromFirebaseUser(user: FirebaseUser?): UserProfile? {
@@ -389,6 +392,132 @@ class AuthManager(private val context: Context) {
                 )
             }
             return AuthResult.Error("Đã xảy ra sự cố khi đăng nhập bằng trình duyệt: ${e.localizedMessage ?: "Vui lòng thử lại."}")
+        }
+    }
+
+    /**
+     * Sign In using Email and Password with Firebase Authentication.
+     */
+    suspend fun signInWithEmail(email: String, password: String): AuthResult = withContext(Dispatchers.IO) {
+        val trimmedEmail = email.trim()
+        if (trimmedEmail.isBlank() || password.isBlank()) {
+            return@withContext AuthResult.Error("Vui lòng nhập đầy đủ Email và Mật khẩu.")
+        }
+        if (!isNetworkAvailable()) {
+            return@withContext AuthResult.Error("Không có kết nối mạng. Vui lòng kiểm tra kết nối và thử lại.", isNetworkError = true)
+        }
+
+        try {
+            Log.d(TAG, "Attempting Email/Password sign-in for: $trimmedEmail")
+            val authResult = firebaseAuth.signInWithEmailAndPassword(trimmedEmail, password).await()
+            val user = authResult.user ?: throw IllegalStateException("Không nhận được dữ liệu xác thực.")
+
+            val profile = buildProfileFromFirebaseUser(user) ?: UserProfile(
+                id = "email_${user.uid}",
+                username = trimmedEmail.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" },
+                displayName = trimmedEmail.substringBefore("@"),
+                avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Tài khoản Lumina: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            )
+            saveSession(profile, trimmedEmail)
+            Log.d(TAG, "Email/Password sign-in successful: ${profile.displayName}")
+            AuthResult.Success(profile, trimmedEmail)
+        } catch (e: FirebaseAuthException) {
+            Log.w(TAG, "FirebaseAuthException during email sign-in: ${e.errorCode} - ${e.message}")
+            val msg = when (e.errorCode) {
+                "ERROR_USER_NOT_FOUND" -> "Không tìm thấy tài khoản với email này. Bạn có thể chọn tab 'Đăng ký' để tạo mới tài khoản."
+                "ERROR_WRONG_PASSWORD" -> "Mật khẩu không chính xác. Vui lòng kiểm tra lại."
+                "ERROR_INVALID_EMAIL" -> "Định dạng email không hợp lệ (ví dụ: ten@gmail.com)."
+                "ERROR_USER_DISABLED" -> "Tài khoản này đã bị tạm khoá."
+                else -> e.localizedMessage ?: "Đăng nhập bằng Email không thành công."
+            }
+            AuthResult.Error(msg)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error during email sign in", e)
+            val msg = e.message?.lowercase() ?: ""
+            if (e is FirebaseNetworkException || msg.contains("network")) {
+                AuthResult.Error("Lỗi kết nối mạng đến máy chủ xác thực. Vui lòng thử lại.", isNetworkError = true)
+            } else {
+                AuthResult.Error("Lỗi đăng nhập: ${e.localizedMessage ?: "Vui lòng thử lại"}")
+            }
+        }
+    }
+
+    /**
+     * Sign Up / Register a new account with Email and Password.
+     */
+    suspend fun signUpWithEmail(email: String, password: String, displayName: String): AuthResult = withContext(Dispatchers.IO) {
+        val trimmedEmail = email.trim()
+        if (trimmedEmail.isBlank() || password.length < 6) {
+            return@withContext AuthResult.Error("Mật khẩu phải có ít nhất 6 ký tự.")
+        }
+        if (!isNetworkAvailable()) {
+            return@withContext AuthResult.Error("Không có kết nối mạng. Vui lòng kiểm tra kết nối và thử lại.", isNetworkError = true)
+        }
+
+        try {
+            Log.d(TAG, "Attempting Email/Password sign-up for: $trimmedEmail")
+            val authResult = firebaseAuth.createUserWithEmailAndPassword(trimmedEmail, password).await()
+            val user = authResult.user ?: throw IllegalStateException("Không thể tạo tài khoản.")
+
+            val name = displayName.trim().ifBlank { trimmedEmail.substringBefore("@") }
+            val profile = UserProfile(
+                id = "email_${user.uid}",
+                username = trimmedEmail.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" },
+                displayName = name,
+                avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Tài khoản Lumina: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            )
+            saveSession(profile, trimmedEmail)
+            Log.d(TAG, "Email sign-up successful for: ${profile.displayName}")
+            AuthResult.Success(profile, trimmedEmail)
+        } catch (e: FirebaseAuthException) {
+            Log.w(TAG, "FirebaseAuthException during email sign-up: ${e.errorCode} - ${e.message}")
+            val msg = when (e.errorCode) {
+                "ERROR_EMAIL_ALREADY_IN_USE" -> "Email này đã được sử dụng. Vui lòng chuyển sang tab 'Đăng nhập' hoặc chọn email khác."
+                "ERROR_WEAK_PASSWORD" -> "Mật khẩu quá yếu. Vui lòng chọn mật khẩu từ 6 ký tự trở lên."
+                "ERROR_INVALID_EMAIL" -> "Định dạng email không hợp lệ (ví dụ: ten@gmail.com)."
+                else -> e.localizedMessage ?: "Đăng ký tài khoản không thành công."
+            }
+            AuthResult.Error(msg)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error during email sign up", e)
+            val msg = e.message?.lowercase() ?: ""
+            if (e is FirebaseNetworkException || msg.contains("network")) {
+                AuthResult.Error("Lỗi kết nối mạng đến máy chủ xác thực. Vui lòng thử lại.", isNetworkError = true)
+            } else {
+                AuthResult.Error("Lỗi đăng ký: ${e.localizedMessage ?: "Vui lòng thử lại"}")
+            }
+        }
+    }
+
+    /**
+     * Fast Guest / Demo Access:
+     * Creates an instant session for testing or instant exploration without requiring Google account on device.
+     */
+    suspend fun signInAsGuest(customName: String = "Lữ khách Khám Phá"): AuthResult = withContext(Dispatchers.IO) {
+        try {
+            val randomSuffix = UUID.randomUUID().toString().take(6)
+            val guestId = "guest_$randomSuffix"
+            val username = "traveler_$randomSuffix"
+            val name = customName.trim().ifBlank { "Lữ khách Lumina" }
+
+            val profile = UserProfile(
+                id = guestId,
+                username = username,
+                displayName = name,
+                avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Chế độ trải nghiệm lữ khách • Khám phá 34 tỉnh thành Việt Nam 🇻🇳"
+            )
+            saveSession(profile, "guest_$randomSuffix@lumina.travel")
+            Log.d(TAG, "Guest login successful: ${profile.displayName}")
+            AuthResult.Success(profile, "guest_$randomSuffix@lumina.travel")
+        } catch (e: Exception) {
+            Log.e(TAG, "Guest login error", e)
+            AuthResult.Error("Không thể kích hoạt chế độ trải nghiệm: ${e.localizedMessage}")
         }
     }
 

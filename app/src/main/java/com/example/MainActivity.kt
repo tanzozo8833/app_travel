@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -59,6 +60,9 @@ class MainActivity : ComponentActivity() {
                         canFallbackToBrowser = loginCanFallbackToBrowser,
                         onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
                         onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
+                        onSignInWithEmail = { email, pass -> viewModel.signInWithEmail(email, pass) },
+                        onSignUpWithEmail = { email, pass, name -> viewModel.signUpWithEmail(email, pass, name) },
+                        onSignInAsGuest = { name -> viewModel.signInAsGuest(name) },
                         onClearError = { viewModel.clearLoginError() }
                     )
                 } else {
@@ -100,6 +104,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val isShowingCityPassport by viewModel.isShowingCityPassport.collectAsState()
     val selectedProvinceForPassport by viewModel.selectedProvinceForPassport.collectAsState()
     val isShowingTravelCv by viewModel.isShowingTravelCv.collectAsState()
+    val selectedUserProfileTarget by viewModel.selectedUserProfileTarget.collectAsState()
 
     val isShowingSettings by viewModel.isShowingSettings.collectAsState()
     val isDeletingAccount by viewModel.isDeletingAccount.collectAsState()
@@ -115,6 +120,41 @@ fun LuminaApp(viewModel: LuminaViewModel) {
 
     // Comment Bottom Sheet State (Requirement 2)
     var commentPostTarget by remember { mutableStateOf<Post?>(null) }
+
+    // Android System Back Navigation hierarchy
+    BackHandler(enabled = isShowingSettings) {
+        viewModel.showSettings(false)
+    }
+    BackHandler(enabled = selectedUserProfileTarget != null && !isShowingSettings) {
+        viewModel.closeUserProfile()
+    }
+    BackHandler(enabled = isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.showTravelCv(false)
+    }
+    BackHandler(enabled = isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.showCityPassport(false)
+    }
+    BackHandler(enabled = isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.showNotifications(false)
+    }
+    BackHandler(enabled = isShowingSearch && !isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.showSearch(false)
+    }
+    BackHandler(enabled = isShowingCreatePost && !isShowingSearch && !isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.showCreatePost(false)
+    }
+    BackHandler(enabled = selectedTrip != null && !isShowingCreatePost && !isShowingSearch && !isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.closeTripDetail()
+    }
+    BackHandler(enabled = selectedPost != null && selectedTrip == null && !isShowingCreatePost && !isShowingSearch && !isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings) {
+        viewModel.closePostDetail()
+    }
+    BackHandler(enabled = commentPostTarget != null) {
+        commentPostTarget = null
+    }
+    BackHandler(enabled = currentTab != MainTab.HOME && selectedPost == null && selectedTrip == null && !isShowingCreatePost && !isShowingSearch && !isShowingNotifications && !isShowingCityPassport && !isShowingTravelCv && selectedUserProfileTarget == null && !isShowingSettings && commentPostTarget == null) {
+        viewModel.selectTab(MainTab.HOME)
+    }
 
     // Toast triggers
     LaunchedEffect(toastMessage) {
@@ -164,6 +204,14 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                                     authorHandle = post.authorHandle,
                                     authorName = post.authorName,
                                     authorAvatarUrl = post.authorAvatarUrl
+                                )
+                            },
+                            onAuthorClick = { post ->
+                                viewModel.openUserProfile(
+                                    userId = post.userId,
+                                    username = post.authorHandle,
+                                    displayName = post.authorName,
+                                    avatarUrl = post.authorAvatarUrl
                                 )
                             },
                             onPostClick = { viewModel.openPostDetail(it) },
@@ -306,6 +354,14 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             authorAvatarUrl = p.authorAvatarUrl
                         )
                     },
+                    onAuthorClick = { p ->
+                        viewModel.openUserProfile(
+                            userId = p.userId,
+                            username = p.authorHandle,
+                            displayName = p.authorName,
+                            avatarUrl = p.authorAvatarUrl
+                        )
+                    },
                     onPostClick = { viewModel.openPostDetail(it) },
                     onBack = { viewModel.closePostDetail() },
                     onTripClick = { viewModel.openTripDetail(it) },
@@ -423,7 +479,55 @@ fun LuminaApp(viewModel: LuminaViewModel) {
             )
         }
 
-        // 8. Settings & Account Management Screen (Requirement)
+        // 8. User Profile Modal (Requirement: View another user's profile with posts & follow)
+        AnimatedVisibility(
+            visible = selectedUserProfileTarget != null,
+            enter = slideInHorizontally(initialOffsetX = { it }) + fadeIn(),
+            exit = slideOutHorizontally(targetOffsetX = { it }) + fadeOut()
+        ) {
+            selectedUserProfileTarget?.let { target ->
+                val profileFlow = remember(target.userId, target.username) {
+                    viewModel.getUserProfileFlow(target.userId, target.username)
+                }
+                val dbProfile by profileFlow.collectAsState(initial = null)
+                val targetFollowerCountFlow = remember(target.userId) {
+                    viewModel.getUserFollowerCountFlow(target.userId)
+                }
+                val targetFollowerCount by targetFollowerCountFlow.collectAsState(initial = 0)
+                val targetFollowingCountFlow = remember(target.userId) {
+                    viewModel.getUserFollowingCountFlow(target.userId)
+                }
+                val targetFollowingCount by targetFollowingCountFlow.collectAsState(initial = 0)
+
+                UserProfileDetailScreen(
+                    target = target,
+                    dbProfile = dbProfile,
+                    allPosts = posts,
+                    followedTargetKeys = followedTargetKeys,
+                    currentUserId = userProfile.id,
+                    currentUsername = userProfile.username,
+                    followerCount = targetFollowerCount,
+                    followingCount = targetFollowingCount,
+                    onFollowClick = { uId, handle, name, avatarUrl ->
+                        viewModel.toggleFollow(
+                            authorId = uId,
+                            authorHandle = handle,
+                            authorName = name,
+                            authorAvatarUrl = avatarUrl
+                        )
+                    },
+                    onBack = { viewModel.closeUserProfile() },
+                    onPostClick = { viewModel.openPostDetail(it) },
+                    onTripClick = { viewModel.openTripDetail(it) },
+                    onLikeClick = { viewModel.toggleLike(it.id) },
+                    onSaveClick = { viewModel.toggleSave(it.id) },
+                    onShareClick = { viewModel.sharePost(it.id) },
+                    onCommentClick = { commentPostTarget = it }
+                )
+            }
+        }
+
+        // 9. Settings & Account Management Screen (Requirement)
         AnimatedVisibility(
             visible = isShowingSettings,
             enter = slideInHorizontally(initialOffsetX = { it }),

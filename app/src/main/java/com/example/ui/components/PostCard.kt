@@ -40,6 +40,7 @@ fun PostCard(
     isFollowing: Boolean = false,
     isSelf: Boolean = false,
     onFollowClick: () -> Unit = {},
+    onAuthorClick: (Post) -> Unit = {},
     onPostClick: (Post) -> Unit,
     onTripClick: (Trip) -> Unit,
     onLikeClick: (Post) -> Unit,
@@ -87,66 +88,74 @@ fun PostCard(
                     .padding(horizontal = 8.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Avatar with 24h gold check-in ring
-                Box(contentAlignment = Alignment.Center) {
-                    AsyncImage(
-                        model = post.authorAvatarUrl,
-                        contentDescription = post.authorName,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(26.dp)
-                            .clip(CircleShape)
-                            .border(
-                                width = if (post.hasRecentCheckIn) 1.5.dp else 0.5.dp,
-                                color = if (post.hasRecentCheckIn) Gold500 else Color(0xFFD3DCD5),
-                                shape = CircleShape
-                            )
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Column(modifier = Modifier.weight(1f)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = post.authorName,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = TextPrimary,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.weight(1f, fill = false)
-                        )
-
-                        // Trip Attached Pill
-                        if (post.attachedTrip != null) {
-                            Spacer(modifier = Modifier.width(3.dp))
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = Brand100,
-                                modifier = Modifier.clickable {
-                                    onTripClick(post.attachedTrip)
-                                }
-                            ) {
-                                Text(
-                                    text = "Trip",
-                                    fontSize = 7.5.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Brand700,
-                                    modifier = Modifier.padding(horizontal = 3.dp, vertical = 1.dp)
+                // Clickable Avatar + Name to open User Profile
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { onAuthorClick(post) },
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Avatar with 24h gold check-in ring
+                    Box(contentAlignment = Alignment.Center) {
+                        AsyncImage(
+                            model = post.authorAvatarUrl,
+                            contentDescription = post.authorName,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(26.dp)
+                                .clip(CircleShape)
+                                .border(
+                                    width = if (post.hasRecentCheckIn) 1.5.dp else 0.5.dp,
+                                    color = if (post.hasRecentCheckIn) Gold500 else Color(0xFFD3DCD5),
+                                    shape = CircleShape
                                 )
-                            }
-                        }
+                        )
                     }
 
-                    // Location tag
-                    Text(
-                        text = post.locationLabel,
-                        fontSize = 8.5.sp,
-                        color = TextSecondary,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = post.authorName,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f, fill = false)
+                            )
+
+                            // Trip Attached Pill
+                            if (post.attachedTrip != null) {
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(999.dp),
+                                    color = Brand100,
+                                    modifier = Modifier.clickable {
+                                        onTripClick(post.attachedTrip)
+                                    }
+                                ) {
+                                    Text(
+                                        text = "Trip",
+                                        fontSize = 7.5.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Brand700,
+                                        modifier = Modifier.padding(horizontal = 3.dp, vertical = 1.dp)
+                                    )
+                                }
+                            }
+                        }
+
+                        // Location tag
+                        Text(
+                            text = post.locationLabel,
+                            fontSize = 8.5.sp,
+                            color = TextSecondary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
 
                 // Follow / Following Button (Only for other users, never for self)

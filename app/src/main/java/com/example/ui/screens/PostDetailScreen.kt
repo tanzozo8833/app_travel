@@ -49,6 +49,7 @@ fun PostDetailScreen(
     currentUserId: String = "",
     currentUsername: String = "",
     onFollowClick: (Post) -> Unit = {},
+    onAuthorClick: (Post) -> Unit = {},
     onPostClick: (Post) -> Unit = {},
     onBack: () -> Unit,
     onTripClick: (Trip) -> Unit,
@@ -152,32 +153,39 @@ fun PostDetailScreen(
                         .padding(horizontal = 16.dp, vertical = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    AsyncImage(
-                        model = post.authorAvatarUrl,
-                        contentDescription = post.authorName,
-                        contentScale = ContentScale.Crop,
+                    Row(
                         modifier = Modifier
-                            .size(44.dp)
-                            .clip(CircleShape)
-                            .border(
-                                2.dp,
-                                if (post.hasRecentCheckIn) Gold500 else Color(0xFFD6DFDB),
-                                CircleShape
+                            .weight(1f)
+                            .clickable { onAuthorClick(post) },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AsyncImage(
+                            model = post.authorAvatarUrl,
+                            contentDescription = post.authorName,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(44.dp)
+                                .clip(CircleShape)
+                                .border(
+                                    2.dp,
+                                    if (post.hasRecentCheckIn) Gold500 else Color(0xFFD6DFDB),
+                                    CircleShape
+                                )
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = post.authorName,
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
                             )
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = post.authorName,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = TextPrimary
-                        )
-                        Text(
-                            text = "${post.locationLabel} • ${post.timeAgo}",
-                            fontSize = 11.sp,
-                            color = TextSecondary
-                        )
+                            Text(
+                                text = "${post.locationLabel} • ${post.timeAgo}",
+                                fontSize = 11.sp,
+                                color = TextSecondary
+                            )
+                        }
                     }
 
                     if (!isSelf) {
@@ -477,6 +485,7 @@ fun PostDetailScreen(
                                             isFollowing = p0IsFollowing,
                                             isSelf = p0IsSelf,
                                             onFollowClick = { onFollowClick(p0) },
+                                            onAuthorClick = onAuthorClick,
                                             onPostClick = onPostClick,
                                             onTripClick = onTripClick,
                                             onLikeClick = onLikeClick,
@@ -495,6 +504,7 @@ fun PostDetailScreen(
                                                 isFollowing = p1IsFollowing,
                                                 isSelf = p1IsSelf,
                                                 onFollowClick = { onFollowClick(p1) },
+                                                onAuthorClick = onAuthorClick,
                                                 onPostClick = onPostClick,
                                                 onTripClick = onTripClick,
                                                 onLikeClick = onLikeClick,

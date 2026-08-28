@@ -27,7 +27,7 @@ import com.example.data.local.seed.DatabaseSeeder
         AppSettingsEntity::class,
         UserFollowEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)

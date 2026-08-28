@@ -13,7 +13,8 @@ object DatabaseSeeder {
         scope.launch {
             try {
                 val currentProvinceCount = database.provinceDao().getCount()
-                
+                val currentUserProfileCount = database.userProfileDao().getCount()
+
                 if (currentProvinceCount == 0) {
                     Log.d(TAG, "Starting full database seeding...")
                     database.provinceDao().insertAll(ProvinceSeed.data)
@@ -27,16 +28,19 @@ object DatabaseSeeder {
                     database.frameDao().insertAll(FrameSeed.data)
                     database.notificationDao().insertAll(NotificationSeed.data)
                     database.savedBoardDao().insertAll(SavedBoardSeed.data)
-                    Log.d(TAG, "Full database seeding completed with 34 provinces.")
-                } else if (currentProvinceCount < ProvinceSeed.data.size) {
-                    Log.d(TAG, "Database has $currentProvinceCount provinces. Updating to ${ProvinceSeed.data.size} provinces...")
-                    database.provinceDao().insertAll(ProvinceSeed.data)
-                    database.placeDao().insertAll(PlaceSeed.data)
-                    database.frameDao().insertAll(FrameSeed.data)
-                    database.badgeDao().insertAll(BadgeSeed.data)
-                    Log.d(TAG, "Database successfully updated to 34 provinces.")
+                    Log.d(TAG, "Full database seeding completed with 34 provinces and ${UserProfileSeed.data.size} profiles.")
                 } else {
-                    Log.d(TAG, "Database already contains $currentProvinceCount provinces.")
+                    if (currentProvinceCount < ProvinceSeed.data.size) {
+                        Log.d(TAG, "Database has $currentProvinceCount provinces. Updating to ${ProvinceSeed.data.size} provinces...")
+                        database.provinceDao().insertAll(ProvinceSeed.data)
+                        database.placeDao().insertAll(PlaceSeed.data)
+                        database.frameDao().insertAll(FrameSeed.data)
+                        database.badgeDao().insertAll(BadgeSeed.data)
+                    }
+                    if (currentUserProfileCount < UserProfileSeed.data.size) {
+                        Log.d(TAG, "Database has $currentUserProfileCount profiles. Inserting missing seed profiles...")
+                        database.userProfileDao().insertAll(UserProfileSeed.data)
+                    }
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to seed database", e)

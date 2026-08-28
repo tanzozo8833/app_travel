@@ -7,21 +7,17 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.outlined.ErrorOutline
-import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.OpenInBrowser
-import androidx.compose.material.icons.outlined.Security
-import androidx.compose.material.icons.outlined.WifiOff
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,14 +26,24 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.ui.theme.*
+
+enum class AuthTab {
+    GOOGLE_QUICK,
+    EMAIL_PASSWORD
+}
 
 @Composable
 fun LoginScreen(
@@ -47,11 +53,24 @@ fun LoginScreen(
     canFallbackToBrowser: Boolean = false,
     onSignInWithGoogle: (Activity) -> Unit,
     onSignInWithBrowser: (Activity) -> Unit,
+    onSignInWithEmail: (String, String) -> Unit,
+    onSignUpWithEmail: (String, String, String) -> Unit,
+    onSignInAsGuest: (String) -> Unit,
     onClearError: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
+    val focusManager = LocalFocusManager.current
+
+    var selectedTab by remember { mutableStateOf(AuthTab.GOOGLE_QUICK) }
+    var isSignUpMode by remember { mutableStateOf(false) }
+
+    // Form inputs for Email / Password
+    var emailInput by remember { mutableStateOf("") }
+    var passwordInput by remember { mutableStateOf("") }
+    var displayNameInput by remember { mutableStateOf("") }
+    var isPasswordVisible by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -89,10 +108,10 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp),
+                .padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
             // App Brand Logo Badge
             Surface(
@@ -100,7 +119,7 @@ fun LoginScreen(
                 color = Brand700,
                 shadowElevation = 8.dp,
                 modifier = Modifier
-                    .size(76.dp)
+                    .size(72.dp)
                     .border(3.dp, Gold500, CircleShape)
             ) {
                 Box(
@@ -111,17 +130,17 @@ fun LoginScreen(
                         imageVector = Icons.Default.Explore,
                         contentDescription = "Lumina Logo",
                         tint = Gold500,
-                        modifier = Modifier.size(42.dp)
+                        modifier = Modifier.size(40.dp)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
             // App Name & Tagline
             Text(
                 text = "LUMINA TRAVEL",
-                fontSize = 24.sp,
+                fontSize = 23.sp,
                 fontWeight = FontWeight.ExtraBold,
                 fontFamily = FontFamily.Monospace,
                 letterSpacing = 2.sp,
@@ -130,14 +149,14 @@ fun LoginScreen(
 
             Text(
                 text = "Hộ Chiếu & Hành Trình Lữ Hành Việt Nam 🇻🇳",
-                fontSize = 13.5.sp,
+                fontSize = 13.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White.copy(alpha = 0.9f),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 6.dp)
+                modifier = Modifier.padding(top = 4.dp)
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
             // Main Card: Login Area
             Card(
@@ -150,38 +169,65 @@ fun LoginScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(24.dp),
+                        .padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = "CHÀO MỪNG BẠN",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        color = Brand700,
-                        letterSpacing = 1.sp
-                    )
+                    // Segmented Control: Tab Selection
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = BgSunken,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp)
+                        ) {
+                            // Tab 1: Google & Trải Nghiệm
+                            Surface(
+                                shape = RoundedCornerShape(9.dp),
+                                color = if (selectedTab == AuthTab.GOOGLE_QUICK) Brand700 else Color.Transparent,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clickable {
+                                        selectedTab = AuthTab.GOOGLE_QUICK
+                                        onClearError()
+                                    }
+                            ) {
+                                Text(
+                                    text = "Google & Nhanh",
+                                    fontSize = 12.5.sp,
+                                    fontWeight = if (selectedTab == AuthTab.GOOGLE_QUICK) FontWeight.Bold else FontWeight.Medium,
+                                    color = if (selectedTab == AuthTab.GOOGLE_QUICK) Color.White else TextSecondary,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(vertical = 8.dp)
+                                )
+                            }
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                            // Tab 2: Email & Mật Khẩu
+                            Surface(
+                                shape = RoundedCornerShape(9.dp),
+                                color = if (selectedTab == AuthTab.EMAIL_PASSWORD) Brand700 else Color.Transparent,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clickable {
+                                        selectedTab = AuthTab.EMAIL_PASSWORD
+                                        onClearError()
+                                    }
+                            ) {
+                                Text(
+                                    text = "Email & Mật khẩu",
+                                    fontSize = 12.5.sp,
+                                    fontWeight = if (selectedTab == AuthTab.EMAIL_PASSWORD) FontWeight.Bold else FontWeight.Medium,
+                                    color = if (selectedTab == AuthTab.EMAIL_PASSWORD) Color.White else TextSecondary,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(vertical = 8.dp)
+                                )
+                            }
+                        }
+                    }
 
-                    Text(
-                        text = "Đăng Nhập Để Bắt Đầu",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = TextPrimary
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(
-                        text = "Đăng nhập tài khoản Google để tự động đồng bộ tên, ảnh đại diện và lưu dấu hộ chiếu 34 tỉnh thành.",
-                        fontSize = 12.5.sp,
-                        color = TextSecondary,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
-
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(18.dp))
 
                     // Error Alert (If Any)
                     AnimatedVisibility(
@@ -198,7 +244,7 @@ fun LoginScreen(
                             ),
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(bottom = 18.dp)
+                                .padding(bottom = 16.dp)
                         ) {
                             Column(modifier = Modifier.padding(14.dp)) {
                                 Row(
@@ -210,20 +256,20 @@ fun LoginScreen(
                                         contentDescription = null,
                                         tint = if (isNetworkError) Color(0xFF856404) else DangerRed,
                                         modifier = Modifier
-                                            .size(22.dp)
+                                            .size(20.dp)
                                             .padding(top = 2.dp)
                                     )
-                                    Spacer(modifier = Modifier.width(10.dp))
+                                    Spacer(modifier = Modifier.width(8.dp))
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
-                                            text = if (isNetworkError) "Lỗi kết nối mạng" else "Đăng nhập không thành công",
-                                            fontSize = 13.sp,
+                                            text = if (isNetworkError) "Lỗi kết nối mạng" else "Thông báo đăng nhập",
+                                            fontSize = 12.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isNetworkError) Color(0xFF856404) else DangerRed
                                         )
                                         Text(
                                             text = errorMessage ?: "",
-                                            fontSize = 12.sp,
+                                            fontSize = 11.5.sp,
                                             color = TextPrimary,
                                             lineHeight = 16.sp,
                                             modifier = Modifier.padding(top = 2.dp)
@@ -231,18 +277,18 @@ fun LoginScreen(
                                     }
                                     IconButton(
                                         onClick = onClearError,
-                                        modifier = Modifier.size(24.dp)
+                                        modifier = Modifier.size(22.dp)
                                     ) {
                                         Icon(
                                             Icons.Default.Close,
                                             contentDescription = "Đóng",
                                             tint = Color.Gray,
-                                            modifier = Modifier.size(16.dp)
+                                            modifier = Modifier.size(15.dp)
                                         )
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.height(10.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
 
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
@@ -256,8 +302,8 @@ fun LoginScreen(
                                                 onSignInWithBrowser(activity)
                                             },
                                             shape = RoundedCornerShape(8.dp),
-                                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                                            modifier = Modifier.padding(end = 8.dp)
+                                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
+                                            modifier = Modifier.padding(end = 6.dp)
                                         ) {
                                             Icon(
                                                 Icons.Outlined.OpenInBrowser,
@@ -268,7 +314,7 @@ fun LoginScreen(
                                             Spacer(modifier = Modifier.width(4.dp))
                                             Text(
                                                 "Mở trình duyệt",
-                                                fontSize = 11.5.sp,
+                                                fontSize = 11.sp,
                                                 fontWeight = FontWeight.Bold,
                                                 color = Brand700
                                             )
@@ -281,138 +327,300 @@ fun LoginScreen(
                                             activity?.let { onSignInWithGoogle(it) }
                                         },
                                         shape = RoundedCornerShape(8.dp),
-                                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
-                                        modifier = Modifier.height(34.dp)
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                        modifier = Modifier.height(30.dp)
                                     ) {
                                         Icon(
                                             Icons.Default.Refresh,
                                             contentDescription = null,
-                                            modifier = Modifier.size(14.dp)
+                                            modifier = Modifier.size(13.dp)
                                         )
-                                        Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Thử lại", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text("Thử lại", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }
                         }
                     }
 
-                    // 1. Primary Google Sign-In Button (One-Tap / Play Services)
-                    Button(
-                        onClick = {
-                            if (activity != null) {
-                                onSignInWithGoogle(activity)
+                    // TAB CONTENT
+                    if (selectedTab == AuthTab.GOOGLE_QUICK) {
+                        // 1. Primary Google Sign-In Button (Credential Manager / One-Tap)
+                        Button(
+                            onClick = {
+                                if (activity != null) {
+                                    onSignInWithGoogle(activity)
+                                }
+                            },
+                            enabled = !isLoading && activity != null,
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.White,
+                                contentColor = Color(0xFF3C4043),
+                                disabledContainerColor = Color(0xFFF1F3F4)
+                            ),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFDADCE0)),
+                            elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp, pressedElevation = 4.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                                .testTag("google_signin_button")
+                        ) {
+                            if (isLoading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    strokeWidth = 2.5.dp,
+                                    color = Brand700
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = "Đang xử lý...",
+                                    fontSize = 13.5.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = TextPrimary
+                                )
+                            } else {
+                                GoogleGIcon(modifier = Modifier.size(20.dp))
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Text(
+                                    text = "Đăng nhập nhanh bằng Google",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Color(0xFF1F1F1F)
+                                )
                             }
-                        },
-                        enabled = !isLoading && activity != null,
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White,
-                            contentColor = Color(0xFF3C4043),
-                            disabledContainerColor = Color(0xFFF1F3F4)
-                        ),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFDADCE0)),
-                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp, pressedElevation = 4.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(52.dp)
-                            .testTag("google_signin_button")
-                    ) {
-                        if (isLoading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(22.dp),
-                                strokeWidth = 2.5.dp,
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        // 2. Browser Google OAuth Button
+                        OutlinedButton(
+                            onClick = {
+                                if (activity != null) {
+                                    onSignInWithBrowser(activity)
+                                }
+                            },
+                            enabled = !isLoading && activity != null,
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Brand700
+                            ),
+                            border = androidx.compose.foundation.BorderStroke(1.2.dp, Brand700.copy(alpha = 0.5f)),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(46.dp)
+                                .testTag("browser_signin_button")
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Language,
+                                contentDescription = null,
+                                tint = Brand700,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Đăng nhập qua Trình duyệt Web",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.Bold,
                                 color = Brand700
                             )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(
-                                text = "Đang xử lý đăng nhập...",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = TextPrimary
-                            )
-                        } else {
-                            GoogleGIcon(modifier = Modifier.size(22.dp))
-                            Spacer(modifier = Modifier.width(14.dp))
-                            Text(
-                                text = "Đăng nhập nhanh bằng Google",
-                                fontSize = 14.5.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF1F1F1F)
-                            )
                         }
-                    }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    // Divider with "HOẶC" (OR)
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        HorizontalDivider(
-                            modifier = Modifier.weight(1f),
-                            color = Color(0xFFE2EBE5)
-                        )
-                        Text(
-                            text = "HOẶC DỰ PHÒNG",
-                            fontSize = 10.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace,
-                            color = TextSecondary.copy(alpha = 0.7f),
-                            modifier = Modifier.padding(horizontal = 10.dp)
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier.weight(1f),
-                            color = Color(0xFFE2EBE5)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    // 2. Secondary / Explicit Browser Sign-In Button (Web OAuth)
-                    OutlinedButton(
-                        onClick = {
-                            if (activity != null) {
-                                onSignInWithBrowser(activity)
-                            }
-                        },
-                        enabled = !isLoading && activity != null,
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Brand700
-                        ),
-                        border = androidx.compose.foundation.BorderStroke(1.5.dp, Brand700.copy(alpha = 0.6f)),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .testTag("browser_signin_button")
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Language,
-                            contentDescription = null,
-                            tint = Brand700,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Column(horizontalAlignment = Alignment.Start) {
+                        // Divider
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            HorizontalDivider(modifier = Modifier.weight(1f), color = Color(0xFFE2EBE5))
                             Text(
-                                text = "Đăng nhập bằng cách khác (Trình duyệt web)",
+                                text = "HOẶC THỬ NGHIỆM",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = TextSecondary.copy(alpha = 0.7f),
+                                modifier = Modifier.padding(horizontal = 8.dp)
+                            )
+                            HorizontalDivider(modifier = Modifier.weight(1f), color = Color(0xFFE2EBE5))
+                        }
+
+                        Spacer(modifier = Modifier.height(14.dp))
+
+                        // 3. Fast Guest / Instant Access Button (Zero friction, no Google account needed)
+                        FilledTonalButton(
+                            onClick = {
+                                onSignInAsGuest("Lữ khách Khám Phá")
+                            },
+                            enabled = !isLoading,
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.filledTonalButtonColors(
+                                containerColor = Brand100,
+                                contentColor = Brand700
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp)
+                                .testTag("guest_signin_button")
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.FlightTakeoff,
+                                contentDescription = null,
+                                tint = Brand700,
+                                modifier = Modifier.size(19.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Khám phá ngay (Chế độ Lữ Khách)",
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Brand700
                             )
-                            Text(
-                                text = "Tự gõ email & mật khẩu trên trang Google",
-                                fontSize = 10.5.sp,
-                                color = TextSecondary
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = "Dành cho trải nghiệm nhanh trên máy ảo hoặc không cần tài khoản Google",
+                            fontSize = 10.5.sp,
+                            color = TextSecondary,
+                            textAlign = TextAlign.Center
+                        )
+                    } else {
+                        // TAB: EMAIL / PASSWORD
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            FilterChip(
+                                selected = !isSignUpMode,
+                                onClick = {
+                                    isSignUpMode = false
+                                    onClearError()
+                                },
+                                label = { Text("Đăng nhập", fontSize = 12.sp) },
+                                modifier = Modifier.padding(end = 8.dp)
                             )
+                            FilterChip(
+                                selected = isSignUpMode,
+                                onClick = {
+                                    isSignUpMode = true
+                                    onClearError()
+                                },
+                                label = { Text("Đăng ký mới", fontSize = 12.sp) }
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(14.dp))
+
+                        if (isSignUpMode) {
+                            OutlinedTextField(
+                                value = displayNameInput,
+                                onValueChange = { displayNameInput = it },
+                                label = { Text("Họ và tên / Biệt danh") },
+                                leadingIcon = {
+                                    Icon(Icons.Outlined.Person, contentDescription = null, tint = Brand700)
+                                },
+                                singleLine = true,
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
+
+                        OutlinedTextField(
+                            value = emailInput,
+                            onValueChange = { emailInput = it },
+                            label = { Text("Địa chỉ Email") },
+                            placeholder = { Text("vi_du@gmail.com") },
+                            leadingIcon = {
+                                Icon(Icons.Outlined.Email, contentDescription = null, tint = Brand700)
+                            },
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Email,
+                                imeAction = ImeAction.Next
+                            ),
+                            singleLine = true,
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        OutlinedTextField(
+                            value = passwordInput,
+                            onValueChange = { passwordInput = it },
+                            label = { Text("Mật khẩu") },
+                            leadingIcon = {
+                                Icon(Icons.Outlined.Lock, contentDescription = null, tint = Brand700)
+                            },
+                            trailingIcon = {
+                                IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
+                                    Icon(
+                                        imageVector = if (isPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                                        contentDescription = if (isPasswordVisible) "Ẩn mật khẩu" else "Hiện mật khẩu"
+                                    )
+                                }
+                            },
+                            visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Password,
+                                imeAction = ImeAction.Done
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onDone = {
+                                    focusManager.clearFocus()
+                                    if (isSignUpMode) {
+                                        onSignUpWithEmail(emailInput, passwordInput, displayNameInput)
+                                    } else {
+                                        onSignInWithEmail(emailInput, passwordInput)
+                                    }
+                                }
+                            ),
+                            singleLine = true,
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(
+                            onClick = {
+                                focusManager.clearFocus()
+                                if (isSignUpMode) {
+                                    onSignUpWithEmail(emailInput, passwordInput, displayNameInput)
+                                } else {
+                                    onSignInWithEmail(emailInput, passwordInput)
+                                }
+                            },
+                            enabled = !isLoading && emailInput.isNotBlank() && passwordInput.isNotBlank(),
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Brand700,
+                                contentColor = Color.White
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp)
+                        ) {
+                            if (isLoading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(20.dp),
+                                    strokeWidth = 2.5.dp,
+                                    color = Color.White
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text("Đang xử lý...", fontSize = 13.sp)
+                            } else {
+                                Text(
+                                    text = if (isSignUpMode) "Tạo tài khoản Lumina" else "Đăng nhập ngay",
+                                    fontSize = 13.5.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Notice on unified profile & offline support
                     Surface(
@@ -432,17 +640,17 @@ fun LoginScreen(
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Dù đăng nhập bằng cách nào, toàn bộ hồ sơ và dấu mộc hành trình của bạn đều được đồng bộ trọn vẹn vào một tài khoản duy nhất.",
-                                fontSize = 11.sp,
+                                text = "Toàn bộ hồ sơ, con dấu hộ chiếu 34 tỉnh thành và lịch trình của bạn đều được bảo mật và lưu trữ an toàn.",
+                                fontSize = 10.5.sp,
                                 color = TextSecondary,
-                                lineHeight = 15.sp
+                                lineHeight = 14.sp
                             )
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             // App Feature Highlights
             Row(
@@ -456,7 +664,7 @@ fun LoginScreen(
                 FeatureBadge(title = "Bản Đồ Offline", subtitle = "Không lo mất sóng")
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // Security & Privacy Guarantee Note
             Row(
@@ -467,12 +675,12 @@ fun LoginScreen(
                     imageVector = Icons.Outlined.Security,
                     contentDescription = null,
                     tint = Color.Gray,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(15.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Bảo mật an toàn qua Google OAuth & Firebase Auth",
-                    fontSize = 11.5.sp,
+                    text = "Bảo mật & Lưu trữ qua Google Identity & Firebase Auth",
+                    fontSize = 11.sp,
                     color = Color.Gray
                 )
             }

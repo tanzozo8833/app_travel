@@ -77,6 +77,16 @@ class LuminaRepository(
         list.map { it.toDomainModel() }
     }
 
+    fun getUserProfileFlow(userId: String, username: String): Flow<UserProfile?> {
+        val cleanHandle = username.removePrefix("@")
+        return combine(
+            database.userProfileDao().getProfileByIdFlow(userId),
+            database.userProfileDao().getProfileByUsernameFlow(cleanHandle)
+        ) { byId, byUsername ->
+            (byId ?: byUsername)?.toDomainModel()
+        }
+    }
+
     // Google Sign-In & Authentication
     suspend fun signInWithGoogle(activity: Activity, allowBrowserFallback: Boolean = true): AuthResult {
         val result = authManager.signInWithGoogle(activity, allowBrowserFallback = allowBrowserFallback)
@@ -86,6 +96,24 @@ class LuminaRepository(
 
     suspend fun signInWithGoogleBrowser(activity: Activity): AuthResult {
         val result = authManager.signInWithGoogleBrowser(activity)
+        handleAuthSuccess(result)
+        return result
+    }
+
+    suspend fun signInWithEmail(email: String, password: String): AuthResult {
+        val result = authManager.signInWithEmail(email, password)
+        handleAuthSuccess(result)
+        return result
+    }
+
+    suspend fun signUpWithEmail(email: String, password: String, displayName: String): AuthResult {
+        val result = authManager.signUpWithEmail(email, password, displayName)
+        handleAuthSuccess(result)
+        return result
+    }
+
+    suspend fun signInAsGuest(customName: String = "Lữ khách Khám Phá"): AuthResult {
+        val result = authManager.signInAsGuest(customName)
         handleAuthSuccess(result)
         return result
     }
