@@ -35,6 +35,9 @@ interface CommentDao {
     @Query("DELETE FROM comments WHERE post_id = :postId")
     suspend fun deleteCommentsForPost(postId: String)
 
+    @Query("DELETE FROM comments WHERE user_id = :userId OR (author_handle != '' AND (author_handle = :userHandle OR author_handle = '@' || :userHandle))")
+    suspend fun deleteCommentsByUser(userId: String, userHandle: String)
+
     @Query("SELECT COUNT(*) FROM comments")
     suspend fun getCount(): Int
 

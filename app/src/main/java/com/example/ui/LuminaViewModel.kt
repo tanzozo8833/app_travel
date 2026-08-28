@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LuminaApplication
 import com.example.data.auth.AuthResult
+import com.example.data.auth.DeleteAccountResult
 import com.example.data.model.*
 import com.example.data.repository.LuminaRepository
 import kotlinx.coroutines.delay
@@ -695,8 +696,42 @@ class LuminaViewModel(
         }
     }
 
-    fun deleteAccount() {
-        showToast("Chức năng xoá tài khoản sẽ được hỗ trợ trong bản cập nhật kế tiếp.")
-        _isShowingSettings.value = false
+    private val _isDeletingAccount = MutableStateFlow(false)
+    val isDeletingAccount: StateFlow<Boolean> = _isDeletingAccount.asStateFlow()
+
+    fun deleteAccount(activity: Activity) {
+        if (_isDeletingAccount.value) return
+        _isDeletingAccount.value = true
+
+        viewModelScope.launch {
+            try {
+                when (val result = repository.deleteUserAccount(activity)) {
+                    is DeleteAccountResult.Success -> {
+                        _isDeletingAccount.value = false
+                        _isShowingSettings.value = false
+                        _selectedTrip.value = null
+                        _selectedPost.value = null
+                        _selectedProvinceForPassport.value = null
+                        _isShowingCreatePost.value = false
+                        _isShowingSearch.value = false
+                        _isShowingNotifications.value = false
+                        _isShowingCityPassport.value = false
+                        _isShowingTravelCv.value = false
+                        _currentTab.value = MainTab.HOME
+                        showToast("Đã xoá tài khoản và toàn bộ dữ liệu cá nhân vĩnh viễn.")
+                    }
+                    is DeleteAccountResult.Cancelled -> {
+                        _isDeletingAccount.value = false
+                    }
+                    is DeleteAccountResult.Error -> {
+                        _isDeletingAccount.value = false
+                        showToast(result.message)
+                    }
+                }
+            } catch (e: Exception) {
+                _isDeletingAccount.value = false
+                showToast("Lỗi khi xoá tài khoản: ${e.localizedMessage ?: "Vui lòng thử lại sau"}")
+            }
+        }
     }
 }

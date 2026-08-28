@@ -56,6 +56,9 @@ interface PostDao {
     @Query("DELETE FROM posts WHERE id = :id")
     suspend fun deleteById(id: String)
 
+    @Query("DELETE FROM posts WHERE user_id = :userId OR (author_handle != '' AND (author_handle = :userHandle OR author_handle = '@' || :userHandle))")
+    suspend fun deletePostsByUser(userId: String, userHandle: String)
+
     @Query("SELECT COUNT(*) FROM posts")
     suspend fun getCount(): Int
 

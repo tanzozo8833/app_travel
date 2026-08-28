@@ -19,6 +19,7 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
@@ -40,6 +41,12 @@ sealed class AuthResult {
         val isNoCredential: Boolean = false,
         val canFallbackToBrowser: Boolean = false
     ) : AuthResult()
+}
+
+sealed class DeleteAccountResult {
+    data object Success : DeleteAccountResult()
+    data object Cancelled : DeleteAccountResult()
+    data class Error(val message: String) : DeleteAccountResult()
 }
 
 class AuthManager(private val context: Context) {
@@ -401,6 +408,81 @@ class AuthManager(private val context: Context) {
     }
 
     suspend fun logout() = withContext(Dispatchers.IO) {
+        clearLocalState()
+    }
+
+    /**
+     * Deletes user account completely from Firebase Auth.
+     * If Firebase Auth raises FirebaseAuthRecentLoginRequiredException (or equivalent recent-login code),
+     * automatically requests re-authentication with Google, then resumes deleting the account.
+     */
+    suspend fun deleteAccount(activity: Activity): DeleteAccountResult = withContext(Dispatchers.IO) {
+        val user = firebaseAuth.currentUser
+        if (user == null) {
+            clearLocalState()
+            return@withContext DeleteAccountResult.Success
+        }
+
+        try {
+            Log.d(TAG, "Attempting to delete Firebase user: ${user.uid}")
+            user.delete().await()
+            clearLocalState()
+            Log.d(TAG, "Firebase user deleted successfully")
+            return@withContext DeleteAccountResult.Success
+        } catch (e: Exception) {
+            Log.w(TAG, "Exception during user.delete(): ${e.javaClass.simpleName} - ${e.message}", e)
+            val msg = e.message?.lowercase() ?: ""
+            val isRecentLoginRequired = e is FirebaseAuthRecentLoginRequiredException ||
+                    (e is FirebaseAuthException && (e.errorCode == "ERROR_REQUIRES_RECENT_LOGIN" || msg.contains("recent") || msg.contains("requires recent authentication"))) ||
+                    msg.contains("recent-login-required") ||
+                    msg.contains("requires recent") ||
+                    msg.contains("credential_too_old")
+
+            if (isRecentLoginRequired) {
+                Log.w(TAG, "Recent login required to delete account. Prompting re-authentication flow...")
+                when (val reauthResult = signInWithGoogle(activity, allowBrowserFallback = true)) {
+                    is AuthResult.Success -> {
+                        val reAuthedUser = firebaseAuth.currentUser
+                        if (reAuthedUser != null) {
+                            try {
+                                reAuthedUser.delete().await()
+                                clearLocalState()
+                                Log.d(TAG, "Firebase user deleted successfully after re-authentication")
+                                return@withContext DeleteAccountResult.Success
+                            } catch (e2: Exception) {
+                                Log.e(TAG, "Delete failed after re-auth: ${e2.message}", e2)
+                                return@withContext DeleteAccountResult.Error(
+                                    "Không thể hoàn tất xoá tài khoản: ${e2.localizedMessage ?: "Vui lòng thử lại"}"
+                                )
+                            }
+                        } else {
+                            clearLocalState()
+                            return@withContext DeleteAccountResult.Success
+                        }
+                    }
+                    is AuthResult.Cancelled -> {
+                        return@withContext DeleteAccountResult.Cancelled
+                    }
+                    is AuthResult.Error -> {
+                        return@withContext DeleteAccountResult.Error(
+                            "Yêu cầu xác thực tài khoản trước khi xoá: ${reauthResult.message}"
+                        )
+                    }
+                }
+            } else {
+                if (e is FirebaseNetworkException || msg.contains("network") || msg.contains("timeout")) {
+                    return@withContext DeleteAccountResult.Error("Lỗi kết nối mạng khi liên hệ máy chủ để xoá tài khoản. Vui lòng kiểm tra kết nối mạng và thử lại.")
+                }
+                if (e is FirebaseAuthException && (e.errorCode == "ERROR_USER_NOT_FOUND" || msg.contains("no user"))) {
+                    clearLocalState()
+                    return@withContext DeleteAccountResult.Success
+                }
+                return@withContext DeleteAccountResult.Error("Không thể xoá tài khoản: ${e.localizedMessage ?: "Vui lòng thử lại sau"}")
+            }
+        }
+    }
+
+    private suspend fun clearLocalState() {
         try {
             credentialManager.clearCredentialState(
                 androidx.credentials.ClearCredentialStateRequest()

@@ -33,6 +33,9 @@ interface UserFollowDao {
     @Query("DELETE FROM user_follows WHERE follower_id = :followerId AND (followed_id = :followedId OR (followed_handle != '' AND followed_handle = :followedHandle))")
     suspend fun deleteFollow(followerId: String, followedId: String, followedHandle: String)
 
+    @Query("DELETE FROM user_follows WHERE follower_id = :userId OR followed_id = :userId OR (followed_handle != '' AND (followed_handle = :userHandle OR followed_handle = '@' || :userHandle))")
+    suspend fun deleteFollowsByUser(userId: String, userHandle: String)
+
     @Query("SELECT COUNT(*) FROM user_follows WHERE follower_id = :followerId")
     suspend fun getFollowingCount(followerId: String): Int
 

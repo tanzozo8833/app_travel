@@ -50,6 +50,9 @@ interface CheckInDao {
     @Query("SELECT COUNT(*) FROM check_ins")
     suspend fun getCount(): Int
 
+    @Query("DELETE FROM check_ins WHERE user_id = :userId")
+    suspend fun deleteCheckInsByUserId(userId: String)
+
     @Query("DELETE FROM check_ins")
     suspend fun deleteAll()
 }

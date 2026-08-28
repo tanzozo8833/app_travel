@@ -35,6 +35,7 @@ fun SettingsScreen(
     userProfile: UserProfile,
     isDarkMode: Boolean,
     appLanguage: String,
+    isDeletingAccount: Boolean = false,
     onBack: () -> Unit,
     onToggleDarkMode: (Boolean) -> Unit,
     onSetLanguage: (String) -> Unit,
@@ -483,13 +484,73 @@ fun SettingsScreen(
         )
     }
 
-    // Dialog 4: Xác nhận xoá tài khoản
+    // Dialog 4: Xác nhận xoá tài khoản vĩnh viễn
     if (showDeleteAccountConfirmDialog) {
         AlertDialog(
-            onDismissRequest = { showDeleteAccountConfirmDialog = false },
-            title = { Text("Xoá tài khoản vĩnh viễn?", fontWeight = FontWeight.Bold, color = DangerRed) },
+            onDismissRequest = {
+                if (!isDeletingAccount) showDeleteAccountConfirmDialog = false
+            },
+            icon = {
+                Surface(
+                    shape = CircleShape,
+                    color = DangerRed.copy(alpha = 0.12f),
+                    modifier = Modifier.size(52.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Filled.WarningAmber,
+                            contentDescription = "Cảnh báo xoá tài khoản",
+                            tint = DangerRed,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+                }
+            },
+            title = {
+                Text(
+                    text = "Xoá Vĩnh Viễn Tài Khoản?",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = DangerRed
+                )
+            },
             text = {
-                Text("Hành động này sẽ xoá toàn bộ bài viết, dấu hộ chiếu 34 tỉnh thành và các chuyến đi đã tạo. Hành động này không thể hoàn tác.")
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        text = "Hành động này sẽ xoá hoàn toàn tài khoản của bạn khỏi hệ thống xác thực và không thể hoàn tác.",
+                        fontSize = 13.sp,
+                        color = TextPrimary,
+                        lineHeight = 18.sp
+                    )
+
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = DangerRed.copy(alpha = 0.06f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, DangerRed.copy(alpha = 0.25f)),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)
+                    ) {
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(
+                                text = "Dữ liệu cá nhân của bạn sẽ bị xoá sạch:",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = DangerRed
+                            )
+                            Text("• Toàn bộ hồ sơ cá nhân và phiên đăng nhập", fontSize = 11.5.sp, color = TextPrimary)
+                            Text("• Tất cả bài viết chia sẻ và bình luận", fontSize = 11.5.sp, color = TextPrimary)
+                            Text("• Toàn bộ con dấu hộ chiếu 34 tỉnh thành", fontSize = 11.5.sp, color = TextPrimary)
+                            Text("• Tất cả lịch trình chuyến đi đã tạo", fontSize = 11.5.sp, color = TextPrimary)
+                            Text("• Quan hệ theo dõi, thông báo & bộ sưu tập đã lưu", fontSize = 11.5.sp, color = TextPrimary)
+                        }
+                    }
+
+                    Text(
+                        text = "Lưu ý: Nếu phiên đăng nhập đã cũ, bạn có thể được yêu cầu đăng nhập lại một lần để xác thực quyền sở hữu trước khi xoá.",
+                        fontSize = 11.sp,
+                        color = TextSecondary,
+                        lineHeight = 15.sp
+                    )
+                }
             },
             confirmButton = {
                 Button(
@@ -497,16 +558,54 @@ fun SettingsScreen(
                         showDeleteAccountConfirmDialog = false
                         onDeleteAccount()
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = DangerRed)
+                    colors = ButtonDefaults.buttonColors(containerColor = DangerRed),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Xác nhận xoá", color = Color.White)
+                    Text("Tôi hiểu & Xoá vĩnh viễn", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteAccountConfirmDialog = false }) {
-                    Text("Huỷ")
+                OutlinedButton(
+                    onClick = { showDeleteAccountConfirmDialog = false },
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Huỷ & Giữ tài khoản", color = TextPrimary, fontSize = 13.sp)
                 }
             }
+        )
+    }
+
+    // Dialog: Loading khi đang thực hiện xoá tài khoản
+    if (isDeletingAccount) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = {
+                Text(
+                    text = "Đang Xử Lý Xoá Tài Khoản",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            },
+            text = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.padding(vertical = 8.dp)
+                ) {
+                    CircularProgressIndicator(
+                        color = DangerRed,
+                        modifier = Modifier.size(36.dp),
+                        strokeWidth = 3.dp
+                    )
+                    Text(
+                        text = "Đang xoá tài khoản trên hệ thống và dọn dẹp toàn bộ dữ liệu cá nhân trong máy...",
+                        fontSize = 13.sp,
+                        color = TextPrimary,
+                        lineHeight = 18.sp
+                    )
+                }
+            },
+            confirmButton = {}
         )
     }
 

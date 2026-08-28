@@ -45,6 +45,9 @@ interface TripDao {
     @Query("DELETE FROM trips WHERE id = :id")
     suspend fun deleteById(id: String)
 
+    @Query("DELETE FROM trips WHERE user_id = :userId")
+    suspend fun deleteTripsByUserId(userId: String)
+
     @Query("SELECT COUNT(*) FROM trips")
     suspend fun getCount(): Int
 

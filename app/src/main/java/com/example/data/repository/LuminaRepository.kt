@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import com.example.data.auth.AuthManager
 import com.example.data.auth.AuthResult
+import com.example.data.auth.DeleteAccountResult
 import com.example.data.local.database.LuminaDatabase
 import com.example.data.local.entity.*
 import com.example.data.model.*
@@ -129,6 +130,41 @@ class LuminaRepository(
     suspend fun logout() {
         authManager.logout()
         database.userProfileDao().setActiveProfile("")
+    }
+
+    /**
+     * Completely deletes the user account from Firebase Auth and wipes all local
+     * personal records (profile, posts, comments, check-in stamps, trips, follows,
+     * notifications, and saved boards) belonging to this user from Room database.
+     * Sample datasets and other users' records are preserved.
+     */
+    suspend fun deleteUserAccount(activity: Activity): DeleteAccountResult {
+        val activeProfile = database.userProfileDao().getActiveProfile()
+        val userId = activeProfile?.id ?: authManager.currentAuthUser.value?.id ?: ""
+        val userHandle = activeProfile?.username ?: authManager.currentAuthUser.value?.username ?: ""
+
+        // 1. Delete from Firebase Authentication (handles re-auth automatically if needed)
+        val deleteResult = authManager.deleteAccount(activity)
+        if (deleteResult is DeleteAccountResult.Error || deleteResult is DeleteAccountResult.Cancelled) {
+            return deleteResult
+        }
+
+        // 2. Delete all user-specific data from Room database
+        if (userId.isNotBlank()) {
+            database.userProfileDao().deleteById(userId)
+            database.postDao().deletePostsByUser(userId, userHandle)
+            database.commentDao().deleteCommentsByUser(userId, userHandle)
+            database.checkInDao().deleteCheckInsByUserId(userId)
+            database.tripDao().deleteTripsByUserId(userId)
+            database.userFollowDao().deleteFollowsByUser(userId, userHandle)
+            database.notificationDao().deleteNotificationsByUserId(userId)
+            database.savedBoardDao().deleteSavedBoardsByUserId(userId)
+        }
+
+        // 3. Clear active profile state
+        database.userProfileDao().setActiveProfile("")
+
+        return DeleteAccountResult.Success
     }
 
     val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->

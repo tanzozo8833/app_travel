@@ -32,6 +32,9 @@ interface SavedBoardDao {
     @Delete
     suspend fun delete(board: SavedBoardEntity)
 
+    @Query("DELETE FROM saved_boards WHERE user_id = :userId")
+    suspend fun deleteSavedBoardsByUserId(userId: String)
+
     @Query("SELECT COUNT(*) FROM saved_boards")
     suspend fun getCount(): Int
 

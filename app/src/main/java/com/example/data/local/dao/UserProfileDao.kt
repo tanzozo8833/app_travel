@@ -44,6 +44,9 @@ interface UserProfileDao {
     @Delete
     suspend fun delete(profile: UserProfileEntity)
 
+    @Query("DELETE FROM user_profiles WHERE id = :userId")
+    suspend fun deleteById(userId: String)
+
     @Query("SELECT COUNT(*) FROM user_profiles")
     suspend fun getCount(): Int
 

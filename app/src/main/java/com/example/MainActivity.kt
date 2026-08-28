@@ -1,5 +1,6 @@
 package com.example
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -101,6 +102,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val isShowingTravelCv by viewModel.isShowingTravelCv.collectAsState()
 
     val isShowingSettings by viewModel.isShowingSettings.collectAsState()
+    val isDeletingAccount by viewModel.isDeletingAccount.collectAsState()
     val isDarkMode by viewModel.isDarkMode.collectAsState()
     val appLanguage by viewModel.appLanguage.collectAsState()
 
@@ -431,13 +433,18 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                 userProfile = userProfile,
                 isDarkMode = isDarkMode,
                 appLanguage = appLanguage,
+                isDeletingAccount = isDeletingAccount,
                 onBack = { viewModel.showSettings(false) },
                 onToggleDarkMode = { viewModel.setDarkMode(it) },
                 onSetLanguage = { viewModel.setLanguage(it) },
                 onUpdateProfile = { name, bio, title -> viewModel.updateProfileInfo(name, bio, title) },
                 onClearCache = { viewModel.clearCache() },
                 onLogout = { viewModel.logout() },
-                onDeleteAccount = { viewModel.deleteAccount() }
+                onDeleteAccount = {
+                    (context as? Activity)?.let { act ->
+                        viewModel.deleteAccount(act)
+                    }
+                }
             )
         }
 
