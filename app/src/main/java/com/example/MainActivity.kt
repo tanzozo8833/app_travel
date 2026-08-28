@@ -87,6 +87,9 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val userProfile by viewModel.userProfile.collectAsState()
     val savedBoards by viewModel.savedBoards.collectAsState()
     val frames by viewModel.frames.collectAsState()
+    val followedTargetKeys by viewModel.followedTargetKeys.collectAsState()
+    val followingCount by viewModel.followingCount.collectAsState()
+    val followerCount by viewModel.followerCount.collectAsState()
 
     val selectedPost by viewModel.selectedPost.collectAsState()
     val selectedTrip by viewModel.selectedTrip.collectAsState()
@@ -148,8 +151,19 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             provinces = provinces,
                             places = places,
                             checkIns = checkIns,
+                            followedTargetKeys = followedTargetKeys,
+                            currentUserId = userProfile.id,
+                            currentUsername = userProfile.username,
                             currentSubTab = feedSubTab,
                             onSubTabChanged = { viewModel.setFeedSubTab(it) },
+                            onFollowClick = { post ->
+                                viewModel.toggleFollow(
+                                    authorId = post.userId,
+                                    authorHandle = post.authorHandle,
+                                    authorName = post.authorName,
+                                    authorAvatarUrl = post.authorAvatarUrl
+                                )
+                            },
                             onPostClick = { viewModel.openPostDetail(it) },
                             onTripClick = { viewModel.openTripDetail(it) },
                             onLikeClick = { viewModel.toggleLike(it.id) },
@@ -252,6 +266,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             posts = posts,
                             checkIns = checkIns,
                             places = places,
+                            followingCount = followingCount,
+                            followerCount = followerCount,
                             onOpenTravelCv = { viewModel.showTravelCv(true) },
                             onOpenSettings = { viewModel.showSettings(true) },
                             onProvinceClick = { viewModel.showCityPassport(true, it) },
@@ -277,6 +293,17 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                 PostDetailScreen(
                     post = post,
                     allPosts = posts,
+                    followedTargetKeys = followedTargetKeys,
+                    currentUserId = userProfile.id,
+                    currentUsername = userProfile.username,
+                    onFollowClick = { p ->
+                        viewModel.toggleFollow(
+                            authorId = p.userId,
+                            authorHandle = p.authorHandle,
+                            authorName = p.authorName,
+                            authorAvatarUrl = p.authorAvatarUrl
+                        )
+                    },
                     onPostClick = { viewModel.openPostDetail(it) },
                     onBack = { viewModel.closePostDetail() },
                     onTripClick = { viewModel.openTripDetail(it) },

@@ -45,6 +45,10 @@ import kotlinx.coroutines.withContext
 fun PostDetailScreen(
     post: Post,
     allPosts: List<Post> = emptyList(),
+    followedTargetKeys: Set<String> = emptySet(),
+    currentUserId: String = "",
+    currentUsername: String = "",
+    onFollowClick: (Post) -> Unit = {},
     onPostClick: (Post) -> Unit = {},
     onBack: () -> Unit,
     onTripClick: (Trip) -> Unit,
@@ -55,7 +59,8 @@ fun PostDetailScreen(
     onAddComment: (postId: String, content: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isFollowed by remember { mutableStateOf(false) }
+    val isFollowing = post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
+    val isSelf = post.userId == currentUserId || (post.authorHandle.isNotBlank() && (post.authorHandle.equals(currentUsername, ignoreCase = true) || post.authorHandle.equals("@$currentUsername", ignoreCase = true)))
     val mediaUrls = if (post.mediaUrls.isNotEmpty()) post.mediaUrls else listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
     val pagerState = rememberPagerState(pageCount = { mediaUrls.size })
 
@@ -175,19 +180,21 @@ fun PostDetailScreen(
                         )
                     }
 
-                    Surface(
-                        shape = RoundedCornerShape(999.dp),
-                        color = if (isFollowed) BgCanvas else Brand100,
-                        border = if (isFollowed) androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD0DDD6)) else null,
-                        modifier = Modifier.clickable { isFollowed = !isFollowed }
-                    ) {
-                        Text(
-                            text = if (isFollowed) "Đã theo dõi" else "+ Theo dõi",
-                            fontSize = 11.5.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = if (isFollowed) TextSecondary else Brand700,
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp)
-                        )
+                    if (!isSelf) {
+                        Surface(
+                            shape = RoundedCornerShape(999.dp),
+                            color = if (isFollowing) BgCanvas else Brand100,
+                            border = if (isFollowing) androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD0DDD6)) else null,
+                            modifier = Modifier.clickable { onFollowClick(post) }
+                        ) {
+                            Text(
+                                text = if (isFollowing) "Đang theo dõi" else "+ Theo dõi",
+                                fontSize = 11.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (isFollowing) TextSecondary else Brand700,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -462,8 +469,14 @@ fun PostDetailScreen(
                                     horizontalArrangement = Arrangement.spacedBy(0.dp)
                                 ) {
                                     Box(modifier = Modifier.weight(1f)) {
+                                        val p0 = pair[0]
+                                        val p0IsFollowing = p0.userId in followedTargetKeys || (p0.authorHandle.isNotBlank() && p0.authorHandle in followedTargetKeys)
+                                        val p0IsSelf = p0.userId == currentUserId || (p0.authorHandle.isNotBlank() && (p0.authorHandle.equals(currentUsername, ignoreCase = true) || p0.authorHandle.equals("@$currentUsername", ignoreCase = true)))
                                         PostCard(
-                                            post = pair[0],
+                                            post = p0,
+                                            isFollowing = p0IsFollowing,
+                                            isSelf = p0IsSelf,
+                                            onFollowClick = { onFollowClick(p0) },
                                             onPostClick = onPostClick,
                                             onTripClick = onTripClick,
                                             onLikeClick = onLikeClick,
@@ -474,8 +487,14 @@ fun PostDetailScreen(
                                     }
                                     if (pair.size > 1) {
                                         Box(modifier = Modifier.weight(1f)) {
+                                            val p1 = pair[1]
+                                            val p1IsFollowing = p1.userId in followedTargetKeys || (p1.authorHandle.isNotBlank() && p1.authorHandle in followedTargetKeys)
+                                            val p1IsSelf = p1.userId == currentUserId || (p1.authorHandle.isNotBlank() && (p1.authorHandle.equals(currentUsername, ignoreCase = true) || p1.authorHandle.equals("@$currentUsername", ignoreCase = true)))
                                             PostCard(
-                                                post = pair[1],
+                                                post = p1,
+                                                isFollowing = p1IsFollowing,
+                                                isSelf = p1IsSelf,
+                                                onFollowClick = { onFollowClick(p1) },
                                                 onPostClick = onPostClick,
                                                 onTripClick = onTripClick,
                                                 onLikeClick = onLikeClick,

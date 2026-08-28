@@ -22,10 +22,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.GpsFixed
 import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Verified
+import androidx.compose.material.icons.outlined.People
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,6 +38,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -78,8 +81,12 @@ fun HomeScreen(
     provinces: List<Province>,
     places: List<Place> = emptyList(),
     checkIns: List<CheckInRecord> = emptyList(),
+    followedTargetKeys: Set<String> = emptySet(),
+    currentUserId: String = "",
+    currentUsername: String = "",
     currentSubTab: FeedSubTab,
     onSubTabChanged: (FeedSubTab) -> Unit,
+    onFollowClick: (Post) -> Unit = {},
     onPostClick: (Post) -> Unit,
     onTripClick: (Trip) -> Unit,
     onLikeClick: (Post) -> Unit,
@@ -356,23 +363,112 @@ fun HomeScreen(
             val targetProvinceCode = detectedProvince?.code ?: "LDG"
             val filteredPosts = when (currentSubTab) {
                 FeedSubTab.EXPLORE -> posts
-                FeedSubTab.FOLLOWING -> posts.filter { it.authorHandle in listOf("linh.travels", "vy.explorer") }
+                FeedSubTab.FOLLOWING -> posts.filter { post ->
+                    post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
+                }
                 FeedSubTab.NEARBY -> {
                     val nearbyPosts = posts.filter { it.provinceCode == targetProvinceCode }
                     if (nearbyPosts.isNotEmpty()) nearbyPosts else posts
                 }
             }
 
-            items(filteredPosts, key = { it.id }) { post ->
-                PostCard(
-                    post = post,
-                    onPostClick = onPostClick,
-                    onTripClick = onTripClick,
-                    onLikeClick = onLikeClick,
-                    onSaveClick = onSaveClick,
-                    onShareClick = onShareClick,
-                    onCommentClick = onCommentClick
-                )
+            if (currentSubTab == FeedSubTab.FOLLOWING && filteredPosts.isEmpty()) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = BgSurface),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFDCE6E1)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp, vertical = 20.dp)
+                            .testTag("empty_following_prompt")
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = Brand100,
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.People,
+                                        contentDescription = null,
+                                        tint = Brand700,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            Text(
+                                text = "Bạn chưa theo dõi ai",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
+                            )
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Text(
+                                text = "Bạn chưa theo dõi ai, hãy khám phá thêm ở tab Khám phá.",
+                                fontSize = 13.sp,
+                                color = TextSecondary,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                lineHeight = 18.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Button(
+                                onClick = { onSubTabChanged(FeedSubTab.EXPLORE) },
+                                shape = RoundedCornerShape(999.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                modifier = Modifier.testTag("explore_tab_button")
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Explore,
+                                    contentDescription = null,
+                                    tint = Gold500,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = "Khám phá ngay ➔",
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
+                }
+            } else {
+                items(filteredPosts, key = { it.id }) { post ->
+                    val isFollowing = post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
+                    val isSelf = post.userId == currentUserId || (post.authorHandle.isNotBlank() && (post.authorHandle.equals(currentUsername, ignoreCase = true) || post.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+
+                    PostCard(
+                        post = post,
+                        isFollowing = isFollowing,
+                        isSelf = isSelf,
+                        onFollowClick = { onFollowClick(post) },
+                        onPostClick = onPostClick,
+                        onTripClick = onTripClick,
+                        onLikeClick = onLikeClick,
+                        onSaveClick = onSaveClick,
+                        onShareClick = onShareClick,
+                        onCommentClick = onCommentClick
+                    )
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun PostCard(
     post: Post,
+    isFollowing: Boolean = false,
+    isSelf: Boolean = false,
+    onFollowClick: () -> Unit = {},
     onPostClick: (Post) -> Unit,
     onTripClick: (Trip) -> Unit,
     onLikeClick: (Post) -> Unit,
@@ -106,11 +110,12 @@ fun PostCard(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = post.authorName,
-                            fontSize = 11.5.sp,
+                            fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f, fill = false)
                         )
 
                         // Trip Attached Pill
@@ -125,10 +130,10 @@ fun PostCard(
                             ) {
                                 Text(
                                     text = "Trip",
-                                    fontSize = 8.sp,
+                                    fontSize = 7.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Brand700,
-                                    modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                                    modifier = Modifier.padding(horizontal = 3.dp, vertical = 1.dp)
                                 )
                             }
                         }
@@ -137,11 +142,33 @@ fun PostCard(
                     // Location tag
                     Text(
                         text = post.locationLabel,
-                        fontSize = 9.sp,
+                        fontSize = 8.5.sp,
                         color = TextSecondary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                }
+
+                // Follow / Following Button (Only for other users, never for self)
+                if (!isSelf) {
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Surface(
+                        shape = RoundedCornerShape(999.dp),
+                        color = if (isFollowing) BgCanvas else Brand100,
+                        border = if (isFollowing) androidx.compose.foundation.BorderStroke(0.8.dp, Color(0xFFCBD7D1)) else null,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(999.dp))
+                            .clickable { onFollowClick() }
+                            .testTag("post_follow_button_${post.id}")
+                    ) {
+                        Text(
+                            text = if (isFollowing) "Đang theo dõi" else "Theo dõi",
+                            fontSize = 8.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (isFollowing) TextSecondary else Brand700,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp)
+                        )
+                    }
                 }
             }
 

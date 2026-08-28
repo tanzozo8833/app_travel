@@ -67,6 +67,8 @@ fun ProfileScreen(
     posts: List<Post>,
     checkIns: List<CheckInRecord> = emptyList(),
     places: List<Place> = emptyList(),
+    followingCount: Int = 0,
+    followerCount: Int = 0,
     onOpenTravelCv: () -> Unit,
     onOpenSettings: () -> Unit = {},
     onProvinceClick: (Province) -> Unit,
@@ -245,16 +247,30 @@ fun ProfileScreen(
                         border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD6DFDB)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.SpaceAround
-                        ) {
-                            ProfileStatItem("Tỉnh thành", "$visitedProvincesCount/$totalProvincesCount")
-                            ProfileStatItem("Con dấu", "$totalStamps")
-                            ProfileStatItem("Chuyến đi", "${trips.size}")
-                            ProfileStatItem("Lượt lưu", "${savedPosts.size}")
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            // Social follow & saves counters (live from database)
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceAround
+                            ) {
+                                ProfileStatItem("Đang theo dõi", "$followingCount")
+                                ProfileStatItem("Người theo dõi", "$followerCount")
+                                ProfileStatItem("Lượt lưu", "${savedPosts.size}")
+                            }
+
+                            Spacer(modifier = Modifier.height(8.dp))
+                            HorizontalDivider(color = Color(0xFFE6EFEA), thickness = 0.8.dp)
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            // Vietnam exploration counters
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceAround
+                            ) {
+                                ProfileStatItem("Tỉnh thành", "$visitedProvincesCount/$totalProvincesCount")
+                                ProfileStatItem("Con dấu", "$totalStamps")
+                                ProfileStatItem("Chuyến đi", "${trips.size}")
+                            }
                         }
                     }
                 }

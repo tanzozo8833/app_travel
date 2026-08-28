@@ -24,9 +24,10 @@ import com.example.data.local.seed.DatabaseSeeder
         NotificationEntity::class,
         SavedBoardEntity::class,
         UserProfileEntity::class,
-        AppSettingsEntity::class
+        AppSettingsEntity::class,
+        UserFollowEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)
@@ -44,6 +45,7 @@ abstract class LuminaDatabase : RoomDatabase() {
     abstract fun savedBoardDao(): SavedBoardDao
     abstract fun userProfileDao(): UserProfileDao
     abstract fun appSettingsDao(): AppSettingsDao
+    abstract fun userFollowDao(): UserFollowDao
 
     companion object {
         private const val DATABASE_NAME = "lumina_vietnam_travel.db"

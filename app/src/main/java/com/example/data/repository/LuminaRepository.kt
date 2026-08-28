@@ -427,6 +427,55 @@ class LuminaRepository(
         return GeminiService.askAi(question, destination, plugin)
     }
 
+    // Follow & Social Relationship Engine
+    fun getFollowedTargetKeysFlow(followerId: String): Flow<Set<String>> {
+        return database.userFollowDao().getFollowingsFlow(followerId).map { follows ->
+            val set = mutableSetOf<String>()
+            follows.forEach { follow ->
+                if (follow.followedId.isNotBlank()) set.add(follow.followedId)
+                if (follow.followedHandle.isNotBlank()) set.add(follow.followedHandle)
+            }
+            set
+        }
+    }
+
+    fun getFollowingCountFlow(userId: String): Flow<Int> {
+        return database.userFollowDao().getFollowingCountFlow(userId)
+    }
+
+    fun getFollowerCountFlow(userId: String): Flow<Int> {
+        return database.userFollowDao().getFollowerCountFlow(userId)
+    }
+
+    suspend fun isFollowing(followerId: String, followedId: String, followedHandle: String): Boolean {
+        return database.userFollowDao().isFollowing(followerId, followedId, followedHandle)
+    }
+
+    suspend fun toggleFollow(
+        followerId: String,
+        followedId: String,
+        followedHandle: String,
+        followedName: String,
+        followedAvatarUrl: String
+    ): Boolean {
+        val currentlyFollowing = database.userFollowDao().isFollowing(followerId, followedId, followedHandle)
+        if (currentlyFollowing) {
+            database.userFollowDao().deleteFollow(followerId, followedId, followedHandle)
+            return false
+        } else {
+            val entity = UserFollowEntity(
+                followerId = followerId,
+                followedId = followedId,
+                followedHandle = followedHandle,
+                followedName = followedName,
+                followedAvatarUrl = followedAvatarUrl,
+                createdAt = System.currentTimeMillis()
+            )
+            database.userFollowDao().insert(entity)
+            return true
+        }
+    }
+
     // Search filter
     fun search(query: String): Flow<List<Place>> {
         val q = query.trim()

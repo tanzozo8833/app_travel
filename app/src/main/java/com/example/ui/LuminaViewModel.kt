@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -192,6 +193,40 @@ class LuminaViewModel(
         emptyList()
     )
 
+    // Follow / Social State
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val followedTargetKeys: StateFlow<Set<String>> = userProfile
+        .flatMapLatest { profile ->
+            repository.getFollowedTargetKeysFlow(profile.id)
+        }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            emptySet()
+        )
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val followingCount: StateFlow<Int> = userProfile
+        .flatMapLatest { profile ->
+            repository.getFollowingCountFlow(profile.id)
+        }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            0
+        )
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val followerCount: StateFlow<Int> = userProfile
+        .flatMapLatest { profile ->
+            repository.getFollowerCountFlow(profile.id)
+        }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            0
+        )
+
     // AI Planning State
     private val _aiWizardState = MutableStateFlow(AiWizardState())
     val aiWizardState: StateFlow<AiWizardState> = _aiWizardState.asStateFlow()
@@ -330,6 +365,30 @@ class LuminaViewModel(
     }
 
     fun getCommentsForPost(postId: String): Flow<List<Comment>> = repository.getCommentsForPost(postId)
+
+    fun toggleFollow(
+        authorId: String,
+        authorHandle: String,
+        authorName: String,
+        authorAvatarUrl: String
+    ) {
+        val currentUserId = userProfile.value.id
+        val currentHandle = userProfile.value.username
+        if (currentUserId == authorId || (authorHandle.isNotBlank() && (authorHandle.equals(currentHandle, ignoreCase = true) || authorHandle.equals("@$currentHandle", ignoreCase = true)))) {
+            showToast("Bạn không thể tự theo dõi chính mình")
+            return
+        }
+        viewModelScope.launch {
+            val isNowFollowing = repository.toggleFollow(
+                followerId = currentUserId,
+                followedId = authorId,
+                followedHandle = authorHandle,
+                followedName = authorName,
+                followedAvatarUrl = authorAvatarUrl
+            )
+            showToast(if (isNowFollowing) "Đã theo dõi $authorName" else "Đã bỏ theo dõi $authorName")
+        }
+    }
 
     fun publishPost(
         caption: String,
