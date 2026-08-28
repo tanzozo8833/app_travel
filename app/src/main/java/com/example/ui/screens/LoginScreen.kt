@@ -5,22 +5,18 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Security
 import androidx.compose.material.icons.outlined.WifiOff
@@ -28,14 +24,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -50,14 +43,11 @@ fun LoginScreen(
     errorMessage: String?,
     isNetworkError: Boolean,
     onSignInWithGoogle: (Activity) -> Unit,
-    onDirectSignIn: (email: String, name: String, avatarUrl: String) -> Unit,
     onClearError: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
-
-    var showDirectLoginDialog by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
@@ -71,7 +61,7 @@ fun LoginScreen(
                 .height(340.dp)
         ) {
             AsyncImage(
-                model = "https://images.unsplash.com/photo-1528127269322-539801943592?w=1080&auto=format&fit=crop", // Ha Long / Vietnam sunset scenery
+                model = "https://images.unsplash.com/photo-1528127269322-539801943592?w=1080&auto=format&fit=crop",
                 contentDescription = "Lumina Vietnam Travel",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -281,11 +271,9 @@ fun LoginScreen(
                         onClick = {
                             if (activity != null) {
                                 onSignInWithGoogle(activity)
-                            } else {
-                                showDirectLoginDialog = true
                             }
                         },
-                        enabled = !isLoading,
+                        enabled = !isLoading && activity != null,
                         shape = RoundedCornerShape(14.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.White,
@@ -307,8 +295,8 @@ fun LoginScreen(
                             )
                             Spacer(modifier = Modifier.width(12.dp))
                             Text(
-                                text = "Đang kết nối Google...",
-                                fontSize = 14.5.sp,
+                                text = "Đang kết nối Google & Firebase...",
+                                fontSize = 14.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = TextPrimary
                             )
@@ -323,29 +311,6 @@ fun LoginScreen(
                                 color = Color(0xFF1F1F1F)
                             )
                         }
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Secondary Direct Account Selection (for seamless testing & devices without Play Services)
-                    TextButton(
-                        onClick = { showDirectLoginDialog = true },
-                        enabled = !isLoading,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.AccountCircle,
-                            contentDescription = null,
-                            tint = Brand700,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "Đăng nhập nhanh với email của bạn",
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Brand700
-                        )
                     }
                 }
             }
@@ -379,75 +344,12 @@ fun LoginScreen(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Bảo mật an toàn qua Google OAuth & Android Identity",
+                    text = "Bảo mật an toàn qua Google OAuth & Firebase Auth",
                     fontSize = 11.5.sp,
                     color = Color.Gray
                 )
             }
         }
-    }
-
-    // Direct Login Dialog (User-friendly fallback & instant login)
-    if (showDirectLoginDialog) {
-        var emailInput by remember { mutableStateOf("hoangductan733@gmail.com") }
-        var nameInput by remember { mutableStateOf("Hoàng Đức Tân") }
-
-        AlertDialog(
-            onDismissRequest = { showDirectLoginDialog = false },
-            title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    GoogleGIcon(modifier = Modifier.size(20.dp))
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text("Đăng nhập tài khoản Google", fontWeight = FontWeight.Bold, fontSize = 17.sp)
-                }
-            },
-            text = {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(
-                        text = "Nhập thông tin tài khoản Google của bạn để tạo hồ sơ người dùng chính thức trong app:",
-                        fontSize = 12.5.sp,
-                        color = TextSecondary
-                    )
-                    OutlinedTextField(
-                        value = emailInput,
-                        onValueChange = { emailInput = it },
-                        label = { Text("Địa chỉ Email Google") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    OutlinedTextField(
-                        value = nameInput,
-                        onValueChange = { nameInput = it },
-                        label = { Text("Họ và tên hiển thị") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        if (emailInput.isNotBlank() && nameInput.isNotBlank()) {
-                            showDirectLoginDialog = false
-                            onDirectSignIn(
-                                emailInput.trim(),
-                                nameInput.trim(),
-                                "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop"
-                            )
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
-                    enabled = emailInput.isNotBlank() && nameInput.isNotBlank()
-                ) {
-                    Text("Xác nhận đăng nhập")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDirectLoginDialog = false }) {
-                    Text("Huỷ")
-                }
-            }
-        )
     }
 }
 

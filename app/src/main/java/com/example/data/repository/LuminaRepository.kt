@@ -87,14 +87,6 @@ class LuminaRepository(
         return result
     }
 
-    suspend fun signInDirect(email: String, displayName: String, avatarUrl: String = ""): UserProfile {
-        val profile = authManager.signInDirect(email, displayName, avatarUrl)
-        val entity = UserProfileEntity.fromDomainModel(profile, isActive = true)
-        database.userProfileDao().insert(entity)
-        database.userProfileDao().setActiveProfile(profile.id)
-        return profile
-    }
-
     suspend fun logout() {
         authManager.logout()
         database.userProfileDao().setActiveProfile("")
@@ -123,34 +115,6 @@ class LuminaRepository(
         scope.launch {
             val entity = UserProfileEntity.fromDomainModel(user, isActive = true)
             database.userProfileDao().insert(entity)
-        }
-    }
-
-    fun switchActiveUser(userId: String) {
-        scope.launch {
-            database.userProfileDao().setActiveProfile(userId)
-        }
-    }
-
-    fun addNewUser(displayName: String, username: String) {
-        scope.launch {
-            val newAcc = UserProfile(
-                id = "u_${System.currentTimeMillis()}",
-                username = username.lowercase().replace(" ", "."),
-                displayName = displayName,
-                avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop",
-                tagTitle = "NEW EXPLORER",
-                bio = "Bắt đầu hành trình khám phá Việt Nam cùng Lumina ✨",
-                topCityName = "Đà Nẵng",
-                topCityCheckInCount = 1,
-                visitedProvincesCount = 1,
-                totalProvincesCount = 34,
-                totalDistanceKm = 300.0,
-                tripsCompletedCount = 1,
-                totalSavesCount = 12
-            )
-            database.userProfileDao().insert(UserProfileEntity.fromDomainModel(newAcc, isActive = true))
-            database.userProfileDao().setActiveProfile(newAcc.id)
         }
     }
 

@@ -54,7 +54,6 @@ class MainActivity : ComponentActivity() {
                         errorMessage = loginError,
                         isNetworkError = loginErrorIsNetwork,
                         onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
-                        onDirectSignIn = { email, name, avatar -> viewModel.signInWithDirectEmail(email, name, avatar) },
                         onClearError = { viewModel.clearLoginError() }
                     )
                 } else {
@@ -97,8 +96,6 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val isShowingSettings by viewModel.isShowingSettings.collectAsState()
     val isDarkMode by viewModel.isDarkMode.collectAsState()
     val appLanguage by viewModel.appLanguage.collectAsState()
-    val userAccounts by viewModel.userAccounts.collectAsState()
-    val currentAccountIndex by viewModel.currentAccountIndex.collectAsState()
 
     val aiWizardState by viewModel.aiWizardState.collectAsState()
     val chatMessages by viewModel.chatMessages.collectAsState()

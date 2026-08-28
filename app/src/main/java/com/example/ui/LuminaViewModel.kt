@@ -128,15 +128,6 @@ class LuminaViewModel(
     private val _appLanguage = MutableStateFlow("vi")
     val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
 
-    val userAccounts: StateFlow<List<UserProfile>> = repository.userProfiles.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        emptyList()
-    )
-
-    private val _currentAccountIndex = MutableStateFlow(0)
-    val currentAccountIndex: StateFlow<Int> = _currentAccountIndex.asStateFlow()
-
     private val _isShowingCommentSheet = MutableStateFlow(false)
     val isShowingCommentSheet: StateFlow<Boolean> = _isShowingCommentSheet.asStateFlow()
 
@@ -553,23 +544,6 @@ class LuminaViewModel(
         }
     }
 
-    fun signInWithDirectEmail(email: String, displayName: String, avatarUrl: String = "") {
-        if (_isLoggingIn.value) return
-        _isLoggingIn.value = true
-        _loginError.value = null
-
-        viewModelScope.launch {
-            try {
-                val profile = repository.signInDirect(email, displayName, avatarUrl)
-                _isLoggingIn.value = false
-                showToast("Đăng nhập thành công với tài khoản ${profile.displayName}!")
-            } catch (e: Exception) {
-                _isLoggingIn.value = false
-                _loginError.value = "Lỗi khi đăng nhập: ${e.localizedMessage}"
-            }
-        }
-    }
-
     fun clearLoginError() {
         _loginError.value = null
         _loginErrorIsNetwork.value = false
@@ -588,21 +562,6 @@ class LuminaViewModel(
     fun setLanguage(lang: String) {
         _appLanguage.value = lang
         showToast(if (lang == "vi") "Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳" else "Language changed to English 🇬🇧")
-    }
-
-    fun switchAccount(index: Int) {
-        val accounts = userAccounts.value
-        if (index in accounts.indices) {
-            _currentAccountIndex.value = index
-            val target = accounts[index]
-            repository.switchActiveUser(target.id)
-            showToast("Đã chuyển sang tài khoản @${target.username}")
-        }
-    }
-
-    fun addNewAccount(displayName: String, username: String) {
-        repository.addNewUser(displayName, username)
-        showToast("Đã tạo và đăng nhập tài khoản mới!")
     }
 
     fun updateProfileInfo(displayName: String, bio: String, tagTitle: String) {
