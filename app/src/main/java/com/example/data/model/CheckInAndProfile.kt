@@ -37,18 +37,6 @@ data class LuminaFrame(
     val isSeasonal: Boolean = false
 )
 
-data class AchievementBadge(
-    val id: String,
-    val code: String,
-    val name: String,
-    val description: String,
-    val iconEmoji: String,
-    val isEarned: Boolean = false,
-    val progressCurrent: Int = 0,
-    val progressMax: Int = 1,
-    val earnedDate: String? = null
-)
-
 data class NotificationItem(
     val id: String = UUID.randomUUID().toString(),
     val isSocial: Boolean = true, // true: Hoạt động (Likes, comments), false: Của bạn (Hành trình, geofence, badges)

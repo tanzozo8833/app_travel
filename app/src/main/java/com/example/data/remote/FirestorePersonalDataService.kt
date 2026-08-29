@@ -20,7 +20,6 @@ class FirestorePersonalDataService(
         private const val CHECK_INS = "check_ins"
         private const val TRIPS = "trips"
         private const val SAVED_BOARDS = "saved_boards"
-        private const val BADGES = "badges"
         private const val NOTIFICATIONS = "notifications"
     }
 
@@ -409,110 +408,7 @@ class FirestorePersonalDataService(
     }
 
     // ==========================================
-    // 4. ACHIEVEMENT BADGES (HUY HIỆU THÀNH TỰU)
-    // ==========================================
-
-    private fun documentToBadge(doc: DocumentSnapshot): AchievementBadge? {
-        if (!doc.exists()) return null
-        return try {
-            val id = doc.getString("id") ?: doc.id
-            val code = doc.getString("code") ?: id
-            val name = doc.getString("name") ?: ""
-            val description = doc.getString("description") ?: ""
-            val iconEmoji = doc.getString("iconEmoji") ?: "🏅"
-            val isEarned = doc.getBoolean("isEarned") ?: false
-            val progressCurrent = doc.getLong("progressCurrent")?.toInt() ?: 0
-            val progressMax = doc.getLong("progressMax")?.toInt() ?: 1
-            val earnedDate = doc.getString("earnedDate")
-
-            AchievementBadge(
-                id = id,
-                code = code,
-                name = name,
-                description = description,
-                iconEmoji = iconEmoji,
-                isEarned = isEarned,
-                progressCurrent = progressCurrent,
-                progressMax = progressMax,
-                earnedDate = earnedDate
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Error mapping AchievementBadge ${doc.id}", e)
-            null
-        }
-    }
-
-    fun observeBadges(userId: String): Flow<List<AchievementBadge>> = callbackFlow {
-        if (userId.isBlank()) {
-            trySend(emptyList())
-            close()
-            return@callbackFlow
-        }
-
-        val registration = userDoc(userId).collection(BADGES)
-            .addSnapshotListener { snapshot, error ->
-                if (error != null) {
-                    Log.w(TAG, "Listen failed for badges of $userId", error)
-                    return@addSnapshotListener
-                }
-                if (snapshot != null) {
-                    val list = snapshot.documents.mapNotNull { doc ->
-                        documentToBadge(doc)
-                    }
-                    trySend(list)
-                } else {
-                    trySend(emptyList())
-                }
-            }
-
-        awaitClose { registration.remove() }
-    }
-
-    suspend fun saveOrUpdateBadge(userId: String, badge: AchievementBadge) {
-        if (userId.isBlank() || badge.id.isBlank()) return
-        try {
-            val data = hashMapOf(
-                "id" to badge.id,
-                "code" to badge.code,
-                "name" to badge.name,
-                "description" to badge.description,
-                "iconEmoji" to badge.iconEmoji,
-                "isEarned" to badge.isEarned,
-                "progressCurrent" to badge.progressCurrent,
-                "progressMax" to badge.progressMax,
-                "earnedDate" to badge.earnedDate,
-                "updatedAt" to System.currentTimeMillis()
-            )
-            userDoc(userId).collection(BADGES).document(badge.id)
-                .set(data, SetOptions.merge())
-                .await()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error saving badge for $userId", e)
-        }
-    }
-
-    suspend fun updateBadgeProgress(userId: String, code: String, progress: Int, isEarned: Boolean, earnedDate: String?) {
-        if (userId.isBlank() || code.isBlank()) return
-        try {
-            val query = userDoc(userId).collection(BADGES).whereEqualTo("code", code).get().await()
-            for (doc in query.documents) {
-                val updates = hashMapOf<String, Any>(
-                    "progressCurrent" to progress,
-                    "isEarned" to isEarned,
-                    "updatedAt" to System.currentTimeMillis()
-                )
-                if (earnedDate != null) {
-                    updates["earnedDate"] = earnedDate
-                }
-                doc.reference.update(updates).await()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error updating badge progress $code for $userId", e)
-        }
-    }
-
-    // ==========================================
-    // 5. NOTIFICATIONS (THÔNG BÁO)
+    // 4. NOTIFICATIONS (THÔNG BÁO)
     // ==========================================
 
     private fun documentToNotification(doc: DocumentSnapshot): NotificationItem? {
@@ -627,7 +523,7 @@ class FirestorePersonalDataService(
 
     suspend fun deleteAllPersonalData(userId: String) {
         if (userId.isBlank()) return
-        val collections = listOf(CHECK_INS, TRIPS, SAVED_BOARDS, BADGES, NOTIFICATIONS)
+        val collections = listOf(CHECK_INS, TRIPS, SAVED_BOARDS, NOTIFICATIONS)
         for (colName in collections) {
             try {
                 val snapshot = userDoc(userId).collection(colName).get().await()

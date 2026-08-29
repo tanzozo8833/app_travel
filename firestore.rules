@@ -37,11 +37,6 @@ service cloud.firestore {
         allow read, write: if isOwner(userId);
       }
 
-      // Huy hiệu thành tựu: Chỉ chủ sở hữu mới đọc và ghi được
-      match /badges/{badgeId} {
-        allow read, write: if isOwner(userId);
-      }
-
       // Thông báo riêng: Chỉ chủ sở hữu mới đọc và ghi được
       match /notifications/{notificationId} {
         allow read, write: if isOwner(userId);

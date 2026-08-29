@@ -69,8 +69,9 @@ async function seedFirestore() {
 
   const users = seedData.users || [];
   const posts = seedData.posts || [];
+  const follows = seedData.follows || [];
 
-  console.log(`📦 Tìm thấy: ${users.length} hồ sơ người dùng, ${posts.length} bài viết.`);
+  console.log(`📦 Tìm thấy: ${users.length} hồ sơ người dùng, ${posts.length} bài viết, ${follows.length} quan hệ theo dõi.`);
 
   // 1. Đẩy hồ sơ người dùng mẫu vào collection "users"
   console.log('\n--- 1. Đang nạp hồ sơ người dùng (users) ---');
@@ -121,11 +122,24 @@ async function seedFirestore() {
     }
   }
 
+  // 3. Đẩy quan hệ theo dõi vào collection "user_follows"
+  console.log('\n--- 3. Đang nạp quan hệ theo dõi giữa các tài khoản mẫu (user_follows) ---');
+  for (const follow of follows) {
+    const followId = follow.id;
+    if (!followId) {
+      console.warn('⚠️ Bỏ qua quan hệ theo dõi thiếu id:', follow);
+      continue;
+    }
+    await db.collection('user_follows').doc(followId).set(follow, { merge: true });
+    console.log(`  ✅ [Follow] ${follow.followerId} ➔ ${follow.followedId}`);
+  }
+
   console.log('\n================================================================');
   console.log('🎉 HOÀN THÀNH NẠP DỮ LIỆU LÊN CLOUD FIRESTORE THÀNH CÔNG!');
-  console.log(`- Người dùng đã nạp: ${users.length}`);
-  console.log(`- Bài viết đã nạp:   ${posts.length}`);
-  console.log(`- Bình luận đã nạp: ${totalComments}`);
+  console.log(`- Người dùng đã nạp:     ${users.length}`);
+  console.log(`- Bài viết đã nạp:       ${posts.length}`);
+  console.log(`- Bình luận đã nạp:      ${totalComments}`);
+  console.log(`- Quan hệ theo dõi nạp:  ${follows.length}`);
   console.log('================================================================\n');
 }
 

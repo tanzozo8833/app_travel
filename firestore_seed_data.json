@@ -337,5 +337,115 @@
         }
       ]
     }
+  ],
+  "follows": [
+    {
+      "id": "usr_duc_anh_usr_minh_tri",
+      "followerId": "usr_duc_anh",
+      "followedId": "usr_minh_tri",
+      "createdAt": 1740010000000
+    },
+    {
+      "id": "usr_khanh_vy_usr_minh_tri",
+      "followerId": "usr_khanh_vy",
+      "followedId": "usr_minh_tri",
+      "createdAt": 1740020000000
+    },
+    {
+      "id": "usr_huong_giang_usr_minh_tri",
+      "followerId": "usr_huong_giang",
+      "followedId": "usr_minh_tri",
+      "createdAt": 1740030000000
+    },
+    {
+      "id": "usr_hoang_long_usr_minh_tri",
+      "followerId": "usr_hoang_long",
+      "followedId": "usr_minh_tri",
+      "createdAt": 1740040000000
+    },
+    {
+      "id": "usr_minh_tri_usr_duc_anh",
+      "followerId": "usr_minh_tri",
+      "followedId": "usr_duc_anh",
+      "createdAt": 1740050000000
+    },
+    {
+      "id": "usr_huong_giang_usr_duc_anh",
+      "followerId": "usr_huong_giang",
+      "followedId": "usr_duc_anh",
+      "createdAt": 1740060000000
+    },
+    {
+      "id": "usr_hoang_long_usr_duc_anh",
+      "followerId": "usr_hoang_long",
+      "followedId": "usr_duc_anh",
+      "createdAt": 1740070000000
+    },
+    {
+      "id": "usr_thao_linh_usr_duc_anh",
+      "followerId": "usr_thao_linh",
+      "followedId": "usr_duc_anh",
+      "createdAt": 1740080000000
+    },
+    {
+      "id": "usr_duc_anh_usr_khanh_vy",
+      "followerId": "usr_duc_anh",
+      "followedId": "usr_khanh_vy",
+      "createdAt": 1740090000000
+    },
+    {
+      "id": "usr_huong_giang_usr_khanh_vy",
+      "followerId": "usr_huong_giang",
+      "followedId": "usr_khanh_vy",
+      "createdAt": 1740100000000
+    },
+    {
+      "id": "usr_thao_linh_usr_khanh_vy",
+      "followerId": "usr_thao_linh",
+      "followedId": "usr_khanh_vy",
+      "createdAt": 1740110000000
+    },
+    {
+      "id": "usr_minh_tri_usr_huong_giang",
+      "followerId": "usr_minh_tri",
+      "followedId": "usr_huong_giang",
+      "createdAt": 1740120000000
+    },
+    {
+      "id": "usr_khanh_vy_usr_huong_giang",
+      "followerId": "usr_khanh_vy",
+      "followedId": "usr_huong_giang",
+      "createdAt": 1740130000000
+    },
+    {
+      "id": "usr_hoang_long_usr_huong_giang",
+      "followerId": "usr_hoang_long",
+      "followedId": "usr_huong_giang",
+      "createdAt": 1740140000000
+    },
+    {
+      "id": "usr_thao_linh_usr_huong_giang",
+      "followerId": "usr_thao_linh",
+      "followedId": "usr_huong_giang",
+      "createdAt": 1740150000000
+    },
+    {
+      "id": "usr_duc_anh_usr_hoang_long",
+      "followerId": "usr_duc_anh",
+      "followedId": "usr_hoang_long",
+      "createdAt": 1740160000000
+    },
+    {
+      "id": "usr_duc_anh_usr_thao_linh",
+      "followerId": "usr_duc_anh",
+      "followedId": "usr_thao_linh",
+      "createdAt": 1740170000000
+    },
+    {
+      "id": "usr_khanh_vy_usr_thao_linh",
+      "followerId": "usr_khanh_vy",
+      "followedId": "usr_thao_linh",
+      "createdAt": 1740180000000
+    }
   ]
 }

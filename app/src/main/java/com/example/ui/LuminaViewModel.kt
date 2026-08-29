@@ -302,11 +302,6 @@ class LuminaViewModel(
         SharingStarted.Eagerly,
         emptyList()
     )
-    val badges: StateFlow<List<AchievementBadge>> = repository.badges.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        emptyList()
-    )
     val notifications: StateFlow<List<NotificationItem>> = repository.notifications.stateIn(
         viewModelScope,
         SharingStarted.Eagerly,

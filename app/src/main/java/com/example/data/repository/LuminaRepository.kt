@@ -93,16 +93,6 @@ class LuminaRepository(
     }
 
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-    val badges: Flow<List<AchievementBadge>> = authManager.currentAuthUser.flatMapLatest { user ->
-        val uid = user?.id ?: ""
-        if (uid.isNotBlank()) {
-            firestorePersonalService.observeBadges(uid)
-        } else {
-            flowOf(emptyList())
-        }
-    }
-
-    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val notifications: Flow<List<NotificationItem>> = authManager.currentAuthUser.flatMapLatest { user ->
         val uid = user?.id ?: ""
         if (uid.isNotBlank()) {
@@ -496,19 +486,7 @@ class LuminaRepository(
             val userVisitedProvincesCount = (currentCheckIns.map { it.provinceCode } + provinceCode).distinct().size
             firestoreService.updateStatsAfterCheckIn(userId, userVisitedProvincesCount, 0.0)
 
-            // 5. Check & Update Badges on Firestore
-            val totalCheckIns = currentCheckIns.size + 1
-            if (totalCheckIns >= 1) {
-                firestorePersonalService.updateBadgeProgress(userId, "first_stamp", 1, true, dateFormat.format(now))
-            }
-            if (userVisitedProvincesCount >= 5) {
-                firestorePersonalService.updateBadgeProgress(userId, "province_5", userVisitedProvincesCount, true, dateFormat.format(now))
-            }
-            if (userVisitedProvincesCount >= 10) {
-                firestorePersonalService.updateBadgeProgress(userId, "province_10", userVisitedProvincesCount, userVisitedProvincesCount >= 10, if (userVisitedProvincesCount >= 10) dateFormat.format(now) else null)
-            }
-
-            // 6. Trigger notification on Firestore
+            // 5. Trigger notification on Firestore
             val notif = NotificationItem(
                 id = "notif_${UUID.randomUUID()}",
                 isSocial = false,

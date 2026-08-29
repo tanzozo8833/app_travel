@@ -90,7 +90,6 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val provinces by viewModel.provinces.collectAsState()
     val places by viewModel.places.collectAsState()
     val checkIns by viewModel.checkIns.collectAsState()
-    val badges by viewModel.badges.collectAsState()
     val notifications by viewModel.notifications.collectAsState()
     val userProfile by viewModel.userProfile.collectAsState()
     val savedBoards by viewModel.savedBoards.collectAsState()
