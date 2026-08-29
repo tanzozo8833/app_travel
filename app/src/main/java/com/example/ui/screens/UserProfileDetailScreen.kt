@@ -74,19 +74,14 @@ fun UserProfileDetailScreen(
     val resolvedTagTitle = dbProfile?.tagTitle ?: "Lữ Khách Lumina"
 
     // 2. Identify if this is the current logged-in user
-    val isSelf = resolvedUserId == currentUserId ||
-            (resolvedUsername.isNotBlank() && (resolvedUsername.equals(currentUsername, ignoreCase = true) || resolvedUsername.equals("@$currentUsername", ignoreCase = true)))
+    val isSelf = resolvedUserId == currentUserId
 
-    // 3. Follow state synced with followedTargetKeys
-    val isFollowing = resolvedUserId in followedTargetKeys ||
-            resolvedUsername in followedTargetKeys ||
-            "@$resolvedUsername" in followedTargetKeys
+    // 3. Follow state synced with followedTargetKeys (strictly userId)
+    val isFollowing = resolvedUserId.isNotBlank() && resolvedUserId in followedTargetKeys
 
-    // 4. Effective follower count (syncs with base count + live follows)
-    val baseFollowers = 128
-    val effectiveFollowers = (baseFollowers + followerCount).coerceAtLeast(if (isFollowing) 1 else 0)
-    val baseFollowing = 45
-    val effectiveFollowing = (baseFollowing + followingCount).coerceAtLeast(0)
+    // 4. Follower and Following counts directly from server
+    val effectiveFollowers = followerCount
+    val effectiveFollowing = followingCount
 
     // 5. Filter user's posts
     val userPosts = remember(allPosts, resolvedUserId, resolvedUsername, resolvedDisplayName) {
@@ -443,8 +438,8 @@ fun UserProfileDetailScreen(
                             ) {
                                 Box(modifier = Modifier.weight(1f)) {
                                     val p0 = pair[0]
-                                    val p0IsFollowing = p0.userId in followedTargetKeys || (p0.authorHandle.isNotBlank() && p0.authorHandle in followedTargetKeys)
-                                    val p0IsSelf = p0.userId == currentUserId || (p0.authorHandle.isNotBlank() && (p0.authorHandle.equals(currentUsername, ignoreCase = true) || p0.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+                                    val p0IsFollowing = p0.userId.isNotBlank() && p0.userId in followedTargetKeys
+                                    val p0IsSelf = p0.userId == currentUserId
                                     PostCard(
                                         post = p0,
                                         isFollowing = p0IsFollowing,
@@ -464,8 +459,8 @@ fun UserProfileDetailScreen(
                                 if (pair.size > 1) {
                                     Box(modifier = Modifier.weight(1f)) {
                                         val p1 = pair[1]
-                                        val p1IsFollowing = p1.userId in followedTargetKeys || (p1.authorHandle.isNotBlank() && p1.authorHandle in followedTargetKeys)
-                                        val p1IsSelf = p1.userId == currentUserId || (p1.authorHandle.isNotBlank() && (p1.authorHandle.equals(currentUsername, ignoreCase = true) || p1.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+                                        val p1IsFollowing = p1.userId.isNotBlank() && p1.userId in followedTargetKeys
+                                        val p1IsSelf = p1.userId == currentUserId
                                         PostCard(
                                             post = p1,
                                             isFollowing = p1IsFollowing,

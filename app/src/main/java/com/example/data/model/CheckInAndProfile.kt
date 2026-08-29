@@ -79,3 +79,10 @@ data class UserProfile(
     val isCustomName: Boolean = false,
     val isCustomAvatar: Boolean = false
 )
+
+data class UserFollow(
+    val id: String,
+    val followerId: String,
+    val followedId: String,
+    val createdAt: Long = System.currentTimeMillis()
+)

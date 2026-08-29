@@ -60,8 +60,8 @@ fun PostDetailScreen(
     onAddComment: (postId: String, content: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isFollowing = post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
-    val isSelf = post.userId == currentUserId || (post.authorHandle.isNotBlank() && (post.authorHandle.equals(currentUsername, ignoreCase = true) || post.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+    val isFollowing = post.userId.isNotBlank() && post.userId in followedTargetKeys
+    val isSelf = post.userId == currentUserId
     val mediaUrls = if (post.mediaUrls.isNotEmpty()) post.mediaUrls else listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
     val pagerState = rememberPagerState(pageCount = { mediaUrls.size })
 
@@ -478,8 +478,8 @@ fun PostDetailScreen(
                                 ) {
                                     Box(modifier = Modifier.weight(1f)) {
                                         val p0 = pair[0]
-                                        val p0IsFollowing = p0.userId in followedTargetKeys || (p0.authorHandle.isNotBlank() && p0.authorHandle in followedTargetKeys)
-                                        val p0IsSelf = p0.userId == currentUserId || (p0.authorHandle.isNotBlank() && (p0.authorHandle.equals(currentUsername, ignoreCase = true) || p0.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+                                        val p0IsFollowing = p0.userId.isNotBlank() && p0.userId in followedTargetKeys
+                                        val p0IsSelf = p0.userId == currentUserId
                                         PostCard(
                                             post = p0,
                                             isFollowing = p0IsFollowing,
@@ -497,8 +497,8 @@ fun PostDetailScreen(
                                     if (pair.size > 1) {
                                         Box(modifier = Modifier.weight(1f)) {
                                             val p1 = pair[1]
-                                            val p1IsFollowing = p1.userId in followedTargetKeys || (p1.authorHandle.isNotBlank() && p1.authorHandle in followedTargetKeys)
-                                            val p1IsSelf = p1.userId == currentUserId || (p1.authorHandle.isNotBlank() && (p1.authorHandle.equals(currentUsername, ignoreCase = true) || p1.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+                                            val p1IsFollowing = p1.userId.isNotBlank() && p1.userId in followedTargetKeys
+                                            val p1IsSelf = p1.userId == currentUserId
                                             PostCard(
                                                 post = p1,
                                                 isFollowing = p1IsFollowing,

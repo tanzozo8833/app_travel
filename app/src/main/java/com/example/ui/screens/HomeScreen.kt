@@ -430,7 +430,7 @@ fun HomeScreen(
             val filteredPosts = when (currentSubTab) {
                 FeedSubTab.EXPLORE -> posts
                 FeedSubTab.FOLLOWING -> posts.filter { post ->
-                    post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
+                    post.userId.isNotBlank() && post.userId in followedTargetKeys
                 }
                 FeedSubTab.NEARBY -> {
                     val nearbyPosts = posts.filter { it.provinceCode == targetProvinceCode }
@@ -692,8 +692,8 @@ fun HomeScreen(
                 }
             } else {
                 items(filteredPosts, key = { it.id }) { post ->
-                    val isFollowing = post.userId in followedTargetKeys || (post.authorHandle.isNotBlank() && post.authorHandle in followedTargetKeys)
-                    val isSelf = post.userId == currentUserId || (post.authorHandle.isNotBlank() && (post.authorHandle.equals(currentUsername, ignoreCase = true) || post.authorHandle.equals("@$currentUsername", ignoreCase = true)))
+                    val isFollowing = post.userId.isNotBlank() && post.userId in followedTargetKeys
+                    val isSelf = post.userId == currentUserId
 
                     PostCard(
                         post = post,

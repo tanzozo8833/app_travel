@@ -12,16 +12,62 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
 
-    // User profiles collection
+    // ==========================================
+    // 1. User profiles collection & Personal subcollections
+    // ==========================================
     match /users/{userId} {
-      // Any authenticated user can read profiles to view other travelers
+      // Any authenticated user can read public profiles to view other travelers
       allow read: if isAuthenticated();
 
       // Users can only create, update, or delete their own profile
       allow write: if isOwner(userId);
+
+      // Con dấu check-in: Chỉ chủ sở hữu mới đọc và ghi được
+      match /check_ins/{checkInId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Chuyến đi: Chỉ chủ sở hữu mới đọc và ghi được
+      match /trips/{tripId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Bộ sưu tập đã lưu: Chỉ chủ sở hữu mới đọc và ghi được
+      match /saved_boards/{boardId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Huy hiệu thành tựu: Chỉ chủ sở hữu mới đọc và ghi được
+      match /badges/{badgeId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Thông báo riêng: Chỉ chủ sở hữu mới đọc và ghi được
+      match /notifications/{notificationId} {
+        allow read, write: if isOwner(userId);
+      }
     }
 
-    // Community Posts collection
+    // ==========================================
+    // 2. User Follows collection: /user_follows/{followDocId}
+    // ==========================================
+    match /user_follows/{followDocId} {
+      // Any authenticated user can read follows to view follower/following stats
+      allow read: if isAuthenticated();
+
+      // Only the follower can create a follow relation for themselves
+      allow create: if isAuthenticated() && request.resource.data.followerId == request.auth.uid;
+
+      // Only the follower can delete/unfollow their own follow relation
+      allow delete: if isAuthenticated() && resource.data.followerId == request.auth.uid;
+
+      // Updates are not allowed on follow relations
+      allow update: if false;
+    }
+
+    // ==========================================
+    // 3. Community Posts collection: /posts/{postId}
+    // ==========================================
     match /posts/{postId} {
       // Any authenticated user can read all posts
       allow read: if isAuthenticated();

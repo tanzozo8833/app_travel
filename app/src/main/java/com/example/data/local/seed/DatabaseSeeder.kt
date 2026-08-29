@@ -15,23 +15,17 @@ object DatabaseSeeder {
                 val currentProvinceCount = database.provinceDao().getCount()
 
                 if (currentProvinceCount == 0) {
-                    Log.d(TAG, "Starting full database seeding...")
+                    Log.d(TAG, "Starting database seeding (provinces, places, frames)...")
                     database.provinceDao().insertAll(ProvinceSeed.data)
                     database.placeDao().insertAll(PlaceSeed.data)
-                    database.tripDao().insertAll(TripSeed.data)
-                    database.checkInDao().insertAll(CheckInSeed.data)
-                    database.badgeDao().insertAll(BadgeSeed.data)
                     database.frameDao().insertAll(FrameSeed.data)
-                    database.notificationDao().insertAll(NotificationSeed.data)
-                    database.savedBoardDao().insertAll(SavedBoardSeed.data)
-                    Log.d(TAG, "Full database seeding completed with 34 provinces.")
+                    Log.d(TAG, "Database seeding completed with 34 provinces.")
                 } else {
                     if (currentProvinceCount < ProvinceSeed.data.size) {
                         Log.d(TAG, "Database has $currentProvinceCount provinces. Updating to ${ProvinceSeed.data.size} provinces...")
                         database.provinceDao().insertAll(ProvinceSeed.data)
                         database.placeDao().insertAll(PlaceSeed.data)
                         database.frameDao().insertAll(FrameSeed.data)
-                        database.badgeDao().insertAll(BadgeSeed.data)
                     }
                 }
             } catch (e: Exception) {

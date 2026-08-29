@@ -570,25 +570,22 @@ class LuminaViewModel(
 
     fun toggleFollow(
         authorId: String,
-        authorHandle: String,
-        authorName: String,
-        authorAvatarUrl: String
+        authorHandle: String = "",
+        authorName: String = "",
+        authorAvatarUrl: String = ""
     ) {
         val currentUserId = userProfile.value.id
-        val currentHandle = userProfile.value.username
-        if (currentUserId == authorId || (authorHandle.isNotBlank() && (authorHandle.equals(currentHandle, ignoreCase = true) || authorHandle.equals("@$currentHandle", ignoreCase = true)))) {
+        if (currentUserId.isNotBlank() && currentUserId == authorId) {
             showToast("Bạn không thể tự theo dõi chính mình")
             return
         }
         viewModelScope.launch {
             val isNowFollowing = repository.toggleFollow(
                 followerId = currentUserId,
-                followedId = authorId,
-                followedHandle = authorHandle,
-                followedName = authorName,
-                followedAvatarUrl = authorAvatarUrl
+                followedId = authorId
             )
-            showToast(if (isNowFollowing) "Đã theo dõi $authorName" else "Đã bỏ theo dõi $authorName")
+            val displayName = authorName.ifBlank { authorHandle.ifBlank { "người dùng" } }
+            showToast(if (isNowFollowing) "Đã theo dõi $displayName" else "Đã bỏ theo dõi $displayName")
         }
     }
 

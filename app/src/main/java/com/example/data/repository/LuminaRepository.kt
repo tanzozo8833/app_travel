@@ -7,8 +7,9 @@ import com.example.data.auth.AuthManager
 import com.example.data.auth.AuthResult
 import com.example.data.auth.DeleteAccountResult
 import com.example.data.local.database.LuminaDatabase
-import com.example.data.local.entity.*
 import com.example.data.model.*
+import com.example.data.remote.FirestoreFollowService
+import com.example.data.remote.FirestorePersonalDataService
 import com.example.data.remote.FirestorePostService
 import com.example.data.remote.FirestoreUserProfileService
 import com.example.data.remote.GeminiService
@@ -31,6 +32,8 @@ class LuminaRepository(
     val authManager = AuthManager(context)
     val firestoreService = FirestoreUserProfileService()
     val firestorePostService = FirestorePostService()
+    val firestoreFollowService = FirestoreFollowService()
+    val firestorePersonalService = FirestorePersonalDataService()
 
     val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
     val isAnonymous: StateFlow<Boolean> = authManager.isAnonymous
@@ -55,11 +58,7 @@ class LuminaRepository(
         }
     }
 
-    // Local Room Database Reactive Streams (provinces, places, check-ins, badges, notifications, etc.)
-    val trips: Flow<List<Trip>> = database.tripDao().getAllTripsFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
+    // Local Room Database (Provinces, Places, Frames)
     val provinces: Flow<List<Province>> = database.provinceDao().getAllProvincesFlow().map { list ->
         list.map { it.toDomainModel() }
     }
@@ -68,29 +67,62 @@ class LuminaRepository(
         list.map { it.toDomainModel() }
     }
 
-    val checkIns: Flow<List<CheckInRecord>> = database.checkInDao().getAllCheckInsFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val badges: Flow<List<AchievementBadge>> = database.badgeDao().getAllBadgesFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val notifications: Flow<List<NotificationItem>> = database.notificationDao().getAllNotificationsFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val savedBoards: Flow<List<SavedBoard>> = database.savedBoardDao().getAllSavedBoardsFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
     val frames: Flow<List<LuminaFrame>> = database.frameDao().getAllFramesFlow().map { list ->
         list.map { it.toDomainModel() }
     }
+
+    // Cloud Firestore Personal Reactive Streams for Active User
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val trips: Flow<List<Trip>> = authManager.currentAuthUser.flatMapLatest { user ->
+        val uid = user?.id ?: ""
+        if (uid.isNotBlank()) {
+            firestorePersonalService.observeTrips(uid)
+        } else {
+            flowOf(emptyList())
+        }
+    }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val checkIns: Flow<List<CheckInRecord>> = authManager.currentAuthUser.flatMapLatest { user ->
+        val uid = user?.id ?: ""
+        if (uid.isNotBlank()) {
+            firestorePersonalService.observeCheckIns(uid)
+        } else {
+            flowOf(emptyList())
+        }
+    }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val badges: Flow<List<AchievementBadge>> = authManager.currentAuthUser.flatMapLatest { user ->
+        val uid = user?.id ?: ""
+        if (uid.isNotBlank()) {
+            firestorePersonalService.observeBadges(uid)
+        } else {
+            flowOf(emptyList())
+        }
+    }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val notifications: Flow<List<NotificationItem>> = authManager.currentAuthUser.flatMapLatest { user ->
+        val uid = user?.id ?: ""
+        if (uid.isNotBlank()) {
+            firestorePersonalService.observeNotifications(uid)
+        } else {
+            flowOf(emptyList())
+        }
+    }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val savedBoards: Flow<List<SavedBoard>> = authManager.currentAuthUser.flatMapLatest { user ->
+        val uid = user?.id ?: ""
+        if (uid.isNotBlank()) {
+            firestorePersonalService.observeSavedBoards(uid)
+        } else {
+            flowOf(emptyList())
+        }
+    }
+
+    val cityVault: Flow<List<CheckInRecord>> = checkIns
 
     /**
      * Real-time UserProfile flow sourced directly from Cloud Firestore.
@@ -184,12 +216,11 @@ class LuminaRepository(
 
     /**
      * Completely deletes the user account from Firebase Auth, deletes the profile from
-     * Cloud Firestore server, and wipes all local personal records.
+     * Cloud Firestore server, wipes all personal subcollections on Firestore, and deletes follows.
      */
     suspend fun deleteUserAccount(activity: Activity): DeleteAccountResult {
         val currentUser = authManager.currentAuthUser.value
         val userId = currentUser?.id ?: ""
-        val userHandle = currentUser?.username ?: ""
 
         val deleteResult = authManager.deleteAccount(activity)
         if (deleteResult is DeleteAccountResult.Error || deleteResult is DeleteAccountResult.Cancelled) {
@@ -198,15 +229,12 @@ class LuminaRepository(
 
         if (userId.isNotBlank()) {
             try {
+                firestorePersonalService.deleteAllPersonalData(userId)
+                firestoreFollowService.deleteFollowsForUser(userId)
                 firestoreService.deleteUserProfile(userId)
             } catch (e: Exception) {
-                Log.w("LuminaRepository", "Error deleting Firestore profile for $userId", e)
+                Log.w("LuminaRepository", "Error deleting Firestore data for $userId", e)
             }
-            database.checkInDao().deleteCheckInsByUserId(userId)
-            database.tripDao().deleteTripsByUserId(userId)
-            database.userFollowDao().deleteFollowsByUser(userId, userHandle)
-            database.notificationDao().deleteNotificationsByUserId(userId)
-            database.savedBoardDao().deleteSavedBoardsByUserId(userId)
         }
 
         return DeleteAccountResult.Success
@@ -447,15 +475,15 @@ class LuminaRepository(
 
         scope.launch {
             val activeUser = authManager.currentAuthUser.value
-            val userId = activeUser?.id ?: "u_1"
+            val userId = activeUser?.id ?: "traveler_guest"
 
-            // 1. Insert check-in record
-            database.checkInDao().insert(CheckInEntity.fromDomainModel(record, userId = userId))
+            // 1. Insert check-in record to Firestore
+            firestorePersonalService.saveCheckIn(userId, record)
 
-            // 2. Mark place as visited
+            // 2. Mark place as visited in local Room db
             database.placeDao().markAsVisitedByName(placeName, provinceCode)
 
-            // 3. Update province visited count
+            // 3. Update province visited count in local Room db
             val province = database.provinceDao().getProvinceByCode(provinceCode)
             if (province != null) {
                 val newVisited = (province.visitedPlacesCount + 1).coerceAtMost(province.suggestedPlacesCount)
@@ -464,35 +492,33 @@ class LuminaRepository(
             }
 
             // 4. Update user profile stats on Firestore server for this user
-            val allUserCheckIns = database.checkInDao().getAllCheckInsFlow().first().filter { it.userId == userId }
-            val userVisitedProvincesCount = allUserCheckIns.map { it.provinceCode }.distinct().size
+            val currentCheckIns = firestorePersonalService.observeCheckIns(userId).firstOrNull() ?: emptyList()
+            val userVisitedProvincesCount = (currentCheckIns.map { it.provinceCode } + provinceCode).distinct().size
             firestoreService.updateStatsAfterCheckIn(userId, userVisitedProvincesCount, 0.0)
 
-            // 5. Check & Update Badges
-            val totalCheckIns = allUserCheckIns.size
+            // 5. Check & Update Badges on Firestore
+            val totalCheckIns = currentCheckIns.size + 1
             if (totalCheckIns >= 1) {
-                database.badgeDao().updateProgress("first_stamp", 1, true, dateFormat.format(now))
+                firestorePersonalService.updateBadgeProgress(userId, "first_stamp", 1, true, dateFormat.format(now))
             }
             if (userVisitedProvincesCount >= 5) {
-                database.badgeDao().updateProgress("province_5", userVisitedProvincesCount, true, dateFormat.format(now))
+                firestorePersonalService.updateBadgeProgress(userId, "province_5", userVisitedProvincesCount, true, dateFormat.format(now))
             }
             if (userVisitedProvincesCount >= 10) {
-                database.badgeDao().updateProgress("province_10", userVisitedProvincesCount, userVisitedProvincesCount >= 10, if (userVisitedProvincesCount >= 10) dateFormat.format(now) else null)
+                firestorePersonalService.updateBadgeProgress(userId, "province_10", userVisitedProvincesCount, userVisitedProvincesCount >= 10, if (userVisitedProvincesCount >= 10) dateFormat.format(now) else null)
             }
 
-            // 6. Trigger notification
-            val notif = NotificationEntity(
+            // 6. Trigger notification on Firestore
+            val notif = NotificationItem(
                 id = "notif_${UUID.randomUUID()}",
-                userId = userId,
                 isSocial = false,
                 title = "Đóng dấu thành công!",
                 message = "Bạn vừa đóng dấu tại $placeName ($provinceName). Hộ chiếu đã được cập nhật.",
                 timeAgo = "Vừa xong",
                 actionType = "checkin_success",
-                isRead = false,
-                createdAt = System.currentTimeMillis()
+                isRead = false
             )
-            database.notificationDao().insert(notif)
+            firestorePersonalService.saveNotification(userId, notif)
         }
 
         return record
@@ -500,7 +526,9 @@ class LuminaRepository(
 
     fun saveToCityVault(checkInRecord: CheckInRecord) {
         scope.launch {
-            database.checkInDao().updateCityVaultStatus(checkInRecord.id, true)
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.saveCheckIn(userId, checkInRecord)
         }
     }
 
@@ -508,24 +536,24 @@ class LuminaRepository(
     fun saveTrip(trip: Trip) {
         scope.launch {
             val activeUser = authManager.currentAuthUser.value
-            val userId = activeUser?.id ?: "u_1"
-            val entity = TripEntity.fromDomainModel(trip, userId = userId)
-            database.tripDao().insert(entity)
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.saveTrip(userId, trip.copy(userId = userId))
             firestoreService.incrementTripsCompleted(userId)
         }
     }
 
     fun duplicateTrip(tripId: String, onDuplicated: (Trip) -> Unit = {}) {
         scope.launch {
-            val originalEntity = database.tripDao().getTripById(tripId) ?: return@launch
-            val original = originalEntity.toDomainModel()
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            val original = firestorePersonalService.getTripById(userId, tripId) ?: return@launch
             val duplicated = original.copy(
                 id = "trip_${UUID.randomUUID()}",
                 title = "${original.title} (Bản sao)",
-                status = TripStatus.UPCOMING
+                status = TripStatus.UPCOMING,
+                userId = userId
             )
-            val entity = TripEntity.fromDomainModel(duplicated, userId = originalEntity.userId)
-            database.tripDao().insert(entity)
+            firestorePersonalService.saveTrip(userId, duplicated)
             withContext(Dispatchers.Main) {
                 onDuplicated(duplicated)
             }
@@ -534,20 +562,43 @@ class LuminaRepository(
 
     fun deleteTrip(tripId: String) {
         scope.launch {
-            database.tripDao().deleteById(tripId)
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.deleteTrip(userId, tripId)
+        }
+    }
+
+    // Saved Boards
+    fun saveSavedBoard(board: SavedBoard) {
+        scope.launch {
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.saveSavedBoard(userId, board)
+        }
+    }
+
+    fun deleteSavedBoard(boardId: String) {
+        scope.launch {
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.deleteSavedBoard(userId, boardId)
         }
     }
 
     // Notifications
     fun markNotificationAsRead(id: String) {
         scope.launch {
-            database.notificationDao().markAsRead(id)
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.markNotificationAsRead(userId, id)
         }
     }
 
     fun markAllNotificationsAsRead() {
         scope.launch {
-            database.notificationDao().markAllAsRead()
+            val activeUser = authManager.currentAuthUser.value
+            val userId = activeUser?.id ?: "traveler_guest"
+            firestorePersonalService.markAllNotificationsAsRead(userId)
         }
     }
 
@@ -574,53 +625,28 @@ class LuminaRepository(
         return GeminiService.askAi(question, destination, plugin)
     }
 
-    // Follow & Social Relationship Engine
+    // Follow & Social Relationship Engine (Purely using userId)
     fun getFollowedTargetKeysFlow(followerId: String): Flow<Set<String>> {
-        return database.userFollowDao().getFollowingsFlow(followerId).map { follows ->
-            val set = mutableSetOf<String>()
-            follows.forEach { follow ->
-                if (follow.followedId.isNotBlank()) set.add(follow.followedId)
-                if (follow.followedHandle.isNotBlank()) set.add(follow.followedHandle)
-            }
-            set
-        }
+        return firestoreFollowService.observeFollowedUserIds(followerId)
     }
 
     fun getFollowingCountFlow(userId: String): Flow<Int> {
-        return database.userFollowDao().getFollowingCountFlow(userId)
+        return firestoreFollowService.observeFollowingCount(userId)
     }
 
     fun getFollowerCountFlow(userId: String): Flow<Int> {
-        return database.userFollowDao().getFollowerCountFlow(userId)
+        return firestoreFollowService.observeFollowerCount(userId)
     }
 
-    suspend fun isFollowing(followerId: String, followedId: String, followedHandle: String): Boolean {
-        return database.userFollowDao().isFollowing(followerId, followedId, followedHandle)
+    suspend fun isFollowing(followerId: String, followedId: String): Boolean {
+        return firestoreFollowService.isFollowing(followerId, followedId)
     }
 
     suspend fun toggleFollow(
         followerId: String,
-        followedId: String,
-        followedHandle: String,
-        followedName: String,
-        followedAvatarUrl: String
+        followedId: String
     ): Boolean {
-        val currentlyFollowing = database.userFollowDao().isFollowing(followerId, followedId, followedHandle)
-        if (currentlyFollowing) {
-            database.userFollowDao().deleteFollow(followerId, followedId, followedHandle)
-            return false
-        } else {
-            val entity = UserFollowEntity(
-                followerId = followerId,
-                followedId = followedId,
-                followedHandle = followedHandle,
-                followedName = followedName,
-                followedAvatarUrl = followedAvatarUrl,
-                createdAt = System.currentTimeMillis()
-            )
-            database.userFollowDao().insert(entity)
-            return true
-        }
+        return firestoreFollowService.toggleFollow(followerId, followedId)
     }
 
     // Search filter
