@@ -1,10 +1,10 @@
 package com.example.data.local.seed
 
-import com.example.data.local.entity.UserProfileEntity
+import com.example.data.model.UserProfile
 
 object UserProfileSeed {
     val data = listOf(
-        UserProfileEntity(
+        UserProfile(
             id = "u_1",
             username = "linh.travels",
             displayName = "Thảo Linh",
@@ -17,10 +17,9 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 12500.0,
             tripsCompletedCount = 18,
-            totalSavesCount = 3420,
-            isActive = false
+            totalSavesCount = 3420
         ),
-        UserProfileEntity(
+        UserProfile(
             id = "u_2",
             username = "tri.wanderer",
             displayName = "Minh Trí",
@@ -33,10 +32,9 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 24800.0,
             tripsCompletedCount = 32,
-            totalSavesCount = 8900,
-            isActive = false
+            totalSavesCount = 8900
         ),
-        UserProfileEntity(
+        UserProfile(
             id = "u_3",
             username = "vy.explorer",
             displayName = "Khánh Vy",
@@ -49,10 +47,9 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 18600.0,
             tripsCompletedCount = 22,
-            totalSavesCount = 5200,
-            isActive = false
+            totalSavesCount = 5200
         ),
-        UserProfileEntity(
+        UserProfile(
             id = "u_4",
             username = "anh.vietnam",
             displayName = "Đức Anh",
@@ -65,10 +62,9 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 22400.0,
             tripsCompletedCount = 27,
-            totalSavesCount = 6800,
-            isActive = false
+            totalSavesCount = 6800
         ),
-        UserProfileEntity(
+        UserProfile(
             id = "u_5",
             username = "giang.travel",
             displayName = "Hương Giang",
@@ -81,10 +77,9 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 15300.0,
             tripsCompletedCount = 19,
-            totalSavesCount = 4750,
-            isActive = false
+            totalSavesCount = 4750
         ),
-        UserProfileEntity(
+        UserProfile(
             id = "u_6",
             username = "long.wander",
             displayName = "Hoàng Long",
@@ -97,8 +92,7 @@ object UserProfileSeed {
             totalProvincesCount = 34,
             totalDistanceKm = 21000.0,
             tripsCompletedCount = 25,
-            totalSavesCount = 7300,
-            isActive = false
+            totalSavesCount = 7300
         )
     )
 }

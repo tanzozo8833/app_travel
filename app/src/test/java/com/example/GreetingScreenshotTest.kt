@@ -28,7 +28,12 @@ class GreetingScreenshotTest {
           isLoading = false,
           errorMessage = null,
           isNetworkError = false,
+          canFallbackToBrowser = false,
           onSignInWithGoogle = {},
+          onSignInWithBrowser = {},
+          onSignInWithEmail = { _, _ -> },
+          onSignUpWithEmail = { _, _, _ -> },
+          onSignInAsGuest = {},
           onClearError = {}
         )
       }

@@ -23,11 +23,10 @@ import com.example.data.local.seed.DatabaseSeeder
         AchievementBadgeEntity::class,
         NotificationEntity::class,
         SavedBoardEntity::class,
-        UserProfileEntity::class,
         AppSettingsEntity::class,
         UserFollowEntity::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)
@@ -43,7 +42,6 @@ abstract class LuminaDatabase : RoomDatabase() {
     abstract fun badgeDao(): AchievementBadgeDao
     abstract fun notificationDao(): NotificationDao
     abstract fun savedBoardDao(): SavedBoardDao
-    abstract fun userProfileDao(): UserProfileDao
     abstract fun appSettingsDao(): AppSettingsDao
     abstract fun userFollowDao(): UserFollowDao
 

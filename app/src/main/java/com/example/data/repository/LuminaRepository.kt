@@ -2,12 +2,15 @@ package com.example.data.repository
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.example.data.auth.AuthManager
 import com.example.data.auth.AuthResult
 import com.example.data.auth.DeleteAccountResult
 import com.example.data.local.database.LuminaDatabase
 import com.example.data.local.entity.*
+import com.example.data.local.seed.UserProfileSeed
 import com.example.data.model.*
+import com.example.data.remote.FirestoreUserProfileService
 import com.example.data.remote.GeminiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +28,7 @@ class LuminaRepository(
 ) {
     private val scope = CoroutineScope(Dispatchers.IO)
     val authManager = AuthManager(context)
+    val firestoreService = FirestoreUserProfileService()
 
     val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
     val isAnonymous: StateFlow<Boolean> = authManager.isAnonymous
@@ -32,28 +36,8 @@ class LuminaRepository(
     init {
         scope.launch {
             authManager.currentAuthUser.collectLatest { profile ->
-                if (profile != null) {
-                    val existing = database.userProfileDao().getProfileById(profile.id)
-                    if (existing == null) {
-                        val entity = UserProfileEntity(
-                            id = profile.id,
-                            username = profile.username,
-                            displayName = profile.displayName,
-                            avatarUrl = profile.avatarUrl,
-                            tagTitle = profile.tagTitle,
-                            bio = profile.bio,
-                            topCityName = "",
-                            topCityCheckInCount = 0,
-                            visitedProvincesCount = 0,
-                            totalProvincesCount = 34,
-                            totalDistanceKm = 0.0,
-                            tripsCompletedCount = 0,
-                            totalSavesCount = 0,
-                            isActive = true
-                        )
-                        database.userProfileDao().insert(entity)
-                    }
-                    database.userProfileDao().setActiveProfile(profile.id)
+                if (profile != null && profile.id.isNotBlank()) {
+                    firestoreService.syncProfileOnLogin(profile)
                 }
             }
         }
@@ -95,26 +79,49 @@ class LuminaRepository(
         list.map { it.toDomainModel() }
     }
 
-    val userProfile: Flow<UserProfile> = database.userProfileDao().getActiveProfileFlow().map { entity ->
-        entity?.toDomainModel() ?: authManager.currentAuthUser.value ?: UserProfile(
-            id = "google_user",
-            username = "traveler",
-            displayName = "Lữ khách Lumina",
-            avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
-        )
+    /**
+     * Real-time UserProfile flow sourced directly from Cloud Firestore.
+     * Falls back to auth manager's current profile if Firestore is syncing or offline.
+     */
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    val userProfile: Flow<UserProfile> = authManager.currentAuthUser.flatMapLatest { authProfile ->
+        if (authProfile != null && authProfile.id.isNotBlank()) {
+            firestoreService.observeUserProfile(authProfile.id).map { remoteProfile ->
+                remoteProfile ?: authProfile
+            }
+        } else {
+            flowOf(
+                UserProfile(
+                    id = "traveler_guest",
+                    username = "traveler",
+                    displayName = "Lữ khách Lumina",
+                    avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+                )
+            )
+        }
     }
 
-    val userProfiles: Flow<List<UserProfile>> = database.userProfileDao().getAllProfilesFlow().map { list ->
-        list.map { it.toDomainModel() }
+    /**
+     * Real-time list of all user profiles from Cloud Firestore, combined with sample seeds for community explore.
+     */
+    val userProfiles: Flow<List<UserProfile>> = firestoreService.observeAllUserProfiles().map { remoteList ->
+        val remoteIds = remoteList.map { it.id }.toSet()
+        val missingSeeds = UserProfileSeed.data.filter { it.id !in remoteIds }
+        remoteList + missingSeeds
     }
 
+    /**
+     * Fetches or observes a specific user profile from Cloud Firestore.
+     */
     fun getUserProfileFlow(userId: String, username: String): Flow<UserProfile?> {
-        val cleanHandle = username.removePrefix("@")
-        return combine(
-            database.userProfileDao().getProfileByIdFlow(userId),
-            database.userProfileDao().getProfileByUsernameFlow(cleanHandle)
-        ) { byId, byUsername ->
-            (byId ?: byUsername)?.toDomainModel()
+        val cleanHandle = username.removePrefix("@").lowercase()
+        if (userId.isNotBlank()) {
+            return firestoreService.observeUserProfile(userId).map { remote ->
+                remote ?: UserProfileSeed.data.find { it.id == userId || it.username.equals(cleanHandle, ignoreCase = true) }
+            }
+        }
+        return userProfiles.map { list ->
+            list.find { it.username.equals(cleanHandle, ignoreCase = true) }
         }
     }
 
@@ -157,62 +164,24 @@ class LuminaRepository(
 
     private suspend fun handleAuthSuccess(result: AuthResult) {
         if (result is AuthResult.Success) {
-            val existing = database.userProfileDao().getProfileById(result.userProfile.id)
-            if (existing != null) {
-                // Update profile info, preserving user's check-in stats and stamps
-                val updatedBio = if (result.isUpgrade && existing.bio.contains("Chế độ Lữ Khách")) {
-                    result.userProfile.bio
-                } else {
-                    existing.bio.ifBlank { result.userProfile.bio }
-                }
-                val updated = existing.copy(
-                    displayName = result.userProfile.displayName,
-                    avatarUrl = result.userProfile.avatarUrl.ifBlank { existing.avatarUrl },
-                    username = result.userProfile.username,
-                    bio = updatedBio,
-                    isActive = true
-                )
-                database.userProfileDao().update(updated)
-                database.userProfileDao().setActiveProfile(result.userProfile.id)
-            } else {
-                // First-time profile creation: save to Room DB and mark as active user
-                val entity = UserProfileEntity(
-                    id = result.userProfile.id,
-                    username = result.userProfile.username,
-                    displayName = result.userProfile.displayName,
-                    avatarUrl = result.userProfile.avatarUrl,
-                    tagTitle = result.userProfile.tagTitle,
-                    bio = result.userProfile.bio,
-                    topCityName = "",
-                    topCityCheckInCount = 0,
-                    visitedProvincesCount = 0,
-                    totalProvincesCount = 34,
-                    totalDistanceKm = 0.0,
-                    tripsCompletedCount = 0,
-                    totalSavesCount = 0,
-                    isActive = true
-                )
-                database.userProfileDao().insert(entity)
-                database.userProfileDao().setActiveProfile(result.userProfile.id)
-            }
+            val synced = firestoreService.syncProfileOnLogin(result.userProfile)
+            authManager.updateSavedUserProfile(synced)
         }
     }
 
     suspend fun logout() {
         authManager.logout()
-        database.userProfileDao().setActiveProfile("")
     }
 
     /**
-     * Completely deletes the user account from Firebase Auth and wipes all local
-     * personal records (profile, posts, comments, check-in stamps, trips, follows,
-     * notifications, and saved boards) belonging to this user from Room database.
-     * Sample datasets and other users' records are preserved.
+     * Completely deletes the user account from Firebase Auth, deletes the profile from
+     * Cloud Firestore server, and wipes all local personal records (posts, comments, check-in stamps,
+     * trips, follows, notifications, and saved boards) belonging to this user from Room database.
      */
     suspend fun deleteUserAccount(activity: Activity): DeleteAccountResult {
-        val activeProfile = database.userProfileDao().getActiveProfile()
-        val userId = activeProfile?.id ?: authManager.currentAuthUser.value?.id ?: ""
-        val userHandle = activeProfile?.username ?: authManager.currentAuthUser.value?.username ?: ""
+        val currentUser = authManager.currentAuthUser.value
+        val userId = currentUser?.id ?: ""
+        val userHandle = currentUser?.username ?: ""
 
         // 1. Delete from Firebase Authentication (handles re-auth automatically if needed)
         val deleteResult = authManager.deleteAccount(activity)
@@ -220,9 +189,13 @@ class LuminaRepository(
             return deleteResult
         }
 
-        // 2. Delete all user-specific data from Room database
+        // 2. Delete user profile document from Firestore server
         if (userId.isNotBlank()) {
-            database.userProfileDao().deleteById(userId)
+            try {
+                firestoreService.deleteUserProfile(userId)
+            } catch (e: Exception) {
+                Log.w("LuminaRepository", "Error deleting Firestore profile for $userId", e)
+            }
             database.postDao().deletePostsByUser(userId, userHandle)
             database.commentDao().deleteCommentsByUser(userId, userHandle)
             database.checkInDao().deleteCheckInsByUserId(userId)
@@ -231,9 +204,6 @@ class LuminaRepository(
             database.notificationDao().deleteNotificationsByUserId(userId)
             database.savedBoardDao().deleteSavedBoardsByUserId(userId)
         }
-
-        // 3. Clear active profile state
-        database.userProfileDao().setActiveProfile("")
 
         return DeleteAccountResult.Success
     }
@@ -256,11 +226,11 @@ class LuminaRepository(
         }
     }
 
-    // Profile updates
+    // Profile updates synced directly to Firestore
     fun updateUserProfile(user: UserProfile) {
         scope.launch {
-            val entity = UserProfileEntity.fromDomainModel(user, isActive = true)
-            database.userProfileDao().insert(entity)
+            firestoreService.saveOrUpdateUserProfile(user)
+            authManager.updateSavedUserProfile(user)
         }
     }
 
@@ -291,7 +261,7 @@ class LuminaRepository(
 
     fun addComment(postId: String, content: String) {
         scope.launch {
-            val activeUser = database.userProfileDao().getActiveProfile()?.toDomainModel()
+            val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "u_1"
             val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
             val authorHandle = activeUser?.username ?: "traveler"
@@ -324,7 +294,7 @@ class LuminaRepository(
     ): Post {
         val newPostId = "post_${UUID.randomUUID()}"
         scope.launch {
-            val activeUser = database.userProfileDao().getActiveProfile()
+            val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "u_1"
             val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
             val authorHandle = activeUser?.username ?: "traveler"
@@ -406,7 +376,7 @@ class LuminaRepository(
         )
 
         scope.launch {
-            val activeUser = database.userProfileDao().getActiveProfile()
+            val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "u_1"
 
             // 1. Insert check-in record
@@ -423,10 +393,10 @@ class LuminaRepository(
                 database.provinceDao().updateProgress(provinceCode, newVisited, isComp)
             }
 
-            // 4. Update user profile stats specifically for this active user
+            // 4. Update user profile stats on Firestore server for this user
             val allUserCheckIns = database.checkInDao().getAllCheckInsFlow().first().filter { it.userId == userId }
             val userVisitedProvincesCount = allUserCheckIns.map { it.provinceCode }.distinct().size
-            database.userProfileDao().updateStatsAfterCheckIn(userId, userVisitedProvincesCount, 0.0)
+            firestoreService.updateStatsAfterCheckIn(userId, userVisitedProvincesCount, 0.0)
 
             // 5. Check & Update Badges
             val totalCheckIns = allUserCheckIns.size
@@ -467,11 +437,11 @@ class LuminaRepository(
     // Trip Management
     fun saveTrip(trip: Trip) {
         scope.launch {
-            val activeUser = database.userProfileDao().getActiveProfile()
+            val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "u_1"
             val entity = TripEntity.fromDomainModel(trip, userId = userId)
             database.tripDao().insert(entity)
-            database.userProfileDao().incrementTripsCompleted(userId)
+            firestoreService.incrementTripsCompleted(userId)
         }
     }
 
