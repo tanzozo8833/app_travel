@@ -17,8 +17,6 @@ import com.example.data.local.seed.DatabaseSeeder
         PlaceEntity::class,
         CheckInEntity::class,
         TripEntity::class,
-        PostEntity::class,
-        CommentEntity::class,
         LuminaFrameEntity::class,
         AchievementBadgeEntity::class,
         NotificationEntity::class,
@@ -26,7 +24,7 @@ import com.example.data.local.seed.DatabaseSeeder
         AppSettingsEntity::class,
         UserFollowEntity::class
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)
@@ -36,8 +34,6 @@ abstract class LuminaDatabase : RoomDatabase() {
     abstract fun placeDao(): PlaceDao
     abstract fun checkInDao(): CheckInDao
     abstract fun tripDao(): TripDao
-    abstract fun postDao(): PostDao
-    abstract fun commentDao(): CommentDao
     abstract fun frameDao(): LuminaFrameDao
     abstract fun badgeDao(): AchievementBadgeDao
     abstract fun notificationDao(): NotificationDao

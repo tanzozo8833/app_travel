@@ -99,6 +99,10 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val followingCount by viewModel.followingCount.collectAsState()
     val followerCount by viewModel.followerCount.collectAsState()
 
+    val feedUiState by viewModel.feedUiState.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
+    val isLoadingMore by viewModel.isLoadingMore.collectAsState()
+
     val selectedPost by viewModel.selectedPost.collectAsState()
     val selectedTrip by viewModel.selectedTrip.collectAsState()
     val isShowingCreatePost by viewModel.isShowingCreatePost.collectAsState()
@@ -202,7 +206,14 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             currentUserId = userProfile.id,
                             currentUsername = userProfile.username,
                             currentSubTab = feedSubTab,
+                            feedUiState = feedUiState,
+                            isRefreshing = isRefreshing,
+                            isLoadingMore = isLoadingMore,
                             onSubTabChanged = { viewModel.setFeedSubTab(it) },
+                            onRefreshFeed = { viewModel.refreshFeed() },
+                            onLoadMorePosts = { viewModel.loadMorePosts() },
+                            onRetryFeed = { viewModel.retryFeed() },
+                            onCreatePostClick = { viewModel.showCreatePost(true) },
                             onFollowClick = { post ->
                                 viewModel.toggleFollow(
                                     authorId = post.userId,

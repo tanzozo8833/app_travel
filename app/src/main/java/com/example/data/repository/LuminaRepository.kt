@@ -10,8 +10,10 @@ import com.example.data.local.database.LuminaDatabase
 import com.example.data.local.entity.*
 import com.example.data.local.seed.UserProfileSeed
 import com.example.data.model.*
+import com.example.data.remote.FirestorePostService
 import com.example.data.remote.FirestoreUserProfileService
 import com.example.data.remote.GeminiService
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -29,32 +31,32 @@ class LuminaRepository(
     private val scope = CoroutineScope(Dispatchers.IO)
     val authManager = AuthManager(context)
     val firestoreService = FirestoreUserProfileService()
+    val firestorePostService = FirestorePostService()
 
     val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
     val isAnonymous: StateFlow<Boolean> = authManager.isAnonymous
+
+    // Local set of liked and saved post IDs for the currently logged-in user
+    private val _userLikedPostIds = MutableStateFlow<Set<String>>(emptySet())
+    val userLikedPostIds: StateFlow<Set<String>> = _userLikedPostIds.asStateFlow()
+
+    private val _userSavedPostIds = MutableStateFlow<Set<String>>(emptySet())
+    val userSavedPostIds: StateFlow<Set<String>> = _userSavedPostIds.asStateFlow()
 
     init {
         scope.launch {
             authManager.currentAuthUser.collectLatest { profile ->
                 if (profile != null && profile.id.isNotBlank()) {
                     firestoreService.syncProfileOnLogin(profile)
+                } else {
+                    _userLikedPostIds.value = emptySet()
+                    _userSavedPostIds.value = emptySet()
                 }
             }
         }
     }
 
-    // Reactive data streams directly connected to Room Database
-    val posts: Flow<List<Post>> = combine(
-        database.postDao().getAllPostsFlow(),
-        database.tripDao().getAllTripsFlow()
-    ) { postEntities, tripEntities ->
-        val tripsMap = tripEntities.associateBy { it.id }
-        postEntities.map { entity ->
-            val attached = entity.attachedTripId?.let { tripsMap[it]?.toDomainModel() }
-            entity.toDomainModel(attached)
-        }
-    }
-
+    // Local Room Database Reactive Streams (provinces, places, check-ins, badges, notifications, etc.)
     val trips: Flow<List<Trip>> = database.tripDao().getAllTripsFlow().map { list ->
         list.map { it.toDomainModel() }
     }
@@ -76,6 +78,18 @@ class LuminaRepository(
     }
 
     val notifications: Flow<List<NotificationItem>> = database.notificationDao().getAllNotificationsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
+
+    val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
+
+    val savedBoards: Flow<List<SavedBoard>> = database.savedBoardDao().getAllSavedBoardsFlow().map { list ->
+        list.map { it.toDomainModel() }
+    }
+
+    val frames: Flow<List<LuminaFrame>> = database.frameDao().getAllFramesFlow().map { list ->
         list.map { it.toDomainModel() }
     }
 
@@ -171,33 +185,30 @@ class LuminaRepository(
 
     suspend fun logout() {
         authManager.logout()
+        _userLikedPostIds.value = emptySet()
+        _userSavedPostIds.value = emptySet()
     }
 
     /**
      * Completely deletes the user account from Firebase Auth, deletes the profile from
-     * Cloud Firestore server, and wipes all local personal records (posts, comments, check-in stamps,
-     * trips, follows, notifications, and saved boards) belonging to this user from Room database.
+     * Cloud Firestore server, and wipes all local personal records.
      */
     suspend fun deleteUserAccount(activity: Activity): DeleteAccountResult {
         val currentUser = authManager.currentAuthUser.value
         val userId = currentUser?.id ?: ""
         val userHandle = currentUser?.username ?: ""
 
-        // 1. Delete from Firebase Authentication (handles re-auth automatically if needed)
         val deleteResult = authManager.deleteAccount(activity)
         if (deleteResult is DeleteAccountResult.Error || deleteResult is DeleteAccountResult.Cancelled) {
             return deleteResult
         }
 
-        // 2. Delete user profile document from Firestore server
         if (userId.isNotBlank()) {
             try {
                 firestoreService.deleteUserProfile(userId)
             } catch (e: Exception) {
                 Log.w("LuminaRepository", "Error deleting Firestore profile for $userId", e)
             }
-            database.postDao().deletePostsByUser(userId, userHandle)
-            database.commentDao().deleteCommentsByUser(userId, userHandle)
             database.checkInDao().deleteCheckInsByUserId(userId)
             database.tripDao().deleteTripsByUserId(userId)
             database.userFollowDao().deleteFollowsByUser(userId, userHandle)
@@ -208,24 +219,6 @@ class LuminaRepository(
         return DeleteAccountResult.Success
     }
 
-    val cityVault: Flow<List<CheckInRecord>> = database.checkInDao().getCityVaultFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val savedBoards: Flow<List<SavedBoard>> = database.savedBoardDao().getAllSavedBoardsFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    val frames: Flow<List<LuminaFrame>> = database.frameDao().getAllFramesFlow().map { list ->
-        list.map { it.toDomainModel() }
-    }
-
-    fun getCommentsForPost(postId: String): Flow<List<Comment>> {
-        return database.commentDao().getCommentsForPostFlow(postId).map { list ->
-            list.map { it.toDomainModel() }
-        }
-    }
-
     // Profile updates synced directly to Firestore
     fun updateUserProfile(user: UserProfile) {
         scope.launch {
@@ -234,57 +227,122 @@ class LuminaRepository(
         }
     }
 
-    // Post Interactions
-    fun toggleLike(postId: String) {
-        scope.launch {
-            val post = database.postDao().getPostById(postId) ?: return@launch
-            val newLiked = !post.isLiked
-            val newLikeCount = if (newLiked) post.likeCount + 1 else (post.likeCount - 1).coerceAtLeast(0)
-            database.postDao().updateLikeStatus(postId, newLiked, newLikeCount)
+    // ==========================================
+    // Cloud Firestore Feed & Post Interactions
+    // ==========================================
+
+    /**
+     * Fetches a paginated page of posts directly from Cloud Firestore.
+     * Maps documents to domain Post models with isLiked and isSaved resolved for current user.
+     */
+    suspend fun fetchPostsPage(
+        pageSize: Int = FirestorePostService.DEFAULT_PAGE_SIZE,
+        lastVisibleDoc: DocumentSnapshot? = null
+    ): Pair<List<Post>, DocumentSnapshot?> {
+        val (docs, _) = firestorePostService.fetchPostsPage(pageSize, lastVisibleDoc)
+        val currentUserId = authManager.currentAuthUser.value?.id ?: ""
+
+        val likedIds = _userLikedPostIds.value.toMutableSet()
+        val savedIds = _userSavedPostIds.value.toMutableSet()
+
+        // Asynchronously check like/save state for newly fetched docs if userId exists
+        if (currentUserId.isNotBlank()) {
+            for (doc in docs) {
+                val postId = doc.id
+                if (postId !in likedIds) {
+                    val isLiked = firestorePostService.isPostLikedByUser(postId, currentUserId)
+                    if (isLiked) likedIds.add(postId)
+                }
+                if (postId !in savedIds) {
+                    val isSaved = firestorePostService.isPostSavedByUser(postId, currentUserId)
+                    if (isSaved) savedIds.add(postId)
+                }
+            }
+            _userLikedPostIds.value = likedIds
+            _userSavedPostIds.value = savedIds
         }
+
+        val posts = docs.mapNotNull { doc ->
+            firestorePostService.documentToPost(doc, likedIds, savedIds)
+        }
+        val lastDoc = docs.lastOrNull()
+        return Pair(posts, lastDoc)
     }
 
-    fun toggleSave(postId: String) {
-        scope.launch {
-            val post = database.postDao().getPostById(postId) ?: return@launch
-            val newSaved = !post.isSaved
-            val newSaveCount = if (newSaved) post.saveCount + 1 else (post.saveCount - 1).coerceAtLeast(0)
-            database.postDao().updateSaveStatus(postId, newSaved, newSaveCount)
-        }
+    /**
+     * Real-time stream of comments for a specific post from Cloud Firestore subcollection.
+     */
+    fun getCommentsForPost(postId: String): Flow<List<Comment>> {
+        return firestorePostService.observeCommentsForPost(postId)
     }
 
+    /**
+     * Toggles like state on Cloud Firestore with atomic FieldValue.increment.
+     */
+    suspend fun toggleLike(postId: String, currentPost: Post): Post {
+        val currentUserId = authManager.currentAuthUser.value?.id ?: "u_guest"
+        val isCurrentlyLiked = postId in _userLikedPostIds.value
+        val newLiked = !isCurrentlyLiked
+
+        // Optimistically update local set
+        val updatedLikedSet = _userLikedPostIds.value.toMutableSet()
+        if (newLiked) updatedLikedSet.add(postId) else updatedLikedSet.remove(postId)
+        _userLikedPostIds.value = updatedLikedSet
+
+        val newLikeCount = if (newLiked) currentPost.likeCount + 1 else (currentPost.likeCount - 1).coerceAtLeast(0)
+        val updatedPost = currentPost.copy(isLiked = newLiked, likeCount = newLikeCount)
+
+        scope.launch {
+            try {
+                firestorePostService.toggleLike(postId, currentUserId, newLiked)
+            } catch (e: Exception) {
+                Log.e("LuminaRepository", "Error syncing toggleLike to Firestore", e)
+            }
+        }
+
+        return updatedPost
+    }
+
+    /**
+     * Toggles save state on Cloud Firestore with atomic FieldValue.increment.
+     */
+    suspend fun toggleSave(postId: String, currentPost: Post): Post {
+        val currentUserId = authManager.currentAuthUser.value?.id ?: "u_guest"
+        val isCurrentlySaved = postId in _userSavedPostIds.value
+        val newSaved = !isCurrentlySaved
+
+        // Optimistically update local set
+        val updatedSavedSet = _userSavedPostIds.value.toMutableSet()
+        if (newSaved) updatedSavedSet.add(postId) else updatedSavedSet.remove(postId)
+        _userSavedPostIds.value = updatedSavedSet
+
+        val newSaveCount = if (newSaved) currentPost.saveCount + 1 else (currentPost.saveCount - 1).coerceAtLeast(0)
+        val updatedPost = currentPost.copy(isSaved = newSaved, saveCount = newSaveCount)
+
+        scope.launch {
+            try {
+                firestorePostService.toggleSave(postId, currentUserId, newSaved)
+            } catch (e: Exception) {
+                Log.e("LuminaRepository", "Error syncing toggleSave to Firestore", e)
+            }
+        }
+
+        return updatedPost
+    }
+
+    /**
+     * Increments share count on Firestore.
+     */
     fun sharePost(postId: String) {
         scope.launch {
-            database.postDao().incrementShareCount(postId)
+            firestorePostService.incrementShareCount(postId)
         }
     }
 
-    fun addComment(postId: String, content: String) {
-        scope.launch {
-            val activeUser = authManager.currentAuthUser.value
-            val userId = activeUser?.id ?: "u_1"
-            val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
-            val authorHandle = activeUser?.username ?: "traveler"
-            val authorAvatar = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop"
-
-            val comment = Comment(
-                id = "c_${UUID.randomUUID()}",
-                postId = postId,
-                userId = userId,
-                authorName = authorName,
-                authorHandle = authorHandle,
-                authorAvatarUrl = authorAvatar,
-                content = content,
-                timeAgo = "Vừa xong",
-                likeCount = 0,
-                isLiked = false
-            )
-            database.commentDao().insert(CommentEntity.fromDomainModel(comment, userId = userId))
-            database.postDao().incrementCommentCount(postId)
-        }
-    }
-
-    fun createPost(
+    /**
+     * Creates and publishes a post to Cloud Firestore.
+     */
+    suspend fun createPost(
         caption: String,
         mediaUrls: List<String>,
         locationLabel: String,
@@ -292,47 +350,19 @@ class LuminaRepository(
         attachedTrip: Trip? = null,
         aspectRatio: Float = 0.82f
     ): Post {
+        val activeUser = authManager.currentAuthUser.value
+        val userId = activeUser?.id ?: "traveler_guest"
+        val authorName = activeUser?.displayName ?: "Lữ khách Levart"
+        val authorHandle = activeUser?.username ?: "traveler"
+        val authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
         val newPostId = "post_${UUID.randomUUID()}"
-        scope.launch {
-            val activeUser = authManager.currentAuthUser.value
-            val userId = activeUser?.id ?: "u_1"
-            val authorName = activeUser?.displayName ?: "Lữ khách Lumina"
-            val authorHandle = activeUser?.username ?: "traveler"
-            val authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop"
 
-            val entity = PostEntity(
-                id = newPostId,
-                userId = userId,
-                authorName = authorName,
-                authorHandle = authorHandle,
-                authorAvatarUrl = authorAvatarUrl,
-                hasRecentCheckIn = true,
-                locationLabel = locationLabel,
-                provinceCode = provinceCode,
-                timeAgo = "Vừa xong",
-                caption = caption,
-                mediaUrls = mediaUrls.ifEmpty {
-                    listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
-                },
-                aspectRatio = aspectRatio,
-                attachedTripId = attachedTrip?.id,
-                likeCount = 1,
-                commentCount = 0,
-                saveCount = 0,
-                shareCount = 0,
-                isLiked = true,
-                isSaved = false,
-                tags = listOf("Lumina", "VietnamTravel", "GenZ"),
-                createdAt = System.currentTimeMillis()
-            )
-            database.postDao().insert(entity)
-        }
-
-        return Post(
+        val post = Post(
             id = newPostId,
-            authorName = "Lữ khách Lumina",
-            authorHandle = "traveler",
-            authorAvatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop",
+            userId = userId,
+            authorName = authorName,
+            authorHandle = authorHandle,
+            authorAvatarUrl = authorAvatarUrl,
             hasRecentCheckIn = true,
             locationLabel = locationLabel,
             provinceCode = provinceCode,
@@ -343,16 +373,63 @@ class LuminaRepository(
             },
             aspectRatio = aspectRatio,
             attachedTrip = attachedTrip,
-            likeCount = 1,
+            likeCount = 0,
             commentCount = 0,
             saveCount = 0,
             shareCount = 0,
-            isLiked = true,
-            tags = listOf("Lumina", "VietnamTravel", "GenZ")
+            isLiked = false,
+            isSaved = false,
+            tags = listOf("Levart", "VietnamTravel", "GenZ")
         )
+
+        firestorePostService.createPost(post, userId)
+        return post
     }
 
+    /**
+     * Adds a comment to the post subcollection on Cloud Firestore.
+     */
+    suspend fun addComment(postId: String, content: String): Comment {
+        val activeUser = authManager.currentAuthUser.value
+        val userId = activeUser?.id ?: "traveler_guest"
+        val authorName = activeUser?.displayName ?: "Lữ khách Levart"
+        val authorHandle = activeUser?.username ?: "traveler"
+        val authorAvatar = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+
+        val comment = Comment(
+            id = "c_${UUID.randomUUID()}",
+            postId = postId,
+            userId = userId,
+            authorName = authorName,
+            authorHandle = authorHandle,
+            authorAvatarUrl = authorAvatar,
+            content = content,
+            timeAgo = "Vừa xong",
+            likeCount = 0,
+            isLiked = false
+        )
+
+        firestorePostService.addComment(postId, comment)
+        return comment
+    }
+
+    /**
+     * Deletes a post from Firestore.
+     */
+    suspend fun deletePost(postId: String) {
+        firestorePostService.deletePost(postId)
+    }
+
+    /**
+     * Deletes a comment from Firestore.
+     */
+    suspend fun deleteComment(postId: String, commentId: String) {
+        firestorePostService.deleteComment(postId, commentId)
+    }
+
+    // ==========================================
     // Check-in Engine
+    // ==========================================
     fun performQuickCheckIn(
         placeName: String = "Đồi Chè Cầu Đất",
         provinceCode: String = "LDG",

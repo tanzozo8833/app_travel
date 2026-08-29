@@ -52,6 +52,7 @@ import com.example.data.model.Post
 import com.example.data.model.Province
 import com.example.data.model.Trip
 import com.example.ui.FeedSubTab
+import com.example.ui.FeedUiState
 import com.example.ui.components.PostCard
 import com.example.ui.theme.*
 import com.google.android.gms.location.LocationServices
@@ -85,7 +86,14 @@ fun HomeScreen(
     currentUserId: String = "",
     currentUsername: String = "",
     currentSubTab: FeedSubTab,
+    feedUiState: FeedUiState = FeedUiState.Success(posts),
+    isRefreshing: Boolean = false,
+    isLoadingMore: Boolean = false,
     onSubTabChanged: (FeedSubTab) -> Unit,
+    onRefreshFeed: () -> Unit = {},
+    onLoadMorePosts: () -> Unit = {},
+    onRetryFeed: () -> Unit = {},
+    onCreatePostClick: () -> Unit = {},
     onFollowClick: (Post) -> Unit = {},
     onAuthorClick: (Post) -> Unit = {},
     onPostClick: (Post) -> Unit,
@@ -103,6 +111,19 @@ fun HomeScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+    val gridState = androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState()
+
+    // Infinite scroll detection
+    LaunchedEffect(gridState, isLoadingMore) {
+        snapshotFlow { gridState.layoutInfo }
+            .collect { layoutInfo ->
+                val totalItems = layoutInfo.totalItemsCount
+                val lastVisibleIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+                if (totalItems > 0 && lastVisibleIndex >= totalItems - 3 && !isLoadingMore) {
+                    onLoadMorePosts()
+                }
+            }
+    }
 
     // Real GPS States
     var detectedLat by remember { mutableStateOf<Double?>(null) }
@@ -289,12 +310,56 @@ fun HomeScreen(
 
         // 2-Column Staggered Grid with rounded post cards and elegant small gap spacing:
         LazyVerticalStaggeredGrid(
+            state = gridState,
             columns = StaggeredGridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalItemSpacing = 8.dp,
             contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 90.dp),
             modifier = Modifier.fillMaxSize()
         ) {
+            // Offline Warning Notice if offline
+            val isOffline = (feedUiState as? FeedUiState.Success)?.isOffline == true || (feedUiState as? FeedUiState.Error)?.isOffline == true
+            if (isOffline) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = Color(0xFFFFF3CD),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFFFEEBA)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp, vertical = 4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 12.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Text("⚡", fontSize = 13.sp)
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Đang xem bài viết lưu tạm (Ngoại tuyến)",
+                                    fontSize = 12.sp,
+                                    color = Color(0xFF856404),
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                            TextButton(
+                                onClick = onRetryFeed,
+                                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+                            ) {
+                                Text("Thử lại", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Brand700)
+                            }
+                        }
+                    }
+                }
+            }
+
             // 1. Hero Banner: Real GPS Passport Stamp Prompt with Intelligent Action State
             item(span = StaggeredGridItemSpan.FullLine) {
                 Box(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -370,6 +435,179 @@ fun HomeScreen(
                 FeedSubTab.NEARBY -> {
                     val nearbyPosts = posts.filter { it.provinceCode == targetProvinceCode }
                     if (nearbyPosts.isNotEmpty()) nearbyPosts else posts
+                }
+            }
+
+            // First Loading State (if no posts loaded yet)
+            if (feedUiState is FeedUiState.Loading && posts.isEmpty()) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 40.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            CircularProgressIndicator(
+                                color = Brand700,
+                                modifier = Modifier.size(36.dp),
+                                strokeWidth = 3.dp
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Text(
+                                text = "Đang tải bài viết từ cộng đồng Levart...",
+                                fontSize = 13.sp,
+                                color = TextSecondary
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Error State (if failed and no posts loaded)
+            if (feedUiState is FeedUiState.Error && posts.isEmpty()) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = BgSurface),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE8EFEA)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp, vertical = 20.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = Color(0xFFFDE8E8),
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Refresh,
+                                        contentDescription = null,
+                                        tint = Color(0xFFE02424),
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            Text(
+                                text = "Không thể tải bảng tin",
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
+                            )
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Text(
+                                text = feedUiState.message,
+                                fontSize = 13.sp,
+                                color = TextSecondary,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Button(
+                                onClick = onRetryFeed,
+                                shape = RoundedCornerShape(999.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = Brand700)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Refresh,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("Thử lại", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Empty Community Feed State
+            if (currentSubTab == FeedSubTab.EXPLORE && (feedUiState is FeedUiState.Empty || (feedUiState is FeedUiState.Success && filteredPosts.isEmpty()))) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = BgSurface),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFDCE6E1)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp, vertical = 20.dp)
+                            .testTag("empty_community_feed")
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = Brand100,
+                                modifier = Modifier.size(56.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Explore,
+                                        contentDescription = null,
+                                        tint = Brand700,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            Text(
+                                text = "Bảng tin cộng đồng đang trống",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextPrimary
+                            )
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Text(
+                                text = "Chưa có bài viết nào trên máy chủ. Hãy là người đầu tiên chia sẻ chuyến đi tuyệt vời của bạn!",
+                                fontSize = 13.sp,
+                                color = TextSecondary,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                lineHeight = 18.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Button(
+                                onClick = onCreatePostClick,
+                                shape = RoundedCornerShape(999.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                modifier = Modifier.testTag("post_first_button")
+                            ) {
+                                Text(
+                                    text = "Đăng bài đầu tiên ngay ➔",
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
@@ -470,6 +708,24 @@ fun HomeScreen(
                         onShareClick = onShareClick,
                         onCommentClick = onCommentClick
                     )
+                }
+            }
+
+            // Pagination loading indicator item at bottom
+            if (isLoadingMore) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(
+                            color = Brand700,
+                            strokeWidth = 2.5.dp,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.example.ui
 
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LuminaApplication
@@ -157,12 +158,130 @@ class LuminaViewModel(
     private val _isShowingCommentSheet = MutableStateFlow(false)
     val isShowingCommentSheet: StateFlow<Boolean> = _isShowingCommentSheet.asStateFlow()
 
-    // Data streams directly from Room Database via repository
-    val posts: StateFlow<List<Post>> = repository.posts.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        emptyList()
-    )
+    // Remote Firestore Feed UI State & Pagination
+    private val _feedUiState = MutableStateFlow<FeedUiState>(FeedUiState.Loading)
+    val feedUiState: StateFlow<FeedUiState> = _feedUiState.asStateFlow()
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
+    private val _isLoadingMore = MutableStateFlow(false)
+    val isLoadingMore: StateFlow<Boolean> = _isLoadingMore.asStateFlow()
+
+    private val _currentFeedPosts = MutableStateFlow<List<Post>>(emptyList())
+    val posts: StateFlow<List<Post>> = _currentFeedPosts.asStateFlow()
+
+    private var lastVisibleDoc: com.google.firebase.firestore.DocumentSnapshot? = null
+    private var hasMorePages: Boolean = true
+
+    init {
+        loadInitialFeed()
+    }
+
+    fun loadInitialFeed() {
+        viewModelScope.launch {
+            _feedUiState.value = if (_currentFeedPosts.value.isEmpty()) FeedUiState.Loading else _feedUiState.value
+            try {
+                lastVisibleDoc = null
+                val (fetchedPosts, lastDoc) = repository.fetchPostsPage(pageSize = 10, lastVisibleDoc = null)
+                lastVisibleDoc = lastDoc
+                hasMorePages = fetchedPosts.size >= 10
+                _currentFeedPosts.value = fetchedPosts
+
+                if (fetchedPosts.isEmpty()) {
+                    _feedUiState.value = FeedUiState.Empty(isOffline = false)
+                } else {
+                    _feedUiState.value = FeedUiState.Success(
+                        posts = fetchedPosts,
+                        isOffline = false,
+                        hasMore = hasMorePages
+                    )
+                }
+            } catch (e: Exception) {
+                val isNetworkError = e is java.io.IOException || e.message?.contains("network", ignoreCase = true) == true || e.message?.contains("offline", ignoreCase = true) == true
+                if (_currentFeedPosts.value.isNotEmpty()) {
+                    _feedUiState.value = FeedUiState.Success(
+                        posts = _currentFeedPosts.value,
+                        isOffline = true,
+                        hasMore = false
+                    )
+                } else {
+                    _feedUiState.value = FeedUiState.Error(
+                        message = if (isNetworkError) "Không có kết nối mạng. Vui lòng kiểm tra lại đường truyền." else "Không thể tải bài viết (${e.localizedMessage})",
+                        isOffline = isNetworkError
+                    )
+                }
+            }
+        }
+    }
+
+    fun refreshFeed() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            try {
+                lastVisibleDoc = null
+                val (fetchedPosts, lastDoc) = repository.fetchPostsPage(pageSize = 10, lastVisibleDoc = null)
+                lastVisibleDoc = lastDoc
+                hasMorePages = fetchedPosts.size >= 10
+                _currentFeedPosts.value = fetchedPosts
+
+                if (fetchedPosts.isEmpty()) {
+                    _feedUiState.value = FeedUiState.Empty(isOffline = false)
+                } else {
+                    _feedUiState.value = FeedUiState.Success(
+                        posts = fetchedPosts,
+                        isOffline = false,
+                        hasMore = hasMorePages
+                    )
+                }
+            } catch (e: Exception) {
+                val isNetworkError = e is java.io.IOException || e.message?.contains("network", ignoreCase = true) == true
+                if (_currentFeedPosts.value.isNotEmpty()) {
+                    _feedUiState.value = FeedUiState.Success(
+                        posts = _currentFeedPosts.value,
+                        isOffline = true,
+                        hasMore = false
+                    )
+                    showToast("Đang xem bài viết ngoại tuyến")
+                } else {
+                    _feedUiState.value = FeedUiState.Error(
+                        message = if (isNetworkError) "Mất kết nối mạng. Hãy kiểm tra WiFi/4G." else "Không thể làm mới: ${e.localizedMessage}",
+                        isOffline = isNetworkError
+                    )
+                }
+            } finally {
+                _isRefreshing.value = false
+            }
+        }
+    }
+
+    fun loadMorePosts() {
+        if (_isLoadingMore.value || !hasMorePages || lastVisibleDoc == null) return
+        viewModelScope.launch {
+            _isLoadingMore.value = true
+            try {
+                val (morePosts, lastDoc) = repository.fetchPostsPage(pageSize = 10, lastVisibleDoc = lastVisibleDoc)
+                lastVisibleDoc = lastDoc
+                hasMorePages = morePosts.size >= 10
+
+                val combined = (_currentFeedPosts.value + morePosts).distinctBy { it.id }
+                _currentFeedPosts.value = combined
+                _feedUiState.value = FeedUiState.Success(
+                    posts = combined,
+                    isOffline = false,
+                    hasMore = hasMorePages
+                )
+            } catch (e: Exception) {
+                Log.w("LuminaViewModel", "Failed to load more posts: ${e.message}")
+            } finally {
+                _isLoadingMore.value = false
+            }
+        }
+    }
+
+    fun retryFeed() {
+        loadInitialFeed()
+    }
     val trips: StateFlow<List<Trip>> = repository.trips.stateIn(
         viewModelScope,
         SharingStarted.Eagerly,
@@ -382,21 +501,41 @@ class LuminaViewModel(
 
     // Interactions
     fun toggleLike(postId: String) {
-        repository.toggleLike(postId)
-        val updated = posts.value.find { it.id == postId }
-        if (_selectedPost.value?.id == postId && updated != null) {
-            _selectedPost.value = updated
+        val current = _currentFeedPosts.value.find { it.id == postId }
+            ?: _selectedPost.value?.takeIf { it.id == postId }
+            ?: return
+
+        viewModelScope.launch {
+            val updatedPost = repository.toggleLike(postId, current)
+            _currentFeedPosts.value = _currentFeedPosts.value.map { if (it.id == postId) updatedPost else it }
+            if (_selectedPost.value?.id == postId) {
+                _selectedPost.value = updatedPost
+            }
+            // Update FeedUiState if needed
+            val currentState = _feedUiState.value
+            if (currentState is FeedUiState.Success) {
+                _feedUiState.value = currentState.copy(posts = _currentFeedPosts.value)
+            }
         }
     }
 
     fun toggleSave(postId: String) {
-        repository.toggleSave(postId)
-        val updated = posts.value.find { it.id == postId }
-        if (_selectedPost.value?.id == postId && updated != null) {
-            _selectedPost.value = updated
+        val current = _currentFeedPosts.value.find { it.id == postId }
+            ?: _selectedPost.value?.takeIf { it.id == postId }
+            ?: return
+
+        viewModelScope.launch {
+            val updatedPost = repository.toggleSave(postId, current)
+            _currentFeedPosts.value = _currentFeedPosts.value.map { if (it.id == postId) updatedPost else it }
+            if (_selectedPost.value?.id == postId) {
+                _selectedPost.value = updatedPost
+            }
+            val currentState = _feedUiState.value
+            if (currentState is FeedUiState.Success) {
+                _feedUiState.value = currentState.copy(posts = _currentFeedPosts.value)
+            }
+            showToast(if (updatedPost.isSaved) "Đã lưu vào bộ sưu tập!" else "Đã bỏ lưu bài viết")
         }
-        val isNowSaved = updated?.isSaved == true
-        showToast(if (isNowSaved) "Đã lưu vào bộ sưu tập!" else "Đã bỏ lưu bài viết")
     }
 
     fun sharePost(postId: String) {
@@ -406,12 +545,25 @@ class LuminaViewModel(
 
     fun addComment(postId: String, content: String) {
         if (content.isBlank()) return
-        repository.addComment(postId, content)
-        val updated = posts.value.find { it.id == postId }
-        if (_selectedPost.value?.id == postId && updated != null) {
-            _selectedPost.value = updated
+        viewModelScope.launch {
+            try {
+                repository.addComment(postId, content)
+                // Increment comment count locally for immediate feedback
+                _currentFeedPosts.value = _currentFeedPosts.value.map { post ->
+                    if (post.id == postId) post.copy(commentCount = post.commentCount + 1) else post
+                }
+                if (_selectedPost.value?.id == postId) {
+                    _selectedPost.value = _selectedPost.value?.copy(commentCount = (_selectedPost.value?.commentCount ?: 0) + 1)
+                }
+                val currentState = _feedUiState.value
+                if (currentState is FeedUiState.Success) {
+                    _feedUiState.value = currentState.copy(posts = _currentFeedPosts.value)
+                }
+                showToast("Đã đăng bình luận!")
+            } catch (e: Exception) {
+                showToast("Không thể gửi bình luận: ${e.localizedMessage}")
+            }
         }
-        showToast("Đã đăng bình luận!")
     }
 
     fun getCommentsForPost(postId: String): Flow<List<Comment>> = repository.getCommentsForPost(postId)
@@ -447,18 +599,53 @@ class LuminaViewModel(
         mediaUrls: List<String> = emptyList(),
         aspectRatio: Float = 0.8f
     ) {
-        repository.createPost(
-            caption = caption,
-            mediaUrls = mediaUrls.ifEmpty {
-                listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
-            },
-            locationLabel = location,
-            provinceCode = "LDG",
-            attachedTrip = trip,
-            aspectRatio = aspectRatio
-        )
-        showCreatePost(false)
-        showToast("Đã chia sẻ chuyến đi lên cộng đồng Levart!")
+        viewModelScope.launch {
+            try {
+                val newPost = repository.createPost(
+                    caption = caption,
+                    mediaUrls = mediaUrls.ifEmpty {
+                        listOf("https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop")
+                    },
+                    locationLabel = location,
+                    provinceCode = "LDG",
+                    attachedTrip = trip,
+                    aspectRatio = aspectRatio
+                )
+                // Insert newly created post at top of feed
+                val updatedList = listOf(newPost) + _currentFeedPosts.value
+                _currentFeedPosts.value = updatedList
+                _feedUiState.value = FeedUiState.Success(
+                    posts = updatedList,
+                    isOffline = false,
+                    hasMore = hasMorePages
+                )
+                showCreatePost(false)
+                showToast("Đã chia sẻ chuyến đi lên cộng đồng Levart!")
+            } catch (e: Exception) {
+                showToast("Không thể đăng bài: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun deletePost(postId: String) {
+        viewModelScope.launch {
+            try {
+                repository.deletePost(postId)
+                _currentFeedPosts.value = _currentFeedPosts.value.filter { it.id != postId }
+                if (_selectedPost.value?.id == postId) {
+                    _selectedPost.value = null
+                }
+                val updated = _currentFeedPosts.value
+                _feedUiState.value = if (updated.isEmpty()) {
+                    FeedUiState.Empty(isOffline = false)
+                } else {
+                    FeedUiState.Success(posts = updated, isOffline = false, hasMore = hasMorePages)
+                }
+                showToast("Đã xóa bài viết")
+            } catch (e: Exception) {
+                showToast("Không thể xóa bài: ${e.localizedMessage}")
+            }
+        }
     }
 
     // Check-in

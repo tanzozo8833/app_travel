@@ -19,8 +19,6 @@ object DatabaseSeeder {
                     database.provinceDao().insertAll(ProvinceSeed.data)
                     database.placeDao().insertAll(PlaceSeed.data)
                     database.tripDao().insertAll(TripSeed.data)
-                    database.postDao().insertAll(PostSeed.data)
-                    database.commentDao().insertAll(CommentSeed.data)
                     database.checkInDao().insertAll(CheckInSeed.data)
                     database.badgeDao().insertAll(BadgeSeed.data)
                     database.frameDao().insertAll(FrameSeed.data)
