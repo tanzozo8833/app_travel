@@ -75,5 +75,7 @@ data class UserProfile(
     val totalProvincesCount: Int = 34,
     val totalDistanceKm: Double = 12500.0,
     val tripsCompletedCount: Int = 18,
-    val totalSavesCount: Int = 3420
+    val totalSavesCount: Int = 3420,
+    val isCustomName: Boolean = false,
+    val isCustomAvatar: Boolean = false
 )

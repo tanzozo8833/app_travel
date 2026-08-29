@@ -95,6 +95,8 @@ class AuthManager(private val context: Context) {
         private const val KEY_AVATAR_URL = "auth_user_avatar_url"
         private const val KEY_TAG_TITLE = "auth_user_tag_title"
         private const val KEY_BIO = "auth_user_bio"
+        private const val KEY_IS_CUSTOM_NAME = "auth_user_is_custom_name"
+        private const val KEY_IS_CUSTOM_AVATAR = "auth_user_is_custom_avatar"
     }
 
     /**
@@ -132,16 +134,30 @@ class AuthManager(private val context: Context) {
         if (user == null) return null
         val isAnon = user.isAnonymous
         val email = user.email ?: ""
+        val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+        val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
         val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
-        val displayName = user.displayName?.ifBlank { null }
-            ?: savedDisplayName
-            ?: if (isAnon) "Lữ khách Khám Phá" else email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+        val savedAvatarUrl = prefs.getString(KEY_AVATAR_URL, null)
+
+        val displayName = if (isCustomName && !savedDisplayName.isNullOrBlank()) {
+            savedDisplayName
+        } else {
+            user.displayName?.ifBlank { null }
+                ?: savedDisplayName
+                ?: if (isAnon) "Lữ khách Khám Phá" else email.substringBefore("@").ifBlank { "Lữ khách Levart" }
+        }
+
         val username = if (isAnon) {
             prefs.getString(KEY_USERNAME, null) ?: "traveler_${user.uid.takeLast(6).lowercase()}"
         } else {
             email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
         }
-        val avatarUrl = user.photoUrl?.toString() ?: prefs.getString(KEY_AVATAR_URL, null) ?: ""
+
+        val avatarUrl = if (isCustomAvatar && !savedAvatarUrl.isNullOrBlank()) {
+            savedAvatarUrl
+        } else {
+            user.photoUrl?.toString() ?: savedAvatarUrl ?: ""
+        }
 
         val savedBio = prefs.getString(KEY_BIO, null)
         val savedTag = prefs.getString(KEY_TAG_TITLE, null)
@@ -158,7 +174,9 @@ class AuthManager(private val context: Context) {
                 "Chế độ Lữ Khách • Khám phá 34 tỉnh thành Việt Nam 🇻🇳"
             } else {
                 "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
-            }
+            },
+            isCustomName = isCustomName,
+            isCustomAvatar = isCustomAvatar
         )
     }
 
@@ -166,11 +184,13 @@ class AuthManager(private val context: Context) {
         if (firebaseAuth.currentUser == null) return null
 
         val id = prefs.getString(KEY_USER_ID, null) ?: firebaseAuth.currentUser?.uid ?: return null
-        val displayName = prefs.getString(KEY_DISPLAY_NAME, "Lữ khách Lumina") ?: "Lữ khách Lumina"
+        val displayName = prefs.getString(KEY_DISPLAY_NAME, "Lữ khách Levart") ?: "Lữ khách Levart"
         val username = prefs.getString(KEY_USERNAME, "traveler") ?: "traveler"
         val avatarUrl = prefs.getString(KEY_AVATAR_URL, "") ?: ""
         val tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER"
-        val bio = prefs.getString(KEY_BIO, "Khám phá 34 tỉnh thành Việt Nam cùng Lumina ✨") ?: ""
+        val bio = prefs.getString(KEY_BIO, "Khám phá 34 tỉnh thành Việt Nam cùng Levart ✨") ?: ""
+        val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+        val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
 
         return UserProfile(
             id = id,
@@ -180,7 +200,9 @@ class AuthManager(private val context: Context) {
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
             },
             tagTitle = tagTitle,
-            bio = bio
+            bio = bio,
+            isCustomName = isCustomName,
+            isCustomAvatar = isCustomAvatar
         )
     }
 
@@ -258,15 +280,33 @@ class AuthManager(private val context: Context) {
                             ?: ""
                         val username = email.substringBefore("@").replace(".", "_").lowercase()
 
+                        val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+                        val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
+                        val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
+                        val savedAvatarUrl = prefs.getString(KEY_AVATAR_URL, null)
+
+                        val resolvedDisplayName = if (isCustomName && !savedDisplayName.isNullOrBlank()) {
+                            savedDisplayName
+                        } else {
+                            displayName
+                        }
+                        val resolvedAvatarUrl = if (isCustomAvatar && !savedAvatarUrl.isNullOrBlank()) {
+                            savedAvatarUrl
+                        } else {
+                            avatarUrl
+                        }
+
                         val profile = UserProfile(
                             id = upgradedUser.uid,
                             username = username,
-                            displayName = displayName,
-                            avatarUrl = avatarUrl.ifBlank {
+                            displayName = resolvedDisplayName,
+                            avatarUrl = resolvedAvatarUrl.ifBlank {
                                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                             },
                             tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
-                            bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                            bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳",
+                            isCustomName = isCustomName,
+                            isCustomAvatar = isCustomAvatar
                         )
 
                         saveSession(profile, email)
@@ -306,15 +346,33 @@ class AuthManager(private val context: Context) {
                         ?: ""
                     val username = email.substringBefore("@").replace(".", "_").lowercase()
 
+                    val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+                    val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
+                    val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
+                    val savedAvatarUrl = prefs.getString(KEY_AVATAR_URL, null)
+
+                    val resolvedDisplayName = if (isCustomName && !savedDisplayName.isNullOrBlank()) {
+                        savedDisplayName
+                    } else {
+                        displayName
+                    }
+                    val resolvedAvatarUrl = if (isCustomAvatar && !savedAvatarUrl.isNullOrBlank()) {
+                        savedAvatarUrl
+                    } else {
+                        avatarUrl
+                    }
+
                     val profile = UserProfile(
                         id = firebaseUser.uid,
                         username = username,
-                        displayName = displayName,
-                        avatarUrl = avatarUrl.ifBlank {
+                        displayName = resolvedDisplayName,
+                        avatarUrl = resolvedAvatarUrl.ifBlank {
                             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                         },
-                        tagTitle = "GEN Z EXPLORER",
-                        bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                        tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
+                        bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳",
+                        isCustomName = isCustomName,
+                        isCustomAvatar = isCustomAvatar
                     )
 
                     saveSession(profile, email)
@@ -432,15 +490,33 @@ class AuthManager(private val context: Context) {
             val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
             val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
 
+            val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+            val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
+            val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
+            val savedAvatarUrl = prefs.getString(KEY_AVATAR_URL, null)
+
+            val resolvedDisplayName = if (isCustomName && !savedDisplayName.isNullOrBlank()) {
+                savedDisplayName
+            } else {
+                displayName
+            }
+            val resolvedAvatarUrl = if (isCustomAvatar && !savedAvatarUrl.isNullOrBlank()) {
+                savedAvatarUrl
+            } else {
+                avatarUrl
+            }
+
             val profile = UserProfile(
                 id = firebaseUser.uid,
                 username = username,
-                displayName = displayName,
-                avatarUrl = avatarUrl.ifBlank {
+                displayName = resolvedDisplayName,
+                avatarUrl = resolvedAvatarUrl.ifBlank {
                     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                 },
                 tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
-                bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳",
+                isCustomName = isCustomName,
+                isCustomAvatar = isCustomAvatar
             )
 
             saveSession(profile, email)
@@ -518,19 +594,37 @@ class AuthManager(private val context: Context) {
 
             val firebaseUser = authResult.user ?: throw IllegalStateException("Không nhận được dữ liệu xác thực từ Firebase.")
             val email = firebaseUser.email ?: ""
-            val displayName = firebaseUser.displayName?.ifBlank { null } ?: email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+            val displayName = firebaseUser.displayName?.ifBlank { null } ?: email.substringBefore("@").ifBlank { "Lữ khách Levart" }
             val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
             val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
+
+            val isCustomName = prefs.getBoolean(KEY_IS_CUSTOM_NAME, false)
+            val isCustomAvatar = prefs.getBoolean(KEY_IS_CUSTOM_AVATAR, false)
+            val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
+            val savedAvatarUrl = prefs.getString(KEY_AVATAR_URL, null)
+
+            val resolvedDisplayName = if (isCustomName && !savedDisplayName.isNullOrBlank()) {
+                savedDisplayName
+            } else {
+                displayName
+            }
+            val resolvedAvatarUrl = if (isCustomAvatar && !savedAvatarUrl.isNullOrBlank()) {
+                savedAvatarUrl
+            } else {
+                avatarUrl
+            }
 
             val profile = UserProfile(
                 id = firebaseUser.uid,
                 username = username,
-                displayName = displayName,
-                avatarUrl = avatarUrl.ifBlank {
+                displayName = resolvedDisplayName,
+                avatarUrl = resolvedAvatarUrl.ifBlank {
                     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                 },
-                tagTitle = "GEN Z EXPLORER",
-                bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
+                bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳",
+                isCustomName = isCustomName,
+                isCustomAvatar = isCustomAvatar
             )
 
             saveSession(profile, email)
@@ -565,7 +659,7 @@ class AuthManager(private val context: Context) {
                 displayName = trimmedEmail.substringBefore("@"),
                 avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
                 tagTitle = "GEN Z EXPLORER",
-                bio = "Tài khoản Lumina: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                bio = "Tài khoản Levart: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
             )
             saveSession(profile, trimmedEmail)
             Log.d(TAG, "Email/Password sign-in successful: ${profile.displayName}")
@@ -692,6 +786,8 @@ class AuthManager(private val context: Context) {
             .putString(KEY_AVATAR_URL, profile.avatarUrl)
             .putString(KEY_TAG_TITLE, profile.tagTitle)
             .putString(KEY_BIO, profile.bio)
+            .putBoolean(KEY_IS_CUSTOM_NAME, profile.isCustomName)
+            .putBoolean(KEY_IS_CUSTOM_AVATAR, profile.isCustomAvatar)
             .apply()
 
         _isLoggedIn.value = true
@@ -805,6 +901,8 @@ class AuthManager(private val context: Context) {
             .putString(KEY_AVATAR_URL, profile.avatarUrl)
             .putString(KEY_TAG_TITLE, profile.tagTitle)
             .putString(KEY_BIO, profile.bio)
+            .putBoolean(KEY_IS_CUSTOM_NAME, profile.isCustomName)
+            .putBoolean(KEY_IS_CUSTOM_AVATAR, profile.isCustomAvatar)
             .apply()
 
         _currentAuthUser.value = profile

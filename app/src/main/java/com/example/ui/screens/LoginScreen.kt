@@ -139,7 +139,7 @@ fun LoginScreen(
 
             // App Name & Tagline
             Text(
-                text = "LUMINA TRAVEL",
+                text = "LEVART TRAVEL",
                 fontSize = 23.sp,
                 fontWeight = FontWeight.ExtraBold,
                 fontFamily = FontFamily.Monospace,
@@ -612,7 +612,7 @@ fun LoginScreen(
                                 Text("Đang xử lý...", fontSize = 13.sp)
                             } else {
                                 Text(
-                                    text = if (isSignUpMode) "Tạo tài khoản Lumina" else "Đăng nhập ngay",
+                                    text = if (isSignUpMode) "Tạo tài khoản Levart" else "Đăng nhập ngay",
                                     fontSize = 13.5.sp,
                                     fontWeight = FontWeight.Bold
                                 )

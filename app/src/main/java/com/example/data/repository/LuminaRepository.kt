@@ -94,7 +94,7 @@ class LuminaRepository(
                 UserProfile(
                     id = "traveler_guest",
                     username = "traveler",
-                    displayName = "Lữ khách Lumina",
+                    displayName = "Lữ khách Levart",
                     avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                 )
             )

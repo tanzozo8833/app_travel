@@ -29,10 +29,10 @@ class FirestoreUserProfileService(
         return try {
             val id = doc.getString("id") ?: doc.id.ifBlank { fallbackId }
             val username = doc.getString("username") ?: "traveler"
-            val displayName = doc.getString("displayName") ?: "Lữ khách Lumina"
+            val displayName = doc.getString("displayName") ?: "Lữ khách Levart"
             val avatarUrl = doc.getString("avatarUrl") ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
             val tagTitle = doc.getString("tagTitle") ?: "GEN Z EXPLORER"
-            val bio = doc.getString("bio") ?: "Khám phá 34 tỉnh thành Việt Nam cùng Lumina ✨"
+            val bio = doc.getString("bio") ?: "Khám phá 34 tỉnh thành Việt Nam cùng Levart ✨"
             val topCityName = doc.getString("topCityName") ?: ""
             val topCityCheckInCount = doc.getLong("topCityCheckInCount")?.toInt() ?: 0
             val visitedProvincesCount = doc.getLong("visitedProvincesCount")?.toInt() ?: 0
@@ -40,6 +40,8 @@ class FirestoreUserProfileService(
             val totalDistanceKm = doc.getDouble("totalDistanceKm") ?: 0.0
             val tripsCompletedCount = doc.getLong("tripsCompletedCount")?.toInt() ?: 0
             val totalSavesCount = doc.getLong("totalSavesCount")?.toInt() ?: 0
+            val isCustomName = doc.getBoolean("isCustomName") ?: false
+            val isCustomAvatar = doc.getBoolean("isCustomAvatar") ?: false
 
             UserProfile(
                 id = id,
@@ -54,7 +56,9 @@ class FirestoreUserProfileService(
                 totalProvincesCount = totalProvincesCount,
                 totalDistanceKm = totalDistanceKm,
                 tripsCompletedCount = tripsCompletedCount,
-                totalSavesCount = totalSavesCount
+                totalSavesCount = totalSavesCount,
+                isCustomName = isCustomName,
+                isCustomAvatar = isCustomAvatar
             )
         } catch (e: Exception) {
             Log.e(TAG, "Error mapping document ${doc.id} to UserProfile", e)
@@ -149,6 +153,8 @@ class FirestoreUserProfileService(
                 "totalDistanceKm" to profile.totalDistanceKm,
                 "tripsCompletedCount" to profile.tripsCompletedCount,
                 "totalSavesCount" to profile.totalSavesCount,
+                "isCustomName" to profile.isCustomName,
+                "isCustomAvatar" to profile.isCustomAvatar,
                 "updatedAt" to System.currentTimeMillis()
             )
 
@@ -163,8 +169,13 @@ class FirestoreUserProfileService(
 
     /**
      * Synchronizes profile upon login.
-     * If profile already exists on Firestore, it loads the existing profile and merges non-empty identity fields (displayName/avatarUrl) while PRESERVING stats and bio.
-     * If profile is new, creates the document on Firestore.
+     * - If profile already exists on Firestore:
+     *   - If user previously customized their name (isCustomName == true), KEEP the custom displayName.
+     *   - If not customized yet, use auth provider's displayName.
+     *   - If user previously customized their avatar (isCustomAvatar == true), KEEP the custom avatarUrl.
+     *   - If not customized yet, use auth provider's avatarUrl.
+     *   - Always preserve stats, bio, tagTitle, and con dấu.
+     * - If profile is new, creates the initial document on Firestore using authProfile.
      */
     suspend fun syncProfileOnLogin(authProfile: UserProfile): UserProfile {
         if (authProfile.id.isBlank()) return authProfile
@@ -173,16 +184,28 @@ class FirestoreUserProfileService(
             if (existingDoc.exists()) {
                 val existing = documentToUserProfile(existingDoc, authProfile.id)
                 if (existing != null) {
+                    val resolvedDisplayName = if (existing.isCustomName) {
+                        existing.displayName
+                    } else {
+                        authProfile.displayName.ifBlank { existing.displayName }
+                    }
+                    val resolvedAvatarUrl = if (existing.isCustomAvatar) {
+                        existing.avatarUrl
+                    } else {
+                        authProfile.avatarUrl.ifBlank { existing.avatarUrl }
+                    }
+                    val resolvedUsername = existing.username.ifBlank { authProfile.username }
+
                     val merged = existing.copy(
-                        displayName = authProfile.displayName.ifBlank { existing.displayName },
-                        avatarUrl = authProfile.avatarUrl.ifBlank { existing.avatarUrl },
-                        username = existing.username.ifBlank { authProfile.username }
+                        displayName = resolvedDisplayName,
+                        avatarUrl = resolvedAvatarUrl,
+                        username = resolvedUsername
                     )
                     // If anything was updated, sync back
                     if (merged != existing) {
                         saveOrUpdateUserProfile(merged)
                     }
-                    Log.d(TAG, "Loaded existing Firestore profile for ${authProfile.id}: ${merged.displayName}")
+                    Log.d(TAG, "Loaded existing Firestore profile for ${authProfile.id}: ${merged.displayName} (isCustomName=${existing.isCustomName})")
                     return merged
                 }
             }
@@ -199,6 +222,7 @@ class FirestoreUserProfileService(
 
     /**
      * Updates editable personal info: displayName, bio, tagTitle.
+     * Sets isCustomName = true so future logins will not overwrite the custom name with Google account name.
      */
     suspend fun updateProfileInfo(userId: String, displayName: String, bio: String, tagTitle: String) {
         if (userId.isBlank()) return
@@ -207,12 +231,13 @@ class FirestoreUserProfileService(
                 "displayName" to displayName,
                 "bio" to bio,
                 "tagTitle" to tagTitle,
+                "isCustomName" to true,
                 "updatedAt" to System.currentTimeMillis()
             )
             usersCollection.document(userId)
                 .update(updates)
                 .await()
-            Log.d(TAG, "Updated profile info on Firestore for $userId")
+            Log.d(TAG, "Updated profile info on Firestore for $userId (marked isCustomName=true)")
         } catch (e: Exception) {
             Log.e(TAG, "Error updating profile info on Firestore for $userId", e)
         }

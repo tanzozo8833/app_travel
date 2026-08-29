@@ -58,7 +58,7 @@ fun LuminaHeader(
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
                     Text(
-                        text = "Lumina",
+                        text = "Levart",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = Brand900,

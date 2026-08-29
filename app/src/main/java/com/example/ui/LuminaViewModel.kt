@@ -256,7 +256,7 @@ class LuminaViewModel(
         listOf(
             ChatMessage(
                 isUser = false,
-                text = "Xin chào Thảo Linh! Mình là trợ lý du lịch Lumina ✨ Bạn đang dự định khám phá tỉnh thành nào ở Việt Nam? Hãy hỏi mình quán ăn ngon, outfit chụp ảnh hoặc chi phí chuyến đi nhé!"
+                text = "Xin chào Thảo Linh! Mình là trợ lý du lịch Levart ✨ Bạn đang dự định khám phá tỉnh thành nào ở Việt Nam? Hãy hỏi mình quán ăn ngon, outfit chụp ảnh hoặc chi phí chuyến đi nhé!"
             )
         )
     )
@@ -458,7 +458,7 @@ class LuminaViewModel(
             aspectRatio = aspectRatio
         )
         showCreatePost(false)
-        showToast("Đã chia sẻ chuyến đi lên cộng đồng Lumina!")
+        showToast("Đã chia sẻ chuyến đi lên cộng đồng Levart!")
     }
 
     // Check-in
@@ -890,7 +890,8 @@ class LuminaViewModel(
         val updated = current.copy(
             displayName = displayName,
             bio = bio,
-            tagTitle = tagTitle
+            tagTitle = tagTitle,
+            isCustomName = true
         )
         repository.updateUserProfile(updated)
         repository.authManager.updateSavedUserProfile(updated)

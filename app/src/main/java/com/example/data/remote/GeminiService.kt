@@ -45,7 +45,7 @@ object GeminiService {
 
         try {
             val prompt = """
-                Bạn là chuyên gia thiết kế lịch trình du lịch Lumina dành cho Gen Z tại Việt Nam.
+                Bạn là chuyên gia thiết kế lịch trình du lịch Levart dành cho Gen Z tại Việt Nam.
                 Hãy tạo lịch trình chi tiết theo định dạng JSON cho chuyến đi:
                 - Điểm đến: $destination
                 - Số ngày: $durationDays ngày (${durationDays}N${durationDays - 1}Đ)
@@ -385,7 +385,7 @@ object GeminiService {
                         "1. **Bánh căn xíu mại nóng hổi** — Giòn rụm bên ngoài, xíu mại béo ngậy chấm ngập mỡ hành (35k–50k).\n" +
                         "2. **Lẩu gà lá é / Bò tơ** — Nước dùng ngọt thanh, the cay giải lạnh tuyệt vời (180k–250k/nồi).\n" +
                         "3. **Bánh tráng nướng 'Pizza Việt Nam'** — Ăn kèm sữa đậu nành nóng ở chợ đêm.\n\n" +
-                        "💡 *Mẹo Lumina:* Nên đi ăn từ 17:30 để tránh phải xếp hàng lâu nhé!"
+                        "💡 *Mẹo Levart:* Nên đi ăn từ 17:30 để tránh phải xếp hàng lâu nhé!"
             }
             plugin == "outfit" || question.contains("mặc gì", ignoreCase = true) || question.contains("đồ", ignoreCase = true) -> {
                 "👗 **Gợi ý outfit chụp ảnh tại $destination:**\n\n" +
@@ -411,7 +411,7 @@ object GeminiService {
                         "3. **Ga Cổ Đà Lạt (08:30 - 10:00)**: Góc toa tàu gỗ cổ điển phong cách phim Hong Kong thập niên 90."
             }
             else -> {
-                "✨ Chào bạn! Tại **$destination**, Lumina gợi ý bạn nên dậy sớm săn mây lúc 05:30 và dành buổi chiều ngắm hoàng hôn tại các quán cà phê thung lũng. Bạn có muốn mình tạo lịch trình chi tiết theo ngày hay tìm quán ăn ngon gần bạn không?"
+                "✨ Chào bạn! Tại **$destination**, Levart gợi ý bạn nên dậy sớm săn mây lúc 05:30 và dành buổi chiều ngắm hoàng hôn tại các quán cà phê thung lũng. Bạn có muốn mình tạo lịch trình chi tiết theo ngày hay tìm quán ăn ngon gần bạn không?"
             }
         }
     }

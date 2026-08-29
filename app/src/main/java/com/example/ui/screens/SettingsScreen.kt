@@ -428,7 +428,7 @@ fun SettingsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "LUMINA TRAVEL • PHIÊN BẢN 2.5.0",
+                        text = "LEVART TRAVEL • PHIÊN BẢN 2.5.0",
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -587,7 +587,7 @@ fun SettingsScreen(
         } else {
             AlertDialog(
                 onDismissRequest = { showLogoutConfirmDialog = false },
-                title = { Text("Đăng xuất khỏi Lumina?", fontWeight = FontWeight.Bold) },
+                title = { Text("Đăng xuất khỏi Levart?", fontWeight = FontWeight.Bold) },
                 text = {
                     Text("Dữ liệu check-in và lịch trình của bạn đã được sao lưu an toàn. Bạn có thể đăng nhập lại bất kỳ lúc nào.")
                 },
