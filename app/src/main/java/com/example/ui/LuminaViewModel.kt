@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LuminaApplication
+import com.example.R
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.example.data.auth.AuthResult
 import com.example.data.auth.DeleteAccountResult
 import com.example.data.model.*
@@ -183,6 +186,15 @@ class LuminaViewModel(
 
     init {
         loadInitialFeed()
+        viewModelScope.launch {
+            val savedLang = repository.getSavedLanguage()
+            if (!savedLang.isNullOrBlank()) {
+                val currentAppLocales = AppCompatDelegate.getApplicationLocales()
+                if (currentAppLocales.isEmpty || currentAppLocales[0]?.language != savedLang) {
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(savedLang))
+                }
+            }
+        }
     }
 
     fun loadInitialFeed() {
@@ -1064,12 +1076,9 @@ class LuminaViewModel(
     fun setDarkMode(enabled: Boolean) {
         viewModelScope.launch {
             repository.setDarkMode(enabled)
-            val isEn = appLanguage.value == "en"
-            val msg = if (enabled) {
-                if (isEn) "Dark Mode activated" else "Đã kích hoạt Giao diện Tối (Dark Mode)"
-            } else {
-                if (isEn) "Light Mode activated" else "Đã chuyển sang Giao diện Sáng (Light Mode)"
-            }
+            val msg = LuminaApplication.instance.getString(
+                if (enabled) R.string.settings_dark_mode_on_toast else R.string.settings_dark_mode_off_toast
+            )
             showToast(msg)
         }
     }
@@ -1077,7 +1086,12 @@ class LuminaViewModel(
     fun setLanguage(lang: String) {
         viewModelScope.launch {
             repository.setLanguage(lang)
-            val msg = if (lang == "vi") "Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳" else "Language changed to English 🇬🇧"
+            // Standard Android Per-App Language API via AppCompatDelegate / LocaleManager
+            val appLocales = LocaleListCompat.forLanguageTags(lang)
+            AppCompatDelegate.setApplicationLocales(appLocales)
+            val msg = LuminaApplication.instance.getString(
+                if (lang == "vi") R.string.settings_lang_vi_toast else R.string.settings_lang_en_toast
+            )
             showToast(msg)
         }
     }
@@ -1092,7 +1106,7 @@ class LuminaViewModel(
         )
         repository.updateUserProfile(updated)
         repository.authManager.updateSavedUserProfile(updated)
-        val msg = if (appLanguage.value == "en") "Profile updated successfully!" else "Đã lưu cập nhật hồ sơ!"
+        val msg = LuminaApplication.instance.getString(R.string.settings_profile_updated_toast)
         showToast(msg)
     }
 
@@ -1106,11 +1120,10 @@ class LuminaViewModel(
             } else {
                 "$freedBytes B"
             }
-            val isEn = appLanguage.value == "en"
             val msg = if (freedBytes > 0) {
-                if (isEn) "Freed $formatted of image cache!" else "Đã giải phóng $formatted bộ nhớ đệm hình ảnh!"
+                LuminaApplication.instance.getString(R.string.settings_cache_freed_msg, formatted)
             } else {
-                if (isEn) "Image cache is already clean (0 B)!" else "Bộ nhớ đệm hình ảnh đã sạch (0 B)!"
+                LuminaApplication.instance.getString(R.string.settings_cache_clean_msg)
             }
             showToast(msg)
         }
@@ -1120,7 +1133,8 @@ class LuminaViewModel(
         viewModelScope.launch {
             repository.logout()
             _isShowingSettings.value = false
-            showToast("Đã đăng xuất tài khoản.")
+            val msg = LuminaApplication.instance.getString(R.string.settings_logout_toast)
+            showToast(msg)
         }
     }
 

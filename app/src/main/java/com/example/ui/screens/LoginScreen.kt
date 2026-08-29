@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.R
+import com.example.ui.components.LanguageDropdownButton
 import com.example.ui.theme.*
 
 enum class AuthTab {
@@ -53,6 +54,8 @@ fun LoginScreen(
     errorMessage: String?,
     isNetworkError: Boolean,
     canFallbackToBrowser: Boolean = false,
+    appLanguage: String = "vi",
+    onSetLanguage: (String) -> Unit = {},
     onSignInWithGoogle: (Activity) -> Unit,
     onSignInWithBrowser: (Activity) -> Unit,
     onSignInWithEmail: (String, String) -> Unit,
@@ -105,6 +108,17 @@ fun LoginScreen(
                     )
             )
         }
+
+        // Top Right Language Selector Button
+        LanguageDropdownButton(
+            currentLanguage = appLanguage,
+            onLanguageSelected = onSetLanguage,
+            isDarkOverlay = true,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .statusBarsPadding()
+                .padding(top = 12.dp, end = 16.dp)
+        )
 
         Column(
             modifier = Modifier

@@ -58,48 +58,24 @@ class MainActivity : ComponentActivity() {
             val loginErrorIsNetwork by viewModel.loginErrorIsNetwork.collectAsState()
             val loginCanFallbackToBrowser by viewModel.loginCanFallbackToBrowser.collectAsState()
 
-            val currentContext = LocalContext.current
-            val currentConfig = LocalConfiguration.current
-
-            val targetLocale = remember(appLanguage) {
-                if (appLanguage.isNotBlank()) Locale(appLanguage) else Locale.getDefault()
-            }
-
-            val localizedContext = remember(targetLocale, currentContext) {
-                val config = Configuration(currentContext.resources.configuration)
-                config.setLocale(targetLocale)
-                config.setLayoutDirection(targetLocale)
-                currentContext.createConfigurationContext(config)
-            }
-
-            val localizedConfiguration = remember(targetLocale, currentConfig) {
-                Configuration(currentConfig).apply {
-                    setLocale(targetLocale)
-                    setLayoutDirection(targetLocale)
-                }
-            }
-
-            CompositionLocalProvider(
-                LocalContext provides localizedContext,
-                LocalConfiguration provides localizedConfiguration
-            ) {
-                LuminaTheme(darkTheme = isDark) {
-                    if (!isLoggedIn) {
-                        LoginScreen(
-                            isLoading = isLoggingIn,
-                            errorMessage = loginError,
-                            isNetworkError = loginErrorIsNetwork,
-                            canFallbackToBrowser = loginCanFallbackToBrowser,
-                            onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
-                            onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
-                            onSignInWithEmail = { email, pass -> viewModel.signInWithEmail(email, pass) },
-                            onSignUpWithEmail = { email, pass, name -> viewModel.signUpWithEmail(email, pass, name) },
-                            onSignInAsGuest = { name -> viewModel.signInAsGuest(name) },
-                            onClearError = { viewModel.clearLoginError() }
-                        )
-                    } else {
-                        LuminaApp(viewModel = viewModel)
-                    }
+            LuminaTheme(darkTheme = isDark) {
+                if (!isLoggedIn) {
+                    LoginScreen(
+                        isLoading = isLoggingIn,
+                        errorMessage = loginError,
+                        isNetworkError = loginErrorIsNetwork,
+                        canFallbackToBrowser = loginCanFallbackToBrowser,
+                        appLanguage = appLanguage,
+                        onSetLanguage = { viewModel.setLanguage(it) },
+                        onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
+                        onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
+                        onSignInWithEmail = { email, pass -> viewModel.signInWithEmail(email, pass) },
+                        onSignUpWithEmail = { email, pass, name -> viewModel.signUpWithEmail(email, pass, name) },
+                        onSignInAsGuest = { name -> viewModel.signInAsGuest(name) },
+                        onClearError = { viewModel.clearLoginError() }
+                    )
+                } else {
+                    LuminaApp(viewModel = viewModel)
                 }
             }
         }
@@ -207,6 +183,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
             topBar = {
                 LuminaHeader(
                     unreadCount = notifications.count { !it.isRead },
+                    appLanguage = appLanguage,
+                    onSetLanguage = { viewModel.setLanguage(it) },
                     onCreatePostClick = { viewModel.showCreatePost(true) },
                     onSearchClick = { viewModel.showSearch(true) },
                     onNotificationClick = { viewModel.showNotifications(true) }

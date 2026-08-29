@@ -24,6 +24,8 @@ import com.example.ui.theme.*
 @Composable
 fun LuminaHeader(
     unreadCount: Int = 2,
+    appLanguage: String = "vi",
+    onSetLanguage: (String) -> Unit = {},
     onCreatePostClick: () -> Unit,
     onSearchClick: () -> Unit,
     onNotificationClick: () -> Unit,
@@ -37,7 +39,7 @@ fun LuminaHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(horizontal = 16.dp, vertical = 10.dp),
+                .padding(horizontal = 14.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -59,14 +61,14 @@ fun LuminaHeader(
                 Column {
                     Text(
                         text = "Levart",
-                        fontSize = 20.sp,
+                        fontSize = 19.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = Brand900,
                         letterSpacing = (-0.5).sp
                     )
                     Text(
                         text = "VIETNAM PASSPORT",
-                        fontSize = 7.5.sp,
+                        fontSize = 7.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
                         color = Brand500,
@@ -75,23 +77,23 @@ fun LuminaHeader(
                 }
             }
 
-            // Action Icons (➕, 🔍, 🔔)
+            // Action Icons (➕, 🔍, 🔔, 🇻🇳 VI ▾)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 // Create Post
                 IconButton(
                     onClick = onCreatePostClick,
                     modifier = Modifier
-                        .size(38.dp)
+                        .size(34.dp)
                         .background(BgSunken, CircleShape)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Tạo bài viết",
                         tint = Brand900,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
 
@@ -99,14 +101,14 @@ fun LuminaHeader(
                 IconButton(
                     onClick = onSearchClick,
                     modifier = Modifier
-                        .size(38.dp)
+                        .size(34.dp)
                         .background(BgSunken, CircleShape)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Tìm kiếm",
                         tint = Brand900,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
 
@@ -115,26 +117,32 @@ fun LuminaHeader(
                     IconButton(
                         onClick = onNotificationClick,
                         modifier = Modifier
-                            .size(38.dp)
+                            .size(34.dp)
                             .background(BgSunken, CircleShape)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Notifications,
                             contentDescription = "Thông báo",
                             tint = Brand900,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(18.dp)
                         )
                     }
                     if (unreadCount > 0) {
                         Box(
                             modifier = Modifier
                                 .align(Alignment.TopEnd)
-                                .offset(x = (-2).dp, y = 2.dp)
-                                .size(10.dp)
+                                .offset(x = (-1).dp, y = 1.dp)
+                                .size(8.dp)
                                 .background(HeartRed, CircleShape)
                         )
                     }
                 }
+
+                // Compact Language Selector Dropdown (Top Right)
+                LanguageDropdownButton(
+                    currentLanguage = appLanguage,
+                    onLanguageSelected = onSetLanguage
+                )
             }
         }
     }
