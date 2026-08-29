@@ -41,7 +41,11 @@ if (!fs.existsSync(seedDataPath)) {
 // 2. Khởi tạo Firebase Admin SDK
 let admin;
 try {
-  admin = require('firebase-admin');
+  // firebase-admin v13+ dùng API modular: require('firebase-admin') không còn .credential
+  admin = {
+    app: require('firebase-admin/app'),
+    firestore: require('firebase-admin/firestore'),
+  };
 } catch (e) {
   console.error('\n❌ [LỖI THIẾU THƯ VIỆN]');
   console.error('Chưa cài đặt thư viện firebase-admin. Hãy chạy lệnh sau trước khi chạy script:');
@@ -51,11 +55,11 @@ try {
 
 const serviceAccount = require(serviceAccountPath);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+admin.app.initializeApp({
+  credential: admin.app.cert(serviceAccount)
 });
 
-const db = admin.firestore();
+const db = admin.firestore.getFirestore();
 
 async function seedFirestore() {
   console.log('\n🚀 Bắt đầu quá trình nạp dữ liệu lên Cloud Firestore...');

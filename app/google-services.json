@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "50591347475",
+    "project_id": "travel-app-844e3",
+    "storage_bucket": "travel-app-844e3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50591347475:android:7be43331245042b139a0e6",
+        "android_client_info": {
+          "package_name": "com.aistudio.luminavietnam.trav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50591347475-l46f2vbh5rqbk9qekk489if8b5buk0av.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.luminavietnam.trav",
+            "certificate_hash": "f96ad2982830fa0c2db617059d61ab951455576c"
+          }
+        },
+        {
+          "client_id": "50591347475-kbuer0hv544befn0276jp4h8n0u6ovui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNzRmjYXxT2kNG6DAyyDrITLaaXocsvNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50591347475-kbuer0hv544befn0276jp4h8n0u6ovui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

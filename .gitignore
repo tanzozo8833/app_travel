@@ -24,3 +24,5 @@ serviceAccountKey.json
 *firebase-adminsdk*.json
 
 .idea/
+
+node_modules/
