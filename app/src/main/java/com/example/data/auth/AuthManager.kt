@@ -17,9 +17,11 @@ import com.example.data.model.UserProfile
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
@@ -33,8 +35,12 @@ import java.security.MessageDigest
 import java.util.UUID
 
 sealed class AuthResult {
-    data class Success(val userProfile: UserProfile, val email: String) : AuthResult()
+    data class Success(val userProfile: UserProfile, val email: String, val isUpgrade: Boolean = false) : AuthResult()
     data object Cancelled : AuthResult()
+    data class AccountCollision(
+        val email: String,
+        val credential: AuthCredential? = null
+    ) : AuthResult()
     data class Error(
         val message: String,
         val isNetworkError: Boolean = false,
@@ -57,6 +63,9 @@ class AuthManager(private val context: Context) {
     private val _isLoggedIn = MutableStateFlow(firebaseAuth.currentUser != null)
     val isLoggedIn: StateFlow<Boolean> = _isLoggedIn.asStateFlow()
 
+    private val _isAnonymous = MutableStateFlow(firebaseAuth.currentUser?.isAnonymous == true)
+    val isAnonymous: StateFlow<Boolean> = _isAnonymous.asStateFlow()
+
     private val _currentAuthUser = MutableStateFlow(buildProfileFromFirebaseUser(firebaseAuth.currentUser) ?: getSavedUser())
     val currentAuthUser: StateFlow<UserProfile?> = _currentAuthUser.asStateFlow()
 
@@ -65,6 +74,7 @@ class AuthManager(private val context: Context) {
             val user = auth.currentUser
             val isUserLoggedIn = user != null
             _isLoggedIn.value = isUserLoggedIn
+            _isAnonymous.value = user?.isAnonymous == true
             if (user != null) {
                 val profile = buildProfileFromFirebaseUser(user)
                 _currentAuthUser.value = profile
@@ -73,6 +83,8 @@ class AuthManager(private val context: Context) {
             }
         }
     }
+
+    fun getFirebaseUser(): FirebaseUser? = firebaseAuth.currentUser
 
     companion object {
         private const val TAG = "AuthManager"
@@ -118,31 +130,42 @@ class AuthManager(private val context: Context) {
 
     private fun buildProfileFromFirebaseUser(user: FirebaseUser?): UserProfile? {
         if (user == null) return null
+        val isAnon = user.isAnonymous
         val email = user.email ?: ""
+        val savedDisplayName = prefs.getString(KEY_DISPLAY_NAME, null)
         val displayName = user.displayName?.ifBlank { null }
-            ?: email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
-        val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
-        val avatarUrl = user.photoUrl?.toString() ?: ""
+            ?: savedDisplayName
+            ?: if (isAnon) "Lữ khách Khám Phá" else email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+        val username = if (isAnon) {
+            prefs.getString(KEY_USERNAME, null) ?: "traveler_${user.uid.takeLast(6).lowercase()}"
+        } else {
+            email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
+        }
+        val avatarUrl = user.photoUrl?.toString() ?: prefs.getString(KEY_AVATAR_URL, null) ?: ""
 
         val savedBio = prefs.getString(KEY_BIO, null)
         val savedTag = prefs.getString(KEY_TAG_TITLE, null)
 
         return UserProfile(
-            id = "google_${user.uid}",
+            id = user.uid,
             username = username,
             displayName = displayName,
             avatarUrl = avatarUrl.ifBlank {
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
             },
             tagTitle = savedTag ?: "GEN Z EXPLORER",
-            bio = savedBio ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            bio = savedBio ?: if (isAnon) {
+                "Chế độ Lữ Khách • Khám phá 34 tỉnh thành Việt Nam 🇻🇳"
+            } else {
+                "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            }
         )
     }
 
     private fun getSavedUser(): UserProfile? {
         if (firebaseAuth.currentUser == null) return null
 
-        val id = prefs.getString(KEY_USER_ID, null) ?: return null
+        val id = prefs.getString(KEY_USER_ID, null) ?: firebaseAuth.currentUser?.uid ?: return null
         val displayName = prefs.getString(KEY_DISPLAY_NAME, "Lữ khách Lumina") ?: "Lữ khách Lumina"
         val username = prefs.getString(KEY_USERNAME, "traveler") ?: "traveler"
         val avatarUrl = prefs.getString(KEY_AVATAR_URL, "") ?: ""
@@ -163,8 +186,8 @@ class AuthManager(private val context: Context) {
 
     /**
      * Primary Sign-In Method: Uses CredentialManager (One-Tap / Google Play Services).
-     * If Google Play Services is missing or no accounts exist on the device, it automatically
-     * falls back to Browser-based OAuth so users are never blocked.
+     * If currently in Guest Mode (Anonymous User), it upgrades the account via linkWithCredential.
+     * If an existing account collision is detected, returns AuthResult.AccountCollision.
      */
     suspend fun signInWithGoogle(activity: Activity, allowBrowserFallback: Boolean = true): AuthResult = withContext(Dispatchers.IO) {
         // 1. Check network connectivity
@@ -213,36 +236,90 @@ class AuthManager(private val context: Context) {
 
             if (credential is CustomCredential && credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                 val googleIdToken = GoogleIdTokenCredential.createFrom(credential.data)
-
-                // 4. Authenticate with Firebase Auth using the Google ID Token
                 val authCredential = GoogleAuthProvider.getCredential(googleIdToken.idToken, null)
-                val authResult = firebaseAuth.signInWithCredential(authCredential).await()
-                val firebaseUser = authResult.user
-                    ?: throw IllegalStateException("Không nhận được dữ liệu xác thực người dùng từ Firebase Auth.")
 
-                val email = firebaseUser.email ?: googleIdToken.id
-                val displayName = firebaseUser.displayName?.ifBlank { null }
-                    ?: googleIdToken.displayName
-                    ?: googleIdToken.givenName
-                    ?: email.substringBefore("@")
-                val avatarUrl = firebaseUser.photoUrl?.toString()
-                    ?: googleIdToken.profilePictureUri?.toString()
-                    ?: ""
-                val username = email.substringBefore("@").replace(".", "_").lowercase()
+                val currentUser = firebaseAuth.currentUser
+                val isCurrentlyAnonymous = currentUser != null && currentUser.isAnonymous
 
-                val profile = UserProfile(
-                    id = "google_${firebaseUser.uid}",
-                    username = username,
-                    displayName = displayName,
-                    avatarUrl = avatarUrl.ifBlank {
-                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
-                    },
-                    tagTitle = "GEN Z EXPLORER",
-                    bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
-                )
+                if (isCurrentlyAnonymous) {
+                    // ACCOUNT UPGRADE: Link existing anonymous guest account with Google
+                    Log.d(TAG, "Upgrading anonymous guest account (UID: ${currentUser!!.uid}) via linkWithCredential...")
+                    try {
+                        val linkResult = currentUser.linkWithCredential(authCredential).await()
+                        val upgradedUser = linkResult.user ?: currentUser
 
-                saveSession(profile, email)
-                return@withContext AuthResult.Success(profile, email)
+                        val email = upgradedUser.email ?: googleIdToken.id
+                        val displayName = upgradedUser.displayName?.ifBlank { null }
+                            ?: googleIdToken.displayName
+                            ?: googleIdToken.givenName
+                            ?: email.substringBefore("@")
+                        val avatarUrl = upgradedUser.photoUrl?.toString()
+                            ?: googleIdToken.profilePictureUri?.toString()
+                            ?: ""
+                        val username = email.substringBefore("@").replace(".", "_").lowercase()
+
+                        val profile = UserProfile(
+                            id = upgradedUser.uid,
+                            username = username,
+                            displayName = displayName,
+                            avatarUrl = avatarUrl.ifBlank {
+                                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+                            },
+                            tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
+                            bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                        )
+
+                        saveSession(profile, email)
+                        Log.d(TAG, "Account successfully upgraded from Guest to Google: ${profile.displayName}")
+                        return@withContext AuthResult.Success(profile, email, isUpgrade = true)
+                    } catch (e: Exception) {
+                        val isCollision = e is FirebaseAuthUserCollisionException ||
+                                (e is FirebaseAuthException && (e.errorCode == "ERROR_CREDENTIAL_ALREADY_IN_USE" || e.errorCode == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL")) ||
+                                e.message?.contains("already in use", ignoreCase = true) == true ||
+                                e.message?.contains("collision", ignoreCase = true) == true
+
+                        if (isCollision) {
+                            val collisionEmail = (e as? FirebaseAuthUserCollisionException)?.email
+                                ?: googleIdToken.id.takeIf { it.contains("@") }
+                                ?: "tài khoản Google này"
+                            Log.w(TAG, "Collision detected when upgrading guest: account $collisionEmail already exists.")
+                            return@withContext AuthResult.AccountCollision(
+                                email = collisionEmail,
+                                credential = authCredential
+                            )
+                        }
+                        throw e
+                    }
+                } else {
+                    // Standard Google Sign-In
+                    val authResult = firebaseAuth.signInWithCredential(authCredential).await()
+                    val firebaseUser = authResult.user
+                        ?: throw IllegalStateException("Không nhận được dữ liệu xác thực người dùng từ Firebase Auth.")
+
+                    val email = firebaseUser.email ?: googleIdToken.id
+                    val displayName = firebaseUser.displayName?.ifBlank { null }
+                        ?: googleIdToken.displayName
+                        ?: googleIdToken.givenName
+                        ?: email.substringBefore("@")
+                    val avatarUrl = firebaseUser.photoUrl?.toString()
+                        ?: googleIdToken.profilePictureUri?.toString()
+                        ?: ""
+                    val username = email.substringBefore("@").replace(".", "_").lowercase()
+
+                    val profile = UserProfile(
+                        id = firebaseUser.uid,
+                        username = username,
+                        displayName = displayName,
+                        avatarUrl = avatarUrl.ifBlank {
+                            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+                        },
+                        tagTitle = "GEN Z EXPLORER",
+                        bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                    )
+
+                    saveSession(profile, email)
+                    return@withContext AuthResult.Success(profile, email, isUpgrade = false)
+                }
             } else {
                 if (allowBrowserFallback) {
                     Log.d(TAG, "Unsupported credential type, attempting browser fallback...")
@@ -267,10 +344,8 @@ class AuthManager(private val context: Context) {
             Log.e(TAG, "Credential Manager error: ${e.type} - ${e.message}", e)
             val msg = e.message?.lowercase() ?: ""
             if (msg.contains("16:") || msg.contains("canceled") || msg.contains("cancelled")) {
-                // User dismissed or canceled
                 return@withContext AuthResult.Cancelled
             }
-            // If Play Services issue or no credential found, automatically fallback
             if (allowBrowserFallback && (msg.contains("play services") || msg.contains("unavailable") || msg.contains("not found") || msg.contains("developer_error") || msg.contains("api_not_connected"))) {
                 Log.w(TAG, "Play Services error encountered. Auto-falling back to browser login...")
                 return@withContext signInWithGoogleBrowserInternal(activity)
@@ -297,8 +372,6 @@ class AuthManager(private val context: Context) {
     /**
      * Fallback & Alternative Sign-In Method:
      * Opens official Google Sign-In in web browser / Custom Tabs via Firebase OAuthProvider.
-     * Works on any Android device with or without Google Play Services.
-     * Resolves to the exact same unified Google User ID and profile data.
      */
     suspend fun signInWithGoogleBrowser(activity: Activity): AuthResult = withContext(Dispatchers.IO) {
         signInWithGoogleBrowserInternal(activity)
@@ -319,12 +392,35 @@ class AuthManager(private val context: Context) {
             provider.scopes = listOf("profile", "email")
             provider.addCustomParameter("prompt", "select_account")
 
-            // Check if there is an in-flight pending auth result from previous activity recreation
-            val pendingResultTask = firebaseAuth.pendingAuthResult
-            val authResult = if (pendingResultTask != null) {
-                pendingResultTask.await()
+            val currentUser = firebaseAuth.currentUser
+            val isCurrentlyAnonymous = currentUser != null && currentUser.isAnonymous
+
+            val authResult = if (isCurrentlyAnonymous) {
+                Log.d(TAG, "Upgrading anonymous guest account via Browser OAuth link...")
+                try {
+                    currentUser!!.startActivityForLinkWithProvider(activity, provider.build()).await()
+                } catch (e: Exception) {
+                    val isCollision = e is FirebaseAuthUserCollisionException ||
+                            (e is FirebaseAuthException && (e.errorCode == "ERROR_CREDENTIAL_ALREADY_IN_USE" || e.errorCode == "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL")) ||
+                            e.message?.contains("already in use", ignoreCase = true) == true ||
+                            e.message?.contains("collision", ignoreCase = true) == true
+
+                    if (isCollision) {
+                        Log.w(TAG, "Collision detected during browser link with existing account.")
+                        return AuthResult.AccountCollision(
+                            email = "tài khoản Google bạn vừa chọn",
+                            credential = null
+                        )
+                    }
+                    throw e
+                }
             } else {
-                firebaseAuth.startActivityForSignInWithProvider(activity, provider.build()).await()
+                val pendingResultTask = firebaseAuth.pendingAuthResult
+                if (pendingResultTask != null) {
+                    pendingResultTask.await()
+                } else {
+                    firebaseAuth.startActivityForSignInWithProvider(activity, provider.build()).await()
+                }
             }
 
             val firebaseUser = authResult.user
@@ -337,19 +433,19 @@ class AuthManager(private val context: Context) {
             val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
 
             val profile = UserProfile(
-                id = "google_${firebaseUser.uid}",
+                id = firebaseUser.uid,
                 username = username,
                 displayName = displayName,
                 avatarUrl = avatarUrl.ifBlank {
                     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
                 },
-                tagTitle = "GEN Z EXPLORER",
-                bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                tagTitle = prefs.getString(KEY_TAG_TITLE, "GEN Z EXPLORER") ?: "GEN Z EXPLORER",
+                bio = prefs.getString(KEY_BIO, "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳") ?: "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
             )
 
             saveSession(profile, email)
             Log.d(TAG, "Browser sign-in successful for user: ${profile.displayName} (UID: ${firebaseUser.uid})")
-            return AuthResult.Success(profile, email)
+            return AuthResult.Success(profile, email, isUpgrade = isCurrentlyAnonymous)
         } catch (e: ActivityNotFoundException) {
             Log.e(TAG, "No browser application installed on device", e)
             return AuthResult.Error(
@@ -364,7 +460,6 @@ class AuthManager(private val context: Context) {
                 msg.contains("closed") ||
                 msg.contains("user cancelled")
             ) {
-                // User cleanly closed browser or pressed back
                 return AuthResult.Cancelled
             }
             if (e is FirebaseNetworkException || msg.contains("network") || msg.contains("timeout")) {
@@ -396,6 +491,58 @@ class AuthManager(private val context: Context) {
     }
 
     /**
+     * In case of account collision during linking, allows the user to switch to the existing Google account.
+     */
+    suspend fun switchToExistingGoogleAccount(credential: AuthCredential?, activity: Activity? = null): AuthResult = withContext(Dispatchers.IO) {
+        if (!isNetworkAvailable()) {
+            return@withContext AuthResult.Error("Không có kết nối mạng. Vui lòng kiểm tra lại kết nối.", isNetworkError = true)
+        }
+        try {
+            // Sign out from the anonymous session first
+            try {
+                firebaseAuth.signOut()
+            } catch (e: Exception) {
+                Log.w(TAG, "Error signing out anonymous user before switch", e)
+            }
+
+            val authResult = if (credential != null) {
+                firebaseAuth.signInWithCredential(credential).await()
+            } else if (activity != null) {
+                val provider = OAuthProvider.newBuilder("google.com")
+                provider.scopes = listOf("profile", "email")
+                provider.addCustomParameter("prompt", "select_account")
+                firebaseAuth.startActivityForSignInWithProvider(activity, provider.build()).await()
+            } else {
+                throw IllegalArgumentException("Không có thông tin xác thực để chuyển tài khoản.")
+            }
+
+            val firebaseUser = authResult.user ?: throw IllegalStateException("Không nhận được dữ liệu xác thực từ Firebase.")
+            val email = firebaseUser.email ?: ""
+            val displayName = firebaseUser.displayName?.ifBlank { null } ?: email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+            val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
+            val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
+
+            val profile = UserProfile(
+                id = firebaseUser.uid,
+                username = username,
+                displayName = displayName,
+                avatarUrl = avatarUrl.ifBlank {
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+                },
+                tagTitle = "GEN Z EXPLORER",
+                bio = "Tài khoản Google: $email • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+            )
+
+            saveSession(profile, email)
+            Log.d(TAG, "Switched successfully to existing Google account: ${profile.displayName}")
+            return@withContext AuthResult.Success(profile, email, isUpgrade = false)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error switching to existing Google account", e)
+            return@withContext AuthResult.Error("Không thể đăng nhập vào tài khoản cũ: ${e.localizedMessage ?: "Vui lòng thử lại"}")
+        }
+    }
+
+    /**
      * Sign In using Email and Password with Firebase Authentication.
      */
     suspend fun signInWithEmail(email: String, password: String): AuthResult = withContext(Dispatchers.IO) {
@@ -413,7 +560,7 @@ class AuthManager(private val context: Context) {
             val user = authResult.user ?: throw IllegalStateException("Không nhận được dữ liệu xác thực.")
 
             val profile = buildProfileFromFirebaseUser(user) ?: UserProfile(
-                id = "email_${user.uid}",
+                id = user.uid,
                 username = trimmedEmail.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" },
                 displayName = trimmedEmail.substringBefore("@"),
                 avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
@@ -463,7 +610,7 @@ class AuthManager(private val context: Context) {
 
             val name = displayName.trim().ifBlank { trimmedEmail.substringBefore("@") }
             val profile = UserProfile(
-                id = "email_${user.uid}",
+                id = user.uid,
                 username = trimmedEmail.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" },
                 displayName = name,
                 avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
@@ -494,30 +641,45 @@ class AuthManager(private val context: Context) {
     }
 
     /**
-     * Fast Guest / Demo Access:
-     * Creates an instant session for testing or instant exploration without requiring Google account on device.
+     * Real Firebase Anonymous Authentication for Guest Mode ("Khám phá ngay (Chế độ Lữ Khách)"):
+     * Issues a genuine anonymous Firebase user account. No fake ID or fake email.
+     * Persists across app restarts.
      */
     suspend fun signInAsGuest(customName: String = "Lữ khách Khám Phá"): AuthResult = withContext(Dispatchers.IO) {
+        if (!isNetworkAvailable()) {
+            return@withContext AuthResult.Error(
+                message = "Không có kết nối mạng. Vui lòng kiểm tra Wi-Fi hoặc 4G để khởi tạo chế độ lữ khách.",
+                isNetworkError = true
+            )
+        }
         try {
-            val randomSuffix = UUID.randomUUID().toString().take(6)
-            val guestId = "guest_$randomSuffix"
-            val username = "traveler_$randomSuffix"
-            val name = customName.trim().ifBlank { "Lữ khách Lumina" }
+            Log.d(TAG, "Performing genuine Firebase signInAnonymously()...")
+            val authResult = firebaseAuth.signInAnonymously().await()
+            val firebaseUser = authResult.user
+                ?: throw IllegalStateException("Không nhận được dữ liệu xác thực ẩn danh từ Firebase Auth.")
+
+            val name = customName.trim().ifBlank { "Lữ khách Khám Phá" }
+            val username = "traveler_${firebaseUser.uid.takeLast(6).lowercase()}"
 
             val profile = UserProfile(
-                id = guestId,
+                id = firebaseUser.uid,
                 username = username,
                 displayName = name,
                 avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
                 tagTitle = "GEN Z EXPLORER",
-                bio = "Chế độ trải nghiệm lữ khách • Khám phá 34 tỉnh thành Việt Nam 🇻🇳"
+                bio = "Chế độ Lữ Khách • Khám phá 34 tỉnh thành Việt Nam 🇻🇳"
             )
-            saveSession(profile, "guest_$randomSuffix@lumina.travel")
-            Log.d(TAG, "Guest login successful: ${profile.displayName}")
-            AuthResult.Success(profile, "guest_$randomSuffix@lumina.travel")
+            saveSession(profile, email = "")
+            Log.d(TAG, "Firebase Anonymous Sign-In successful. UID: ${firebaseUser.uid}")
+            AuthResult.Success(profile, email = "")
         } catch (e: Exception) {
             Log.e(TAG, "Guest login error", e)
-            AuthResult.Error("Không thể kích hoạt chế độ trải nghiệm: ${e.localizedMessage}")
+            val msg = e.message?.lowercase() ?: ""
+            if (e is FirebaseNetworkException || msg.contains("network")) {
+                AuthResult.Error("Lỗi kết nối mạng khi khởi tạo chế độ lữ khách. Vui lòng thử lại.", isNetworkError = true)
+            } else {
+                AuthResult.Error("Không thể kích hoạt chế độ lữ khách: ${e.localizedMessage ?: "Vui lòng thử lại"}")
+            }
         }
     }
 
@@ -533,6 +695,7 @@ class AuthManager(private val context: Context) {
             .apply()
 
         _isLoggedIn.value = true
+        _isAnonymous.value = firebaseAuth.currentUser?.isAnonymous == true
         _currentAuthUser.value = profile
     }
 
@@ -542,7 +705,7 @@ class AuthManager(private val context: Context) {
 
     /**
      * Deletes user account completely from Firebase Auth.
-     * If Firebase Auth raises FirebaseAuthRecentLoginRequiredException (or equivalent recent-login code),
+     * If Firebase Auth raises FirebaseAuthRecentLoginRequiredException,
      * automatically requests re-authentication with Google, then resumes deleting the account.
      */
     suspend fun deleteAccount(activity: Activity): DeleteAccountResult = withContext(Dispatchers.IO) {
@@ -592,6 +755,9 @@ class AuthManager(private val context: Context) {
                     is AuthResult.Cancelled -> {
                         return@withContext DeleteAccountResult.Cancelled
                     }
+                    is AuthResult.AccountCollision -> {
+                        return@withContext DeleteAccountResult.Error("Phát hiện xung đột tài khoản trong quá trình xác thực lại.")
+                    }
                     is AuthResult.Error -> {
                         return@withContext DeleteAccountResult.Error(
                             "Yêu cầu xác thực tài khoản trước khi xoá: ${reauthResult.message}"
@@ -628,6 +794,7 @@ class AuthManager(private val context: Context) {
 
         prefs.edit().clear().apply()
         _isLoggedIn.value = false
+        _isAnonymous.value = false
         _currentAuthUser.value = null
     }
 

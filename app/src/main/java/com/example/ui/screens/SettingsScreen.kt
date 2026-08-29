@@ -35,6 +35,7 @@ fun SettingsScreen(
     userProfile: UserProfile,
     isDarkMode: Boolean,
     appLanguage: String,
+    isAnonymous: Boolean = false,
     isDeletingAccount: Boolean = false,
     onBack: () -> Unit,
     onToggleDarkMode: (Boolean) -> Unit,
@@ -42,6 +43,7 @@ fun SettingsScreen(
     onUpdateProfile: (displayName: String, bio: String, tagTitle: String) -> Unit,
     onClearCache: () -> Unit,
     onLogout: () -> Unit,
+    onUpgradeAccount: () -> Unit = {},
     onDeleteAccount: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -194,6 +196,51 @@ fun SettingsScreen(
                                 color = TextPrimary,
                                 lineHeight = 16.sp
                             )
+                        }
+
+                        if (isAnonymous) {
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Surface(
+                                shape = RoundedCornerShape(12.dp),
+                                color = Gold500.copy(alpha = 0.12f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Gold500.copy(alpha = 0.4f)),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Column(modifier = Modifier.padding(12.dp)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(
+                                            Icons.Filled.WarningAmber,
+                                            contentDescription = null,
+                                            tint = Gold500,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            text = "Tài khoản Lữ Khách (Chưa liên kết)",
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = TextPrimary
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Text(
+                                        text = "Hành trình và con dấu sẽ mất nếu bạn đăng xuất. Hãy liên kết với Google để bảo vệ dữ liệu!",
+                                        fontSize = 11.sp,
+                                        color = TextSecondary,
+                                        lineHeight = 15.sp
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Button(
+                                        onClick = onUpgradeAccount,
+                                        shape = RoundedCornerShape(8.dp),
+                                        colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Text("Liên kết Google ngay (Lưu dữ liệu)", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -459,29 +506,109 @@ fun SettingsScreen(
 
     // Dialog 2: Xác nhận đăng xuất
     if (showLogoutConfirmDialog) {
-        AlertDialog(
-            onDismissRequest = { showLogoutConfirmDialog = false },
-            title = { Text("Đăng xuất khỏi Lumina?", fontWeight = FontWeight.Bold) },
-            text = {
-                Text("Dữ liệu check-in và lịch trình của bạn đã được sao lưu an toàn. Bạn có thể đăng nhập lại bất kỳ lúc nào.")
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        showLogoutConfirmDialog = false
-                        onLogout()
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = DangerRed)
-                ) {
-                    Text("Đăng xuất", color = Color.White)
+        if (isAnonymous) {
+            AlertDialog(
+                onDismissRequest = { showLogoutConfirmDialog = false },
+                icon = {
+                    Surface(
+                        shape = CircleShape,
+                        color = DangerRed.copy(alpha = 0.12f),
+                        modifier = Modifier.size(52.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Filled.WarningAmber,
+                                contentDescription = "Cảnh báo",
+                                tint = DangerRed,
+                                modifier = Modifier.size(30.dp)
+                            )
+                        }
+                    }
+                },
+                title = {
+                    Text(
+                        text = "Mất Dữ Liệu Khách Vĩnh Viễn?",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 17.sp,
+                        color = DangerRed
+                    )
+                },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = "Tài khoản khách không có cách nào đăng nhập lại. Nếu bạn bấm Đăng xuất, bạn sẽ MẤT VĨNH VIỄN mọi thứ đã làm (bài viết, con dấu 34 tỉnh thành, lịch trình).",
+                            fontSize = 13.sp,
+                            color = TextPrimary,
+                            lineHeight = 18.sp
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(10.dp),
+                            color = Brand100,
+                            modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                        ) {
+                            Text(
+                                text = "💡 Lời khuyên: Hãy liên kết với tài khoản Google để lưu giữ vĩnh viễn dữ liệu của bạn!",
+                                fontSize = 12.sp,
+                                color = Brand700,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(10.dp)
+                            )
+                        }
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            showLogoutConfirmDialog = false
+                            onUpgradeAccount()
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text("Liên kết Google (Lưu dữ liệu)", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.5.sp)
+                    }
+                },
+                dismissButton = {
+                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        TextButton(onClick = { showLogoutConfirmDialog = false }) {
+                            Text("Ở lại", color = TextPrimary)
+                        }
+                        TextButton(
+                            onClick = {
+                                showLogoutConfirmDialog = false
+                                onLogout()
+                            }
+                        ) {
+                            Text("Vẫn đăng xuất", color = DangerRed, fontWeight = FontWeight.Bold)
+                        }
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = { showLogoutConfirmDialog = false }) {
-                    Text("Ở lại")
+            )
+        } else {
+            AlertDialog(
+                onDismissRequest = { showLogoutConfirmDialog = false },
+                title = { Text("Đăng xuất khỏi Lumina?", fontWeight = FontWeight.Bold) },
+                text = {
+                    Text("Dữ liệu check-in và lịch trình của bạn đã được sao lưu an toàn. Bạn có thể đăng nhập lại bất kỳ lúc nào.")
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            showLogoutConfirmDialog = false
+                            onLogout()
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = DangerRed)
+                    ) {
+                        Text("Đăng xuất", color = Color.White)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showLogoutConfirmDialog = false }) {
+                        Text("Ở lại")
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 
     // Dialog 4: Xác nhận xoá tài khoản vĩnh viễn

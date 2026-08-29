@@ -15,6 +15,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -110,6 +113,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
     val isDeletingAccount by viewModel.isDeletingAccount.collectAsState()
     val isDarkMode by viewModel.isDarkMode.collectAsState()
     val appLanguage by viewModel.appLanguage.collectAsState()
+    val isAnonymous by viewModel.isAnonymous.collectAsState()
+    val accountCollisionEmail by viewModel.accountCollisionEmail.collectAsState()
 
     val aiWizardState by viewModel.aiWizardState.collectAsState()
     val chatMessages by viewModel.chatMessages.collectAsState()
@@ -318,8 +323,10 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             places = places,
                             followingCount = followingCount,
                             followerCount = followerCount,
+                            isAnonymous = isAnonymous,
                             onOpenTravelCv = { viewModel.showTravelCv(true) },
                             onOpenSettings = { viewModel.showSettings(true) },
+                            onUpgradeAccount = { (context as? Activity)?.let { viewModel.signInWithGoogle(it) } },
                             onProvinceClick = { viewModel.showCityPassport(true, it) },
                             onTripClick = { viewModel.openTripDetail(it) },
                             onPostClick = { viewModel.openPostDetail(it) },
@@ -537,6 +544,7 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                 userProfile = userProfile,
                 isDarkMode = isDarkMode,
                 appLanguage = appLanguage,
+                isAnonymous = isAnonymous,
                 isDeletingAccount = isDeletingAccount,
                 onBack = { viewModel.showSettings(false) },
                 onToggleDarkMode = { viewModel.setDarkMode(it) },
@@ -544,9 +552,81 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                 onUpdateProfile = { name, bio, title -> viewModel.updateProfileInfo(name, bio, title) },
                 onClearCache = { viewModel.clearCache() },
                 onLogout = { viewModel.logout() },
+                onUpgradeAccount = { (context as? Activity)?.let { viewModel.signInWithGoogle(it) } },
                 onDeleteAccount = {
                     (context as? Activity)?.let { act ->
                         viewModel.deleteAccount(act)
+                    }
+                }
+            )
+        }
+
+        // Account Collision Dialog (when linking existing Google account from Guest Mode)
+        accountCollisionEmail?.let { email ->
+            AlertDialog(
+                onDismissRequest = { viewModel.dismissAccountCollision() },
+                icon = {
+                    Surface(
+                        shape = CircleShape,
+                        color = Gold500.copy(alpha = 0.15f),
+                        modifier = Modifier.size(52.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "Tài khoản tồn tại",
+                                tint = Brand700,
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
+                    }
+                },
+                title = {
+                    Text(
+                        text = "Tài Khoản Google Đã Tồn Tại",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 17.sp
+                    )
+                },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = "Tài khoản Google ($email) đã có dữ liệu riêng từ trước trên hệ thống Lumina.",
+                            fontSize = 13.sp,
+                            color = TextPrimary,
+                            lineHeight = 18.sp
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(10.dp),
+                            color = DangerRed.copy(alpha = 0.08f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, DangerRed.copy(alpha = 0.25f)),
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                        ) {
+                            Text(
+                                text = "⚠️ Bạn có muốn chuyển sang đăng nhập vào tài khoản cũ đó không?\n\nLưu ý: Dữ liệu bạn vừa tạo ở chế độ Lữ Khách sẽ không được mang theo.",
+                                fontSize = 12.sp,
+                                color = DangerRed,
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(10.dp),
+                                lineHeight = 16.sp
+                            )
+                        }
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            viewModel.confirmSwitchToExistingAccount(context as? Activity)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text("Đăng nhập tài khoản cũ", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.5.sp)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { viewModel.dismissAccountCollision() }) {
+                        Text("Huỷ & Giữ chế độ khách", color = TextPrimary)
                     }
                 }
             )

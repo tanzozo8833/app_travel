@@ -27,6 +27,37 @@ class LuminaRepository(
     val authManager = AuthManager(context)
 
     val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
+    val isAnonymous: StateFlow<Boolean> = authManager.isAnonymous
+
+    init {
+        scope.launch {
+            authManager.currentAuthUser.collectLatest { profile ->
+                if (profile != null) {
+                    val existing = database.userProfileDao().getProfileById(profile.id)
+                    if (existing == null) {
+                        val entity = UserProfileEntity(
+                            id = profile.id,
+                            username = profile.username,
+                            displayName = profile.displayName,
+                            avatarUrl = profile.avatarUrl,
+                            tagTitle = profile.tagTitle,
+                            bio = profile.bio,
+                            topCityName = "",
+                            topCityCheckInCount = 0,
+                            visitedProvincesCount = 0,
+                            totalProvincesCount = 34,
+                            totalDistanceKm = 0.0,
+                            tripsCompletedCount = 0,
+                            totalSavesCount = 0,
+                            isActive = true
+                        )
+                        database.userProfileDao().insert(entity)
+                    }
+                    database.userProfileDao().setActiveProfile(profile.id)
+                }
+            }
+        }
+    }
 
     // Reactive data streams directly connected to Room Database
     val posts: Flow<List<Post>> = combine(
@@ -118,21 +149,33 @@ class LuminaRepository(
         return result
     }
 
+    suspend fun switchToExistingGoogleAccount(credential: com.google.firebase.auth.AuthCredential?, activity: Activity? = null): AuthResult {
+        val result = authManager.switchToExistingGoogleAccount(credential, activity)
+        handleAuthSuccess(result)
+        return result
+    }
+
     private suspend fun handleAuthSuccess(result: AuthResult) {
         if (result is AuthResult.Success) {
             val existing = database.userProfileDao().getProfileById(result.userProfile.id)
             if (existing != null) {
-                // Update profile name, username and avatar, but preserve user's real stats and custom bio/tag
+                // Update profile info, preserving user's check-in stats and stamps
+                val updatedBio = if (result.isUpgrade && existing.bio.contains("Chế độ Lữ Khách")) {
+                    result.userProfile.bio
+                } else {
+                    existing.bio.ifBlank { result.userProfile.bio }
+                }
                 val updated = existing.copy(
                     displayName = result.userProfile.displayName,
-                    avatarUrl = result.userProfile.avatarUrl,
+                    avatarUrl = result.userProfile.avatarUrl.ifBlank { existing.avatarUrl },
                     username = result.userProfile.username,
+                    bio = updatedBio,
                     isActive = true
                 )
                 database.userProfileDao().update(updated)
                 database.userProfileDao().setActiveProfile(result.userProfile.id)
             } else {
-                // First-time login: create new user profile using Google account ID, marked as active
+                // First-time profile creation: save to Room DB and mark as active user
                 val entity = UserProfileEntity(
                     id = result.userProfile.id,
                     username = result.userProfile.username,

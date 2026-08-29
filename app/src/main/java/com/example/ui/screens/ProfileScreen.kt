@@ -69,8 +69,10 @@ fun ProfileScreen(
     places: List<Place> = emptyList(),
     followingCount: Int = 0,
     followerCount: Int = 0,
+    isAnonymous: Boolean = false,
     onOpenTravelCv: () -> Unit,
     onOpenSettings: () -> Unit = {},
+    onUpgradeAccount: () -> Unit = {},
     onProvinceClick: (Province) -> Unit,
     onTripClick: (Trip) -> Unit,
     onPostClick: (Post) -> Unit,
@@ -236,6 +238,50 @@ fun ProfileScreen(
                             fontSize = 12.5.sp,
                             fontWeight = FontWeight.Bold
                         )
+                    }
+
+                    if (isAnonymous) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = Gold500.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, Gold500.copy(alpha = 0.4f)),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Column(modifier = Modifier.padding(14.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        Icons.Default.AutoAwesome,
+                                        contentDescription = null,
+                                        tint = Brand700,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = "Chế độ Lữ Khách Tạm Thời",
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = TextPrimary
+                                    )
+                                }
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = "Dữ liệu con dấu và lịch trình đang được lưu trong phiên ẩn danh này. Hãy liên kết với Google để giữ vĩnh viễn hành trình!",
+                                    fontSize = 11.5.sp,
+                                    color = TextSecondary,
+                                    lineHeight = 16.sp
+                                )
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Button(
+                                    onClick = onUpgradeAccount,
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = Brand700),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text("Nâng cấp & Liên kết Google ➔", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                }
+                            }
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(14.dp))

@@ -73,6 +73,8 @@ class LuminaViewModel(
 
     // Authentication State
     val isLoggedIn: StateFlow<Boolean> = repository.isLoggedIn
+    val isAnonymous: StateFlow<Boolean> = repository.isAnonymous
+
     private val _isLoggingIn = MutableStateFlow(false)
     val isLoggingIn: StateFlow<Boolean> = _isLoggingIn.asStateFlow()
 
@@ -84,6 +86,13 @@ class LuminaViewModel(
 
     private val _loginCanFallbackToBrowser = MutableStateFlow(false)
     val loginCanFallbackToBrowser: StateFlow<Boolean> = _loginCanFallbackToBrowser.asStateFlow()
+
+    // Account Collision when upgrading Guest -> Google
+    private val _accountCollisionPendingCredential = MutableStateFlow<com.google.firebase.auth.AuthCredential?>(null)
+    val accountCollisionPendingCredential: StateFlow<com.google.firebase.auth.AuthCredential?> = _accountCollisionPendingCredential.asStateFlow()
+
+    private val _accountCollisionEmail = MutableStateFlow<String?>(null)
+    val accountCollisionEmail: StateFlow<String?> = _accountCollisionEmail.asStateFlow()
 
     // Main Navigation
     private val _currentTab = MutableStateFlow(MainTab.HOME)
@@ -633,12 +642,22 @@ class LuminaViewModel(
                         _isLoggingIn.value = false
                         _loginError.value = null
                         _loginCanFallbackToBrowser.value = false
-                        showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                        if (result.isUpgrade) {
+                            showToast("Đã liên kết tài khoản Google thành công! Dữ liệu hành trình đã được lưu vĩnh viễn 🎉")
+                        } else {
+                            showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                        }
                     }
                     is AuthResult.Cancelled -> {
                         _isLoggingIn.value = false
                         _loginCanFallbackToBrowser.value = false
                         // Do not show error banner on user cancel
+                    }
+                    is AuthResult.AccountCollision -> {
+                        _isLoggingIn.value = false
+                        _loginCanFallbackToBrowser.value = false
+                        _accountCollisionEmail.value = result.email
+                        _accountCollisionPendingCredential.value = result.credential
                     }
                     is AuthResult.Error -> {
                         _isLoggingIn.value = false
@@ -669,12 +688,22 @@ class LuminaViewModel(
                         _isLoggingIn.value = false
                         _loginError.value = null
                         _loginCanFallbackToBrowser.value = false
-                        showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                        if (result.isUpgrade) {
+                            showToast("Đã liên kết tài khoản Google thành công! Dữ liệu hành trình đã được lưu vĩnh viễn 🎉")
+                        } else {
+                            showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
+                        }
                     }
                     is AuthResult.Cancelled -> {
                         _isLoggingIn.value = false
                         _loginCanFallbackToBrowser.value = false
                         // User cancelled or closed browser cleanly
+                    }
+                    is AuthResult.AccountCollision -> {
+                        _isLoggingIn.value = false
+                        _loginCanFallbackToBrowser.value = false
+                        _accountCollisionEmail.value = result.email
+                        _accountCollisionPendingCredential.value = result.credential
                     }
                     is AuthResult.Error -> {
                         _isLoggingIn.value = false
@@ -687,6 +716,42 @@ class LuminaViewModel(
                 _isLoggingIn.value = false
                 _loginError.value = "Lỗi khi mở trình duyệt: ${e.localizedMessage ?: "Vui lòng thử lại"}"
                 _loginCanFallbackToBrowser.value = false
+            }
+        }
+    }
+
+    fun dismissAccountCollision() {
+        _accountCollisionEmail.value = null
+        _accountCollisionPendingCredential.value = null
+    }
+
+    fun confirmSwitchToExistingAccount(activity: Activity? = null) {
+        val cred = _accountCollisionPendingCredential.value
+        dismissAccountCollision()
+        if (_isLoggingIn.value) return
+        _isLoggingIn.value = true
+        _loginError.value = null
+        viewModelScope.launch {
+            try {
+                when (val result = repository.switchToExistingGoogleAccount(cred, activity)) {
+                    is AuthResult.Success -> {
+                        _isLoggingIn.value = false
+                        showToast("Đã chuyển sang tài khoản Google: ${result.userProfile.displayName} 🇻🇳")
+                    }
+                    is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.AccountCollision -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.Error -> {
+                        _isLoggingIn.value = false
+                        showToast(result.message)
+                    }
+                }
+            } catch (e: Exception) {
+                _isLoggingIn.value = false
+                showToast("Lỗi chuyển tài khoản: ${e.localizedMessage ?: "Vui lòng thử lại"}")
             }
         }
     }
@@ -708,6 +773,9 @@ class LuminaViewModel(
                         showToast("Đăng nhập thành công! Chào mừng ${result.userProfile.displayName} 🇻🇳")
                     }
                     is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.AccountCollision -> {
                         _isLoggingIn.value = false
                     }
                     is AuthResult.Error -> {
@@ -743,6 +811,9 @@ class LuminaViewModel(
                     is AuthResult.Cancelled -> {
                         _isLoggingIn.value = false
                     }
+                    is AuthResult.AccountCollision -> {
+                        _isLoggingIn.value = false
+                    }
                     is AuthResult.Error -> {
                         _isLoggingIn.value = false
                         _loginError.value = result.message
@@ -774,6 +845,9 @@ class LuminaViewModel(
                         showToast("Bắt đầu hành trình với tư cách ${result.userProfile.displayName} 🇻🇳")
                     }
                     is AuthResult.Cancelled -> {
+                        _isLoggingIn.value = false
+                    }
+                    is AuthResult.AccountCollision -> {
                         _isLoggingIn.value = false
                     }
                     is AuthResult.Error -> {
