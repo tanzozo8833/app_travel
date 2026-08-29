@@ -17,4 +17,10 @@ local.properties
 .env
 debug.keystore
 
+# Firebase Admin Service Account Credentials (NEVER commit to version control)
+serviceAccountKey.json
+*serviceAccountKey*.json
+*credentials*.json
+*firebase-adminsdk*.json
+
 .idea/

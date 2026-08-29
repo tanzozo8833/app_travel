@@ -8,7 +8,6 @@ import com.example.data.auth.AuthResult
 import com.example.data.auth.DeleteAccountResult
 import com.example.data.local.database.LuminaDatabase
 import com.example.data.local.entity.*
-import com.example.data.local.seed.UserProfileSeed
 import com.example.data.model.*
 import com.example.data.remote.FirestorePostService
 import com.example.data.remote.FirestoreUserProfileService
@@ -116,23 +115,17 @@ class LuminaRepository(
     }
 
     /**
-     * Real-time list of all user profiles from Cloud Firestore, combined with sample seeds for community explore.
+     * Real-time list of all user profiles sourced directly from Cloud Firestore.
      */
-    val userProfiles: Flow<List<UserProfile>> = firestoreService.observeAllUserProfiles().map { remoteList ->
-        val remoteIds = remoteList.map { it.id }.toSet()
-        val missingSeeds = UserProfileSeed.data.filter { it.id !in remoteIds }
-        remoteList + missingSeeds
-    }
+    val userProfiles: Flow<List<UserProfile>> = firestoreService.observeAllUserProfiles()
 
     /**
-     * Fetches or observes a specific user profile from Cloud Firestore.
+     * Fetches or observes a specific user profile directly from Cloud Firestore.
      */
     fun getUserProfileFlow(userId: String, username: String): Flow<UserProfile?> {
         val cleanHandle = username.removePrefix("@").lowercase()
         if (userId.isNotBlank()) {
-            return firestoreService.observeUserProfile(userId).map { remote ->
-                remote ?: UserProfileSeed.data.find { it.id == userId || it.username.equals(cleanHandle, ignoreCase = true) }
-            }
+            return firestoreService.observeUserProfile(userId)
         }
         return userProfiles.map { list ->
             list.find { it.username.equals(cleanHandle, ignoreCase = true) }
