@@ -7,6 +7,7 @@ import com.example.data.auth.AuthManager
 import com.example.data.auth.AuthResult
 import com.example.data.auth.DeleteAccountResult
 import com.example.data.local.database.LuminaDatabase
+import com.example.data.local.entity.AppSettingsEntity
 import com.example.data.model.*
 import com.example.data.remote.FirestoreFollowService
 import com.example.data.remote.FirestorePersonalDataService
@@ -637,5 +638,66 @@ class LuminaRepository(
                 list.map { it.toDomainModel() }
             }
         }
+    }
+
+    // App Settings Persistence (Dark Mode, Language, Currency)
+    val isDarkMode: Flow<Boolean> = database.appSettingsDao()
+        .getSettingFlow("dark_mode")
+        .map { it == "true" }
+
+    val appLanguage: Flow<String> = database.appSettingsDao()
+        .getSettingFlow("app_language")
+        .map { it ?: if (Locale.getDefault().language == "en") "en" else "vi" }
+
+    suspend fun getSavedLanguage(): String? {
+        return database.appSettingsDao().getSetting("app_language")
+    }
+
+    suspend fun setDarkMode(enabled: Boolean) {
+        database.appSettingsDao().setSetting(
+            AppSettingsEntity("dark_mode", enabled.toString())
+        )
+    }
+
+    suspend fun setLanguage(lang: String) {
+        database.appSettingsDao().setSetting(
+            AppSettingsEntity("app_language", lang)
+        )
+    }
+
+    suspend fun clearAppCache(): Long = withContext(Dispatchers.IO) {
+        var totalFreed = 0L
+        fun calculateDirSize(dir: java.io.File): Long {
+            var size = 0L
+            if (dir.exists()) {
+                dir.listFiles()?.forEach { file ->
+                    size += if (file.isDirectory) calculateDirSize(file) else file.length()
+                }
+            }
+            return size
+        }
+
+        // 1. Calculate size of cache directory
+        totalFreed += calculateDirSize(context.cacheDir)
+        context.externalCacheDir?.let { totalFreed += calculateDirSize(it) }
+
+        // 2. Clear Coil in-memory and disk cache
+        try {
+            val imageLoader = coil.Coil.imageLoader(context)
+            imageLoader.memoryCache?.clear()
+            imageLoader.diskCache?.clear()
+        } catch (e: Exception) {
+            Log.w("LuminaRepository", "Coil cache clear warning: ${e.message}")
+        }
+
+        // 3. Clear file cache directories
+        try {
+            context.cacheDir.listFiles()?.forEach { it.deleteRecursively() }
+            context.externalCacheDir?.listFiles()?.forEach { it.deleteRecursively() }
+        } catch (e: Exception) {
+            Log.w("LuminaRepository", "File cache clear warning: ${e.message}")
+        }
+
+        totalFreed
     }
 }

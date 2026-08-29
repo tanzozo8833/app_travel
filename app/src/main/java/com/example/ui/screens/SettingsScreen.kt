@@ -21,11 +21,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
 import com.example.data.model.UserProfile
 import com.example.ui.theme.*
 
@@ -67,7 +69,7 @@ fun SettingsScreen(
                 title = {
                     Column {
                         Text(
-                            text = "CÀI ĐẶT & TÀI KHOẢN",
+                            text = stringResource(R.string.settings_category_header),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -75,7 +77,7 @@ fun SettingsScreen(
                             letterSpacing = 0.8.sp
                         )
                         Text(
-                            text = "Tùy Chọn Ứng Dụng",
+                            text = stringResource(R.string.settings_title),
                             fontSize = 17.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = TextPrimary
@@ -86,7 +88,7 @@ fun SettingsScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Quay lại",
+                            contentDescription = stringResource(R.string.common_back),
                             tint = TextPrimary
                         )
                     }
@@ -184,7 +186,7 @@ fun SettingsScreen(
                                 shape = RoundedCornerShape(999.dp),
                                 contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                             ) {
-                                Text(text = "Sửa", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                Text(text = stringResource(R.string.common_edit), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                             }
                         }
 
@@ -216,7 +218,7 @@ fun SettingsScreen(
                                         )
                                         Spacer(modifier = Modifier.width(6.dp))
                                         Text(
-                                            text = "Tài khoản Lữ Khách (Chưa liên kết)",
+                                            text = stringResource(R.string.settings_guest_badge_title),
                                             fontSize = 12.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = TextPrimary
@@ -224,7 +226,7 @@ fun SettingsScreen(
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
-                                        text = "Hành trình và con dấu sẽ mất nếu bạn đăng xuất. Hãy liên kết với Google để bảo vệ dữ liệu!",
+                                        text = stringResource(R.string.settings_guest_badge_desc),
                                         fontSize = 11.sp,
                                         color = TextSecondary,
                                         lineHeight = 15.sp
@@ -237,7 +239,7 @@ fun SettingsScreen(
                                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
                                         modifier = Modifier.fillMaxWidth()
                                     ) {
-                                        Text("Liên kết Google ngay (Lưu dữ liệu)", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        Text(stringResource(R.string.settings_guest_link_google_btn), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }
@@ -248,11 +250,11 @@ fun SettingsScreen(
 
             // 2. Giao diện & Chế độ sáng/tối (Dark / Light Mode)
             item {
-                SettingsSectionContainer(title = "GIAO DIỆN & HIỂN THỊ") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_display)) {
                     SettingsSwitchRow(
                         icon = if (isDarkMode) Icons.Default.DarkMode else Icons.Outlined.LightMode,
-                        title = "Chế độ nền tối (Dark Mode)",
-                        subtitle = if (isDarkMode) "Đang bật giao diện ban đêm" else "Đang dùng giao diện ban ngày",
+                        title = stringResource(R.string.settings_dark_mode_title),
+                        subtitle = if (isDarkMode) stringResource(R.string.settings_dark_mode_subtitle_on) else stringResource(R.string.settings_dark_mode_subtitle_off),
                         isChecked = isDarkMode,
                         onCheckedChange = onToggleDarkMode
                     )
@@ -261,11 +263,11 @@ fun SettingsScreen(
 
             // 4. Ngôn ngữ & Khu vực (Language & Currency)
             item {
-                SettingsSectionContainer(title = "NGÔN NGỮ & KHU VỰC") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_language)) {
                     SettingsClickableRow(
                         icon = Icons.Outlined.Language,
-                        title = "Ngôn ngữ ứng dụng",
-                        value = if (appLanguage == "vi") "Tiếng Việt (VN) 🇻🇳" else "English (US) 🇬🇧",
+                        title = stringResource(R.string.settings_language_title),
+                        value = if (appLanguage == "vi") stringResource(R.string.settings_language_vietnamese) else stringResource(R.string.settings_language_english),
                         onClick = {
                             onSetLanguage(if (appLanguage == "vi") "en" else "vi")
                         }
@@ -273,15 +275,15 @@ fun SettingsScreen(
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsClickableRow(
                         icon = Icons.Outlined.Paid,
-                        title = "Đơn vị tiền tệ dự toán",
+                        title = stringResource(R.string.settings_currency_title),
                         value = selectedCurrency,
                         onClick = { showCurrencyDialog = true }
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsClickableRow(
                         icon = Icons.Outlined.Straighten,
-                        title = "Đơn vị khoảng cách",
-                        value = "Kilômét (km)",
+                        title = stringResource(R.string.settings_distance_unit_title),
+                        value = stringResource(R.string.settings_distance_unit_value),
                         onClick = {}
                     )
                 }
@@ -289,27 +291,27 @@ fun SettingsScreen(
 
             // 5. Thông báo & Lời nhắc
             item {
-                SettingsSectionContainer(title = "THÔNG BÁO & NHẮC NHỞ") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_notifications)) {
                     SettingsSwitchRow(
                         icon = Icons.Outlined.NotificationsActive,
-                        title = "Nhắc nhở lịch trình chuyến đi",
-                        subtitle = "Báo trước 1 ngày & 2 giờ khởi hành",
+                        title = stringResource(R.string.settings_notify_trip_title),
+                        subtitle = stringResource(R.string.settings_notify_trip_sub),
                         isChecked = notifyTripAlarm,
                         onCheckedChange = { notifyTripAlarm = it }
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsSwitchRow(
                         icon = Icons.Outlined.Place,
-                        title = "Gợi ý điểm check-in gần bạn",
-                        subtitle = "Nhận diện geofence khi đến tỉnh thành mới",
+                        title = stringResource(R.string.settings_notify_nearby_title),
+                        subtitle = stringResource(R.string.settings_notify_nearby_sub),
                         isChecked = notifyNearbyPlaces,
                         onCheckedChange = { notifyNearbyPlaces = it }
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsSwitchRow(
                         icon = Icons.Outlined.FavoriteBorder,
-                        title = "Tương tác cộng đồng",
-                        subtitle = "Thông báo khi có người thả tim hoặc bình luận",
+                        title = stringResource(R.string.settings_notify_social_title),
+                        subtitle = stringResource(R.string.settings_notify_social_sub),
                         isChecked = notifySocialInteractions,
                         onCheckedChange = { notifySocialInteractions = it }
                     )
@@ -318,27 +320,27 @@ fun SettingsScreen(
 
             // 6. Bản đồ & Quyền riêng tư
             item {
-                SettingsSectionContainer(title = "BẢN ĐỒ & QUYỀN RIÊNG TƯ") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_privacy)) {
                     SettingsSwitchRow(
                         icon = Icons.Outlined.Map,
-                        title = "Hiển thị vị trí check-in công khai",
-                        subtitle = "Cho phép bạn bè xem dấu hộ chiếu của bạn",
+                        title = stringResource(R.string.settings_privacy_public_checkins_title),
+                        subtitle = stringResource(R.string.settings_privacy_public_checkins_sub),
                         isChecked = publicCheckIns,
                         onCheckedChange = { publicCheckIns = it }
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsSwitchRow(
                         icon = Icons.Outlined.CardMembership,
-                        title = "Chia sẻ Travel CV",
-                        subtitle = "Tạo liên kết chia sẻ hồ sơ lữ hành",
+                        title = stringResource(R.string.settings_privacy_cv_share_title),
+                        subtitle = stringResource(R.string.settings_privacy_cv_share_sub),
                         isChecked = allowCvSharing,
                         onCheckedChange = { allowCvSharing = it }
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsSwitchRow(
                         icon = Icons.Outlined.DownloadForOffline,
-                        title = "Tải bản đồ ngoại tuyến (Offline Map)",
-                        subtitle = "Lưu bản đồ 34 tỉnh thành để xem khi mất sóng",
+                        title = stringResource(R.string.settings_privacy_offline_map_title),
+                        subtitle = stringResource(R.string.settings_privacy_offline_map_sub),
                         isChecked = offlineMapsEnabled,
                         onCheckedChange = { offlineMapsEnabled = it }
                     )
@@ -347,18 +349,18 @@ fun SettingsScreen(
 
             // 7. Bộ nhớ & Quản lý dữ liệu
             item {
-                SettingsSectionContainer(title = "DỮ LIỆU & BỘ NHỚ") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_storage)) {
                     SettingsClickableRow(
                         icon = Icons.Outlined.CleaningServices,
-                        title = "Dọn dẹp bộ nhớ đệm hình ảnh",
+                        title = stringResource(R.string.settings_clear_cache_title),
                         value = "48.6 MB",
                         onClick = onClearCache
                     )
                     HorizontalDivider(color = Color(0xFFEFF4F1), modifier = Modifier.padding(horizontal = 14.dp))
                     SettingsClickableRow(
                         icon = Icons.Outlined.CloudUpload,
-                        title = "Sao lưu lịch trình lên đám mây",
-                        value = "Đã đồng bộ",
+                        title = stringResource(R.string.settings_cloud_sync_title),
+                        value = stringResource(R.string.settings_cloud_sync_synced),
                         onClick = { onClearCache() }
                     )
                 }
@@ -366,10 +368,10 @@ fun SettingsScreen(
 
             // 8. Đăng xuất & Quản trị tài khoản
             item {
-                SettingsSectionContainer(title = "QUẢN TRỊ TÀI KHOẢN") {
+                SettingsSectionContainer(title = stringResource(R.string.settings_section_account)) {
                     SettingsClickableRow(
                         icon = Icons.Outlined.Lock,
-                        title = "Đổi mật khẩu & Bảo mật",
+                        title = stringResource(R.string.settings_change_password_title),
                         value = "",
                         onClick = {}
                     )
@@ -389,7 +391,7 @@ fun SettingsScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Đăng xuất tài khoản",
+                            text = stringResource(R.string.settings_logout_title),
                             fontSize = 13.5.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = DangerRed
@@ -411,7 +413,7 @@ fun SettingsScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Xoá tài khoản vĩnh viễn",
+                            text = stringResource(R.string.settings_delete_account_title),
                             fontSize = 13.sp,
                             color = Color.Gray
                         )
@@ -428,7 +430,7 @@ fun SettingsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "LEVART TRAVEL • PHIÊN BẢN 2.5.0",
+                        text = stringResource(R.string.settings_footer_version),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -436,7 +438,7 @@ fun SettingsScreen(
                         letterSpacing = 0.5.sp
                     )
                     Text(
-                        text = "Thiết kế cho thế hệ Lữ hành Việt Nam 🇻🇳",
+                        text = stringResource(R.string.settings_footer_tagline),
                         fontSize = 11.sp,
                         color = Color.Gray
                     )
@@ -455,7 +457,7 @@ fun SettingsScreen(
             onDismissRequest = { showEditProfileDialog = false },
             title = {
                 Text(
-                    text = "Chỉnh Sửa Hồ Sơ",
+                    text = stringResource(R.string.settings_edit_profile_dialog_title),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
                 )
@@ -465,21 +467,21 @@ fun SettingsScreen(
                     OutlinedTextField(
                         value = editName,
                         onValueChange = { editName = it },
-                        label = { Text("Tên hiển thị") },
+                        label = { Text(stringResource(R.string.settings_field_display_name)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     OutlinedTextField(
                         value = editTitle,
                         onValueChange = { editTitle = it },
-                        label = { Text("Danh hiệu lữ hành") },
+                        label = { Text(stringResource(R.string.settings_field_travel_title)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     OutlinedTextField(
                         value = editBio,
                         onValueChange = { editBio = it },
-                        label = { Text("Tiểu sử (Bio)") },
+                        label = { Text(stringResource(R.string.settings_field_bio)) },
                         maxLines = 3,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -493,12 +495,12 @@ fun SettingsScreen(
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Brand700)
                 ) {
-                    Text("Lưu thay đổi")
+                    Text(stringResource(R.string.common_save))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showEditProfileDialog = false }) {
-                    Text("Huỷ")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -518,7 +520,7 @@ fun SettingsScreen(
                         Box(contentAlignment = Alignment.Center) {
                             Icon(
                                 imageVector = Icons.Filled.WarningAmber,
-                                contentDescription = "Cảnh báo",
+                                contentDescription = null,
                                 tint = DangerRed,
                                 modifier = Modifier.size(30.dp)
                             )
@@ -527,7 +529,7 @@ fun SettingsScreen(
                 },
                 title = {
                     Text(
-                        text = "Mất Dữ Liệu Khách Vĩnh Viễn?",
+                        text = stringResource(R.string.settings_logout_guest_title),
                         fontWeight = FontWeight.Bold,
                         fontSize = 17.sp,
                         color = DangerRed
@@ -536,7 +538,7 @@ fun SettingsScreen(
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
-                            text = "Tài khoản khách không có cách nào đăng nhập lại. Nếu bạn bấm Đăng xuất, bạn sẽ MẤT VĨNH VIỄN mọi thứ đã làm (bài viết, con dấu 34 tỉnh thành, lịch trình).",
+                            text = stringResource(R.string.settings_logout_guest_desc),
                             fontSize = 13.sp,
                             color = TextPrimary,
                             lineHeight = 18.sp
@@ -547,7 +549,7 @@ fun SettingsScreen(
                             modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
                         ) {
                             Text(
-                                text = "💡 Lời khuyên: Hãy liên kết với tài khoản Google để lưu giữ vĩnh viễn dữ liệu của bạn!",
+                                text = stringResource(R.string.settings_logout_guest_tip),
                                 fontSize = 12.sp,
                                 color = Brand700,
                                 fontWeight = FontWeight.SemiBold,
@@ -565,13 +567,13 @@ fun SettingsScreen(
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text("Liên kết Google (Lưu dữ liệu)", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.5.sp)
+                        Text(stringResource(R.string.settings_guest_link_google_btn), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.5.sp)
                     }
                 },
                 dismissButton = {
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         TextButton(onClick = { showLogoutConfirmDialog = false }) {
-                            Text("Ở lại", color = TextPrimary)
+                            Text(stringResource(R.string.settings_stay_btn), color = TextPrimary)
                         }
                         TextButton(
                             onClick = {
@@ -579,7 +581,7 @@ fun SettingsScreen(
                                 onLogout()
                             }
                         ) {
-                            Text("Vẫn đăng xuất", color = DangerRed, fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.settings_still_logout_btn), color = DangerRed, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -587,9 +589,9 @@ fun SettingsScreen(
         } else {
             AlertDialog(
                 onDismissRequest = { showLogoutConfirmDialog = false },
-                title = { Text("Đăng xuất khỏi Levart?", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.settings_logout_normal_title), fontWeight = FontWeight.Bold) },
                 text = {
-                    Text("Dữ liệu check-in và lịch trình của bạn đã được sao lưu an toàn. Bạn có thể đăng nhập lại bất kỳ lúc nào.")
+                    Text(stringResource(R.string.settings_logout_normal_desc))
                 },
                 confirmButton = {
                     Button(
@@ -599,12 +601,12 @@ fun SettingsScreen(
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = DangerRed)
                     ) {
-                        Text("Đăng xuất", color = Color.White)
+                        Text(stringResource(R.string.settings_logout_title), color = Color.White)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showLogoutConfirmDialog = false }) {
-                        Text("Ở lại")
+                        Text(stringResource(R.string.settings_stay_btn))
                     }
                 }
             )
@@ -626,7 +628,7 @@ fun SettingsScreen(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Filled.WarningAmber,
-                            contentDescription = "Cảnh báo xoá tài khoản",
+                            contentDescription = null,
                             tint = DangerRed,
                             modifier = Modifier.size(30.dp)
                         )
@@ -635,7 +637,7 @@ fun SettingsScreen(
             },
             title = {
                 Text(
-                    text = "Xoá Vĩnh Viễn Tài Khoản?",
+                    text = stringResource(R.string.settings_delete_account_dialog_title),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = DangerRed
@@ -644,7 +646,7 @@ fun SettingsScreen(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "Hành động này sẽ xoá hoàn toàn tài khoản của bạn khỏi hệ thống xác thực và không thể hoàn tác.",
+                        text = stringResource(R.string.settings_delete_account_dialog_desc),
                         fontSize = 13.sp,
                         color = TextPrimary,
                         lineHeight = 18.sp
@@ -658,21 +660,21 @@ fun SettingsScreen(
                     ) {
                         Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(
-                                text = "Dữ liệu cá nhân của bạn sẽ bị xoá sạch:",
+                                text = stringResource(R.string.settings_delete_account_loss_summary),
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = DangerRed
                             )
-                            Text("• Toàn bộ hồ sơ cá nhân và phiên đăng nhập", fontSize = 11.5.sp, color = TextPrimary)
-                            Text("• Tất cả bài viết chia sẻ và bình luận", fontSize = 11.5.sp, color = TextPrimary)
-                            Text("• Toàn bộ con dấu hộ chiếu 34 tỉnh thành", fontSize = 11.5.sp, color = TextPrimary)
-                            Text("• Tất cả lịch trình chuyến đi đã tạo", fontSize = 11.5.sp, color = TextPrimary)
-                            Text("• Quan hệ theo dõi, thông báo & bộ sưu tập đã lưu", fontSize = 11.5.sp, color = TextPrimary)
+                            Text(stringResource(R.string.settings_delete_account_loss_1), fontSize = 11.5.sp, color = TextPrimary)
+                            Text(stringResource(R.string.settings_delete_account_loss_2), fontSize = 11.5.sp, color = TextPrimary)
+                            Text(stringResource(R.string.settings_delete_account_loss_3), fontSize = 11.5.sp, color = TextPrimary)
+                            Text(stringResource(R.string.settings_delete_account_loss_4), fontSize = 11.5.sp, color = TextPrimary)
+                            Text(stringResource(R.string.settings_delete_account_loss_5), fontSize = 11.5.sp, color = TextPrimary)
                         }
                     }
 
                     Text(
-                        text = "Lưu ý: Nếu phiên đăng nhập đã cũ, bạn có thể được yêu cầu đăng nhập lại một lần để xác thực quyền sở hữu trước khi xoá.",
+                        text = stringResource(R.string.settings_delete_account_reauth_note),
                         fontSize = 11.sp,
                         color = TextSecondary,
                         lineHeight = 15.sp
@@ -688,7 +690,7 @@ fun SettingsScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = DangerRed),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Tôi hiểu & Xoá vĩnh viễn", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                    Text(stringResource(R.string.settings_delete_account_confirm_btn), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
                 }
             },
             dismissButton = {
@@ -696,7 +698,7 @@ fun SettingsScreen(
                     onClick = { showDeleteAccountConfirmDialog = false },
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Huỷ & Giữ tài khoản", color = TextPrimary, fontSize = 13.sp)
+                    Text(stringResource(R.string.settings_delete_account_cancel_btn), color = TextPrimary, fontSize = 13.sp)
                 }
             }
         )
@@ -708,7 +710,7 @@ fun SettingsScreen(
             onDismissRequest = {},
             title = {
                 Text(
-                    text = "Đang Xử Lý Xoá Tài Khoản",
+                    text = stringResource(R.string.settings_deleting_progress_title),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
@@ -725,7 +727,7 @@ fun SettingsScreen(
                         strokeWidth = 3.dp
                     )
                     Text(
-                        text = "Đang xoá tài khoản trên hệ thống và dọn dẹp toàn bộ dữ liệu cá nhân trong máy...",
+                        text = stringResource(R.string.settings_deleting_progress_desc),
                         fontSize = 13.sp,
                         color = TextPrimary,
                         lineHeight = 18.sp
@@ -738,12 +740,14 @@ fun SettingsScreen(
 
     // Dialog 5: Chọn đơn vị tiền tệ
     if (showCurrencyDialog) {
+        val currVnd = stringResource(R.string.settings_currency_vnd)
+        val currUsd = stringResource(R.string.settings_currency_usd)
         AlertDialog(
             onDismissRequest = { showCurrencyDialog = false },
-            title = { Text("Chọn đơn vị tiền tệ", fontWeight = FontWeight.Bold) },
+            title = { Text(stringResource(R.string.settings_select_currency_title), fontWeight = FontWeight.Bold) },
             text = {
                 Column {
-                    listOf("VNĐ (₫) - Đồng Việt Nam", "USD ($) - Đô la Mỹ").forEach { curr ->
+                    listOf(currVnd, currUsd).forEach { curr ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()

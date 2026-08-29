@@ -1,3 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Levart</string>
+
+    <!-- COMMON / CHUNG -->
+    <string name="common_cancel">Huỷ</string>
+    <string name="common_save">Lưu thay đổi</string>
+    <string name="common_retry">Thử lại</string>
+    <string name="common_close">Đóng</string>
+    <string name="common_processing">Đang xử lý…</string>
+    <string name="common_back">Quay lại</string>
+    <string name="common_edit">Sửa</string>
+    <string name="common_details">Chi tiết ➔</string>
+
+    <!-- AUTH SCREEN / ĐĂNG NHẬP (auth_*) -->
+    <string name="auth_app_name">LEVART TRAVEL</string>
+    <string name="auth_hero_desc">Lumina Vietnam Travel</string>
+    <string name="auth_logo_desc">Logo Levart</string>
+    <string name="auth_tagline">Hộ Chiếu &amp; Hành Trình Lữ Hành Việt Nam 🇻🇳</string>
+    <string name="auth_tab_google_quick">Google &amp; Nhanh</string>
+    <string name="auth_tab_email_password">Email &amp; Mật khẩu</string>
+    <string name="auth_network_error_title">Lỗi kết nối mạng</string>
+    <string name="auth_error_title">Thông báo đăng nhập</string>
+    <string name="auth_open_browser">Mở trình duyệt</string>
+    <string name="auth_google_signin_btn">Đăng nhập nhanh bằng Google</string>
+    <string name="auth_browser_signin_btn">Đăng nhập qua Trình duyệt Web</string>
+    <string name="auth_or_divider">HOẶC THỬ NGHIỆM</string>
+    <string name="auth_guest_signin_btn">Khám phá ngay (Chế độ Lữ Khách)</string>
+    <string name="auth_guest_caption">Dành cho trải nghiệm nhanh trên máy ảo hoặc không cần tài khoản Google</string>
+    <string name="auth_chip_login">Đăng nhập</string>
+    <string name="auth_chip_signup">Đăng ký mới</string>
+    <string name="auth_field_fullname">Họ và tên / Biệt danh</string>
+    <string name="auth_field_email">Địa chỉ Email</string>
+    <string name="auth_field_email_placeholder">vi_du@gmail.com</string>
+    <string name="auth_field_password">Mật khẩu</string>
+    <string name="auth_password_show">Hiện mật khẩu</string>
+    <string name="auth_password_hide">Ẩn mật khẩu</string>
+    <string name="auth_action_create_account">Tạo tài khoản Levart</string>
+    <string name="auth_action_signin">Đăng nhập ngay</string>
+    <string name="auth_security_note">Toàn bộ hồ sơ, con dấu hộ chiếu 34 tỉnh thành và lịch trình của bạn đều được bảo mật và lưu trữ an toàn.</string>
+    <string name="auth_badge_provinces_title">34 Tỉnh Thành</string>
+    <string name="auth_badge_provinces_sub">Dấu hộ chiếu thật</string>
+    <string name="auth_badge_ai_title">Lịch Trình AI</string>
+    <string name="auth_badge_ai_sub">Tối ưu chi phí</string>
+    <string name="auth_badge_offline_title">Bản Đồ Offline</string>
+    <string name="auth_badge_offline_sub">Không lo mất sóng</string>
+    <string name="auth_footer_security">Bảo mật &amp; Lưu trữ qua Google Identity &amp; Firebase Auth</string>
+    <string name="auth_guest_default_name">Lữ khách Khám Phá</string>
+
+    <!-- SETTINGS SCREEN / CÀI ĐẶT (settings_*) -->
+    <string name="settings_category_header">CÀI ĐẶT &amp; TÀI KHOẢN</string>
+    <string name="settings_title">Tùy Chọn Ứng Dụng</string>
+    <string name="settings_guest_badge_title">Tài khoản Lữ Khách (Chưa liên kết)</string>
+    <string name="settings_guest_badge_desc">Hành trình và con dấu sẽ mất nếu bạn đăng xuất. Hãy liên kết với Google để bảo vệ dữ liệu!</string>
+    <string name="settings_guest_link_google_btn">Liên kết Google ngay (Lưu dữ liệu)</string>
+    <string name="settings_section_display">GIAO DIỆN &amp; HIỂN THỊ</string>
+    <string name="settings_dark_mode_title">Chế độ nền tối (Dark Mode)</string>
+    <string name="settings_dark_mode_subtitle_on">Đang bật giao diện ban đêm</string>
+    <string name="settings_dark_mode_subtitle_off">Đang dùng giao diện ban ngày</string>
+    <string name="settings_section_language">NGÔN NGỮ &amp; KHU VỰC</string>
+    <string name="settings_language_title">Ngôn ngữ ứng dụng</string>
+    <string name="settings_language_vietnamese">Tiếng Việt (VN) 🇻🇳</string>
+    <string name="settings_language_english">English (US) 🇬🇧</string>
+    <string name="settings_currency_title">Đơn vị tiền tệ dự toán</string>
+    <string name="settings_distance_unit_title">Đơn vị khoảng cách</string>
+    <string name="settings_distance_unit_value">Kilômét (km)</string>
+    <string name="settings_section_notifications">THÔNG BÁO &amp; NHẮC NHỞ</string>
+    <string name="settings_notify_trip_title">Nhắc nhở lịch trình chuyến đi</string>
+    <string name="settings_notify_trip_sub">Báo trước 1 ngày &amp; 2 giờ khởi hành</string>
+    <string name="settings_notify_nearby_title">Gợi ý điểm check-in gần bạn</string>
+    <string name="settings_notify_nearby_sub">Nhận diện geofence khi đến tỉnh thành mới</string>
+    <string name="settings_notify_social_title">Tương tác cộng đồng</string>
+    <string name="settings_notify_social_sub">Thông báo khi có người thả tim hoặc bình luận</string>
+    <string name="settings_section_privacy">BẢN ĐỒ &amp; QUYỀN RIÊNG TƯ</string>
+    <string name="settings_privacy_public_checkins_title">Hiển thị vị trí check-in công khai</string>
+    <string name="settings_privacy_public_checkins_sub">Cho phép bạn bè xem dấu hộ chiếu của bạn</string>
+    <string name="settings_privacy_cv_share_title">Chia sẻ Travel CV</string>
+    <string name="settings_privacy_cv_share_sub">Tạo liên kết chia sẻ hồ sơ lữ hành</string>
+    <string name="settings_privacy_offline_map_title">Tải bản đồ ngoại tuyến (Offline Map)</string>
+    <string name="settings_privacy_offline_map_sub">Lưu bản đồ 34 tỉnh thành để xem khi mất sóng</string>
+    <string name="settings_section_storage">DỮ LIỆU &amp; BỘ NHỚ</string>
+    <string name="settings_clear_cache_title">Dọn dẹp bộ nhớ đệm hình ảnh</string>
+    <string name="settings_cloud_sync_title">Sao lưu lịch trình lên đám mây</string>
+    <string name="settings_cloud_sync_synced">Đã đồng bộ</string>
+    <string name="settings_section_account">QUẢN TRỊ TÀI KHOẢN</string>
+    <string name="settings_change_password_title">Đổi mật khẩu &amp; Bảo mật</string>
+    <string name="settings_logout_title">Đăng xuất tài khoản</string>
+    <string name="settings_delete_account_title">Xoá tài khoản vĩnh viễn</string>
+    <string name="settings_footer_version">LEVART TRAVEL • PHIÊN BẢN 2.5.0</string>
+    <string name="settings_footer_tagline">Thiết kế cho thế hệ Lữ hành Việt Nam 🇻🇳</string>
+    <string name="settings_edit_profile_dialog_title">Chỉnh Sửa Hồ Sơ</string>
+    <string name="settings_field_display_name">Tên hiển thị</string>
+    <string name="settings_field_travel_title">Danh hiệu lữ hành</string>
+    <string name="settings_field_bio">Tiểu sử (Bio)</string>
+    <string name="settings_logout_guest_title">Mất Dữ Liệu Khách Vĩnh Viễn?</string>
+    <string name="settings_logout_guest_desc">Tài khoản khách không có cách nào đăng nhập lại. Nếu bạn bấm Đăng xuất, bạn sẽ MẤT VĨNH VIỄN mọi thứ đã làm (bài viết, con dấu 34 tỉnh thành, lịch trình).</string>
+    <string name="settings_logout_guest_tip">💡 Lời khuyên: Hãy liên kết với tài khoản Google để lưu giữ vĩnh viễn dữ liệu của bạn!</string>
+    <string name="settings_stay_btn">Ở lại</string>
+    <string name="settings_still_logout_btn">Vẫn đăng xuất</string>
+    <string name="settings_logout_normal_title">Đăng xuất khỏi Levart?</string>
+    <string name="settings_logout_normal_desc">Dữ liệu check-in và lịch trình của bạn đã được sao lưu an toàn. Bạn có thể đăng nhập lại bất kỳ lúc nào.</string>
+    <string name="settings_delete_account_dialog_title">Xoá Vĩnh Viễn Tài Khoản?</string>
+    <string name="settings_delete_account_dialog_desc">Hành động này sẽ xoá hoàn toàn tài khoản của bạn khỏi hệ thống xác thực và không thể hoàn tác.</string>
+    <string name="settings_delete_account_loss_summary">Dữ liệu cá nhân của bạn sẽ bị xoá sạch:</string>
+    <string name="settings_delete_account_loss_1">• Toàn bộ hồ sơ cá nhân và phiên đăng nhập</string>
+    <string name="settings_delete_account_loss_2">• Tất cả bài viết chia sẻ và bình luận</string>
+    <string name="settings_delete_account_loss_3">• Toàn bộ con dấu hộ chiếu 34 tỉnh thành</string>
+    <string name="settings_delete_account_loss_4">• Tất cả lịch trình chuyến đi đã tạo</string>
+    <string name="settings_delete_account_loss_5">• Quan hệ theo dõi, thông báo &amp; bộ sưu tập đã lưu</string>
+    <string name="settings_delete_account_reauth_note">Lưu ý: Nếu phiên đăng nhập đã cũ, bạn có thể được yêu cầu đăng nhập lại một lần để xác thực quyền sở hữu trước khi xoá.</string>
+    <string name="settings_delete_account_confirm_btn">Tôi hiểu &amp; Xoá vĩnh viễn</string>
+    <string name="settings_delete_account_cancel_btn">Huỷ &amp; Giữ tài khoản</string>
+    <string name="settings_deleting_progress_title">Đang Xử Lý Xoá Tài Khoản</string>
+    <string name="settings_deleting_progress_desc">Đang xoá tài khoản trên hệ thống và dọn dẹp toàn bộ dữ liệu cá nhân trong máy…</string>
+    <string name="settings_select_currency_title">Chọn đơn vị tiền tệ</string>
+    <string name="settings_currency_vnd">VNĐ (₫) - Đồng Việt Nam</string>
+    <string name="settings_currency_usd">USD ($) - Đô la Mỹ</string>
+    <string name="settings_cache_freed_msg">Đã giải phóng %1$s bộ nhớ đệm hình ảnh!</string>
+    <string name="settings_cache_clean_msg">Bộ nhớ đệm hình ảnh đã sạch (0 B)!</string>
+    <string name="settings_dark_mode_on_toast">Đã kích hoạt Giao diện Tối (Dark Mode)</string>
+    <string name="settings_dark_mode_off_toast">Đã chuyển sang Giao diện Sáng (Light Mode)</string>
+    <string name="settings_lang_vi_toast">Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳</string>
+    <string name="settings_lang_en_toast">Language changed to English 🇬🇧</string>
+    <string name="settings_profile_updated_toast">Đã lưu cập nhật hồ sơ!</string>
+    <string name="settings_logout_toast">Đã đăng xuất tài khoản.</string>
+
+    <!-- PROFILE SCREEN / TRANG CÁ NHÂN (profile_*) -->
+    <string name="profile_header_title">HỒ SƠ LỮ HÀNH</string>
+    <string name="profile_travel_cv_btn">Tạo Thẻ Dấu Chân Du Lịch (Travel CV) ➔</string>
+    <string name="profile_guest_badge_title">Chế độ Lữ Khách Tạm Thời</string>
+    <string name="profile_guest_badge_desc">Dữ liệu con dấu và lịch trình đang được lưu trong phiên ẩn danh này. Hãy liên kết với Google để giữ vĩnh viễn hành trình!</string>
+    <string name="profile_guest_upgrade_btn">Nâng cấp &amp; Liên kết Google ➔</string>
+    <string name="profile_stat_following">Đang theo dõi</string>
+    <string name="profile_stat_followers">Người theo dõi</string>
+    <string name="profile_stat_saved">Lượt lưu</string>
+    <string name="profile_stat_provinces">Tỉnh thành</string>
+    <string name="profile_stat_stamps">Con dấu</string>
+    <string name="profile_stat_trips">Chuyến đi</string>
+    <string name="profile_tab_trips_format">Chuyến đi (%1$d)</string>
+    <string name="profile_tab_saved_format">Đã lưu (%1$d)</string>
+    <string name="profile_trip_status_ongoing">Đang diễn ra</string>
+    <string name="profile_trip_status_upcoming">Sắp tới</string>
+    <string name="profile_trip_status_past">Đã hoàn thành</string>
+    <string name="profile_trip_ai_badge">AI Thiết kế</string>
+    <string name="profile_trip_duration_prefix">⏱ %1$s</string>
+    <string name="profile_trip_cost_vnd">💰 %1$sđ</string>
+    <string name="profile_post_multiple_photos">Nhiều ảnh</string>
+    <string name="profile_post_has_itinerary">Có lịch trình</string>
+    <string name="profile_empty_trips_title">Chưa có chuyến đi nào</string>
+    <string name="profile_empty_trips_desc">Lên kế hoạch và lưu các hành trình khám phá Việt Nam của riêng bạn.</string>
+    <string name="profile_empty_trips_action">Lên lịch trình với AI</string>
+    <string name="profile_empty_saved_title">Chưa có bài viết nào được lưu</string>
+    <string name="profile_empty_saved_desc">Chạm vào biểu tượng bookmark ở bất kỳ bài viết nào trên Bảng tin để lưu lại xem sau.</string>
+    <string name="profile_empty_saved_action">Khám phá bảng tin ngay</string>
+
+    <!-- PLURALS / SỐ NHIỀU -->
+    <plurals name="profile_plural_provinces">
+        <item quantity="other">%1$d tỉnh thành</item>
+    </plurals>
+
+    <plurals name="profile_plural_spots">
+        <item quantity="other">📍 %1$d địa điểm</item>
+    </plurals>
+
+    <plurals name="profile_plural_stamps">
+        <item quantity="other">%1$d con dấu</item>
+    </plurals>
+
+    <plurals name="profile_plural_trips">
+        <item quantity="other">%1$d chuyến đi</item>
+    </plurals>
 </resources>

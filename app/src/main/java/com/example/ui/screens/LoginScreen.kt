@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -38,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
 import com.example.ui.theme.*
 
 enum class AuthTab {
@@ -85,7 +87,7 @@ fun LoginScreen(
         ) {
             AsyncImage(
                 model = "https://images.unsplash.com/photo-1528127269322-539801943592?w=1080&auto=format&fit=crop",
-                contentDescription = "Lumina Vietnam Travel",
+                contentDescription = stringResource(R.string.auth_hero_desc),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
@@ -128,7 +130,7 @@ fun LoginScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Explore,
-                        contentDescription = "Lumina Logo",
+                        contentDescription = stringResource(R.string.auth_logo_desc),
                         tint = Gold500,
                         modifier = Modifier.size(40.dp)
                     )
@@ -139,7 +141,7 @@ fun LoginScreen(
 
             // App Name & Tagline
             Text(
-                text = "LEVART TRAVEL",
+                text = stringResource(R.string.auth_app_name),
                 fontSize = 23.sp,
                 fontWeight = FontWeight.ExtraBold,
                 fontFamily = FontFamily.Monospace,
@@ -148,7 +150,7 @@ fun LoginScreen(
             )
 
             Text(
-                text = "Hộ Chiếu & Hành Trình Lữ Hành Việt Nam 🇻🇳",
+                text = stringResource(R.string.auth_tagline),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White.copy(alpha = 0.9f),
@@ -195,7 +197,7 @@ fun LoginScreen(
                                     }
                             ) {
                                 Text(
-                                    text = "Google & Nhanh",
+                                    text = stringResource(R.string.auth_tab_google_quick),
                                     fontSize = 12.5.sp,
                                     fontWeight = if (selectedTab == AuthTab.GOOGLE_QUICK) FontWeight.Bold else FontWeight.Medium,
                                     color = if (selectedTab == AuthTab.GOOGLE_QUICK) Color.White else TextSecondary,
@@ -216,7 +218,7 @@ fun LoginScreen(
                                     }
                             ) {
                                 Text(
-                                    text = "Email & Mật khẩu",
+                                    text = stringResource(R.string.auth_tab_email_password),
                                     fontSize = 12.5.sp,
                                     fontWeight = if (selectedTab == AuthTab.EMAIL_PASSWORD) FontWeight.Bold else FontWeight.Medium,
                                     color = if (selectedTab == AuthTab.EMAIL_PASSWORD) Color.White else TextSecondary,
@@ -262,7 +264,7 @@ fun LoginScreen(
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
-                                            text = if (isNetworkError) "Lỗi kết nối mạng" else "Thông báo đăng nhập",
+                                            text = if (isNetworkError) stringResource(R.string.auth_network_error_title) else stringResource(R.string.auth_error_title),
                                             fontSize = 12.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isNetworkError) Color(0xFF856404) else DangerRed
@@ -281,7 +283,7 @@ fun LoginScreen(
                                     ) {
                                         Icon(
                                             Icons.Default.Close,
-                                            contentDescription = "Đóng",
+                                            contentDescription = stringResource(R.string.common_close),
                                             tint = Color.Gray,
                                             modifier = Modifier.size(15.dp)
                                         )
@@ -313,7 +315,7 @@ fun LoginScreen(
                                             )
                                             Spacer(modifier = Modifier.width(4.dp))
                                             Text(
-                                                "Mở trình duyệt",
+                                                stringResource(R.string.auth_open_browser),
                                                 fontSize = 11.sp,
                                                 fontWeight = FontWeight.Bold,
                                                 color = Brand700
@@ -336,7 +338,7 @@ fun LoginScreen(
                                             modifier = Modifier.size(13.dp)
                                         )
                                         Spacer(modifier = Modifier.width(4.dp))
-                                        Text("Thử lại", fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
+                                        Text(stringResource(R.string.common_retry), fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }
@@ -374,7 +376,7 @@ fun LoginScreen(
                                 )
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Text(
-                                    text = "Đang xử lý...",
+                                    text = stringResource(R.string.common_processing),
                                     fontSize = 13.5.sp,
                                     fontWeight = FontWeight.SemiBold,
                                     color = TextPrimary
@@ -383,7 +385,7 @@ fun LoginScreen(
                                 GoogleGIcon(modifier = Modifier.size(20.dp))
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
-                                    text = "Đăng nhập nhanh bằng Google",
+                                    text = stringResource(R.string.auth_google_signin_btn),
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color(0xFF1F1F1F)
@@ -419,7 +421,7 @@ fun LoginScreen(
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Đăng nhập qua Trình duyệt Web",
+                                text = stringResource(R.string.auth_browser_signin_btn),
                                 fontSize = 12.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Brand700
@@ -435,7 +437,7 @@ fun LoginScreen(
                         ) {
                             HorizontalDivider(modifier = Modifier.weight(1f), color = Color(0xFFE2EBE5))
                             Text(
-                                text = "HOẶC THỬ NGHIỆM",
+                                text = stringResource(R.string.auth_or_divider),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -448,9 +450,10 @@ fun LoginScreen(
                         Spacer(modifier = Modifier.height(14.dp))
 
                         // 3. Fast Guest / Instant Access Button (Zero friction, no Google account needed)
+                        val guestDefaultName = stringResource(R.string.auth_guest_default_name)
                         FilledTonalButton(
                             onClick = {
-                                onSignInAsGuest("Lữ khách Khám Phá")
+                                onSignInAsGuest(guestDefaultName)
                             },
                             enabled = !isLoading,
                             shape = RoundedCornerShape(14.dp),
@@ -471,7 +474,7 @@ fun LoginScreen(
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Khám phá ngay (Chế độ Lữ Khách)",
+                                text = stringResource(R.string.auth_guest_signin_btn),
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Brand700
@@ -480,7 +483,7 @@ fun LoginScreen(
 
                         Spacer(modifier = Modifier.height(10.dp))
                         Text(
-                            text = "Dành cho trải nghiệm nhanh trên máy ảo hoặc không cần tài khoản Google",
+                            text = stringResource(R.string.auth_guest_caption),
                             fontSize = 10.5.sp,
                             color = TextSecondary,
                             textAlign = TextAlign.Center
@@ -497,7 +500,7 @@ fun LoginScreen(
                                     isSignUpMode = false
                                     onClearError()
                                 },
-                                label = { Text("Đăng nhập", fontSize = 12.sp) },
+                                label = { Text(stringResource(R.string.auth_chip_login), fontSize = 12.sp) },
                                 modifier = Modifier.padding(end = 8.dp)
                             )
                             FilterChip(
@@ -506,7 +509,7 @@ fun LoginScreen(
                                     isSignUpMode = true
                                     onClearError()
                                 },
-                                label = { Text("Đăng ký mới", fontSize = 12.sp) }
+                                label = { Text(stringResource(R.string.auth_chip_signup), fontSize = 12.sp) }
                             )
                         }
 
@@ -516,7 +519,7 @@ fun LoginScreen(
                             OutlinedTextField(
                                 value = displayNameInput,
                                 onValueChange = { displayNameInput = it },
-                                label = { Text("Họ và tên / Biệt danh") },
+                                label = { Text(stringResource(R.string.auth_field_fullname)) },
                                 leadingIcon = {
                                     Icon(Icons.Outlined.Person, contentDescription = null, tint = Brand700)
                                 },
@@ -530,8 +533,8 @@ fun LoginScreen(
                         OutlinedTextField(
                             value = emailInput,
                             onValueChange = { emailInput = it },
-                            label = { Text("Địa chỉ Email") },
-                            placeholder = { Text("vi_du@gmail.com") },
+                            label = { Text(stringResource(R.string.auth_field_email)) },
+                            placeholder = { Text(stringResource(R.string.auth_field_email_placeholder)) },
                             leadingIcon = {
                                 Icon(Icons.Outlined.Email, contentDescription = null, tint = Brand700)
                             },
@@ -549,7 +552,7 @@ fun LoginScreen(
                         OutlinedTextField(
                             value = passwordInput,
                             onValueChange = { passwordInput = it },
-                            label = { Text("Mật khẩu") },
+                            label = { Text(stringResource(R.string.auth_field_password)) },
                             leadingIcon = {
                                 Icon(Icons.Outlined.Lock, contentDescription = null, tint = Brand700)
                             },
@@ -557,7 +560,7 @@ fun LoginScreen(
                                 IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
                                     Icon(
                                         imageVector = if (isPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                                        contentDescription = if (isPasswordVisible) "Ẩn mật khẩu" else "Hiện mật khẩu"
+                                        contentDescription = if (isPasswordVisible) stringResource(R.string.auth_password_hide) else stringResource(R.string.auth_password_show)
                                     )
                                 }
                             },
@@ -609,10 +612,10 @@ fun LoginScreen(
                                     color = Color.White
                                 )
                                 Spacer(modifier = Modifier.width(10.dp))
-                                Text("Đang xử lý...", fontSize = 13.sp)
+                                Text(stringResource(R.string.common_processing), fontSize = 13.sp)
                             } else {
                                 Text(
-                                    text = if (isSignUpMode) "Tạo tài khoản Levart" else "Đăng nhập ngay",
+                                    text = if (isSignUpMode) stringResource(R.string.auth_action_create_account) else stringResource(R.string.auth_action_signin),
                                     fontSize = 13.5.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -640,7 +643,7 @@ fun LoginScreen(
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Toàn bộ hồ sơ, con dấu hộ chiếu 34 tỉnh thành và lịch trình của bạn đều được bảo mật và lưu trữ an toàn.",
+                                text = stringResource(R.string.auth_security_note),
                                 fontSize = 10.5.sp,
                                 color = TextSecondary,
                                 lineHeight = 14.sp
@@ -659,9 +662,9 @@ fun LoginScreen(
                     .padding(horizontal = 8.dp),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                FeatureBadge(title = "34 Tỉnh Thành", subtitle = "Dấu hộ chiếu thật")
-                FeatureBadge(title = "Lịch Trình AI", subtitle = "Tối ưu chi phí")
-                FeatureBadge(title = "Bản Đồ Offline", subtitle = "Không lo mất sóng")
+                FeatureBadge(title = stringResource(R.string.auth_badge_provinces_title), subtitle = stringResource(R.string.auth_badge_provinces_sub))
+                FeatureBadge(title = stringResource(R.string.auth_badge_ai_title), subtitle = stringResource(R.string.auth_badge_ai_sub))
+                FeatureBadge(title = stringResource(R.string.auth_badge_offline_title), subtitle = stringResource(R.string.auth_badge_offline_sub))
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -679,7 +682,7 @@ fun LoginScreen(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Bảo mật & Lưu trữ qua Google Identity & Firebase Auth",
+                    text = stringResource(R.string.auth_footer_security),
                     fontSize = 11.sp,
                     color = Color.Gray
                 )

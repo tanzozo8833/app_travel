@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Levart</string>
+
+    <!-- COMMON -->
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save changes</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_close">Close</string>
+    <string name="common_processing">Processing…</string>
+    <string name="common_back">Back</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_details">Details ➔</string>
+
+    <!-- AUTH SCREEN (auth_*) -->
+    <string name="auth_app_name">LEVART TRAVEL</string>
+    <string name="auth_hero_desc">Lumina Vietnam Travel</string>
+    <string name="auth_logo_desc">Levart Logo</string>
+    <string name="auth_tagline">Vietnam Travel &amp; Passport Journey 🇻🇳</string>
+    <string name="auth_tab_google_quick">Google &amp; Quick</string>
+    <string name="auth_tab_email_password">Email &amp; Password</string>
+    <string name="auth_network_error_title">Network Connection Error</string>
+    <string name="auth_error_title">Login Notice</string>
+    <string name="auth_open_browser">Open browser</string>
+    <string name="auth_google_signin_btn">Sign in quickly with Google</string>
+    <string name="auth_browser_signin_btn">Sign in via Web Browser</string>
+    <string name="auth_or_divider">OR TRY DEMO</string>
+    <string name="auth_guest_signin_btn">Explore Now (Guest Mode)</string>
+    <string name="auth_guest_caption">For a quick trial on emulator or without a Google account</string>
+    <string name="auth_chip_login">Log In</string>
+    <string name="auth_chip_signup">Sign Up</string>
+    <string name="auth_field_fullname">Full Name / Nickname</string>
+    <string name="auth_field_email">Email Address</string>
+    <string name="auth_field_email_placeholder">example@gmail.com</string>
+    <string name="auth_field_password">Password</string>
+    <string name="auth_password_show">Show password</string>
+    <string name="auth_password_hide">Hide password</string>
+    <string name="auth_action_create_account">Create Levart Account</string>
+    <string name="auth_action_signin">Log In Now</string>
+    <string name="auth_security_note">All your profile, 34-province passport stamps, and itineraries are securely stored and protected.</string>
+    <string name="auth_badge_provinces_title">34 Provinces</string>
+    <string name="auth_badge_provinces_sub">Real passport stamps</string>
+    <string name="auth_badge_ai_title">AI Itineraries</string>
+    <string name="auth_badge_ai_sub">Cost optimized</string>
+    <string name="auth_badge_offline_title">Offline Maps</string>
+    <string name="auth_badge_offline_sub">No signal needed</string>
+    <string name="auth_footer_security">Secured &amp; Stored via Google Identity &amp; Firebase Auth</string>
+    <string name="auth_guest_default_name">Explorer Guest</string>
+
+    <!-- SETTINGS SCREEN (settings_*) -->
+    <string name="settings_category_header">SETTINGS &amp; ACCOUNT</string>
+    <string name="settings_title">App Preferences</string>
+    <string name="settings_guest_badge_title">Guest Account (Unlinked)</string>
+    <string name="settings_guest_badge_desc">Itineraries and stamps will be lost if you log out. Link with Google to safeguard your data!</string>
+    <string name="settings_guest_link_google_btn">Link Google Now (Save Data)</string>
+    <string name="settings_section_display">DISPLAY &amp; APPEARANCE</string>
+    <string name="settings_dark_mode_title">Dark Mode</string>
+    <string name="settings_dark_mode_subtitle_on">Night theme is currently active</string>
+    <string name="settings_dark_mode_subtitle_off">Day theme is currently active</string>
+    <string name="settings_section_language">LANGUAGE &amp; REGION</string>
+    <string name="settings_language_title">App Language</string>
+    <string name="settings_language_vietnamese">Tiếng Việt (VN) 🇻🇳</string>
+    <string name="settings_language_english">English (US) 🇬🇧</string>
+    <string name="settings_currency_title">Estimated Currency</string>
+    <string name="settings_distance_unit_title">Distance Unit</string>
+    <string name="settings_distance_unit_value">Kilometer (km)</string>
+    <string name="settings_section_notifications">NOTIFICATIONS &amp; REMINDERS</string>
+    <string name="settings_notify_trip_title">Trip Itinerary Reminders</string>
+    <string name="settings_notify_trip_sub">Alert 1 day &amp; 2 hours before departure</string>
+    <string name="settings_notify_nearby_title">Nearby Check-in Suggestions</string>
+    <string name="settings_notify_nearby_sub">Geofence alerts when entering a new province</string>
+    <string name="settings_notify_social_title">Community Interactions</string>
+    <string name="settings_notify_social_sub">Notify when someone likes or comments</string>
+    <string name="settings_section_privacy">MAPS &amp; PRIVACY</string>
+    <string name="settings_privacy_public_checkins_title">Public Check-in Locations</string>
+    <string name="settings_privacy_public_checkins_sub">Allow friends to view your passport stamps</string>
+    <string name="settings_privacy_cv_share_title">Share Travel CV</string>
+    <string name="settings_privacy_cv_share_sub">Generate public link to share travel profile</string>
+    <string name="settings_privacy_offline_map_title">Download Offline Maps</string>
+    <string name="settings_privacy_offline_map_sub">Save 34-province maps for offline viewing</string>
+    <string name="settings_section_storage">DATA &amp; STORAGE</string>
+    <string name="settings_clear_cache_title">Clear Image Cache</string>
+    <string name="settings_cloud_sync_title">Backup Itineraries to Cloud</string>
+    <string name="settings_cloud_sync_synced">Synced</string>
+    <string name="settings_section_account">ACCOUNT MANAGEMENT</string>
+    <string name="settings_change_password_title">Change Password &amp; Security</string>
+    <string name="settings_logout_title">Log Out</string>
+    <string name="settings_delete_account_title">Delete Account Permanently</string>
+    <string name="settings_footer_version">LEVART TRAVEL • VERSION 2.5.0</string>
+    <string name="settings_footer_tagline">Designed for the Vietnamese Traveling Generation 🇻🇳</string>
+    <string name="settings_edit_profile_dialog_title">Edit Profile</string>
+    <string name="settings_field_display_name">Display Name</string>
+    <string name="settings_field_travel_title">Travel Title</string>
+    <string name="settings_field_bio">Bio</string>
+    <string name="settings_logout_guest_title">Lose Guest Data Permanently?</string>
+    <string name="settings_logout_guest_desc">Guest accounts cannot be recovered. If you log out, you will PERMANENTLY LOSE all created data (posts, 34-province stamps, itineraries).</string>
+    <string name="settings_logout_guest_tip">💡 Tip: Link with a Google account to preserve your data permanently!</string>
+    <string name="settings_stay_btn">Stay</string>
+    <string name="settings_still_logout_btn">Log Out Anyway</string>
+    <string name="settings_logout_normal_title">Log out from Levart?</string>
+    <string name="settings_logout_normal_desc">Your check-ins and itineraries are safely backed up. You can log in again anytime.</string>
+    <string name="settings_delete_account_dialog_title">Delete Account Permanently?</string>
+    <string name="settings_delete_account_dialog_desc">This action will permanently delete your account from authentication and cannot be undone.</string>
+    <string name="settings_delete_account_loss_summary">Your personal data will be completely erased:</string>
+    <string name="settings_delete_account_loss_1">• All personal profile and session data</string>
+    <string name="settings_delete_account_loss_2">• All shared posts and comments</string>
+    <string name="settings_delete_account_loss_3">• All 34-province passport stamps</string>
+    <string name="settings_delete_account_loss_4">• All created travel itineraries</string>
+    <string name="settings_delete_account_loss_5">• Following relations, notifications &amp; saved bookmarks</string>
+    <string name="settings_delete_account_reauth_note">Note: If your login session is old, you may be asked to re-authenticate before deletion.</string>
+    <string name="settings_delete_account_confirm_btn">I understand &amp; Delete permanently</string>
+    <string name="settings_delete_account_cancel_btn">Cancel &amp; Keep Account</string>
+    <string name="settings_deleting_progress_title">Processing Account Deletion</string>
+    <string name="settings_deleting_progress_desc">Deleting account on server and cleaning up local personal data…</string>
+    <string name="settings_select_currency_title">Select Currency</string>
+    <string name="settings_currency_vnd">VNĐ (₫) - Vietnamese Dong</string>
+    <string name="settings_currency_usd">USD ($) - US Dollar</string>
+    <string name="settings_cache_freed_msg">Freed %1$s of image cache!</string>
+    <string name="settings_cache_clean_msg">Image cache is already clean (0 B)!</string>
+    <string name="settings_dark_mode_on_toast">Dark Mode activated</string>
+    <string name="settings_dark_mode_off_toast">Light Mode activated</string>
+    <string name="settings_lang_vi_toast">Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳</string>
+    <string name="settings_lang_en_toast">Language changed to English 🇬🇧</string>
+    <string name="settings_profile_updated_toast">Profile updated successfully!</string>
+    <string name="settings_logout_toast">Logged out successfully.</string>
+
+    <!-- PROFILE SCREEN (profile_*) -->
+    <string name="profile_header_title">TRAVEL PROFILE</string>
+    <string name="profile_travel_cv_btn">Create Travel Stamp Card (Travel CV) ➔</string>
+    <string name="profile_guest_badge_title">Temporary Guest Mode</string>
+    <string name="profile_guest_badge_desc">Stamps and itineraries are stored in this guest session. Link with Google to preserve your journey permanently!</string>
+    <string name="profile_guest_upgrade_btn">Upgrade &amp; Link Google ➔</string>
+    <string name="profile_stat_following">Following</string>
+    <string name="profile_stat_followers">Followers</string>
+    <string name="profile_stat_saved">Saved</string>
+    <string name="profile_stat_provinces">Provinces</string>
+    <string name="profile_stat_stamps">Stamps</string>
+    <string name="profile_stat_trips">Trips</string>
+    <string name="profile_tab_trips_format">Trips (%1$d)</string>
+    <string name="profile_tab_saved_format">Saved (%1$d)</string>
+    <string name="profile_trip_status_ongoing">Ongoing</string>
+    <string name="profile_trip_status_upcoming">Upcoming</string>
+    <string name="profile_trip_status_past">Completed</string>
+    <string name="profile_trip_ai_badge">AI Planned</string>
+    <string name="profile_trip_duration_prefix">⏱ %1$s</string>
+    <string name="profile_trip_cost_vnd">💰 %1$s₫</string>
+    <string name="profile_post_multiple_photos">Multiple photos</string>
+    <string name="profile_post_has_itinerary">Has itinerary</string>
+    <string name="profile_empty_trips_title">No itineraries yet</string>
+    <string name="profile_empty_trips_desc">Plan and save your own exploration journeys across Vietnam.</string>
+    <string name="profile_empty_trips_action">Plan Trip with AI</string>
+    <string name="profile_empty_saved_title">No saved posts yet</string>
+    <string name="profile_empty_saved_desc">Tap the bookmark icon on any post in the Feed to save it for later.</string>
+    <string name="profile_empty_saved_action">Explore Feed Now</string>
+
+    <!-- PLURALS -->
+    <plurals name="profile_plural_provinces">
+        <item quantity="one">%1$d province</item>
+        <item quantity="other">%1$d provinces</item>
+    </plurals>
+
+    <plurals name="profile_plural_spots">
+        <item quantity="one">📍 %1$d spot</item>
+        <item quantity="other">📍 %1$d spots</item>
+    </plurals>
+
+    <plurals name="profile_plural_stamps">
+        <item quantity="one">%1$d stamp</item>
+        <item quantity="other">%1$d stamps</item>
+    </plurals>
+
+    <plurals name="profile_plural_trips">
+        <item quantity="one">%1$d trip</item>
+        <item quantity="other">%1$d trips</item>
+    </plurals>
+</resources>

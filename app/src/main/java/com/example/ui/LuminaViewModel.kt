@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.Locale
 import java.util.UUID
 
 enum class MainTab {
@@ -149,11 +150,17 @@ class LuminaViewModel(
     private val _selectedUserProfileTarget = MutableStateFlow<UserProfileTarget?>(null)
     val selectedUserProfileTarget: StateFlow<UserProfileTarget?> = _selectedUserProfileTarget.asStateFlow()
 
-    private val _isDarkMode = MutableStateFlow(false)
-    val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
+    val isDarkMode: StateFlow<Boolean> = repository.isDarkMode.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        false
+    )
 
-    private val _appLanguage = MutableStateFlow("vi")
-    val appLanguage: StateFlow<String> = _appLanguage.asStateFlow()
+    val appLanguage: StateFlow<String> = repository.appLanguage.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        if (Locale.getDefault().language == "en") "en" else "vi"
+    )
 
     private val _isShowingCommentSheet = MutableStateFlow(false)
     val isShowingCommentSheet: StateFlow<Boolean> = _isShowingCommentSheet.asStateFlow()
@@ -1055,13 +1062,24 @@ class LuminaViewModel(
     }
 
     fun setDarkMode(enabled: Boolean) {
-        _isDarkMode.value = enabled
-        showToast(if (enabled) "Đã kích hoạt Giao diện Tối (Dark Mode)" else "Đã chuyển sang Giao diện Sáng (Light Mode)")
+        viewModelScope.launch {
+            repository.setDarkMode(enabled)
+            val isEn = appLanguage.value == "en"
+            val msg = if (enabled) {
+                if (isEn) "Dark Mode activated" else "Đã kích hoạt Giao diện Tối (Dark Mode)"
+            } else {
+                if (isEn) "Light Mode activated" else "Đã chuyển sang Giao diện Sáng (Light Mode)"
+            }
+            showToast(msg)
+        }
     }
 
     fun setLanguage(lang: String) {
-        _appLanguage.value = lang
-        showToast(if (lang == "vi") "Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳" else "Language changed to English 🇬🇧")
+        viewModelScope.launch {
+            repository.setLanguage(lang)
+            val msg = if (lang == "vi") "Đã đổi ngôn ngữ sang Tiếng Việt 🇻🇳" else "Language changed to English 🇬🇧"
+            showToast(msg)
+        }
     }
 
     fun updateProfileInfo(displayName: String, bio: String, tagTitle: String) {
@@ -1074,11 +1092,28 @@ class LuminaViewModel(
         )
         repository.updateUserProfile(updated)
         repository.authManager.updateSavedUserProfile(updated)
-        showToast("Đã lưu cập nhật hồ sơ!")
+        val msg = if (appLanguage.value == "en") "Profile updated successfully!" else "Đã lưu cập nhật hồ sơ!"
+        showToast(msg)
     }
 
     fun clearCache() {
-        showToast("Đã dọn dẹp sạch 48.6 MB bộ nhớ đệm hình ảnh và dữ liệu tạm!")
+        viewModelScope.launch {
+            val freedBytes = repository.clearAppCache()
+            val formatted = if (freedBytes >= 1024 * 1024) {
+                String.format(Locale.getDefault(), "%.1f MB", freedBytes / (1024.0 * 1024.0))
+            } else if (freedBytes >= 1024) {
+                String.format(Locale.getDefault(), "%.1f KB", freedBytes / 1024.0)
+            } else {
+                "$freedBytes B"
+            }
+            val isEn = appLanguage.value == "en"
+            val msg = if (freedBytes > 0) {
+                if (isEn) "Freed $formatted of image cache!" else "Đã giải phóng $formatted bộ nhớ đệm hình ảnh!"
+            } else {
+                if (isEn) "Image cache is already clean (0 B)!" else "Bộ nhớ đệm hình ảnh đã sạch (0 B)!"
+            }
+            showToast(msg)
+        }
     }
 
     fun logout() {

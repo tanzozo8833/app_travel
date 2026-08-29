@@ -35,6 +35,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,6 +44,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Place
 import com.example.data.model.Post
@@ -116,7 +119,7 @@ fun ProfileScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "HỒ SƠ LỮ HÀNH",
+                            text = stringResource(R.string.profile_header_title),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -134,7 +137,7 @@ fun ProfileScreen(
                             ) {
                                 Icon(
                                     Icons.Default.CardMembership,
-                                    contentDescription = "Travel CV",
+                                    contentDescription = stringResource(R.string.settings_privacy_cv_share_title),
                                     tint = Brand700,
                                     modifier = Modifier.size(18.dp)
                                 )
@@ -147,7 +150,7 @@ fun ProfileScreen(
                             ) {
                                 Icon(
                                     Icons.Default.Settings,
-                                    contentDescription = "Cài đặt & Tài khoản",
+                                    contentDescription = stringResource(R.string.settings_title),
                                     tint = Brand700,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -234,7 +237,7 @@ fun ProfileScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Tạo Thẻ Dấu Chân Du Lịch (Travel CV) ➔",
+                            text = stringResource(R.string.profile_travel_cv_btn),
                             fontSize = 12.5.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -258,7 +261,7 @@ fun ProfileScreen(
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "Chế độ Lữ Khách Tạm Thời",
+                                        text = stringResource(R.string.profile_guest_badge_title),
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = TextPrimary
@@ -266,7 +269,7 @@ fun ProfileScreen(
                                 }
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
-                                    text = "Dữ liệu con dấu và lịch trình đang được lưu trong phiên ẩn danh này. Hãy liên kết với Google để giữ vĩnh viễn hành trình!",
+                                    text = stringResource(R.string.profile_guest_badge_desc),
                                     fontSize = 11.5.sp,
                                     color = TextSecondary,
                                     lineHeight = 16.sp
@@ -278,7 +281,7 @@ fun ProfileScreen(
                                     colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text("Nâng cấp & Liên kết Google ➔", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Text(stringResource(R.string.profile_guest_upgrade_btn), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }
@@ -299,9 +302,9 @@ fun ProfileScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
-                                ProfileStatItem("Đang theo dõi", "$followingCount")
-                                ProfileStatItem("Người theo dõi", "$followerCount")
-                                ProfileStatItem("Lượt lưu", "${savedPosts.size}")
+                                ProfileStatItem(stringResource(R.string.profile_stat_following), "$followingCount")
+                                ProfileStatItem(stringResource(R.string.profile_stat_followers), "$followerCount")
+                                ProfileStatItem(stringResource(R.string.profile_stat_saved), "${savedPosts.size}")
                             }
 
                             Spacer(modifier = Modifier.height(8.dp))
@@ -313,9 +316,9 @@ fun ProfileScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
-                                ProfileStatItem("Tỉnh thành", "$visitedProvincesCount/$totalProvincesCount")
-                                ProfileStatItem("Con dấu", "$totalStamps")
-                                ProfileStatItem("Chuyến đi", "${trips.size}")
+                                ProfileStatItem(stringResource(R.string.profile_stat_provinces), "$visitedProvincesCount/$totalProvincesCount")
+                                ProfileStatItem(stringResource(R.string.profile_stat_stamps), "$totalStamps")
+                                ProfileStatItem(stringResource(R.string.profile_stat_trips), "${trips.size}")
                             }
                         }
                     }
@@ -351,14 +354,14 @@ fun ProfileScreen(
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         ProfileTabButton(
-                            title = "Chuyến đi (${trips.size})",
+                            title = stringResource(R.string.profile_tab_trips_format, trips.size),
                             icon = Icons.Default.Luggage,
                             isSelected = selectedTab == ProfileSubTab.TRIPS,
                             onClick = { selectedTab = ProfileSubTab.TRIPS },
                             modifier = Modifier.weight(1f)
                         )
                         ProfileTabButton(
-                            title = "Đã lưu (${savedPosts.size})",
+                            title = stringResource(R.string.profile_tab_saved_format, savedPosts.size),
                             icon = Icons.Default.Bookmark,
                             isSelected = selectedTab == ProfileSubTab.SAVED,
                             onClick = { selectedTab = ProfileSubTab.SAVED },
@@ -518,9 +521,9 @@ private fun ProfileTripCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val (statusBg, statusText, statusColor) = when (trip.status) {
-                        TripStatus.ONGOING -> Triple(Brand700, "Đang diễn ra", Color.White)
-                        TripStatus.UPCOMING -> Triple(Gold500, "Sắp tới", TextOnGold)
-                        TripStatus.PAST -> Triple(Color(0xFF616161), "Đã hoàn thành", Color.White)
+                        TripStatus.ONGOING -> Triple(Brand700, stringResource(R.string.profile_trip_status_ongoing), Color.White)
+                        TripStatus.UPCOMING -> Triple(Gold500, stringResource(R.string.profile_trip_status_upcoming), TextOnGold)
+                        TripStatus.PAST -> Triple(Color(0xFF616161), stringResource(R.string.profile_trip_status_past), Color.White)
                     }
 
                     Surface(
@@ -553,7 +556,7 @@ private fun ProfileTripCard(
                                 )
                                 Spacer(modifier = Modifier.width(3.dp))
                                 Text(
-                                    text = "AI Thiết kế",
+                                    text = stringResource(R.string.profile_trip_ai_badge),
                                     fontSize = 9.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
@@ -624,7 +627,7 @@ private fun ProfileTripCard(
                             color = TextSecondary
                         )
                         Text(
-                            text = "📍 ${trip.spotsCount} địa điểm",
+                            text = pluralStringResource(R.plurals.profile_plural_spots, trip.spotsCount, trip.spotsCount),
                             fontSize = 11.sp,
                             color = TextSecondary
                         )
@@ -637,7 +640,7 @@ private fun ProfileTripCard(
                     }
 
                     Text(
-                        text = "Chi tiết ➔",
+                        text = stringResource(R.string.common_details),
                         fontSize = 11.5.sp,
                         fontWeight = FontWeight.Bold,
                         color = Brand700
@@ -689,7 +692,7 @@ private fun InstaTikTokPostGridItem(
         if (post.mediaUrls.size > 1) {
             Icon(
                 imageVector = Icons.Default.Collections,
-                contentDescription = "Nhiều ảnh",
+                contentDescription = stringResource(R.string.profile_post_multiple_photos),
                 tint = Color.White,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -712,7 +715,7 @@ private fun InstaTikTokPostGridItem(
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
                         Icons.Default.Luggage,
-                        contentDescription = "Có lịch trình",
+                        contentDescription = stringResource(R.string.profile_post_has_itinerary),
                         tint = Color.White,
                         modifier = Modifier.size(9.dp)
                     )
@@ -760,14 +763,14 @@ private fun EmptyTripsState(onCreateTrip: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Chưa có chuyến đi nào",
+            text = stringResource(R.string.profile_empty_trips_title),
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = TextPrimary
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Lên kế hoạch và lưu các hành trình khám phá Việt Nam của riêng bạn.",
+            text = stringResource(R.string.profile_empty_trips_desc),
             fontSize = 12.sp,
             color = TextSecondary,
             textAlign = TextAlign.Center
@@ -780,7 +783,7 @@ private fun EmptyTripsState(onCreateTrip: () -> Unit) {
         ) {
             Icon(Icons.Default.AutoAwesome, contentDescription = null, tint = Gold500, modifier = Modifier.size(14.dp))
             Spacer(modifier = Modifier.width(6.dp))
-            Text("Lên lịch trình với AI", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.profile_empty_trips_action), fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -801,14 +804,14 @@ private fun EmptySavedState(onExploreFeed: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Chưa có bài viết nào được lưu",
+            text = stringResource(R.string.profile_empty_saved_title),
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = TextPrimary
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Chạm vào biểu tượng bookmark ở bất kỳ bài viết nào trên Bảng tin để lưu lại xem sau.",
+            text = stringResource(R.string.profile_empty_saved_desc),
             fontSize = 12.sp,
             color = TextSecondary,
             textAlign = TextAlign.Center
@@ -819,7 +822,7 @@ private fun EmptySavedState(onExploreFeed: () -> Unit) {
             colors = ButtonDefaults.buttonColors(containerColor = Brand700),
             shape = RoundedCornerShape(999.dp)
         ) {
-            Text("Khám phá bảng tin ngay", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.profile_empty_saved_action), fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example
 
 import android.app.Activity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -23,6 +24,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +41,7 @@ import com.example.ui.components.StampBadge
 import com.example.ui.components.TravelCvDialog
 import com.example.ui.screens.*
 import com.example.ui.theme.*
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     private val viewModel: LuminaViewModel by viewModels()
@@ -48,28 +51,55 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val isDark by viewModel.isDarkMode.collectAsState()
+            val appLanguage by viewModel.appLanguage.collectAsState()
             val isLoggedIn by viewModel.isLoggedIn.collectAsState()
             val isLoggingIn by viewModel.isLoggingIn.collectAsState()
             val loginError by viewModel.loginError.collectAsState()
             val loginErrorIsNetwork by viewModel.loginErrorIsNetwork.collectAsState()
             val loginCanFallbackToBrowser by viewModel.loginCanFallbackToBrowser.collectAsState()
 
-            LuminaTheme(darkTheme = isDark) {
-                if (!isLoggedIn) {
-                    LoginScreen(
-                        isLoading = isLoggingIn,
-                        errorMessage = loginError,
-                        isNetworkError = loginErrorIsNetwork,
-                        canFallbackToBrowser = loginCanFallbackToBrowser,
-                        onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
-                        onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
-                        onSignInWithEmail = { email, pass -> viewModel.signInWithEmail(email, pass) },
-                        onSignUpWithEmail = { email, pass, name -> viewModel.signUpWithEmail(email, pass, name) },
-                        onSignInAsGuest = { name -> viewModel.signInAsGuest(name) },
-                        onClearError = { viewModel.clearLoginError() }
-                    )
-                } else {
-                    LuminaApp(viewModel = viewModel)
+            val currentContext = LocalContext.current
+            val currentConfig = LocalConfiguration.current
+
+            val targetLocale = remember(appLanguage) {
+                if (appLanguage.isNotBlank()) Locale(appLanguage) else Locale.getDefault()
+            }
+
+            val localizedContext = remember(targetLocale, currentContext) {
+                val config = Configuration(currentContext.resources.configuration)
+                config.setLocale(targetLocale)
+                config.setLayoutDirection(targetLocale)
+                currentContext.createConfigurationContext(config)
+            }
+
+            val localizedConfiguration = remember(targetLocale, currentConfig) {
+                Configuration(currentConfig).apply {
+                    setLocale(targetLocale)
+                    setLayoutDirection(targetLocale)
+                }
+            }
+
+            CompositionLocalProvider(
+                LocalContext provides localizedContext,
+                LocalConfiguration provides localizedConfiguration
+            ) {
+                LuminaTheme(darkTheme = isDark) {
+                    if (!isLoggedIn) {
+                        LoginScreen(
+                            isLoading = isLoggingIn,
+                            errorMessage = loginError,
+                            isNetworkError = loginErrorIsNetwork,
+                            canFallbackToBrowser = loginCanFallbackToBrowser,
+                            onSignInWithGoogle = { activity -> viewModel.signInWithGoogle(activity) },
+                            onSignInWithBrowser = { activity -> viewModel.signInWithGoogleBrowser(activity) },
+                            onSignInWithEmail = { email, pass -> viewModel.signInWithEmail(email, pass) },
+                            onSignUpWithEmail = { email, pass, name -> viewModel.signUpWithEmail(email, pass, name) },
+                            onSignInAsGuest = { name -> viewModel.signInAsGuest(name) },
+                            onClearError = { viewModel.clearLoginError() }
+                        )
+                    } else {
+                        LuminaApp(viewModel = viewModel)
+                    }
                 }
             }
         }
