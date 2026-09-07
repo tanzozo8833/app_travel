@@ -1,5 +1,7 @@
 package com.example.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -62,7 +64,7 @@ fun LuminaBottomBar(
             ) {
                 // Tab 1: AI Plan
                 NavPillItem(
-                    label = "AI Plan",
+                    label = stringResource(R.string.nav_ai_plan),
                     iconFilled = Icons.Default.AutoAwesome,
                     iconOutlined = Icons.Outlined.AutoAwesome,
                     isSelected = currentTab == MainTab.AI_PLAN,
@@ -71,7 +73,7 @@ fun LuminaBottomBar(
 
                 // Tab 2: Chuyến đi
                 NavPillItem(
-                    label = "Chuyến đi",
+                    label = stringResource(R.string.nav_trips),
                     iconFilled = Icons.Default.Luggage,
                     iconOutlined = Icons.Outlined.Luggage,
                     isSelected = currentTab == MainTab.MY_TRIPS,
@@ -80,7 +82,7 @@ fun LuminaBottomBar(
 
                 // Tab 3: Bảng Home Feed
                 NavPillItem(
-                    label = "Feed",
+                    label = stringResource(R.string.nav_feed),
                     iconFilled = Icons.Default.Home,
                     iconOutlined = Icons.Outlined.Home,
                     isSelected = currentTab == MainTab.HOME,
@@ -89,7 +91,7 @@ fun LuminaBottomBar(
 
                 // Tab 4: Stamp
                 NavPillItem(
-                    label = "Stamp",
+                    label = stringResource(R.string.nav_stamp),
                     iconFilled = Icons.Default.CameraAlt,
                     iconOutlined = Icons.Outlined.CameraAlt,
                     isSelected = currentTab == MainTab.CHECK_IN,
@@ -98,7 +100,7 @@ fun LuminaBottomBar(
 
                 // Tab 5: Profile
                 NavPillItem(
-                    label = "Tôi",
+                    label = stringResource(R.string.nav_profile),
                     iconFilled = Icons.Default.Person,
                     iconOutlined = Icons.Outlined.Person,
                     isSelected = currentTab == MainTab.PROFILE,

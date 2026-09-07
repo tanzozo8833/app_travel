@@ -1158,7 +1158,7 @@ fun GpsSpatialCheckInDialog(
                             }
                             Surface(shape = RoundedCornerShape(999.dp), color = Color(0xFFE8F5E9)) {
                                 Text(
-                                    text = "GPS Thật 🔒",
+                                    text = stringResource(R.string.map_gps_real_locked),
                                     fontSize = 9.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2E7D32),

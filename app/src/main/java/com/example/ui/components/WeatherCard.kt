@@ -1,5 +1,7 @@
 package com.example.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -44,7 +46,7 @@ fun WeatherCard(
                     Text(text = "☀️", fontSize = 18.sp)
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "THỜI TIẾT ĐIỂM ĐẾN",
+                        text = stringResource(R.string.weather_header),
                         fontSize = 10.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,

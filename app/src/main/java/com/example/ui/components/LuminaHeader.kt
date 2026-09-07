@@ -1,5 +1,7 @@
 package com.example.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -91,7 +93,7 @@ fun LuminaHeader(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Tạo bài viết",
+                        contentDescription = stringResource(R.string.header_create_post),
                         tint = Brand900,
                         modifier = Modifier.size(18.dp)
                     )
@@ -106,7 +108,7 @@ fun LuminaHeader(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = "Tìm kiếm",
+                        contentDescription = stringResource(R.string.header_search),
                         tint = Brand900,
                         modifier = Modifier.size(18.dp)
                     )
@@ -122,7 +124,7 @@ fun LuminaHeader(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Notifications,
-                            contentDescription = "Thông báo",
+                            contentDescription = stringResource(R.string.header_notifications),
                             tint = Brand900,
                             modifier = Modifier.size(18.dp)
                         )

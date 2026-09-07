@@ -626,7 +626,7 @@ fun CreatePostScreen(
             item {
                 Column {
                     Text(
-                        text = "NỘI DUNG CHIA SẺ",
+                        text = stringResource(R.string.createpost_content_header),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,

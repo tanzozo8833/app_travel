@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.R
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.example.data.model.PlaceCategory
 import com.example.data.model.Trip
@@ -258,7 +259,7 @@ fun EditTripDialog(
                                 ) {
                                     Column {
                                         Text(
-                                            text = stringResource(R.string.edittrip_total_days, daysList.size),
+                                            text = pluralStringResource(R.plurals.edittrip_total_days, daysList.size, daysList.size),
                                             fontSize = 10.sp,
                                             fontWeight = FontWeight.Bold,
                                             fontFamily = FontFamily.Monospace,
@@ -293,7 +294,7 @@ fun EditTripDialog(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = stringResource(R.string.edittrip_days_header, daysList.size),
+                                text = pluralStringResource(R.plurals.edittrip_days_header, daysList.size, daysList.size),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -361,7 +362,7 @@ fun EditTripDialog(
                                             color = if (isSelected) Color.White else TextPrimary
                                         )
                                         Text(
-                                            text = stringResource(R.string.edittrip_day_places, day.items.size),
+                                            text = pluralStringResource(R.plurals.edittrip_day_places, day.items.size, day.items.size),
                                             fontSize = 10.sp,
                                             color = if (isSelected) Gold100 else TextSecondary
                                         )
@@ -402,7 +403,7 @@ fun EditTripDialog(
                                             color = Brand900
                                         )
                                         Text(
-                                            text = stringResource(R.string.edittrip_day_summary, currentSelectedDay.dayNumber, currentSelectedDay.items.size),
+                                            text = pluralStringResource(R.plurals.edittrip_day_summary, currentSelectedDay.items.size, currentSelectedDay.dayNumber, currentSelectedDay.items.size),
                                             fontSize = 11.sp,
                                             color = TextSecondary
                                         )
@@ -531,7 +532,7 @@ fun EditTripDialog(
                                                                 },
                                                                 modifier = Modifier.size(26.dp)
                                                             ) {
-                                                                Icon(Icons.Default.Edit, contentDescription = "Sửa", tint = Brand700, modifier = Modifier.size(15.dp))
+                                                                Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.common_edit), tint = Brand700, modifier = Modifier.size(15.dp))
                                                             }
 
                                                             IconButton(
@@ -810,7 +811,7 @@ fun EditTripDialog(
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp)
                     ) {
-                        Text(if (isEditing) "Cập nhật" else stringResource(R.string.common_add))
+                        Text(stringResource(if (isEditing) R.string.common_update else R.string.common_add))
                     }
                 },
                 dismissButton = {
@@ -853,7 +854,7 @@ fun EditTripDialog(
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp)
                     ) {
-                        Text("Lưu")
+                        Text(stringResource(R.string.common_save_short))
                     }
                 },
                 dismissButton = {

@@ -95,7 +95,7 @@ fun SearchScreen(
                 // Trending tags
                 item {
                     Text(
-                        text = "TÌM KIẾM PHỔ BIẾN",
+                        text = stringResource(R.string.search_popular_header),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = Brand700

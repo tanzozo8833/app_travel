@@ -223,7 +223,7 @@ fun CommentBottomSheet(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Send,
-                            contentDescription = "Gửi",
+                            contentDescription = stringResource(R.string.common_send),
                             tint = Color.White,
                             modifier = Modifier.size(18.dp)
                         )

@@ -1,5 +1,7 @@
 package com.example.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -71,7 +73,7 @@ fun TravelCvDialog(
                             color = Brand700
                         )
                         Text(
-                            text = "Thẻ Dấu Chân Du Lịch",
+                            text = stringResource(R.string.travelcv_title),
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
@@ -79,7 +81,7 @@ fun TravelCvDialog(
                     }
 
                     IconButton(onClick = onDismiss) {
-                        Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextSecondary)
+                        Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextSecondary)
                     }
                 }
 
@@ -255,7 +257,7 @@ fun TravelCvDialog(
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(999.dp)
                     ) {
-                        Text(text = "Đóng", fontSize = 13.sp)
+                        Text(text = stringResource(R.string.common_close), fontSize = 13.sp)
                     }
 
                     Button(
@@ -266,7 +268,7 @@ fun TravelCvDialog(
                     ) {
                         Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(text = "Chia sẻ", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.common_share), fontSize = 13.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }

@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import com.example.R
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.example.data.model.CheckInRecord
 import com.example.data.model.LuminaFrame
@@ -672,7 +673,7 @@ fun CheckInScreen(
                                         )
                                         Spacer(modifier = Modifier.width(4.dp))
                                         Text(
-                                            text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else stringResource(R.string.checkin_review_photo),
+                                            text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) stringResource(R.string.checkin_live_camera_badge) else stringResource(R.string.checkin_review_photo),
                                             fontSize = 8.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
@@ -701,10 +702,10 @@ fun CheckInScreen(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                                 ) {
-                                    Icon(Icons.Default.Refresh, contentDescription = "Chụp lại", tint = Brand700, modifier = Modifier.size(14.dp))
+                                    Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.checkin_retake), tint = Brand700, modifier = Modifier.size(14.dp))
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = "Chụp lại",
+                                        text = stringResource(R.string.checkin_retake),
                                         fontSize = 11.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Brand700
@@ -869,7 +870,7 @@ fun CheckInScreen(
                                                 shape = RoundedCornerShape(999.dp),
                                                 contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp)
                                             ) {
-                                                Text("Bật Camera", fontSize = 11.5.sp, color = TextOnGold, fontWeight = FontWeight.Bold)
+                                                Text(stringResource(R.string.checkin_enable_camera), fontSize = 11.5.sp, color = TextOnGold, fontWeight = FontWeight.Bold)
                                             }
 
                                             if (permissionRequested) {
@@ -1321,7 +1322,7 @@ fun CheckInScreen(
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
                 Text(
-                    text = "CHỌN KIỂU VIỀN KHUNG",
+                    text = stringResource(R.string.checkin_frame_style_header),
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -1647,7 +1648,7 @@ fun CheckInScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "CON DẤU",
+                                    text = stringResource(R.string.checkin_stamp_header),
                                     fontSize = 9.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -1768,7 +1769,7 @@ fun CheckInScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column {
                                     Text(
-                                        text = "VỊ TRÍ GPS THỰC TẾ",
+                                        text = stringResource(R.string.checkin_gps_header),
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
                                         fontFamily = FontFamily.Monospace,
@@ -1807,7 +1808,7 @@ fun CheckInScreen(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.GpsFixed,
-                                        contentDescription = "Quét GPS",
+                                        contentDescription = stringResource(R.string.checkin_gps_scan),
                                         tint = Brand700,
                                         modifier = Modifier.size(12.dp)
                                     )
@@ -1977,7 +1978,7 @@ fun CheckInScreen(
                                             }
                                             Column(horizontalAlignment = Alignment.End) {
                                                 Text(
-                                                    text = "KHU VỰC NHẬN DIỆN",
+                                                    text = stringResource(R.string.checkin_region_header),
                                                     fontSize = 8.5.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     fontFamily = FontFamily.Monospace,
@@ -2002,7 +2003,7 @@ fun CheckInScreen(
                                                 verticalAlignment = Alignment.CenterVertically
                                             ) {
                                                 Text(
-                                                    text = "Gần: ${state.nearestPlace.name}",
+                                                    text = stringResource(R.string.checkin_nearest_place, state.nearestPlace.name),
                                                     fontSize = 10.5.sp,
                                                     fontWeight = FontWeight.Medium,
                                                     color = TextPrimary,
@@ -2457,7 +2458,8 @@ fun CheckInScreen(
                                 )
 
                                 Text(
-                                    text = if (isEarned) "${prov.visitedPlacesCount} điểm" else stringResource(R.string.checkin_locked),
+                                    text = if (isEarned) pluralStringResource(R.plurals.checkin_places_count, prov.visitedPlacesCount, prov.visitedPlacesCount)
+                                           else stringResource(R.string.checkin_locked),
                                     fontSize = 9.sp,
                                     color = if (isEarned) Brand700 else TextTertiary,
                                     textAlign = TextAlign.Center

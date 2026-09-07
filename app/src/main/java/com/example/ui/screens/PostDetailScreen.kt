@@ -334,7 +334,7 @@ fun PostDetailScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Share,
-                                contentDescription = "Chia sẻ",
+                                contentDescription = stringResource(R.string.common_share),
                                 tint = TextPrimary,
                                 modifier = Modifier.size(22.dp)
                             )

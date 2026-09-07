@@ -1,5 +1,7 @@
 package com.example.ui.screens
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -114,13 +116,13 @@ fun UserProfileDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Quay lại",
+                            contentDescription = stringResource(R.string.common_back),
                             tint = TextPrimary
                         )
                     }
 
                     Text(
-                        text = "Trang Cá Nhân",
+                        text = stringResource(R.string.profiledetail_title),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
@@ -131,7 +133,7 @@ fun UserProfileDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Share,
-                            contentDescription = "Chia sẻ hồ sơ",
+                            contentDescription = stringResource(R.string.profiledetail_share),
                             tint = TextSecondary
                         )
                     }
@@ -246,7 +248,7 @@ fun UserProfileDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Đang theo dõi",
+                                    text = stringResource(R.string.profile_stat_following),
                                     fontSize = 13.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = TextPrimary
@@ -260,7 +262,7 @@ fun UserProfileDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "+ Theo dõi",
+                                    text = stringResource(R.string.postdetail_follow_cta),
                                     fontSize = 13.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
@@ -274,7 +276,7 @@ fun UserProfileDetailScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
-                                text = "Đây là trang cá nhân của bạn",
+                                text = stringResource(R.string.profiledetail_own),
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = TextSecondary,
@@ -349,7 +351,7 @@ fun UserProfileDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Bảng tin (${userPosts.size})",
+                                    text = stringResource(R.string.profiledetail_tab_feed, userPosts.size),
                                     fontSize = 12.sp,
                                     fontWeight = if (selectedTab == OtherProfileTab.POSTS_FEED) FontWeight.Bold else FontWeight.Medium,
                                     color = if (selectedTab == OtherProfileTab.POSTS_FEED) Brand700 else TextSecondary
@@ -378,7 +380,7 @@ fun UserProfileDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Lưới ảnh (${userPosts.size})",
+                                    text = stringResource(R.string.profiledetail_tab_grid, userPosts.size),
                                     fontSize = 12.sp,
                                     fontWeight = if (selectedTab == OtherProfileTab.POSTS_GRID) FontWeight.Bold else FontWeight.Medium,
                                     color = if (selectedTab == OtherProfileTab.POSTS_GRID) Brand700 else TextSecondary
@@ -410,14 +412,14 @@ fun UserProfileDetailScreen(
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(
-                            text = "Chưa có bài viết nào",
+                            text = stringResource(R.string.profiledetail_empty_title),
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Người dùng này chưa chia sẻ khoảnh khắc du lịch nào trên Levart.",
+                            text = stringResource(R.string.profiledetail_empty_desc),
                             fontSize = 12.5.sp,
                             color = TextSecondary,
                             textAlign = TextAlign.Center

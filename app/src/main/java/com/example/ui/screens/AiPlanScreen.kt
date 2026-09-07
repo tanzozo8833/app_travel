@@ -27,6 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.PlaceCategory
 import com.example.data.model.Trip
 import com.example.data.model.TripDay
@@ -215,7 +218,7 @@ fun AiPlanScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(
-                text = "LEVART AI & LỊCH TRÌNH DU LỊCH",
+                text = stringResource(R.string.aiplan_eyebrow),
                 fontSize = 10.5.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,
@@ -223,7 +226,7 @@ fun AiPlanScreen(
                 letterSpacing = 0.8.sp
             )
             Text(
-                text = "Kế Hoạch & Trợ Lý Du Lịch",
+                text = stringResource(R.string.aiplan_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = TextPrimary
@@ -251,7 +254,7 @@ fun AiPlanScreen(
                         modifier = Modifier.padding(vertical = 7.dp)
                     ) {
                         Text(
-                            text = "Lập lịch trình bằng AI",
+                            text = stringResource(R.string.aiplan_mode_ai),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (planMode == PlanMode.AI_GENERATOR) Color.White else TextSecondary
@@ -271,7 +274,7 @@ fun AiPlanScreen(
                         modifier = Modifier.padding(vertical = 7.dp)
                     ) {
                         Text(
-                            text = "Tạo lịch trình thủ công",
+                            text = stringResource(R.string.aiplan_mode_manual),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (planMode == PlanMode.MANUAL_CREATE) Color.White else TextSecondary
@@ -306,7 +309,7 @@ fun AiPlanScreen(
                             CircularProgressIndicator(color = Gold500, strokeWidth = 3.dp)
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                text = "AI ĐANG THIẾT LẬP LỊCH TRÌNH",
+                                text = stringResource(R.string.aiplan_generating),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -344,7 +347,7 @@ fun AiPlanScreen(
                             // 1. Destination Input (Typed + Quick Selection Chips)
                             Column {
                                 Text(
-                                    text = "ĐIỂM ĐẾN DU LỊCH",
+                                    text = stringResource(R.string.aiplan_destination_header),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -358,7 +361,7 @@ fun AiPlanScreen(
                                         onUpdateWizard(it, null, null, null, null, null)
                                     },
                                     leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = Brand700) },
-                                    placeholder = { Text("Nhập địa điểm (Đà Lạt, Hà Giang, Phú Quốc...)", fontSize = 13.sp) },
+                                    placeholder = { Text(stringResource(R.string.aiplan_destination_hint), fontSize = 13.sp) },
                                     shape = RoundedCornerShape(12.dp),
                                     singleLine = true,
                                     modifier = Modifier.fillMaxWidth()
@@ -395,7 +398,7 @@ fun AiPlanScreen(
                             // 2. Duration Input (Typed number)
                             Column {
                                 Text(
-                                    text = "THỜI LƯỢNG (SỐ NGÀY)",
+                                    text = stringResource(R.string.aiplan_duration_header),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -416,7 +419,7 @@ fun AiPlanScreen(
                                         },
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                         leadingIcon = { Icon(Icons.Default.DateRange, contentDescription = null, tint = Brand700) },
-                                        label = { Text("Số ngày") },
+                                        label = { Text(stringResource(R.string.aiplan_duration_field)) },
                                         shape = RoundedCornerShape(12.dp),
                                         singleLine = true,
                                         modifier = Modifier.weight(1f)
@@ -456,7 +459,7 @@ fun AiPlanScreen(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "NGÂN SÁCH DỰ KIẾN (VNĐ)",
+                                        text = stringResource(R.string.aiplan_budget_header),
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
                                         fontFamily = FontFamily.Monospace,
@@ -479,7 +482,7 @@ fun AiPlanScreen(
                                     },
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                     leadingIcon = { Icon(Icons.Default.Payments, contentDescription = null, tint = Brand700) },
-                                    placeholder = { Text("Nhập ngân sách ví dụ: 3500000", fontSize = 13.sp) },
+                                    placeholder = { Text(stringResource(R.string.aiplan_budget_hint), fontSize = 13.sp) },
                                     shape = RoundedCornerShape(12.dp),
                                     singleLine = true,
                                     modifier = Modifier.fillMaxWidth()
@@ -489,7 +492,7 @@ fun AiPlanScreen(
                             // 4. Group Size (Number of people input)
                             Column {
                                 Text(
-                                    text = "SỐ LƯỢNG NGƯỜI",
+                                    text = stringResource(R.string.aiplan_group_header),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -511,8 +514,8 @@ fun AiPlanScreen(
                                         },
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                         leadingIcon = { Icon(Icons.Default.Group, contentDescription = null, tint = Brand700) },
-                                        label = { Text("Số người tham gia") },
-                                        placeholder = { Text("Ví dụ: 1, 2, 4, 8...") },
+                                        label = { Text(stringResource(R.string.aiplan_group_field)) },
+                                        placeholder = { Text(stringResource(R.string.aiplan_group_hint)) },
                                         shape = RoundedCornerShape(12.dp),
                                         singleLine = true,
                                         modifier = Modifier.weight(1f)
@@ -532,7 +535,7 @@ fun AiPlanScreen(
                                             },
                                             modifier = Modifier.size(46.dp)
                                         ) {
-                                            Icon(Icons.Default.Remove, contentDescription = "Giảm", tint = Brand700)
+                                            Icon(Icons.Default.Remove, contentDescription = stringResource(R.string.edittrip_decrease), tint = Brand700)
                                         }
 
                                         FilledTonalIconButton(
@@ -544,7 +547,7 @@ fun AiPlanScreen(
                                             },
                                             modifier = Modifier.size(46.dp)
                                         ) {
-                                            Icon(Icons.Default.Add, contentDescription = "Tăng", tint = Brand700)
+                                            Icon(Icons.Default.Add, contentDescription = stringResource(R.string.edittrip_increase), tint = Brand700)
                                         }
                                     }
                                 }
@@ -552,7 +555,7 @@ fun AiPlanScreen(
 
                             Column {
                                 Text(
-                                    text = "PHONG CÁCH TRẢI NGHIỆM",
+                                    text = stringResource(R.string.aiplan_style_header),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -593,7 +596,7 @@ fun AiPlanScreen(
                             // 5. Notes input
                             Column {
                                 Text(
-                                    text = "GHI CHÚ THÊM CHO KẾ HOẠCH",
+                                    text = stringResource(R.string.aiplan_notes_header),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -606,7 +609,7 @@ fun AiPlanScreen(
                                         customNotesInput = it
                                         onUpdateWizard(null, null, null, null, null, it)
                                     },
-                                    placeholder = { Text("Ví dụ: Thích ghé quán cà phê view đồi thông, muốn dậy sớm săn mây...", fontSize = 12.sp) },
+                                    placeholder = { Text(stringResource(R.string.aiplan_notes_hint), fontSize = 12.sp) },
                                     shape = RoundedCornerShape(12.dp),
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -625,7 +628,7 @@ fun AiPlanScreen(
                                 Icon(Icons.Default.AutoAwesome, contentDescription = null, tint = Gold500, modifier = Modifier.size(18.dp))
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "TẠO LỊCH TRÌNH BẰNG AI",
+                                    text = stringResource(R.string.aiplan_generate_btn),
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
@@ -656,7 +659,7 @@ fun AiPlanScreen(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "THÔNG TIN CHUNG CHUYẾN ĐI",
+                                text = stringResource(R.string.edittrip_section_general),
                                 fontSize = 10.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -667,8 +670,8 @@ fun AiPlanScreen(
                             OutlinedTextField(
                                 value = manualTitle,
                                 onValueChange = { manualTitle = it },
-                                label = { Text("Tên chuyến đi") },
-                                placeholder = { Text("Ví dụ: Hành trình khám phá Đà Lạt 3N2Đ") },
+                                label = { Text(stringResource(R.string.edittrip_field_name)) },
+                                placeholder = { Text(stringResource(R.string.aiplan_trip_name_hint)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -679,8 +682,8 @@ fun AiPlanScreen(
                                 value = manualDestination,
                                 onValueChange = { manualDestination = it },
                                 leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = Brand700) },
-                                label = { Text("Điểm đến (Tỉnh / Thành phố)") },
-                                placeholder = { Text("Ví dụ: Đà Lạt, Lâm Đồng") },
+                                label = { Text(stringResource(R.string.edittrip_field_destination)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_field_destination_hint)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -701,14 +704,14 @@ fun AiPlanScreen(
                                 ) {
                                     Column {
                                         Text(
-                                            text = "TỔNG SỐ NGÀY: ${manualDays.size} NGÀY",
+                                            text = pluralStringResource(R.plurals.edittrip_total_days, manualDays.size, manualDays.size),
                                             fontSize = 10.sp,
                                             fontWeight = FontWeight.Bold,
                                             fontFamily = FontFamily.Monospace,
                                             color = Brand700
                                         )
                                         Text(
-                                            text = "Tổng chi phí dự tính:",
+                                            text = stringResource(R.string.edittrip_total_cost),
                                             fontSize = 11.5.sp,
                                             color = TextSecondary
                                         )
@@ -734,7 +737,7 @@ fun AiPlanScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "LỊCH TRÌNH CÁC NGÀY (${manualDays.size} NGÀY)",
+                                text = pluralStringResource(R.plurals.edittrip_days_header, manualDays.size, manualDays.size),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -769,7 +772,7 @@ fun AiPlanScreen(
                             ) {
                                 Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(14.dp), tint = Gold500)
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text(text = "Thêm ngày", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                Text(text = stringResource(R.string.edittrip_add_day), fontSize = 11.sp, fontWeight = FontWeight.Bold)
                             }
                         }
 
@@ -796,13 +799,13 @@ fun AiPlanScreen(
                                         modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp)
                                     ) {
                                         Text(
-                                            text = "Ngày ${day.dayNumber}",
+                                            text = stringResource(R.string.edittrip_day_label, day.dayNumber),
                                             fontSize = 12.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isSelected) Color.White else TextPrimary
                                         )
                                         Text(
-                                            text = "${day.items.size} địa điểm",
+                                            text = pluralStringResource(R.plurals.edittrip_day_places, day.items.size, day.items.size),
                                             fontSize = 10.sp,
                                             color = if (isSelected) Gold100 else TextSecondary
                                         )
@@ -841,7 +844,7 @@ fun AiPlanScreen(
                                             color = Brand900
                                         )
                                         Text(
-                                            text = "Ngày ${currentSelectedDay.dayNumber} • ${currentSelectedDay.items.size} hoạt động",
+                                            text = pluralStringResource(R.plurals.edittrip_day_summary, currentSelectedDay.items.size, currentSelectedDay.dayNumber, currentSelectedDay.items.size),
                                             fontSize = 11.sp,
                                             color = TextSecondary
                                         )
@@ -856,7 +859,7 @@ fun AiPlanScreen(
                                             },
                                             modifier = Modifier.size(32.dp)
                                         ) {
-                                            Icon(Icons.Default.Edit, contentDescription = "Đổi tên ngày", tint = Brand700, modifier = Modifier.size(16.dp))
+                                            Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.edittrip_rename_day), tint = Brand700, modifier = Modifier.size(16.dp))
                                         }
 
                                         // Delete day button (if > 1 day)
@@ -877,7 +880,7 @@ fun AiPlanScreen(
                                                 },
                                                 modifier = Modifier.size(32.dp)
                                             ) {
-                                                Icon(Icons.Default.DeleteOutline, contentDescription = "Xoá ngày", tint = Color.Red, modifier = Modifier.size(16.dp))
+                                                Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.edittrip_delete_day), tint = Color.Red, modifier = Modifier.size(16.dp))
                                             }
                                         }
                                     }
@@ -903,7 +906,7 @@ fun AiPlanScreen(
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
                                             Text(
-                                                text = "Chưa có hoạt động nào trong Ngày ${currentSelectedDay.dayNumber}",
+                                                text = stringResource(R.string.edittrip_day_empty, currentSelectedDay.dayNumber),
                                                 fontSize = 12.sp,
                                                 color = TextSecondary
                                             )
@@ -970,7 +973,7 @@ fun AiPlanScreen(
                                                                 },
                                                                 modifier = Modifier.size(26.dp)
                                                             ) {
-                                                                Icon(Icons.Default.Edit, contentDescription = "Sửa", tint = Brand700, modifier = Modifier.size(15.dp))
+                                                                Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.common_edit), tint = Brand700, modifier = Modifier.size(15.dp))
                                                             }
 
                                                             IconButton(
@@ -983,7 +986,7 @@ fun AiPlanScreen(
                                                                 },
                                                                 modifier = Modifier.size(26.dp)
                                                             ) {
-                                                                Icon(Icons.Default.DeleteOutline, contentDescription = "Xoá", tint = Color.Red, modifier = Modifier.size(15.dp))
+                                                                Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.common_delete), tint = Color.Red, modifier = Modifier.size(15.dp))
                                                             }
                                                         }
                                                     }
@@ -1053,7 +1056,7 @@ fun AiPlanScreen(
                                     Icon(Icons.Default.AddCircleOutline, contentDescription = null, modifier = Modifier.size(16.dp))
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
-                                        text = "Thêm hoạt động cho Ngày ${currentSelectedDay.dayNumber}",
+                                        text = stringResource(R.string.aiplan_add_activity_for_day, currentSelectedDay.dayNumber),
                                         fontSize = 12.5.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -1092,7 +1095,7 @@ fun AiPlanScreen(
                         Icon(Icons.Default.Bookmark, contentDescription = null, tint = TextOnGold, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "LƯU VÀ XEM CHI TIẾT LỊCH TRÌNH",
+                            text = stringResource(R.string.aiplan_save_and_view),
                             fontSize = 13.5.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = TextOnGold
@@ -1118,7 +1121,7 @@ fun AiPlanScreen(
                     ) {
                         // Context Selection Title & Row
                         Text(
-                            text = "CHỌN CONTEXT CHO TRỢ LÝ AI",
+                            text = stringResource(R.string.aiplan_context_header),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -1172,7 +1175,7 @@ fun AiPlanScreen(
                                     }
                             ) {
                                 Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 6.dp)) {
-                                    Text("Ăn gì ngon", fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
+                                    Text(stringResource(R.string.aiplan_chip_food), fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
                                 }
                             }
 
@@ -1190,7 +1193,7 @@ fun AiPlanScreen(
                                     }
                             ) {
                                 Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 6.dp)) {
-                                    Text("Mặc gì đẹp", fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
+                                    Text(stringResource(R.string.aiplan_chip_outfit), fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
                                 }
                             }
 
@@ -1208,7 +1211,7 @@ fun AiPlanScreen(
                                     }
                             ) {
                                 Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 6.dp)) {
-                                    Text("Dự toán chi phí", fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
+                                    Text(stringResource(R.string.aiplan_chip_budget), fontSize = 10.5.sp, fontWeight = FontWeight.Bold, color = Brand900)
                                 }
                             }
                         }
@@ -1235,7 +1238,7 @@ fun AiPlanScreen(
                             OutlinedTextField(
                                 value = chatInput,
                                 onValueChange = { chatInput = it },
-                                placeholder = { Text("Hỏi AI với context: $selectedChatContext", fontSize = 12.sp) },
+                                placeholder = { Text(stringResource(R.string.aiplan_chat_hint, selectedChatContext), fontSize = 12.sp) },
                                 shape = RoundedCornerShape(999.dp),
                                 modifier = Modifier.weight(1f),
                                 maxLines = 2
@@ -1253,7 +1256,7 @@ fun AiPlanScreen(
                                     .size(42.dp)
                                     .background(Brand700, CircleShape)
                             ) {
-                                Icon(Icons.Default.Send, contentDescription = "Gửi", tint = Color.White, modifier = Modifier.size(16.dp))
+                                Icon(Icons.Default.Send, contentDescription = stringResource(R.string.common_send), tint = Color.White, modifier = Modifier.size(16.dp))
                             }
                         }
                     }
@@ -1270,7 +1273,7 @@ fun AiPlanScreen(
             onDismissRequest = { showItemDialog = false },
             title = {
                 Text(
-                    text = if (editingItemIndex == null) "Thêm Hoạt Động Mới" else "Chỉnh Sửa Hoạt Động",
+                    text = stringResource(if (editingItemIndex == null) R.string.aiplan_item_add_title else R.string.aiplan_item_edit_title),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Brand900
@@ -1284,8 +1287,8 @@ fun AiPlanScreen(
                     OutlinedTextField(
                         value = itemDialogTitle,
                         onValueChange = { itemDialogTitle = it },
-                        label = { Text("Tên hoạt động / Điểm đến") },
-                        placeholder = { Text("Ví dụ: Ăn sáng bún bò, check-in đồi chè...") },
+                        label = { Text(stringResource(R.string.aiplan_item_name)) },
+                        placeholder = { Text(stringResource(R.string.aiplan_item_name_hint)) },
                         singleLine = true,
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth()
@@ -1294,8 +1297,8 @@ fun AiPlanScreen(
                     OutlinedTextField(
                         value = itemDialogLocation,
                         onValueChange = { itemDialogLocation = it },
-                        label = { Text("Địa chỉ / Tên địa điểm") },
-                        placeholder = { Text("Ví dụ: Cầu Đất, Đà Lạt") },
+                        label = { Text(stringResource(R.string.edittrip_item_address)) },
+                        placeholder = { Text(stringResource(R.string.aiplan_item_address_hint)) },
                         singleLine = true,
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth()
@@ -1305,7 +1308,7 @@ fun AiPlanScreen(
                         OutlinedTextField(
                             value = itemDialogTime,
                             onValueChange = { itemDialogTime = it },
-                            label = { Text("Khung giờ") },
+                            label = { Text(stringResource(R.string.edittrip_item_timeslot)) },
                             placeholder = { Text("08:00 - 10:00") },
                             singleLine = true,
                             shape = RoundedCornerShape(12.dp),
@@ -1315,7 +1318,7 @@ fun AiPlanScreen(
                         OutlinedTextField(
                             value = itemDialogCost,
                             onValueChange = { itemDialogCost = it },
-                            label = { Text("Chi phí (k)") },
+                            label = { Text(stringResource(R.string.aiplan_item_cost)) },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             singleLine = true,
                             shape = RoundedCornerShape(12.dp),
@@ -1326,15 +1329,15 @@ fun AiPlanScreen(
                     OutlinedTextField(
                         value = itemDialogDescription,
                         onValueChange = { itemDialogDescription = it },
-                        label = { Text("Mô tả / Kinh nghiệm") },
-                        placeholder = { Text("Góc chụp đẹp, món ăn nên gọi...") },
+                        label = { Text(stringResource(R.string.aiplan_item_desc)) },
+                        placeholder = { Text(stringResource(R.string.aiplan_item_desc_hint)) },
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth()
                     )
 
                     // Category selection
                     Column {
-                        Text(text = "Danh mục:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = TextSecondary)
+                        Text(text = stringResource(R.string.aiplan_item_category_label), fontSize = 11.sp, fontWeight = FontWeight.Bold, color = TextSecondary)
                         Spacer(modifier = Modifier.height(4.dp))
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             items(PlaceCategory.values().toList()) { cat ->
@@ -1392,12 +1395,12 @@ fun AiPlanScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                     shape = RoundedCornerShape(999.dp)
                 ) {
-                    Text(if (editingItemIndex == null) "Thêm" else "Cập nhật", fontWeight = FontWeight.Bold)
+                    Text(stringResource(if (editingItemIndex == null) R.string.common_add else R.string.common_update), fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showItemDialog = false }) {
-                    Text("Huỷ")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -1411,7 +1414,7 @@ fun AiPlanScreen(
             onDismissRequest = { showEditDayDialog = false },
             title = {
                 Text(
-                    text = "Đổi Tiêu Đề Ngày ${currentSelectedDay.dayNumber}",
+                    text = stringResource(R.string.aiplan_rename_day_title, currentSelectedDay.dayNumber),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Brand900
@@ -1421,8 +1424,8 @@ fun AiPlanScreen(
                 OutlinedTextField(
                     value = editDayTitleInput,
                     onValueChange = { editDayTitleInput = it },
-                    label = { Text("Tiêu đề ngày") },
-                    placeholder = { Text("Ví dụ: Ngày 1: Săn mây và ngắm hoàng hôn") },
+                    label = { Text(stringResource(R.string.edittrip_day_title_field)) },
+                    placeholder = { Text(stringResource(R.string.aiplan_day_title_hint)) },
                     singleLine = true,
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
@@ -1441,12 +1444,12 @@ fun AiPlanScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                     shape = RoundedCornerShape(999.dp)
                 ) {
-                    Text("Lưu", fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.common_save_short), fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showEditDayDialog = false }) {
-                    Text("Huỷ")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )

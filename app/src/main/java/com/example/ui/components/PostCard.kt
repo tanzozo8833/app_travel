@@ -300,7 +300,7 @@ fun PostCard(
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Share,
-                        contentDescription = "Chia sẻ",
+                        contentDescription = stringResource(R.string.common_share),
                         tint = TextSecondary,
                         modifier = Modifier.size(14.dp)
                     )

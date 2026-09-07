@@ -823,7 +823,7 @@ private fun HeroCheckInBanner(
                     ) {
                         Icon(
                             imageVector = if (!hasPermission) Icons.Default.MyLocation else Icons.Default.GpsFixed,
-                            contentDescription = "GPS Thật",
+                            contentDescription = stringResource(R.string.home_gps_real),
                             tint = if (!hasPermission) Color(0xFFFFB74D) else Gold500,
                             modifier = Modifier.size(12.dp)
                         )
@@ -861,7 +861,7 @@ private fun HeroCheckInBanner(
                     }
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = if (!hasPermission) stringResource(R.string.home_gps_locating_title) else "Gần $placeDisplayName ($distanceText)",
+                        text = if (!hasPermission) stringResource(R.string.home_gps_locating_title) else stringResource(R.string.home_near_place, placeDisplayName, distanceText),
                         fontSize = 14.5.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = Color.White,
@@ -932,7 +932,7 @@ private fun HeroCheckInBanner(
                 Spacer(modifier = Modifier.width(8.dp))
 
                 // Action Button with 3 distinct dynamic states:
-                // 1. "Truy cập GPS" if location permission not granted
+                // 1. stringResource(R.string.home_action_gps) if location permission not granted
                 // 2. stringResource(R.string.home_action_photo) if place is already stamped
                 // 3. stringResource(R.string.home_action_stamp) if place is not stamped yet
                 if (!hasPermission) {
@@ -950,7 +950,7 @@ private fun HeroCheckInBanner(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "Truy cập GPS",
+                            text = stringResource(R.string.home_action_gps),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = TextOnGold

@@ -106,14 +106,14 @@ fun VietnamMapGraphic(
                 ) {
                     // Region 1: Northern Vietnam (Bắc Bộ)
                     RegionMapRow(
-                        regionName = "MIỀN BẮC",
+                        regionName = stringResource(R.string.map_row_north),
                         provinces = provinces.filter { it.region.contains("Bắc", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
 
                     // Region 2: Central Vietnam (Trung Bộ)
                     RegionMapRow(
-                        regionName = "MIỀN TRUNG",
+                        regionName = stringResource(R.string.map_row_central),
                         provinces = provinces.filter { it.region.contains("Trung", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
@@ -235,7 +235,7 @@ fun SovereigntyRecognitionCard(modifier: Modifier = Modifier) {
                 Text(text = "🇻🇳", fontSize = 10.sp)
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "CHỦ QUYỀN VIỆT NAM",
+                    text = stringResource(R.string.map_sovereignty_header),
                     fontSize = 7.5.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,

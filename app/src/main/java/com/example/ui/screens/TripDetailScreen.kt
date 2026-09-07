@@ -167,7 +167,7 @@ fun TripDetailScreen(
                                     .size(36.dp)
                                     .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                             ) {
-                                Icon(Icons.Default.Edit, contentDescription = "Sửa", tint = Color.White)
+                                Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.common_edit), tint = Color.White)
                             }
                             IconButton(
                                 onClick = { onShareTrip(trip) },
@@ -175,7 +175,7 @@ fun TripDetailScreen(
                                     .size(36.dp)
                                     .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                             ) {
-                                Icon(Icons.Default.Share, contentDescription = "Chia sẻ", tint = Color.White)
+                                Icon(Icons.Default.Share, contentDescription = stringResource(R.string.common_share), tint = Color.White)
                             }
                         }
                     }

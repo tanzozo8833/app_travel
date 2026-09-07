@@ -1,5 +1,7 @@
 package com.example.ui.components
 
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -81,7 +83,7 @@ fun LanguageDropdownButton(
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Chọn ngôn ngữ / Select language",
+                    contentDescription = stringResource(R.string.lang_select),
                     tint = contentColor.copy(alpha = 0.8f),
                     modifier = Modifier.size(14.dp)
                 )
