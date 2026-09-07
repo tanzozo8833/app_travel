@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
@@ -43,7 +43,10 @@ import com.example.ui.screens.*
 import com.example.ui.theme.*
 import java.util.Locale
 
-class MainActivity : ComponentActivity() {
+// Kế thừa AppCompatActivity là điều kiện bắt buộc để AppCompatDelegate.setApplicationLocales()
+// có tác dụng — chính delegate của lớp này chịu trách nhiệm áp ngôn ngữ và tạo lại Activity.
+// Với ComponentActivity thuần, lệnh đổi ngôn ngữ được gọi nhưng không làm gì cả.
+class MainActivity : AppCompatActivity() {
     private val viewModel: LuminaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

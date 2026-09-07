@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MyApplication" parent="android:Theme.DeviceDefault.NoActionBar" />
+    <!--
+      Phải kế thừa từ AppCompat: AppCompatActivity từ chối khởi động với theme khác,
+      và cơ chế đổi ngôn ngữ theo từng ứng dụng chỉ chạy khi có AppCompat.
+      DayNight để nền cửa sổ lúc khởi động khớp với chế độ sáng/tối của hệ thống.
+      Giao diện bên trong do Compose tự vẽ nên theme này chỉ ảnh hưởng cửa sổ.
+    -->
+    <style name="Theme.MyApplication" parent="Theme.AppCompat.DayNight.NoActionBar" />
 </resources>
