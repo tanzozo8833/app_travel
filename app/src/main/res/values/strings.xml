@@ -258,4 +258,24 @@
     <string name="tripdetail_days_header">LỊCH TRÌNH CHI TIẾT THEO NGÀY</string>
     <string name="tripdetail_day_number">Ngày %1$d</string>
     <string name="tripdetail_loading_places">Đang cập nhật danh sách địa điểm…</string>
+
+    <!-- ===================== TÌM KIẾM ===================== -->
+    <string name="search_placeholder">Tìm tỉnh thành, địa điểm, đặc sản…</string>
+    <string name="search_clear">Xoá</string>
+    <string name="search_provinces_header">34 TỈNH THÀNH VIỆT NAM</string>
+    <string name="search_province_progress">%1$d/%2$d điểm</string>
+    <string name="search_results_header">KẾT QUẢ CHO: \"%1$s\" (%2$d)</string>
+
+    <!-- ===================== THÔNG BÁO ===================== -->
+    <string name="notifications_title">Thông Báo</string>
+    <string name="notifications_tab_yours">🗺 Của bạn (Hành trình)</string>
+    <string name="notifications_tab_social">💬 Hoạt động cộng đồng</string>
+
+    <!-- ===================== HỘ CHIẾU TỈNH THÀNH ===================== -->
+    <string name="passport_title">Hộ Chiếu %1$s</string>
+    <string name="passport_create_ai_plan">Tạo lịch AI</string>
+    <string name="passport_stamp_action">Đóng dấu ⦿</string>
+    <string name="passport_region_progress">Khu vực: Miền %1$s · %2$d/%3$d địa điểm</string>
+    <string name="passport_places_header">DANH SÁCH ĐỊA ĐIỂM GỢI Ý CHECK-IN</string>
+    <string name="passport_stamped">✓ Đã in dấu</string>
 </resources>

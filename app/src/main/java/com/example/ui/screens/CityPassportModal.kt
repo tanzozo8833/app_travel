@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.ui.components.StampBadge
@@ -52,10 +54,10 @@ fun CityPassportModal(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onClose) {
-                        Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextPrimary)
+                        Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextPrimary)
                     }
                     Text(
-                        text = "Hộ Chiếu ${province.shortName}",
+                        text = stringResource(R.string.passport_title, province.shortName),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
@@ -84,7 +86,7 @@ fun CityPassportModal(
                     ) {
                         Icon(Icons.Default.AutoAwesome, contentDescription = null, tint = Brand700, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Tạo lịch AI", fontSize = 12.sp)
+                        Text(text = stringResource(R.string.passport_create_ai_plan), fontSize = 12.sp)
                     }
 
                     Button(
@@ -96,7 +98,7 @@ fun CityPassportModal(
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier.weight(1.2f)
                     ) {
-                        Text(text = "Đóng dấu ⦿", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.passport_stamp_action), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -153,7 +155,7 @@ fun CityPassportModal(
                                 color = Color.White
                             )
                             Text(
-                                text = "Khu vực: Miền ${province.region} · ${province.visitedPlacesCount}/${province.suggestedPlacesCount} địa điểm",
+                                text = stringResource(R.string.passport_region_progress, province.region, province.visitedPlacesCount, province.suggestedPlacesCount),
                                 fontSize = 11.5.sp,
                                 color = Gold100
                             )
@@ -175,7 +177,7 @@ fun CityPassportModal(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "DANH SÁCH ĐỊA ĐIỂM GỢI Ý CHECK-IN",
+                        text = stringResource(R.string.passport_places_header),
                         fontSize = 10.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -215,7 +217,7 @@ fun CityPassportModal(
                         if (place.isVisited) {
                             Surface(shape = RoundedCornerShape(999.dp), color = Gold100) {
                                 Text(
-                                    text = "✓ Đã in dấu",
+                                    text = stringResource(R.string.passport_stamped),
                                     fontSize = 9.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = TextOnGold,

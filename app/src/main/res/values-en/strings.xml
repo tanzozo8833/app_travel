@@ -264,4 +264,24 @@
     <string name="tripdetail_days_header">DAY-BY-DAY ITINERARY</string>
     <string name="tripdetail_day_number">Day %1$d</string>
     <string name="tripdetail_loading_places">Updating the list of places…</string>
+
+    <!-- ===================== SEARCH ===================== -->
+    <string name="search_placeholder">Search provinces, places, local food…</string>
+    <string name="search_clear">Clear</string>
+    <string name="search_provinces_header">34 PROVINCES OF VIETNAM</string>
+    <string name="search_province_progress">%1$d/%2$d places</string>
+    <string name="search_results_header">RESULTS FOR: \"%1$s\" (%2$d)</string>
+
+    <!-- ===================== NOTIFICATIONS ===================== -->
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_tab_yours">🗺 Yours (Journey)</string>
+    <string name="notifications_tab_social">💬 Community activity</string>
+
+    <!-- ===================== PROVINCE PASSPORT ===================== -->
+    <string name="passport_title">%1$s Passport</string>
+    <string name="passport_create_ai_plan">Plan with AI</string>
+    <string name="passport_stamp_action">Stamp ⦿</string>
+    <string name="passport_region_progress">Region: %1$s · %2$d/%3$d places</string>
+    <string name="passport_places_header">SUGGESTED PLACES TO CHECK IN</string>
+    <string name="passport_stamped">✓ Stamped</string>
 </resources>

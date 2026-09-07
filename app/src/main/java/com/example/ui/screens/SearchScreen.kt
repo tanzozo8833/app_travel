@@ -23,6 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.Place
 import com.example.data.model.Province
 import com.example.ui.theme.*
@@ -64,18 +66,18 @@ fun SearchScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBack) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Quay lại", tint = TextPrimary)
+                Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.common_back), tint = TextPrimary)
             }
 
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                placeholder = { Text("Tìm tỉnh thành, địa điểm, đặc sản...", fontSize = 13.sp) },
+                placeholder = { Text(stringResource(R.string.search_placeholder), fontSize = 13.sp) },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = Brand700) },
                 trailingIcon = {
                     if (searchQuery.isNotEmpty()) {
                         IconButton(onClick = { searchQuery = "" }) {
-                            Icon(Icons.Default.Clear, contentDescription = "Xoá", tint = TextSecondary)
+                            Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.search_clear), tint = TextSecondary)
                         }
                     }
                 },
@@ -122,7 +124,7 @@ fun SearchScreen(
                 item {
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
-                        text = "34 TỈNH THÀNH VIỆT NAM",
+                        text = stringResource(R.string.search_provinces_header),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = Brand700
@@ -151,7 +153,7 @@ fun SearchScreen(
                                 Text(text = prov.name, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                 Text(text = prov.highlightDescription, fontSize = 11.sp, color = TextSecondary, maxLines = 1)
                             }
-                            Text(text = "${prov.visitedPlacesCount}/${prov.suggestedPlacesCount} điểm", fontSize = 11.sp, color = Brand700)
+                            Text(text = stringResource(R.string.search_province_progress, prov.visitedPlacesCount, prov.suggestedPlacesCount), fontSize = 11.sp, color = Brand700)
                         }
                     }
                 }
@@ -159,7 +161,7 @@ fun SearchScreen(
                 // Search Results
                 item {
                     Text(
-                        text = "KẾT QUẢ CHO: \"$searchQuery\" (${searchResults.size})",
+                        text = stringResource(R.string.search_results_header, searchQuery, searchResults.size),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = Brand700

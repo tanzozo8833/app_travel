@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.NotificationItem
 import com.example.ui.theme.*
 
@@ -47,10 +49,10 @@ fun NotificationsScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBack) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Quay lại", tint = TextPrimary)
+                Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.common_back), tint = TextPrimary)
             }
             Text(
-                text = "Thông Báo",
+                text = stringResource(R.string.notifications_title),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = TextPrimary
@@ -78,7 +80,7 @@ fun NotificationsScreen(
                     modifier = Modifier.padding(vertical = 7.dp)
                 ) {
                     Text(
-                        text = "🗺 Của bạn (Hành trình)",
+                        text = stringResource(R.string.notifications_tab_yours),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = if (!isSocialTab) Color.White else TextSecondary
@@ -98,7 +100,7 @@ fun NotificationsScreen(
                     modifier = Modifier.padding(vertical = 7.dp)
                 ) {
                     Text(
-                        text = "💬 Hoạt động cộng đồng",
+                        text = stringResource(R.string.notifications_tab_social),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = if (isSocialTab) Color.White else TextSecondary
