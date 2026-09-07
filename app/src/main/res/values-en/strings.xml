@@ -394,4 +394,46 @@
         <item quantity="one">%1$d place</item>
         <item quantity="other">%1$d places</item>
     </plurals>
+
+    <string name="common_save_short">Save</string>
+    <string name="common_add">Add</string>
+    <string name="common_delete">Delete</string>
+
+    <!-- ===================== EDIT ITINERARY ===================== -->
+    <string name="edittrip_title">Edit Itinerary</string>
+    <string name="edittrip_section_general">GENERAL TRIP INFORMATION</string>
+    <string name="edittrip_field_name">Trip name</string>
+    <string name="edittrip_field_name_hint">Example: Exploring %1$s</string>
+    <string name="edittrip_field_destination">Destination (province / city)</string>
+    <string name="edittrip_field_destination_hint">Example: Da Lat, Lam Dong</string>
+    <string name="edittrip_field_group_size">Number of people</string>
+    <string name="edittrip_decrease">Decrease</string>
+    <string name="edittrip_increase">Increase</string>
+    <string name="edittrip_total_days">TOTAL: %1$d DAYS</string>
+    <string name="edittrip_total_cost">Estimated total cost:</string>
+    <string name="edittrip_cost_value">%1$s VND</string>
+    <string name="edittrip_cost_value_approx">~%1$s VND</string>
+    <string name="edittrip_days_header">DAILY ITINERARY (%1$d DAYS)</string>
+    <string name="edittrip_add_day">Add day</string>
+    <string name="edittrip_day_label">Day %1$d</string>
+    <string name="edittrip_day_places">%1$d places</string>
+    <string name="edittrip_day_summary">Day %1$d • %2$d activities</string>
+    <string name="edittrip_rename_day">Rename day</string>
+    <string name="edittrip_delete_day">Delete day</string>
+    <string name="edittrip_day_empty">No activities on Day %1$d yet</string>
+    <string name="edittrip_add_activity_to_day">Add an activity to Day %1$d</string>
+    <string name="edittrip_save_itinerary">SAVE ITINERARY</string>
+    <string name="edittrip_item_edit_title">Edit Activity</string>
+    <string name="edittrip_item_add_title">New Activity</string>
+    <string name="edittrip_item_name">Activity / destination name *</string>
+    <string name="edittrip_item_name_hint">Example: Check in at Lam Vien Square</string>
+    <string name="edittrip_item_address">Address / place name</string>
+    <string name="edittrip_item_address_hint">Example: Ward 10, Da Lat</string>
+    <string name="edittrip_item_timeslot">Time slot</string>
+    <string name="edittrip_item_cost">Cost (k VND)</string>
+    <string name="edittrip_item_category">ACTIVITY CATEGORY</string>
+    <string name="edittrip_item_note">Notes / experience tips</string>
+    <string name="edittrip_item_note_hint">Best photo angles, what to wear…</string>
+    <string name="edittrip_rename_day_title">Rename Day %1$d</string>
+    <string name="edittrip_day_title_field">Day title</string>
 </resources>

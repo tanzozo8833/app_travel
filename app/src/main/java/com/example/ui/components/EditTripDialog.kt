@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.PlaceCategory
 import com.example.data.model.Trip
 import com.example.data.model.TripDay
@@ -106,10 +108,10 @@ fun EditTripDialog(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         IconButton(onClick = onDismiss) {
-                            Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextPrimary)
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextPrimary)
                         }
                         Text(
-                            text = "Chỉnh Sửa Lịch Trình",
+                            text = stringResource(R.string.edittrip_title),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
@@ -133,7 +135,7 @@ fun EditTripDialog(
                         ) {
                             Icon(Icons.Default.Check, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "Lưu", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.common_save_short), fontSize = 13.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -164,7 +166,7 @@ fun EditTripDialog(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "THÔNG TIN CHUNG CHUYẾN ĐI",
+                                text = stringResource(R.string.edittrip_section_general),
                                 fontSize = 10.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -175,8 +177,8 @@ fun EditTripDialog(
                             OutlinedTextField(
                                 value = tripTitle,
                                 onValueChange = { tripTitle = it },
-                                label = { Text("Tên chuyến đi") },
-                                placeholder = { Text("Ví dụ: Hành trình khám phá $tripDestination") },
+                                label = { Text(stringResource(R.string.edittrip_field_name)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_field_name_hint, tripDestination)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -187,8 +189,8 @@ fun EditTripDialog(
                                 value = tripDestination,
                                 onValueChange = { tripDestination = it },
                                 leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = Brand700) },
-                                label = { Text("Điểm đến (Tỉnh / Thành phố)") },
-                                placeholder = { Text("Ví dụ: Đà Lạt, Lâm Đồng") },
+                                label = { Text(stringResource(R.string.edittrip_field_destination)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_field_destination_hint)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -207,7 +209,7 @@ fun EditTripDialog(
                                     },
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                     leadingIcon = { Icon(Icons.Default.Group, contentDescription = null, tint = Brand700) },
-                                    label = { Text("Số lượng người") },
+                                    label = { Text(stringResource(R.string.edittrip_field_group_size)) },
                                     shape = RoundedCornerShape(12.dp),
                                     singleLine = true,
                                     modifier = Modifier.weight(1f)
@@ -225,7 +227,7 @@ fun EditTripDialog(
                                         },
                                         modifier = Modifier.size(46.dp)
                                     ) {
-                                        Icon(Icons.Default.Remove, contentDescription = "Giảm", tint = Brand700)
+                                        Icon(Icons.Default.Remove, contentDescription = stringResource(R.string.edittrip_decrease), tint = Brand700)
                                     }
 
                                     FilledTonalIconButton(
@@ -236,7 +238,7 @@ fun EditTripDialog(
                                         },
                                         modifier = Modifier.size(46.dp)
                                     ) {
-                                        Icon(Icons.Default.Add, contentDescription = "Tăng", tint = Brand700)
+                                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.edittrip_increase), tint = Brand700)
                                     }
                                 }
                             }
@@ -256,20 +258,20 @@ fun EditTripDialog(
                                 ) {
                                     Column {
                                         Text(
-                                            text = "TỔNG SỐ NGÀY: ${daysList.size} NGÀY",
+                                            text = stringResource(R.string.edittrip_total_days, daysList.size),
                                             fontSize = 10.sp,
                                             fontWeight = FontWeight.Bold,
                                             fontFamily = FontFamily.Monospace,
                                             color = Brand700
                                         )
                                         Text(
-                                            text = "Tổng chi phí dự tính:",
+                                            text = stringResource(R.string.edittrip_total_cost),
                                             fontSize = 11.5.sp,
                                             color = TextSecondary
                                         )
                                     }
                                     Text(
-                                        text = "${NumberFormat.getNumberInstance(Locale.GERMANY).format(calculatedTotalCost.coerceAtLeast(100000L))} đ",
+                                        text = stringResource(R.string.edittrip_cost_value, NumberFormat.getNumberInstance(Locale.GERMANY).format(calculatedTotalCost.coerceAtLeast(100000L))),
                                         fontSize = 15.sp,
                                         fontWeight = FontWeight.ExtraBold,
                                         color = Brand900
@@ -291,7 +293,7 @@ fun EditTripDialog(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "LỊCH TRÌNH CÁC NGÀY (${daysList.size} NGÀY)",
+                                text = stringResource(R.string.edittrip_days_header, daysList.size),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -326,7 +328,7 @@ fun EditTripDialog(
                             ) {
                                 Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(14.dp), tint = Gold500)
                                 Spacer(modifier = Modifier.width(4.dp))
-                                Text(text = "Thêm ngày", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                Text(text = stringResource(R.string.edittrip_add_day), fontSize = 11.sp, fontWeight = FontWeight.Bold)
                             }
                         }
 
@@ -353,13 +355,13 @@ fun EditTripDialog(
                                         modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp)
                                     ) {
                                         Text(
-                                            text = "Ngày ${day.dayNumber}",
+                                            text = stringResource(R.string.edittrip_day_label, day.dayNumber),
                                             fontSize = 12.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isSelected) Color.White else TextPrimary
                                         )
                                         Text(
-                                            text = "${day.items.size} địa điểm",
+                                            text = stringResource(R.string.edittrip_day_places, day.items.size),
                                             fontSize = 10.sp,
                                             color = if (isSelected) Gold100 else TextSecondary
                                         )
@@ -400,7 +402,7 @@ fun EditTripDialog(
                                             color = Brand900
                                         )
                                         Text(
-                                            text = "Ngày ${currentSelectedDay.dayNumber} • ${currentSelectedDay.items.size} hoạt động",
+                                            text = stringResource(R.string.edittrip_day_summary, currentSelectedDay.dayNumber, currentSelectedDay.items.size),
                                             fontSize = 11.sp,
                                             color = TextSecondary
                                         )
@@ -415,7 +417,7 @@ fun EditTripDialog(
                                             },
                                             modifier = Modifier.size(32.dp)
                                         ) {
-                                            Icon(Icons.Default.Edit, contentDescription = "Đổi tên ngày", tint = Brand700, modifier = Modifier.size(16.dp))
+                                            Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.edittrip_rename_day), tint = Brand700, modifier = Modifier.size(16.dp))
                                         }
 
                                         // Delete day button (if > 1 day)
@@ -436,7 +438,7 @@ fun EditTripDialog(
                                                 },
                                                 modifier = Modifier.size(32.dp)
                                             ) {
-                                                Icon(Icons.Default.DeleteOutline, contentDescription = "Xoá ngày", tint = Color.Red, modifier = Modifier.size(16.dp))
+                                                Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.edittrip_delete_day), tint = Color.Red, modifier = Modifier.size(16.dp))
                                             }
                                         }
                                     }
@@ -462,7 +464,7 @@ fun EditTripDialog(
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
                                             Text(
-                                                text = "Chưa có hoạt động nào trong Ngày ${currentSelectedDay.dayNumber}",
+                                                text = stringResource(R.string.edittrip_day_empty, currentSelectedDay.dayNumber),
                                                 fontSize = 12.sp,
                                                 color = TextSecondary
                                             )
@@ -542,7 +544,7 @@ fun EditTripDialog(
                                                                 },
                                                                 modifier = Modifier.size(26.dp)
                                                             ) {
-                                                                Icon(Icons.Default.DeleteOutline, contentDescription = "Xoá", tint = Color.Red, modifier = Modifier.size(15.dp))
+                                                                Icon(Icons.Default.DeleteOutline, contentDescription = stringResource(R.string.common_delete), tint = Color.Red, modifier = Modifier.size(15.dp))
                                                             }
                                                         }
                                                     }
@@ -579,7 +581,7 @@ fun EditTripDialog(
                                                             color = Brand700
                                                         )
                                                         Text(
-                                                            text = "~${NumberFormat.getNumberInstance(Locale.GERMANY).format(item.costVnd)} đ",
+                                                            text = stringResource(R.string.edittrip_cost_value_approx, NumberFormat.getNumberInstance(Locale.GERMANY).format(item.costVnd)),
                                                             fontSize = 11.sp,
                                                             fontWeight = FontWeight.Bold,
                                                             color = Brand900
@@ -613,7 +615,7 @@ fun EditTripDialog(
                                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
-                                        text = "Thêm hoạt động vào Ngày ${currentSelectedDay.dayNumber}",
+                                        text = stringResource(R.string.edittrip_add_activity_to_day, currentSelectedDay.dayNumber),
                                         fontSize = 12.5.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -647,7 +649,7 @@ fun EditTripDialog(
                         Icon(Icons.Default.Save, contentDescription = null, tint = Gold500, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "LƯU LỊCH TRÌNH",
+                            text = stringResource(R.string.edittrip_save_itinerary),
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
@@ -666,7 +668,7 @@ fun EditTripDialog(
                 onDismissRequest = { showItemDialog = false },
                 title = {
                     Text(
-                        text = if (isEditing) "Sửa Hoạt Động" else "Thêm Hoạt Động Mới",
+                        text = stringResource(if (isEditing) R.string.edittrip_item_edit_title else R.string.edittrip_item_add_title),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = Brand900
@@ -681,8 +683,8 @@ fun EditTripDialog(
                             OutlinedTextField(
                                 value = itemDialogTitle,
                                 onValueChange = { itemDialogTitle = it },
-                                label = { Text("Tên hoạt động / Điểm đến *") },
-                                placeholder = { Text("Ví dụ: Check-in Quảng trường Lâm Viên") },
+                                label = { Text(stringResource(R.string.edittrip_item_name)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_item_name_hint)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -694,8 +696,8 @@ fun EditTripDialog(
                                 value = itemDialogLocation,
                                 onValueChange = { itemDialogLocation = it },
                                 leadingIcon = { Icon(Icons.Default.Place, contentDescription = null, tint = Brand700) },
-                                label = { Text("Địa chỉ / Tên địa điểm") },
-                                placeholder = { Text("Ví dụ: Phường 10, TP. Đà Lạt") },
+                                label = { Text(stringResource(R.string.edittrip_item_address)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_item_address_hint)) },
                                 singleLine = true,
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth()
@@ -710,7 +712,7 @@ fun EditTripDialog(
                                 OutlinedTextField(
                                     value = itemDialogTime,
                                     onValueChange = { itemDialogTime = it },
-                                    label = { Text("Khung giờ") },
+                                    label = { Text(stringResource(R.string.edittrip_item_timeslot)) },
                                     placeholder = { Text("08:00 - 10:00") },
                                     singleLine = true,
                                     shape = RoundedCornerShape(12.dp),
@@ -721,7 +723,7 @@ fun EditTripDialog(
                                     value = itemDialogCost,
                                     onValueChange = { itemDialogCost = it.filter { c -> c.isDigit() } },
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                    label = { Text("Chi phí (k đ)") },
+                                    label = { Text(stringResource(R.string.edittrip_item_cost)) },
                                     placeholder = { Text("50") },
                                     singleLine = true,
                                     shape = RoundedCornerShape(12.dp),
@@ -732,7 +734,7 @@ fun EditTripDialog(
 
                         item {
                             Text(
-                                text = "THỂ LOẠI HOẠT ĐỘNG",
+                                text = stringResource(R.string.edittrip_item_category),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -767,8 +769,8 @@ fun EditTripDialog(
                             OutlinedTextField(
                                 value = itemDialogDescription,
                                 onValueChange = { itemDialogDescription = it },
-                                label = { Text("Ghi chú / Mẹo trải nghiệm") },
-                                placeholder = { Text("Góc chụp đẹp, lưu ý trang phục...") },
+                                label = { Text(stringResource(R.string.edittrip_item_note)) },
+                                placeholder = { Text(stringResource(R.string.edittrip_item_note_hint)) },
                                 minLines = 2,
                                 maxLines = 3,
                                 shape = RoundedCornerShape(12.dp),
@@ -808,12 +810,12 @@ fun EditTripDialog(
                         colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                         shape = RoundedCornerShape(999.dp)
                     ) {
-                        Text(if (isEditing) "Cập nhật" else "Thêm")
+                        Text(if (isEditing) "Cập nhật" else stringResource(R.string.common_add))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showItemDialog = false }) {
-                        Text("Huỷ")
+                        Text(stringResource(R.string.common_cancel))
                     }
                 }
             )
@@ -826,13 +828,13 @@ fun EditTripDialog(
             AlertDialog(
                 onDismissRequest = { showEditDayTitleDialog = false },
                 title = {
-                    Text("Đổi tên Ngày ${currentSelectedDay.dayNumber}", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    Text(stringResource(R.string.edittrip_rename_day_title, currentSelectedDay.dayNumber), fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 },
                 text = {
                     OutlinedTextField(
                         value = editDayTitleInput,
                         onValueChange = { editDayTitleInput = it },
-                        label = { Text("Tiêu đề ngày") },
+                        label = { Text(stringResource(R.string.edittrip_day_title_field)) },
                         singleLine = true,
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth()
@@ -856,7 +858,7 @@ fun EditTripDialog(
                 },
                 dismissButton = {
                     TextButton(onClick = { showEditDayTitleDialog = false }) {
-                        Text("Huỷ")
+                        Text(stringResource(R.string.common_cancel))
                     }
                 }
             )

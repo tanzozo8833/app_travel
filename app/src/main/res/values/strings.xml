@@ -387,4 +387,46 @@
     <plurals name="map_province_points">
         <item quantity="other">%1$d điểm</item>
     </plurals>
+
+    <string name="common_save_short">Lưu</string>
+    <string name="common_add">Thêm</string>
+    <string name="common_delete">Xoá</string>
+
+    <!-- ===================== SỬA LỊCH TRÌNH ===================== -->
+    <string name="edittrip_title">Chỉnh Sửa Lịch Trình</string>
+    <string name="edittrip_section_general">THÔNG TIN CHUNG CHUYẾN ĐI</string>
+    <string name="edittrip_field_name">Tên chuyến đi</string>
+    <string name="edittrip_field_name_hint">Ví dụ: Hành trình khám phá %1$s</string>
+    <string name="edittrip_field_destination">Điểm đến (Tỉnh / Thành phố)</string>
+    <string name="edittrip_field_destination_hint">Ví dụ: Đà Lạt, Lâm Đồng</string>
+    <string name="edittrip_field_group_size">Số lượng người</string>
+    <string name="edittrip_decrease">Giảm</string>
+    <string name="edittrip_increase">Tăng</string>
+    <string name="edittrip_total_days">TỔNG SỐ NGÀY: %1$d NGÀY</string>
+    <string name="edittrip_total_cost">Tổng chi phí dự tính:</string>
+    <string name="edittrip_cost_value">%1$s đ</string>
+    <string name="edittrip_cost_value_approx">~%1$s đ</string>
+    <string name="edittrip_days_header">LỊCH TRÌNH CÁC NGÀY (%1$d NGÀY)</string>
+    <string name="edittrip_add_day">Thêm ngày</string>
+    <string name="edittrip_day_label">Ngày %1$d</string>
+    <string name="edittrip_day_places">%1$d địa điểm</string>
+    <string name="edittrip_day_summary">Ngày %1$d • %2$d hoạt động</string>
+    <string name="edittrip_rename_day">Đổi tên ngày</string>
+    <string name="edittrip_delete_day">Xoá ngày</string>
+    <string name="edittrip_day_empty">Chưa có hoạt động nào trong Ngày %1$d</string>
+    <string name="edittrip_add_activity_to_day">Thêm hoạt động vào Ngày %1$d</string>
+    <string name="edittrip_save_itinerary">LƯU LỊCH TRÌNH</string>
+    <string name="edittrip_item_edit_title">Sửa Hoạt Động</string>
+    <string name="edittrip_item_add_title">Thêm Hoạt Động Mới</string>
+    <string name="edittrip_item_name">Tên hoạt động / Điểm đến *</string>
+    <string name="edittrip_item_name_hint">Ví dụ: Check-in Quảng trường Lâm Viên</string>
+    <string name="edittrip_item_address">Địa chỉ / Tên địa điểm</string>
+    <string name="edittrip_item_address_hint">Ví dụ: Phường 10, TP. Đà Lạt</string>
+    <string name="edittrip_item_timeslot">Khung giờ</string>
+    <string name="edittrip_item_cost">Chi phí (k đ)</string>
+    <string name="edittrip_item_category">THỂ LOẠI HOẠT ĐỘNG</string>
+    <string name="edittrip_item_note">Ghi chú / Mẹo trải nghiệm</string>
+    <string name="edittrip_item_note_hint">Góc chụp đẹp, lưu ý trang phục…</string>
+    <string name="edittrip_rename_day_title">Đổi tên Ngày %1$d</string>
+    <string name="edittrip_day_title_field">Tiêu đề ngày</string>
 </resources>
