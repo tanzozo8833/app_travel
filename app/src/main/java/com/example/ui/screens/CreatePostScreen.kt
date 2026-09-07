@@ -35,21 +35,24 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.request.SuccessResult
+import androidx.annotation.StringRes
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.Trip
 import com.example.ui.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-enum class ShareAudience(val label: String, val description: String) {
-    PUBLIC("Thế giới", "Mọi người trên Lumina đều có thể xem và lưu"),
-    FRIENDS("Bạn bè", "Chỉ những người bạn theo dõi lẫn nhau có thể xem"),
-    ONLY_ME("Chỉ mình tôi", "Lưu vào nhật ký du lịch riêng tư")
+enum class ShareAudience(@StringRes val labelRes: Int, @StringRes val descriptionRes: Int) {
+    PUBLIC(R.string.createpost_privacy_public, R.string.createpost_privacy_public_desc),
+    FRIENDS(R.string.createpost_privacy_friends, R.string.createpost_privacy_friends_desc),
+    ONLY_ME(R.string.createpost_privacy_private, R.string.createpost_privacy_private_desc)
 }
 
 data class AspectRatioOption(
-    val label: String,
+    @StringRes val labelRes: Int,
     val ratio: Float,
-    val subtext: String
+    @StringRes val subtextRes: Int
 )
 
 @Composable
@@ -98,11 +101,11 @@ fun CreatePostScreen(
 
     // Aspect ratio options for the first (cover) image layout
     val aspectOptions = listOf(
-        AspectRatioOption("Ảnh Dọc (4:5)", 0.8f, "Chuẩn feed Instagram / Pinterest"),
-        AspectRatioOption("Ảnh Ngang (16:9)", 1.77f, "Khung cảnh rộng / Panorama"),
-        AspectRatioOption("Ảnh Ngang (4:3)", 1.33f, "Ảnh máy ảnh phong cảnh"),
-        AspectRatioOption("Ảnh Vuông (1:1)", 1.0f, "Cân đối cổ điển"),
-        AspectRatioOption("Dọc Story (9:16)", 0.56f, "Toàn màn hình / Reel")
+        AspectRatioOption(R.string.createpost_ratio_portrait_45, 0.8f, R.string.createpost_ratio_portrait_45_desc),
+        AspectRatioOption(R.string.createpost_ratio_landscape_169, 1.77f, R.string.createpost_ratio_landscape_169_desc),
+        AspectRatioOption(R.string.createpost_ratio_landscape_43, 1.33f, R.string.createpost_ratio_landscape_43_desc),
+        AspectRatioOption(R.string.createpost_ratio_square, 1.0f, R.string.createpost_ratio_square_desc),
+        AspectRatioOption(R.string.createpost_ratio_story, 0.56f, R.string.createpost_ratio_story_desc)
     )
     var selectedAspectRatio by remember { mutableStateOf(0.8f) }
 
@@ -219,17 +222,17 @@ fun CreatePostScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onClose) {
-                        Icon(Icons.Default.Close, contentDescription = "Huỷ", tint = TextPrimary)
+                        Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_cancel), tint = TextPrimary)
                     }
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = "Tạo Bài Viết Mới",
+                            text = stringResource(R.string.createpost_title),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
                         )
                         Text(
-                            text = "Đã chọn ${selectedImages.size}/20 media",
+                            text = stringResource(R.string.createpost_selected_count, selectedImages.size),
                             fontSize = 10.5.sp,
                             color = if (selectedImages.size == 20) Gold500 else TextSecondary
                         )
@@ -245,7 +248,7 @@ fun CreatePostScreen(
                         shape = RoundedCornerShape(999.dp),
                         enabled = caption.isNotBlank()
                     ) {
-                        Text(text = "Đăng", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.createpost_publish), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -264,7 +267,7 @@ fun CreatePostScreen(
             item {
                 Column {
                     Text(
-                        text = "CHIA SẺ VỚI (QUYỀN RIÊNG TƯ)",
+                        text = stringResource(R.string.createpost_privacy_header),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -304,7 +307,7 @@ fun CreatePostScreen(
                                     )
                                     Spacer(modifier = Modifier.height(3.dp))
                                     Text(
-                                        text = audience.label,
+                                        text = stringResource(audience.labelRes),
                                         fontSize = 11.5.sp,
                                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                                         color = if (isSelected) Color.White else TextPrimary
@@ -325,14 +328,14 @@ fun CreatePostScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "MEDIA TẢI LÊN (${selectedImages.size}/20)",
+                            text = stringResource(R.string.createpost_media_header, selectedImages.size),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
                             color = Brand700
                         )
                         Text(
-                            text = "Ảnh đầu tiên làm bìa hiển thị trên feed",
+                            text = stringResource(R.string.createpost_media_hint),
                             fontSize = 10.5.sp,
                             color = TextSecondary
                         )
@@ -351,7 +354,7 @@ fun CreatePostScreen(
                             modifier = Modifier.clickable { addSampleBatch(5) }
                         ) {
                             Text(
-                                text = "+5 ảnh mẫu",
+                                text = stringResource(R.string.createpost_add_5_samples),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Brand700,
@@ -365,7 +368,7 @@ fun CreatePostScreen(
                             modifier = Modifier.clickable { addSampleBatch(10) }
                         ) {
                             Text(
-                                text = "+10 ảnh phong cảnh",
+                                text = stringResource(R.string.createpost_add_10_samples),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Brand700,
@@ -380,7 +383,7 @@ fun CreatePostScreen(
                                 modifier = Modifier.clickable { addSampleBatch(20) }
                             ) {
                                 Text(
-                                    text = "Đủ 20 ảnh tối đa",
+                                    text = stringResource(R.string.createpost_media_full),
                                     fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = TextOnGold,
@@ -422,19 +425,19 @@ fun CreatePostScreen(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Default.AddAPhoto,
-                                            contentDescription = "Chọn ảnh từ máy",
+                                            contentDescription = stringResource(R.string.createpost_pick_from_device),
                                             tint = Brand700,
                                             modifier = Modifier.size(28.dp)
                                         )
                                         Spacer(modifier = Modifier.height(4.dp))
                                         Text(
-                                            text = "Thêm ảnh/video",
+                                            text = stringResource(R.string.createpost_add_media),
                                             fontSize = 11.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = Brand700
                                         )
                                         Text(
-                                            text = "Tối đa 20 media",
+                                            text = stringResource(R.string.createpost_media_limit),
                                             fontSize = 9.sp,
                                             color = TextSecondary
                                         )
@@ -480,7 +483,7 @@ fun CreatePostScreen(
                                             }
                                     ) {
                                         Text(
-                                            text = if (isCover) "★ Ảnh bìa Feed" else "Đặt làm bìa",
+                                            text = if (isCover) stringResource(R.string.createpost_cover_badge) else stringResource(R.string.createpost_set_cover),
                                             fontSize = 8.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isCover) TextOnGold else Color.White,
@@ -501,7 +504,7 @@ fun CreatePostScreen(
                                         ) {
                                             Icon(
                                                 imageVector = Icons.Default.Close,
-                                                contentDescription = "Xoá ảnh",
+                                                contentDescription = stringResource(R.string.createpost_remove_image),
                                                 tint = Color.White,
                                                 modifier = Modifier.size(12.dp)
                                             )
@@ -525,7 +528,7 @@ fun CreatePostScreen(
                                             ) {
                                                 Icon(
                                                     imageVector = Icons.Default.ChevronLeft,
-                                                    contentDescription = "Di chuyển sang trái",
+                                                    contentDescription = stringResource(R.string.createpost_move_left),
                                                     tint = Color.White,
                                                     modifier = Modifier.size(16.dp)
                                                 )
@@ -544,7 +547,7 @@ fun CreatePostScreen(
                                             ) {
                                                 Icon(
                                                     imageVector = Icons.Default.ChevronRight,
-                                                    contentDescription = "Di chuyển sang phải",
+                                                    contentDescription = stringResource(R.string.createpost_move_right),
                                                     tint = Color.White,
                                                     modifier = Modifier.size(16.dp)
                                                 )
@@ -567,14 +570,14 @@ fun CreatePostScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "ĐỊNH DẠNG KHUNG ẢNH BÌA FEED",
+                            text = stringResource(R.string.createpost_ratio_header),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
                             color = Brand700
                         )
                         Text(
-                            text = "Tùy biến theo ảnh đầu tiên (Ngang / Dọc)",
+                            text = stringResource(R.string.createpost_ratio_auto_hint),
                             fontSize = 10.5.sp,
                             color = TextSecondary
                         )
@@ -602,13 +605,13 @@ fun CreatePostScreen(
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = option.label,
+                                        text = stringResource(option.labelRes),
                                         fontSize = 11.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = if (isSelected) Color.White else TextPrimary
                                     )
                                     Text(
-                                        text = option.subtext,
+                                        text = stringResource(option.subtextRes),
                                         fontSize = 9.sp,
                                         color = if (isSelected) Gold500 else TextSecondary
                                     )
@@ -633,7 +636,7 @@ fun CreatePostScreen(
                     OutlinedTextField(
                         value = caption,
                         onValueChange = { caption = it },
-                        placeholder = { Text("Chia sẻ cảm nhận, kinh nghiệm săn mây, ăn uống, góc chụp ảnh đẹp...", fontSize = 13.sp) },
+                        placeholder = { Text(stringResource(R.string.createpost_caption_placeholder), fontSize = 13.sp) },
                         shape = RoundedCornerShape(14.dp),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -673,7 +676,7 @@ fun CreatePostScreen(
 
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "ĐỊA ĐIỂM CHECK-IN",
+                        text = stringResource(R.string.createpost_location_header),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -695,12 +698,12 @@ fun CreatePostScreen(
                                 IconButton(onClick = { isLocationDropdownOpen = !isLocationDropdownOpen }) {
                                     Icon(
                                         imageVector = if (isLocationDropdownOpen) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
-                                        contentDescription = "Gợi ý địa điểm",
+                                        contentDescription = stringResource(R.string.createpost_location_suggest),
                                         tint = TextSecondary
                                     )
                                 }
                             },
-                            placeholder = { Text("Nhập địa điểm check-in...", fontSize = 13.sp) },
+                            placeholder = { Text(stringResource(R.string.createpost_location_placeholder), fontSize = 13.sp) },
                             shape = RoundedCornerShape(14.dp),
                             singleLine = true,
                             colors = OutlinedTextFieldDefaults.colors(
@@ -718,7 +721,7 @@ fun CreatePostScreen(
                                 .background(BgSurface)
                         ) {
                             Text(
-                                text = "GỢI Ý ĐỊA ĐIỂM",
+                                text = stringResource(R.string.createpost_location_suggest_header),
                                 fontSize = 9.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -760,7 +763,7 @@ fun CreatePostScreen(
             item {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "ĐÍNH KÈM LỊCH TRÌNH (3 MỤC LỰA CHỌN)",
+                        text = stringResource(R.string.createpost_attach_header),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -800,13 +803,13 @@ fun CreatePostScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column {
                                     Text(
-                                        text = "1. Không đính kèm lịch trình",
+                                        text = stringResource(R.string.createpost_attach_none),
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = TextPrimary
                                     )
                                     Text(
-                                        text = "Đăng bài viết dạng chia sẻ ảnh và bài viết tự do",
+                                        text = stringResource(R.string.createpost_attach_none_desc),
                                         fontSize = 11.sp,
                                         color = TextSecondary
                                     )
@@ -841,13 +844,13 @@ fun CreatePostScreen(
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Column {
                                         Text(
-                                            text = "2. Chọn từ lịch trình chuyến đi của bạn",
+                                            text = stringResource(R.string.createpost_attach_existing),
                                             fontSize = 13.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = TextPrimary
                                         )
                                         Text(
-                                            text = "Người xem có thể bấm vào để xem toàn bộ chi tiết hành trình",
+                                            text = stringResource(R.string.createpost_attach_existing_desc),
                                             fontSize = 11.sp,
                                             color = TextSecondary
                                         )
@@ -951,13 +954,13 @@ fun CreatePostScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Column {
                                     Text(
-                                        text = "3. Tạo lịch trình mới đi kèm bài viết",
+                                        text = stringResource(R.string.createpost_attach_new),
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = TextPrimary
                                     )
                                     Text(
-                                        text = "Tự động thiết lập khung lịch trình theo địa điểm check-in",
+                                        text = stringResource(R.string.createpost_attach_new_desc),
                                         fontSize = 11.sp,
                                         color = TextSecondary
                                     )
