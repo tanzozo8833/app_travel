@@ -36,6 +36,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
+import androidx.annotation.StringRes
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Place
 import com.example.data.model.Province
@@ -104,6 +107,22 @@ fun calculateDistanceMeters(lat1: Double, lng1: Double, lat2: Double, lng2: Doub
             Math.sin(dLng / 2) * Math.sin(dLng / 2)
     val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     return (r * c).toInt()
+}
+
+/**
+ * Bộ lọc vùng dùng chính chuỗi tiếng Việt làm khoá so sánh với Province.region,
+ * nên KHÔNG được dịch chuỗi đó. Hàm này chỉ tra ra nhãn hiển thị tương ứng,
+ * giữ nguyên khoá bên dưới.
+ */
+@StringRes
+private fun regionFilterLabelRes(regionKey: String): Int = when (regionKey) {
+    "Tất cả" -> R.string.map_region_all
+    "Bắc" -> R.string.map_region_north
+    "Trung" -> R.string.map_region_central
+    "Tây Nguyên" -> R.string.map_region_highlands
+    "Nam" -> R.string.map_region_south
+    "Biển Đảo" -> R.string.map_region_islands
+    else -> R.string.map_region_all
 }
 
 @Composable
@@ -472,7 +491,7 @@ fun InteractiveMapScreen(
                                     Box(contentAlignment = Alignment.Center) {
                                         Icon(
                                             Icons.Default.Add,
-                                            contentDescription = "Chưa đến",
+                                            contentDescription = stringResource(R.string.map_not_visited),
                                             tint = TextOnGold,
                                             modifier = Modifier.size(10.dp)
                                         )
@@ -534,7 +553,7 @@ fun InteractiveMapScreen(
                                 }
                             }
                             Text(
-                                text = "Bản Đồ Hành Trình Việt Nam 🇻🇳",
+                                text = stringResource(R.string.map_title),
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color.White
@@ -557,16 +576,16 @@ fun InteractiveMapScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Layers,
-                                contentDescription = "Đổi kiểu",
+                                contentDescription = stringResource(R.string.map_change_style),
                                 tint = Gold500,
                                 modifier = Modifier.size(13.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
                                 text = when (layerStyle) {
-                                    MapLayerStyle.TERRAIN -> "Địa hình"
-                                    MapLayerStyle.SATELLITE -> "Vệ tinh"
-                                    MapLayerStyle.CLASSIC -> "Mặc định"
+                                    MapLayerStyle.TERRAIN -> stringResource(R.string.map_style_terrain)
+                                    MapLayerStyle.SATELLITE -> stringResource(R.string.map_style_satellite)
+                                    MapLayerStyle.CLASSIC -> stringResource(R.string.map_style_default)
                                 },
                                 fontSize = 9.5.sp,
                                 fontWeight = FontWeight.Bold,
@@ -595,7 +614,7 @@ fun InteractiveMapScreen(
                                     modifier = Modifier.clickable { selectedRegionFilter = region }
                                 ) {
                                     Text(
-                                        text = region,
+                                        text = stringResource(regionFilterLabelRes(region)),
                                         fontSize = 9.5.sp,
                                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                                         color = if (isSelected) TextOnGold else Color.White,
@@ -709,7 +728,7 @@ fun InteractiveMapScreen(
                     }
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(Icons.Default.MyLocation, contentDescription = "Reset vị trí", tint = Gold500, modifier = Modifier.size(16.dp))
+                    Icon(Icons.Default.MyLocation, contentDescription = stringResource(R.string.map_reset_position), tint = Gold500, modifier = Modifier.size(16.dp))
                 }
             }
         }
@@ -810,7 +829,7 @@ fun InteractiveMapScreen(
                                     color = if (marker.isVisited) Brand100 else Color(0xFFFFECB3)
                                 ) {
                                     Text(
-                                        text = if (marker.isVisited) "Đã đến • ${marker.highlightTag}" else "Gợi ý khám phá",
+                                        text = if (marker.isVisited) stringResource(R.string.map_marker_visited, marker.highlightTag) else stringResource(R.string.map_marker_suggested),
                                         fontSize = 8.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = if (marker.isVisited) Brand700 else Color(0xFFF57F17),
@@ -847,7 +866,7 @@ fun InteractiveMapScreen(
                                     modifier = Modifier.height(28.dp)
                                 ) {
                                     Text(
-                                        text = if (marker.isVisited) "Đóng dấu lại ${marker.stampSymbol}" else "Đóng dấu lần đầu ⦿",
+                                        text = if (marker.isVisited) stringResource(R.string.map_stamp_again, marker.stampSymbol) else stringResource(R.string.map_stamp_first),
                                         fontSize = 10.5.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -856,7 +875,7 @@ fun InteractiveMapScreen(
                         }
 
                         IconButton(onClick = { selectedMarker = null }) {
-                            Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextSecondary, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextSecondary, modifier = Modifier.size(18.dp))
                         }
                     }
                 }
@@ -909,7 +928,7 @@ fun GpsSpatialCheckInDialog(
         val granted = perms[Manifest.permission.ACCESS_FINE_LOCATION] == true || perms[Manifest.permission.ACCESS_COARSE_LOCATION] == true
         if (!granted) {
             isLocating = false
-            locationError = "Chưa có quyền vị trí. Vui lòng cấp quyền để quét địa điểm gần bạn."
+            locationError = context.getString(R.string.map_gps_no_permission)
         }
     }
 
@@ -935,7 +954,7 @@ fun GpsSpatialCheckInDialog(
 
         if (!isGpsEnabled) {
             isLocating = false
-            locationError = "Dịch vụ vị trí đang tắt. Vui lòng bật GPS trên máy."
+            locationError = context.getString(R.string.map_gps_disabled)
             return@LaunchedEffect
         }
 
@@ -971,11 +990,11 @@ fun GpsSpatialCheckInDialog(
                 isLocating = false
             } else {
                 isLocating = false
-                locationError = "Không bắt được tín hiệu GPS thực tế (có thể do đang ở trong nhà). Vui lòng thử lại ở nơi thoáng hơn."
+                locationError = context.getString(R.string.map_gps_no_signal)
             }
         } catch (e: Exception) {
             isLocating = false
-            locationError = "Lỗi kết nối định vị: ${e.localizedMessage ?: "Lỗi GPS"}"
+            locationError = context.getString(R.string.map_gps_error, e.localizedMessage ?: context.getString(R.string.map_gps_error_title))
         }
     }
 
@@ -1035,14 +1054,14 @@ fun GpsSpatialCheckInDialog(
                         Spacer(modifier = Modifier.width(8.dp))
                         Column {
                             Text(
-                                text = "ĐỊNH VỊ VỊ TRÍ THỰC TẾ",
+                                text = stringResource(R.string.map_gps_header),
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
                                 color = Brand700
                             )
                             Text(
-                                text = "Quét Vị Trí & Khớp Địa Điểm",
+                                text = stringResource(R.string.map_gps_dialog_title),
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
@@ -1051,7 +1070,7 @@ fun GpsSpatialCheckInDialog(
                     }
 
                     IconButton(onClick = onDismiss, modifier = Modifier.size(24.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextSecondary, modifier = Modifier.size(16.dp))
+                        Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextSecondary, modifier = Modifier.size(16.dp))
                     }
                 }
 
@@ -1067,13 +1086,13 @@ fun GpsSpatialCheckInDialog(
                         CircularProgressIndicator(color = Brand700, modifier = Modifier.size(40.dp))
                         Spacer(modifier = Modifier.height(14.dp))
                         Text(
-                            text = "Đang đọc toạ độ GPS thực tế từ máy...",
+                            text = stringResource(R.string.map_gps_reading),
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = TextPrimary
                         )
                         Text(
-                            text = "Truy vấn chip định vị chính xác",
+                            text = stringResource(R.string.map_gps_reading_sub),
                             fontSize = 10.sp,
                             fontFamily = FontFamily.Monospace,
                             color = TextSecondary
@@ -1087,7 +1106,7 @@ fun GpsSpatialCheckInDialog(
                             .padding(14.dp)
                     ) {
                         Text(
-                            text = locationError ?: "Lỗi GPS",
+                            text = locationError ?: stringResource(R.string.map_gps_error_title),
                             fontSize = 11.5.sp,
                             color = Color(0xFFE65100),
                             lineHeight = 16.sp
@@ -1106,7 +1125,7 @@ fun GpsSpatialCheckInDialog(
                                 shape = RoundedCornerShape(8.dp),
                                 contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                             ) {
-                                Text("Cài Đặt Quyền", fontSize = 11.sp, color = Color.White)
+                                Text(stringResource(R.string.map_gps_open_settings), fontSize = 11.sp, color = Color.White)
                             }
                         }
                     }
@@ -1125,14 +1144,14 @@ fun GpsSpatialCheckInDialog(
                         ) {
                             Column {
                                 Text(
-                                    text = "Toạ độ: ${"%.4f".format(detectedLat)}° N, ${"%.4f".format(detectedLng)}° E",
+                                    text = stringResource(R.string.map_gps_coords, "%.4f".format(detectedLat), "%.4f".format(detectedLng)),
                                     fontSize = 10.5.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
                                     color = TextPrimary
                                 )
                                 Text(
-                                    text = "Sai số: ±${accuracyMeters.toInt()}m • Khu vực: ${nearestProv?.shortName ?: "Việt Nam"}",
+                                    text = stringResource(R.string.map_gps_accuracy, accuracyMeters.toInt(), nearestProv?.shortName ?: stringResource(R.string.map_gps_fallback_region)),
                                     fontSize = 9.5.sp,
                                     color = TextSecondary
                                 )
@@ -1152,7 +1171,7 @@ fun GpsSpatialCheckInDialog(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Địa điểm gần tọa độ thực của bạn nhất:",
+                        text = stringResource(R.string.map_gps_nearest_header),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
@@ -1162,7 +1181,7 @@ fun GpsSpatialCheckInDialog(
 
                     if (nearbyCandidates.isEmpty()) {
                         Text(
-                            text = "Không tìm thấy địa điểm trong dữ liệu gần toạ độ này.",
+                            text = stringResource(R.string.map_gps_no_place),
                             fontSize = 11.sp,
                             color = TextSecondary,
                             modifier = Modifier.padding(vertical = 12.dp)
@@ -1204,7 +1223,7 @@ fun GpsSpatialCheckInDialog(
                                                 )
                                                 val distStr = if (place.distanceMeters < 1000) "${place.distanceMeters}m" else "${"%.1f".format(place.distanceMeters / 1000.0)}km"
                                                 Text(
-                                                    text = "Cách $distStr • ${if (place.isMatchWithinRadius) "Trong bán kính khớp" else "Khoảng cách xa hơn"}",
+                                                    text = stringResource(R.string.map_gps_distance, distStr, stringResource(if (place.isMatchWithinRadius) R.string.map_gps_within_radius else R.string.map_gps_outside_radius)),
                                                     fontSize = 9.5.sp,
                                                     color = if (place.isMatchWithinRadius) Brand700 else TextSecondary
                                                 )
@@ -1234,7 +1253,7 @@ fun GpsSpatialCheckInDialog(
                                 .height(44.dp)
                         ) {
                             Text(
-                                text = "Lưu Check-in & Đóng Dấu Tại ${match.provinceName} ⦿",
+                                text = stringResource(R.string.map_gps_save_checkin, match.provinceName),
                                 fontSize = 12.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White

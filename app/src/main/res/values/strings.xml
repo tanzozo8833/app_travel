@@ -332,4 +332,59 @@
     <string name="home_gps_error_unknown">Không lấy được vị trí, vui lòng thử lại</string>
     <string name="home_gps_action_grant">Cấp quyền</string>
     <string name="home_gps_action_open_settings">Mở cài đặt vị trí</string>
+
+    <!-- ===================== BẢN ĐỒ HÀNH TRÌNH ===================== -->
+    <string name="map_title">Bản Đồ Hành Trình Việt Nam 🇻🇳</string>
+    <string name="map_change_style">Đổi kiểu</string>
+    <string name="map_style_terrain">Địa hình</string>
+    <string name="map_style_satellite">Vệ tinh</string>
+    <string name="map_style_default">Mặc định</string>
+    <string name="map_reset_position">Reset vị trí</string>
+    <string name="map_not_visited">Chưa đến</string>
+    <string name="map_marker_visited">Đã đến • %1$s</string>
+    <string name="map_marker_suggested">Gợi ý khám phá</string>
+    <string name="map_stamp_again">Đóng dấu lại %1$s</string>
+    <string name="map_stamp_first">Đóng dấu lần đầu ⦿</string>
+
+    <!-- Nhãn hiển thị của bộ lọc vùng. Giá trị so sánh vẫn là chuỗi gốc trong code. -->
+    <string name="map_region_all">Tất cả</string>
+    <string name="map_region_north">Bắc</string>
+    <string name="map_region_central">Trung</string>
+    <string name="map_region_highlands">Tây Nguyên</string>
+    <string name="map_region_south">Nam</string>
+    <string name="map_region_islands">Biển Đảo</string>
+
+    <!-- Hộp thoại quét GPS trên bản đồ -->
+    <string name="map_gps_no_permission">Chưa có quyền vị trí. Vui lòng cấp quyền để quét địa điểm gần bạn.</string>
+    <string name="map_gps_disabled">Dịch vụ vị trí đang tắt. Vui lòng bật GPS trên máy.</string>
+    <string name="map_gps_no_signal">Không bắt được tín hiệu GPS thực tế (có thể do đang ở trong nhà). Vui lòng thử lại ở nơi thoáng hơn.</string>
+    <string name="map_gps_error">Lỗi kết nối định vị: %1$s</string>
+    <string name="map_gps_header">ĐỊNH VỊ VỊ TRÍ THỰC TẾ</string>
+    <string name="map_gps_dialog_title">Quét Vị Trí &amp; Khớp Địa Điểm</string>
+    <string name="map_gps_reading">Đang đọc toạ độ GPS thực tế từ máy…</string>
+    <string name="map_gps_reading_sub">Truy vấn chip định vị chính xác</string>
+    <string name="map_gps_error_title">Lỗi GPS</string>
+    <string name="map_gps_open_settings">Cài Đặt Quyền</string>
+    <string name="map_gps_coords">Toạ độ: %1$s° N, %2$s° E</string>
+    <string name="map_gps_accuracy">Sai số: ±%1$dm • Khu vực: %2$s</string>
+    <string name="map_gps_fallback_region">Việt Nam</string>
+    <string name="map_gps_nearest_header">Địa điểm gần tọa độ thực của bạn nhất:</string>
+    <string name="map_gps_no_place">Không tìm thấy địa điểm trong dữ liệu gần toạ độ này.</string>
+    <string name="map_gps_distance">Cách %1$s • %2$s</string>
+    <string name="map_gps_within_radius">Trong bán kính khớp</string>
+    <string name="map_gps_outside_radius">Khoảng cách xa hơn</string>
+    <string name="map_gps_save_checkin">Lưu Check-in &amp; Đóng Dấu Tại %1$s ⦿</string>
+
+    <!-- ===================== BẢN ĐỒ DẤU CHÂN ===================== -->
+    <string name="map_footprint_title">BẢN ĐỒ DẤU CHÂN VIỆT NAM</string>
+    <string name="map_footprint_progress">Đã check-in %1$d / %2$d tỉnh thành</string>
+    <string name="map_nationwide">📍 Toàn quốc</string>
+    <string name="map_row_highlands_south">TÂY NGUYÊN &amp; NAM BỘ</string>
+    <string name="map_stat_north">Miền Bắc</string>
+    <string name="map_stat_central">Miền Trung</string>
+    <string name="map_stat_highlands">Tây Nguyên</string>
+    <string name="map_stat_south">Miền Nam</string>
+    <plurals name="map_province_points">
+        <item quantity="other">%1$d điểm</item>
+    </plurals>
 </resources>

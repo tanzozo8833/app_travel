@@ -338,4 +338,60 @@
     <string name="home_gps_error_unknown">Could not get your location, please try again</string>
     <string name="home_gps_action_grant">Grant permission</string>
     <string name="home_gps_action_open_settings">Open location settings</string>
+
+    <!-- ===================== JOURNEY MAP ===================== -->
+    <string name="map_title">Vietnam Journey Map 🇻🇳</string>
+    <string name="map_change_style">Change style</string>
+    <string name="map_style_terrain">Terrain</string>
+    <string name="map_style_satellite">Satellite</string>
+    <string name="map_style_default">Default</string>
+    <string name="map_reset_position">Reset view</string>
+    <string name="map_not_visited">Not visited</string>
+    <string name="map_marker_visited">Visited • %1$s</string>
+    <string name="map_marker_suggested">Suggested to explore</string>
+    <string name="map_stamp_again">Stamp again %1$s</string>
+    <string name="map_stamp_first">First stamp ⦿</string>
+
+    <!-- Display labels for the region filter. The comparison values stay in code. -->
+    <string name="map_region_all">All</string>
+    <string name="map_region_north">North</string>
+    <string name="map_region_central">Central</string>
+    <string name="map_region_highlands">Highlands</string>
+    <string name="map_region_south">South</string>
+    <string name="map_region_islands">Islands</string>
+
+    <!-- GPS scan dialog on the map -->
+    <string name="map_gps_no_permission">Location permission not granted. Please allow it to scan places near you.</string>
+    <string name="map_gps_disabled">Location services are off. Please turn on GPS on your device.</string>
+    <string name="map_gps_no_signal">No real GPS signal (you may be indoors). Please try again somewhere more open.</string>
+    <string name="map_gps_error">Location error: %1$s</string>
+    <string name="map_gps_header">FINDING YOUR REAL LOCATION</string>
+    <string name="map_gps_dialog_title">Scan Location &amp; Match Places</string>
+    <string name="map_gps_reading">Reading real GPS coordinates from the device…</string>
+    <string name="map_gps_reading_sub">Querying the precise location chip</string>
+    <string name="map_gps_error_title">GPS error</string>
+    <string name="map_gps_open_settings">Permission settings</string>
+    <string name="map_gps_coords">Coordinates: %1$s° N, %2$s° E</string>
+    <string name="map_gps_accuracy">Accuracy: ±%1$dm • Area: %2$s</string>
+    <string name="map_gps_fallback_region">Vietnam</string>
+    <string name="map_gps_nearest_header">Places closest to your real coordinates:</string>
+    <string name="map_gps_no_place">No place in the data is near these coordinates.</string>
+    <string name="map_gps_distance">%1$s away • %2$s</string>
+    <string name="map_gps_within_radius">Within matching radius</string>
+    <string name="map_gps_outside_radius">Further away</string>
+    <string name="map_gps_save_checkin">Save check-in &amp; stamp at %1$s ⦿</string>
+
+    <!-- ===================== FOOTPRINT MAP ===================== -->
+    <string name="map_footprint_title">VIETNAM FOOTPRINT MAP</string>
+    <string name="map_footprint_progress">Checked in %1$d / %2$d provinces</string>
+    <string name="map_nationwide">📍 Nationwide</string>
+    <string name="map_row_highlands_south">HIGHLANDS &amp; SOUTH</string>
+    <string name="map_stat_north">North</string>
+    <string name="map_stat_central">Central</string>
+    <string name="map_stat_highlands">Highlands</string>
+    <string name="map_stat_south">South</string>
+    <plurals name="map_province_points">
+        <item quantity="one">%1$d place</item>
+        <item quantity="other">%1$d places</item>
+    </plurals>
 </resources>

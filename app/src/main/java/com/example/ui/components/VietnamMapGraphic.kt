@@ -20,6 +20,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import com.example.data.model.Province
 import com.example.ui.theme.*
 
@@ -52,7 +55,7 @@ fun VietnamMapGraphic(
             ) {
                 Column {
                     Text(
-                        text = "BẢN ĐỒ DẤU CHÂN VIỆT NAM",
+                        text = stringResource(R.string.map_footprint_title),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -60,7 +63,7 @@ fun VietnamMapGraphic(
                         letterSpacing = 0.5.sp
                     )
                     Text(
-                        text = "Đã check-in $visitedCount / $totalCount tỉnh thành",
+                        text = stringResource(R.string.map_footprint_progress, visitedCount, totalCount),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = TextOnBrand
@@ -72,7 +75,7 @@ fun VietnamMapGraphic(
                     color = Brand700.copy(alpha = 0.8f)
                 ) {
                     Text(
-                        text = "📍 Toàn quốc",
+                        text = stringResource(R.string.map_nationwide),
                         fontSize = 11.sp,
                         color = Color.White,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
@@ -117,7 +120,7 @@ fun VietnamMapGraphic(
 
                     // Region 3: Central Highlands & South (Tây Nguyên & Nam Bộ)
                     RegionMapRow(
-                        regionName = "TÂY NGUYÊN & NAM BỘ",
+                        regionName = stringResource(R.string.map_row_highlands_south),
                         provinces = provinces.filter { it.region.contains("Tây Nguyên", ignoreCase = true) || it.region.contains("Nam", ignoreCase = true) },
                         onProvinceClick = onProvinceClick
                     )
@@ -149,10 +152,10 @@ fun VietnamMapGraphic(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                MapStatItem(label = "Miền Bắc", count = "$northVisited/${northProvinces.size}")
-                MapStatItem(label = "Miền Trung", count = "$centralVisited/${centralProvinces.size}")
-                MapStatItem(label = "Tây Nguyên", count = "$highlandsVisited/${highlandsProvinces.size}")
-                MapStatItem(label = "Miền Nam", count = "$southVisited/${southProvinces.size}")
+                MapStatItem(label = stringResource(R.string.map_stat_north), count = "$northVisited/${northProvinces.size}")
+                MapStatItem(label = stringResource(R.string.map_stat_central), count = "$centralVisited/${centralProvinces.size}")
+                MapStatItem(label = stringResource(R.string.map_stat_highlands), count = "$highlandsVisited/${highlandsProvinces.size}")
+                MapStatItem(label = stringResource(R.string.map_stat_south), count = "$southVisited/${southProvinces.size}")
             }
         }
     }
@@ -204,7 +207,7 @@ private fun RegionMapRow(
                         )
                         if (hasVisited) {
                             Text(
-                                text = "${prov.visitedPlacesCount} điểm",
+                                text = pluralStringResource(R.plurals.map_province_points, prov.visitedPlacesCount, prov.visitedPlacesCount),
                                 fontSize = 7.5.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = TextOnGold.copy(alpha = 0.8f)
