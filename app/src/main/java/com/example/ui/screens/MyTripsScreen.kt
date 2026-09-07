@@ -19,6 +19,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Place
 import com.example.data.model.Province
@@ -85,7 +87,7 @@ fun MyTripsScreen(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Lịch trình (${trips.size})",
+                        text = stringResource(R.string.trips_tab_itinerary, trips.size),
                         fontSize = 12.5.sp,
                         fontWeight = if (viewMode == TripViewMode.ITINERARIES) FontWeight.Bold else FontWeight.Medium,
                         color = if (viewMode == TripViewMode.ITINERARIES) Color.White else TextSecondary
@@ -113,7 +115,7 @@ fun MyTripsScreen(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Bản đồ Việt Nam 🇻🇳",
+                        text = stringResource(R.string.trips_tab_map),
                         fontSize = 12.5.sp,
                         fontWeight = if (viewMode == TripViewMode.VIETNAM_MAP) FontWeight.Bold else FontWeight.Medium,
                         color = if (viewMode == TripViewMode.VIETNAM_MAP) Color.White else TextSecondary
@@ -152,7 +154,7 @@ fun MyTripsScreen(
                         letterSpacing = 0.8.sp
                     )
                     Text(
-                        text = "Chuyến Đi Của Tôi",
+                        text = stringResource(R.string.trips_title),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = TextPrimary
@@ -167,7 +169,7 @@ fun MyTripsScreen(
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = "Tạo mới", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(R.string.trips_create_new), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }
             }
 
@@ -185,17 +187,17 @@ fun MyTripsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 TripSubTabPill(
-                    label = "Đang đi ($ongoingCount)",
+                    label = stringResource(R.string.trips_filter_ongoing, ongoingCount),
                     isSelected = currentSubTab == TripSubTab.ONGOING,
                     onClick = { onSubTabChanged(TripSubTab.ONGOING) }
                 )
                 TripSubTabPill(
-                    label = "Sắp đi ($upcomingCount)",
+                    label = stringResource(R.string.trips_filter_upcoming, upcomingCount),
                     isSelected = currentSubTab == TripSubTab.UPCOMING,
                     onClick = { onSubTabChanged(TripSubTab.UPCOMING) }
                 )
                 TripSubTabPill(
-                    label = "Đã đi ($pastCount)",
+                    label = stringResource(R.string.trips_filter_past, pastCount),
                     isSelected = currentSubTab == TripSubTab.PAST,
                     onClick = { onSubTabChanged(TripSubTab.PAST) }
                 )
@@ -224,7 +226,7 @@ fun MyTripsScreen(
                             Text(text = "🎒", fontSize = 36.sp)
                             Spacer(modifier = Modifier.height(10.dp))
                             Text(
-                                text = "Chưa có chuyến đi nào trong mục này",
+                                text = stringResource(R.string.trips_empty),
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Medium,
                                 color = TextSecondary
@@ -235,7 +237,7 @@ fun MyTripsScreen(
                                 colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                                 shape = RoundedCornerShape(999.dp)
                             ) {
-                                Text(text = "Tạo lịch trình bằng AI ngay", fontSize = 12.sp)
+                                Text(text = stringResource(R.string.trips_empty_cta), fontSize = 12.sp)
                             }
                         }
                     }

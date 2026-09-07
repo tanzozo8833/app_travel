@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.Trip
 import com.example.data.model.TripDay
 import com.example.data.model.TripItem
@@ -82,7 +84,7 @@ fun TripDetailScreen(
                     ) {
                         Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Chỉnh sửa", fontSize = 12.sp)
+                        Text(text = stringResource(R.string.tripdetail_edit), fontSize = 12.sp)
                     }
 
                     OutlinedButton(
@@ -92,7 +94,7 @@ fun TripDetailScreen(
                     ) {
                         Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Nhân bản", fontSize = 12.sp)
+                        Text(text = stringResource(R.string.tripdetail_duplicate), fontSize = 12.sp)
                     }
 
                     Button(
@@ -103,7 +105,7 @@ fun TripDetailScreen(
                     ) {
                         Icon(Icons.Default.Bookmark, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "Lưu Chuyến", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.tripdetail_save_trip), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -155,7 +157,7 @@ fun TripDetailScreen(
                                 .size(36.dp)
                                 .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                         ) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = "Quay lại", tint = Color.White)
+                            Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.common_back), tint = Color.White)
                         }
 
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -237,7 +239,7 @@ fun TripDetailScreen(
                 item {
                     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
                         Text(
-                            text = "LỊCH TRÌNH CHI TIẾT THEO NGÀY",
+                            text = stringResource(R.string.tripdetail_days_header),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -264,7 +266,7 @@ fun TripDetailScreen(
                                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                                     ) {
                                         Text(
-                                            text = "Ngày ${day.dayNumber}",
+                                            text = stringResource(R.string.tripdetail_day_number, day.dayNumber),
                                             fontSize = 12.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isSelected) Color.White else TextPrimary
@@ -306,7 +308,7 @@ fun TripDetailScreen(
             } else {
                 item {
                     Text(
-                        text = "Đang cập nhật danh sách địa điểm...",
+                        text = stringResource(R.string.tripdetail_loading_places),
                         fontSize = 13.sp,
                         color = TextSecondary,
                         modifier = Modifier.padding(16.dp)

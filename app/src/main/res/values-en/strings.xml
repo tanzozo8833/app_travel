@@ -232,4 +232,36 @@
     <string name="comment_sheet_title">Comments (%1$d)</string>
     <string name="comment_empty">No comments yet. Be the first to share your thoughts!</string>
     <string name="comment_input_placeholder">Write a comment or ask a question…</string>
+
+    <!-- ===================== TRIPS (LIST) ===================== -->
+    <string name="trips_title">My Trips</string>
+    <string name="trips_tab_itinerary">Itineraries (%1$d)</string>
+    <string name="trips_tab_map">Vietnam map 🇻🇳</string>
+    <string name="trips_create_new">New trip</string>
+    <string name="trips_filter_ongoing">Ongoing (%1$d)</string>
+    <string name="trips_filter_upcoming">Upcoming (%1$d)</string>
+    <string name="trips_filter_past">Past (%1$d)</string>
+    <string name="trips_empty">No trips in this section yet</string>
+    <string name="trips_empty_cta">Plan a trip with AI</string>
+
+    <!-- ===================== TRIP CARD ===================== -->
+    <string name="tripcard_ongoing_badge">TRIP IN PROGRESS</string>
+    <string name="tripcard_next_spot">Next stop: %1$s</string>
+    <string name="tripcard_stamp">Stamp</string>
+    <string name="tripcard_cost_per_person">Cost: ~%1$dk VND / person</string>
+    <string name="tripcard_create_recap">Write a recap post ➔</string>
+    <string name="tripcard_budget">Budget: ~%1$dM VND</string>
+    <string name="tripcard_view_detail">View full itinerary ➔</string>
+    <plurals name="tripcard_spots">
+        <item quantity="one">📍 %1$d spot</item>
+        <item quantity="other">📍 %1$d spots</item>
+    </plurals>
+
+    <!-- ===================== TRIP DETAIL ===================== -->
+    <string name="tripdetail_edit">Edit</string>
+    <string name="tripdetail_duplicate">Duplicate</string>
+    <string name="tripdetail_save_trip">Save trip</string>
+    <string name="tripdetail_days_header">DAY-BY-DAY ITINERARY</string>
+    <string name="tripdetail_day_number">Day %1$d</string>
+    <string name="tripdetail_loading_places">Updating the list of places…</string>
 </resources>

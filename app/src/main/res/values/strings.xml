@@ -227,4 +227,35 @@
     <string name="comment_sheet_title">Bình luận (%1$d)</string>
     <string name="comment_empty">Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ cảm nghĩ!</string>
     <string name="comment_input_placeholder">Viết bình luận hoặc đặt câu hỏi…</string>
+
+    <!-- ===================== CHUYẾN ĐI (DANH SÁCH) ===================== -->
+    <string name="trips_title">Chuyến Đi Của Tôi</string>
+    <string name="trips_tab_itinerary">Lịch trình (%1$d)</string>
+    <string name="trips_tab_map">Bản đồ Việt Nam 🇻🇳</string>
+    <string name="trips_create_new">Tạo mới</string>
+    <string name="trips_filter_ongoing">Đang đi (%1$d)</string>
+    <string name="trips_filter_upcoming">Sắp đi (%1$d)</string>
+    <string name="trips_filter_past">Đã đi (%1$d)</string>
+    <string name="trips_empty">Chưa có chuyến đi nào trong mục này</string>
+    <string name="trips_empty_cta">Tạo lịch trình bằng AI ngay</string>
+
+    <!-- ===================== THẺ CHUYẾN ĐI ===================== -->
+    <string name="tripcard_ongoing_badge">ĐANG TRONG CHUYẾN ĐI</string>
+    <string name="tripcard_next_spot">Điểm kế tiếp: %1$s</string>
+    <string name="tripcard_stamp">Đóng dấu</string>
+    <string name="tripcard_cost_per_person">Chi phí: ~%1$dk / người</string>
+    <string name="tripcard_create_recap">Tạo bài tổng kết ➔</string>
+    <string name="tripcard_budget">Ngân sách: ~%1$d tr VNĐ</string>
+    <string name="tripcard_view_detail">Xem chi tiết lịch trình ➔</string>
+    <plurals name="tripcard_spots">
+        <item quantity="other">📍 %1$d điểm</item>
+    </plurals>
+
+    <!-- ===================== CHI TIẾT CHUYẾN ĐI ===================== -->
+    <string name="tripdetail_edit">Chỉnh sửa</string>
+    <string name="tripdetail_duplicate">Nhân bản</string>
+    <string name="tripdetail_save_trip">Lưu Chuyến</string>
+    <string name="tripdetail_days_header">LỊCH TRÌNH CHI TIẾT THEO NGÀY</string>
+    <string name="tripdetail_day_number">Ngày %1$d</string>
+    <string name="tripdetail_loading_places">Đang cập nhật danh sách địa điểm…</string>
 </resources>

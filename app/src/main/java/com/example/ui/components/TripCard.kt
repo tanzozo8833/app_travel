@@ -24,6 +24,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import com.example.data.model.Trip
 import com.example.data.model.TripStatus
 import com.example.ui.theme.*
@@ -150,7 +153,7 @@ fun TripCard(
                         )
                         Text(text = "•", color = Color.LightGray, fontSize = 11.sp)
                         Text(
-                            text = "📍 ${trip.spotsCount} điểm",
+                            text = pluralStringResource(R.plurals.tripcard_spots, trip.spotsCount, trip.spotsCount),
                             fontSize = 11.sp,
                             color = Gold100
                         )
@@ -173,7 +176,7 @@ fun TripCard(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "ĐANG TRONG CHUYẾN ĐI",
+                                text = stringResource(R.string.tripcard_ongoing_badge),
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
@@ -193,7 +196,7 @@ fun TripCard(
                             shape = RoundedCornerShape(999.dp),
                             contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp)
                         ) {
-                            Text(text = "Đóng dấu", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.tripcard_stamp), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -206,7 +209,7 @@ fun TripCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Chi phí: ~${trip.totalEstimatedCostVnd / 1000}k / người",
+                        text = stringResource(R.string.tripcard_cost_per_person, (trip.totalEstimatedCostVnd / 1000).toInt()),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Medium,
                         color = TextSecondary
@@ -216,7 +219,7 @@ fun TripCard(
                         onClick = { onCreateRecapClick?.invoke() },
                         colors = ButtonDefaults.textButtonColors(contentColor = Brand700)
                     ) {
-                        Text(text = "Tạo bài tổng kết ➔", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.tripcard_create_recap), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             } else {
@@ -228,13 +231,13 @@ fun TripCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Ngân sách: ~${trip.totalEstimatedCostVnd / 1000000}tr VNĐ",
+                        text = stringResource(R.string.tripcard_budget, (trip.totalEstimatedCostVnd / 1000000).toInt()),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Brand700
                     )
                     Text(
-                        text = "Xem chi tiết lịch trình ➔",
+                        text = stringResource(R.string.tripcard_view_detail),
                         fontSize = 11.5.sp,
                         fontWeight = FontWeight.Medium,
                         color = TextSecondary
