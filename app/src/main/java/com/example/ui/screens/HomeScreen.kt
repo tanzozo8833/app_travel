@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
+import com.example.R
 import com.example.data.model.CheckInRecord
 import com.example.data.model.Place
 import com.example.data.model.Post
@@ -148,7 +150,7 @@ fun HomeScreen(
 
         if (!fineGranted && !coarseGranted) {
             hasLocationPermission = false
-            gpsErrorMessage = "Chưa cấp quyền vị trí"
+            gpsErrorMessage = context.getString(R.string.home_gps_no_permission_title)
             return
         }
         hasLocationPermission = true
@@ -163,7 +165,7 @@ fun HomeScreen(
         } ?: false
 
         if (!isGpsEnabled) {
-            gpsErrorMessage = "Dịch vụ GPS đang tắt"
+            gpsErrorMessage = context.getString(R.string.home_gps_disabled)
             return
         }
 
@@ -237,7 +239,7 @@ fun HomeScreen(
                     }
                     gpsErrorMessage = null
                 } else {
-                    gpsErrorMessage = "Chưa nhận được tín hiệu GPS"
+                    gpsErrorMessage = context.getString(R.string.home_gps_no_signal)
                 }
             } catch (e: Exception) {
                 gpsErrorMessage = e.message
@@ -257,7 +259,7 @@ fun HomeScreen(
             refreshGpsLocation()
         } else {
             hasLocationPermission = false
-            gpsErrorMessage = "Cần quyền vị trí để định vị GPS thật"
+            gpsErrorMessage = context.getString(R.string.home_gps_permission_needed)
         }
     }
 
@@ -292,17 +294,18 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             FeedTabPill(
-                label = "Khám phá",
+                label = stringResource(R.string.home_tab_explore),
                 isSelected = currentSubTab == FeedSubTab.EXPLORE,
                 onClick = { onSubTabChanged(FeedSubTab.EXPLORE) }
             )
             FeedTabPill(
-                label = "Đang theo dõi",
+                label = stringResource(R.string.home_tab_following),
                 isSelected = currentSubTab == FeedSubTab.FOLLOWING,
                 onClick = { onSubTabChanged(FeedSubTab.FOLLOWING) }
             )
             FeedTabPill(
-                label = if (detectedProvince != null) "Gần bạn (${detectedProvince?.shortName})" else "Gần bạn",
+                label = detectedProvince?.shortName?.let { stringResource(R.string.home_tab_nearby_province, it) }
+                    ?: stringResource(R.string.home_tab_nearby),
                 isSelected = currentSubTab == FeedSubTab.NEARBY,
                 onClick = { onSubTabChanged(FeedSubTab.NEARBY) }
             )
@@ -343,7 +346,7 @@ fun HomeScreen(
                                 Text("⚡", fontSize = 13.sp)
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Đang xem bài viết lưu tạm (Ngoại tuyến)",
+                                    text = stringResource(R.string.home_offline_banner),
                                     fontSize = 12.sp,
                                     color = Color(0xFF856404),
                                     fontWeight = FontWeight.Medium
@@ -353,7 +356,7 @@ fun HomeScreen(
                                 onClick = onRetryFeed,
                                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
                             ) {
-                                Text("Thử lại", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Brand700)
+                                Text(stringResource(R.string.common_retry), fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Brand700)
                             }
                         }
                     }
@@ -455,7 +458,7 @@ fun HomeScreen(
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                text = "Đang tải bài viết từ cộng đồng Levart...",
+                                text = stringResource(R.string.home_feed_loading),
                                 fontSize = 13.sp,
                                 color = TextSecondary
                             )
@@ -502,7 +505,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(14.dp))
 
                             Text(
-                                text = "Không thể tải bảng tin",
+                                text = stringResource(R.string.home_feed_error_title),
                                 fontSize = 15.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
@@ -530,7 +533,7 @@ fun HomeScreen(
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Thử lại", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                                Text(stringResource(R.string.common_retry), fontSize = 13.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -576,7 +579,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(14.dp))
 
                             Text(
-                                text = "Bảng tin cộng đồng đang trống",
+                                text = stringResource(R.string.home_feed_empty_title),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
@@ -585,7 +588,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(6.dp))
 
                             Text(
-                                text = "Chưa có bài viết nào trên máy chủ. Hãy là người đầu tiên chia sẻ chuyến đi tuyệt vời của bạn!",
+                                text = stringResource(R.string.home_feed_empty_desc),
                                 fontSize = 13.sp,
                                 color = TextSecondary,
                                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -601,7 +604,7 @@ fun HomeScreen(
                                 modifier = Modifier.testTag("post_first_button")
                             ) {
                                 Text(
-                                    text = "Đăng bài đầu tiên ngay ➔",
+                                    text = stringResource(R.string.home_feed_empty_cta),
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -650,7 +653,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(14.dp))
 
                             Text(
-                                text = "Bạn chưa theo dõi ai",
+                                text = stringResource(R.string.home_following_empty_title),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
@@ -659,7 +662,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.height(6.dp))
 
                             Text(
-                                text = "Bạn chưa theo dõi ai, hãy khám phá thêm ở tab Khám phá.",
+                                text = stringResource(R.string.home_following_empty_desc),
                                 fontSize = 13.sp,
                                 color = TextSecondary,
                                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -682,7 +685,7 @@ fun HomeScreen(
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Khám phá ngay ➔",
+                                    text = stringResource(R.string.home_following_empty_cta),
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -776,8 +779,8 @@ private fun HeroCheckInBanner(
     val placeDisplayName = detectedPlace?.name ?: "Đồi Chè Cầu Đất"
 
     val distanceText = when {
-        !hasPermission -> "Chưa cấp quyền"
-        distanceMeters == null -> "Đang định vị"
+        !hasPermission -> stringResource(R.string.home_gps_distance_no_permission)
+        distanceMeters == null -> stringResource(R.string.home_gps_distance_locating)
         distanceMeters < 1000 -> "${distanceMeters}m"
         else -> String.format(Locale.US, "%.1fkm", distanceMeters / 1000.0)
     }
@@ -817,9 +820,9 @@ private fun HeroCheckInBanner(
                         )
                         Text(
                             text = if (!hasPermission) {
-                                "GPS THỰC TẾ · CHƯA CẤP QUYỀN"
+                                stringResource(R.string.home_gps_badge_no_permission)
                             } else {
-                                "ĐANG Ở ${provinceDisplayName.uppercase()} · GPS THỰC TẾ"
+                                stringResource(R.string.home_gps_badge_located, provinceDisplayName.uppercase())
                             },
                             fontSize = 9.sp,
                             fontWeight = FontWeight.Bold,
@@ -840,7 +843,7 @@ private fun HeroCheckInBanner(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Refresh,
-                                    contentDescription = "Làm mới GPS",
+                                    contentDescription = stringResource(R.string.home_gps_refresh),
                                     tint = Gold500.copy(alpha = 0.8f),
                                     modifier = Modifier.size(11.dp)
                                 )
@@ -849,7 +852,7 @@ private fun HeroCheckInBanner(
                     }
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = if (!hasPermission) "Định vị vị trí hiện tại của bạn" else "Gần $placeDisplayName ($distanceText)",
+                        text = if (!hasPermission) stringResource(R.string.home_gps_locating_title) else "Gần $placeDisplayName ($distanceText)",
                         fontSize = 14.5.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = Color.White,
@@ -858,10 +861,10 @@ private fun HeroCheckInBanner(
                     )
                     Text(
                         text = when {
-                            !hasPermission -> "Chạm để cấp quyền truy cập GPS và định vị địa điểm gần bạn"
-                            isAlreadyStamped -> "Đã đóng dấu hộ chiếu · Bấm chụp ảnh để lưu giữ khoảnh khắc"
-                            detectedLat != null && detectedLng != null -> "Tọa độ: ${"%.4f".format(detectedLat)}°N, ${"%.4f".format(detectedLng)}°E · Chạm để đóng dấu thật"
-                            else -> "Chạm để đóng dấu hộ chiếu & tích luỹ dấu chân thật"
+                            !hasPermission -> stringResource(R.string.home_gps_hint_permission)
+                            isAlreadyStamped -> stringResource(R.string.home_gps_hint_stamped)
+                            detectedLat != null && detectedLng != null -> stringResource(R.string.home_gps_hint_coords, "%.4f".format(detectedLat), "%.4f".format(detectedLng))
+                            else -> stringResource(R.string.home_gps_hint_default)
                         },
                         fontSize = 11.sp,
                         color = Color(0xFFC7E2D7),
@@ -874,8 +877,8 @@ private fun HeroCheckInBanner(
 
                 // Action Button with 3 distinct dynamic states:
                 // 1. "Truy cập GPS" if location permission not granted
-                // 2. "Chụp ảnh" if place is already stamped
-                // 3. "Đóng dấu" if place is not stamped yet
+                // 2. stringResource(R.string.home_action_photo) if place is already stamped
+                // 3. stringResource(R.string.home_action_stamp) if place is not stamped yet
                 if (!hasPermission) {
                     Button(
                         onClick = onRequestPermission,
@@ -912,7 +915,7 @@ private fun HeroCheckInBanner(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "Chụp ảnh",
+                            text = stringResource(R.string.home_action_photo),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = TextOnGold
@@ -933,7 +936,7 @@ private fun HeroCheckInBanner(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "Đóng dấu",
+                            text = stringResource(R.string.home_action_stamp),
                             fontSize = 12.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = TextOnGold
@@ -952,7 +955,7 @@ private fun ProvinceStoryTray(
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "HỘ CHIẾU 34 TỈNH THÀNH VIỆT NAM",
+            text = stringResource(R.string.home_passport_title),
             fontSize = 10.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Monospace,

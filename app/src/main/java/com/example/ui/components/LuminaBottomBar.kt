@@ -131,22 +131,19 @@ private fun NavPillItem(
                 indication = ripple()
             ) { onClick() }
     ) {
+        // Chỉ hiện icon, không hiện chữ. Nhãn vẫn giữ ở contentDescription để
+        // trình đọc màn hình đọc được — bỏ chữ khỏi giao diện không được làm
+        // mất khả năng tiếp cận.
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp)
+            modifier = Modifier.padding(13.dp)
         ) {
             Icon(
                 imageVector = if (isSelected) iconFilled else iconOutlined,
                 contentDescription = label,
                 tint = tintColor,
-                modifier = Modifier.size(19.dp)
-            )
-            Text(
-                text = label,
-                fontSize = 9.5.sp,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                color = tintColor
+                modifier = Modifier.size(22.dp)
             )
         }
     }

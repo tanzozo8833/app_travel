@@ -173,4 +173,45 @@
         <item quantity="one">%1$d trip</item>
         <item quantity="other">%1$d trips</item>
     </plurals>
+
+    <!-- ===================== FEED (HOME) ===================== -->
+    <string name="home_tab_explore">Explore</string>
+    <string name="home_tab_following">Following</string>
+    <string name="home_tab_nearby">Near you</string>
+    <string name="home_tab_nearby_province">Near you (%1$s)</string>
+    <string name="home_offline_banner">Showing cached posts (Offline)</string>
+    <string name="home_feed_loading">Loading posts from the Levart community…</string>
+    <string name="home_feed_error_title">Could not load the feed</string>
+    <string name="home_feed_empty_title">The community feed is empty</string>
+    <string name="home_feed_empty_desc">No posts on the server yet. Be the first to share an amazing trip!</string>
+    <string name="home_feed_empty_cta">Write the first post ➔</string>
+    <string name="home_following_empty_title">You are not following anyone</string>
+    <string name="home_following_empty_desc">You are not following anyone yet — find travellers in the Explore tab.</string>
+    <string name="home_following_empty_cta">Explore now ➔</string>
+    <string name="home_passport_title">PASSPORT · 34 PROVINCES OF VIETNAM</string>
+    <string name="home_action_photo">Take photo</string>
+    <string name="home_action_stamp">Stamp</string>
+
+    <!-- GPS on the feed -->
+    <string name="home_gps_no_permission_title">Location permission not granted</string>
+    <string name="home_gps_disabled">Location services are off</string>
+    <string name="home_gps_no_signal">No GPS signal yet</string>
+    <string name="home_gps_permission_needed">Location permission is required for real GPS</string>
+    <string name="home_gps_distance_no_permission">No permission</string>
+    <string name="home_gps_distance_locating">Locating</string>
+    <string name="home_gps_badge_no_permission">LIVE GPS · NO PERMISSION</string>
+    <string name="home_gps_badge_located">IN %1$s · LIVE GPS</string>
+    <string name="home_gps_refresh">Refresh GPS</string>
+    <string name="home_gps_locating_title">Finding your current location</string>
+    <string name="home_gps_hint_permission">Tap to grant GPS access and find places near you</string>
+    <string name="home_gps_hint_stamped">Passport stamped · Tap the camera to keep the moment</string>
+    <string name="home_gps_hint_coords">Coordinates: %1$s°N, %2$s°E · Tap to stamp for real</string>
+    <string name="home_gps_hint_default">Tap to stamp your passport &amp; collect real footprints</string>
+
+    <!-- ===================== POST CARD ===================== -->
+    <string name="post_action_follow">Follow</string>
+    <string name="post_action_following">Following</string>
+    <string name="post_action_like">Like</string>
+    <string name="post_action_comment">Comment</string>
+    <string name="post_action_save">Save</string>
 </resources>

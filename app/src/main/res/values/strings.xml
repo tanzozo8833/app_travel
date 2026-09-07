@@ -169,4 +169,45 @@
     <plurals name="profile_plural_trips">
         <item quantity="other">%1$d chuyến đi</item>
     </plurals>
+
+    <!-- ===================== BẢNG TIN (HOME) ===================== -->
+    <string name="home_tab_explore">Khám phá</string>
+    <string name="home_tab_following">Đang theo dõi</string>
+    <string name="home_tab_nearby">Gần bạn</string>
+    <string name="home_tab_nearby_province">Gần bạn (%1$s)</string>
+    <string name="home_offline_banner">Đang xem bài viết lưu tạm (Ngoại tuyến)</string>
+    <string name="home_feed_loading">Đang tải bài viết từ cộng đồng Levart…</string>
+    <string name="home_feed_error_title">Không thể tải bảng tin</string>
+    <string name="home_feed_empty_title">Bảng tin cộng đồng đang trống</string>
+    <string name="home_feed_empty_desc">Chưa có bài viết nào trên máy chủ. Hãy là người đầu tiên chia sẻ chuyến đi tuyệt vời của bạn!</string>
+    <string name="home_feed_empty_cta">Đăng bài đầu tiên ngay ➔</string>
+    <string name="home_following_empty_title">Bạn chưa theo dõi ai</string>
+    <string name="home_following_empty_desc">Bạn chưa theo dõi ai, hãy khám phá thêm ở tab Khám phá.</string>
+    <string name="home_following_empty_cta">Khám phá ngay ➔</string>
+    <string name="home_passport_title">HỘ CHIẾU 34 TỈNH THÀNH VIỆT NAM</string>
+    <string name="home_action_photo">Chụp ảnh</string>
+    <string name="home_action_stamp">Đóng dấu</string>
+
+    <!-- GPS trên bảng tin -->
+    <string name="home_gps_no_permission_title">Chưa cấp quyền vị trí</string>
+    <string name="home_gps_disabled">Dịch vụ GPS đang tắt</string>
+    <string name="home_gps_no_signal">Chưa nhận được tín hiệu GPS</string>
+    <string name="home_gps_permission_needed">Cần quyền vị trí để định vị GPS thật</string>
+    <string name="home_gps_distance_no_permission">Chưa cấp quyền</string>
+    <string name="home_gps_distance_locating">Đang định vị</string>
+    <string name="home_gps_badge_no_permission">GPS THỰC TẾ · CHƯA CẤP QUYỀN</string>
+    <string name="home_gps_badge_located">ĐANG Ở %1$s · GPS THỰC TẾ</string>
+    <string name="home_gps_refresh">Làm mới GPS</string>
+    <string name="home_gps_locating_title">Định vị vị trí hiện tại của bạn</string>
+    <string name="home_gps_hint_permission">Chạm để cấp quyền truy cập GPS và định vị địa điểm gần bạn</string>
+    <string name="home_gps_hint_stamped">Đã đóng dấu hộ chiếu · Bấm chụp ảnh để lưu giữ khoảnh khắc</string>
+    <string name="home_gps_hint_coords">Toạ độ: %1$s°N, %2$s°E · Chạm để đóng dấu thật</string>
+    <string name="home_gps_hint_default">Chạm để đóng dấu hộ chiếu &amp; tích luỹ dấu chân thật</string>
+
+    <!-- ===================== THẺ BÀI VIẾT ===================== -->
+    <string name="post_action_follow">Theo dõi</string>
+    <string name="post_action_following">Đang theo dõi</string>
+    <string name="post_action_like">Thích</string>
+    <string name="post_action_comment">Bình luận</string>
+    <string name="post_action_save">Lưu</string>
 </resources>

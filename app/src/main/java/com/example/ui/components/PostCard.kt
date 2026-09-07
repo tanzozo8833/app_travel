@@ -23,11 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
 import com.example.data.model.Post
 import com.example.data.model.Trip
 import com.example.ui.theme.*
@@ -171,7 +173,7 @@ fun PostCard(
                             .testTag("post_follow_button_${post.id}")
                     ) {
                         Text(
-                            text = if (isFollowing) "Đang theo dõi" else "Theo dõi",
+                            text = stringResource(if (isFollowing) R.string.post_action_following else R.string.post_action_follow),
                             fontSize = 8.5.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (isFollowing) TextSecondary else Brand700,
@@ -278,7 +280,7 @@ fun PostCard(
                 ) {
                     Icon(
                         imageVector = if (post.isLiked) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
-                        contentDescription = "Thích",
+                        contentDescription = stringResource(R.string.post_action_like),
                         tint = if (post.isLiked) HeartRed else TextSecondary,
                         modifier = Modifier.size(15.dp)
                     )
@@ -317,7 +319,7 @@ fun PostCard(
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.ChatBubbleOutline,
-                        contentDescription = "Bình luận",
+                        contentDescription = stringResource(R.string.post_action_comment),
                         tint = TextSecondary,
                         modifier = Modifier.size(14.dp)
                     )
@@ -336,7 +338,7 @@ fun PostCard(
                 ) {
                     Icon(
                         imageVector = if (post.isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
-                        contentDescription = "Lưu",
+                        contentDescription = stringResource(R.string.post_action_save),
                         tint = if (post.isSaved) Brand700 else TextSecondary,
                         modifier = Modifier.size(15.dp)
                     )
