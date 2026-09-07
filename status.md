@@ -410,3 +410,59 @@ Xếp theo **lợi ích / công sức**, và theo ràng buộc phụ thuộc (l�
 > Bước 1–3 không đổi lược đồ dữ liệu, không đổi chức năng, làm được ngay.
 > Bước 4 đổi cấu hình máy chủ, cần bật enforcement trong Firebase Console.
 > Bước 8 đổi lược đồ, phải làm sau nhóm B.
+
+---
+
+## 8. Quyết định đang chờ thực hiện — B1
+
+**Chốt ngày 07/09/2026.** Chủ dự án đã duyệt phương án, nhưng **chưa bắt đầu làm** —
+tạm dừng vì hết hạn mức phiên làm việc. Khi chủ dự án nói "tiếp tục" thì làm đúng theo mục này.
+
+### Phương án đã duyệt: B1 bản đầy đủ
+
+Nén ảnh + sinh thumbnail + hàng đợi tải lên khi mất mạng.
+
+```
+CreatePostScreen
+   └─ chọn ảnh (Photo Picker)
+        └─ nén về ≤1600px, sinh thumb 400px
+             └─ ghi hàng đợi Room: pending_uploads
+                  └─ WorkManager (retry, backoff)
+                       └─ Storage: posts/{uid}/{postId}/{n}.jpg
+                            └─ Firestore: mediaUrls + mediaThumbUrls
+
+Mất mạng  → bài nằm hàng đợi, có mạng tự đăng
+Đổi máy   → ảnh hiện bình thường
+```
+
+**Vì sao chọn bản đầy đủ thay vì bản gọn:** hàng đợi offline đòi thêm bảng Room và đổi
+luồng đăng bài. Làm bản gọn trước rồi thêm sau nghĩa là viết lại luồng đăng bài hai lần.
+
+### Việc phải làm, theo thứ tự
+
+| Bước | Nội dung | Ghi chú |
+|---|---|---|
+| 1 | Thêm `firebase-storage` vào `libs.versions.toml` + `build.gradle.kts` | Hiện `grep -n "storage"` trong hai tệp này trả về **rỗng** |
+| 2 | Viết luật bảo mật cho Storage | Chỉ chủ sở hữu được ghi vào `posts/{uid}/**`; giới hạn kiểu tệp và dung lượng |
+| 3 | Nén ảnh trước khi tải | `BitmapFactory` với `inJustDecodeBounds` + `inSampleSize`. Bắt cả `OutOfMemoryError` — lớp này kế thừa `Error`, **không phải** `Exception` |
+| 4 | Thêm bảng Room `pending_uploads` | Room lên version **10**. Nhớ: **không đổi tên** `lumina_vietnam_travel.db` |
+| 5 | Thêm WorkManager, worker tải lên có retry + backoff | Dependency mới |
+| 6 | Sửa `LuminaRepository.kt:357` `createPost` | Hiện nhận `mediaUrls` rồi ghi thẳng, không có bước tải lên |
+| 7 | Sửa ảnh check-in | `ImageColorFilterProcessor.kt:92` đang lưu vào `context.filesDir`, cũng phải đẩy lên Storage |
+| 8 | Thêm `mediaThumbUrls` vào `FS_posts`; bảng tin đọc thumb, màn chi tiết đọc ảnh gốc | Đổi lược đồ, cập nhật `database_target.mmd` |
+| 9 | Chuyển sang Android Photo Picker | Xem S8 mục 7.2 — không cần xin quyền lưu trữ nào |
+
+### Câu hỏi còn treo — phải trả lời trước bước 1
+
+> **Dự án `travel-app-844e3` đã ở gói Blaze chưa?**
+
+Từ 09/2024, tạo bucket Cloud Storage mặc định **bắt buộc dự án phải ở gói Blaze**
+(trả theo mức dùng). Dự án ở gói Spark sẽ nhận lỗi **402 hoặc 403** khi gọi tới bucket.
+Bucket vẫn giữ hạn mức miễn phí, nhưng phải gắn thẻ thanh toán vào dự án.
+
+Nguồn: [Default bucket and billing requirements for Cloud Storage for Firebase after September 2024](https://firebase.google.com/docs/storage/faqs-storage-changes-announced-sept-2024)
+
+Chỗ kiểm tra: Firebase Console → dự án `travel-app-844e3` → góc dưới bên trái, dòng ghi gói hiện tại.
+
+**Nếu chưa ở Blaze thì bước 1–2 không chạy được**, nhưng bước 3, 4, 5 (nén ảnh, bảng hàng đợi,
+worker) vẫn viết trước được vì không đụng tới máy chủ.
