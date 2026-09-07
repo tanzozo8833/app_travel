@@ -193,7 +193,7 @@ fun TripDetailScreen(
                                 modifier = Modifier.padding(bottom = 6.dp)
                             ) {
                                 Text(
-                                    text = "✨ LUMINA AI ITINERARY",
+                                    text = "✨ LEVART AI ITINERARY",
                                     fontSize = 8.5.sp,
                                     fontWeight = FontWeight.ExtraBold,
                                     fontFamily = FontFamily.Monospace,

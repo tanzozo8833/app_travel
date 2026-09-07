@@ -105,7 +105,7 @@ fun StampBadge(
             modifier = Modifier.padding(6.dp)
         ) {
             Text(
-                text = "LUMINA STAMP",
+                text = "LEVART STAMP",
                 fontSize = 6.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,

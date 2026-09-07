@@ -18,7 +18,7 @@ import com.example.data.local.seed.DatabaseSeeder
         LuminaFrameEntity::class,
         AppSettingsEntity::class
     ],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)
@@ -30,6 +30,8 @@ abstract class LuminaDatabase : RoomDatabase() {
     abstract fun appSettingsDao(): AppSettingsDao
 
     companion object {
+        // KHONG doi ten tep nay: Room se tao co so du lieu moi rong va toan bo
+        // du lieu danh muc trong may cua nguoi dung bi mat.
         private const val DATABASE_NAME = "lumina_vietnam_travel.db"
 
         @Volatile

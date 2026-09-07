@@ -217,7 +217,7 @@ fun CheckInScreen(
                 name = "Cổ điển",
                 badgeLabel = "📷 Cổ điển",
                 subtitle = "TRAVEL DIARY · 2026",
-                topTitle = "★ LUMINA PASSPORT ★",
+                topTitle = "★ LEVART PASSPORT ★",
                 bottomTagline = "GEN Z FOOTPRINT PASSPORT",
                 previewColor = 0xFF1B2A26,
                 provinceCode = null,

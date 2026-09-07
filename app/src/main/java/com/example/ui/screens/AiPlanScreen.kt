@@ -215,7 +215,7 @@ fun AiPlanScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(
-                text = "LUMINA AI & LỊCH TRÌNH DU LỊCH",
+                text = "LEVART AI & LỊCH TRÌNH DU LỊCH",
                 fontSize = 10.5.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,

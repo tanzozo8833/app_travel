@@ -224,7 +224,7 @@ object GeminiService {
         }
 
         try {
-            val systemPrompt = "Bạn là trợ lý AI du lịch Lumina Gen Z tại Việt Nam. Giọng điệu thân thiện, sành điệu, đưa ra gợi ý địa điểm chính xác, mẹo chụp ảnh, quán ăn ngon và lời khuyên thiết thực."
+            val systemPrompt = "Bạn là trợ lý AI du lịch Levart Gen Z tại Việt Nam. Giọng điệu thân thiện, sành điệu, đưa ra gợi ý địa điểm chính xác, mẹo chụp ảnh, quán ăn ngon và lời khuyên thiết thực."
             val userPrompt = "Điểm đến đang quan tâm: $contextDestination. Câu hỏi: $question"
 
             val requestBodyJson = JSONObject().apply {
@@ -280,7 +280,7 @@ object GeminiService {
             isHaGiang -> "Hà Giang ${durationDays}N${durationDays - 1}Đ Chinh Phục Mã Pí Lèng & Mùa Hoa"
             isDaNang -> "Đà Nẵng - Hội An ${durationDays}N${durationDays - 1}Đ Biển Xanh & Phố Cổ"
             isHaNoi -> "Hà Nội ${durationDays}N${durationDays - 1}Đ 36 Phố Phường & Cà Phê Trứng"
-            else -> "$dest ${durationDays}N${durationDays - 1}Đ Trọn Vẹn Cùng Lumina"
+            else -> "$dest ${durationDays}N${durationDays - 1}Đ Trọn Vẹn Cùng Levart"
         }
 
         val days = mutableListOf<TripDay>()

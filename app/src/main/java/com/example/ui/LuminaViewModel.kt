@@ -1004,7 +1004,7 @@ class LuminaViewModel(
                         _isLoggingIn.value = false
                         _loginError.value = null
                         _loginCanFallbackToBrowser.value = false
-                        showToast("Đăng ký thành công! Chào mừng ${result.userProfile.displayName} đến với Lumina 🇻🇳")
+                        showToast("Đăng ký thành công! Chào mừng ${result.userProfile.displayName} đến với Levart 🇻🇳")
                     }
                     is AuthResult.Cancelled -> {
                         _isLoggingIn.value = false

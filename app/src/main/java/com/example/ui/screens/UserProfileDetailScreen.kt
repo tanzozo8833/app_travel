@@ -64,14 +64,14 @@ fun UserProfileDetailScreen(
     // 1. Resolve Profile Info with Fallback to Post Data
     val resolvedUserId = dbProfile?.id ?: target.userId.ifBlank { "u_fallback" }
     val resolvedUsername = dbProfile?.username ?: target.username.ifBlank { "traveler" }
-    val resolvedDisplayName = dbProfile?.displayName ?: target.displayName.ifBlank { "Lữ khách Lumina" }
+    val resolvedDisplayName = dbProfile?.displayName ?: target.displayName.ifBlank { "Lữ khách Levart" }
     val resolvedAvatarUrl = dbProfile?.avatarUrl ?: target.avatarUrl.ifBlank {
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
     }
     val resolvedBio = dbProfile?.bio ?: target.bio.ifBlank {
-        "Thành viên yêu thích du lịch, check-in và khám phá 34 tỉnh thành Việt Nam trên Lumina."
+        "Thành viên yêu thích du lịch, check-in và khám phá 34 tỉnh thành Việt Nam trên Levart."
     }
-    val resolvedTagTitle = dbProfile?.tagTitle ?: "Lữ Khách Lumina"
+    val resolvedTagTitle = dbProfile?.tagTitle ?: "Lữ Khách Levart"
 
     // 2. Identify if this is the current logged-in user
     val isSelf = resolvedUserId == currentUserId
@@ -417,7 +417,7 @@ fun UserProfileDetailScreen(
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Người dùng này chưa chia sẻ khoảnh khắc du lịch nào trên Lumina.",
+                            text = "Người dùng này chưa chia sẻ khoảnh khắc du lịch nào trên Levart.",
                             fontSize = 12.5.sp,
                             color = TextSecondary,
                             textAlign = TextAlign.Center

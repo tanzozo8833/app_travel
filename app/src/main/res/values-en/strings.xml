@@ -14,7 +14,7 @@
 
     <!-- AUTH SCREEN (auth_*) -->
     <string name="auth_app_name">LEVART TRAVEL</string>
-    <string name="auth_hero_desc">Lumina Vietnam Travel</string>
+    <string name="auth_hero_desc">Levart Vietnam Travel</string>
     <string name="auth_logo_desc">Levart Logo</string>
     <string name="auth_tagline">Vietnam Travel &amp; Passport Journey 🇻🇳</string>
     <string name="auth_tab_google_quick">Google &amp; Quick</string>
@@ -333,4 +333,9 @@
     <string name="createpost_attach_new">3. Create a new itinerary with this post</string>
     <string name="createpost_attach_new_desc">Sets up an itinerary outline from the check-in location</string>
     <string name="createpost_ratio_portrait_45_desc">Instagram / Pinterest standard</string>
+
+    <!-- GPS errors shown to the user -->
+    <string name="home_gps_error_unknown">Could not get your location, please try again</string>
+    <string name="home_gps_action_grant">Grant permission</string>
+    <string name="home_gps_action_open_settings">Open location settings</string>
 </resources>

@@ -56,6 +56,8 @@ sealed class DeleteAccountResult {
 }
 
 class AuthManager(private val context: Context) {
+    // KHONG doi ten "lumina_auth_prefs": day la ten tep luu phien dang nhap tren may.
+    // Doi ten se khien moi nguoi dung dang bi dang xuat va mat lua chon da luu.
     private val prefs: SharedPreferences = context.getSharedPreferences("lumina_auth_prefs", Context.MODE_PRIVATE)
     private val credentialManager = CredentialManager.create(context)
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -486,7 +488,7 @@ class AuthManager(private val context: Context) {
 
             val email = firebaseUser.email ?: ""
             val displayName = firebaseUser.displayName?.ifBlank { null }
-                ?: email.substringBefore("@").ifBlank { "Lữ khách Lumina" }
+                ?: email.substringBefore("@").ifBlank { "Lữ khách Levart" }
             val username = email.substringBefore("@").replace(".", "_").lowercase().ifBlank { "traveler" }
             val avatarUrl = firebaseUser.photoUrl?.toString() ?: ""
 
@@ -709,7 +711,7 @@ class AuthManager(private val context: Context) {
                 displayName = name,
                 avatarUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop",
                 tagTitle = "GEN Z EXPLORER",
-                bio = "Tài khoản Lumina: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
+                bio = "Tài khoản Levart: $trimmedEmail • Yêu du lịch & Khám phá Việt Nam 🇻🇳"
             )
             saveSession(profile, trimmedEmail)
             Log.d(TAG, "Email sign-up successful for: ${profile.displayName}")

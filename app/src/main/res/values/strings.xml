@@ -14,7 +14,7 @@
 
     <!-- AUTH SCREEN / ĐĂNG NHẬP (auth_*) -->
     <string name="auth_app_name">LEVART TRAVEL</string>
-    <string name="auth_hero_desc">Lumina Vietnam Travel</string>
+    <string name="auth_hero_desc">Levart Vietnam Travel</string>
     <string name="auth_logo_desc">Logo Levart</string>
     <string name="auth_tagline">Hộ Chiếu &amp; Hành Trình Lữ Hành Việt Nam 🇻🇳</string>
     <string name="auth_tab_google_quick">Google &amp; Nhanh</string>
@@ -327,4 +327,9 @@
     <string name="createpost_attach_new">3. Tạo lịch trình mới đi kèm bài viết</string>
     <string name="createpost_attach_new_desc">Tự động thiết lập khung lịch trình theo địa điểm check-in</string>
     <string name="createpost_ratio_portrait_45_desc">Chuẩn feed Instagram / Pinterest</string>
+
+    <!-- Lỗi GPS hiển thị cho người dùng -->
+    <string name="home_gps_error_unknown">Không lấy được vị trí, vui lòng thử lại</string>
+    <string name="home_gps_action_grant">Cấp quyền</string>
+    <string name="home_gps_action_open_settings">Mở cài đặt vị trí</string>
 </resources>

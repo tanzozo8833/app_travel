@@ -64,7 +64,7 @@ fun TravelCvDialog(
                 ) {
                     Column {
                         Text(
-                            text = "LUMINA TRAVEL CV",
+                            text = "LEVART TRAVEL CV",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,

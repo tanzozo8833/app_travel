@@ -146,7 +146,7 @@ fun MyTripsScreen(
             ) {
                 Column {
                     Text(
-                        text = "LUMINA ITINERARIES",
+                        text = "LEVART ITINERARIES",
                         fontSize = 9.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Luggage
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,8 +29,77 @@ import com.example.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.pluralStringResource
 import com.example.data.model.Trip
+import java.util.Locale
+import java.util.Calendar
+import java.text.SimpleDateFormat
+import com.example.data.model.TripItem
 import com.example.data.model.TripStatus
 import com.example.ui.theme.*
+
+/**
+ * Tìm điểm dừng kế tiếp của chuyến đi từ chính lịch trình, thay vì hiển thị
+ * một cái tên viết cứng cho mọi chuyến.
+ *
+ * Cách xác định: startDate cho biết chuyến bắt đầu ngày nào, mỗi TripDay có
+ * dayNumber nên suy ra được ngày thực của từng mục. Trong ngày hôm nay, chọn
+ * mục đầu tiên chưa kết thúc theo timeSlot ("05:00 - 07:30"). Nếu hôm nay đã
+ * hết mục thì lấy mục đầu của ngày kế tiếp.
+ *
+ * Trả về null khi không xác định được — nơi gọi sẽ ẩn hẳn dòng này thay vì
+ * hiển thị thông tin sai.
+ *
+ * Dùng Calendar chứ không dùng java.time vì minSdk = 24 mà java.time cần API 26.
+ */
+private fun findNextSpotName(trip: Trip): String? {
+    val days = trip.days.filter { it.items.isNotEmpty() }.sortedBy { it.dayNumber }
+    if (days.isEmpty()) return null
+
+    fun label(item: TripItem): String? =
+        item.locationName.ifBlank { item.title }.ifBlank { null }
+
+    val startMillis = try {
+        SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(trip.startDate)?.time
+    } catch (e: Exception) {
+        null
+    } ?: return label(days.first().items.first())
+
+    val dayMillis = 24L * 60 * 60 * 1000
+    fun startOfDay(millis: Long): Long {
+        val c = Calendar.getInstance()
+        c.timeInMillis = millis
+        c.set(Calendar.HOUR_OF_DAY, 0)
+        c.set(Calendar.MINUTE, 0)
+        c.set(Calendar.SECOND, 0)
+        c.set(Calendar.MILLISECOND, 0)
+        return c.timeInMillis
+    }
+
+    val todayStart = startOfDay(System.currentTimeMillis())
+    val tripStart = startOfDay(startMillis)
+
+    val nowCal = Calendar.getInstance()
+    val nowMinutes = nowCal.get(Calendar.HOUR_OF_DAY) * 60 + nowCal.get(Calendar.MINUTE)
+
+    for (day in days) {
+        val dayStart = tripStart + (day.dayNumber - 1) * dayMillis
+        when {
+            dayStart > todayStart -> return label(day.items.first())
+            dayStart == todayStart -> {
+                for (item in day.items) {
+                    val endMinutes = try {
+                        val text = item.timeSlot.substringAfter("-").trim()
+                        val parts = text.split(":")
+                        parts[0].trim().toInt() * 60 + parts[1].trim().toInt()
+                    } catch (e: Exception) {
+                        null
+                    }
+                    if (endMinutes == null || endMinutes > nowMinutes) return label(item)
+                }
+            }
+        }
+    }
+    return null
+}
 
 @Composable
 fun TripCard(
@@ -182,12 +252,15 @@ fun TripCard(
                                 fontFamily = FontFamily.Monospace,
                                 color = Brand700
                             )
-                            Text(
-                                text = "Điểm kế tiếp: Cà phê Thung Lũng",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Brand900
-                            )
+                            val nextSpot = remember(trip) { findNextSpotName(trip) }
+                            if (nextSpot != null) {
+                                Text(
+                                    text = stringResource(R.string.tripcard_next_spot, nextSpot),
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = Brand900
+                                )
+                            }
                         }
 
                         Button(

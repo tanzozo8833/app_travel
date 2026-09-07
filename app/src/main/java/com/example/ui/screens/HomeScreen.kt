@@ -67,6 +67,12 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.Locale
 
+/**
+ * Loại sự cố GPS. Dùng enum thay vì chuỗi thuần để giao diện vừa hiển thị đúng
+ * thông báo, vừa chọn được nút hành động tương ứng cho từng loại.
+ */
+private enum class GpsIssue { NO_PERMISSION, DISABLED, NO_SIGNAL, ERROR }
+
 private fun computeGpsDistanceMeters(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Int {
     val r = 6371000.0 // Earth radius in meters
     val dLat = Math.toRadians(lat2 - lat1)
@@ -134,7 +140,7 @@ fun HomeScreen(
     var detectedPlace by remember { mutableStateOf<Place?>(null) }
     var distanceMeters by remember { mutableStateOf<Int?>(null) }
     var isSearchingGps by remember { mutableStateOf(false) }
-    var gpsErrorMessage by remember { mutableStateOf<String?>(null) }
+    var gpsIssue by remember { mutableStateOf<GpsIssue?>(null) }
     var hasLocationPermission by remember {
         mutableStateOf(
             ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -150,7 +156,7 @@ fun HomeScreen(
 
         if (!fineGranted && !coarseGranted) {
             hasLocationPermission = false
-            gpsErrorMessage = context.getString(R.string.home_gps_no_permission_title)
+            gpsIssue = GpsIssue.NO_PERMISSION
             return
         }
         hasLocationPermission = true
@@ -165,13 +171,13 @@ fun HomeScreen(
         } ?: false
 
         if (!isGpsEnabled) {
-            gpsErrorMessage = context.getString(R.string.home_gps_disabled)
+            gpsIssue = GpsIssue.DISABLED
             return
         }
 
         locationJob?.cancel()
         isSearchingGps = true
-        gpsErrorMessage = null
+        gpsIssue = null
 
         locationJob = coroutineScope.launch {
             try {
@@ -237,12 +243,13 @@ fun HomeScreen(
                     } else {
                         distanceMeters = null
                     }
-                    gpsErrorMessage = null
+                    gpsIssue = null
                 } else {
-                    gpsErrorMessage = context.getString(R.string.home_gps_no_signal)
+                    gpsIssue = GpsIssue.NO_SIGNAL
                 }
             } catch (e: Exception) {
-                gpsErrorMessage = e.message
+                Log.w("HomeScreen", "GPS error: ${e.message}", e)
+                gpsIssue = GpsIssue.ERROR
             } finally {
                 isSearchingGps = false
             }
@@ -259,7 +266,7 @@ fun HomeScreen(
             refreshGpsLocation()
         } else {
             hasLocationPermission = false
-            gpsErrorMessage = context.getString(R.string.home_gps_permission_needed)
+            gpsIssue = GpsIssue.NO_PERMISSION
         }
     }
 
@@ -388,6 +395,7 @@ fun HomeScreen(
                         isSearchingGps = isSearchingGps,
                         hasPermission = hasLocationPermission,
                         isAlreadyStamped = isAlreadyStamped,
+                        gpsIssue = gpsIssue,
                         onRequestPermission = {
                             locationPermissionLauncher.launch(
                                 arrayOf(
@@ -770,6 +778,7 @@ private fun HeroCheckInBanner(
     isSearchingGps: Boolean,
     hasPermission: Boolean,
     isAlreadyStamped: Boolean,
+    gpsIssue: GpsIssue?,
     onRequestPermission: () -> Unit,
     onRefreshGps: () -> Unit,
     onQuickCheckIn: () -> Unit,
@@ -859,18 +868,65 @@ private fun HeroCheckInBanner(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(
-                        text = when {
-                            !hasPermission -> stringResource(R.string.home_gps_hint_permission)
-                            isAlreadyStamped -> stringResource(R.string.home_gps_hint_stamped)
-                            detectedLat != null && detectedLng != null -> stringResource(R.string.home_gps_hint_coords, "%.4f".format(detectedLat), "%.4f".format(detectedLng))
-                            else -> stringResource(R.string.home_gps_hint_default)
-                        },
-                        fontSize = 11.sp,
-                        color = Color(0xFFC7E2D7),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    // Khi GPS có sự cố thì nói rõ lý do và cho một nút xử lý được
+                    // ngay, thay vì để ô định vị quay mãi mà người dùng không hiểu.
+                    if (gpsIssue != null) {
+                        Text(
+                            text = stringResource(
+                                when (gpsIssue) {
+                                    GpsIssue.NO_PERMISSION -> R.string.home_gps_no_permission_title
+                                    GpsIssue.DISABLED -> R.string.home_gps_disabled
+                                    GpsIssue.NO_SIGNAL -> R.string.home_gps_no_signal
+                                    GpsIssue.ERROR -> R.string.home_gps_error_unknown
+                                }
+                            ),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Gold500,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        val context = LocalContext.current
+                        Text(
+                            text = stringResource(
+                                when (gpsIssue) {
+                                    GpsIssue.NO_PERMISSION -> R.string.home_gps_action_grant
+                                    GpsIssue.DISABLED -> R.string.home_gps_action_open_settings
+                                    else -> R.string.common_retry
+                                }
+                            ),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(999.dp))
+                                .background(Brand700)
+                                .clickable {
+                                    when (gpsIssue) {
+                                        GpsIssue.NO_PERMISSION -> onRequestPermission()
+                                        GpsIssue.DISABLED -> context.startActivity(
+                                            android.content.Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                        )
+                                        else -> onRefreshGps()
+                                    }
+                                }
+                                .padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
+                    } else {
+                        Text(
+                            text = when {
+                                !hasPermission -> stringResource(R.string.home_gps_hint_permission)
+                                isAlreadyStamped -> stringResource(R.string.home_gps_hint_stamped)
+                                detectedLat != null && detectedLng != null -> stringResource(R.string.home_gps_hint_coords, "%.4f".format(detectedLat), "%.4f".format(detectedLng))
+                                else -> stringResource(R.string.home_gps_hint_default)
+                            },
+                            fontSize = 11.sp,
+                            color = Color(0xFFC7E2D7),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
