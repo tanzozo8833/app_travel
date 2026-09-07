@@ -429,4 +429,112 @@
     <string name="edittrip_item_note_hint">Góc chụp đẹp, lưu ý trang phục…</string>
     <string name="edittrip_rename_day_title">Đổi tên Ngày %1$d</string>
     <string name="edittrip_day_title_field">Tiêu đề ngày</string>
+
+    <!-- ===================== CHẾ ĐỘ MÀU ẢNH ===================== -->
+    <string name="colormode_original">Màu Gốc</string>
+    <string name="colormode_original_desc">Tự nhiên nguyên bản</string>
+    <string name="colormode_film">Màu Film</string>
+    <string name="colormode_film_desc">Ấm áp Kodak 35mm</string>
+    <string name="colormode_monochrome">Trắng Đen</string>
+    <string name="colormode_monochrome_desc">Photobooth Noir B&amp;W</string>
+    <string name="colormode_vivid">Màu Tươi</string>
+    <string name="colormode_vivid_desc">Rực rỡ &amp; Sống động</string>
+    <string name="colormode_rosy">Trắng Hồng</string>
+    <string name="colormode_rosy_desc">Mịn da Glow Photobooth</string>
+    <string name="colormode_vintage">Vintage 90s</string>
+    <string name="colormode_vintage_desc">Hoài niệm Retro Sepia</string>
+    <string name="colormode_mist">Sương Mù</string>
+    <string name="colormode_mist_desc">Thông xanh &amp; Moody Teal</string>
+    <string name="colormode_cyberpunk">Neon Night</string>
+    <string name="colormode_cyberpunk_desc">Tương phản Sài Gòn đêm</string>
+
+    <!-- ===================== CHỤP &amp; XEM CON DẤU ===================== -->
+    <string name="checkin_tab_capture">Chụp Stamp</string>
+    <string name="checkin_review_photo">XEM LẠI ẢNH</string>
+    <string name="checkin_capture_title">Chụp Ảnh &amp; Đóng Dấu Dấu Chân</string>
+    <string name="checkin_retake">Chụp lại</string>
+    <string name="checkin_open_camera">Mở Camera Thật</string>
+    <string name="checkin_camera_permission_desc">Cần cấp quyền Camera để chụp ảnh check-in chân thực trước mặt bạn.</string>
+    <string name="checkin_settings">Cài Đặt</string>
+    <string name="checkin_colormode_header">CHẾ ĐỘ MÀU (BỘ LỌC PHOTOBOOTH)</string>
+    <string name="checkin_colormode_note">Lưu thật vào ảnh 1:1</string>
+    <string name="checkin_pick_from_gallery">Tải ảnh từ Thư viện</string>
+    <string name="checkin_gallery">Thư viện</string>
+    <string name="checkin_switch_camera">Đổi Camera</string>
+    <string name="checkin_camera_front">Trước</string>
+    <string name="checkin_caption_hint">Viết cảm nghĩ về khoảnh khắc check-in này… #vietnam #checkin</string>
+    <string name="checkin_stamp_passport">Đóng dấu Hộ Chiếu</string>
+    <string name="checkin_posting">Đang đăng…</string>
+    <string name="checkin_post_feed">Đăng feed</string>
+    <string name="checkin_nearby_header">ĐỊA ĐIỂM SĂN DẤU GẦN BẠN (%1$s)</string>
+    <string name="checkin_passport_title">CUỐN HỘ CHIẾU DẤU CHÂN VIỆT NAM</string>
+    <string name="checkin_passport_subtitle">Hành Trình Chinh Phục 34 Tỉnh Thành</string>
+    <string name="checkin_city_label">THÀNH PHỐ</string>
+    <string name="checkin_provinces_visited"> / %1$d đã đi</string>
+    <string name="checkin_stamps_collected"> con dấu đã thu</string>
+    <string name="checkin_passport_progress">Tiến độ hoàn thành Hộ Chiếu</string>
+
+    <!-- Trạng thái GPS trong màn hình con dấu -->
+    <string name="checkin_gps_updated_at">Cập nhật lúc: %1$s • Sai số: ±%2$dm</string>
+    <string name="checkin_gps_receiving">Đang nhận tín hiệu chip GPS…</string>
+    <string name="checkin_gps_disabled">Dịch vụ vị trí đang tắt</string>
+    <string name="checkin_gps_no_permission">Chưa cấp quyền vị trí</string>
+    <string name="checkin_gps_need_permission">Cần cấp quyền truy cập vị trí</string>
+    <string name="checkin_gps_lost">Mất tín hiệu GPS</string>
+    <string name="checkin_gps_not_scanned">Chưa quét vị trí</string>
+    <string name="checkin_gps_scanning">Đang dò…</string>
+    <string name="checkin_gps_rescan">Quét lại GPS</string>
+    <string name="checkin_gps_reading">Đang đọc tọa độ thực từ chip GPS của máy…</string>
+    <string name="checkin_gps_permission_rationale">Ứng dụng cần quyền vị trí chính xác để nhận diện địa phương bạn đang du lịch và mở khóa Stamp thật.</string>
+    <string name="checkin_gps_grant">Cấp Quyền Vị Trí</string>
+    <string name="checkin_gps_app_settings">Cài Đặt App</string>
+    <string name="checkin_gps_disabled_desc">Dịch vụ định vị (GPS) trên thiết bị đang tắt. Vui lòng bật vị trí để quét tọa độ thực.</string>
+    <string name="checkin_gps_enable_in_settings">Bật Vị Trí Trong Cài Đặt</string>
+    <string name="checkin_gps_try_again">Thử Quét Lại</string>
+    <string name="checkin_gps_coords_header">TỌA ĐỘ HIỆN TẠI (WGS84)</string>
+    <string name="checkin_gps_distance">Khoảng cách: %1$s</string>
+    <string name="checkin_gps_real_location">Vị trí GPS thực tế (%1$s)</string>
+    <string name="checkin_gps_stamp_at">Đóng Dấu Tại %1$s</string>
+    <string name="checkin_gps_start_scan">Bắt Đầu Quét Vị Trí GPS Thật</string>
+
+    <!-- Bản đồ &amp; danh sách tỉnh trong màn hình con dấu -->
+    <string name="checkin_map_header">BẢN ĐỒ DẤU CHÂN VIỆT NAM (GOOGLE MAPS)</string>
+    <string name="checkin_map_desc">Bản đồ vệ tinh/địa hình trực quan &amp; điểm check-in</string>
+    <string name="checkin_see_more">Xem thêm</string>
+    <string name="checkin_province_list_header">DANH SÁCH 34 TỈNH THÀNH VIỆT NAM</string>
+    <string name="checkin_province_list_hint">Chạm tỉnh thành để xem bộ con dấu</string>
+    <string name="checkin_province_progress">%1$d/%2$d Đã đi</string>
+    <string name="checkin_province_checked">Đã check-in %1$d/%2$d điểm</string>
+    <string name="checkin_province_locked">Chưa mở khoá (0/%1$d điểm)</string>
+    <string name="checkin_unlock">Mở khoá</string>
+    <string name="checkin_collapse_list">Thu gọn danh sách</string>
+    <string name="checkin_expand_list">Xem thêm toàn bộ %1$d tỉnh thành (%2$d tỉnh còn lại) ▼</string>
+    <string name="checkin_stamp_grid_header">BỘ SƯU TẬP CON DẤU Ô TRÒN (PASSPORT)</string>
+    <string name="checkin_stamp_grid_title">Cuốn Hộ Chiếu Dấu Chân Tròn</string>
+    <string name="checkin_stamp_grid_hint">Chạm vào từng con dấu tròn để mở trang hộ chiếu dấu chân</string>
+    <string name="checkin_filter_all">Tất cả (%1$d)</string>
+    <string name="checkin_filter_earned">Đã có (%1$d)</string>
+    <string name="checkin_filter_north">Miền Bắc</string>
+    <string name="checkin_filter_central">Miền Trung</string>
+    <string name="checkin_filter_highlands">Tây Nguyên</string>
+    <string name="checkin_filter_south">Miền Nam</string>
+    <string name="checkin_not_unlocked">Chưa mở khoá</string>
+    <string name="checkin_locked">Khóa</string>
+    <string name="checkin_success_title">Tuyệt vời!</string>
+    <string name="checkin_success_header">🎉 ĐÃ ĐÓNG DẤU HỘ CHIẾU</string>
+    <string name="checkin_success_desc">Đã lưu dấu chân tại %1$s với khung %2$s và bộ lọc %3$s vào Hộ Chiếu Dấu Chân!</string>
+
+    <!-- Thông báo trong màn hình con dấu -->
+    <string name="checkin_toast_need_camera">Cần cấp quyền Camera để chụp ảnh check-in</string>
+    <string name="checkin_toast_applying">Đang áp bộ lọc màu…</string>
+    <string name="checkin_toast_capture_failed">Chụp ảnh không thành công, vui lòng thử lại</string>
+    <string name="checkin_toast_need_photo">Vui lòng chụp ảnh hoặc chọn ảnh từ thư viện trước</string>
+    <string name="checkin_toast_processing">Đang xử lý &amp; áp bộ lọc %1$s…</string>
+    <string name="checkin_toast_oom">Bộ nhớ máy quá tải khi áp bộ lọc màu, đã lưu ảnh gốc an toàn</string>
+    <string name="checkin_toast_saved_original">Đã lưu ảnh gốc an toàn</string>
+    <string name="checkin_toast_gps_updated">Đã cập nhật vị trí GPS thật (±%1$dm)</string>
+    <string name="checkin_toast_gps_no_signal">Không bắt được tín hiệu GPS (có thể do đang ở trong nhà). Vui lòng thử lại ở khu vực thoáng đãng hơn.</string>
+    <string name="checkin_toast_gps_error">Không thể lấy vị trí: %1$s</string>
+    <string name="checkin_toast_need_photo_before_stamp">Vui lòng chụp ảnh từ Camera hoặc chọn ảnh từ Thư viện trước khi đóng dấu hay đăng bài.</string>
+    <string name="checkin_caption_auto">Check-in tại %1$s (%2$s) ✨</string>
 </resources>

@@ -1,68 +1,70 @@
 package com.example.ui.components
 
+import androidx.annotation.StringRes
+import com.example.R
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 
 enum class CheckInColorMode(
     val id: String,
-    val title: String,
-    val subtext: String,
+    @StringRes val titleRes: Int,
+    @StringRes val subtextRes: Int,
     val iconEmoji: String,
     val samplePreviewColor: Long
 ) {
     ORIGINAL(
         id = "original",
-        title = "Màu Gốc",
-        subtext = "Tự nhiên nguyên bản",
+        titleRes = R.string.colormode_original,
+        subtextRes = R.string.colormode_original_desc,
         iconEmoji = "📷",
         samplePreviewColor = 0xFF4A6572
     ),
     FILM(
         id = "film",
-        title = "Màu Film",
-        subtext = "Ấm áp Kodak 35mm",
+        titleRes = R.string.colormode_film,
+        subtextRes = R.string.colormode_film_desc,
         iconEmoji = "🎞️",
         samplePreviewColor = 0xFFD48B38
     ),
     BLACK_AND_WHITE(
         id = "monochrome",
-        title = "Trắng Đen",
-        subtext = "Photobooth Noir B&W",
+        titleRes = R.string.colormode_monochrome,
+        subtextRes = R.string.colormode_monochrome_desc,
         iconEmoji = "⚪",
         samplePreviewColor = 0xFF2C3437
     ),
     VIVID(
         id = "vivid",
-        title = "Màu Tươi",
-        subtext = "Rực rỡ & Sống động",
+        titleRes = R.string.colormode_vivid,
+        subtextRes = R.string.colormode_vivid_desc,
         iconEmoji = "✨",
         samplePreviewColor = 0xFF00897B
     ),
     ROSY_WHITE(
         id = "rosy",
-        title = "Trắng Hồng",
-        subtext = "Mịn da Glow Photobooth",
+        titleRes = R.string.colormode_rosy,
+        subtextRes = R.string.colormode_rosy_desc,
         iconEmoji = "🌸",
         samplePreviewColor = 0xFFE91E63
     ),
     VINTAGE(
         id = "vintage",
-        title = "Vintage 90s",
-        subtext = "Hoài niệm Retro Sepia",
+        titleRes = R.string.colormode_vintage,
+        subtextRes = R.string.colormode_vintage_desc,
         iconEmoji = "📻",
         samplePreviewColor = 0xFF8D6E63
     ),
     DALAT_MIST(
         id = "dalat_mist",
-        title = "Sương Mù",
-        subtext = "Thông xanh & Moody Teal",
+        titleRes = R.string.colormode_mist,
+        subtextRes = R.string.colormode_mist_desc,
         iconEmoji = "🌲",
         samplePreviewColor = 0xFF00796B
     ),
     CYBERPUNK(
         id = "cyberpunk",
-        title = "Neon Night",
-        subtext = "Tương phản Sài Gòn đêm",
+        titleRes = R.string.colormode_cyberpunk,
+        subtextRes = R.string.colormode_cyberpunk_desc,
         iconEmoji = "⚡",
         samplePreviewColor = 0xFF6200EE
     );

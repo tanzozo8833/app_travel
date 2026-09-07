@@ -436,4 +436,112 @@
     <string name="edittrip_item_note_hint">Best photo angles, what to wear…</string>
     <string name="edittrip_rename_day_title">Rename Day %1$d</string>
     <string name="edittrip_day_title_field">Day title</string>
+
+    <!-- ===================== PHOTO COLOR MODES ===================== -->
+    <string name="colormode_original">Original</string>
+    <string name="colormode_original_desc">Natural, untouched</string>
+    <string name="colormode_film">Film</string>
+    <string name="colormode_film_desc">Warm Kodak 35mm</string>
+    <string name="colormode_monochrome">Black &amp; White</string>
+    <string name="colormode_monochrome_desc">Photobooth noir B&amp;W</string>
+    <string name="colormode_vivid">Vivid</string>
+    <string name="colormode_vivid_desc">Bright &amp; lively</string>
+    <string name="colormode_rosy">Rosy</string>
+    <string name="colormode_rosy_desc">Smooth glow photobooth</string>
+    <string name="colormode_vintage">Vintage 90s</string>
+    <string name="colormode_vintage_desc">Nostalgic retro sepia</string>
+    <string name="colormode_mist">Misty</string>
+    <string name="colormode_mist_desc">Pine green &amp; moody teal</string>
+    <string name="colormode_cyberpunk">Neon Night</string>
+    <string name="colormode_cyberpunk_desc">Saigon night contrast</string>
+
+    <!-- ===================== CAPTURE &amp; VIEW STAMPS ===================== -->
+    <string name="checkin_tab_capture">Capture stamp</string>
+    <string name="checkin_review_photo">REVIEW PHOTO</string>
+    <string name="checkin_capture_title">Take a Photo &amp; Stamp Your Passport</string>
+    <string name="checkin_retake">Retake</string>
+    <string name="checkin_open_camera">Open real camera</string>
+    <string name="checkin_camera_permission_desc">Camera permission is required to take a real check-in photo.</string>
+    <string name="checkin_settings">Settings</string>
+    <string name="checkin_colormode_header">COLOR MODE (PHOTOBOOTH FILTER)</string>
+    <string name="checkin_colormode_note">Baked into the 1:1 photo</string>
+    <string name="checkin_pick_from_gallery">Pick from gallery</string>
+    <string name="checkin_gallery">Gallery</string>
+    <string name="checkin_switch_camera">Switch camera</string>
+    <string name="checkin_camera_front">Front</string>
+    <string name="checkin_caption_hint">Write about this check-in moment… #vietnam #checkin</string>
+    <string name="checkin_stamp_passport">Stamp passport</string>
+    <string name="checkin_posting">Publishing…</string>
+    <string name="checkin_post_feed">Post to feed</string>
+    <string name="checkin_nearby_header">STAMP SPOTS NEAR YOU (%1$s)</string>
+    <string name="checkin_passport_title">VIETNAM FOOTPRINT PASSPORT</string>
+    <string name="checkin_passport_subtitle">Conquering all 34 provinces</string>
+    <string name="checkin_city_label">CITY</string>
+    <string name="checkin_provinces_visited"> / %1$d visited</string>
+    <string name="checkin_stamps_collected"> stamps collected</string>
+    <string name="checkin_passport_progress">Passport completion</string>
+
+    <!-- GPS status on the stamp screen -->
+    <string name="checkin_gps_updated_at">Updated at %1$s • Accuracy ±%2$dm</string>
+    <string name="checkin_gps_receiving">Receiving GPS signal…</string>
+    <string name="checkin_gps_disabled">Location services are off</string>
+    <string name="checkin_gps_no_permission">Location permission not granted</string>
+    <string name="checkin_gps_need_permission">Location permission required</string>
+    <string name="checkin_gps_lost">GPS signal lost</string>
+    <string name="checkin_gps_not_scanned">Location not scanned yet</string>
+    <string name="checkin_gps_scanning">Scanning…</string>
+    <string name="checkin_gps_rescan">Scan GPS again</string>
+    <string name="checkin_gps_reading">Reading real coordinates from the GPS chip…</string>
+    <string name="checkin_gps_permission_rationale">The app needs precise location to recognise where you are travelling and unlock real stamps.</string>
+    <string name="checkin_gps_grant">Grant location permission</string>
+    <string name="checkin_gps_app_settings">App settings</string>
+    <string name="checkin_gps_disabled_desc">Location services (GPS) are off on this device. Please turn them on to scan real coordinates.</string>
+    <string name="checkin_gps_enable_in_settings">Turn on location in settings</string>
+    <string name="checkin_gps_try_again">Try scanning again</string>
+    <string name="checkin_gps_coords_header">CURRENT COORDINATES (WGS84)</string>
+    <string name="checkin_gps_distance">Distance: %1$s</string>
+    <string name="checkin_gps_real_location">Real GPS location (%1$s)</string>
+    <string name="checkin_gps_stamp_at">Stamp at %1$s</string>
+    <string name="checkin_gps_start_scan">Start real GPS scan</string>
+
+    <!-- Map &amp; province list on the stamp screen -->
+    <string name="checkin_map_header">VIETNAM FOOTPRINT MAP (GOOGLE MAPS)</string>
+    <string name="checkin_map_desc">Satellite/terrain map &amp; check-in spots</string>
+    <string name="checkin_see_more">See more</string>
+    <string name="checkin_province_list_header">ALL 34 PROVINCES OF VIETNAM</string>
+    <string name="checkin_province_list_hint">Tap a province to see its stamps</string>
+    <string name="checkin_province_progress">%1$d/%2$d visited</string>
+    <string name="checkin_province_checked">Checked in at %1$d/%2$d places</string>
+    <string name="checkin_province_locked">Not unlocked (0/%1$d places)</string>
+    <string name="checkin_unlock">Unlock</string>
+    <string name="checkin_collapse_list">Collapse list</string>
+    <string name="checkin_expand_list">See all %1$d provinces (%2$d more) ▼</string>
+    <string name="checkin_stamp_grid_header">ROUND STAMP COLLECTION (PASSPORT)</string>
+    <string name="checkin_stamp_grid_title">Round footprint passport</string>
+    <string name="checkin_stamp_grid_hint">Tap a round stamp to open its passport page</string>
+    <string name="checkin_filter_all">All (%1$d)</string>
+    <string name="checkin_filter_earned">Earned (%1$d)</string>
+    <string name="checkin_filter_north">North</string>
+    <string name="checkin_filter_central">Central</string>
+    <string name="checkin_filter_highlands">Highlands</string>
+    <string name="checkin_filter_south">South</string>
+    <string name="checkin_not_unlocked">Not unlocked</string>
+    <string name="checkin_locked">Locked</string>
+    <string name="checkin_success_title">Wonderful!</string>
+    <string name="checkin_success_header">🎉 PASSPORT STAMPED</string>
+    <string name="checkin_success_desc">Saved your footprint at %1$s with the %2$s frame and the %3$s filter into your Footprint Passport!</string>
+
+    <!-- Toasts on the stamp screen -->
+    <string name="checkin_toast_need_camera">Camera permission is required for check-in photos</string>
+    <string name="checkin_toast_applying">Applying colour filter…</string>
+    <string name="checkin_toast_capture_failed">Could not take the photo, please try again</string>
+    <string name="checkin_toast_need_photo">Please take or pick a photo first</string>
+    <string name="checkin_toast_processing">Processing &amp; applying the %1$s filter…</string>
+    <string name="checkin_toast_oom">Ran out of memory applying the filter, the original photo was saved safely</string>
+    <string name="checkin_toast_saved_original">Original photo saved safely</string>
+    <string name="checkin_toast_gps_updated">Real GPS location updated (±%1$dm)</string>
+    <string name="checkin_toast_gps_no_signal">No GPS signal (you may be indoors). Please try again somewhere more open.</string>
+    <string name="checkin_toast_gps_error">Could not get your location: %1$s</string>
+    <string name="checkin_toast_need_photo_before_stamp">Please take a photo with the camera or pick one from the gallery before stamping or posting.</string>
+    <string name="checkin_caption_auto">Check-in at %1$s (%2$s) ✨</string>
 </resources>

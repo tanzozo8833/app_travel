@@ -101,7 +101,9 @@ object ImageColorFilterProcessor {
             }
 
             val savedUri = Uri.fromFile(targetFile).toString()
-            Log.d(TAG, "Processed and saved image to: $savedUri (Filter: ${colorMode.title}, Target: ${targetDimension}px)")
+            // Dùng id chứ không dùng tên hiển thị: log không nên đổi theo ngôn ngữ,
+            // và id cố định thì tìm kiếm trong log dễ hơn.
+            Log.d(TAG, "Processed and saved image to: $savedUri (Filter: ${colorMode.id}, Target: ${targetDimension}px)")
             Result.success(savedUri)
         } catch (oom: OutOfMemoryError) {
             Log.e(TAG, "OutOfMemoryError during image processing pipeline (target: $targetDimension)", oom)

@@ -49,6 +49,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.CheckInRecord
 import com.example.data.model.LuminaFrame
 import com.example.data.model.Place
@@ -180,7 +182,7 @@ fun CheckInScreen(
         hasCameraPermission = isGranted
         permissionRequested = true
         if (!isGranted) {
-            Toast.makeText(context, "Cần cấp quyền Camera để chụp ảnh check-in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.checkin_toast_need_camera), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -199,7 +201,7 @@ fun CheckInScreen(
     var showFocusRing by remember { mutableStateOf(false) }
     var isCapturingPhoto by remember { mutableStateOf(false) }
     var isProcessingPhoto by remember { mutableStateOf(false) }
-    var processingMessage by remember { mutableStateOf("Đang áp bộ lọc màu...") }
+    var processingMessage by remember { mutableStateOf(context.getString(R.string.checkin_toast_applying)) }
     var showSuccessStampDialog by remember { mutableStateOf(false) }
     var lastSavedPhotoUri by remember { mutableStateOf<String?>(null) }
 
@@ -279,7 +281,7 @@ fun CheckInScreen(
                 override fun onError(exception: ImageCaptureException) {
                     isCapturingPhoto = false
                     Log.e("CheckInScreen", "Real photo capture failed", exception)
-                    Toast.makeText(context, "Chụp ảnh không thành công, vui lòng thử lại", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.checkin_toast_capture_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -292,13 +294,13 @@ fun CheckInScreen(
     ) {
         val sourceImage = capturedPhotoUri
         if (sourceImage == null) {
-            Toast.makeText(context, "Vui lòng chụp ảnh hoặc chọn ảnh từ thư viện trước", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.checkin_toast_need_photo), Toast.LENGTH_SHORT).show()
             return
         }
 
         if (isProcessingPhoto) return
         isProcessingPhoto = true
-        processingMessage = "Đang xử lý & áp bộ lọc ${selectedColorMode.title}..."
+        processingMessage = context.getString(R.string.checkin_toast_processing, context.getString(selectedColorMode.titleRes))
 
         coroutineScope.launch {
             try {
@@ -316,7 +318,7 @@ fun CheckInScreen(
                     withContext(Dispatchers.Main) {
                         Toast.makeText(
                             context,
-                            "Bộ nhớ máy quá tải khi áp bộ lọc màu, đã lưu ảnh gốc an toàn",
+                            context.getString(R.string.checkin_toast_oom),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -329,7 +331,7 @@ fun CheckInScreen(
                 isProcessingPhoto = false
                 Log.e("CheckInScreen", "Unexpected error in processing", t)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Đã lưu ảnh gốc an toàn", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.checkin_toast_saved_original), Toast.LENGTH_SHORT).show()
                 }
                 lastSavedPhotoUri = sourceImage
                 onComplete(sourceImage)
@@ -473,10 +475,10 @@ fun CheckInScreen(
                     }
 
                     if (isManualRefresh) {
-                        Toast.makeText(context, "Đã cập nhật vị trí GPS thật (±${accuracy.toInt()}m)", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.checkin_toast_gps_updated, accuracy.toInt()), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    realGpsState = RealGpsState.Error("Không bắt được tín hiệu GPS (có thể do đang ở trong nhà). Vui lòng thử lại ở khu vực thoáng đãng hơn.")
+                    realGpsState = RealGpsState.Error(context.getString(R.string.checkin_toast_gps_no_signal))
                 }
             } catch (e: Exception) {
                 Log.e("CheckInScreen", "Error getting location", e)
@@ -572,7 +574,7 @@ fun CheckInScreen(
                                 )
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Chụp Stamp",
+                                    text = stringResource(R.string.checkin_tab_capture),
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = if (currentSubTab == StampScreenTab.CAPTURE) Color.White else TextPrimary
@@ -670,7 +672,7 @@ fun CheckInScreen(
                                         )
                                         Spacer(modifier = Modifier.width(4.dp))
                                         Text(
-                                            text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else "XEM LẠI ẢNH",
+                                            text = if (studioMode == CheckInStudioMode.LIVE_CAMERA) "CAMERA THẬT 1:1" else stringResource(R.string.checkin_review_photo),
                                             fontSize = 8.5.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (studioMode == CheckInStudioMode.LIVE_CAMERA) HeartRed else Brand700
@@ -679,7 +681,7 @@ fun CheckInScreen(
                                 }
                             }
                             Text(
-                                text = "Chụp Ảnh & Đóng Dấu Dấu Chân",
+                                text = stringResource(R.string.checkin_capture_title),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = TextPrimary
@@ -845,14 +847,14 @@ fun CheckInScreen(
                                         }
                                         Spacer(modifier = Modifier.height(10.dp))
                                         Text(
-                                            text = "Mở Camera Thật",
+                                            text = stringResource(R.string.checkin_open_camera),
                                             fontSize = 15.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = Color.White
                                         )
                                         Spacer(modifier = Modifier.height(4.dp))
                                         Text(
-                                            text = "Cần cấp quyền Camera để chụp ảnh check-in chân thực trước mặt bạn.",
+                                            text = stringResource(R.string.checkin_camera_permission_desc),
                                             fontSize = 11.5.sp,
                                             color = Color.White.copy(alpha = 0.8f),
                                             textAlign = TextAlign.Center
@@ -882,7 +884,7 @@ fun CheckInScreen(
                                                     shape = RoundedCornerShape(999.dp),
                                                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                                                 ) {
-                                                    Text("Cài Đặt", fontSize = 11.5.sp, color = Color.White)
+                                                    Text(stringResource(R.string.checkin_settings), fontSize = 11.5.sp, color = Color.White)
                                                 }
                                             }
                                         }
@@ -958,7 +960,7 @@ fun CheckInScreen(
                                         Text(text = selectedColorMode.iconEmoji, fontSize = 11.sp)
                                         Spacer(modifier = Modifier.width(4.dp))
                                         Text(
-                                            text = selectedColorMode.title,
+                                            text = stringResource(selectedColorMode.titleRes),
                                             fontSize = 10.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = Color.White
@@ -1140,14 +1142,14 @@ fun CheckInScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "CHẾ ĐỘ MÀU (BỘ LỌC PHOTOBOOTH)",
+                        text = stringResource(R.string.checkin_colormode_header),
                         fontSize = 9.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
                         color = Brand700
                     )
                     Text(
-                        text = "Lưu thật vào ảnh 1:1",
+                        text = stringResource(R.string.checkin_colormode_note),
                         fontSize = 9.5.sp,
                         color = TextSecondary
                     )
@@ -1191,14 +1193,14 @@ fun CheckInScreen(
                                 Spacer(modifier = Modifier.height(2.dp))
 
                                 Text(
-                                    text = mode.title,
+                                    text = stringResource(mode.titleRes),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = if (isSelected) Color.White else TextPrimary,
                                     maxLines = 1
                                 )
                                 Text(
-                                    text = mode.subtext,
+                                    text = stringResource(mode.subtextRes),
                                     fontSize = 7.5.sp,
                                     color = if (isSelected) Gold100 else TextSecondary,
                                     maxLines = 1,
@@ -1243,14 +1245,14 @@ fun CheckInScreen(
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Default.PhotoLibrary,
-                                        contentDescription = "Tải ảnh từ Thư viện",
+                                        contentDescription = stringResource(R.string.checkin_pick_from_gallery),
                                         tint = Brand700,
                                         modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.height(2.dp))
-                            Text(text = "Thư viện", fontSize = 10.sp, color = TextPrimary)
+                            Text(text = stringResource(R.string.checkin_gallery), fontSize = 10.sp, color = TextPrimary)
                         }
 
                         // 2. BIG REAL SHUTTER BUTTON
@@ -1297,14 +1299,14 @@ fun CheckInScreen(
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Default.Cameraswitch,
-                                        contentDescription = "Đổi Camera",
+                                        contentDescription = stringResource(R.string.checkin_switch_camera),
                                         tint = Brand700,
                                         modifier = Modifier.size(20.dp)
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.height(2.dp))
-                            Text(text = if (isFrontCamera) "Trước" else "Sau", fontSize = 10.sp, color = TextPrimary)
+                            Text(text = if (isFrontCamera) stringResource(R.string.checkin_camera_front) else "Sau", fontSize = 10.sp, color = TextPrimary)
                         }
                     }
                 }
@@ -1376,7 +1378,7 @@ fun CheckInScreen(
                 OutlinedTextField(
                     value = userCaption,
                     onValueChange = { userCaption = it },
-                    placeholder = { Text("Viết cảm nghĩ về khoảnh khắc check-in này... #vietnam #checkin", fontSize = 12.sp) },
+                    placeholder = { Text(stringResource(R.string.checkin_caption_hint), fontSize = 12.sp) },
                     shape = RoundedCornerShape(14.dp),
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 3
@@ -1406,7 +1408,7 @@ fun CheckInScreen(
                             )
                             Spacer(modifier = Modifier.width(10.dp))
                             Text(
-                                text = "Vui lòng chụp ảnh từ Camera hoặc chọn ảnh từ Thư viện trước khi đóng dấu hay đăng bài.",
+                                text = stringResource(R.string.checkin_toast_need_photo_before_stamp),
                                 fontSize = 12.sp,
                                 color = Brand900,
                                 fontWeight = FontWeight.SemiBold,
@@ -1437,12 +1439,12 @@ fun CheckInScreen(
                         if (isProcessingPhoto) {
                             CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Brand700, strokeWidth = 2.dp)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Đang xử lý...", fontSize = 11.5.sp, color = Brand700)
+                            Text(stringResource(R.string.common_processing), fontSize = 11.5.sp, color = Brand700)
                         } else {
                             Icon(Icons.Default.Bookmark, contentDescription = null, tint = if (hasRealPhoto) Brand700 else TextTertiary, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "Đóng dấu Hộ Chiếu",
+                                text = stringResource(R.string.checkin_stamp_passport),
                                 fontSize = 12.sp,
                                 color = if (hasRealPhoto) Brand700 else TextTertiary,
                                 fontWeight = FontWeight.Bold
@@ -1457,7 +1459,7 @@ fun CheckInScreen(
                                 val caption = if (userCaption.isNotBlank()) {
                                     userCaption
                                 } else {
-                                    "Check-in tại ${selectedPlace.name} (${selectedColorMode.title}) ✨"
+                                    context.getString(R.string.checkin_caption_auto, selectedPlace.name, context.getString(selectedColorMode.titleRes))
                                 }
                                 onPublishPost(caption, "${selectedPlace.name}, ${selectedProvince.shortName}", savedUri)
                             }
@@ -1472,11 +1474,11 @@ fun CheckInScreen(
                         if (isProcessingPhoto) {
                             CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White, strokeWidth = 2.dp)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Đang đăng...", fontSize = 11.5.sp, color = Color.White)
+                            Text(stringResource(R.string.checkin_posting), fontSize = 11.5.sp, color = Color.White)
                         } else {
                             Icon(Icons.Default.Send, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "Đăng feed", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Text(text = stringResource(R.string.checkin_post_feed), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -1491,7 +1493,7 @@ fun CheckInScreen(
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
                 Text(
-                    text = "ĐỊA ĐIỂM SĂN DẤU GẦN BẠN (${selectedProvince.shortName.uppercase()})",
+                    text = stringResource(R.string.checkin_nearby_header, selectedProvince.shortName.uppercase()),
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -1565,7 +1567,7 @@ fun CheckInScreen(
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
                 Text(
-                    text = "CUỐN HỘ CHIẾU DẤU CHÂN VIỆT NAM",
+                    text = stringResource(R.string.checkin_passport_title),
                     fontSize = 10.5.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -1573,7 +1575,7 @@ fun CheckInScreen(
                     letterSpacing = 0.8.sp
                 )
                 Text(
-                    text = "Hành Trình Chinh Phục 34 Tỉnh Thành",
+                    text = stringResource(R.string.checkin_passport_subtitle),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = TextPrimary
@@ -1600,7 +1602,7 @@ fun CheckInScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "THÀNH PHỐ",
+                                    text = stringResource(R.string.checkin_city_label),
                                     fontSize = 9.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace,
@@ -1622,7 +1624,7 @@ fun CheckInScreen(
                                     color = Brand700
                                 )
                                 Text(
-                                    text = " / ${provinces.size} đã đi",
+                                    text = stringResource(R.string.checkin_provinces_visited, provinces.size),
                                     fontSize = 11.5.sp,
                                     color = TextSecondary,
                                     modifier = Modifier.padding(bottom = 2.dp, start = 4.dp)
@@ -1667,7 +1669,7 @@ fun CheckInScreen(
                                     color = Gold500
                                 )
                                 Text(
-                                    text = " con dấu đã thu",
+                                    text = stringResource(R.string.checkin_stamps_collected),
                                     fontSize = 11.5.sp,
                                     color = TextSecondary,
                                     modifier = Modifier.padding(bottom = 2.dp, start = 4.dp)
@@ -1693,7 +1695,7 @@ fun CheckInScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Tiến độ hoàn thành Hộ Chiếu",
+                                text = stringResource(R.string.checkin_passport_progress),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = TextPrimary
@@ -1776,14 +1778,14 @@ fun CheckInScreen(
                                         text = when (val state = realGpsState) {
                                             is RealGpsState.Success -> {
                                                 val timeStr = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date(state.timestamp))
-                                                "Cập nhật lúc: $timeStr • Sai số: ±${state.accuracyMeters.toInt()}m"
+                                                stringResource(R.string.checkin_gps_updated_at, timeStr, state.accuracyMeters.toInt())
                                             }
-                                            is RealGpsState.Searching -> "Đang nhận tín hiệu chip GPS..."
-                                            is RealGpsState.LocationDisabled -> "Dịch vụ vị trí đang tắt"
-                                            is RealGpsState.PermissionDenied -> "Chưa cấp quyền vị trí"
-                                            is RealGpsState.PermissionRequired -> "Cần cấp quyền truy cập vị trí"
-                                            is RealGpsState.Error -> "Mất tín hiệu GPS"
-                                            RealGpsState.Idle -> "Chưa quét vị trí"
+                                            is RealGpsState.Searching -> stringResource(R.string.checkin_gps_receiving)
+                                            is RealGpsState.LocationDisabled -> stringResource(R.string.checkin_gps_disabled)
+                                            is RealGpsState.PermissionDenied -> stringResource(R.string.checkin_gps_no_permission)
+                                            is RealGpsState.PermissionRequired -> stringResource(R.string.checkin_gps_need_permission)
+                                            is RealGpsState.Error -> stringResource(R.string.checkin_gps_lost)
+                                            RealGpsState.Idle -> stringResource(R.string.checkin_gps_not_scanned)
                                         },
                                         fontSize = 9.5.sp,
                                         color = TextSecondary
@@ -1811,7 +1813,7 @@ fun CheckInScreen(
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = if (isRefreshingGps || realGpsState is RealGpsState.Searching) "Đang dò..." else "Quét lại GPS",
+                                        text = if (isRefreshingGps || realGpsState is RealGpsState.Searching) stringResource(R.string.checkin_gps_scanning) else stringResource(R.string.checkin_gps_rescan),
                                         fontSize = 9.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Brand700
@@ -1839,7 +1841,7 @@ fun CheckInScreen(
                                     )
                                     Spacer(modifier = Modifier.height(8.dp))
                                     Text(
-                                        text = "Đang đọc tọa độ thực từ chip GPS của máy...",
+                                        text = stringResource(R.string.checkin_gps_reading),
                                         fontSize = 11.5.sp,
                                         fontWeight = FontWeight.Medium,
                                         color = TextPrimary
@@ -1854,7 +1856,7 @@ fun CheckInScreen(
                                         .padding(12.dp)
                                 ) {
                                     Text(
-                                        text = "Ứng dụng cần quyền vị trí chính xác để nhận diện địa phương bạn đang du lịch và mở khóa Stamp thật.",
+                                        text = stringResource(R.string.checkin_gps_permission_rationale),
                                         fontSize = 11.sp,
                                         color = Color(0xFF8D6E63),
                                         lineHeight = 15.sp
@@ -1874,7 +1876,7 @@ fun CheckInScreen(
                                             shape = RoundedCornerShape(8.dp),
                                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                                         ) {
-                                            Text("Cấp Quyền Vị Trí", fontSize = 11.sp, color = Color.White)
+                                            Text(stringResource(R.string.checkin_gps_grant), fontSize = 11.sp, color = Color.White)
                                         }
 
                                         OutlinedButton(
@@ -1888,7 +1890,7 @@ fun CheckInScreen(
                                             shape = RoundedCornerShape(8.dp),
                                             contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp)
                                         ) {
-                                            Text("Cài Đặt App", fontSize = 11.sp, color = Brand700)
+                                            Text(stringResource(R.string.checkin_gps_app_settings), fontSize = 11.sp, color = Brand700)
                                         }
                                     }
                                 }
@@ -1901,7 +1903,7 @@ fun CheckInScreen(
                                         .padding(12.dp)
                                 ) {
                                     Text(
-                                        text = "Dịch vụ định vị (GPS) trên thiết bị đang tắt. Vui lòng bật vị trí để quét tọa độ thực.",
+                                        text = stringResource(R.string.checkin_gps_disabled_desc),
                                         fontSize = 11.sp,
                                         color = Color(0xFFC62828),
                                         lineHeight = 15.sp
@@ -1916,7 +1918,7 @@ fun CheckInScreen(
                                         shape = RoundedCornerShape(8.dp),
                                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
                                     ) {
-                                        Text("Bật Vị Trí Trong Cài Đặt", fontSize = 11.sp, color = Color.White)
+                                        Text(stringResource(R.string.checkin_gps_enable_in_settings), fontSize = 11.sp, color = Color.White)
                                     }
                                 }
                             }
@@ -1942,7 +1944,7 @@ fun CheckInScreen(
                                     ) {
                                         Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(14.dp), tint = Gold500)
                                         Spacer(modifier = Modifier.width(4.dp))
-                                        Text("Thử Quét Lại", fontSize = 11.sp, color = Color.White)
+                                        Text(stringResource(R.string.checkin_gps_try_again), fontSize = 11.sp, color = Color.White)
                                     }
                                 }
                             }
@@ -1960,7 +1962,7 @@ fun CheckInScreen(
                                         ) {
                                             Column {
                                                 Text(
-                                                    text = "TỌA ĐỘ HIỆN TẠI (WGS84)",
+                                                    text = stringResource(R.string.checkin_gps_coords_header),
                                                     fontSize = 8.5.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     fontFamily = FontFamily.Monospace,
@@ -2014,7 +2016,7 @@ fun CheckInScreen(
                                                     "${"%.1f".format(state.distanceToNearestPlaceMeters / 1000.0)}km"
                                                 }
                                                 Text(
-                                                    text = "Khoảng cách: $distText",
+                                                    text = stringResource(R.string.checkin_gps_distance, distText),
                                                     fontSize = 9.5.sp,
                                                     fontWeight = FontWeight.Bold,
                                                     color = Brand700
@@ -2028,7 +2030,7 @@ fun CheckInScreen(
 
                                 // Quick Stamp Button at real GPS
                                 val targetProvince = state.detectedProvince ?: selectedProvince
-                                val targetPlaceName = state.nearestPlace?.name ?: "Vị trí GPS thực tế (${targetProvince.shortName})"
+                                val targetPlaceName = state.nearestPlace?.name ?: stringResource(R.string.checkin_gps_real_location, targetProvince.shortName)
                                 Button(
                                     onClick = {
                                         onQuickCheckIn(targetPlaceName, targetProvince.code, targetProvince.shortName, null)
@@ -2041,7 +2043,7 @@ fun CheckInScreen(
                                     Icon(Icons.Default.BookmarkAdded, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "Đóng Dấu Tại ${targetProvince.shortName}",
+                                        text = stringResource(R.string.checkin_gps_stamp_at, targetProvince.shortName),
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White
@@ -2058,7 +2060,7 @@ fun CheckInScreen(
                                     Icon(Icons.Default.GpsFixed, contentDescription = null, tint = Gold500, modifier = Modifier.size(16.dp))
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "Bắt Đầu Quét Vị Trí GPS Thật",
+                                        text = stringResource(R.string.checkin_gps_start_scan),
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White
@@ -2085,7 +2087,7 @@ fun CheckInScreen(
                 ) {
                     Column {
                         Text(
-                            text = "BẢN ĐỒ DẤU CHÂN VIỆT NAM (GOOGLE MAPS)",
+                            text = stringResource(R.string.checkin_map_header),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -2093,7 +2095,7 @@ fun CheckInScreen(
                             letterSpacing = 0.5.sp
                         )
                         Text(
-                            text = "Bản đồ vệ tinh/địa hình trực quan & điểm check-in",
+                            text = stringResource(R.string.checkin_map_desc),
                             fontSize = 12.sp,
                             color = TextSecondary
                         )
@@ -2138,7 +2140,7 @@ fun CheckInScreen(
             }
         }
 
-        // 4. VERTICAL LIST OF 34 PROVINCES (Show 5 + "Xem thêm" expander)
+        // 4. VERTICAL LIST OF 34 PROVINCES (Show 5 + stringResource(R.string.checkin_see_more) expander)
         item {
             Column(
                 modifier = Modifier
@@ -2152,7 +2154,7 @@ fun CheckInScreen(
                 ) {
                     Column {
                         Text(
-                            text = "DANH SÁCH 34 TỈNH THÀNH VIỆT NAM",
+                            text = stringResource(R.string.checkin_province_list_header),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -2160,7 +2162,7 @@ fun CheckInScreen(
                             letterSpacing = 0.5.sp
                         )
                         Text(
-                            text = "Chạm tỉnh thành để xem bộ con dấu",
+                            text = stringResource(R.string.checkin_province_list_hint),
                             fontSize = 12.sp,
                             color = TextSecondary
                         )
@@ -2170,7 +2172,7 @@ fun CheckInScreen(
                         color = Brand100
                     ) {
                         Text(
-                            text = "${visitedProvinces.size}/${provinces.size} Đã đi",
+                            text = stringResource(R.string.checkin_province_progress, visitedProvinces.size, provinces.size),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             color = Brand700,
@@ -2251,7 +2253,7 @@ fun CheckInScreen(
                                         maxLines = 1
                                     )
                                     Text(
-                                        text = if (isVisited) "Đã check-in ${prov.visitedPlacesCount}/${prov.suggestedPlacesCount} điểm" else "Chưa mở khoá (0/${prov.suggestedPlacesCount} điểm)",
+                                        text = if (isVisited) stringResource(R.string.checkin_province_checked, prov.visitedPlacesCount, prov.suggestedPlacesCount) else stringResource(R.string.checkin_province_locked, prov.suggestedPlacesCount),
                                         fontSize = 10.sp,
                                         color = if (isVisited) Brand700 else TextTertiary,
                                         fontWeight = if (isVisited) FontWeight.SemiBold else FontWeight.Normal
@@ -2270,7 +2272,7 @@ fun CheckInScreen(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = if (isVisited) "Xem stamp" else "Mở khoá",
+                                        text = if (isVisited) "Xem stamp" else stringResource(R.string.checkin_unlock),
                                         fontSize = 10.5.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = if (isVisited) Color.White else TextSecondary
@@ -2305,7 +2307,7 @@ fun CheckInScreen(
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = if (showAllProvincesList) "Thu gọn danh sách" else "Xem thêm toàn bộ ${provinces.size} tỉnh thành (${provinces.size - 5} tỉnh còn lại) ▼",
+                            text = if (showAllProvincesList) stringResource(R.string.checkin_collapse_list) else stringResource(R.string.checkin_expand_list, provinces.size, provinces.size - 5),
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.Bold,
                             color = Brand700
@@ -2323,7 +2325,7 @@ fun CheckInScreen(
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 Text(
-                    text = "BỘ SƯU TẬP CON DẤU Ô TRÒN (PASSPORT)",
+                    text = stringResource(R.string.checkin_stamp_grid_header),
                     fontSize = 10.5.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
@@ -2331,13 +2333,13 @@ fun CheckInScreen(
                     letterSpacing = 0.8.sp
                 )
                 Text(
-                    text = "Cuốn Hộ Chiếu Dấu Chân Tròn",
+                    text = stringResource(R.string.checkin_stamp_grid_title),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,
                     color = TextPrimary
                 )
                 Text(
-                    text = "Chạm vào từng con dấu tròn để mở trang hộ chiếu dấu chân",
+                    text = stringResource(R.string.checkin_stamp_grid_hint),
                     fontSize = 11.sp,
                     color = TextSecondary
                 )
@@ -2346,12 +2348,12 @@ fun CheckInScreen(
 
                 // Region Filter Chips Row
                 val regionFilters = listOf(
-                    "ALL" to "Tất cả (${provinces.size})",
-                    "EARNED" to "Đã có (${visitedProvinces.size})",
-                    "Bắc" to "Miền Bắc",
-                    "Trung" to "Miền Trung",
-                    "Tây Nguyên" to "Tây Nguyên",
-                    "Nam" to "Miền Nam"
+                    "ALL" to stringResource(R.string.checkin_filter_all, provinces.size),
+                    "EARNED" to stringResource(R.string.checkin_filter_earned, visitedProvinces.size),
+                    "Bắc" to stringResource(R.string.checkin_filter_north),
+                    "Trung" to stringResource(R.string.checkin_filter_central),
+                    "Tây Nguyên" to stringResource(R.string.checkin_filter_highlands),
+                    "Nam" to stringResource(R.string.checkin_filter_south)
                 )
 
                 LazyRow(
@@ -2434,7 +2436,7 @@ fun CheckInScreen(
                                             Box(contentAlignment = Alignment.Center) {
                                                 Icon(
                                                     imageVector = Icons.Default.Lock,
-                                                    contentDescription = "Chưa mở khoá",
+                                                    contentDescription = stringResource(R.string.checkin_not_unlocked),
                                                     tint = Color.White,
                                                     modifier = Modifier.size(12.dp)
                                                 )
@@ -2455,7 +2457,7 @@ fun CheckInScreen(
                                 )
 
                                 Text(
-                                    text = if (isEarned) "${prov.visitedPlacesCount} điểm" else "Khóa",
+                                    text = if (isEarned) "${prov.visitedPlacesCount} điểm" else stringResource(R.string.checkin_locked),
                                     fontSize = 9.sp,
                                     color = if (isEarned) Brand700 else TextTertiary,
                                     textAlign = TextAlign.Center
@@ -2485,12 +2487,12 @@ fun CheckInScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = Brand700),
                     shape = RoundedCornerShape(999.dp)
                 ) {
-                    Text("Tuyệt vời!")
+                    Text(stringResource(R.string.checkin_success_title))
                 }
             },
             title = {
                 Text(
-                    text = "🎉 ĐÃ ĐÓNG DẤU HỘ CHIẾU",
+                    text = stringResource(R.string.checkin_success_header),
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
                     color = Brand700,
@@ -2513,7 +2515,7 @@ fun CheckInScreen(
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Đã lưu dấu chân tại ${selectedPlace.name} với khung ${selectedFrame.name} và bộ lọc ${selectedColorMode.title} vào Hộ Chiếu Dấu Chân!",
+                        text = stringResource(R.string.checkin_success_desc, selectedPlace.name, selectedFrame.name, stringResource(selectedColorMode.titleRes)),
                         fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         color = TextPrimary
