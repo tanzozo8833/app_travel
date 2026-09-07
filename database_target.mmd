@@ -1,0 +1,273 @@
+%% ============================================================================
+%% LEVART — SƠ ĐỒ CƠ SỞ DỮ LIỆU KHI HOÀN THIỆN
+%% Cập nhật: 30/08/2026
+%%
+%% Đây là đích đến, KHÔNG phải hiện trạng. So sánh với database_current.mmd.
+%% Mỗi thay đổi đều xuất phát từ một lỗ hổng có bằng chứng, ghi trong status.md.
+%%
+%% QUY ƯỚC ĐÁNH DẤU:
+%%   [MỚI]  bảng hoặc cột chưa tồn tại
+%%   [SỬA]  đã có nhưng phải đổi nguồn hoặc đổi ý nghĩa
+%%   [BỎ]   nên loại khỏi nơi đang nằm
+%% ============================================================================
+
+erDiagram
+
+    %% ------------------------------------------------------------------
+    %% ROOM — chỉ còn danh mục tra cứu thuần tuý và cài đặt thiết bị
+    %% Mọi cột tiến độ cá nhân bị gỡ khỏi đây
+    %% ------------------------------------------------------------------
+
+    ROOM_provinces {
+        int    id PK
+        string code
+        string name
+        string short_name
+        string region
+        double center_lat
+        double center_lng
+        string cover_url
+        string stamp_symbol
+        string highlight_description
+        int    suggested_places_count
+        int    visited_places_count "[BỎ] chuyển sang FS_user_province_progress"
+        bool   is_completed "[BỎ] chuyển sang FS_user_province_progress"
+    }
+
+    ROOM_places {
+        string id PK
+        int    province_id FK
+        string province_code
+        string name
+        string category
+        string address
+        string description
+        string cover_url
+        int    checkin_radius_meters
+        bool   is_suggested
+        long   price_range_vnd
+        string tags
+        double rating
+        bool   is_visited "[BỎ] tiến độ cá nhân, không thuộc danh mục"
+        double lat
+        double lng
+    }
+
+    ROOM_lumina_frames {
+        string id PK
+        string name
+        string badge_label
+        string subtitle
+        string top_title
+        string bottom_tagline
+        long   preview_color
+        string province_code
+        bool   is_seasonal
+    }
+
+    ROOM_app_settings {
+        string setting_key PK
+        string setting_value
+    }
+
+    ROOM_pending_uploads {
+        string id PK "[MỚI] hàng đợi tải ảnh khi mất mạng"
+        string local_path
+        string target_type "post | check_in | avatar"
+        string target_id
+        int    retry_count
+        long   created_at
+    }
+
+    ROOM_provinces ||--o{ ROOM_places : "chua"
+
+    %% ------------------------------------------------------------------
+    %% FIRESTORE — nguồn duy nhất cho mọi dữ liệu người dùng
+    %% ------------------------------------------------------------------
+
+    FS_users {
+        string id PK
+        string username
+        string displayName
+        string avatarUrl "[SỬA] trỏ tới Storage thay vì Unsplash"
+        string tagTitle
+        string bio
+        bool   isCustomName
+        bool   isCustomAvatar
+        string topCityName
+        int    topCityCheckInCount "[SỬA] do máy chủ tính"
+        int    visitedProvincesCount "[SỬA] do máy chủ tính"
+        int    totalProvincesCount
+        double totalDistanceKm "[SỬA] tính từ toạ độ thật"
+        int    tripsCompletedCount "[SỬA] do máy chủ tính"
+        int    totalSavesCount "[SỬA] do máy chủ tính"
+        int    followerCount "[MỚI] đếm sẵn, tránh quét cả bảng"
+        int    followingCount "[MỚI]"
+        string fcmToken "[MỚI] để gửi thông báo đẩy"
+        string locale "[MỚI] ngôn ngữ ưa dùng"
+        bool   isBanned "[MỚI] phục vụ kiểm duyệt"
+        long   createdAt "[MỚI]"
+        long   updatedAt
+    }
+
+    FS_posts {
+        string id PK
+        string userId FK
+        string authorName "[SỬA] chỉ là bản sao đọc nhanh, gốc ở FS_users"
+        string authorHandle "[SỬA] như trên"
+        string authorAvatarUrl "[SỬA] như trên"
+        bool   hasRecentCheckIn
+        string locationLabel
+        string provinceCode
+        double lat "[MỚI] để lọc bài Gần bạn bằng toạ độ thật"
+        double lng "[MỚI]"
+        string caption
+        array  mediaUrls "[SỬA] BẮT BUỘC là đường dẫn Firebase Storage"
+        array  mediaThumbUrls "[MỚI] ảnh nhỏ cho bảng tin, tiết kiệm băng thông"
+        float  aspectRatio
+        int    likeCount "[SỬA] do Cloud Function cập nhật"
+        int    commentCount "[SỬA] do Cloud Function cập nhật"
+        int    saveCount "[SỬA] do Cloud Function cập nhật"
+        int    shareCount
+        array  tags
+        string visibility "[MỚI] công khai | chỉ mình tôi | người theo dõi"
+        bool   isDeleted "[MỚI] xoá mềm, giữ được bình luận"
+        string reportCount "[MỚI] phục vụ kiểm duyệt"
+        long   createdAt
+        long   updatedAt
+    }
+
+    FS_post_comments {
+        string id PK
+        string postId FK
+        string userId FK
+        string content
+        int    likeCount
+        string parentCommentId "[MỚI] cho phép trả lời bình luận"
+        bool   isDeleted "[MỚI] xoá mềm"
+        long   createdAt
+    }
+
+    FS_post_likes {
+        string userId PK
+        long   createdAt "[MỚI] để sắp xếp và chống spam"
+    }
+
+    FS_post_saves {
+        string userId PK
+        string boardId FK "[MỚI] lưu vào bộ sưu tập nào"
+        long   createdAt "[MỚI]"
+    }
+
+    FS_user_follows {
+        string id PK
+        string followerId FK
+        string followedId FK
+        long   createdAt
+    }
+
+    FS_user_check_ins {
+        string id PK
+        string userId
+        string placeId FK "[MỚI] khoá thật thay vì so tên"
+        string placeName
+        string provinceCode
+        double lat
+        double lng
+        string photoUrl "[SỬA] BẮT BUỘC là đường dẫn Firebase Storage"
+        string frameId
+        string colorMode "[MỚI] chế độ màu đã áp"
+        float  trustScore
+        long   createdAt
+    }
+
+    FS_user_province_progress {
+        string provinceCode PK "[MỚI] thay cột tiến độ trong ROOM_provinces"
+        int    visitedPlacesCount
+        bool   isCompleted
+        long   firstVisitedAt
+        long   lastVisitedAt
+    }
+
+    FS_user_trips {
+        string id PK
+        string userId
+        string title
+        string destination
+        string provinceCode
+        string startDate
+        string endDate
+        string durationText
+        string groupType
+        int    groupSize "[MỚI] số người, hiện đang nhét trong chuỗi groupType"
+        array  styleTags
+        string coverUrl "[SỬA] trỏ tới Storage"
+        long   totalEstimatedCostVnd
+        int    spotsCount
+        string status
+        bool   isAiGenerated
+        object weatherSummary "[SỬA] lấy từ dịch vụ thời tiết thật, kèm mốc thời gian"
+        array  days
+        string calendarEventIds "[MỚI] để đồng bộ Google Calendar không tạo trùng"
+        long   calendarSyncedAt "[MỚI]"
+        long   createdAt
+    }
+
+    FS_user_saved_boards {
+        string id PK
+        string name
+        string coverUrl
+        int    itemCount "[MỚI]"
+        long   createdAt
+    }
+
+    FS_user_notifications {
+        string id PK
+        bool   isSocial
+        string actorId FK "[MỚI] để mở trang người gây ra thông báo"
+        string actorName
+        string actorAvatarUrl
+        string title
+        string message
+        string targetType "[MỚI] post | trip | province"
+        string targetId "[MỚI] bấm vào là mở đúng nội dung"
+        string previewUrl
+        bool   isRead
+        long   createdAt "[MỚI] thay cho chuỗi timeAgo cố định"
+    }
+
+    FS_reports {
+        string id PK "[MỚI] báo cáo nội dung xấu — Google Play yêu cầu"
+        string reporterId FK
+        string targetType
+        string targetId
+        string reason
+        string status
+        long   createdAt
+    }
+
+    FS_place_catalog {
+        string id PK "[MỚI] danh mục địa điểm dùng chung, thay cho seed trong máy"
+        int    provinceId
+        string name
+        string category
+        double lat
+        double lng
+        string coverUrl
+        bool   isApproved "địa điểm do người dùng đề xuất cần duyệt"
+        string createdByUserId
+    }
+
+    FS_users ||--o{ FS_posts                    : "viet"
+    FS_users ||--o{ FS_user_follows             : "theo doi"
+    FS_users ||--o{ FS_user_check_ins           : "so huu"
+    FS_users ||--o{ FS_user_province_progress   : "tien do"
+    FS_users ||--o{ FS_user_trips               : "so huu"
+    FS_users ||--o{ FS_user_saved_boards        : "so huu"
+    FS_users ||--o{ FS_user_notifications       : "nhan"
+    FS_users ||--o{ FS_reports                  : "bao cao"
+    FS_posts ||--o{ FS_post_comments            : "co"
+    FS_posts ||--o{ FS_post_likes               : "duoc thich"
+    FS_posts ||--o{ FS_post_saves               : "duoc luu"
+    FS_user_saved_boards ||--o{ FS_post_saves   : "gom"
+    FS_place_catalog ||--o{ FS_user_check_ins   : "duoc dong dau tai"

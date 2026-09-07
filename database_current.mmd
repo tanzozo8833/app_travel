@@ -1,0 +1,195 @@
+%% ============================================================================
+%% LEVART — SƠ ĐỒ CƠ SỞ DỮ LIỆU HIỆN TẠI
+%% Cập nhật: 30/08/2026
+%%
+%% BẰNG CHỨNG:
+%%   - Room: đọc từ app/src/main/java/com/example/data/local/entity/*.kt
+%%     và LuminaDatabase.kt (version = 8, 4 entity)
+%%   - Firestore: truy vấn trực tiếp máy chủ travel-app-844e3 bằng
+%%     firebase-admin, lấy danh sách trường thật của từng collection
+%%   - Số document trong ngoặc là số đếm thật tại thời điểm khảo sát
+%% ============================================================================
+
+erDiagram
+
+    %% ------------------------------------------------------------------
+    %% NHÓM 1 — ROOM (nằm trong máy, Room version = 8, 4 bảng)
+    %% Chỉ còn danh mục tra cứu và cài đặt thiết bị
+    %% ------------------------------------------------------------------
+
+    ROOM_provinces {
+        int    id PK
+        string code
+        string name
+        string short_name
+        string region
+        double center_lat
+        double center_lng
+        string cover_url
+        string stamp_symbol
+        string highlight_description
+        int    suggested_places_count
+        int    visited_places_count "TIẾN ĐỘ CHECK-IN — chỉ có trên máy này"
+        bool   is_completed
+    }
+
+    ROOM_places {
+        string id PK
+        int    province_id FK
+        string province_code
+        string name
+        string category
+        string address
+        string description
+        string cover_url
+        int    checkin_radius_meters
+        bool   is_suggested
+        long   price_range_vnd
+        string tags
+        double rating
+        bool   is_visited "TIẾN ĐỘ — chỉ có trên máy này"
+        double lat
+        double lng
+    }
+
+    ROOM_lumina_frames {
+        string id PK
+        string name
+        string badge_label
+        string subtitle
+        string top_title
+        string bottom_tagline
+        long   preview_color
+        string province_code
+        bool   is_seasonal
+    }
+
+    ROOM_app_settings {
+        string setting_key PK
+        string setting_value
+    }
+
+    ROOM_provinces ||--o{ ROOM_places : "chua"
+
+    %% ------------------------------------------------------------------
+    %% NHÓM 2 — FIRESTORE (máy chủ, dùng chung mọi thiết bị)
+    %% ------------------------------------------------------------------
+
+    FS_users {
+        string id PK "= uid Firebase Auth"
+        string username
+        string displayName
+        string avatarUrl
+        string tagTitle
+        string bio
+        bool   isCustomName
+        bool   isCustomAvatar
+        string topCityName
+        int    topCityCheckInCount
+        int    visitedProvincesCount
+        int    totalProvincesCount
+        double totalDistanceKm
+        int    tripsCompletedCount
+        int    totalSavesCount
+        long   updatedAt
+    }
+
+    FS_posts {
+        string id PK
+        string userId FK
+        string authorName "sao chép — có thể lệch"
+        string authorHandle "sao chép — có thể lệch"
+        string authorAvatarUrl "sao chép — có thể lệch"
+        bool   hasRecentCheckIn
+        string locationLabel
+        string provinceCode
+        string caption
+        array  mediaUrls "CHƯA TẢI LÊN — có thể là đường dẫn cục bộ"
+        float  aspectRatio
+        int    likeCount
+        int    commentCount
+        int    saveCount
+        int    shareCount
+        array  tags
+        long   createdAt
+        long   updatedAt
+    }
+
+    FS_post_comments {
+        string id PK
+        string postId FK
+        string userId FK
+        string authorName
+        string authorHandle
+        string authorAvatarUrl
+        string content
+        int    likeCount
+        long   createdAt
+    }
+
+    FS_post_likes {
+        string userId PK "id tài liệu = uid — hiện 0 bản ghi"
+    }
+
+    FS_post_saves {
+        string userId PK "id tài liệu = uid — hiện 0 bản ghi"
+    }
+
+    FS_user_follows {
+        string id PK "dạng follower_followed"
+        string followerId FK
+        string followedId FK
+        long   createdAt
+    }
+
+    FS_user_check_ins {
+        string id PK "HIỆN 0 BẢN GHI"
+        string placeName
+        string provinceCode
+        double lat
+        double lng
+        string photoUrl "đường dẫn cục bộ — không dùng được ở máy khác"
+    }
+
+    FS_user_trips {
+        string id PK "hiện 1 bản ghi"
+        string userId
+        string title
+        string destination
+        string provinceCode
+        string startDate
+        string endDate
+        string durationText
+        string groupType
+        array  styleTags
+        string coverUrl
+        long   totalEstimatedCostVnd
+        int    spotsCount
+        string status
+        bool   isAiGenerated
+        object weatherSummary "DO AI BỊA — không có nguồn thời tiết thật"
+        array  days
+        long   createdAt
+    }
+
+    FS_user_saved_boards {
+        string id PK "HIỆN 0 BẢN GHI"
+    }
+
+    FS_user_notifications {
+        string id PK "HIỆN 0 BẢN GHI"
+        string title
+        string message
+        bool   isRead
+    }
+
+    FS_users ||--o{ FS_posts               : "viet"
+    FS_users ||--o{ FS_user_follows        : "theo doi"
+    FS_users ||--o{ FS_user_check_ins      : "so huu rieng tu"
+    FS_users ||--o{ FS_user_trips          : "so huu rieng tu"
+    FS_users ||--o{ FS_user_saved_boards   : "so huu rieng tu"
+    FS_users ||--o{ FS_user_notifications  : "so huu rieng tu"
+    FS_posts ||--o{ FS_post_comments       : "co"
+    FS_posts ||--o{ FS_post_likes          : "duoc thich"
+    FS_posts ||--o{ FS_post_saves          : "duoc luu"
+    FS_users ||--o{ FS_post_comments       : "binh luan"
