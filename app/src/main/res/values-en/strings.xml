@@ -214,4 +214,22 @@
     <string name="post_action_like">Like</string>
     <string name="post_action_comment">Comment</string>
     <string name="post_action_save">Save</string>
+
+    <!-- ===================== POST DETAIL ===================== -->
+    <string name="postdetail_title">Post Details</string>
+    <string name="postdetail_follow_cta">+ Follow</string>
+    <string name="postdetail_save_post">Save post</string>
+    <string name="postdetail_attached_trip">ATTACHED ITINERARY</string>
+    <string name="postdetail_comments_hint">Tap to open the thread or ask for tips</string>
+    <string name="postdetail_related_title">RELATED POSTS</string>
+    <string name="postdetail_related_desc">Discover more views and tips from fellow travellers</string>
+    <plurals name="postdetail_view_comments">
+        <item quantity="one">View %1$d comment</item>
+        <item quantity="other">View %1$d comments</item>
+    </plurals>
+
+    <!-- ===================== COMMENT SHEET ===================== -->
+    <string name="comment_sheet_title">Comments (%1$d)</string>
+    <string name="comment_empty">No comments yet. Be the first to share your thoughts!</string>
+    <string name="comment_input_placeholder">Write a comment or ask a question…</string>
 </resources>

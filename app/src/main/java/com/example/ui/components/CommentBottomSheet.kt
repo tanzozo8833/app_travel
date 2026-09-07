@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.R
+import androidx.compose.ui.res.stringResource
 import com.example.data.model.Comment
 import com.example.data.model.Post
 import com.example.data.model.UserProfile
@@ -69,13 +71,13 @@ fun CommentBottomSheet(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Bình luận (${comments.size})",
+                    text = stringResource(R.string.comment_sheet_title, comments.size),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary
                 )
                 IconButton(onClick = onDismiss, modifier = Modifier.size(30.dp)) {
-                    Icon(Icons.Default.Close, contentDescription = "Đóng", tint = TextSecondary)
+                    Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close), tint = TextSecondary)
                 }
             }
 
@@ -91,7 +93,7 @@ fun CommentBottomSheet(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ cảm nghĩ!",
+                        text = stringResource(R.string.comment_empty),
                         fontSize = 13.sp,
                         color = TextSecondary,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -200,7 +202,7 @@ fun CommentBottomSheet(
                     OutlinedTextField(
                         value = inputText,
                         onValueChange = { inputText = it },
-                        placeholder = { Text("Viết bình luận hoặc đặt câu hỏi...", fontSize = 12.5.sp) },
+                        placeholder = { Text(stringResource(R.string.comment_input_placeholder), fontSize = 12.5.sp) },
                         shape = RoundedCornerShape(999.dp),
                         modifier = Modifier.weight(1f),
                         maxLines = 2

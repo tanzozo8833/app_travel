@@ -33,6 +33,9 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.request.SuccessResult
+import com.example.R
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import com.example.data.model.Post
 import com.example.data.model.Trip
 import com.example.ui.components.PostCard
@@ -125,10 +128,10 @@ fun PostDetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Quay lại", tint = TextPrimary)
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.common_back), tint = TextPrimary)
                     }
                     Text(
-                        text = "Bài Viết Chi Tiết",
+                        text = stringResource(R.string.postdetail_title),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
@@ -196,7 +199,7 @@ fun PostDetailScreen(
                             modifier = Modifier.clickable { onFollowClick(post) }
                         ) {
                             Text(
-                                text = if (isFollowing) "Đang theo dõi" else "+ Theo dõi",
+                                text = stringResource(if (isFollowing) R.string.post_action_following else R.string.postdetail_follow_cta),
                                 fontSize = 11.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (isFollowing) TextSecondary else Brand700,
@@ -291,7 +294,7 @@ fun PostDetailScreen(
                         ) {
                             Icon(
                                 imageVector = if (post.isLiked) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
-                                contentDescription = "Thích",
+                                contentDescription = stringResource(R.string.post_action_like),
                                 tint = if (post.isLiked) HeartRed else TextPrimary,
                                 modifier = Modifier.size(24.dp)
                             )
@@ -311,7 +314,7 @@ fun PostDetailScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.ChatBubbleOutline,
-                                contentDescription = "Bình luận",
+                                contentDescription = stringResource(R.string.post_action_comment),
                                 tint = TextPrimary,
                                 modifier = Modifier.size(22.dp)
                             )
@@ -348,7 +351,7 @@ fun PostDetailScreen(
                     IconButton(onClick = { onSaveClick(post) }) {
                         Icon(
                             imageVector = if (post.isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
-                            contentDescription = "Lưu bài viết",
+                            contentDescription = stringResource(R.string.postdetail_save_post),
                             tint = if (post.isSaved) Brand700 else TextPrimary,
                             modifier = Modifier.size(24.dp)
                         )
@@ -390,7 +393,7 @@ fun PostDetailScreen(
                             .padding(16.dp)
                     ) {
                         Text(
-                            text = "LỊCH TRÌNH ĐƯỢC ĐÍNH KÈM",
+                            text = stringResource(R.string.postdetail_attached_trip),
                             fontSize = 10.5.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace,
@@ -424,13 +427,13 @@ fun PostDetailScreen(
                     ) {
                         Column {
                             Text(
-                                text = "Xem ${post.commentCount} bình luận",
+                                text = pluralStringResource(R.plurals.postdetail_view_comments, post.commentCount, post.commentCount),
                                 fontSize = 13.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = TextPrimary
                             )
                             Text(
-                                text = "Chạm để mở khung trao đổi hoặc hỏi kinh nghiệm",
+                                text = stringResource(R.string.postdetail_comments_hint),
                                 fontSize = 11.5.sp,
                                 color = TextSecondary
                             )
@@ -450,14 +453,14 @@ fun PostDetailScreen(
                     ) {
                         Column(modifier = Modifier.padding(horizontal = 14.dp)) {
                             Text(
-                                text = "GỢI Ý BÀI VIẾT LIÊN QUAN",
+                                text = stringResource(R.string.postdetail_related_title),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Monospace,
                                 color = Brand700
                             )
                             Text(
-                                text = "Khám phá thêm góc nhìn và mẹo từ các tín đồ xê dịch khác",
+                                text = stringResource(R.string.postdetail_related_desc),
                                 fontSize = 11.5.sp,
                                 color = TextSecondary
                             )

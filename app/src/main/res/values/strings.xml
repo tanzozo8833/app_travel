@@ -210,4 +210,21 @@
     <string name="post_action_like">Thích</string>
     <string name="post_action_comment">Bình luận</string>
     <string name="post_action_save">Lưu</string>
+
+    <!-- ===================== CHI TIẾT BÀI VIẾT ===================== -->
+    <string name="postdetail_title">Bài Viết Chi Tiết</string>
+    <string name="postdetail_follow_cta">+ Theo dõi</string>
+    <string name="postdetail_save_post">Lưu bài viết</string>
+    <string name="postdetail_attached_trip">LỊCH TRÌNH ĐƯỢC ĐÍNH KÈM</string>
+    <string name="postdetail_comments_hint">Chạm để mở khung trao đổi hoặc hỏi kinh nghiệm</string>
+    <string name="postdetail_related_title">GỢI Ý BÀI VIẾT LIÊN QUAN</string>
+    <string name="postdetail_related_desc">Khám phá thêm góc nhìn và mẹo từ các tín đồ xê dịch khác</string>
+    <plurals name="postdetail_view_comments">
+        <item quantity="other">Xem %1$d bình luận</item>
+    </plurals>
+
+    <!-- ===================== KHUNG BÌNH LUẬN ===================== -->
+    <string name="comment_sheet_title">Bình luận (%1$d)</string>
+    <string name="comment_empty">Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ cảm nghĩ!</string>
+    <string name="comment_input_placeholder">Viết bình luận hoặc đặt câu hỏi…</string>
 </resources>
