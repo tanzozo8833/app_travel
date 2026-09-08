@@ -413,10 +413,11 @@ Xếp theo **lợi ích / công sức**, và theo ràng buộc phụ thuộc (l�
 
 ---
 
-## 8. Quyết định đang chờ thực hiện — B1
+## 8. B1 — đã triển khai xong phần máy khách, chờ bật bucket trên máy chủ
 
-**Chốt ngày 07/09/2026.** Chủ dự án đã duyệt phương án, nhưng **chưa bắt đầu làm** —
-tạm dừng vì hết hạn mức phiên làm việc. Khi chủ dự án nói "tiếp tục" thì làm đúng theo mục này.
+**Chốt ngày 07/09/2026, triển khai ngày 08/09/2026** — commit `7f6e31d`.
+Toàn bộ chín bước phía máy khách đã xong và chạy thử trên máy ảo. Còn đúng một việc
+nằm ngoài tầm code: **bật Cloud Storage cho dự án trên Firebase Console.**
 
 ### Phương án đã duyệt: B1 bản đầy đủ
 
@@ -466,3 +467,56 @@ Chỗ kiểm tra: Firebase Console → dự án `travel-app-844e3` → góc dư�
 
 **Nếu chưa ở Blaze thì bước 1–2 không chạy được**, nhưng bước 3, 4, 5 (nén ảnh, bảng hàng đợi,
 worker) vẫn viết trước được vì không đụng tới máy chủ.
+
+---
+
+### 8.1 Kết quả chạy thử ngày 08/09/2026
+
+Chạy hết luồng thật trên máy ảo `Pixel_10`: đẩy một ảnh vào thư viện, mở màn soạn bài,
+chọn ảnh bằng Photo Picker, nhập nội dung, bấm Đăng.
+
+**Nén ảnh — đo trên tệp thật trong `filesDir/upload_staging`:**
+
+| Tệp | Kích thước | So với gốc |
+|---|---|---|
+| Ảnh gốc (PNG 1080×2424) | 1.406.446 B | — |
+| `*_full.jpg` (cạnh dài ≤1600) | 183.327 B | **−87,0%** |
+| `*_thumb.jpg` (cạnh dài ≤400) | 19.368 B | **−98,6%** |
+
+Bảng tin đọc bản thumbnail, nghĩa là mỗi thẻ tải **19 KB** thay vì **1,4 MB**.
+
+**Hàng đợi — chạy đúng như thiết kế:**
+
+Firebase trả về **404 Not Found** khi tải lên. Worker không văng, trả về `RETRY`,
+bài nằm lại trong hàng đợi, và bảng tin hiện **"1 bài đang chờ tải lên"**.
+Đây chính là hành vi mong muốn khi máy chủ chưa sẵn sàng — bài không biến mất không dấu vết.
+
+**Câu hỏi treo ở mục 8 đã có lời giải bằng bằng chứng chạy thật:**
+
+> Mã **404** (chứ không phải 402/403) nghĩa là dự án `travel-app-844e3`
+> **chưa hề tạo bucket Cloud Storage nào.**
+
+Việc cần làm, chỉ trên Firebase Console, không cần sửa code:
+
+1. Mở Firebase Console → dự án `travel-app-844e3` → **Storage** → **Get started**.
+2. Nếu bị chặn thì nâng dự án lên gói **Blaze** (bắt buộc từ 09/2024). Bucket vẫn giữ hạn mức miễn phí.
+3. Vào tab **Rules**, dán nguyên nội dung tệp `storage.rules` ở gốc dự án.
+4. Mở lại app. Bài đang kẹt trong hàng đợi sẽ tự tải lên, không phải soạn lại.
+
+### 8.2 Bốn lỗi phát hiện khi chạy thử và đã sửa
+
+| Lỗi | Nguyên nhân |
+|---|---|
+| Mọi ảnh đều bị coi là hỏng | Với `inJustDecodeBounds = true` thì `decodeStream()` **luôn** trả về `null`. Đặt `?: return null` sau khối `use{}` là bắt nhầm kết quả giải mã thay vì luồng đọc |
+| Room ném `cannot verify the data integrity` | Thêm cột `remote_urls` mà giữ nguyên version 10. `fallbackToDestructiveMigration()` **không** cứu được khi số version không đổi — Room so hash lược đồ. Đã tăng lên 11 |
+| Ảnh mẫu biến mất khi trộn với ảnh máy | Bộ lọc chỉ giữ `content://` và `file://`, bỏ luôn `http(s)://`. Nay giữ cả hai, ảnh mẫu đứng trước |
+| Băng "đang chờ tải lên" đè lên tiêu đề hộ chiếu | Đặt chung `Box` với `ProvinceStoryTray`; `Box` xếp chồng các phần tử. Đã tách thành item riêng của lưới |
+
+### 8.3 Việc B1 còn nợ lại
+
+| Việc | Vì sao chưa làm |
+|---|---|
+| Xoá ảnh trên Storage khi người dùng xoá bài | `StorageService.deletePostMedia` đã viết nhưng **chưa nối vào `deletePost`** |
+| Màn hình xem và huỷ bài đang kẹt | `UploadQueue.cancel` và `observePending` đã có, nhưng giao diện mới chỉ có băng đếm số |
+| Kiểm chứng với ảnh 50 MP thật | Máy ảo không có ảnh đủ lớn — vẫn nằm ở mục 6 "chưa kiểm chứng" |
+| `attachedTrip` không được lưu qua hàng đợi | Không phải hồi quy: `FirestorePostService.createPost` vốn **chưa bao giờ** ghi trường này vào Firestore |
