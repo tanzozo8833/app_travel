@@ -16,9 +16,13 @@ import com.example.data.local.seed.DatabaseSeeder
         ProvinceEntity::class,
         PlaceEntity::class,
         LuminaFrameEntity::class,
-        AppSettingsEntity::class
+        AppSettingsEntity::class,
+        PendingUploadEntity::class
     ],
-    version = 9,
+    // MOI lan doi luoc do (them cot, doi kieu) deu phai tang so nay. Giu nguyen so cu
+    // ma doi luoc do thi fallbackToDestructiveMigration() KHONG cuu duoc: Room so hash
+    // luoc do, thay lech la nem IllegalStateException "cannot verify the data integrity".
+    version = 11,
     exportSchema = false
 )
 @TypeConverters(LuminaTypeConverters::class)
@@ -28,6 +32,7 @@ abstract class LuminaDatabase : RoomDatabase() {
     abstract fun placeDao(): PlaceDao
     abstract fun frameDao(): LuminaFrameDao
     abstract fun appSettingsDao(): AppSettingsDao
+    abstract fun pendingUploadDao(): PendingUploadDao
 
     companion object {
         // KHONG doi ten tep nay: Room se tao co so du lieu moi rong va toan bo

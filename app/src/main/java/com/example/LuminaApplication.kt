@@ -25,6 +25,10 @@ class LuminaApplication : Application(), ImageLoaderFactory {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        // Lan chay truoc cua worker co the bi he thong dung giua chung (het pin, khoi dong lai
+        // may). Dat lich lai khi mo app de bai con ket trong hang doi duoc tai len tiep.
+        repository.resumePendingUploads()
         val loader = newImageLoader()
         coil.Coil.setImageLoader(loader)
         

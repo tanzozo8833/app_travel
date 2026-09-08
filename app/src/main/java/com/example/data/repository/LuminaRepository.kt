@@ -1,5 +1,10 @@
 package com.example.data.repository
 
+import com.example.data.remote.StorageService
+import android.net.Uri
+import com.example.data.local.entity.PendingUploadEntity
+import com.example.data.upload.UploadQueue
+import kotlinx.coroutines.flow.Flow
 import android.app.Activity
 import android.content.Context
 import android.util.Log
@@ -29,12 +34,18 @@ class LuminaRepository(
     private val database: LuminaDatabase,
     private val context: Context
 ) {
+    companion object {
+        private const val DEFAULT_AVATAR_URL =
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+    }
+
     private val scope = CoroutineScope(Dispatchers.IO)
     val authManager = AuthManager(context)
     val firestoreService = FirestoreUserProfileService()
     val firestorePostService = FirestorePostService()
     val firestoreFollowService = FirestoreFollowService()
     val firestorePersonalService = FirestorePersonalDataService()
+    val storageService = StorageService()
 
     val isLoggedIn: StateFlow<Boolean> = authManager.isLoggedIn
     val isAnonymous: StateFlow<Boolean> = authManager.isAnonymous
@@ -352,6 +363,50 @@ class LuminaRepository(
     }
 
     /**
+     * Xep mot bai viet co anh that vao hang doi tai len.
+     *
+     * Anh duoc nen ngay, ghi vao bang `pending_uploads`, roi WorkManager tai len Cloud Storage
+     * va ghi bai vao Firestore o luong nen. Nho vay mat mang giua chung khong lam mat bai.
+     *
+     * @param imageUris dia chi anh cuc bo tren may (`content://` hoac `file://`)
+     */
+    suspend fun enqueuePostWithMedia(
+        caption: String,
+        imageUris: List<Uri>,
+        locationLabel: String,
+        provinceCode: String,
+        remoteImageUrls: List<String> = emptyList()
+    ): UploadQueue.EnqueueResult {
+        val activeUser = authManager.currentAuthUser.value
+        return UploadQueue.enqueuePost(
+            context = context,
+            userId = activeUser?.id ?: "traveler_guest",
+            authorName = activeUser?.displayName ?: "Lữ khách Levart",
+            authorHandle = activeUser?.username ?: "traveler",
+            authorAvatarUrl = activeUser?.avatarUrl ?: DEFAULT_AVATAR_URL,
+            caption = caption,
+            locationLabel = locationLabel,
+            provinceCode = provinceCode,
+            imageUris = imageUris,
+            remoteImageUrls = remoteImageUrls
+        )
+    }
+
+    /** So bai dang cho tai len, de giao dien hien bang thong bao. */
+    fun observePendingUploadCount(): Flow<Int> = UploadQueue.observePendingCount(context)
+
+    /** Danh sach bai dang cho, kem so lan thu va loi gan nhat. */
+    fun observePendingUploads(): Flow<List<PendingUploadEntity>> = UploadQueue.observePending(context)
+
+    /** Bo mot bai ra khoi hang doi theo yeu cau cua nguoi dung. */
+    suspend fun cancelPendingUpload(postId: String) = UploadQueue.cancel(context, postId)
+
+    /**
+     * Khoi dong lai worker khi mo app, phong truong hop lan chay truoc bi he thong dung giua chung.
+     */
+    fun resumePendingUploads() = UploadQueue.schedule(context)
+
+    /**
      * Creates and publishes a post to Cloud Firestore.
      */
     suspend fun createPost(
@@ -366,7 +421,7 @@ class LuminaRepository(
         val userId = activeUser?.id ?: "traveler_guest"
         val authorName = activeUser?.displayName ?: "Lữ khách Levart"
         val authorHandle = activeUser?.username ?: "traveler"
-        val authorAvatarUrl = activeUser?.avatarUrl ?: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop"
+        val authorAvatarUrl = activeUser?.avatarUrl ?: DEFAULT_AVATAR_URL
         val newPostId = "post_${UUID.randomUUID()}"
 
         val post = Post(
@@ -468,8 +523,13 @@ class LuminaRepository(
             val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "traveler_guest"
 
-            // 1. Insert check-in record to Firestore
-            firestorePersonalService.saveCheckIn(userId, record)
+            // 1. Dua anh dong dau len Cloud Storage truoc, roi moi ghi ban ghi check-in.
+            //    Truoc day photoUrl la duong dan trong filesDir cua may nay, may khac mo ho so
+            //    se thay o trong. Neu tai len that bai thi van ghi ban ghi voi duong dan cu:
+            //    mat anh tren may khac con hon mat ca lan dong dau.
+            val remoteRecord = uploadCheckInPhotoIfLocal(userId, record)
+
+            firestorePersonalService.saveCheckIn(userId, remoteRecord)
 
             // 2. Mark place as visited in local Room db
             database.placeDao().markAsVisitedByName(placeName, provinceCode)
@@ -508,6 +568,31 @@ class LuminaRepository(
             val activeUser = authManager.currentAuthUser.value
             val userId = activeUser?.id ?: "traveler_guest"
             firestorePersonalService.saveCheckIn(userId, checkInRecord)
+        }
+    }
+
+    /**
+     * Anh dong dau duoc [ImageColorFilterProcessor] ghi vao `filesDir/checkin_photos`.
+     * Ham nay day tep do len Cloud Storage va thay [CheckInRecord.photoUrl] bang dia chi that.
+     *
+     * Tra ve ban ghi goc neu khong co anh, anh khong phai tep cuc bo, hoac tai len that bai.
+     */
+    private suspend fun uploadCheckInPhotoIfLocal(
+        userId: String,
+        record: CheckInRecord
+    ): CheckInRecord {
+        val localPath = record.photoUrl ?: return record
+        if (localPath.startsWith("http://") || localPath.startsWith("https://")) return record
+
+        val file = java.io.File(localPath.removePrefix("file://"))
+        if (!file.exists()) return record
+
+        return try {
+            val url = storageService.uploadCheckInPhoto(userId, record.id, file)
+            record.copy(photoUrl = url)
+        } catch (e: Exception) {
+            Log.w("LuminaRepository", "Khong tai duoc anh dong dau: ${storageService.describeError(e)}", e)
+            record
         }
     }
 

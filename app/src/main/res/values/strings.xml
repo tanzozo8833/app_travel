@@ -625,4 +625,10 @@
     </plurals>
     <string name="map_row_north">MIỀN BẮC</string>
     <string name="map_row_central">MIỀN TRUNG</string>
+    <string name="upload_queued">Đã xếp bài vào hàng đợi. Ảnh sẽ tự tải lên khi có mạng.</string>
+    <string name="upload_no_usable_image">Không đọc được ảnh nào bạn đã chọn. Thử chọn ảnh khác nhé.</string>
+    <string name="upload_enqueue_failed">Không lưu được bài để tải lên. Thử lại giúp mình.</string>
+    <plurals name="upload_pending_banner">
+        <item quantity="other">%1$d bài đang chờ tải lên</item>
+    </plurals>
 </resources>

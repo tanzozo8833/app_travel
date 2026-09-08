@@ -1,5 +1,7 @@
 package com.example.ui
 
+import com.example.data.upload.UploadQueue
+import android.net.Uri
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -79,6 +81,16 @@ class LuminaViewModel(
     // Authentication State
     val isLoggedIn: StateFlow<Boolean> = repository.isLoggedIn
     val isAnonymous: StateFlow<Boolean> = repository.isAnonymous
+
+    private val appContext get() = LuminaApplication.instance
+
+    /** Dang nen anh va ghi hang doi. Man hinh soan bai dung de khoa nut Dang. */
+    private val _isUploadingPost = MutableStateFlow(false)
+    val isUploadingPost: StateFlow<Boolean> = _isUploadingPost.asStateFlow()
+
+    /** So bai da soan xong nhung chua tai len duoc, thuong do mat mang. */
+    val pendingUploadCount: StateFlow<Int> = repository.observePendingUploadCount()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0)
 
     private val _isLoggingIn = MutableStateFlow(false)
     val isLoggingIn: StateFlow<Boolean> = _isLoggingIn.asStateFlow()
@@ -610,6 +622,19 @@ class LuminaViewModel(
         mediaUrls: List<String> = emptyList(),
         aspectRatio: Float = 0.8f
     ) {
+        // Anh nguoi dung chon tu may la `content://` hoac `file://`. Nhung dia chi nay chi
+        // co nghia tren chinh may nay, ghi thang vao Firestore thi may khac mo bai se thay o trong.
+        // Vi vay chung phai di qua hang doi tai len; con dia chi `http(s)://` (anh mau) thi
+        // dang thang duoc.
+        val localUris = mediaUrls.filter { it.startsWith("content://") || it.startsWith("file://") }
+        if (localUris.isNotEmpty()) {
+            // Anh mau (http) van giu lai chu khong bo di, neu khong nguoi dung tron
+            // anh mau voi anh may se thay anh mau bien mat khong ly do.
+            val remoteUrls = mediaUrls.filter { it.startsWith("http://") || it.startsWith("https://") }
+            publishPostWithMedia(caption, location, localUris, remoteUrls)
+            return
+        }
+
         viewModelScope.launch {
             try {
                 val newPost = repository.createPost(
@@ -634,6 +659,45 @@ class LuminaViewModel(
                 showToast("Đã chia sẻ chuyến đi lên cộng đồng Levart!")
             } catch (e: Exception) {
                 showToast("Không thể đăng bài: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    /**
+     * Duong di cho bai co anh that: nen anh, xep hang doi, roi de WorkManager tai len.
+     *
+     * Man hinh soan bai dong ngay sau khi xep hang thanh cong — nguoi dung khong phai
+     * ngoi cho anh tai xong. Bai se xuat hien tren bang tin o lan lam moi ke tiep.
+     */
+    private fun publishPostWithMedia(
+        caption: String,
+        location: String,
+        imageUris: List<String>,
+        remoteImageUrls: List<String>
+    ) {
+        viewModelScope.launch {
+            _isUploadingPost.value = true
+            try {
+                val result = repository.enqueuePostWithMedia(
+                    caption = caption,
+                    imageUris = imageUris.map { Uri.parse(it) },
+                    locationLabel = location,
+                    provinceCode = "LDG",
+                    remoteImageUrls = remoteImageUrls
+                )
+                when (result) {
+                    is UploadQueue.EnqueueResult.Queued -> {
+                        showCreatePost(false)
+                        showToast(appContext.getString(R.string.upload_queued))
+                    }
+                    UploadQueue.EnqueueResult.NoUsableImage ->
+                        showToast(appContext.getString(R.string.upload_no_usable_image))
+                }
+            } catch (e: Exception) {
+                Log.e("LuminaViewModel", "Khong xep duoc bai vao hang doi", e)
+                showToast(appContext.getString(R.string.upload_enqueue_failed))
+            } finally {
+                _isUploadingPost.value = false
             }
         }
     }

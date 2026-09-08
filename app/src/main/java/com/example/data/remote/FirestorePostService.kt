@@ -51,6 +51,11 @@ class FirestorePostService(
             @Suppress("UNCHECKED_CAST")
             val mediaUrls = (doc.get("mediaUrls") as? List<String>) ?: emptyList()
 
+            // Bai cu tao truoc khi co Storage khong co truong nay; khi do dung luon anh
+            // day du de bai cu van hien thi binh thuong.
+            @Suppress("UNCHECKED_CAST")
+            val mediaThumbUrls = (doc.get("mediaThumbUrls") as? List<String>) ?: emptyList()
+
             val aspectRatio = doc.getDouble("aspectRatio")?.toFloat() ?: 0.8f
             val likeCount = (doc.getLong("likeCount") ?: 0L).toInt().coerceAtLeast(0)
             val commentCount = (doc.getLong("commentCount") ?: 0L).toInt().coerceAtLeast(0)
@@ -77,6 +82,7 @@ class FirestorePostService(
                 timeAgo = timeAgo,
                 caption = caption,
                 mediaUrls = mediaUrls,
+                mediaThumbUrls = mediaThumbUrls,
                 aspectRatio = aspectRatio,
                 attachedTrip = null,
                 likeCount = likeCount,
@@ -244,7 +250,11 @@ class FirestorePostService(
     /**
      * Creates a new post on Cloud Firestore.
      */
-    suspend fun createPost(post: Post, userId: String) {
+    /**
+     * @param mediaThumbUrls anh ban thu nho, cung thu tu voi `post.mediaUrls`.
+     *        Bang tin doc truong nay de khong phai tai anh day du cho moi the.
+     */
+    suspend fun createPost(post: Post, userId: String, mediaThumbUrls: List<String> = emptyList()) {
         val now = System.currentTimeMillis()
         val map = hashMapOf(
             "id" to post.id,
@@ -257,6 +267,7 @@ class FirestorePostService(
             "provinceCode" to post.provinceCode,
             "caption" to post.caption,
             "mediaUrls" to post.mediaUrls,
+            "mediaThumbUrls" to mediaThumbUrls,
             "aspectRatio" to post.aspectRatio.toDouble(),
             "likeCount" to 0L,
             "commentCount" to 0L,

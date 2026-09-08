@@ -637,4 +637,11 @@
     </plurals>
     <string name="map_row_north">NORTHERN VIETNAM</string>
     <string name="map_row_central">CENTRAL VIETNAM</string>
+    <string name="upload_queued">Post queued. Photos will upload as soon as you are online.</string>
+    <string name="upload_no_usable_image">None of the photos you picked could be read. Try picking different ones.</string>
+    <string name="upload_enqueue_failed">Could not save the post for upload. Please try again.</string>
+    <plurals name="upload_pending_banner">
+        <item quantity="one">%1$d post waiting to upload</item>
+        <item quantity="other">%1$d posts waiting to upload</item>
+    </plurals>
 </resources>

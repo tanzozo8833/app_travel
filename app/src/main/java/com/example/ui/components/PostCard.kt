@@ -199,7 +199,10 @@ fun PostCard(
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
-                    model = post.mediaUrls.firstOrNull(),
+                    // Uu tien ban thu nho: the bang tin chi rong vai tram diem anh, tai ban
+                    // day du o day la ep nguoi dung tai thua vai MB moi the. Bai cu chua co
+                    // thumb thi tu quay ve anh day du.
+                    model = post.mediaThumbUrls.firstOrNull() ?: post.mediaUrls.firstOrNull(),
                     contentDescription = post.caption,
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier

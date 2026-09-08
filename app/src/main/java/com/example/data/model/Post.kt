@@ -14,6 +14,11 @@ data class Post(
     val timeAgo: String = "2 giờ trước",
     val caption: String = "",
     val mediaUrls: List<String> = emptyList(),
+    /**
+     * Anh ban thu nho, cung thu tu voi [mediaUrls]. Bang tin doc danh sach nay,
+     * man hinh chi tiet doc [mediaUrls]. Rong nghia la bai tao truoc khi co Cloud Storage.
+     */
+    val mediaThumbUrls: List<String> = emptyList(),
     val aspectRatio: Float = 0.8f, // w / h for masonry layout
     val attachedTrip: Trip? = null,
     var likeCount: Int = 150,

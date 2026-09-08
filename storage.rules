@@ -1,0 +1,64 @@
+rules_version = '2';
+
+// Luat bao mat cho Cloud Storage for Firebase — du an travel-app-844e3.
+//
+// Nguyen tac: tu choi mac dinh. Moi duong dan khong duoc liet ke o duoi deu bi chan.
+// Dan noi dung tep nay vao Firebase Console > Storage > Rules.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ---- Ham dung chung ----
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Chi cho phep anh. Khong cho tai len tep thuc thi hay video nang.
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    // Tran 8 MB mot tep. Anh da nen ve 1600px thuong duoi 1 MB, nen nguong nay
+    // vua du rong cho truong hop bat thuong ma van chan duoc viec tai len bua bai.
+    function isUnderSizeLimit() {
+      return request.resource.size < 8 * 1024 * 1024;
+    }
+
+    // ---- Anh bai viet ----
+    // posts/{uid}/{postId}/{tep}
+    //
+    // Ai dang nhap cung doc duoc vi bang tin la noi dung cong dong.
+    // Chi chu so huu moi ghi va xoa duoc.
+    match /posts/{userId}/{postId}/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) && isImage() && isUnderSizeLimit();
+      allow delete: if isOwner(userId);
+    }
+
+    // ---- Anh dong dau ----
+    // checkins/{uid}/{checkInId}.jpg
+    match /checkins/{userId}/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) && isImage() && isUnderSizeLimit();
+      allow delete: if isOwner(userId);
+    }
+
+    // ---- Anh dai dien ----
+    match /avatars/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId) && isImage() && request.resource.size < 2 * 1024 * 1024;
+      allow delete: if isOwner(userId);
+    }
+
+    // ---- Tu choi mac dinh ----
+    // Bat ky duong dan nao khac deu bi chan, ke ca khi da dang nhap.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

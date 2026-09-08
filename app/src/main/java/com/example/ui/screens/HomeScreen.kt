@@ -1,5 +1,7 @@
 package com.example.ui.screens
 
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.material.icons.filled.CloudUpload
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -114,6 +116,8 @@ fun HomeScreen(
     onOpenStampCamera: (place: Place?, province: Province?) -> Unit = { _, _ -> },
     onProvinceClick: (Province) -> Unit,
     onPlanTripWithAi: (destination: String) -> Unit = {},
+    /** So bai da soan xong nhung anh chua tai len duoc, thuong do mat mang. */
+    pendingUploadCount: Int = 0,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -423,6 +427,17 @@ fun HomeScreen(
                             onOpenStampCamera(activePlace, activeProvince)
                         }
                     )
+                }
+            }
+
+            // 1b. Bang bao bai dang cho tai len.
+            //     Phai la mot item rieng cua luoi chu khong nhet chung Box voi
+            //     ProvinceStoryTray: Box xep chong cac phan tu len nhau, bang se de len tieu de.
+            if (pendingUploadCount > 0) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Box(modifier = Modifier.padding(vertical = 2.dp)) {
+                        PendingUploadBanner(count = pendingUploadCount)
+                    }
                 }
             }
 
@@ -1000,6 +1015,38 @@ private fun HeroCheckInBanner(
                     }
                 }
             }
+        }
+    }
+}
+
+/**
+ * Bao cho nguoi dung biet bai da soan van con nam trong may, chua len may chu.
+ * Khong co bang nay thi bai "bien mat" ma khong ai giai thich vi sao.
+ */
+@Composable
+private fun PendingUploadBanner(count: Int) {
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = Gold500.copy(alpha = 0.16f),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.CloudUpload,
+                contentDescription = null,
+                tint = Brand700,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = pluralStringResource(R.plurals.upload_pending_banner, count, count),
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = TextPrimary
+            )
         }
     }
 }

@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun LuminaApp(viewModel: LuminaViewModel) {
+    val pendingUploadCount by viewModel.pendingUploadCount.collectAsState()
     val context = LocalContext.current
 
     // State collections
@@ -260,7 +261,8 @@ fun LuminaApp(viewModel: LuminaViewModel) {
                             onPlanTripWithAi = { dest ->
                                 viewModel.updateAiWizard(destination = dest)
                                 viewModel.selectTab(MainTab.AI_PLAN)
-                            }
+                            },
+                            pendingUploadCount = pendingUploadCount
                         )
                     }
                     MainTab.AI_PLAN -> {
