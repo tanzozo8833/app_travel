@@ -72,10 +72,15 @@ class PostUploadWorker(
                 thumbFiles = thumbFiles
             )
 
+            // mediaThumbUrls phai song song 1-1 voi mediaUrls, vi bang tin lay thumb[0] lam
+            // anh bia con man chi tiet lay mediaUrls[0] lam anh dau. Anh mau khong co ban
+            // thu nho rieng nen dung chinh dia chi cua no de giu hai danh sach thang hang;
+            // neu khong, anh bia se la mot anh khac voi anh so 1 nguoi dung nhin thay.
+            val remoteUrls = PendingUploadEntity.splitPaths(item.remoteUrls)
             postService.createPost(
                 post = buildPost(item, fullUrls, thumbUrls),
                 userId = item.userId,
-                mediaThumbUrls = thumbUrls
+                mediaThumbUrls = remoteUrls + thumbUrls
             )
 
             dao.remove(item.postId)
