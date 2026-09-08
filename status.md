@@ -413,11 +413,10 @@ Xếp theo **lợi ích / công sức**, và theo ràng buộc phụ thuộc (l�
 
 ---
 
-## 8. B1 — đã triển khai xong phần máy khách, chờ bật bucket trên máy chủ
+## 8. B1 — ĐÃ XONG, chạy thông đầu cuối trên máy chủ thật
 
-**Chốt ngày 07/09/2026, triển khai ngày 08/09/2026** — commit `7f6e31d`.
-Toàn bộ chín bước phía máy khách đã xong và chạy thử trên máy ảo. Còn đúng một việc
-nằm ngoài tầm code: **bật Cloud Storage cho dự án trên Firebase Console.**
+**Chốt 07/09/2026 · triển khai và nghiệm thu 08/09/2026** — commit `7f6e31d`, `3bc06f5`.
+Chủ dự án đã bật Cloud Storage trên Console. Ảnh **thật sự đi từ máy lên máy chủ và tải về được**.
 
 ### Phương án đã duyệt: B1 bản đầy đủ
 
@@ -520,3 +519,65 @@ Việc cần làm, chỉ trên Firebase Console, không cần sửa code:
 | Màn hình xem và huỷ bài đang kẹt | `UploadQueue.cancel` và `observePending` đã có, nhưng giao diện mới chỉ có băng đếm số |
 | Kiểm chứng với ảnh 50 MP thật | Máy ảo không có ảnh đủ lớn — vẫn nằm ở mục 6 "chưa kiểm chứng" |
 | `attachedTrip` không được lưu qua hàng đợi | Không phải hồi quy: `FirestorePostService.createPost` vốn **chưa bao giờ** ghi trường này vào Firestore |
+
+---
+
+### 8.4 Nghiệm thu đầu cuối sau khi bật Storage — 08/09/2026
+
+Chủ dự án bật Cloud Storage trên Firebase Console. Hai bài đang kẹt trong hàng đợi
+**tự tải lên mà không phải soạn lại** — đúng mục đích của hàng đợi. Sau đó đăng thêm
+một bài mới để kiểm chứng thứ tự ảnh.
+
+**Bằng chứng trên máy chủ thật** (truy vấn bằng `firebase-admin`, không phải đọc từ log app):
+
+Bucket `travel-app-844e3.firebasestorage.app` — `exists=true`, thư mục `posts/` có 4 tệp:
+
+```
+posts/hh6EU62.../post_91712b5d.../0.jpg        183.327 B
+posts/hh6EU62.../post_91712b5d.../0_thumb.jpg   19.368 B
+posts/hh6EU62.../post_fa7babe9.../0.jpg        183.327 B
+posts/hh6EU62.../post_fa7babe9.../0_thumb.jpg   19.368 B
+```
+
+Kích thước khớp đúng số đo cục bộ ở mục 8.1 — tệp lên máy chủ nguyên vẹn.
+
+Log worker: `D PostUploadWorker: Da dang xong bai post_f9c3f6ae-...`
+
+**Kiểm chứng trên giao diện:**
+
+| Việc kiểm | Kết quả |
+|---|---|
+| Bài mới lên đầu bảng tin | Đạt |
+| Ảnh bìa bảng tin tải từ Storage | Đạt — dùng bản thumbnail 19 KB |
+| Mở chi tiết, vuốt tới ảnh 3/3 | Đạt — ảnh đầy đủ 183 KB tải từ Storage, hiển thị đúng |
+| Băng "đang chờ tải lên" biến mất sau khi xong | Đạt |
+| Tệp tạm trong `filesDir/upload_staging` được dọn | Đạt — thư mục rỗng |
+
+### 8.5 Lỗi thứ năm — phát hiện khi nghiệm thu, đã sửa
+
+**Ảnh bìa bảng tin không khớp ảnh số 1 khi mở bài.**
+
+Bảng tin lấy `mediaThumbUrls[0]`, màn chi tiết lấy `mediaUrls[0]`. Ảnh mẫu (`http`) chỉ nằm
+trong `mediaUrls`, còn `mediaThumbUrls` chỉ chứa ảnh vừa tải lên — hai danh sách lệch nhau.
+
+Sửa ở commit `3bc06f5`: ảnh mẫu không có bản thu nhỏ riêng nên dùng chính địa chỉ của nó
+để giữ hai danh sách thẳng hàng. Kiểm chứng lại trên Firestore, bài `post_f9c3f6ae`:
+
+```
+mediaUrls[0] = mediaThumbUrls[0] = unsplash 1528127269322
+mediaUrls[1] = mediaThumbUrls[1] = unsplash 1442512595331
+mediaUrls[2] = mediaThumbUrls[2] = firebasestorage .../0.jpg và 0_thumb.jpg
+```
+
+### 8.6 Dữ liệu thử còn sót trên máy chủ
+
+Ba bài thử do quá trình nghiệm thu tạo ra, **vẫn đang nằm trong Firestore và Storage**:
+
+| Bài | Nội dung |
+|---|---|
+| `post_fa7babe9-00dc-404e-9e86-e52298434aa4` | `T` |
+| `post_91712b5d-2a28-4e10-a103-7d2f993a15dd` | `tuyet voi` |
+| `post_f9c3f6ae-77b7-4d67-bdd1-ec06cfca0bc4` | `Kiem-tra-thu-tu-anh` |
+
+Hai bài đầu tạo bằng bản dựng trước khi sửa lỗi 8.5 nên **ảnh bìa vẫn lệch**.
+Chưa xoá vì xoá dữ liệu trên máy chủ thật là thao tác không hoàn tác được — chờ chủ dự án quyết định.
