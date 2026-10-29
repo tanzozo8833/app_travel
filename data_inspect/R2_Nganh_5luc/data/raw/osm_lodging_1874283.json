@@ -1,0 +1,3391 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:46:49Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 679022452,
+  "tags": {
+    "name": "My Khanh",
+    "name:en": "My Khanh Tourist Village",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 946524799,
+  "tags": {
+    "name": "Tan Phuoc 5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 948325211,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Ngo Gia Tu",
+    "name": "Kim Thơ",
+    "phone": "+84 292 3817 517",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 951963341,
+  "tags": {
+    "name": "Sàigòn Cần Thơ Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1043717733,
+  "tags": {
+    "name": "Phương Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1043858444,
+  "tags": {
+    "addr:housenumber": "41",
+    "addr:street": "Châu Văn Liêm",
+    "name": "Cần Thơ Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1043858457,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Châu Văn Liêm",
+    "name": "Hello 2 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1043858514,
+  "tags": {
+    "addr:housenumber": "61",
+    "addr:street": "Châu Văn Liêm",
+    "name": "Tây Đô",
+    "name:en": "Tay Do Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1043858551,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "Châu Văn Liêm",
+    "name": "Hậu Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1043858750,
+  "tags": {
+    "name": "Xuân Mai 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777167863,
+  "tags": {
+    "name": "KS Hồng Phúc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777639453,
+  "tags": {
+    "addr:city": "Ninh Kiểu, Cần Thơ",
+    "addr:housename": "Hotel Xoai",
+    "addr:housenumber": "93",
+    "addr:street": "Mậu Thân",
+    "name": "Hotel XOAI",
+    "name:zh": "mekong tours旅行社在里面",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777707968,
+  "tags": {
+    "name": "khách sạn Sáu Khải",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777708920,
+  "tags": {
+    "name": "KS Thiên Hải Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777708922,
+  "tags": {
+    "name": "nhà trọ qua đêm",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1777710974,
+  "tags": {
+    "name": "nhà nghỉ Mùa Thu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778024666,
+  "tags": {
+    "name": "Hoa Anh Đào",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778731511,
+  "tags": {
+    "name": "nhà nghỉ Minh Quang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778735917,
+  "tags": {
+    "name": "Phú Ny Hotel",
+    "name:de": "Phú Ny Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778800787,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "39-41",
+    "addr:street": "Ngô Quyền",
+    "name": "Khách Sạn Ngân Hà",
+    "name:en": "Ngan Ha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778803401,
+  "tags": {
+    "name": "KS Phương Đông",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778803921,
+  "tags": {
+    "name": "Khách Sạn 31B",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778804139,
+  "tags": {
+    "name": "Khách Sạn Hùng Cường",
+    "name:en": "Hung Cuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778808138,
+  "tags": {
+    "addr:housename": "138A",
+    "addr:street": "Nguyễn An Ninh",
+    "name": "Kim Lan",
+    "source": "survey",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778905674,
+  "tags": {
+    "name": "Khách sạn Tân Phước 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1778905677,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Queen Hotel",
+    "smoking": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1780019536,
+  "tags": {
+    "addr:street": "Lý Tự Trọng",
+    "internet_access": "wlan",
+    "name": "Huỳnh Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781217852,
+  "tags": {
+    "name": "khách sạn 74",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781217853,
+  "tags": {
+    "name": "khách sạn 62",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781229313,
+  "tags": {
+    "name": "KS Thiên Hải Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781231930,
+  "tags": {
+    "name": "Nhà nghỉ Long Nhân",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781231938,
+  "tags": {
+    "name": "Nhà Nghĩ 184",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781235953,
+  "tags": {
+    "name": "nhà nghỉ Nam Phương 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781236403,
+  "tags": {
+    "name": "KS Phú Mỹ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781236415,
+  "tags": {
+    "name": "KS. Thiên Trang 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1781240145,
+  "tags": {
+    "name": "Nhà nghỉ Thanh Thế",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783216036,
+  "tags": {
+    "name": "khách sạn Hoa Phượng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783216694,
+  "tags": {
+    "addr:city": "CẦN THƠ",
+    "addr:district": "Ninh Kieu",
+    "addr:hamlet": "Cái Khế",
+    "addr:street": "Lô B TTTM Cái Khế",
+    "name": "Khách sạn DONA",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783216695,
+  "tags": {
+    "name": "KS Tân Tây Đô",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783218499,
+  "tags": {
+    "name": "KS. Anh Thư",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783218868,
+  "tags": {
+    "name": "KS. Mỹ Ngọc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783218941,
+  "tags": {
+    "name": "Khách sạn Tân Lộc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783221432,
+  "tags": {
+    "name": "KS. Linh Phương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783223375,
+  "tags": {
+    "name": "Nhà khách Tây Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783263682,
+  "tags": {
+    "name": "KS. Cát tường",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783263684,
+  "tags": {
+    "name": "Nhà nghỉ Toàn Phát",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783265167,
+  "tags": {
+    "name": "Khách sạn Đông Dương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783265479,
+  "tags": {
+    "name": "Nhà nghĩ Phương Nam",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783265571,
+  "tags": {
+    "name": "Khách sạn Phương Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783265646,
+  "tags": {
+    "name": "Khách sạn Phước Tiên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783266130,
+  "tags": {
+    "name": "Khách sạn HQ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783266199,
+  "tags": {
+    "name": "Nhà nghĩ Cẩm Tiên",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783266217,
+  "tags": {
+    "name": "KS. Xuân Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1783267653,
+  "tags": {
+    "name": "Nhà nghỉ Cẩm Tiên",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1792691781,
+  "tags": {
+    "name": "Nhà nghỉ Như Ý 2",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1792795357,
+  "tags": {
+    "name": "Nhà Nghỉ Bình Khánh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1792795506,
+  "tags": {
+    "name": "Nhà nghỉ Bình An",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 1793968788,
+  "tags": {
+    "name": "KS Hương Quê Lữ Quán",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1797763848,
+  "tags": {
+    "name": "Nhà hàng - Khách sạn Cửu Long",
+    "opening_hours": "07:30-11:30,13:30-20:00",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1797816241,
+  "tags": {
+    "name": "Khu nghĩ dưỡng Sinh thái Tây Đô",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1882887284,
+  "tags": {
+    "name": "Nam Mon The Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1938959409,
+  "tags": {
+    "name": "Huy Hoàng Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2341510779,
+  "tags": {
+    "name": "Khách sạn Khánh Hưng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2349086812,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "162C/6",
+    "addr:street": "Trần Ngọc Quế",
+    "name": "Nhà trọ 162C/6",
+    "phone": "07103838605",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 2598517892,
+  "tags": {
+    "name": "Viva",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3482845485,
+  "tags": {
+    "name": "Anh Dao Mekong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3482845491,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "66-68",
+    "addr:province": "Can Tho",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Tân An",
+    "name": "Khách Sạn Thanh Thủy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3482849194,
+  "tags": {
+    "addr:housenumber": "9f",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3488007975,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:street": "30 - 4",
+    "name": "Iris Hotel Can Tho",
+    "source": "http://www.irishotelcantho.vn/home.html",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3507044574,
+  "tags": {
+    "addr:street": "Khu Dan Cu so 9",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3527802930,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "A5-A6, Nguyễn Hiền",
+    "addr:street": "Nguyễn Văn Linh",
+    "addr:subdistrict": "An Khánh",
+    "name": "Kim Khánh Hotel",
+    "operator": "Công Ty TNHH MTV Khách sạn Kim Khánh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3707786039,
+  "tags": {
+    "email": "anhotel1@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "AN Hotel",
+    "phone": "0913910983",
+    "tourism": "hotel",
+    "website": "www.anhotel.com.vn",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3867250433,
+  "tags": {
+    "name": "Thao Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3867253357,
+  "tags": {
+    "addr:housenumber": "403",
+    "name": "Le Phong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4127245889,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Huynh Hoa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4130088790,
+  "tags": {
+    "name": "Maivien Orchard Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4172851489,
+  "tags": {
+    "addr:housenumber": "Tổ 1 Kv1",
+    "addr:street": "Cầu Cần Thơ",
+    "name": "Ngôi nhà nhỏ xinh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4217116907,
+  "tags": {
+    "name": "Sáu Hoài homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4224939393,
+  "tags": {
+    "name": "Ms. Ha Guesthouse",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4226251019,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lua Nep",
+    "tourism": "hotel",
+    "website": "www.luanepresort"
+  }
+},
+{
+  "type": "node",
+  "id": 4228514889,
+  "tags": {
+    "addr:housenumber": "60",
+    "addr:street": "Nguyễn An Ninh",
+    "name": "Xuân Mai 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4256297193,
+  "tags": {
+    "addr:housenumber": "185C",
+    "addr:street": "Ong Tim Bridge, Thanh My Area, Thuong Thanh Ward, Cai Rang District, Can Tho, Vietnam",
+    "name": "Nguyen Shack - Mekong, Can Tho",
+    "phone": "+847106288688",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4270830489,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Riêng",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4311099413,
+  "tags": {
+    "addr:street": "Nguyen Van Cu Str.",
+    "name": "Villa My Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4336544489,
+  "tags": {
+    "name": "Hotel 31",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4340533709,
+  "tags": {
+    "addr:housenumber": "271",
+    "addr:street": "Nguyễn Văn Linh",
+    "internet_access": "wlan",
+    "name": "Lan Anh",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4349830892,
+  "tags": {
+    "name": "Ks 16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4358233296,
+  "tags": {
+    "email": "mekongdeltagroup.m@gmail.com",
+    "internet_access": "wlan",
+    "name": "Mekong Delta Inn Hostel",
+    "phone": "+841206878483",
+    "tourism": "hostel",
+    "website": "https://www.facebook.com/mekongdeltainn"
+  }
+},
+{
+  "type": "node",
+  "id": 4362565890,
+  "tags": {
+    "name": "Vạn Phát Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4403595689,
+  "tags": {
+    "addr:housenumber": "51F7",
+    "addr:street": "3 Tháng 2",
+    "internet_access": "wlan",
+    "name": "Nhà Trọ Sinh Viên Cô Bảy",
+    "name:vi": "Nhà Trọ Sinh Viên Cô Bảy",
+    "phone": "0907314287",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4413584690,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "Nguyễn Thái Học",
+    "internet_access": "wlan",
+    "name": "Khách sạn ABC",
+    "name:en": "ABC Hotel",
+    "name:vi": "Khách sạn ABC",
+    "opening_hours": "24/7",
+    "phone": "07103854422",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4450145789,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Mai Manor Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4461517390,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Kim Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4461519993,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Ven Do (Nha Nghi)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4465710190,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Hoang Nam",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4465710289,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Hoang Nam 2",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4483130099,
+  "tags": {
+    "addr:housenumber": "4544",
+    "addr:street": "Quốc Lộ 80",
+    "internet_access": "wlan",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4495768333,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "75-77-79",
+    "addr:province": "Cần Thơ",
+    "addr:street": "Lý Hồng Thanh",
+    "addr:subdistrict": "Cái Khế",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "KHÁCH SẠN HẠNH PHÚC",
+    "operator": "HẠNH PHÚC",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4564545995,
+  "tags": {
+    "name": "Hai Dang Mekong",
+    "name:vi": "Hai Dang Mekong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4588441591,
+  "tags": {
+    "addr:housenumber": "N6",
+    "addr:postcode": "900000",
+    "addr:street": "Đinh Công Tráng",
+    "email": "quynhanhmotel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Quỳnh Anh 3",
+    "name:en": "Quynh Anh motel 3",
+    "opening_hours": "24/7",
+    "phone": "0901008444",
+    "tourism": "hotel",
+    "website": "http://nhanghiquynhang.tk"
+  }
+},
+{
+  "type": "node",
+  "id": 4588441592,
+  "tags": {
+    "addr:housenumber": "Hẻm 15",
+    "addr:postcode": "900000",
+    "addr:street": "Trần Văn Hoài",
+    "email": "quynhanhmotel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Quỳnh Anh",
+    "name:en": "Quynh Anh motel",
+    "opening_hours": "24/7",
+    "phone": "0901008444",
+    "tourism": "motel",
+    "website": "http://nhanghiquynhang.tk"
+  }
+},
+{
+  "type": "node",
+  "id": 4611199192,
+  "tags": {
+    "name:en": "My Kim hotel",
+    "name:fr": "My Kim hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4700634990,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Tro 132",
+    "name:vi": "Nha Tro 132",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4714755789,
+  "tags": {
+    "name": "Minh Vuong Hotel",
+    "name:fr": "Minh Vuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4715921591,
+  "tags": {
+    "name": "Nha Duong",
+    "name:en": "Duong house",
+    "name:vi": "Nhà Dương",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4754243922,
+  "tags": {
+    "name:es": "ngoi sao",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4815454221,
+  "tags": {
+    "name:en": "Hotel 31",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4824318222,
+  "tags": {
+    "name:zh": "阿秀家",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4838495938,
+  "tags": {
+    "name": "Vườn Ca Cao Mười Cương",
+    "name:en": "Mười Cương Cacao Plantation and Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4986580823,
+  "tags": {
+    "addr:housenumber": "Y26",
+    "addr:postcode": "270000",
+    "addr:street": "Số 12",
+    "email": "lamhongvinh@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà riêng Vĩnh Hoàng",
+    "phone": "0917250250",
+    "tourism": "guest_house",
+    "website": "https://thiepcuoivinhhoang.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5126232927,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177555809,
+  "tags": {
+    "addr:street": "Trần Văn Khéo",
+    "name": "Khách sạn Đông Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177555813,
+  "tags": {
+    "addr:street": "Phạm Ngọc Thạch",
+    "name": "Khách sạn Hoilyday",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177632264,
+  "tags": {
+    "name": "Lam Kiều",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177655259,
+  "tags": {
+    "name": "Khách sạn Hồng Đào",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177656429,
+  "tags": {
+    "addr:district": "Ninh Kiều",
+    "name": "Khach san Cong Doan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691536,
+  "tags": {
+    "name": "Nhà trọ sinh viên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691537,
+  "tags": {
+    "name": "Nhà trọ sinh viên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691538,
+  "tags": {
+    "name": "Nhà trọ sinh viên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691539,
+  "tags": {
+    "name": "Nhà trọ sinh viên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691540,
+  "tags": {
+    "name": "Nhà trọ sinh viên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691562,
+  "tags": {
+    "name": "Tiệm hớt tóc Bình Dân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5177691565,
+  "tags": {
+    "name": "Nhà trọ Hà",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5199300157,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housename": "138A",
+    "addr:housenumber": "126",
+    "addr:street": "Lê Lai",
+    "addr:subdistrict": "Xuân Khánh",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "BumBum Hostel",
+    "rooms": "10",
+    "source": "survey",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211500029,
+  "tags": {
+    "material": "concrete",
+    "name": "Thanh Huong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211512470,
+  "tags": {
+    "addr:street": "162/119 Nguyễn Việt Hồng",
+    "name": "Nhaà nghỉ trọ Kiều Hạnh",
+    "phone": "0909363799",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211512494,
+  "tags": {
+    "addr:street": "80 Lê Lai",
+    "internet_access": "wlan",
+    "name": "Quách Xuyên",
+    "phone": "02923830884",
+    "stars": "2",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211609357,
+  "tags": {
+    "addr:housename": "Kim Lân hotel",
+    "addr:housenumber": "138A",
+    "addr:place": "Nguyễn An Ninh",
+    "authentication:phone_call": "02923817049",
+    "name": "Kim Lân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211609371,
+  "tags": {
+    "addr:housename": "Nhà hàng Á Châu",
+    "addr:housenumber": "91",
+    "addr:place": "Châu Văn Liêm",
+    "name": "Á Châu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211679237,
+  "tags": {
+    "name": "Kim Thơ 1",
+    "phone": "0915839079",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211679238,
+  "tags": {
+    "name": "khu dân cư Metro",
+    "number_of_apartments": "91B",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5211690157,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Nhà trọ sinh viên Thành Phát",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5211700738,
+  "tags": {
+    "internet_access:fee": "yes",
+    "name": "Thiện Trí",
+    "rooms": "10",
+    "smoking": "yes",
+    "tourism": "hostel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5211748392,
+  "tags": {
+    "addr:housenumber": "381M/14B",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Hợp Thành 3",
+    "rooms": "150k/ngày, 50k/h",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211748395,
+  "tags": {
+    "addr:housenumber": "390Y/9",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Đăng Khoa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5211748622,
+  "tags": {
+    "addr:full": "397E/9 Nguyễn Văn Cừ",
+    "name": "Ngọc Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5233356521,
+  "tags": {
+    "addr:street": "Quốc lộ 61, ấp Nhất, xã Thạnh Hoà, huyện Phụng Hiệp, tỉnh Hậu Giang",
+    "name": "Nhà trọ Thu An",
+    "name:en": "Nha tro Thu An",
+    "opening_hours": "24/7",
+    "phone": "0946488035",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5237507172,
+  "tags": {
+    "beds": "50",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Thiên Lý Hotel",
+    "rooms": "20",
+    "smoking": "no",
+    "stars": "2",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5246576841,
+  "tags": {
+    "name": "Hotel & Massage To Chau",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5246578272,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Nha nghi so 1",
+    "smoking": "no",
+    "stars": "1",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5246579837,
+  "tags": {
+    "craft": "handicraft",
+    "name": "Nhà may Nhật Yến",
+    "name:en": "Thien Ngoc Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5246582458,
+  "tags": {
+    "name": "Nhà Trọ Sinh Viên Huyền Trân",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5246590145,
+  "tags": {
+    "internet_access:fee": "yes",
+    "name": "Nhà Trọ Sinh Viên 39",
+    "smoking": "outside",
+    "tourism": "guest_house",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5246594836,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Kiều Khanh",
+    "smoking": "outside",
+    "stars": "2",
+    "tourism": "guest_house",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5248150321,
+  "tags": {
+    "addr:housenumber": "136-138",
+    "addr:street": "Cách Mạng Tháng 8",
+    "name": "Nhà nghỉ Kim Lộc",
+    "name:en": "Kim Loc hostel",
+    "opening_hours": "24/7",
+    "phone": "02923828109",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5251607348,
+  "tags": {
+    "building": "hotel",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Mường Thanh Hotel",
+    "operator": "mường Thanh",
+    "stars": "5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5251616673,
+  "tags": {
+    "name": "Viễn Đông 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5251632993,
+  "tags": {
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "33",
+    "addr:street": "Mậu Thân",
+    "addr:subdistrict": "An Hòa",
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Nhà Nghỉ Đại Lộc",
+    "smoking": "yes",
+    "tourism": "motel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5251647774,
+  "tags": {
+    "addr:city": "can tho",
+    "addr:district": "Ninh Kiều",
+    "addr:street": "30/4",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Khách sạn Trúc Linh",
+    "smoking": "yes",
+    "stars": "1",
+    "tourism": "motel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5251841866,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:country": "VN",
+    "addr:district": "Ninh Kiều",
+    "addr:street": "Hai Bà Trưng",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Nhà khách số 2",
+    "smoking": "yes",
+    "tourism": "guest_house",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5251973435,
+  "tags": {
+    "name": "Nhà Nghĩ An Trúc",
+    "name:en": "An Truc Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5251973437,
+  "tags": {
+    "name": "Khách sạn Kim Phụng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5252156462,
+  "tags": {
+    "internet_access": "yes",
+    "name": "Nhà nghỉ Sao Mai",
+    "tourism": "motel",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 5252156469,
+  "tags": {
+    "internet_access": "yes",
+    "name": "Nhà Trọ Hồng Quang",
+    "tourism": "hostel",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 5252241728,
+  "tags": {
+    "name": "Khu dân cư Phước Kiến",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5252241730,
+  "tags": {
+    "name": "Nhà trọ Sinh viên 42",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5252313875,
+  "tags": {
+    "name": "Phòng trọ Thắm",
+    "phone": "0949688369",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5252313876,
+  "tags": {
+    "name": "Phòng trọ Hiếu Nghĩa",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5253386586,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Nhà Nghỉ Kim Ngân",
+    "phone": "+84 292 3740671",
+    "smoking": "yes",
+    "tourism": "motel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5253417847,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "9C",
+    "addr:street": "Trần Phú",
+    "addr:subdistrict": "Cái Khế",
+    "name": "Nesta Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5253418585,
+  "tags": {
+    "addr:street": "Nguyễn Văn Linh",
+    "addr:subdistrict": "Hưng Lợi",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Hưng Lợi",
+    "phone": "02923783129",
+    "smoking": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5256925675,
+  "tags": {
+    "address": "50, Lương Đình Của, Quận Ninh Kiều, Tp Cần Thơ, Cái Khế, Ninh Kiều, Cần Thơ, Việt Nam",
+    "name": "Khách Sạn Cát Phượng",
+    "phone": "+84 292 3760 332",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5256962149,
+  "tags": {
+    "name": "Nhà khách T82",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5257032716,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "209",
+    "addr:street": "30 Tháng 4",
+    "addr:subdistrict": "Xuân Khánh",
+    "brand": "Sheraton",
+    "brand:wikidata": "Q634831",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Sheraton Cần Thơ",
+    "name:en": "Sheraton Can Tho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5257037790,
+  "tags": {
+    "name": "Ivory Bamboo Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5257037795,
+  "tags": {
+    "address": "An Bình, Bình Thủy, Cần Thơ, Việt Nam",
+    "name": "Ivory Bamboo Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5257151724,
+  "tags": {
+    "address": "Nguyễn Văn Cừ nối dài, An Bình, Ninh Kiều, Cần Thơ, Việt Nam",
+    "name": "Pooja Boys Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5257253727,
+  "tags": {
+    "addr:street": "Trần Hoàng Na",
+    "name": "Nhi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5257594723,
+  "tags": {
+    "addr:street": "Hẻm 1",
+    "name": "Nhà trọ Bà Năm",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5263927352,
+  "tags": {
+    "addr:district": "Biình Thủy",
+    "addr:housenumber": "512",
+    "addr:street": "Cách Mạng Tháng 8",
+    "addr:subdistrict": "Bùi Hữu Nghĩa",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Chiến Công",
+    "smoking": "yes",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5276901721,
+  "tags": {
+    "brand": "@HOME",
+    "brand:wikidata": "Q135249100",
+    "name": "@HOME",
+    "name:en": "Home",
+    "official_name": "@HOME by Best Western",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5324844332,
+  "tags": {
+    "name:en": "Dan Sinh Homestay",
+    "name:fr": "Dan Sinh Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5334348421,
+  "tags": {
+    "name": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5334348521,
+  "tags": {
+    "name": "Homestay Fruit Garden",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5346075547,
+  "tags": {
+    "addr:street": "149 30 Tháng 4, Hưng Lợi, Ninh Kiều, Cần Thơ, Việt Nam",
+    "name": "Khách Sạn Tân Vạn Xuân",
+    "phone": "+84 292 3739 332",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5346075548,
+  "tags": {
+    "addr:street": "44 30 THÁNG 4, Hưng Lợi, Ninh Kiều, Cần Thơ, Việt Nam",
+    "name": "Khách Sạn Thanh Kiều",
+    "phone": "+84 292 3739 363",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093466,
+  "tags": {
+    "addr:housenumber": "1B",
+    "addr:street": "Trần Phú",
+    "addr:subdistrict": "Quận Ninh Kiều, TP Cần Thơ",
+    "name:en": "Dong A Hotel",
+    "name:vi": "Đông Á hotel",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093468,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kieu",
+    "addr:housenumber": "71",
+    "addr:postcode": "940000",
+    "addr:street": "Trần Phú",
+    "addr:subdistrict": "Cai Khe",
+    "name": "De Aquar Home Can Tho",
+    "name:en": "De Aquar Home Can Tho",
+    "name:vi": "De Aquar Home Cần Thơ",
+    "takeaway": "no",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093474,
+  "tags": {
+    "addr:housenumber": "23",
+    "addr:street": "Hùng Vương",
+    "addr:subdistrict": "Quận Ninh Kiều, TP Cần Thơ",
+    "name:en": "Gia Linh 2 Hotel",
+    "name:vi": "khách sạn Gia Linh 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093478,
+  "tags": {
+    "addr:housenumber": "78",
+    "addr:street": "Hùng Vương",
+    "addr:subdistrict": "Quận Ninh Kiều, TP Cần Thơ",
+    "name:en": "Quang Sang hotel",
+    "name:vi": "Khách Sạn Quang Sang",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093479,
+  "tags": {
+    "addr:housenumber": "88D",
+    "addr:street": "Hùng Vương",
+    "addr:subdistrict": "Quận Ninh Kiều, TP Cần Thơ",
+    "name:en": "Rich Hotel",
+    "name:vi": "Rich hotel",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5349093480,
+  "tags": {
+    "addr:housenumber": "112H",
+    "addr:street": "Hùng Vương",
+    "addr:subdistrict": "Quận Ninh Kiều, TP Cần Thơ",
+    "name:en": "Thien Huong Hotel",
+    "name:vi": "Khách Sạn Thiên Hương",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5408924426,
+  "tags": {
+    "name:en": "Nam thanh binh Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5431393222,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Tin Hoa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5433226021,
+  "tags": {
+    "name": "Tai Seng",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5434935421,
+  "tags": {
+    "name:en": "Huynh Lac Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5442006923,
+  "tags": {
+    "addr:housenumber": "1 1/4",
+    "addr:street": "Ngô Văn Sở",
+    "internet_access": "wlan",
+    "name": "Enjoy Mekong Hostel",
+    "phone": "0292373008",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5445444421,
+  "tags": {
+    "name": "Balo House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5466562123,
+  "tags": {
+    "addr:street": "Quốc lộ 91B",
+    "name": "KDC BÀ BỘ",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5466599922,
+  "tags": {
+    "addr:street": "Đường nội bộ",
+    "name": "Anh Thư",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5472548421,
+  "tags": {
+    "name:en": "Dan Sinh homestay",
+    "name:fr": "Dan Sinh homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5489917322,
+  "tags": {
+    "addr:housenumber": "125D",
+    "addr:street": "Hẻm Lò Nhôm",
+    "internet_access": "wlan",
+    "name": "Nhà 125D Mậu Thân(lò nhôm)",
+    "name:en": "Thuan’s house",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5495355021,
+  "tags": {
+    "addr:housenumber": "264/8",
+    "addr:postcode": "900000",
+    "addr:street": "Trần Vĩnh Kiết",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Hạnh Phát",
+    "name:en": "Motel Hanh Phat",
+    "name:fr": "Motel Hanh Phat",
+    "opening_hours": "24/7",
+    "phone": "+84932186500",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5563605659,
+  "tags": {
+    "name": "Tran Tam 2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5563681223,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5655327622,
+  "tags": {
+    "addr:housenumber": "6/10",
+    "addr:postcode": "900000",
+    "addr:street": "Lê Lai",
+    "email": "victorycoffeehostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Victory Coffee & Hostel",
+    "phone": "0982215025",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5674850226,
+  "tags": {
+    "addr:street": "Hẻm 1",
+    "internet_access": "wlan",
+    "name:en": "Yen House",
+    "phone": "01634904779",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5712905621,
+  "tags": {
+    "name": "Nha Duong Can Tho",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5780862895,
+  "tags": {
+    "addr:housenumber": "149/1",
+    "addr:street": "Trần Văn Khéo",
+    "email": "gingko.ct@gmail.com",
+    "internet_access": "wlan",
+    "name": "Gingko Hostel&Coffee",
+    "phone": "0904806477",
+    "phone_1": "0939590288",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5918786085,
+  "tags": {
+    "name": "Nguyen shak",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5934876893,
+  "tags": {
+    "addr:housenumber": "11/30D",
+    "addr:postcode": "90000",
+    "addr:street": "Hẻm 11 Mậu Thân",
+    "email": "darkypooo@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Phong Lan",
+    "opening_hours": "24/7",
+    "phone": "0939041046",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6026790586,
+  "tags": {
+    "name": "Nam Đô",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6065271586,
+  "tags": {
+    "name:it": "Boh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6068375585,
+  "tags": {
+    "name": "Lotus Village",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6144406489,
+  "tags": {
+    "name": "Nha Nghi Mekong Logis",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6222241085,
+  "tags": {
+    "name": "Bang Bang Motel",
+    "name:en": "Bang Bang Motel (correct location)",
+    "name:pt": "Bang Bang Motel (localização correta)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6228042486,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Lavender Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6308020517,
+  "tags": {
+    "name": "Hotel **",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6344569485,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Binh Minh Eco Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6469597791,
+  "tags": {
+    "name": "Hải Yến",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 6502972132,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "D9-9A",
+    "addr:postcode": "92000",
+    "addr:province": "cần thơ",
+    "addr:street": "Trần Quang Khải",
+    "addr:subdistrict": "Cái Khế",
+    "internet_access": "yes",
+    "name": "Duy's Home & coffee shop",
+    "rooms": "3",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543647270,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "17",
+    "addr:province": "Can Tho",
+    "addr:street": "Nguyễn An Ninh",
+    "addr:subdistrict": "Tân An",
+    "internet_access": "wlan",
+    "name": "Hotel 17",
+    "rooms": "0",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543736346,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "25",
+    "addr:province": "Can Tho",
+    "addr:street": "Châu Văn Liêm",
+    "addr:subdistrict": "Tân An",
+    "name": "Khách sạn MỸ NGỌC",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543746009,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "106",
+    "addr:province": "Can Tho",
+    "addr:street": "Phan Đình Phùng",
+    "addr:subdistrict": "Tân An",
+    "name": "Hien Guesthouse II",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543858869,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "7",
+    "addr:province": "Can Tho",
+    "addr:street": "Lý Thường Kiệt",
+    "addr:subdistrict": "Tân An",
+    "name": "Khách sạn Caravelle Cần Thơ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543883130,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "6-8-10-12",
+    "addr:street": "Hai Bà Trưng",
+    "addr:subdistrict": "Tân An",
+    "internet_access": "wlan",
+    "name": "International Hotel",
+    "name:vi": "Khách Sạn International",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543886693,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "5",
+    "addr:province": "Can Tho",
+    "addr:street": "Thủ Khoa Huân",
+    "addr:subdistrict": "Tân An",
+    "name": "Khách sạn Hồng Phát",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543886694,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "10",
+    "addr:province": "Can Tho",
+    "addr:street": "Thủ Khoa Huân",
+    "addr:subdistrict": "Tân An",
+    "name": "Nhà Khách Số 10",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543919001,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6543961463,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "47",
+    "addr:province": "Cần Thơ",
+    "addr:street": "Hem 14 Ly Tu Trong",
+    "addr:subdistrict": "An Cư",
+    "name": "Chang's Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6546331214,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:street": "Mậu Thân",
+    "name": "Nhà Trọ Nguyễn Hoàng Thống",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6760909285,
+  "tags": {
+    "addr:street": "Số 8",
+    "name": "Nhà Đức",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6780254890,
+  "tags": {
+    "addr:street": "Hẻm 43",
+    "email": "dongmekong9@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Mrs 3 dorm and nature",
+    "name:fr": "Mrs 3 dorm and nature",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "phone": "+84939702599",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7084034886,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Adora Central Park Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7084925186,
+  "tags": {
+    "name": "Buddha Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7087372285,
+  "tags": {
+    "addr:housenumber": "60",
+    "addr:postcode": "102000",
+    "addr:street": "Xô Viết Nghệ Tĩnh",
+    "email": "k2homestaycantho@gmail.com",
+    "internet_access": "wlan",
+    "name": "K2 Homestay & Coffee",
+    "opening_hours": "Mo-Su 06:30-22:00",
+    "phone": "+84902969798",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7149130881,
+  "tags": {
+    "name": "Hau Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7168558085,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Can Tho Ecolodge",
+    "tourism": "hotel",
+    "website": "https://cantho.ecolodge.asia"
+  }
+},
+{
+  "type": "node",
+  "id": 7183103285,
+  "tags": {
+    "name:en": "Tan Phat's Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7192331691,
+  "tags": {
+    "name:en": "Stay House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7342854986,
+  "tags": {
+    "addr:housenumber": "168",
+    "addr:street": "Đường nội bộ",
+    "name": "Bin Ròm",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7463901087,
+  "tags": {
+    "addr:street": "91C",
+    "internet_access": "wlan",
+    "name": "Song hỷ",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 8002008354,
+  "tags": {
+    "name": "Max Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 8002008355,
+  "tags": {
+    "name": "Mis Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 8002008356,
+  "tags": {
+    "name": "Lidu Home Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 8043679085,
+  "tags": {
+    "name": "Hồng Phát",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 9906933974,
+  "tags": {
+    "addr:housenumber": "113",
+    "air_conditioning": "yes",
+    "contact:email": "homestaysongngu@gmail.com",
+    "internet_access": "wlan",
+    "name": "Song Ngư Pisces Homestay",
+    "phone": "0915622527",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 9921270473,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10561417809,
+  "tags": {
+    "name": "Midmost Boutique Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10748326753,
+  "tags": {
+    "name": "Chill Guesthouse Can Tho",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11264124975,
+  "tags": {
+    "name": "Anh Dao Mekong Hotel",
+    "name:vi": "Khách sạn Anh Đào Mekong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11266664440,
+  "tags": {
+    "name": "Nhà nghỉ Diệu Hiền",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11266664441,
+  "tags": {
+    "name": "Hân Cao Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11266664442,
+  "tags": {
+    "name": "Nhà nghỉ Gia Bảo Tây Đô 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11266664446,
+  "tags": {
+    "name": "Motel Hồng Ân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11271396499,
+  "tags": {
+    "name": "Hostel Mây",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11271396576,
+  "tags": {
+    "name": "Nhà khách Tây Nam Bộ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11545316536,
+  "tags": {
+    "addr:housenumber": "61C",
+    "addr:street": "Đường",
+    "name": "Boutique lodge can tho homestay",
+    "opening_hours": "Mo-Su 06:00-20:00",
+    "phone": "+84 91 849 47 43",
+    "tourism": "hotel",
+    "website": "https://www.booking.com/hotel/vn/boutique-lodge-can-tho-homstay.it.html?aid=964694&app_hotel_id=3033906&checkin=2024-01-24&checkout=2024-01-25&from_sn=android&group_adults=2&group_children=0&label=hotel_details-vzDPcyv%401706067665"
+  }
+},
+{
+  "type": "node",
+  "id": 11549695069,
+  "tags": {
+    "name:en": "Can Tho Riverside Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12598636206,
+  "tags": {
+    "name": "Queen hotel",
+    "phone": "+842993860777",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12600829278,
+  "tags": {
+    "mobile": "+84 986 470 247",
+    "name": "Nghìn Lẻ Một Đêm",
+    "phone": "+84 2993 860 559",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13285171434,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kieu",
+    "addr:housenumber": "112 D",
+    "addr:postcode": "270000",
+    "addr:street": "Trần Phú",
+    "addr:subdistrict": "Cai Khe",
+    "brand": "Tru by Hilton",
+    "brand:wikidata": "Q24907770",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=61552503024240",
+    "email": "vcact_tru@hilton.com",
+    "name": "Tru by Hilton Can Tho Cai Khe",
+    "operator": "Hilton",
+    "phone": "+84 292 3933 355",
+    "rooms": "128",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/vcactru-tru-can-tho-cai-khe/"
+  }
+},
+{
+  "type": "node",
+  "id": 13344700548,
+  "tags": {
+    "addr:city": "Vị Thanh",
+    "addr:housenumber": "16a",
+    "addr:postcode": "910000",
+    "addr:province": "Hau Giang",
+    "addr:street": "Nguyễn Công Trứ",
+    "addr:subdistrict": "phường 1",
+    "air_conditioning": "yes",
+    "brand": "Hilton",
+    "brand:wikidata": "Q598884",
+    "email": "VKGVT_TRU@hilton.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Tru by Hilton Hau Giang City Centre",
+    "operator": "Hilton",
+    "phone": "+84 293 3985 555",
+    "rooms": "112",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/vkgvtru-tru-hau-giang-city-centre/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13356990725,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Nam Kỳ Khởi Nghĩa",
+    "name": "KP Hotel Cần Thơ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13412885826,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "254",
+    "addr:postcode": "90000",
+    "addr:street": "Xuân Thủy",
+    "addr:subdistrict": "An Bình",
+    "email": "365home.cantho@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "365 Home Cần Thơ",
+    "phone": "+840939119466",
+    "rooms": "4",
+    "tourism": "motel",
+    "website": "https://365home.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 13417623901,
+  "tags": {
+    "addr:street": "ĐT. 925",
+    "internet_access": "wlan",
+    "level": "0",
+    "name": "Gò Chanh Homestay",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13431582469,
+  "tags": {
+    "air_conditioning": "yes",
+    "contact:email": "flowerboutiquelodge@gmail.com",
+    "contact:phone": "+84 357 649 117",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Mương Dình Lodge",
+    "swimming_pool": "no",
+    "tourism": "hotel",
+    "website": "https://muongdinhlodge.com.vn/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13448240544,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "46",
+    "addr:street": "Đường số 1",
+    "addr:subdistrict": "Cái Răng",
+    "contact:facebook": "https://www.facebook.com/Giabaotaydo68hotelcantho",
+    "name": "Gia Bảo Tây Đô 4",
+    "phone": "764939939",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13503213301,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:postcode": "90000",
+    "addr:street": "Hải Thượng Lãn Ông",
+    "internet_access": "wlan",
+    "name": "Khách Sạn Senior 2 Cần Thơ",
+    "phone": "0968 070 759",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13504460201,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Châu Văn Liêm",
+    "internet_access": "wlan",
+    "name": "Kim Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13518302236,
+  "tags": {
+    "name:en": "Nha nghi TAN HUNG THINH",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13518302237,
+  "tags": {
+    "name:en": "Nhà nghỉ Côn Sơn",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13518302307,
+  "tags": {
+    "name:en": "Ben Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13546611602,
+  "tags": {
+    "name": "Lion 16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13546612501,
+  "tags": {
+    "name": "Lion 5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13574244104,
+  "tags": {
+    "name": "Lion 7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 166440548,
+  "tags": {
+    "name": "Nhà khách 2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 166553797,
+  "tags": {
+    "name": "KTX D1 + D2",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 167989649,
+  "tags": {
+    "name": "KTX D1 + D2",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 168424431,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "building": "hotel",
+    "name": "Victoria Cần Thơ Resort",
+    "name:es": "Victoria Can Tho Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 168528554,
+  "tags": {
+    "name": "Khu Ký túc xá B",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 202375536,
+  "tags": {
+    "name": "Nhà trọ Khang Trang",
+    "phone": "+841274578236",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 225364552,
+  "tags": {
+    "area": "yes",
+    "name": "Quê Hương hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 343923391,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "22",
+    "addr:street": "Khu dân cư số 9",
+    "addr:subdistrict": "Xuân Khánh",
+    "building": "yes",
+    "check_date": "2025-12-07",
+    "name": "Spring Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 343923392,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "43",
+    "addr:street": "Khu dân cư số 9",
+    "addr:subdistrict": "Xuân Khánh",
+    "building": "hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442673040,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442673041,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442675524,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442675525,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442675527,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442675529,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442675530,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 442679225,
+  "tags": {
+    "building": "yes",
+    "name": "Chung Cu CADIF",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 442679227,
+  "tags": {
+    "building": "yes",
+    "name": "Chung Cu Cao Cap Hung Phu",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 455256288,
+  "tags": {
+    "name": "Mường Thanh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 472990597,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Minh Lin Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 538438773,
+  "tags": {
+    "building": "yes",
+    "name": "nhà trọ Ngân Hùng",
+    "rooms": "100",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 541659302,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 542576781,
+  "tags": {
+    "building": "yes",
+    "name": "Da Thao",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543238382,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Nhà trọ sinh viên Thành Phát",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 543238424,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 543245357,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Lê Vy",
+    "smoking": "yes",
+    "tourism": "guest_house",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 543247020,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà Nghỉ Mekong Logis",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543247137,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:country": "VN",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "224",
+    "addr:postcode": "270000",
+    "addr:province": "Cần Thơ",
+    "addr:state": "VI",
+    "addr:street": "30/4",
+    "addr:subdistrict": "Xuân Khánh",
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách sạn IRIS",
+    "phone": "0292 3686 969",
+    "smoking": "yes",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "http://www.irishotelcantho.vn/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 543297446,
+  "tags": {
+    "building": "hotel",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "West Hotel",
+    "stars": "4",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 543421594,
+  "tags": {
+    "addr:city": "CẦN THƠ",
+    "addr:district": "Ninh Kieu",
+    "addr:hamlet": "Cái Khế",
+    "addr:street": "12/14/16 Trần Phú",
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách sạn Hoa Phượng",
+    "smoking": "outside",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 543421793,
+  "tags": {
+    "addr:city": "CẦN THƠ",
+    "addr:district": "Ninh Kieu",
+    "addr:hamlet": "Cái Khế",
+    "addr:street": "26 Trần Phú",
+    "building": "yes",
+    "name": "Khách Tân Tây Đô",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 543808454,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543811109,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543811112,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543811113,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543812015,
+  "tags": {
+    "building": "yes",
+    "name": "FIT Hotel Can Tho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543812027,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "19-D3",
+    "addr:postcode": "92000",
+    "addr:province": "cần thơ",
+    "addr:street": "Trần Quang Khải",
+    "addr:subdistrict": "Cái Khế",
+    "brand": "V'Luna Hotel - Managed by THM",
+    "building": "yes",
+    "email": "xinchao@vlunahotel.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "V'Luna Hotel - Managed by THM",
+    "phone": "+84865813369",
+    "rooms": "25",
+    "smoking": "no",
+    "tourism": "hotel",
+    "website": "https://vlunahotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 543816223,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543816255,
+  "tags": {
+    "building": "yes",
+    "material": "concrete",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543816256,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543816257,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 543819225,
+  "tags": {
+    "brand": "Sheraton",
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Sheraton Cần Thơ",
+    "operator": "Marriott International",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 562148122,
+  "tags": {
+    "building": "yes",
+    "name": "Tin Hoa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1203912770,
+  "tags": {
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Bamboo Eco Village",
+    "operator": "Bamboo Eco Village Co, Ltd",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1216448899,
+  "tags": {
+    "barrier": "wall",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1220962055,
+  "tags": {
+    "building": "yes",
+    "name": "Homestay Giàn Gừa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1221487858,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "8",
+    "addr:street": "Hải Thượng Lãn Ông",
+    "addr:subdistrict": "Tân An",
+    "building": "yes",
+    "name": "Hậu Giang 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1227132978,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "30C/8",
+    "addr:street": "Hẻm 49 Đường Nguyễn Văn Trỗi",
+    "building": "yes",
+    "name": "Welkomm Inn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1374381627,
+  "tags": {
+    "building": "yes",
+    "building:levels": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1435728353,
+  "tags": {
+    "addr:housenumber": "9-11-13-15",
+    "addr:street": "Nguyễn Hiền",
+    "building": "yes",
+    "name": "Khách sạn Kim Khánh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1436325302,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "418B",
+    "addr:street": "Huỳnh Thị Nở",
+    "addr:subdistrict": "Cái Răng",
+    "building": "yes",
+    "name": "Nhà Nghỉ và Hồ Bơi Mai Lan Cần Thơ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1441769066,
+  "tags": {
+    "addr:housenumber": "14-16",
+    "addr:street": "Phạm Ngọc Thạch",
+    "building": "yes",
+    "name": "The Sun Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1441769071,
+  "tags": {
+    "addr:housenumber": "9-11",
+    "addr:street": "Phạm Ngọc Thạch",
+    "building": "yes",
+    "name": "Lion 10",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1443752522,
+  "tags": {
+    "addr:housenumber": "77/28",
+    "addr:street": "Trần Phú",
+    "building": "yes",
+    "name": "Thiên Lý",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1453021627,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Hai Bà Trưng",
+    "building": "hotel",
+    "email": "info@ninhkieuriversidehotel.vn",
+    "name": "Ninh Kiều Riverside Hotel",
+    "rooms": "162",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://www.ninhkieuriversidehotel.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 1455807389,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:district": "Ninh Kiều",
+    "addr:housenumber": "34",
+    "addr:province": "Can Tho",
+    "addr:street": "Nguyễn An Ninh",
+    "addr:subdistrict": "Tân An",
+    "building": "yes",
+    "name": "RUBYct HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1456657578,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Trần Văn Hoài",
+    "building": "yes",
+    "name": "Khách sạn Linh Cường",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1466237270,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "46",
+    "addr:street": "Đường số 1",
+    "addr:subdistrict": "Cái Răng",
+    "building": "yes",
+    "name": "Gia Bảo Tây Đô 4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1479949605,
+  "tags": {
+    "building": "yes",
+    "name": "Mai Anh Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526476656,
+  "tags": {
+    "building": "yes",
+    "name": "Tru by Hilton Can Tho Cai Khe",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526479497,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526480687,
+  "tags": {
+    "building": "yes",
+    "name": "Lion 16 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526483192,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526484390,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526488999,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Hai Bà Trưng",
+    "building": "yes",
+    "name": "TTC Hotel Cần Thơ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526491413,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "relation",
+  "id": 1326050,
+  "tags": {
+    "addr:city": "Cần Thơ",
+    "addr:housenumber": "3",
+    "addr:street": "Hòa Bình",
+    "building": "hotel",
+    "name": "Khách sạn Ninh Kiều 2",
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}

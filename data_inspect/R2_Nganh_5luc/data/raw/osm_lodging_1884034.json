@@ -1,0 +1,1835 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:49:51Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 669477875,
+  "tags": {
+    "name": "Hoang Lo",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 677443231,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1098066956,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1409015732,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1409015738,
+  "tags": {
+    "name": "Long Beach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1727618883,
+  "tags": {
+    "name": "Damsan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1727618886,
+  "tags": {
+    "name": "Eden Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2494706690,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Nguyễn Đức Cảnh",
+    "name": "Khách sạn Bạch Mã",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2497085669,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Nguyễn Chí Thanh",
+    "name": "Khách sạn Công Đoàn Ban Mê",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2626620528,
+  "tags": {
+    "name": "Nha Nghi Mai Phuong",
+    "name:en": "Mai Phuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2626620529,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2626620531,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2626620534,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2774523313,
+  "tags": {
+    "name": "Lam Tra",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2774523385,
+  "tags": {
+    "name": "Anh Duong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2774523443,
+  "tags": {
+    "name": "Tay Do",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2774523505,
+  "tags": {
+    "name": "Thuy Thien",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2774523556,
+  "tags": {
+    "name": "Thuy Tien",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3108097440,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3367391664,
+  "tags": {
+    "name": "Hai Bà Trưng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3537690075,
+  "tags": {
+    "name": "Coffee Tour Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3537696564,
+  "tags": {
+    "name": "H&T Hotel Daklak",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3770194146,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4121146090,
+  "tags": {
+    "addr:housenumber": "B14",
+    "addr:street": "DĐiện Biên Phủ",
+    "email": "ksngocmai@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ngoc Mai Guesthouse",
+    "opening_hours": "24/7",
+    "phone": "05003853406",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4121227090,
+  "tags": {
+    "addr:housenumber": "32",
+    "addr:street": "Nơ Trang Long",
+    "name": "Star Guesthouse",
+    "opening_hours": "24/7",
+    "phone": "05003813137",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4132978010,
+  "tags": {
+    "addr:housenumber": "233/21",
+    "addr:street": "Hẻm 233 Xô Viết Nghệ Tĩnh",
+    "email": "beezone.hostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Beezone hostel",
+    "opening_hours": "24/7",
+    "phone": "0906473322",
+    "tourism": "motel",
+    "website": "https://www.facebook.com/beezonehostel/"
+  }
+},
+{
+  "type": "node",
+  "id": 4133408404,
+  "tags": {
+    "addr:housenumber": "233/21",
+    "addr:street": "Hẻm 233 Xô Viết Nghệ Tĩnh",
+    "email": "beezone.hostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Beezone hostel",
+    "opening_hours": "24/7",
+    "phone": "0906473322",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/beezonehostel/"
+  }
+},
+{
+  "type": "node",
+  "id": 4134831391,
+  "tags": {
+    "addr:housenumber": "233/21",
+    "addr:street": "Hẻm 233 Xô Viết Nghệ Tĩnh",
+    "email": "beezone.hostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Beezone Hostel",
+    "opening_hours": "24/7",
+    "phone": "0906473322",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4134875833,
+  "tags": {
+    "addr:housenumber": "233/21",
+    "addr:street": "Hẻm 233 Xô Viết Nghệ Tĩnh",
+    "email": "beezone.hostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Beezone hostel",
+    "opening_hours": "24/7",
+    "phone": "0906473322",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/beezonehostel/"
+  }
+},
+{
+  "type": "node",
+  "id": 4264691190,
+  "tags": {
+    "name": "Khanh Hoa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4289743489,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Anh Tuấn",
+    "phone": "0573841999",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4290481205,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Resort Vietstar",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4424475389,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4470676889,
+  "tags": {
+    "name:en": "Lak Resort",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4507511294,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Manh Thu",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4507593589,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Hung Thinh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4508394693,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4508406191,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Phuong Thuy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4508467689,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4508467690,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4519205791,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4571270289,
+  "tags": {
+    "name": "DCIC",
+    "name:vi": "DCIC",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4600487590,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Kim Anh",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4621663490,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Mắt Kính Quang Ý",
+    "name:vi": "Nha Nhgi $",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4625036789,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nhgi",
+    "name:vi": "Nha Nhgi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4633997790,
+  "tags": {
+    "addr:housenumber": "174",
+    "addr:street": "Đinh Tiên Hoàng",
+    "name": "Khách sạn Trung Nam",
+    "name:en": "Trung Nam Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4644316789,
+  "tags": {
+    "name": "Myhouse",
+    "name:vi": "Myhouse",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4647251297,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4651122789,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693248009,
+  "tags": {
+    "name": "Huy Le",
+    "name:vi": "Huy Le",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4693248010,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Da Xanh",
+    "name:en": "The Reef",
+    "name:vi": "Da Xanh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693248708,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693248709,
+  "tags": {
+    "name": "Kahn Hoa",
+    "name:vi": "Kahn Hoa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693248710,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693262501,
+  "tags": {
+    "name": "Huy Phat",
+    "name:vi": "Huy Phat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4693262502,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4693262503,
+  "tags": {
+    "name": "Thien Phat",
+    "name:vi": "Thien Phat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693278090,
+  "tags": {
+    "name": "Kim Gia Trang",
+    "name:vi": "Kim Gia Trang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4693282989,
+  "tags": {
+    "name": "Thuan Phat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4693283089,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4695310394,
+  "tags": {
+    "name": "Tan Phat",
+    "name:vi": "Tan Phat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4695312291,
+  "tags": {
+    "name:en": "Thien Thanh Nha Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4700343495,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "The Reef Hostel",
+    "name:vi": "The Reef Hostel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4703259889,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Ang Thu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4704796855,
+  "tags": {
+    "addr:city": "Lak",
+    "addr:district": "Yang Tao",
+    "addr:province": "Dak Lak",
+    "addr:subdistrict": "Yok Nau",
+    "internet_access": "wlan",
+    "name": "LAK Tented Camp",
+    "operator": "Highland Trails Ltd",
+    "rooms": "19",
+    "smoking": "isolated",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4706195791,
+  "tags": {
+    "name": "Homestay",
+    "name:de": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4716543093,
+  "tags": {
+    "name:de": "Vinh Tuan Hotel",
+    "name:en": "Vinh Tuan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4720410091,
+  "tags": {
+    "addr:street": "Quốc lộ 1A",
+    "internet_access": "wlan",
+    "name:en": "Thanh Lich",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4721561092,
+  "tags": {
+    "name:en": "Kim Gia Trang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4721587189,
+  "tags": {
+    "name:en": "Hung Mai",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4728649389,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Reef Hostel",
+    "name:vi": "Reef Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4749075722,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngoc Tran Guest House",
+    "name:vi": "Ngoc Tran Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4750748221,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Toàn Dat",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4752367721,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngoc Tran Guest House",
+    "name:vi": "Ngoc Tran Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4759805339,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Eakmat daklak",
+    "name:vi": "Eakmat daklak",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4820433428,
+  "tags": {
+    "name:en": "July's Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4893525721,
+  "tags": {
+    "name": "Moi Truong Ho Lak",
+    "name:vi": "Moi Truong Ho Lak",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4958459621,
+  "tags": {
+    "name": "nha nghi",
+    "name:vi": "nha nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5008587521,
+  "tags": {
+    "name": "Nha Nghỉ Hiên Linh",
+    "name:vi": "Nha Nghỉ Hiên Linh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5008587522,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5027460524,
+  "tags": {
+    "name": "Laura Hotel",
+    "name:vi": "Laura Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5053263721,
+  "tags": {
+    "check_date": "2026-10-04",
+    "name": "Ban Me Central",
+    "name:fr": "sao khue",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5123172125,
+  "tags": {
+    "addr:housenumber": "Thôn 5",
+    "addr:street": "Hòa Thành",
+    "internet_access": "wlan",
+    "name": "Nhà Anh Dưỡng",
+    "name:vi": "AnhDƯỠNG",
+    "phone": "0768659995",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5202436021,
+  "tags": {
+    "addr:housenumber": "hẻm 264",
+    "addr:street": "Phan Huy Chú",
+    "name": "nhà riêng Nguyễn Thế Anh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5265127723,
+  "tags": {
+    "addr:street": "Thôn 5 Hòa Thành",
+    "name": "AnhDƯỠNG",
+    "name:vi": "AnhDƯỠNG",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5324792721,
+  "tags": {
+    "addr:housenumber": "46-48",
+    "addr:street": "Trần Huy Liệu",
+    "email": "khachsanManhHung@gmail.com",
+    "internet_access": "wlan",
+    "name": "Mạnh Hùng",
+    "name:en": "Manh Hung",
+    "opening_hours": "24/7",
+    "phone": "+842623811656",
+    "tourism": "hotel",
+    "website": "https://www.fb.com/khachsanManhHung"
+  }
+},
+{
+  "type": "node",
+  "id": 5326675621,
+  "tags": {
+    "name": "Joy House 2",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5348048627,
+  "tags": {
+    "name:en": "Hong Kong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5348048628,
+  "tags": {
+    "name:en": "An Nhien Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5358949023,
+  "tags": {
+    "name": "Nhà Hàng - Khách Sạn HOA ĐÀO",
+    "name:en": "weird but good and cheap hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5367871422,
+  "tags": {
+    "name": "Nhà nghỉ Nhật Gin",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5386252621,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5517872024,
+  "tags": {
+    "name": "217 Trường Chinh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5519686022,
+  "tags": {
+    "addr:street": "Hương lộ 21",
+    "name": "nhà Lê Trung Đàn",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5592687021,
+  "tags": {
+    "addr:housenumber": "23/1",
+    "addr:street": "Giải Phóng",
+    "name": "Nhà nghỉ khánh vân",
+    "phone": "0963850987",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5607305723,
+  "tags": {
+    "addr:postcode": "620000",
+    "addr:street": "Quốc lộ 1A",
+    "email": "tudatheater@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà Ngoại Ô",
+    "name:en": "Contryside House",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "phone": "+841636566585",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/CountrysideHomestayTuyHoa/"
+  }
+},
+{
+  "type": "node",
+  "id": 5607415721,
+  "tags": {
+    "addr:city": "Tuy Hoà",
+    "addr:postcode": "56120",
+    "addr:province": "Phú Yên",
+    "addr:street": "Chính Nghĩa Village",
+    "addr:subdistrict": "An Phú",
+    "email": "countrysidehomestay.phuyen@gmail.com",
+    "internet_access:fee": "customers",
+    "name": "Countryside House - Nhà Ngoại Ô",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "phone": "+84986842398",
+    "rooms": "7",
+    "tourism": "hostel",
+    "website": "https://www.facebook.com/CountrysideHomestayPhuYen/"
+  }
+},
+{
+  "type": "node",
+  "id": 5694013021,
+  "tags": {
+    "name": "cường ny khách sạn, nhà xe",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5985266185,
+  "tags": {
+    "name": "La Donna",
+    "name:en": "La Donna Hotel",
+    "name:vi": "Khách sạn Sông Cầu - LaDonna Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6235509185,
+  "tags": {
+    "name": "Nha Minh Homestay right adress",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6240916786,
+  "tags": {
+    "name": "Nhá Nghi Sao Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6277486089,
+  "tags": {
+    "name:en": "Lakeside Camping Location",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 6282850485,
+  "tags": {
+    "name:en": "Hotel Hoang Gia",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6341925185,
+  "tags": {
+    "addr:housenumber": "87",
+    "addr:street": "Nguyễn Đức Cảnh",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ 87",
+    "name:en": "Hostel 87",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6409820085,
+  "tags": {
+    "name": "Nhà trọ anh ĐÔN",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6559567385,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Venus Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6632656887,
+  "tags": {
+    "addr:street": "vinh hoa, xuan thing, TX song cau, phu yen",
+    "email": "info@oceanbeach.fun",
+    "internet_access": "wlan",
+    "name": "Ocean Beach Hostel",
+    "opening_hours": "24/7",
+    "phone": "0338262805",
+    "tourism": "hostel",
+    "website": "http://www.oceanbeach.fun"
+  }
+},
+{
+  "type": "node",
+  "id": 6646112369,
+  "tags": {
+    "addr:province": "Phu Yen",
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "brand": "Zannier Hotels",
+    "email": "contact@zannier.com",
+    "internet_access": "yes",
+    "name": "Bãi San Hô",
+    "operator": "Zannier Hotels",
+    "rooms": "75",
+    "tourism": "hotel",
+    "website": "https://www.zannierhotels.com/en/bai-san-ho"
+  }
+},
+{
+  "type": "node",
+  "id": 6992121685,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7043181789,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7043181912,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Family",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7043182509,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7043190490,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7092923087,
+  "tags": {
+    "name": "Nhà Nghỉ HOÀNG THỊNH",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7141872101,
+  "tags": {
+    "name": "Café Duc Mai homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7294316785,
+  "tags": {
+    "addr:street": "Thôn 5",
+    "name": "AnhDƯỠNG",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7834631985,
+  "tags": {
+    "name:en": "Nhà Nghỉ Ngọc Linh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10161721717,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10314842912,
+  "tags": {
+    "addr:housenumber": "185 20 23",
+    "addr:street": "Đinh Tiên Hoàng",
+    "internet_access": "wlan",
+    "name": "Vuon Phap 3 homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10540201109,
+  "tags": {
+    "addr:street": "Hùng Vương",
+    "name": "Apec mandala Victor condotel",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072508,
+  "tags": {
+    "addr:street": "Y Plô Êban",
+    "name": "26yplo",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072509,
+  "tags": {
+    "name": "Bến serepok",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072510,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072511,
+  "tags": {
+    "name": "Điểm 6 xe",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072512,
+  "tags": {
+    "name": "Điểm 7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072607,
+  "tags": {
+    "name": "Điểm 1",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072608,
+  "tags": {
+    "name": "Điểm 8",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072707,
+  "tags": {
+    "name": "Điểm 2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072708,
+  "tags": {
+    "name": "Điểm 9",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691072906,
+  "tags": {
+    "name": "Điểm 3",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10691085005,
+  "tags": {
+    "name": "Điểm 4",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10744442105,
+  "tags": {
+    "addr:street": "Trần Nguyên Hãn",
+    "internet_access": "wlan",
+    "name": "vuon phap 3",
+    "name:fr": "vont phap 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10857999606,
+  "tags": {
+    "addr:housenumber": "09",
+    "addr:street": "Bế Văn Đàn",
+    "internet_access": "wlan",
+    "name": "Nhà nghĩ Thu Hương",
+    "name:en": "Thu Huong Motel",
+    "opening_hours": "24/7",
+    "phone": "0500811580",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11054685205,
+  "tags": {
+    "name:en": "Letters Homestay Le Duan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11374811869,
+  "tags": {
+    "addr:street": "35 Đường Tân Trào,  Liên Trì",
+    "internet_access": "wlan",
+    "name": "Green Homestay Tuy Hòa",
+    "name:en": "Green Homestay Tuy Hòa",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11386764869,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Green Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11394244182,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Nguyen Cong Tru",
+    "name": "Nhu Y Hotel",
+    "phone": "+84 935234201",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11396016178,
+  "tags": {
+    "addr:housenumber": "236",
+    "name": "Coast Homestay",
+    "phone": "+84 93 523 42 01",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11396243616,
+  "tags": {
+    "name": "Letters Bà Triệu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11559139369,
+  "tags": {
+    "addr:housenumber": "Thôn 2 Bãi Bàng",
+    "addr:street": "Quốc lộ 1D",
+    "contact:facebook": "lifesabeachvietnam",
+    "internet_access": "wlan",
+    "name:en": "Life’s a Beach",
+    "phone": "+84978931085",
+    "tourism": "chalet",
+    "website": "https://lifesabeachvietnam.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 11685781336,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11685781337,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11811425157,
+  "tags": {
+    "name": "Nhà nghỉ An Khang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11811472182,
+  "tags": {
+    "name": "Nhà nghỉ Hoa Hồng",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11876215169,
+  "tags": {
+    "name:en": "Cheap clean hotel 250 000 vnd",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12300668680,
+  "tags": {
+    "addr:city": "Tuy Hòa",
+    "addr:housenumber": "05",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Santini Hotel",
+    "phone": "+842573888686",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12389298801,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Song Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12567058844,
+  "tags": {
+    "addr:housenumber": "142",
+    "addr:street": "Đường Phan Chu Trinh",
+    "name": "Elephants Hotel",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://elephantshotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12593244702,
+  "tags": {
+    "name": "Trieu Vu Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12913129880,
+  "tags": {
+    "name": "Motel Thanh Ngọc",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114358739,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114400867,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114410337,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114410338,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114410707,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114413710,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114416776,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114417738,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114417739,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114419820,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114427190,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114428084,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114435081,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114437505,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114440726,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114440845,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114440846,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13114441149,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13455574101,
+  "tags": {
+    "name": "Que Toi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13483603502,
+  "tags": {
+    "check_date": "2026-01-25",
+    "name": "An Nhiên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13610867401,
+  "tags": {
+    "name": "LÀNG MẮM Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13652892201,
+  "tags": {
+    "name": "The Easy Dorm",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13724711401,
+  "tags": {
+    "addr:housenumber": "258 260",
+    "addr:postcode": "630000",
+    "addr:street": "Nguyễn Chí Thanh",
+    "internet_access": "wlan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14134251869,
+  "tags": {
+    "addr:district": "Tân An",
+    "addr:housenumber": "242/2",
+    "addr:postcode": "63000",
+    "addr:province": "Đắk Lắk",
+    "addr:street": "Dã Tượng",
+    "internet_access:fee": "no",
+    "name": "Moonleaf Retreat",
+    "phone": "0333681962",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245348301,
+  "tags": {
+    "check_date": "2026-10-03",
+    "name": "Bob Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14248260602,
+  "tags": {
+    "check_date": "2026-10-04",
+    "name": "Themans",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14254233206,
+  "tags": {
+    "check_date": "2026-10-06",
+    "name": "Dai Bai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 228228662,
+  "tags": {
+    "addr:housenumber": "1-3",
+    "addr:street": "Phan Chu Trinh",
+    "building": "hotel",
+    "name": "KS Sài Gòn Ban Mê",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 228987599,
+  "tags": {
+    "addr:city": "Buon Ma Thuot",
+    "addr:housenumber": "15",
+    "addr:street": "Hùng Vương",
+    "building": "yes",
+    "building:levels": "5",
+    "name": "Tru by Hilton Buon Ma Thuot City Centre",
+    "phone": "+84 262 3616 555",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/bmvbmru-tru-buon-ma-thuot-city-centre/",
+    "wikidata": "Q24907770",
+    "wikipedia": "en:Tru by Hilton"
+  }
+},
+{
+  "type": "way",
+  "id": 239927893,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Ngô Quyền",
+    "building": "yes",
+    "name": "Khách Sạn Biệt Điện",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 239927894,
+  "tags": {
+    "addr:housenumber": "7-9",
+    "addr:street": "Y Bih Alêô",
+    "building": "yes",
+    "name": "KS Hoàng Lộc",
+    "official_name": "Khách Sạn Hoàng Lộc",
+    "tourism": "hotel",
+    "website": "https://hotelhoangloc.com.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 239927899,
+  "tags": {
+    "addr:housenumber": "03",
+    "addr:street": "Nguyễn Tất Thành",
+    "building": "yes",
+    "name": "Nhà khách T611",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 241752744,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Nguyễn Chí Thanh",
+    "building": "yes",
+    "building:levels": "12",
+    "name": "Dakruco Hotels",
+    "tourism": "hotel",
+    "website": "http://www.dakrucohotels.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 241893665,
+  "tags": {
+    "addr:housenumber": "108-110",
+    "addr:street": "Lý Thường Kiệt",
+    "building": "yes",
+    "name": "Khách sạn Tây Nguyên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 241894701,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Phan Chu Trinh",
+    "building": "yes",
+    "name": "Khách sạn Cao Nguyên",
+    "tourism": "hotel",
+    "website": "https://www.daklaktourist.com.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 241902535,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Lê Duẩn",
+    "building": "yes",
+    "name": "Nhà khách tỉnh Đăk Lăk",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 242181003,
+  "tags": {
+    "addr:housenumber": "135/1",
+    "addr:street": "Ngô Quyền",
+    "building": "yes",
+    "name": "Khách sạn Tuấn Vũ",
+    "tourism": "hotel",
+    "website": "http://tuanvuhotel.com.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 475578925,
+  "tags": {
+    "addr:district": "Lak",
+    "addr:province": "Dak Lak",
+    "addr:subdistrict": "Yok Nau",
+    "internet_access": "wlan",
+    "name:en": "LAK Tented Camp",
+    "operator": "Highland Trails Ltd",
+    "rooms": "19",
+    "smoking": "isolated",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1272705240,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Công Đoàn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1288835040,
+  "tags": {
+    "building": "yes",
+    "guest_house": "guest_house",
+    "name": "A1",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1526268512,
+  "tags": {
+    "building": "yes",
+    "name": "Hoàng Linh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526268941,
+  "tags": {
+    "building": "yes",
+    "name": "AEC Hotel Banme",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526269611,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Huyền Nga",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526271478,
+  "tags": {
+    "building": "yes",
+    "name": "Khách Sạn Ban Mê Xanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526273774,
+  "tags": {
+    "building": "yes",
+    "name": "The Healing Luxury Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526276535,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Thanh Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526276983,
+  "tags": {
+    "building": "yes",
+    "name": "Thanh Ngọc Motel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1569706299,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Hami Garden",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

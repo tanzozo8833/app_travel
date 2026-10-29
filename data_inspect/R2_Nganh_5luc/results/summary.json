@@ -1,0 +1,1718 @@
+{
+  "b1_overview": {
+    "n_reports": 81,
+    "gva_accom_growth": {
+      "2017": 8.98,
+      "2018": 6.78,
+      "2019": 6.71,
+      "2020": -14.68,
+      "2021": -20.81,
+      "2022": 40.61,
+      "2023": 12.24,
+      "2024": 9.76,
+      "2025": 10.02
+    },
+    "gva_accom_growth_9m_2026": 8.83,
+    "gva_index_2019_100": {
+      "2017": 87.8,
+      "2018": 93.7,
+      "2019": 100.0,
+      "2020": 85.3,
+      "2021": 67.6,
+      "2022": 95.0,
+      "2023": 106.6,
+      "2024": 117.0,
+      "2025": 128.8
+    },
+    "gva_recovery_last_vs_2019": 128.8,
+    "gva_cagr_2019_last": 4.3,
+    "gva_trend_2023_2025_pct": 9.9,
+    "gva_index_2030_proj": 206.3,
+    "travel_rev_9m": {
+      "2019": 33.5,
+      "2022": 18.2,
+      "2023": 26.5,
+      "2024": 45.6
+    },
+    "accom_rev_9m": {
+      "2019": 434.7,
+      "2022": 430.9,
+      "2023": 500.1,
+      "2024": 543.0
+    },
+    "travel_rev_annual": {
+      "2017": 35.9,
+      "2019": 46.0
+    },
+    "accom_rev_annual": {
+      "2017": 494.7,
+      "2019": 586.7
+    },
+    "travel_9m_growth_2019_2024_pct": 36.1,
+    "accom_9m_growth_2019_2024_pct": 24.9,
+    "online_estimates": [
+      {
+        "src": "e-Conomy SEA (GMV)",
+        "y0": 2025,
+        "v0": 4.0,
+        "y1": 2030,
+        "v1": 8.0,
+        "cagr": 14.87
+      },
+      {
+        "src": "Mordor (doanh thu)",
+        "y0": 2025,
+        "v0": 2.87,
+        "y1": 2031,
+        "v1": 4.69,
+        "cagr": 8.53
+      },
+      {
+        "src": "IMARC (doanh thu)",
+        "y0": 2025,
+        "v0": 3.0,
+        "y1": 2034,
+        "v1": 6.4,
+        "cagr": 8.78
+      }
+    ],
+    "domestic_visitors": {
+      "2019": 85.0,
+      "2022": 101.3,
+      "2023": 108.0,
+      "2025": 135.5
+    },
+    "domestic_cagr_2019_2025": 8.1,
+    "figs": [
+      "results/img/b1_nso_growth.png",
+      "results/img/b1_nso_revenue.png",
+      "results/img/b1_market_estimates.png"
+    ]
+  },
+  "b2_rivalry": {
+    "concentration": {
+      "vn_ratings_ios": {
+        "label": "Số đánh giá App Store Việt Nam",
+        "HHI": 3178,
+        "CR3": 88.8,
+        "shares": {
+          "Agoda": 47.2,
+          "Booking.com": 25.7,
+          "Traveloka": 15.9,
+          "Vexere": 5.0,
+          "Trip.com": 2.3,
+          "Airbnb": 1.5,
+          "Klook": 1.4,
+          "iVIVU": 0.5,
+          "Mytour": 0.5
+        }
+      },
+      "real": {
+        "label": "Lượt cài Google Play (toàn cầu)",
+        "HHI": 3964,
+        "CR3": 86.6,
+        "shares": {
+          "Booking.com": 58.7,
+          "Airbnb": 19.6,
+          "Agoda": 8.4,
+          "Traveloka": 5.9,
+          "Trip.com": 5.6,
+          "Klook": 1.7,
+          "Vexere": 0.1,
+          "Mytour": 0.0,
+          "iVIVU": 0.0
+        }
+      }
+    },
+    "pca_explained": [
+      0.349,
+      0.223,
+      0.122
+    ],
+    "kmeans_groups": {
+      "Nhóm 1: Tour, trải nghiệm + Đặt chỗ, giao dịch": [
+        "Airbnb",
+        "Tripadvisor",
+        "iVIVU"
+      ],
+      "Nhóm 2: Nhật ký, kỷ niệm + Cộng đồng, xã hội": [
+        "Polarsteps",
+        "Been",
+        "Swarm"
+      ],
+      "Nhóm 3: Đặt chỗ, giao dịch + Ưu đãi, khuyến mãi": [
+        "Traveloka",
+        "Agoda",
+        "Booking.com",
+        "Trip.com",
+        "Klook",
+        "Vexere",
+        "Mytour",
+        "Grab"
+      ],
+      "Nhóm 4: Trợ lý AI + Cộng đồng, xã hội": [
+        "Vietravel",
+        "ChatGPT",
+        "Gemini",
+        "TikTok",
+        "Facebook",
+        "MoMo"
+      ],
+      "Nhóm 5: Bản đồ, dẫn đường + Đánh giá, review": [
+        "Google Maps",
+        "Wanderlog",
+        "AllTrails"
+      ]
+    },
+    "levart_nearest": [
+      "Swarm",
+      "Been",
+      "Polarsteps"
+    ],
+    "levart_cos_top": [
+      {
+        "name": "Swarm",
+        "cos_levart": 0.876
+      },
+      {
+        "name": "Been",
+        "cos_levart": 0.827
+      },
+      {
+        "name": "Polarsteps",
+        "cos_levart": 0.811
+      },
+      {
+        "name": "Wanderlog",
+        "cos_levart": 0.708
+      },
+      {
+        "name": "AllTrails",
+        "cos_levart": 0.673
+      }
+    ],
+    "gap_ratio": 1.42,
+    "stamp_feature_top": {
+      "Swarm": 1.0,
+      "Been": 1.0,
+      "Polarsteps": 0.4,
+      "Grab": 0.28,
+      "AllTrails": 0.17
+    },
+    "figs": [
+      "results/img/b2_concentration.png",
+      "results/img/b2_positioning_pca.png",
+      "results/img/b2_feature_heatmap.png",
+      "results/img/b2_share_of_search.png"
+    ],
+    "share_of_search": {
+      "share_2019": {
+        "agoda": 25.7,
+        "traveloka": 28.8,
+        "booking.com": 5.4,
+        "trip.com": 0.5,
+        "klook": 5.1,
+        "mytour": 2.4,
+        "ivivu": 6.6,
+        "vntrip": 2.4,
+        "vexere": 3.8,
+        "airbnb": 19.2
+      },
+      "share_2025": {
+        "agoda": 32.9,
+        "traveloka": 24.8,
+        "booking.com": 5.1,
+        "trip.com": 2.0,
+        "klook": 7.3,
+        "mytour": 0.8,
+        "ivivu": 4.2,
+        "vntrip": 0.3,
+        "vexere": 7.8,
+        "airbnb": 14.6
+      },
+      "hhi_by_year": {
+        "2016": 3761,
+        "2017": 2483,
+        "2018": 2157,
+        "2019": 1996,
+        "2020": 2181,
+        "2021": 2552,
+        "2022": 2601,
+        "2023": 2427,
+        "2024": 2116,
+        "2025": 2104,
+        "2026": 1983
+      },
+      "rank_corr": {
+        "2017": 0.86,
+        "2018": 0.98,
+        "2019": 0.92,
+        "2020": 0.96,
+        "2021": 0.98,
+        "2022": 0.98,
+        "2023": 0.93,
+        "2024": 0.96,
+        "2025": 1.0,
+        "2026": 0.99
+      }
+    }
+  },
+  "b3_entrants": {
+    "n_play_travel": 352,
+    "n_ios_travel": 2190,
+    "cohorts": {
+      "2010": {
+        "play_new": 6,
+        "play_new_vi": 6,
+        "ios_new": 112
+      },
+      "2011": {
+        "play_new": 11,
+        "play_new_vi": 11,
+        "ios_new": 84
+      },
+      "2012": {
+        "play_new": 9,
+        "play_new_vi": 8,
+        "ios_new": 38
+      },
+      "2013": {
+        "play_new": 10,
+        "play_new_vi": 10,
+        "ios_new": 64
+      },
+      "2014": {
+        "play_new": 18,
+        "play_new_vi": 18,
+        "ios_new": 50
+      },
+      "2015": {
+        "play_new": 9,
+        "play_new_vi": 8,
+        "ios_new": 72
+      },
+      "2016": {
+        "play_new": 15,
+        "play_new_vi": 15,
+        "ios_new": 107
+      },
+      "2017": {
+        "play_new": 14,
+        "play_new_vi": 14,
+        "ios_new": 63
+      },
+      "2018": {
+        "play_new": 15,
+        "play_new_vi": 15,
+        "ios_new": 74
+      },
+      "2019": {
+        "play_new": 17,
+        "play_new_vi": 16,
+        "ios_new": 74
+      },
+      "2020": {
+        "play_new": 22,
+        "play_new_vi": 22,
+        "ios_new": 61
+      },
+      "2021": {
+        "play_new": 16,
+        "play_new_vi": 15,
+        "ios_new": 73
+      },
+      "2022": {
+        "play_new": 15,
+        "play_new_vi": 15,
+        "ios_new": 86
+      },
+      "2023": {
+        "play_new": 34,
+        "play_new_vi": 34,
+        "ios_new": 118
+      },
+      "2024": {
+        "play_new": 29,
+        "play_new_vi": 29,
+        "ios_new": 125
+      },
+      "2025": {
+        "play_new": 39,
+        "play_new_vi": 39,
+        "ios_new": 228
+      },
+      "2026": {
+        "play_new": 73,
+        "play_new_vi": 72,
+        "ios_new": 719
+      }
+    },
+    "active_share_by_year": {
+      "2010": 100.0,
+      "2011": 100.0,
+      "2012": 88.9,
+      "2013": 90.0,
+      "2014": 94.4,
+      "2015": 100.0,
+      "2016": 93.3,
+      "2017": 71.4,
+      "2018": 73.3,
+      "2019": 82.4,
+      "2020": 68.2,
+      "2021": 56.2,
+      "2022": 53.3,
+      "2023": 47.1,
+      "2024": 31.0,
+      "2025": 43.6,
+      "2026": 100.0
+    },
+    "active_share_by_year_ios": {
+      "2012": 89.5,
+      "2013": 71.9,
+      "2014": 66.0,
+      "2015": 68.1,
+      "2016": 68.2,
+      "2017": 73.0,
+      "2018": 66.2,
+      "2019": 62.2,
+      "2020": 57.4,
+      "2021": 60.3,
+      "2022": 67.4,
+      "2023": 72.0,
+      "2024": 76.8,
+      "2025": 80.7
+    },
+    "share_dead_play": 16.5,
+    "share_dead_ios": 11.8,
+    "km_median_years": {
+      "play_all": null,
+      "play_vi": null,
+      "ios_all": null,
+      "ios_vi": null
+    },
+    "km_survival_5y": {
+      "play_all": 82.5,
+      "play_vi": 83.1,
+      "ios_all": 87.0,
+      "ios_vi": 86.2
+    },
+    "km_survival_10y": {
+      "play_all": 81.9,
+      "ios_all": 78.5,
+      "ios_vi": 75.9
+    },
+    "ios_cohorts_dead_share": {
+      "2012": 7.9,
+      "2013": 23.4,
+      "2014": 26.0,
+      "2015": 26.4,
+      "2016": 25.2,
+      "2017": 23.8,
+      "2018": 29.7,
+      "2019": 28.4,
+      "2020": 37.7,
+      "2021": 20.5,
+      "2022": 14.0,
+      "2023": 20.3,
+      "2024": 5.6
+    },
+    "gini_installs": 0.954,
+    "zipf_exponent": 1.9,
+    "top1pct_share": 46.8,
+    "top10pct_share": 96.0,
+    "p_new_reach_100k": 12.6,
+    "p_new_reach_1m": 3.7,
+    "p_new_vi_reach_100k": 12.7,
+    "n_new_since_2022": 190,
+    "exits": {
+      "luxstay": {
+        "peak": "2019-12",
+        "last_vs_peak_pct": 0.0
+      },
+      "vntrip": {
+        "peak": "2019-07",
+        "last_vs_peak_pct": 13.5
+      },
+      "mytour": {
+        "peak": "2017-07",
+        "last_vs_peak_pct": 16.3
+      },
+      "ivivu": {
+        "peak": "2019-07",
+        "last_vs_peak_pct": 51.1
+      },
+      "vexere": {
+        "peak": "2026-06",
+        "last_vs_peak_pct": 92.6
+      }
+    },
+    "figs": [
+      "results/img/b3_entry_cohorts.png",
+      "results/img/b3_survival.png",
+      "results/img/b3_installs_power_law.png",
+      "results/img/b3_exit_trends.png"
+    ]
+  },
+  "b6_substitutes": {
+    "installs_by_group_m": {
+      "App lên kế hoạch, sưu tầm": 43.4,
+      "Sản phẩm thay thế": 40747.0,
+      "Đặt chỗ": 1961.2
+    },
+    "ios_vn_ratings_by_group": {
+      "App lên kế hoạch, sưu tầm": 405.0,
+      "Sản phẩm thay thế": 16994526.0,
+      "Đặt chỗ": 516854.0
+    },
+    "substitute_to_planning_installs_ratio": 938,
+    "tour_search_change_2019_2025_pct": -25.6,
+    "chatgpt_vs_lichtrinh_2025": 11.4,
+    "annual": {
+      "chatgpt": {
+        "2016": 0.0,
+        "2017": 0.0,
+        "2018": 0.0,
+        "2019": 0.0,
+        "2020": 0.0,
+        "2021": 0.0,
+        "2022": 0.2,
+        "2023": 9.1,
+        "2024": 20.3,
+        "2025": 70.5,
+        "2026": 76.7
+      },
+      "du lịch": {
+        "2016": 33.2,
+        "2017": 40.9,
+        "2018": 47.3,
+        "2019": 47.0,
+        "2020": 32.8,
+        "2021": 23.8,
+        "2022": 43.8,
+        "2023": 43.8,
+        "2024": 40.7,
+        "2025": 35.6,
+        "2026": 34.7
+      },
+      "google maps": {
+        "2016": 3.7,
+        "2017": 3.6,
+        "2018": 2.8,
+        "2019": 3.2,
+        "2020": 2.9,
+        "2021": 2.6,
+        "2022": 3.7,
+        "2023": 3.0,
+        "2024": 3.0,
+        "2025": 4.0,
+        "2026": 5.6
+      },
+      "lịch trình": {
+        "2016": 2.5,
+        "2017": 2.5,
+        "2018": 3.1,
+        "2019": 2.9,
+        "2020": 3.7,
+        "2021": 4.3,
+        "2022": 6.0,
+        "2023": 5.7,
+        "2024": 6.0,
+        "2025": 6.2,
+        "2026": 5.3
+      },
+      "tour du lịch": {
+        "2016": 2.3,
+        "2017": 2.8,
+        "2018": 3.3,
+        "2019": 3.2,
+        "2020": 1.7,
+        "2021": 1.2,
+        "2022": 2.5,
+        "2023": 2.8,
+        "2024": 2.5,
+        "2025": 2.4,
+        "2026": 2.1
+      }
+    },
+    "figs": [
+      "results/img/b6_substitutes_scale.png"
+    ]
+  },
+  "b4_buyers": {
+    "n_reviews_booking": 7931,
+    "n_reviews_all": 15483,
+    "prevalence": {
+      "1–2 sao": {
+        "Giá, phí": 17.4,
+        "Hoàn tiền, huỷ": 26.1,
+        "Chăm sóc khách hàng": 29.5,
+        "Lỗi ứng dụng": 18.7,
+        "Khuyến mãi, điểm thưởng": 3.9,
+        "Thanh toán": 17.1,
+        "Đặt chỗ thất bại": 4.7,
+        "Lừa đảo, tin cậy": 15.8,
+        "Tiện, dễ dùng": 22.0
+      },
+      "3 sao": {
+        "Giá, phí": 15.4,
+        "Hoàn tiền, huỷ": 4.3,
+        "Chăm sóc khách hàng": 10.1,
+        "Lỗi ứng dụng": 19.2,
+        "Khuyến mãi, điểm thưởng": 4.8,
+        "Thanh toán": 12.0,
+        "Đặt chỗ thất bại": 1.0,
+        "Lừa đảo, tin cậy": 1.0,
+        "Tiện, dễ dùng": 25.5
+      },
+      "4–5 sao": {
+        "Giá, phí": 10.9,
+        "Hoàn tiền, huỷ": 1.5,
+        "Chăm sóc khách hàng": 4.4,
+        "Lỗi ứng dụng": 2.8,
+        "Khuyến mãi, điểm thưởng": 3.6,
+        "Thanh toán": 2.4,
+        "Đặt chỗ thất bại": 0.2,
+        "Lừa đảo, tin cậy": 1.8,
+        "Tiện, dễ dùng": 77.9
+      }
+    },
+    "lift_neg_vs_pos": {
+      "Giá, phí": 1.59,
+      "Hoàn tiền, huỷ": 17.42,
+      "Chăm sóc khách hàng": 6.7,
+      "Lỗi ứng dụng": 6.65,
+      "Khuyến mãi, điểm thưởng": 1.09,
+      "Thanh toán": 7.16,
+      "Đặt chỗ thất bại": 25.97,
+      "Lừa đảo, tin cậy": 8.78,
+      "Tiện, dễ dùng": 0.28
+    },
+    "logit_or": {
+      "Tiện, dễ dùng": {
+        "OR": 0.076,
+        "lo": 0.066,
+        "hi": 0.088,
+        "p": 0.0
+      },
+      "Khuyến mãi, điểm thưởng": {
+        "OR": 0.787,
+        "lo": 0.532,
+        "hi": 1.164,
+        "p": 0.23
+      },
+      "Giá, phí": {
+        "OR": 1.04,
+        "lo": 0.848,
+        "hi": 1.276,
+        "p": 0.705
+      },
+      "Lỗi ứng dụng": {
+        "OR": 2.999,
+        "lo": 2.302,
+        "hi": 3.908,
+        "p": 0.0
+      },
+      "Thanh toán": {
+        "OR": 3.279,
+        "lo": 2.406,
+        "hi": 4.469,
+        "p": 0.0
+      },
+      "Chăm sóc khách hàng": {
+        "OR": 4.942,
+        "lo": 3.93,
+        "hi": 6.214,
+        "p": 0.0
+      },
+      "Lừa đảo, tin cậy": {
+        "OR": 5.184,
+        "lo": 3.834,
+        "hi": 7.011,
+        "p": 0.0
+      },
+      "Hoàn tiền, huỷ": {
+        "OR": 12.573,
+        "lo": 8.954,
+        "hi": 17.654,
+        "p": 0.0
+      },
+      "Đặt chỗ thất bại": {
+        "OR": 17.838,
+        "lo": 6.202,
+        "hi": 51.309,
+        "p": 0.0
+      }
+    },
+    "logit_pseudo_r2": 0.477,
+    "logit_params": {
+      "const": 0.8042,
+      "Giá, phí": 0.0394,
+      "Hoàn tiền, huỷ": 2.5315,
+      "Chăm sóc khách hàng": 1.5978,
+      "Lỗi ứng dụng": 1.0984,
+      "Khuyến mãi, điểm thưởng": -0.2396,
+      "Thanh toán": 1.1875,
+      "Đặt chỗ thất bại": 2.8814,
+      "Lừa đảo, tin cậy": 1.6457,
+      "Tiện, dễ dùng": -2.5753,
+      "App Store": 1.0376
+    },
+    "logit_app_fe": {
+      "Airbnb": -1.5719,
+      "Booking.com": -1.3509,
+      "Klook": -1.861,
+      "Mytour": -1.5024,
+      "Traveloka": -0.2515,
+      "Trip.com": -1.7079,
+      "Vexere": -1.4799,
+      "Vietravel": -1.4106,
+      "iVIVU": -1.5577
+    },
+    "per_app_play": {
+      "Tripadvisor": {
+        "n": 500,
+        "mean": 4.7,
+        "neg": 0.064,
+        "reply": 0.0
+      },
+      "ChatGPT": {
+        "n": 500,
+        "mean": 3.91,
+        "neg": 0.244,
+        "reply": 0.0
+      },
+      "Facebook": {
+        "n": 500,
+        "mean": 2.898,
+        "neg": 0.502,
+        "reply": 0.0
+      },
+      "Gemini": {
+        "n": 500,
+        "mean": 3.814,
+        "neg": 0.268,
+        "reply": 0.0
+      },
+      "Google Maps": {
+        "n": 500,
+        "mean": 3.91,
+        "neg": 0.252,
+        "reply": 0.0
+      },
+      "Vietravel": {
+        "n": 169,
+        "mean": 3.722,
+        "neg": 0.302,
+        "reply": 0.0
+      },
+      "Airbnb": {
+        "n": 500,
+        "mean": 4.2,
+        "neg": 0.182,
+        "reply": 0.006
+      },
+      "AllTrails": {
+        "n": 158,
+        "mean": 4.247,
+        "neg": 0.177,
+        "reply": 0.12025316455696203
+      },
+      "iVIVU": {
+        "n": 204,
+        "mean": 4.25,
+        "neg": 0.172,
+        "reply": 0.16176470588235295
+      },
+      "Mytour": {
+        "n": 500,
+        "mean": 3.842,
+        "neg": 0.26,
+        "reply": 0.324
+      },
+      "Klook": {
+        "n": 500,
+        "mean": 4.21,
+        "neg": 0.174,
+        "reply": 0.446
+      },
+      "TikTok": {
+        "n": 500,
+        "mean": 3.066,
+        "neg": 0.45,
+        "reply": 0.774
+      },
+      "MoMo": {
+        "n": 500,
+        "mean": 2.788,
+        "neg": 0.53,
+        "reply": 0.814
+      },
+      "Grab": {
+        "n": 500,
+        "mean": 2.692,
+        "neg": 0.564,
+        "reply": 0.822
+      },
+      "Traveloka": {
+        "n": 500,
+        "mean": 2.948,
+        "neg": 0.49,
+        "reply": 0.96
+      },
+      "Trip.com": {
+        "n": 500,
+        "mean": 4.388,
+        "neg": 0.132,
+        "reply": 0.986
+      },
+      "Agoda": {
+        "n": 500,
+        "mean": 2.132,
+        "neg": 0.712,
+        "reply": 0.988
+      },
+      "Booking.com": {
+        "n": 500,
+        "mean": 3.968,
+        "neg": 0.238,
+        "reply": 0.99
+      },
+      "Vexere": {
+        "n": 500,
+        "mean": 3.554,
+        "neg": 0.34,
+        "reply": 1.0
+      }
+    },
+    "reply_rate_on_negative": {
+      "Agoda": 0.9859550561797753,
+      "Airbnb": 0.02197802197802198,
+      "AllTrails": 0.6785714285714286,
+      "Booking.com": 0.9831932773109243,
+      "ChatGPT": 0.0,
+      "Facebook": 0.0,
+      "Gemini": 0.0,
+      "Google Maps": 0.0,
+      "Grab": 0.8475177304964538,
+      "Klook": 0.6206896551724138,
+      "MoMo": 0.8075471698113208,
+      "Mytour": 0.5230769230769231,
+      "Polarsteps": 1.0,
+      "Swarm": 0.0,
+      "TikTok": 0.7644444444444445,
+      "Traveloka": 0.926530612244898,
+      "Trip.com": 0.9848484848484849,
+      "Tripadvisor": 0.0,
+      "Vexere": 1.0,
+      "Vietravel": 0.0,
+      "iVIVU": 0.7428571428571429
+    },
+    "cross_mention_share_pct": 0.8,
+    "switch_mention_pct": 1.7,
+    "switch_mention_neg_pct": 3.1,
+    "cross_mentions": {
+      "Traveloka": {
+        "Agoda": 5,
+        "Traveloka": 0,
+        "Booking.com": 0,
+        "Trip.com": 1,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 0,
+        "ChatGPT": 0
+      },
+      "Agoda": {
+        "Agoda": 0,
+        "Traveloka": 6,
+        "Booking.com": 3,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 3,
+        "ChatGPT": 0
+      },
+      "Booking.com": {
+        "Agoda": 8,
+        "Traveloka": 0,
+        "Booking.com": 0,
+        "Trip.com": 1,
+        "Klook": 0,
+        "Airbnb": 1,
+        "Vexere": 0,
+        "Google Maps": 1,
+        "ChatGPT": 0
+      },
+      "Trip.com": {
+        "Agoda": 5,
+        "Traveloka": 2,
+        "Booking.com": 2,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 1,
+        "Vexere": 0,
+        "Google Maps": 1,
+        "ChatGPT": 0
+      },
+      "Klook": {
+        "Agoda": 2,
+        "Traveloka": 0,
+        "Booking.com": 0,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 0,
+        "ChatGPT": 0
+      },
+      "Airbnb": {
+        "Agoda": 5,
+        "Traveloka": 0,
+        "Booking.com": 1,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 2,
+        "ChatGPT": 0
+      },
+      "Vexere": {
+        "Agoda": 0,
+        "Traveloka": 1,
+        "Booking.com": 0,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 3,
+        "ChatGPT": 0
+      },
+      "Mytour": {
+        "Agoda": 10,
+        "Traveloka": 7,
+        "Booking.com": 0,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 0,
+        "ChatGPT": 1
+      },
+      "iVIVU": {
+        "Agoda": 1,
+        "Traveloka": 0,
+        "Booking.com": 0,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 0,
+        "ChatGPT": 0
+      },
+      "Vietravel": {
+        "Agoda": 0,
+        "Traveloka": 0,
+        "Booking.com": 0,
+        "Trip.com": 0,
+        "Klook": 0,
+        "Airbnb": 0,
+        "Vexere": 0,
+        "Google Maps": 0,
+        "ChatGPT": 0
+      }
+    },
+    "price_ratio_annual": {
+      "2016": 0.163,
+      "2017": 0.188,
+      "2018": 0.2,
+      "2019": 0.186,
+      "2020": 0.208,
+      "2021": 0.314,
+      "2022": 0.227,
+      "2023": 0.171,
+      "2024": 0.118,
+      "2025": 0.109,
+      "2026": 0.129
+    },
+    "price_trend_tau": -0.16,
+    "price_trend_p": 0.6007,
+    "neg_share_all": 41.9,
+    "figs": [
+      "results/img/b4_review_topics.png",
+      "results/img/b4_rating_drivers.png",
+      "results/img/b4_reply_rate.png",
+      "results/img/b4_price_seeking.png"
+    ]
+  },
+  "b5_suppliers": {
+    "n_lodging": 11459,
+    "n_provinces": 34,
+    "chain_share_pct": 2.63,
+    "small_share_pct": 39.7,
+    "digital_share_pct": 16.7,
+    "hhi_national": 0.96,
+    "fragmentation_national": 0.9999,
+    "max_chain_share_province": [
+      {
+        "province": "TP. Quảng Ninh",
+        "chain_share": 6.5,
+        "n": 170
+      },
+      {
+        "province": "Cà Mau",
+        "chain_share": 5.6,
+        "n": 36
+      },
+      {
+        "province": "TP. Hà Nội",
+        "chain_share": 5.1,
+        "n": 1061
+      }
+    ],
+    "top_chains": {
+      "mường thanh": 27,
+      "a25": 16,
+      "hilton": 11,
+      "vinpearl": 10,
+      "tru by hilton": 8,
+      "novotel": 8,
+      "mercure": 7,
+      "sheraton": 7,
+      "wyndham": 6,
+      "meliá": 6,
+      "intercontinental": 6,
+      "pullman": 5
+    },
+    "by_province": [
+      {
+        "province": "TP. Hồ Chí Minh",
+        "n": 1496,
+        "chain_share": 3.54,
+        "small_share": 24.8,
+        "digital_share": 15.84,
+        "hhi": 6.79,
+        "hotel": 64.17,
+        "guest_house": 7.55,
+        "hostel": 12.63,
+        "apartment": 11.03,
+        "other": 4.61,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Lâm Đồng",
+        "n": 1269,
+        "chain_share": 1.42,
+        "small_share": 51.3,
+        "digital_share": 14.66,
+        "hhi": 7.88,
+        "hotel": 43.97,
+        "guest_house": 31.52,
+        "hostel": 7.09,
+        "apartment": 4.73,
+        "other": 12.69,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "TP. Đà Nẵng",
+        "n": 1253,
+        "chain_share": 3.75,
+        "small_share": 29.53,
+        "digital_share": 24.58,
+        "hhi": 8.06,
+        "hotel": 63.05,
+        "guest_house": 13.65,
+        "hostel": 9.9,
+        "apartment": 7.42,
+        "other": 5.99,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "TP. Hà Nội",
+        "n": 1061,
+        "chain_share": 5.09,
+        "small_share": 31.29,
+        "digital_share": 22.24,
+        "hhi": 10.72,
+        "hotel": 63.15,
+        "guest_house": 7.26,
+        "hostel": 16.31,
+        "apartment": 5.56,
+        "other": 7.73,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Khánh Hòa",
+        "n": 617,
+        "chain_share": 3.24,
+        "small_share": 31.28,
+        "digital_share": 13.45,
+        "hhi": 16.52,
+        "hotel": 61.59,
+        "guest_house": 8.91,
+        "hostel": 8.91,
+        "apartment": 7.13,
+        "other": 13.45,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Lào Cai",
+        "n": 589,
+        "chain_share": 0.85,
+        "small_share": 48.56,
+        "digital_share": 18.0,
+        "hhi": 16.98,
+        "hotel": 50.42,
+        "guest_house": 30.05,
+        "hostel": 7.98,
+        "apartment": 1.02,
+        "other": 10.53,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Tuyên Quang",
+        "n": 490,
+        "chain_share": 0.0,
+        "small_share": 71.22,
+        "digital_share": 18.57,
+        "hhi": 20.41,
+        "hotel": 28.16,
+        "guest_house": 22.04,
+        "hostel": 15.1,
+        "apartment": 0.61,
+        "other": 34.08,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "An Giang",
+        "n": 477,
+        "chain_share": 3.35,
+        "small_share": 35.22,
+        "digital_share": 21.59,
+        "hhi": 20.96,
+        "hotel": 60.38,
+        "guest_house": 17.19,
+        "hostel": 11.53,
+        "apartment": 4.4,
+        "other": 6.5,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "TP. Hải Phòng",
+        "n": 357,
+        "chain_share": 3.08,
+        "small_share": 24.09,
+        "digital_share": 12.61,
+        "hhi": 28.01,
+        "hotel": 66.67,
+        "guest_house": 5.04,
+        "hostel": 11.48,
+        "apartment": 9.24,
+        "other": 7.56,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Ninh Bình",
+        "n": 335,
+        "chain_share": 0.6,
+        "small_share": 53.13,
+        "digital_share": 22.39,
+        "hhi": 29.85,
+        "hotel": 45.07,
+        "guest_house": 34.33,
+        "hostel": 12.54,
+        "apartment": 1.79,
+        "other": 6.27,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "TP. Cần Thơ",
+        "n": 333,
+        "chain_share": 2.7,
+        "small_share": 32.43,
+        "digital_share": 13.51,
+        "hhi": 30.21,
+        "hotel": 64.56,
+        "guest_house": 11.71,
+        "hostel": 8.41,
+        "apartment": 3.0,
+        "other": 12.31,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Quảng Trị",
+        "n": 315,
+        "chain_share": 2.22,
+        "small_share": 45.71,
+        "digital_share": 13.65,
+        "hhi": 31.95,
+        "hotel": 47.94,
+        "guest_house": 17.14,
+        "hostel": 8.57,
+        "apartment": 6.35,
+        "other": 20.0,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "TP. Huế",
+        "n": 269,
+        "chain_share": 1.12,
+        "small_share": 42.38,
+        "digital_share": 21.93,
+        "hhi": 37.17,
+        "hotel": 56.13,
+        "guest_house": 17.84,
+        "hostel": 14.87,
+        "apartment": 1.12,
+        "other": 10.04,
+        "fragmentation": 1.0
+      },
+      {
+        "province": "Phú Thọ",
+        "n": 200,
+        "chain_share": 1.5,
+        "small_share": 63.5,
+        "digital_share": 17.0,
+        "hhi": 50.5,
+        "hotel": 28.5,
+        "guest_house": 35.0,
+        "hostel": 7.0,
+        "apartment": 8.0,
+        "other": 21.5,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Đắk Lắk",
+        "n": 198,
+        "chain_share": 1.01,
+        "small_share": 50.0,
+        "digital_share": 13.13,
+        "hhi": 50.51,
+        "hotel": 47.47,
+        "guest_house": 23.23,
+        "hostel": 5.56,
+        "apartment": 2.53,
+        "other": 21.21,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Gia Lai",
+        "n": 190,
+        "chain_share": 3.68,
+        "small_share": 41.58,
+        "digital_share": 16.32,
+        "hhi": 52.63,
+        "hotel": 56.32,
+        "guest_house": 13.68,
+        "hostel": 4.74,
+        "apartment": 2.11,
+        "other": 23.16,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "TP. Đồng Nai",
+        "n": 181,
+        "chain_share": 0.0,
+        "small_share": 20.99,
+        "digital_share": 5.52,
+        "hhi": 55.25,
+        "hotel": 13.26,
+        "guest_house": 7.73,
+        "hostel": 2.21,
+        "apartment": 65.75,
+        "other": 11.05,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Quảng Ngãi",
+        "n": 172,
+        "chain_share": 1.16,
+        "small_share": 49.42,
+        "digital_share": 10.47,
+        "hhi": 58.14,
+        "hotel": 47.67,
+        "guest_house": 16.86,
+        "hostel": 0.58,
+        "apartment": 2.91,
+        "other": 31.98,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "TP. Quảng Ninh",
+        "n": 170,
+        "chain_share": 6.47,
+        "small_share": 27.06,
+        "digital_share": 9.41,
+        "hhi": 60.21,
+        "hotel": 70.59,
+        "guest_house": 11.18,
+        "hostel": 4.71,
+        "apartment": 2.35,
+        "other": 11.18,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Cao Bằng",
+        "n": 168,
+        "chain_share": 0.6,
+        "small_share": 47.02,
+        "digital_share": 15.48,
+        "hhi": 59.52,
+        "hotel": 52.38,
+        "guest_house": 16.07,
+        "hostel": 11.9,
+        "apartment": 0.6,
+        "other": 19.05,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "TP. Bắc Ninh",
+        "n": 159,
+        "chain_share": 4.4,
+        "small_share": 16.35,
+        "digital_share": 8.18,
+        "hhi": 63.68,
+        "hotel": 81.13,
+        "guest_house": 5.03,
+        "hostel": 1.26,
+        "apartment": 2.52,
+        "other": 10.06,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Thanh Hóa",
+        "n": 158,
+        "chain_share": 1.9,
+        "small_share": 50.63,
+        "digital_share": 8.86,
+        "hhi": 64.09,
+        "hotel": 46.2,
+        "guest_house": 15.82,
+        "hostel": 6.33,
+        "apartment": 3.16,
+        "other": 28.48,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Nghệ An",
+        "n": 144,
+        "chain_share": 2.78,
+        "small_share": 49.31,
+        "digital_share": 3.47,
+        "hhi": 70.41,
+        "hotel": 46.53,
+        "guest_house": 9.72,
+        "hostel": 2.78,
+        "apartment": 4.17,
+        "other": 36.81,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Sơn La",
+        "n": 118,
+        "chain_share": 0.85,
+        "small_share": 59.32,
+        "digital_share": 6.78,
+        "hhi": 84.75,
+        "hotel": 39.83,
+        "guest_house": 20.34,
+        "hostel": 0.85,
+        "apartment": 0.85,
+        "other": 38.14,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Đồng Tháp",
+        "n": 110,
+        "chain_share": 0.0,
+        "small_share": 41.82,
+        "digital_share": 17.27,
+        "hhi": 90.91,
+        "hotel": 48.18,
+        "guest_house": 10.0,
+        "hostel": 7.27,
+        "apartment": 10.0,
+        "other": 24.55,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Lạng Sơn",
+        "n": 105,
+        "chain_share": 1.9,
+        "small_share": 62.86,
+        "digital_share": 9.52,
+        "hhi": 95.24,
+        "hotel": 37.14,
+        "guest_house": 22.86,
+        "hostel": 2.86,
+        "apartment": 0.0,
+        "other": 37.14,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Vĩnh Long",
+        "n": 102,
+        "chain_share": 1.96,
+        "small_share": 60.78,
+        "digital_share": 22.55,
+        "hhi": 98.04,
+        "hotel": 39.22,
+        "guest_house": 41.18,
+        "hostel": 9.8,
+        "apartment": 0.0,
+        "other": 9.8,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Thái Nguyên",
+        "n": 96,
+        "chain_share": 2.08,
+        "small_share": 65.62,
+        "digital_share": 10.42,
+        "hhi": 104.17,
+        "hotel": 34.38,
+        "guest_house": 23.96,
+        "hostel": 5.21,
+        "apartment": 0.0,
+        "other": 36.46,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Hà Tĩnh",
+        "n": 72,
+        "chain_share": 2.78,
+        "small_share": 41.67,
+        "digital_share": 8.33,
+        "hhi": 138.89,
+        "hotel": 58.33,
+        "guest_house": 9.72,
+        "hostel": 0.0,
+        "apartment": 0.0,
+        "other": 31.94,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Tây Ninh",
+        "n": 72,
+        "chain_share": 4.17,
+        "small_share": 59.72,
+        "digital_share": 16.67,
+        "hhi": 138.89,
+        "hotel": 34.72,
+        "guest_house": 36.11,
+        "hostel": 9.72,
+        "apartment": 5.56,
+        "other": 13.89,
+        "fragmentation": 0.99
+      },
+      {
+        "province": "Lai Châu",
+        "n": 50,
+        "chain_share": 0.0,
+        "small_share": 66.0,
+        "digital_share": 6.0,
+        "hhi": 200.0,
+        "hotel": 34.0,
+        "guest_house": 34.0,
+        "hostel": 2.0,
+        "apartment": 0.0,
+        "other": 30.0,
+        "fragmentation": 0.98
+      },
+      {
+        "province": "Hưng Yên",
+        "n": 49,
+        "chain_share": 2.04,
+        "small_share": 51.02,
+        "digital_share": 6.12,
+        "hhi": 204.08,
+        "hotel": 44.9,
+        "guest_house": 4.08,
+        "hostel": 38.78,
+        "apartment": 4.08,
+        "other": 8.16,
+        "fragmentation": 0.98
+      },
+      {
+        "province": "Điện Biên",
+        "n": 48,
+        "chain_share": 2.08,
+        "small_share": 50.0,
+        "digital_share": 10.42,
+        "hhi": 208.33,
+        "hotel": 50.0,
+        "guest_house": 39.58,
+        "hostel": 4.17,
+        "apartment": 0.0,
+        "other": 6.25,
+        "fragmentation": 0.98
+      },
+      {
+        "province": "Cà Mau",
+        "n": 36,
+        "chain_share": 5.56,
+        "small_share": 27.78,
+        "digital_share": 8.33,
+        "hhi": 293.21,
+        "hotel": 72.22,
+        "guest_house": 2.78,
+        "hostel": 11.11,
+        "apartment": 0.0,
+        "other": 13.89,
+        "fragmentation": 0.97
+      }
+    ],
+    "figs": [
+      "results/img/b5_lodging_structure.png",
+      "results/img/b5_fragmentation.png",
+      "results/img/b5_bargaining.png"
+    ],
+    "bargaining": {
+      "assume": {
+        "adr_vnd": 974000,
+        "occupancy": 0.4533,
+        "ota_commission": 0.18,
+        "ota_share": 0.5885,
+        "marginal_cost_share": 0.25,
+        "levart_cost_vnd": 40000,
+        "beta_levart": 0.3
+      },
+      "k_current": 0.267,
+      "f_min_pct": 4.1,
+      "f_max_pct": 59.8,
+      "f_nash_pct": 20.8,
+      "f_nash_by_beta": {
+        "0.0": 4.1,
+        "0.1": 9.7,
+        "0.2": 15.2,
+        "0.3": 20.8,
+        "0.4": 26.4,
+        "0.5": 32.0,
+        "0.6": 37.5,
+        "0.7": 43.1,
+        "0.8": 48.7,
+        "0.9": 54.2,
+        "1.0": 59.8
+      }
+    }
+  },
+  "f_synthesis": {
+    "force_index": {
+      "Cạnh tranh hiện tại": {
+        "score": 2.8,
+        "p10": 2.23,
+        "p90": 3.29,
+        "level": "Cao",
+        "drivers": "Độ trùng tính năng lớn nhất với Levart (cosine) = 0.88; HHI nhóm đặt chỗ (App Store VN) = 3178.0; Độ ổn định thứ hạng (Spearman giữa các năm) = 0.96; Tăng trưởng thực của ngành 2023–2025 (%/năm) = 9.9"
+      },
+      "Đối thủ mới gia nhập": {
+        "score": 2.34,
+        "p10": 1.83,
+        "p90": 2.85,
+        "level": "Trung bình",
+        "drivers": "% app du lịch iOS ra mắt từ 2022 = 25.9; Chi phí đăng ký phát hành (USD) = 25.0; % app mới (từ 2022) đạt ≥ 100.000 lượt cài = 12.6; Gini lượt cài (thắng thua dồn về số ít) = 0.954"
+      },
+      "Quyền lực người dùng": {
+        "score": 2.73,
+        "p10": 2.15,
+        "p90": 3.24,
+        "level": "Cao",
+        "drivers": "% đánh giá app đặt chỗ nhắc tên đối thủ (so sánh, dùng nhiều app) = 0.8; Tỉ lệ OTA trả lời đánh giá (phải chiều người dùng) = 0.73; |Độ co giãn| tham gia ở chuyến 4–5 triệu (R1) = 1.68; Có sản phẩm thay thế miễn phí = 1.0"
+      },
+      "Nhà cung cấp — địa phương": {
+        "score": 1.28,
+        "p10": 0.87,
+        "p90": 1.64,
+        "level": "Thấp–trung bình",
+        "drivers": "Công suất phòng (thừa cung → yếu) = 0.4533; Mức phí tối đa homestay vẫn có lợi (f_max) = 59.8; % cơ sở lưu trú thuộc chuỗi (OSM) = 2.63"
+      },
+      "Nhà cung cấp — công nghệ": {
+        "score": 3.0,
+        "p10": 3.0,
+        "p90": 3.0,
+        "level": "Cao",
+        "drivers": "Số nhà cung cấp then chốt không thay ngay được (Play, Maps, Firebase, Gemini) = 4.0; Phí kho ứng dụng (%) = 15.0"
+      },
+      "Sản phẩm thay thế": {
+        "score": 3.65,
+        "p10": 3.39,
+        "p90": 3.87,
+        "level": "Rất cao",
+        "drivers": "Lượt cài thay thế ÷ app lên kế hoạch, sưu tầm (lần) = 938.0; Tìm 'chatgpt' ÷ tìm 'lịch trình' (2025) = 11.4; Thay đổi tìm 'tour du lịch' 2019→2025 (%) = -25.6"
+      }
+    },
+    "indicators": [
+      {
+        "force": "Cạnh tranh hiện tại",
+        "indicator": "Độ trùng tính năng lớn nhất với Levart (cosine)",
+        "value": 0.88,
+        "rule": "4 × cosine",
+        "score": 3.504,
+        "source": "D2, D4"
+      },
+      {
+        "force": "Cạnh tranh hiện tại",
+        "indicator": "HHI nhóm đặt chỗ (App Store VN)",
+        "value": 3178.0,
+        "rule": "HHI ÷ 1.000",
+        "score": 3.178,
+        "source": "D4"
+      },
+      {
+        "force": "Cạnh tranh hiện tại",
+        "indicator": "Độ ổn định thứ hạng (Spearman giữa các năm)",
+        "value": 0.96,
+        "rule": "4 × ρ (thứ hạng cứng = khó chen)",
+        "score": 3.8240000000000003,
+        "source": "D6"
+      },
+      {
+        "force": "Cạnh tranh hiện tại",
+        "indicator": "Tăng trưởng thực của ngành 2023–2025 (%/năm)",
+        "value": 9.9,
+        "rule": "4 − tăng trưởng ÷ 3 (ngành tăng nhanh làm dịu cạnh tranh)",
+        "score": 0.6999999999999997,
+        "source": "D1"
+      },
+      {
+        "force": "Đối thủ mới gia nhập",
+        "indicator": "% app du lịch iOS ra mắt từ 2022",
+        "value": 25.9,
+        "rule": "% ÷ 10",
+        "score": 2.5931098696461823,
+        "source": "D4"
+      },
+      {
+        "force": "Đối thủ mới gia nhập",
+        "indicator": "Chi phí đăng ký phát hành (USD)",
+        "value": 25.0,
+        "rule": "phí ≤ 100 USD → 4",
+        "score": 4.0,
+        "source": "S6"
+      },
+      {
+        "force": "Đối thủ mới gia nhập",
+        "indicator": "% app mới (từ 2022) đạt ≥ 100.000 lượt cài",
+        "value": 12.6,
+        "rule": "4 × % ÷ 25 (ít người mới thành công = mối đe doạ thấp)",
+        "score": 2.016,
+        "source": "D2"
+      },
+      {
+        "force": "Đối thủ mới gia nhập",
+        "indicator": "Gini lượt cài (thắng thua dồn về số ít)",
+        "value": 0.954,
+        "rule": "4 × (1 − Gini) × 4, tối đa 4",
+        "score": 0.7360000000000007,
+        "source": "D2"
+      },
+      {
+        "force": "Quyền lực người dùng",
+        "indicator": "% đánh giá app đặt chỗ nhắc tên đối thủ (so sánh, dùng nhiều app)",
+        "value": 0.8,
+        "rule": "% ÷ 5 × 4 (nhắc tên đối thủ hiếm trong đánh giá; 5% coi là rất nhiều)",
+        "score": 0.64,
+        "source": "D3, D5"
+      },
+      {
+        "force": "Quyền lực người dùng",
+        "indicator": "Tỉ lệ OTA trả lời đánh giá (phải chiều người dùng)",
+        "value": 0.73,
+        "rule": "4 × tỉ lệ",
+        "score": 2.927882352941176,
+        "source": "D3"
+      },
+      {
+        "force": "Quyền lực người dùng",
+        "indicator": "|Độ co giãn| tham gia ở chuyến 4–5 triệu (R1)",
+        "value": 1.68,
+        "rule": "4 × |e| ÷ 2",
+        "score": 3.36,
+        "source": "D8"
+      },
+      {
+        "force": "Quyền lực người dùng",
+        "indicator": "Có sản phẩm thay thế miễn phí",
+        "value": 1.0,
+        "rule": "có → 4",
+        "score": 4.0,
+        "source": "D2"
+      },
+      {
+        "force": "Nhà cung cấp — địa phương",
+        "indicator": "Công suất phòng (thừa cung → yếu)",
+        "value": 0.4533,
+        "rule": "4 × công suất ÷ 0,9",
+        "score": 2.0146666666666664,
+        "source": "S1"
+      },
+      {
+        "force": "Nhà cung cấp — địa phương",
+        "indicator": "Mức phí tối đa homestay vẫn có lợi (f_max)",
+        "value": 59.8,
+        "rule": "4 × (1 − f_max)",
+        "score": 1.608,
+        "source": "S1, S2, GT"
+      },
+      {
+        "force": "Nhà cung cấp — địa phương",
+        "indicator": "% cơ sở lưu trú thuộc chuỗi (OSM)",
+        "value": 2.63,
+        "rule": "4 × % ÷ 50",
+        "score": 0.2104,
+        "source": "D7"
+      },
+      {
+        "force": "Nhà cung cấp — công nghệ",
+        "indicator": "Số nhà cung cấp then chốt không thay ngay được (Play, Maps, Firebase, Gemini)",
+        "value": 4.0,
+        "rule": "số ÷ 4 × 3 (GT)",
+        "score": 3.0,
+        "source": "S6, S7, GT"
+      },
+      {
+        "force": "Nhà cung cấp — công nghệ",
+        "indicator": "Phí kho ứng dụng (%)",
+        "value": 15.0,
+        "rule": "% ÷ 5",
+        "score": 3.0,
+        "source": "S6"
+      },
+      {
+        "force": "Sản phẩm thay thế",
+        "indicator": "Lượt cài thay thế ÷ app lên kế hoạch, sưu tầm (lần)",
+        "value": 938.0,
+        "rule": "4 × log10(tỉ lệ) ÷ 3",
+        "score": 3.9629371178387527,
+        "source": "D2"
+      },
+      {
+        "force": "Sản phẩm thay thế",
+        "indicator": "Tìm 'chatgpt' ÷ tìm 'lịch trình' (2025)",
+        "value": 11.4,
+        "rule": "4 × log10(tỉ lệ) ÷ 1",
+        "score": 4.0,
+        "source": "D6"
+      },
+      {
+        "force": "Sản phẩm thay thế",
+        "indicator": "Thay đổi tìm 'tour du lịch' 2019→2025 (%)",
+        "value": -25.6,
+        "rule": "4 × (1 + % ÷ 100) (tour truyền thống giảm = bớt một thay thế)",
+        "score": 2.976,
+        "source": "D6"
+      }
+    ],
+    "desk": {
+      "Cạnh tranh hiện tại": 2.5,
+      "Đối thủ mới gia nhập": 3,
+      "Quyền lực người dùng": 4,
+      "Nhà cung cấp — địa phương": 1.5,
+      "Nhà cung cấp — công nghệ": 3,
+      "Sản phẩm thay thế": 4
+    },
+    "figs": [
+      "results/img/b7_force_radar.png"
+    ]
+  }
+}

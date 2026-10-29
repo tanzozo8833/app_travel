@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S — Xã hội</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f2ee;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --s1-soft:#cde2fb;
+  --q1:#cde2fb; --q2:#86b6ef; --q3:#2a78d6; --q3-ink:#fff;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --accent:#256abf;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+    --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+    --accent:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+  --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+  --accent:#6da7ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+nav.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+nav.files a{font-size:13px;text-decoration:none;color:var(--ink-2);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+nav.files a.on{background:var(--ink);color:var(--page);box-shadow:none}
+.theme{margin-left:auto;font:inherit;font-size:13px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+h1{font-size:30px;line-height:1.2;margin:4px 0 6px;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:24px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.lede{font-size:17px;color:var(--ink-2);max-width:760px}
+.card{min-width:0;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:18px 18px 14px;margin:14px 0}
+.keys{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 20px;margin:18px 0}
+.keys li{margin:6px 0}
+.keys h3{margin:4px 0 6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.tile .l{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+.tile .s{color:var(--muted);font-size:12px;margin-top:6px}
+.lv{display:inline-block;font-size:11px;font-weight:650;line-height:1;padding:3px 6px;border-radius:5px;vertical-align:1px;box-shadow:inset 0 0 0 1px var(--axis);color:var(--ink-2);white-space:nowrap}
+.lv.A{background:var(--ink);color:var(--page);box-shadow:none}
+.lv.B{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.lv.D{border-style:dashed;box-shadow:none;outline:1px dashed var(--axis);outline-offset:-1px}
+.chart-t{font-weight:650;font-size:15.5px;margin:0}
+.chart-s{color:var(--ink-2);font-size:13px;margin:2px 0 12px}
+.bars{display:grid;grid-template-columns:minmax(120px,38%) 1fr;row-gap:8px;column-gap:12px;align-items:center}
+.bl{font-size:13.5px;color:var(--ink);text-align:right;line-height:1.3}
+.bl small{display:block;color:var(--muted);font-size:11.5px}
+.bt{position:relative;height:22px;border-left:1px solid var(--axis);outline:none}
+.bt .b{position:absolute;left:0;top:3px;height:16px;background:var(--s1);border-radius:0 4px 4px 0}
+.bt .b.alt{background:var(--s2)}
+.bt .b.ghost{background:var(--s1-soft)}
+.bt .n{position:absolute;top:1px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;padding-left:6px;font-variant-numeric:tabular-nums}
+.bt .tip{display:none;position:absolute;z-index:5;left:0;top:26px;background:var(--ink);color:var(--page);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:7px;max-width:320px;width:max-content}
+.bt:hover .tip,.bt:focus .tip{display:block}
+.bt:hover .b,.bt:focus .b{filter:brightness(1.12)}
+.foot{color:var(--muted);font-size:12px;margin-top:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--grid)}
+th{font-weight:650;color:var(--ink-2);font-size:12.5px;background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:4px 6px;margin:12px 0}
+.stack{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;padding:0 8px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.stack .a{background:var(--s1);color:#fff}
+.stack .i{background:var(--s2);color:#fff}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.heat table{min-width:760px;table-layout:fixed}
+.heat th,.heat td{text-align:center;vertical-align:middle;padding:6px 2px;border:2px solid var(--surface);font-size:12px}
+.heat td.rl,.heat th.rl{text-align:left;width:190px;padding-left:8px;font-size:12.5px;background:var(--surface)}
+.heat td.h0{background:var(--surface-2);color:var(--muted)}
+.heat td.h1{background:var(--q1);color:var(--ink)}
+.heat td.h2{background:var(--q2);color:#0b0b0b}
+.heat td.h3{background:var(--q3);color:var(--q3-ink);font-weight:650}
+.heat td.rk{background:repeating-linear-gradient(135deg,var(--surface-2) 0 4px,transparent 4px 8px);color:var(--crit);font-weight:650}
+.so{display:inline-block;min-width:22px;text-align:center;font-weight:700;border-radius:5px;padding:1px 6px}
+.so.hi{background:var(--ink);color:var(--page)}
+.so.md{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.so.lo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--axis)}
+.tag{font-size:11.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.op{color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.tag.th{color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}
+.tag.mx{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--axis)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;box-shadow:0 0 0 1px var(--ring)}
+.callout b{color:var(--ink)}
+.gap{border-left:3px dashed var(--axis);padding:8px 14px;margin:12px 0;color:var(--ink-2);font-size:14px}
+.tl{position:relative;margin:10px 0 0 6px;padding-left:22px;border-left:2px solid var(--grid)}
+.tl .ev{position:relative;margin:0 0 14px}
+.tl .ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--s1)}
+.tl .ev.f:before{box-shadow:0 0 0 2px var(--axis);background:var(--surface-2)}
+.tl .d{font-size:12.5px;font-weight:650;color:var(--accent)}
+.tl .ev.f .d{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+ol.src{font-size:12.5px;color:var(--ink-2);padding-left:22px}
+ol.src li{margin:3px 0;word-break:break-word}
+ol.src a{color:var(--accent)}
+a{color:var(--accent)}
+sup a{text-decoration:none;font-size:11px}
+@media (max-width:640px){
+  h1{font-size:24px}
+  .bars{grid-template-columns:minmax(96px,42%) 1fr}
+  .srow{grid-template-columns:76px 1fr}
+}
+@media print{nav.files,.theme{display:none}.bt .tip{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<nav class="files"><a href="01_Xu-huong.html" class="">Xu hướng</a><a href="02_P_Chinh-tri.html" class="">P · Chính trị</a><a href="03_E_Kinh-te.html" class="">E · Kinh tế</a><a href="04_S_Xa-hoi.html" class="on">S · Xã hội</a><a href="05_T_Cong-nghe.html" class="">T · Công nghệ</a><a href="06_L_Phap-ly.html" class="">L · Pháp lý</a><a href="07_E_Moi-truong.html" class="">E · Môi trường</a><button class="theme" type="button">Giao diện tối</button></nav>
+<div class="meta">LEVART · R1 Môi trường vĩ mô · Soạn 19/10/2026 · Bản 0.1 · Nghiên cứu tại bàn (thứ cấp)</div>
+<h1>S — Xã hội</h1>
+<p class="lede">Dân số người trẻ, lịch nghỉ của dân văn phòng và sinh viên, và mùa nào là cao điểm cho loại hình nào, với đối tượng nào.</p>
+<p class="meta">Mức bằng chứng theo <code>PLAN_RESEARCH.md</code>: <span class="lv A" title="Mức bằng chứng A">A</span> văn bản/số liệu nhà nước · <span class="lv B" title="Mức bằng chứng B">B</span> báo cáo có công bố cỡ mẫu · <span class="lv C" title="Mức bằng chứng C">C</span> báo chí/báo cáo không công bố cỡ mẫu · <span class="lv D" title="Mức bằng chứng D">D</span> suy luận của nhóm (GT). Di chuột (hoặc chạm) vào thanh biểu đồ để xem nguồn.</p>
+<div class="keys"><h3>Ý chính</h3><ul><li><b>Dân số 102,3 triệu (2025)</b>; 18–24 tuổi chiếm 9,2% (~9,4 triệu), 25–34 tuổi chiếm 14,4% (~14,7 triệu) <sup><a href="#s1">[1]</a></sup><sup><a href="#s2">[2]</a></sup>. Ước nhóm 18–29 tuổi ≈ <b>16–17 triệu người</b> <span class="lv D" title="Mức bằng chứng D">D</span>.</li><li><b>Đề xuất độ tuổi mục tiêu:</b> lõi <b>20–27 tuổi</b> (sinh viên năm 2 tới đi làm 3–5 năm), không phải 18–29 trọn vẹn — 18–19 tuổi gần như không tự chủ tiền và lịch; 28–29 tuổi bắt đầu lập gia đình. Mở rộng sau sang 28–34.</li><li><b>Lịch nghỉ quyết định mùa:</b> dân văn phòng có 5–6 kỳ nghỉ lễ dài mỗi năm (Tết Dương lịch 4 ngày, Tết Nguyên đán 9 ngày, Giỗ Tổ 3 ngày, 30/4 4 ngày, 2/9 5 ngày năm 2026) <sup><a href="#s7">[7]</a></sup> + 12 ngày phép năm <sup><a href="#s15">[15]</a></sup>; sinh viên có hè 2–3 tháng và Tết ~2 tuần <sup><a href="#s10">[10]</a></sup>.</li><li><b>Mới từ 2026:</b> Ngày Văn hoá Việt Nam 24/11 là ngày nghỉ có lương <sup><a href="#s9">[9]</a></sup>; 2027: Tết 7 ngày (04–10/02), Quốc khánh 4 ngày (02–05/09) <sup><a href="#s8">[8]</a></sup>.</li><li><b>Hai nhóm, hai mùa khác nhau:</b> sinh viên rảnh <i>dài</i> vào tháng 6–8 (đúng lúc miền núi phía Bắc mưa lũ); người đi làm rảnh <i>ngắn, dồn</i> vào lễ — sinh ra “du lịch nén”, quá tải điểm nóng <sup><a href="#s13">[13]</a></sup>.</li></ul></div><div class="tiles"><div class="tile"><div class="v">102,3 tr</div><div class="l">dân số trung bình 2025 (+~1%); 60+ tuổi chiếm 14,5% và tăng</div><div class="s">Cục Thống kê · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">~9,4 tr</div><div class="l">người 18–24 tuổi (9,2% dân số)</div><div class="s">DataReportal, tự nhân · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">~14,7 tr</div><div class="l">người 25–34 tuổi (14,4% dân số)</div><div class="s">DataReportal, tự nhân · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">~2,1 tr</div><div class="l">sinh viên đại học cả nước; mục tiêu &gt;3 triệu năm 2030</div><div class="s">QĐ 452/QĐ-TTg qua báo · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">97</div><div class="l">trường ĐH, học viện ở Hà Nội — ~1/3 cả nước</div><div class="s">Báo dẫn · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">12 + 12</div><div class="l">ngày nghỉ lễ (gồm 24/11) + ngày phép năm của người lao động</div><div class="s">BLLĐ 2019, NQ 28/2026 · <span class="lv A" title="Mức bằng chứng A">A</span></div></div></div><h2>1. Dân số trẻ — và nên chọn độ tuổi nào</h2><div class="card"><p class="chart-t">Người trẻ Việt Nam theo nhóm tuổi (triệu người, ước 2025)</p><p class="chart-s">Tỷ lệ theo DataReportal 2026 × dân số 102,3 triệu của Cục Thống kê</p><div class="bars"><div class="bl">18–24 tuổi<small>9,2% dân số</small></div><div class="bt" tabindex="0" aria-label="18–24 tuổi: ~9,4 tr"><div class="b" style="width:52.28%"></div><span class="n" style="left:52.28%">~9,4 tr</span><span class="tip">DataReportal [2] × Cục Thống kê [1] · mức B</span></div><div class="bl">25–34 tuổi<small>14,4% dân số</small></div><div class="bt" tabindex="0" aria-label="25–34 tuổi: ~14,7 tr"><div class="b" style="width:81.83%"></div><span class="n" style="left:81.83%">~14,7 tr</span><span class="tip">DataReportal [2] × Cục Thống kê [1] · mức B</span></div><div class="bl">18–29 tuổi (ước)<small>= 18–24 + ½ của 25–34</small></div><div class="bt" tabindex="0" aria-label="18–29 tuổi (ước): ~16,8 tr"><div class="b alt" style="width:93.33%"></div><span class="n" style="right:6.67%;color:#fff;padding-right:6px">~16,8 tr</span><span class="tip">Giả định phân bố đều trong nhóm 25–34 · mức D</span></div></div><p class="foot">Cần thay ước tính bằng bảng dân số theo từng độ tuổi trong Niên giám thống kê 2025 (Cục Thống kê) — mức A. Hà Nội: 8,58 triệu dân (2023) <sup><a href="#s3">[3]</a></sup>, chưa có số theo tuổi sau sáp nhập.</p><details><summary>Xem dạng bảng</summary><table><tr><th>Mục</th><th>Giá trị</th><th>Ghi chú</th><th>Nguồn</th></tr><tr><td>18–24 tuổi</td><td class='num'>~9,4 tr</td><td>9,2% dân số</td><td>DataReportal [2] × Cục Thống kê [1] · mức B</td></tr><tr><td>25–34 tuổi</td><td class='num'>~14,7 tr</td><td>14,4% dân số</td><td>DataReportal [2] × Cục Thống kê [1] · mức B</td></tr><tr><td>18–29 tuổi (ước)</td><td class='num'>~16,8 tr</td><td>= 18–24 + ½ của 25–34</td><td>Giả định phân bố đều trong nhóm 25–34 · mức D</td></tr></table></details></div><div class="tbl "><table><tr><th>Phân khúc đề xuất</th><th>Tuổi</th><th>Tiền</th><th>Thời gian</th><th>Cách đi điển hình (GT)</th><th>Ưu tiên</th></tr><tr><td>S1 · Sinh viên</td><td>19–22</td><td>Thấp; 55% chi &lt;3 triệu/tháng (tệp E)</td><td>Nhiều — hè, Tết, sau thi</td><td>Nhóm bạn 3–5, xe khách, homestay rẻ, 2–4 ngày</td><td>Kênh lan truyền; chưa trả tiền</td></tr><tr><td>S2 · Mới đi làm</td><td>22–27</td><td>Vừa; 4–12 triệu/tháng</td><td>Ít — lễ dài, cuối tuần</td><td>Cặp đôi, bạn thân, 2–3 ngày, sẵn lòng trả để đỡ mất thời gian</td><td><b>Lõi</b> — vừa có tiền vừa có nhu cầu</td></tr><tr><td>S3 · Đi làm ổn định</td><td>27–34</td><td>Khá</td><td>Ít, dồn vào lễ, phép</td><td>Gia đình nhỏ, tự lái, nghỉ dưỡng</td><td>Mở rộng giai đoạn sau</td></tr><tr><td>Loại trừ</td><td>&lt;16</td><td>—</td><td>—</td><td>—</td><td>NĐ 147/2024 (cha mẹ đăng ký), dữ liệu trẻ em — xem tệp L</td></tr></table></div><h2>2. Lịch nghỉ — ai rảnh lúc nào</h2><div class="tbl "><table><tr><th>Kỳ nghỉ</th><th>2026 (cán bộ, công chức)</th><th>Số ngày liền</th><th>2027 (đã chốt)</th></tr><tr><td>Tết Dương lịch</td><td>01/01 – 04/01 (làm bù thứ Bảy 10/01)</td><td>4</td><td>—</td></tr><tr><td>Tết Nguyên đán</td><td>14/02 – 22/02</td><td><b>9</b></td><td>04/02 – 10/02 · 7 ngày <sup><a href="#s8">[8]</a></sup></td></tr><tr><td>Giỗ Tổ Hùng Vương</td><td>25/04 – 27/04</td><td>3</td><td>—</td></tr><tr><td>30/4 – 1/5</td><td>30/04 – 03/05</td><td>4</td><td>—</td></tr><tr><td>Quốc khánh</td><td>29/08 – 02/09</td><td>5</td><td>02/09 – 05/09 · 4 ngày <sup><a href="#s8">[8]</a></sup></td></tr><tr><td>Ngày Văn hoá Việt Nam (mới)</td><td>Thứ Ba 24/11 — không hoán đổi</td><td>1</td><td>—</td></tr><tr><td>Nghỉ phép năm</td><td>12 ngày/năm (điều kiện bình thường) <sup><a href="#s15">[15]</a></sup></td><td>tự chọn</td><td>—</td></tr></table></div><p class="meta">Nguồn: <sup><a href="#s7">[7]</a></sup><sup><a href="#s8">[8]</a></sup><sup><a href="#s9">[9]</a></sup>. Doanh nghiệp tư nhân có thể chọn lịch khác cho Tết. Sinh viên: năm học đại học thường từ 8–9 đến 5–6 năm sau; ví dụ một trường nghỉ Tết 01–15/02/2027, thi học kỳ I 30/11–14/12/2026 <sup><a href="#s10">[10]</a></sup>. Lịch mỗi trường khác nhau — cần lấy lịch của 5–10 trường lớn ở Hà Nội.</p><h2>3. Mùa cao điểm — theo đối tượng và theo loại điểm đến</h2><div class="card"><p class="chart-t">Ai có thời gian đi du lịch</p><p class="chart-s">Mức thời gian rảnh theo tháng · suy luận từ lịch nghỉ và lịch học · <span class="lv D" title="Mức bằng chứng D">D</span></p><div class="heat"><table><tr><th class="rl"></th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th><th>T9</th><th>T10</th><th>T11</th><th>T12</th></tr><tr><td class="rl">Sinh viên<br><span class="meta">hè 2–3 tháng, Tết ~2 tuần</span></td><td class="h2">Vừa</td><td class="h3">Cao</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td></tr><tr><td class="rl">Người đi làm<br><span class="meta">kỳ lễ dài + phép</span></td><td class="h2">Vừa</td><td class="h3">Cao</td><td class="h0"></td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h0"></td><td class="h1">Thấp</td><td class="h1">Thấp</td></tr></table></div></div><div class="card"><p class="chart-t">Mùa của từng loại điểm đến</p><p class="chart-s">Mức hút khách theo tháng · tổng hợp lịch mùa phổ biến <sup><a href="#s12">[12]</a></sup> · <span class="lv C" title="Mức bằng chứng C">C</span> — cần xác nhận với sở du lịch từng tỉnh</p><div class="heat"><table><tr><th class="rl"></th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>T8</th><th>T9</th><th>T10</th><th>T11</th><th>T12</th></tr><tr><td class="rl">Biển miền Bắc, Trung<br><span class="meta">Hạ Long, Đà Nẵng, Nha Trang</span></td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td></tr><tr><td class="rl">Biển phía Nam, đảo<br><span class="meta">Phú Quốc, Côn Đảo — mùa khô</span></td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h3">Cao</td></tr><tr><td class="rl">Núi phía Bắc<br><span class="meta">Sa Pa, Hà Giang, Mộc Châu</span></td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h2">Vừa</td></tr><tr><td class="rl">Cao nguyên<br><span class="meta">Đà Lạt, Tây Nguyên</span></td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h2">Vừa</td><td class="h1">Thấp</td><td class="h1">Thấp</td><td class="h3">Cao</td><td class="h3">Cao</td></tr><tr><td class="rl">Lễ hội đầu xuân<br><span class="meta">chùa Hương, Yên Tử, Bái Đính</span></td><td class="h1">Thấp</td><td class="h3">Cao</td><td class="h3">Cao</td><td class="h1">Thấp</td><td class="h0"></td><td class="h0"></td><td class="h0"></td><td class="h0"></td><td class="h0"></td><td class="h0"></td><td class="h0"></td><td class="h0"></td></tr></table></div><p class="foot">Núi phía Bắc: hoa đào, mận, băng tuyết (T12–T2); lúa chín (T9–T10); hoa tam giác mạch Hà Giang (T10–T11). Biển miền Trung mùa hè giá phòng có thể tăng tới 50% <sup><a href="#s12">[12]</a></sup>.</p></div><div class="tbl "><table><tr><th>Đối tượng</th><th>Cao điểm của họ</th><th>Loại hình hợp</th><th>Xung đột cần lưu ý</th></tr><tr><td>Sinh viên</td><td>T6–T8 (hè), T2 (Tết), sau thi T1, T6</td><td>Biển miền Bắc, Trung (hè); núi phía Bắc (T1–T2)</td><td>Hè trùng mùa mưa lũ núi phía Bắc (xem tệp Môi trường)</td></tr><tr><td>Người đi làm, Hà Nội</td><td>4 kỳ lễ: T1, T2, cuối T4–đầu T5, cuối T8–đầu T9</td><td>Núi phía Bắc (2/9 = mùa lúa chín), biển gần (30/4)</td><td>“Du lịch nén”: tắc đường, cháy phòng, giá cao <sup><a href="#s13">[13]</a></sup></td></tr><tr><td>Cả hai</td><td>Cuối tuần thường T9–T11, T3–T5</td><td>Chuyến 2 ngày bán kính ~300 km</td><td><b>Khoảng trống tốt nhất cho Levart</b> — thời tiết đẹp, ít đông, giá thấp</td></tr></table></div><h2>4. Chấm điểm và cột “vì vậy”</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Loại</th><th>Tác động</th><th>Khả năng</th><th>T×K</th><th>Khi nào</th><th>Nguồn · mức</th><th>Vì vậy Levart nên…</th></tr><tr><td>Nhóm 18–29 ≈ 16–17 triệu người</td><td><span class="tag op">Cơ hội</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[1][2] · B/D</td><td>Đủ lớn để không cần mở rộng tuổi sớm. Thay số ước bằng Niên giám (mức A) trước khi viết hồ sơ.</td></tr><tr><td>Người đi làm rảnh theo lễ, dồn cục</td><td><span class="tag mx">Cả hai</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[7][8] · A</td><td>Lịch chiến dịch bám 4 kỳ lễ; nhưng gợi ý <i>lệch giờ, lệch điểm</i> để né đông.</td></tr><tr><td>Sinh viên rảnh dài T6–T8</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[10] · C</td><td>Chạy thử nghiệm với sinh viên vào hè; tránh tỉnh miền núi trong T7–T8.</td></tr><tr><td>Cuối tuần T9–T11 và T3–T5 ít đông, thời tiết đẹp</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>Ngay</td><td>[12] · C/D</td><td>Định vị “đi cuối tuần, đi lệch mùa” — giải pháp cho cả quá tải lẫn giá.</td></tr><tr><td>Ngày nghỉ mới 24/11; Tết 2027 7 ngày</td><td><span class="tag op">Cơ hội</span></td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><b>3</b></td><td>Ngay</td><td>[8][9] · A</td><td>Mốc truyền thông: 24/11 (văn hoá) hợp với con dấu tỉnh.</td></tr><tr><td>Dân số già hoá dần</td><td><span class="tag mx">Cả hai</span></td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><b>3</b></td><td>3+ năm</td><td>[1] · A</td><td>Không ảnh hưởng 3 năm đầu; ghi nhận cho chiến lược dài hạn.</td></tr></table></div>
+<h2>Nguồn</h2>
+<ol class="src"><li id="s1">Cục Thống kê — Dân số và lao động 2025 (102,3 triệu người), qua Nhân Dân — <a href="https://nhandan.vn/dan-so-va-lao-dong-viec-lam-tiep-tuc-on-dinh-nam-2025-tao-da-cho-2026-post946357.html" target="_blank" rel="noopener">https://nhandan.vn/dan-so-va-lao-dong-viec-lam-tiep-tuc-on-dinh-nam-2025-tao-da-cho-2026-post946357.html</a></li><li id="s2">DataReportal — Digital 2026: Vietnam (cơ cấu tuổi dân số) — <a href="https://datareportal.com/reports/digital-2026-vietnam" target="_blank" rel="noopener">https://datareportal.com/reports/digital-2026-vietnam</a></li><li id="s3">Dân số Hà Nội 2023: 8,58 triệu, qua VietnamNet — <a href="https://vietnamnet.vn/tuoi-tho-nguoi-ha-noi-hien-la-bao-nhieu-xep-thu-may-ca-nuoc-2339465.html" target="_blank" rel="noopener">https://vietnamnet.vn/tuoi-tho-nguoi-ha-noi-hien-la-bao-nhieu-xep-thu-may-ca-nuoc-2339465.html</a></li><li id="s4">Quy mô sinh viên ~2,1 triệu, mục tiêu &gt;3 triệu năm 2030 (QĐ 452/QĐ-TTg), qua SGGP — <a href="https://www.sggp.org.vn/den-nam-2030-viet-nam-dat-quy-mo-tren-3-trieu-nguoi-hoc-dai-hoc-post784107.html" target="_blank" rel="noopener">https://www.sggp.org.vn/den-nam-2030-viet-nam-dat-quy-mo-tren-3-trieu-nguoi-hoc-dai-hoc-post784107.html</a></li><li id="s5">Hà Nội có 97 trường đại học, học viện (~1/3 cả nước), qua Hocmai — <a href="https://huongnghiep.hocmai.vn/tuyen-sinh-2025-ha-noi-se-chuyen-phan-lon-sinh-vien-dai-hoc-ra-khoi-noi-do" target="_blank" rel="noopener">https://huongnghiep.hocmai.vn/tuyen-sinh-2025-ha-noi-se-chuyen-phan-lon-sinh-vien-dai-hoc-ra-khoi-noi-do</a></li><li id="s6">613.335 thí sinh xác nhận nhập học đại học 2025, qua Thương hiệu & Công luận — <a href="https://thuonghieucongluan.com.vn/gan-20-thi-sinh-trung-tuyen-dai-hoc-nhung-khong-xac-nhan-nhap-hoc-a280889.html" target="_blank" rel="noopener">https://thuonghieucongluan.com.vn/gan-20-thi-sinh-trung-tuyen-dai-hoc-nhung-khong-xac-nhan-nhap-hoc-a280889.html</a></li><li id="s7">Chi tiết số ngày nghỉ các dịp lễ 2026, Tuổi Trẻ — <a href="https://tuoitre.vn/chi-tiet-so-ngay-nghi-trong-cac-dip-le-nam-2026-20251231230420433.htm" target="_blank" rel="noopener">https://tuoitre.vn/chi-tiet-so-ngay-nghi-trong-cac-dip-le-nam-2026-20251231230420433.htm</a></li><li id="s8">Văn bản 10065/VPCP-KGVX (02/10/2026): Ngày Văn hoá 2026, Tết và Quốc khánh 2027, qua VietnamPlus — <a href="https://www.vietnamplus.vn/chot-lich-nghi-dip-ngay-van-hoa-viet-nam-2026-tet-nguyen-dan-va-quoc-khanh-nam-2027-post1139707.vnp" target="_blank" rel="noopener">https://www.vietnamplus.vn/chot-lich-nghi-dip-ngay-van-hoa-viet-nam-2026-tet-nguyen-dan-va-quoc-khanh-nam-2027-post1139707.vnp</a></li><li id="s9">Ngày Văn hoá Việt Nam 24/11 là ngày nghỉ có lương (NQ 28/2026/QH16), qua Báo Văn hoá — <a href="https://baovanhoa.vn/van-hoa/ngay-van-hoa-viet-nam-nam-2026-chinh-thuc-duoc-nghi-mot-ngay-270980.html" target="_blank" rel="noopener">https://baovanhoa.vn/van-hoa/ngay-van-hoa-viet-nam-nam-2026-chinh-thuc-duoc-nghi-mot-ngay-270980.html</a></li><li id="s10">Lịch năm học, nghỉ Tết 2027 của các trường đại học TP.HCM, qua Znews — <a href="https://znews.vn/loat-truong-dai-hoc-o-tphcm-cong-bo-lich-nghi-tet-nguyen-dan-2027-post1675088.html" target="_blank" rel="noopener">https://znews.vn/loat-truong-dai-hoc-o-tphcm-cong-bo-lich-nghi-tet-nguyen-dan-2027-post1675088.html</a></li><li id="s11">Bộ GD&ĐT — QĐ 2308/QĐ-BGDĐT (06/08/2026) khung thời gian năm học phổ thông từ 2026–2027 — <a href="https://hatinh.gov.vn/vi/bai-viet/bo-gddt-ban-hanh-khung-ke-hoach-thoi-gian-nam-hoc-ap-dung-tu-nam-2026-2027" target="_blank" rel="noopener">https://hatinh.gov.vn/vi/bai-viet/bo-gddt-ban-hanh-khung-ke-hoach-thoi-gian-nam-hoc-ap-dung-tu-nam-2026-2027</a></li><li id="s12">Mùa du lịch theo vùng — tổng hợp — <a href="https://www.vietnamtourism.com/vi/nhung-thang-tot-nhat-va-te-nhat-e-du-lich-viet-nam-huong-dan" target="_blank" rel="noopener">https://www.vietnamtourism.com/vi/nhung-thang-tot-nhat-va-te-nhat-e-du-lich-viet-nam-huong-dan</a></li><li id="s13">“Du lịch nén” dịp lễ: quá tải, ùn tắc, giá leo thang — Báo Văn hoá — <a href="https://baovanhoa.vn/du-lich/ap-luc-du-lich-nen-dip-le-qua-tai-un-tac-va-gia-ca-leo-thang-223033.html" target="_blank" rel="noopener">https://baovanhoa.vn/du-lich/ap-luc-du-lich-nen-dip-le-qua-tai-un-tac-va-gia-ca-leo-thang-223033.html</a></li><li id="s14">Agoda Travel Outlook 2026 — Gen Z (1997–2012) — <a href="https://matterhorncommunications.com/agoda-vietnamese-gen-z-embrace-bite-sized-frequent-and-experience-first-travel-across-the-region/" target="_blank" rel="noopener">https://matterhorncommunications.com/agoda-vietnamese-gen-z-embrace-bite-sized-frequent-and-experience-first-travel-across-the-region/</a></li><li id="s15">Bộ luật Lao động 2019, Điều 112 (nghỉ lễ), Điều 113 (nghỉ hằng năm 12 ngày)</li></ol>
+<p class="foot">Truy cập các nguồn trong khoảng 19/10/2026. Phần pháp lý là danh sách việc cần hỏi luật sư, không phải tư vấn pháp lý.</p>
+</div><script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){var t=document.documentElement.getAttribute('data-theme');
+    if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function lab(){b.textContent=cur()==='dark'?'Giao diện sáng':'Giao diện tối';}
+  try{var s=localStorage.getItem('r1-theme'); if(s) document.documentElement.setAttribute('data-theme',s);}catch(e){}
+  lab();
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('r1-theme',n);}catch(e){} lab();});
+})();
+</script></body></html>

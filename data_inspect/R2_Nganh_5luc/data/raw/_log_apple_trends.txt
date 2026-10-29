@@ -1,0 +1,3 @@
+appstore ok 6469 dòng, 4498 app
+appstore_reviews ok 5181
+trends ok

@@ -1,0 +1,3 @@
+pageviews ok 6907
+!! climate lỗi: RuntimeError('Tải thất bại https://archive-api.open-meteo.com/v1/archive: HTTP 429')
+osm ok 22

@@ -1,0 +1,724 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:57:05Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 980135581,
+  "tags": {
+    "name": "Massage Đại Ngọc Xông Hơi Xoa Bóp",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 980136091,
+  "tags": {
+    "name": "Nhà Trọ Xóm Vườn",
+    "name:en": "Xom Vuon",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 980136678,
+  "tags": {
+    "name": "Nhà Nghỉ Như Ý",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 980137453,
+  "tags": {
+    "name": "Nhà Trọ Hồng Thủy",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 980138589,
+  "tags": {
+    "name": "Nhà Trọ 69 Bình Dân 24/24",
+    "name:en": "Economy Guest House 69",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 980138595,
+  "tags": {
+    "name": "Hotel Quỳnh Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 980138940,
+  "tags": {
+    "name": "Ngọc Sương 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 980138964,
+  "tags": {
+    "name": "Nhà Trọ Hoài Trang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1709510331,
+  "tags": {
+    "name": "Sao Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4248040697,
+  "tags": {
+    "addr:housenumber": "236 duong so 12",
+    "addr:street": "Quốc Lộ 1A",
+    "internet_access": "wlan",
+    "name": "Tra My Nha Nghi",
+    "opening_hours": "24/7",
+    "phone": "0723580147",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4331825992,
+  "tags": {
+    "addr:street": "Đường Huỳnh Công Giản",
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4351691397,
+  "tags": {
+    "phone": "0989794979",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4432189795,
+  "tags": {
+    "name": "NHÀ Phụt Thảo",
+    "name:en": "NHÀ Phụt Thả0",
+    "name:vi": "NHÀ Phụt Thảo",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4434143489,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngoc My",
+    "name:vi": "Ngoc My",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4437179791,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nguyen gia guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4437215189,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Quyen Motel",
+    "name:vi": "Nha Nghi Quyen Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4437215190,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Viet Phuong Hotel",
+    "name:vi": "Viet Phuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4437215191,
+  "tags": {
+    "name": "Nhat Quy Hotel",
+    "name:vi": "Nhat Quy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4437215192,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Anh Duong Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4437215289,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Thuy Oanh Motel",
+    "name:vi": "Thuy Oanh Motel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4505461390,
+  "tags": {
+    "name": "đất mình",
+    "name:vi": "đất mình",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4558153492,
+  "tags": {
+    "addr:street": "Quốc lộ 22",
+    "email": "nguyenhoang_thienan2015@yahoo.com",
+    "internet_access": "wlan",
+    "opening_hours": "24/7",
+    "phone": "01884479510",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4559459289,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4583439989,
+  "tags": {
+    "name": "Nhà Nghỉ Hiểu My",
+    "name:en": "hotel hieu my",
+    "phone": "0933839129",
+    "tourism": "motel",
+    "website": "http://khachsantayninh.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4696780292,
+  "tags": {
+    "name:en": "Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4696794994,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi Lam Khang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4697008890,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Diem Trinh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4697009889,
+  "tags": {
+    "name:en": "Cam Tu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4697009989,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Phuong Dong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4697010389,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hoa Hong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4718260190,
+  "tags": {
+    "name": "Binh an",
+    "name:vi": "Binh an",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4940621521,
+  "tags": {
+    "name": "Nhà Vũ Đức Hoà",
+    "name:vi": "Nhà Vũ Đức Hoà",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4969514621,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ",
+    "name:vi": "Nhà Nghỉ",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5139796224,
+  "tags": {
+    "name": "Lưu Luyến 180k máy lạnh 120k máy quạt",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5198907522,
+  "tags": {
+    "name": "chị Dung 103/16/23...",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5237681421,
+  "tags": {
+    "name:zh": "展鹏烧鸡",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5374919960,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5474409621,
+  "tags": {
+    "name": "Hiệp Hoà",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5492704822,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5521466132,
+  "tags": {
+    "addr:housenumber": "013",
+    "addr:street": "D5",
+    "name": "Thanh Hiệp",
+    "name:en": "my home",
+    "phone": "0966153812",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5526547221,
+  "tags": {
+    "addr:street": "Lý Thường Kiệt",
+    "name": "Kiến Tường",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6093040186,
+  "tags": {
+    "name": "Massage Vieetnam",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6130399694,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha nghi khoi nguyen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6339125259,
+  "tags": {
+    "addr:street": "Bung Binh, Hung Thuan, Trang Bang, Tay Ninh,  Xá Cầu Xe",
+    "description": "Nice and quiet farmstay. Cheap prices",
+    "name": "Pika homestay",
+    "phone": "0907913375",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6339715690,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6339727188,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6340702447,
+  "tags": {
+    "addr:street": "đường số 2,khu dân cư Trung Tâm,tt Bến Lức,Bến Lức,Long An 206, Bến\nLức",
+    "name": "KHÁCH SẠN RUBY",
+    "phone": "+84 91 242 82 93",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6404659885,
+  "tags": {
+    "name": "nhà thảo",
+    "name:en": "thao’s house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6440346641,
+  "tags": {
+    "name": "KS. Thảo Nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6522664185,
+  "tags": {
+    "name:en": "Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6550601785,
+  "tags": {
+    "name:en": "Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6575801860,
+  "tags": {
+    "addr:city": "Tay Ninh",
+    "addr:district": "Tay Ninh",
+    "addr:housenumber": "90",
+    "addr:province": "Tay Ninh",
+    "addr:street": "Lê Duẩn",
+    "bar": "yes",
+    "brand": "Vinpearl",
+    "internet_access": "yes",
+    "name": "Vinpearl hotel",
+    "phone": "+84 2763728888",
+    "reservation": "yes",
+    "rooms": "127",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6728823585,
+  "tags": {
+    "name": "Út loan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6997304885,
+  "tags": {
+    "addr:street": "ĐT787",
+    "amenity": "pharmacy",
+    "internet_access": "wlan",
+    "name": "Hải Huỳnh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7068589087,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7111118185,
+  "tags": {
+    "name": "Nhà thờ Sông Xoài",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7281606985,
+  "tags": {
+    "name": "câu cá thiên nhiên",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 10753465495,
+  "tags": {
+    "addr:street": "Đại lộ Phạm Hộ Pháp",
+    "name": "Nhà Khách Cao Đài",
+    "name:vi": "Nhà Khách Đạo Cao Đài",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12100266844,
+  "tags": {
+    "addr:city": "Tây Ninh",
+    "addr:housenumber": "PG2-12A",
+    "addr:postcode": "84000",
+    "addr:province": "Tây Ninh",
+    "addr:street": "Đường 30 Tháng 4",
+    "addr:subdistrict": "Phường 3",
+    "air_conditioning": "yes",
+    "bar": "no",
+    "branch": "Tây Ninh",
+    "brand": "IDC",
+    "check_date": "2024-08-10",
+    "contact:facebook": "https://www.facebook.com/idchotel",
+    "contact:website": "https://sites.google.com/view/idchotel",
+    "description": "Indochina Hotel Tây Ninh là một khách sạn hiện đại nằm tại trung tâm thành phố Tây Ninh. Dưới đây là một số thông tin chi tiết về khách sạn:\n•\tĐịa chỉ: PG2-12A Shophouse Vincom, 30 Tháng 04, Kp1, P3, TP Tây Ninh, Tây Ninh, Việt Nam.",
+    "email": "koreanhotelresort@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "internet_access:ssid": "Korean Hotel",
+    "level": "4",
+    "mobile": "+84847030131",
+    "name": "Indochina Hotel - Tây Ninh",
+    "opening_hours": "24/7",
+    "operator": "CÔNG TY TNHH XÂY DỰNG VÀ PHÁT TRIỂN NHÀ Ở KOREAN ARCHITECTURE",
+    "payment:cash": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:paypal": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "0847030131",
+    "reservation": "recommended",
+    "rooms": "7",
+    "smoking": "outside",
+    "stars": "3",
+    "tourism": "hotel",
+    "website": "https://www.booking.com/hotel/vn/korean-resort-tac-y-ninh1.vi.html",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12135985317,
+  "tags": {
+    "description": "200 000 Dong for one night",
+    "name": "Nha Nghi Boi Nhi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12363453301,
+  "tags": {
+    "name": "Arina Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12785993785,
+  "tags": {
+    "name": "The Sun Hotel",
+    "phone": "+842763773939",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13394314213,
+  "tags": {
+    "addr:city": "Tây Ninh",
+    "addr:housenumber": "Căn C5 Khu Thương Mại Mai Anh",
+    "addr:postcode": "84000",
+    "addr:province": "Tây Ninh",
+    "addr:street": "Trường Chinh",
+    "addr:subdistrict": "Phường 3",
+    "air_conditioning": "yes",
+    "branch": "Homestay Cây Thị",
+    "building:levels": "3",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "HOTEL Cây Thị - Khách Sạn Tây Ninh",
+    "opening_hours": "24/7",
+    "payment:notes": "yes",
+    "payment:visa": "yes",
+    "phone": "+84 0358258577",
+    "reservation": "yes",
+    "rooms": "7",
+    "tourism": "hotel",
+    "website": "https://homestayphc.com/khach-san-cay-thi-tai-tay-ninh"
+  }
+},
+{
+  "type": "node",
+  "id": 13994002494,
+  "tags": {
+    "name": "Nhà Trọ Nguyễn Văn Dừa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14276221167,
+  "tags": {
+    "addr:housenumber": "521",
+    "addr:street": "Quôc lộ 1",
+    "name": "Nhà Khách Hương Tràm",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 14276396717,
+  "tags": {
+    "addr:housenumber": "1018",
+    "addr:street": "Quôc lộ 1",
+    "name": "Nhà nghỉ Hướng Dương",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 14276432661,
+  "tags": {
+    "addr:housenumber": "986",
+    "addr:street": "Quôc lộ 1",
+    "name": "Nhà Trọ Bác Chín",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "way",
+  "id": 664546727,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Lê Văn Tám",
+    "name": "Nhà khách Hoa Hồng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 741281509,
+  "tags": {
+    "building": "yes",
+    "name": "Trung tâm Tổ chức Hội nghị tỉnh Tây Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1198568247,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1198568257,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1240352423,
+  "tags": {
+    "addr:district": "Thủ Thừa",
+    "addr:housenumber": "Ấp 2",
+    "addr:province": "Long An",
+    "addr:street": "Mỹ An",
+    "addr:subdistrict": "Mỹ An",
+    "brand": "BeauChamp",
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "BeauChamp Villa",
+    "phone": "091 203 07 07",
+    "tourism": "hotel",
+    "website": "https://beauchampvn.com"
+  }
+}
+
+  ]
+}

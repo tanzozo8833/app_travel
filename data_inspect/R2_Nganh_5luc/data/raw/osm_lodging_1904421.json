@@ -1,0 +1,1599 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-27T10:47:07Z",
+    "timestamp_areas_base": "2026-10-27T08:27:32Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3266523255,
+  "tags": {
+    "addr:district": "Định Quán",
+    "addr:housenumber": "km 104",
+    "addr:province": "Đồng Nai",
+    "addr:street": "Quốc lộ 20",
+    "addr:subdistrict": "Phú Ngọc",
+    "name": "Goody",
+    "operator": "Goody",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3704170312,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4272635295,
+  "tags": {
+    "addr:housenumber": "1068",
+    "addr:street": "Phú Riềng Đỏ",
+    "internet_access": "wlan",
+    "name": "Thanh Sang",
+    "opening_hours": "24/7",
+    "phone": "06513879559",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4695231589,
+  "tags": {
+    "name:en": "Hoang Yen Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4945789322,
+  "tags": {
+    "addr:district": "Huyện Định Quán",
+    "addr:housenumber": "Cây số 101.",
+    "addr:postcode": "814390",
+    "addr:province": "Đồng Nai",
+    "addr:street": "Quốc lộ 20",
+    "addr:subdistrict": "Xã La Ngà",
+    "email": "rollang1234.ndh@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ấp Phú Quý 2, Xã La Ngà, Huyện Định Quán, Tỉnh Đồng Nai.",
+    "name:vi": "Ấp Phú Quý 2, Xã La Ngà, Huyện Định Quán, Tỉnh Đồng Nai.",
+    "operator": "Nhà Nghỉ MINH DŨNG",
+    "phone": "02513632256",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4961755222,
+  "tags": {
+    "addr:street": "Quốc lộ 20",
+    "internet_access": "wlan",
+    "name:en": "Dinh quan",
+    "name:nl": "Dinh quan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5049852722,
+  "tags": {
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 5261748924,
+  "tags": {
+    "name": "nha Phuong Nghia",
+    "name:en": "Phuong Nghia",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5313709427,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5451226821,
+  "tags": {
+    "addr:street": "Đường Liên ấp Thọ Tân",
+    "name": "Nhà ngoại Su Su",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5536992125,
+  "tags": {
+    "addr:street": "Duong Bo Dap Suoi Giai",
+    "email": "thonghoang1975@gmail.com",
+    "internet_access": "wlan",
+    "name": "Hồ Suối Giai Bình Phước",
+    "name:en": "Zai Lake",
+    "phone": "0903636367",
+    "tourism": "camp_site",
+    "website": "http://www.suoigiai.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5570451021,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Nhà Hàng Hoa Anh Đào",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5601858122,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Huy Hoang nha nghi",
+    "name:en": "Huy Hoang guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5602098967,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5613330529,
+  "tags": {
+    "name": "Hoàng Minh Châu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5667076889,
+  "tags": {
+    "name": "nhà riêng",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5972773185,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Hướng Dương",
+    "name:en": "Huong Duong Resort",
+    "opening_hours": "24/7",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6452255986,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Loc Phat",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6594342888,
+  "tags": {
+    "addr:housenumber": "112",
+    "addr:postcode": "112",
+    "addr:street": "Quốc lộ 13",
+    "email": "khônghetrung@gamil.com",
+    "internet_access": "wlan",
+    "phone": "0913643375",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6716130469,
+  "tags": {
+    "name": "Thiên Thanh 2",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6776688486,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6836659201,
+  "tags": {
+    "addr:housenumber": "559",
+    "addr:street": "QL 20",
+    "name": "Anh Hậu P Lâm",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6836659203,
+  "tags": {
+    "name": "Vườn Chú Ánh",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 6849180685,
+  "tags": {
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 7060532185,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7173980935,
+  "tags": {
+    "name": "Container",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117286,
+  "tags": {
+    "name": "cửa hàng Ba Tí-trạm thu phí Chơn Thành Ql13-120000103244",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117287,
+  "tags": {
+    "name": "căn tin cao đẳng nghề-chợ mới Thành Tâm-120000101305",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117288,
+  "tags": {
+    "name": "căn tin cty megatech-kcn Chơn Thành",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117289,
+  "tags": {
+    "name": "Ốc đêm Thanh Long",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117290,
+  "tags": {
+    "name": "phở đệ nhất",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117291,
+  "tags": {
+    "name": "bê thui cầu mống-ql13,thành tâm-120000103235",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117292,
+  "tags": {
+    "name": "căn tin cty bao cao su-ql13,t.t Chơn Thành-120000101516",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117385,
+  "tags": {
+    "name": "hồ bơi Khánh Linh-Thành Tâm,Chơn Thành-120000095965",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117387,
+  "tags": {
+    "name": "cf hoa nắng-kcn Chơn Thành-120000101294",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117388,
+  "tags": {
+    "name": "Nhà hàng anh Tuấn-Ql13,Thành Tâm-120000092427",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117389,
+  "tags": {
+    "name": "th Huệ",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117390,
+  "tags": {
+    "name": "th cô Trang-ql14,t.t chơn thành-120000095936",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117685,
+  "tags": {
+    "name": "bếp ăn Tôn Đức Thắng-chợ chiều Thành Tâm-120000092431",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117686,
+  "tags": {
+    "name": "căn tin cty sắc cầu vồng-kcn Chơn Thành-120000095927",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117687,
+  "tags": {
+    "name": "photo sương-ngã tư Chơn Thành-120000099609",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117688,
+  "tags": {
+    "name": "cf mobile-ql13,t.t Chơn Thành",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288117885,
+  "tags": {
+    "name": "Massage Thanh Hoa-Thành Tâm, Chơn Thành",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7288118085,
+  "tags": {
+    "name": "Karaoke Cây Tùng-Thành Tâm, Chơn Thành-120000092458",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7290405085,
+  "tags": {
+    "name": "cây xăng Ngọc Phương Nam-ql13,thành tâm-12",
+    "name:vi": "cây xăng Ngọc Phương Nam-ql13,thành tâm-120000039049",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7290551185,
+  "tags": {
+    "name": "cháo vịt Thu Hà-ngã 4 Chơn Thành-120000094231",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7290632785,
+  "tags": {
+    "name": "cafe Milano-đường số 7-120000095858",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7290673385,
+  "tags": {
+    "name": "căn tin công an huyện-tt hành chính Chơn Thành-",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7290678285,
+  "tags": {
+    "name": "CF House-tt hành chính Chơn Thành-120000088621",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298584785,
+  "tags": {
+    "name": "căn tin công an huyện chơn thành-tt hành chính chơn thành-120000103240",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298627085,
+  "tags": {
+    "name": "lẩu dê Hưng Phú II-đường Đông Hiu-120000095881",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298718385,
+  "tags": {
+    "name": "vpp Nhật Huy-ql14 nha bích-120000099608",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298738185,
+  "tags": {
+    "name": "căn tin Nguyễn Bỉnh khiêm-Nha Bích-120000094215",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298766985,
+  "tags": {
+    "name": "căn tin cty Lâm Sao-Nha Bích-120000039042",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298836885,
+  "tags": {
+    "name": "căn tin công ty Mạnh Phương-Nha Bích-120000094210",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298864785,
+  "tags": {
+    "name": "lẩu dê Thanh Tuấn-Minh Lập-120000101341",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7298908285,
+  "tags": {
+    "name": "trường thcs Minh Lập-Minh Lập-",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7299036385,
+  "tags": {
+    "name": "căn tin cty Nam Cường-ql14,nha bích",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7299074685,
+  "tags": {
+    "name": "cơm phở Đại Phát-đường Đồng Hiu,Minh Thành-120000101466",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304771486,
+  "tags": {
+    "name": "cây xăng lộc phát",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304824786,
+  "tags": {
+    "name": "th phương hạnh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304849485,
+  "tags": {
+    "name": "phố 93-đường mới Lộc Ninh-120000089797",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304952685,
+  "tags": {
+    "name": "TH Bảo Nương-đường 304, Thanh Lương-120000103528",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304963286,
+  "tags": {
+    "name": "gk anh Thắng-đường 304, An Khương-120000023174",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7304978485,
+  "tags": {
+    "name": "TH bé Hai-đường 304, An Khương-120000039077",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7305075385,
+  "tags": {
+    "name": "th chị Út-An Khuong-120000077460",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7305080586,
+  "tags": {
+    "name": "cô 10-xã An Phương-120000103831",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7305235685,
+  "tags": {
+    "name": "cf Icon",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7305243085,
+  "tags": {
+    "name": "th cô Mười",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7305281985,
+  "tags": {
+    "name": "quán cơm kim hạnh-ql-120000101458",
+    "name:vi": "quán cơm kim hạnh-ql13,Thanh Lương-120000101458",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7307694785,
+  "tags": {
+    "name": "cơm gà Phúc Long-Hùng Vương,Bình Long-120000101353",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7307710085,
+  "tags": {
+    "name": "bida 555-Bùi thị xuân,Bình Long-120000039013",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7307754585,
+  "tags": {
+    "name": "th chị Dung-Trần Phú, Bình Long-12000064257",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7307857186,
+  "tags": {
+    "name": "lẩu dê Xuyến-ql13,Bình Long-120000101464",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7307928585,
+  "tags": {
+    "name": "phở Đồng Tiến-ql13,tx Bình Long-120000039064",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308054985,
+  "tags": {
+    "name": "TH Năm Vàng-Minh Tâm,Tống Lê Trân-120000039069",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308186685,
+  "tags": {
+    "name": "TH Mai Chu-Tân Khai-120000101558",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308442885,
+  "tags": {
+    "name": "khu vui chơi Bình Long-tx Bình Long-120000045130",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308605885,
+  "tags": {
+    "name": "TH Hồng Thắm-Xa Cam,TX Bình Long-120000039236",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308637585,
+  "tags": {
+    "name": "Cơm Hoa-tx Bình Long-120000039028",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308758685,
+  "tags": {
+    "name": "lẩu Đoàn Hùng Ngọc-ql13,Thanh Phú-120000064231",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7308773185,
+  "tags": {
+    "name": "quán Sơn Thảo-Ngô Quyền,tx Bình Long-120000101325",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7312227685,
+  "tags": {
+    "name": "căn tin cf chị Hương-Lộc Thái-120000090104",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7312295185,
+  "tags": {
+    "name": "TH chị Dung-Hố Bom,Lộc Ninh-120000068507",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7312352186,
+  "tags": {
+    "name": "TH Tam-chợ Lộc Hiệp-120000068533",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7314346485,
+  "tags": {
+    "name": "CF Hát Với Nhau-Đoàn Thị Điểm-120000035210",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324684985,
+  "tags": {
+    "name": "thcs nguyễn hữu cảng-tân khai-120000039253",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324738885,
+  "tags": {
+    "name": "mười nhỏ-Tàu ô",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324774386,
+  "tags": {
+    "name": "hàn quốc quán",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324775385,
+  "tags": {
+    "name": "cty CN-kcn Minh Hưng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324813485,
+  "tags": {
+    "name": "karaoke Bến thượng Hải-kcn Minh Hưng-120000094236",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7324900985,
+  "tags": {
+    "name": "baby club-đường số 8,Chơn Thành-120000103271",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7327130185,
+  "tags": {
+    "name": "thcs An Lộc B-Nguyễn Du,BL-120000077528",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7327237585,
+  "tags": {
+    "name": "TH Hùng Nâu-Sóc Bế, Thanh Phú-120000039045",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7327298085,
+  "tags": {
+    "name": "TH Thắm Phương-304, ấp 8, An Khương-120000103518",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7340045285,
+  "tags": {
+    "name": "TH Minh Chiến-Tân Tiến-Đồng Phú",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7340051385,
+  "tags": {
+    "name": "Coopmart Đồng Phú",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7340129285,
+  "tags": {
+    "name": "kcn Bắc Đồng Phú",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7342658385,
+  "tags": {
+    "name": "NPP Đức Tấn",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7345235585,
+  "tags": {
+    "name": "TH Huyền Phương-chợ Bù Na-120000072848",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7858301185,
+  "tags": {
+    "name:en": "Suoi Cam Guesthouse (Nha Nghi Suoi Cam)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7877039985,
+  "tags": {
+    "name": "th-ánh viên",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7877045185,
+  "tags": {
+    "name": "TH-bà Thái",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7882588385,
+  "tags": {
+    "name": "GK-Osaka-Ql14 Đức Liễu Bù Đăng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7885537385,
+  "tags": {
+    "name": "gk-king-hùng vương",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8021213186,
+  "tags": {
+    "name": "TH Bình An",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8021307186,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8021643986,
+  "tags": {
+    "name": "TH Minh Thanh-Thôn 2, Thống Nhất",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8233333417,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8298872017,
+  "tags": {
+    "name": "TH Thu Cúc",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323095217,
+  "tags": {
+    "name": "th Dũng Tuấn",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323138619,
+  "tags": {
+    "name": "TH ko tên",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323227417,
+  "tags": {
+    "name": "QA Minh Huy",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323232718,
+  "tags": {
+    "name": "GK Quyên Hiến",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323232719,
+  "tags": {
+    "name": "TH Thuỳ An",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323352217,
+  "tags": {
+    "name": "CF cây Điệp",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323577017,
+  "tags": {
+    "name": "TH Thanh Thảo",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323599017,
+  "tags": {
+    "name": "TH Anh Khánh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8323859117,
+  "tags": {
+    "name": "TH chị Thành",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326616617,
+  "tags": {
+    "name": "CF Võng Thanh Hương",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326618017,
+  "tags": {
+    "name": "Hải sản tươi sống Cà Mau",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326624317,
+  "tags": {
+    "name": "TH dì Gái",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326630017,
+  "tags": {
+    "name": "Trường Trung học cơ sở Tân Bình",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326630117,
+  "tags": {
+    "name": "TH Không bảng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8326641217,
+  "tags": {
+    "name": "Hồ bơi Tân Bình",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337289017,
+  "tags": {
+    "name": "th Hạnh Quyên",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337290117,
+  "tags": {
+    "name": "Quán 999",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337324817,
+  "tags": {
+    "name": "Nhật Phương Gym",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337332217,
+  "tags": {
+    "name": "quán Hương Sen",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337333518,
+  "tags": {
+    "name": "TH Ái Tâm",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337333519,
+  "tags": {
+    "name": "gk Nhật My",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337349917,
+  "tags": {
+    "name": "khu vui chơi Đô kid",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8337375517,
+  "tags": {
+    "name": "TH Thy Chanh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8341297819,
+  "tags": {
+    "name": "th Cường Phát",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8341372017,
+  "tags": {
+    "name": "th cô Sương",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8344280919,
+  "tags": {
+    "name": "Muay Thai club",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8344894817,
+  "tags": {
+    "name": "khu vui chơi Đô kid",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8347579217,
+  "tags": {
+    "name": "căn tin ThCS Nghĩa Bình",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8347883317,
+  "tags": {
+    "name": "happy garden",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8353941517,
+  "tags": {
+    "name": "căn tin Kim Tín",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 8993021950,
+  "tags": {
+    "addr:district": "cẩm mỹ",
+    "addr:housenumber": "172",
+    "addr:postcode": "810000",
+    "addr:province": "đồng nai",
+    "addr:street": "tổ 7, ấp 8, xuân tây",
+    "addr:subdistrict": "xuân tây",
+    "internet_access": "no",
+    "name": "Cẩm Mỹ, Đồng Nai",
+    "operator": "Bùi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 9787150417,
+  "tags": {
+    "name": "Đất Hồ Sông Ray",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 10729691005,
+  "tags": {
+    "name": "Lều trại",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 10729927905,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Hemlet",
+    "contact:facebook": "greenhopelodge",
+    "email": "phamdacluan1992@gmail.com",
+    "internet_access": "wlan",
+    "name": "Khu Nhà Nghỉ Dưỡng Hi Vọng Xanh",
+    "name:en": "Green Hope Lodge",
+    "operator": "Mr. Luan",
+    "phone": "+84972184683",
+    "tourism": "guest_house",
+    "website": "http://www.greenhopelodge.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10915418308,
+  "tags": {
+    "name": "cô Công",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10915418309,
+  "tags": {
+    "name": "dì Hạnh",
+    "name:en": "dì Siêng",
+    "name:vi": "dì Siêng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11101004808,
+  "tags": {
+    "access": "yes",
+    "name": "Lòng Hồ Trị An",
+    "name:en": "Public Campsite",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 11101047298,
+  "tags": {
+    "addr:street": "Ngọc Định - Tân Phú",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Nhà Nghỉ Tú Anh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11414925085,
+  "tags": {
+    "air_conditioning": "yes",
+    "description": "Welcome to Tây homestay, come enjoy authentic Vietnamese living and cooking. Located on a picturesque farm in South Vietnam. 3 acres of beautiful land. We have lakes for fishing animals to visit and peaceful settings to enjoy a moment of serenity and qui",
+    "guest_house": "agritourism",
+    "name": "Homestay Tây",
+    "reservation": "yes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11513431669,
+  "tags": {
+    "addr:housenumber": "430",
+    "addr:postcode": "810000",
+    "addr:street": "Hồ Thị Hương",
+    "name": "Khách sạn Sunshine",
+    "name:en": "Sunshine Hotel",
+    "opening_hours": "24/7",
+    "phone": "0838969969",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 11533605669,
+  "tags": {
+    "name:en": "Hung Oanh Hotel",
+    "name:ru": "Гостиница Hung Oanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11533605670,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11533905369,
+  "tags": {
+    "name:en": "Ban Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11730261643,
+  "tags": {
+    "name": "Green Bamboo Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12015233369,
+  "tags": {
+    "addr:street": "Nam Cát Tiên, Vườn Quốc Gia Cát Tiên, Đồng Nai, Vietnam",
+    "name": "Lava Rock Viet Nam Lodge",
+    "phone": "+84 938 899 300",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12312352134,
+  "tags": {
+    "name": "KHÁCH SẠN D & T",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12363795901,
+  "tags": {
+    "name": "Tân Hạnh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12613087806,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12617616801,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13517847201,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13584878218,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13683968533,
+  "tags": {
+    "air_conditioning": "yes",
+    "bar": "no",
+    "check_date": "2026-03-27",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Green Hope Lodge",
+    "payment:cards": "no",
+    "payment:cash": "yes",
+    "payment:credit_cards": "no",
+    "payment:debit_cards": "no",
+    "phone": "+84 972184683",
+    "reservation": "yes",
+    "tourism": "hotel",
+    "website": "https://greenhopelodge.com/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13684278498,
+  "tags": {
+    "name": "Nhà Nghỉ Phúc Hậu",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13760244603,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13809493948,
+  "tags": {
+    "name": "Ko Nia Lu Quan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 407436383,
+  "tags": {
+    "building": "yes",
+    "name": "Hotel Thai Duong",
+    "source": "GPS",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 975337850,
+  "tags": {
+    "internet_access": "wlan",
+    "landuse": "commercial",
+    "name": "Khách sạn Aurora",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 995763403,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Hoà Bình",
+    "phone": "+84 2513942100",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1041585888,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Nhà khách 71",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1049570824,
+  "tags": {
+    "addr:city": "Thành phố Biên Hòa",
+    "addr:housenumber": "128/6",
+    "addr:province": "Tỉnh Đồng Nai",
+    "addr:street": "Đường Nguyễn Ái Quốc",
+    "addr:subdistrict": "Phường Tân Mai",
+    "building": "hotel",
+    "building:levels": "22",
+    "internet_access": "wlan",
+    "internet_access:fee": "yes",
+    "name": "Khách sạn The Mira Central Park",
+    "rooms": "195",
+    "smoking": "no",
+    "stars": "5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1049624867,
+  "tags": {
+    "landuse": "military",
+    "name": "Nhà khách Bộ chỉ huy Quân sự Thành phố Đồng Nai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1065375346,
+  "tags": {
+    "landuse": "commercial",
+    "name": "Nhà khách Mã Đà",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1080766836,
+  "tags": {
+    "addr:housenumber": "512/1/48",
+    "addr:postcode": "76111",
+    "addr:street": "Đường Đồng Khởi",
+    "addr:subdistrict": "Khu phố 3",
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Phương Anh Châu",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1087491519,
+  "tags": {
+    "internet_access": "wlan",
+    "landuse": "commercial",
+    "name": "Khách sạn Đồng Nai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1117984257,
+  "tags": {
+    "addr:housenumber": "508/10-12",
+    "addr:postcode": "76111",
+    "addr:street": "Đường Đồng Khởi",
+    "addr:subdistrict": "Khu phố 3",
+    "building": "yes",
+    "name": "Nhà nghỉ Bích Mộc",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1117984265,
+  "tags": {
+    "addr:housenumber": "508/22",
+    "addr:postcode": "76111",
+    "addr:street": "Đường Đồng Khởi",
+    "addr:subdistrict": "Khu phố 3",
+    "building": "yes",
+    "name": "Nhà nghỉ Phú Thái",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1181961614,
+  "tags": {
+    "building": "yes",
+    "guest_house": "guest_house",
+    "name": "K1",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1368146497,
+  "tags": {
+    "building": "yes",
+    "internet_access": "no",
+    "reservation": "recommended",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "way",
+  "id": 1377193903,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "CatTienxanh.879",
+    "name": "Thủy Tiên ECO-LODGE",
+    "phone": "0986 939 164",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1412753761,
+  "tags": {
+    "addr:housenumber": "K10",
+    "addr:street": "Đường N11",
+    "building": "yes",
+    "name": "Ngọc Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1412972540,
+  "tags": {
+    "addr:housenumber": "J54",
+    "addr:street": "Đường N11",
+    "building": "yes",
+    "name": "Khách sạn Hy Thành",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

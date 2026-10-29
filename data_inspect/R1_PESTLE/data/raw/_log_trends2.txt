@@ -1,0 +1,7 @@
+   trends thử lại 0 TooManyRequestsError('The request failed: Google returned a response with code 4
+   trends thử lại 1 TooManyRequestsError('The request failed: Google returned a response with code 4
+trends ok
+   trends thử lại 0 TooManyRequestsError('The request failed: Google returned a response with code 4
+   trends thử lại 1 TooManyRequestsError('The request failed: Google returned a response with code 4
+trends_region ok
+region coords ok; thiếu: ['Hà Nam', 'Hồ Chí Minh', 'Thừa Thiên Huế', 'tỉnh Kiên Giang', 'Đăk Nông']

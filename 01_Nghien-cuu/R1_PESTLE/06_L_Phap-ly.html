@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L — Pháp lý</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f2ee;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --s1-soft:#cde2fb;
+  --q1:#cde2fb; --q2:#86b6ef; --q3:#2a78d6; --q3-ink:#fff;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --accent:#256abf;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+    --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+    --accent:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+  --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+  --accent:#6da7ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+nav.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+nav.files a{font-size:13px;text-decoration:none;color:var(--ink-2);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+nav.files a.on{background:var(--ink);color:var(--page);box-shadow:none}
+.theme{margin-left:auto;font:inherit;font-size:13px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+h1{font-size:30px;line-height:1.2;margin:4px 0 6px;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:24px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.lede{font-size:17px;color:var(--ink-2);max-width:760px}
+.card{min-width:0;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:18px 18px 14px;margin:14px 0}
+.keys{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 20px;margin:18px 0}
+.keys li{margin:6px 0}
+.keys h3{margin:4px 0 6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.tile .l{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+.tile .s{color:var(--muted);font-size:12px;margin-top:6px}
+.lv{display:inline-block;font-size:11px;font-weight:650;line-height:1;padding:3px 6px;border-radius:5px;vertical-align:1px;box-shadow:inset 0 0 0 1px var(--axis);color:var(--ink-2);white-space:nowrap}
+.lv.A{background:var(--ink);color:var(--page);box-shadow:none}
+.lv.B{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.lv.D{border-style:dashed;box-shadow:none;outline:1px dashed var(--axis);outline-offset:-1px}
+.chart-t{font-weight:650;font-size:15.5px;margin:0}
+.chart-s{color:var(--ink-2);font-size:13px;margin:2px 0 12px}
+.bars{display:grid;grid-template-columns:minmax(120px,38%) 1fr;row-gap:8px;column-gap:12px;align-items:center}
+.bl{font-size:13.5px;color:var(--ink);text-align:right;line-height:1.3}
+.bl small{display:block;color:var(--muted);font-size:11.5px}
+.bt{position:relative;height:22px;border-left:1px solid var(--axis);outline:none}
+.bt .b{position:absolute;left:0;top:3px;height:16px;background:var(--s1);border-radius:0 4px 4px 0}
+.bt .b.alt{background:var(--s2)}
+.bt .b.ghost{background:var(--s1-soft)}
+.bt .n{position:absolute;top:1px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;padding-left:6px;font-variant-numeric:tabular-nums}
+.bt .tip{display:none;position:absolute;z-index:5;left:0;top:26px;background:var(--ink);color:var(--page);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:7px;max-width:320px;width:max-content}
+.bt:hover .tip,.bt:focus .tip{display:block}
+.bt:hover .b,.bt:focus .b{filter:brightness(1.12)}
+.foot{color:var(--muted);font-size:12px;margin-top:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--grid)}
+th{font-weight:650;color:var(--ink-2);font-size:12.5px;background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:4px 6px;margin:12px 0}
+.stack{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;padding:0 8px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.stack .a{background:var(--s1);color:#fff}
+.stack .i{background:var(--s2);color:#fff}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.heat table{min-width:760px;table-layout:fixed}
+.heat th,.heat td{text-align:center;vertical-align:middle;padding:6px 2px;border:2px solid var(--surface);font-size:12px}
+.heat td.rl,.heat th.rl{text-align:left;width:190px;padding-left:8px;font-size:12.5px;background:var(--surface)}
+.heat td.h0{background:var(--surface-2);color:var(--muted)}
+.heat td.h1{background:var(--q1);color:var(--ink)}
+.heat td.h2{background:var(--q2);color:#0b0b0b}
+.heat td.h3{background:var(--q3);color:var(--q3-ink);font-weight:650}
+.heat td.rk{background:repeating-linear-gradient(135deg,var(--surface-2) 0 4px,transparent 4px 8px);color:var(--crit);font-weight:650}
+.so{display:inline-block;min-width:22px;text-align:center;font-weight:700;border-radius:5px;padding:1px 6px}
+.so.hi{background:var(--ink);color:var(--page)}
+.so.md{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.so.lo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--axis)}
+.tag{font-size:11.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.op{color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.tag.th{color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}
+.tag.mx{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--axis)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;box-shadow:0 0 0 1px var(--ring)}
+.callout b{color:var(--ink)}
+.gap{border-left:3px dashed var(--axis);padding:8px 14px;margin:12px 0;color:var(--ink-2);font-size:14px}
+.tl{position:relative;margin:10px 0 0 6px;padding-left:22px;border-left:2px solid var(--grid)}
+.tl .ev{position:relative;margin:0 0 14px}
+.tl .ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--s1)}
+.tl .ev.f:before{box-shadow:0 0 0 2px var(--axis);background:var(--surface-2)}
+.tl .d{font-size:12.5px;font-weight:650;color:var(--accent)}
+.tl .ev.f .d{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+ol.src{font-size:12.5px;color:var(--ink-2);padding-left:22px}
+ol.src li{margin:3px 0;word-break:break-word}
+ol.src a{color:var(--accent)}
+a{color:var(--accent)}
+sup a{text-decoration:none;font-size:11px}
+@media (max-width:640px){
+  h1{font-size:24px}
+  .bars{grid-template-columns:minmax(96px,42%) 1fr}
+  .srow{grid-template-columns:76px 1fr}
+}
+@media print{nav.files,.theme{display:none}.bt .tip{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<nav class="files"><a href="01_Xu-huong.html" class="">Xu hướng</a><a href="02_P_Chinh-tri.html" class="">P · Chính trị</a><a href="03_E_Kinh-te.html" class="">E · Kinh tế</a><a href="04_S_Xa-hoi.html" class="">S · Xã hội</a><a href="05_T_Cong-nghe.html" class="">T · Công nghệ</a><a href="06_L_Phap-ly.html" class="on">L · Pháp lý</a><a href="07_E_Moi-truong.html" class="">E · Môi trường</a><button class="theme" type="button">Giao diện tối</button></nav>
+<div class="meta">LEVART · R1 Môi trường vĩ mô · Soạn 19/10/2026 · Bản 0.1 · Nghiên cứu tại bàn (thứ cấp)</div>
+<h1>L — Pháp lý</h1>
+<p class="lede">Dữ liệu cá nhân nào được thu, cái gì phải bảo vệ tuyệt đối; luật thương mại điện tử; Luật Du lịch về lữ hành, hướng dẫn viên; sở hữu trí tuệ cho tên ứng dụng và mô hình.</p>
+<p class="meta">Mức bằng chứng theo <code>PLAN_RESEARCH.md</code>: <span class="lv A" title="Mức bằng chứng A">A</span> văn bản/số liệu nhà nước · <span class="lv B" title="Mức bằng chứng B">B</span> báo cáo có công bố cỡ mẫu · <span class="lv C" title="Mức bằng chứng C">C</span> báo chí/báo cáo không công bố cỡ mẫu · <span class="lv D" title="Mức bằng chứng D">D</span> suy luận của nhóm (GT). Di chuột (hoặc chạm) vào thanh biểu đồ để xem nguồn.</p>
+<div class="keys"><h3>Ý chính</h3><ul><li><b>Dữ liệu vị trí là dữ liệu nhạy cảm — và nó là lõi của Levart</b> (check-in, con dấu theo tỉnh). Nghị định 356/2025 còn mở rộng nhóm nhạy cảm sang <i>dữ liệu theo dõi hành vi, hoạt động trên mạng xã hội, dịch vụ trực tuyến</i> <sup><a href="#s3">[3]</a></sup>. Ứng dụng du lịch có mạng xã hội gần như chắc chắn xử lý dữ liệu nhạy cảm.</li><li><b>Vì vậy Levart khó được hưởng miễn trừ 5 năm cho khởi nghiệp:</b> miễn trừ DPO và hồ sơ đánh giá tác động (DPIA, CTIA) <i>không áp dụng</i> khi doanh nghiệp trực tiếp xử lý dữ liệu nhạy cảm hoặc đạt ≥100.000 chủ thể dữ liệu <sup><a href="#s3">[3]</a></sup><sup><a href="#s5">[5]</a></sup>. Cần luật sư xác nhận.</li><li><b>Dùng Firebase = chuyển dữ liệu ra nước ngoài</b> (máy chủ Google) → cần hồ sơ đánh giá tác động chuyển dữ liệu xuyên biên giới. Vi phạm quy định chuyển dữ liệu ra nước ngoài bị phạt tới <b>5% doanh thu năm trước</b>; mua bán dữ liệu trái phép tới 10 lần khoản thu; vi phạm khác tới 3 tỷ đồng <sup><a href="#s4">[4]</a></sup>.</li><li><b>Không thu CCCD.</b> Ảnh CCCD, tài khoản/thẻ ngân hàng, mật khẩu định danh điện tử đều là dữ liệu nhạy cảm <sup><a href="#s3">[3]</a></sup> — Levart không cần chúng cho chức năng nào hiện có.</li><li><b>Không được thành “lữ hành” hay “hướng dẫn viên” vô tình:</b> lữ hành = xây dựng, <i>bán</i> và tổ chức thực hiện một phần hoặc toàn bộ chương trình du lịch <sup><a href="#s9">[9]</a></sup> — cần doanh nghiệp, giấy phép, ký quỹ 100 triệu đồng (nội địa) <sup><a href="#s11">[11]</a></sup>. Người dẫn đường có thu tiền mà không có thẻ hướng dẫn viên bị phạt 15–20 triệu đồng <sup><a href="#s12">[12]</a></sup>.</li><li><b>Tên “Levart” cần nộp đơn nhãn hiệu sớm</b> (nộp trước được trước, 12–18 tháng) <sup><a href="#s14">[14]</a></sup>. Mô hình kinh doanh và ý tưởng <i>không được bảo hộ</i> — bảo vệ bằng bí mật kinh doanh, thoả thuận bảo mật, và tốc độ.</li></ul></div><div class="tiles"><div class="tile"><div class="v">01/01/2026</div><div class="l">Luật BVDLCN 91/2025 + NĐ 356/2025 có hiệu lực</div><div class="s"><span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">5%</div><div class="l">doanh thu năm trước — mức phạt tối đa vi phạm chuyển dữ liệu ra nước ngoài</div><div class="s">KPMG tóm tắt luật · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">72 giờ</div><div class="l">hạn báo chủ thể khi lộ dữ liệu vị trí, sinh trắc học</div><div class="s">NĐ 356 qua EY · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">01/07/2026</div><div class="l">Luật TMĐT 122/2025 + NĐ 248/2026 có hiệu lực</div><div class="s"><span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">01/03/2026</div><div class="l">Luật AI 134/2025 có hiệu lực; phạt tổ chức tới 2 tỷ đồng</div><div class="s"><span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">100 tr</div><div class="l">đồng ký quỹ nếu kinh doanh lữ hành nội địa</div><div class="s">NĐ 168/2017 · <span class="lv A" title="Mức bằng chứng A">A</span></div></div></div><h2>1. Bảo vệ dữ liệu cá nhân — Levart cần dữ liệu gì, được thu gì</h2><p>Phân loại theo Nghị định 356/2025 <sup><a href="#s2">[2]</a></sup><sup><a href="#s3">[3]</a></sup>. Nguyên tắc chung: chỉ thu cái chức năng thật sự cần; mỗi mục đích một lần đồng ý riêng; <b>không đặt mặc định “đồng ý”</b>, lưu lại bằng chứng đồng ý (thời điểm, nội dung) <sup><a href="#s3">[3]</a></sup>.</p><div class="tbl "><table><tr><th>Loại dữ liệu</th><th>Nhóm</th><th>Levart có cần?</th><th>Cách xử lý đề xuất</th></tr><tr><td>Họ tên, email, số điện thoại</td><td>Cơ bản</td><td>Cần — đăng nhập; SĐT còn bắt buộc nếu có mạng xã hội (NĐ 147)</td><td>Đồng ý khi đăng ký; cho xem, sửa, xoá</td></tr><tr><td>Ngày sinh</td><td>Cơ bản</td><td>Cần — kiểm tra &lt;16 tuổi</td><td>Chỉ lưu năm sinh nếu đủ dùng</td></tr><tr><td>Ảnh đại diện, ảnh chuyến đi người dùng tải lên</td><td>Cơ bản (ảnh có mặt người khác: dữ liệu của họ)</td><td>Cần</td><td>Điều khoản cấp phép ảnh; nút báo cáo, gỡ ảnh</td></tr><tr><td><b>Vị trí GPS</b> (check-in, con dấu)</td><td><b>Nhạy cảm</b></td><td><b>Cần — lõi sản phẩm</b></td><td>Xin quyền riêng, chỉ khi bấm check-in; lưu mức <i>điểm đến / tỉnh</i>, không lưu vệt di chuyển liên tục; báo lộ trong 72 giờ</td></tr><tr><td>Hành vi trong app, lịch sử hoạt động (analytics)</td><td><b>Nhạy cảm</b> (mới theo NĐ 356)</td><td>Có ích, không bắt buộc</td><td>Tắt mặc định hoặc ẩn danh hoá; đồng ý riêng cho phân tích</td></tr><tr><td>Ảnh CCCD / số định danh</td><td>Ảnh CCCD: nhạy cảm; số định danh: cơ bản</td><td><b>Không cần</b></td><td>Không thu. Nếu sau này cần xác minh đối tác: dùng dịch vụ xác thực bên thứ ba</td></tr><tr><td>Tài khoản, thẻ ngân hàng, lịch sử giao dịch</td><td><b>Nhạy cảm</b></td><td>Không cần</td><td>Thanh toán qua cổng/VietQR; Levart không lưu</td></tr><tr><td>Tình trạng sức khoẻ (say xe, dị ứng…)</td><td><b>Nhạy cảm</b> (mở rộng theo NĐ 356)</td><td>Không cần ở MVP</td><td>Không hỏi</td></tr><tr><td>Khuôn mặt để nhận diện</td><td><b>Nhạy cảm</b> (sinh trắc học)</td><td>Không cần</td><td>Không dùng nhận diện khuôn mặt</td></tr></table></div><div class="tbl "><table><tr><th>Quyền của chủ thể dữ liệu</th><th>Phản hồi</th><th>Thực hiện</th><th>Nếu cần phối hợp bên thứ ba</th><th>Gia hạn</th></tr><tr><td>Rút đồng ý / hạn chế / phản đối xử lý</td><td>—</td><td>15 ngày</td><td>20 ngày</td><td>1 lần, ≤15 ngày</td></tr><tr><td>Xem, chỉnh sửa, yêu cầu cung cấp dữ liệu</td><td>2 ngày làm việc</td><td>10 ngày</td><td>15 ngày</td><td>1 lần, ≤10 ngày</td></tr><tr><td>Xoá dữ liệu</td><td>—</td><td>20 ngày</td><td>30 ngày</td><td>1 lần, ≤20 ngày</td></tr></table></div><p class="meta">Thời hạn theo NĐ 356/2025, đọc qua bảng của EY <sup><a href="#s3">[3]</a></sup> — cách trình bày bảng gốc dễ đọc nhầm, phải đối chiếu toàn văn. <span class="lv B" title="Mức bằng chứng B">B</span></p><div class="tbl "><table><tr><th>Miễn trừ (NĐ 356)</th><th>Ai được</th><th>Thời hạn</th><th>Không được miễn khi</th></tr><tr><td>Bổ nhiệm DPO/bộ phận bảo vệ dữ liệu; lập, nộp hồ sơ DPIA, CTIA</td><td>Doanh nghiệp nhỏ, khởi nghiệp (hộ KD, siêu nhỏ: miễn hoàn toàn)</td><td>5 năm từ 01/01/2026</td><td>Kinh doanh dịch vụ xử lý dữ liệu · <b>trực tiếp xử lý dữ liệu nhạy cảm</b> · tích luỹ ≥100.000 chủ thể dữ liệu</td></tr></table></div><h2>2. Mạng xã hội và thương mại điện tử</h2><div class="tbl "><table><tr><th>Văn bản</th><th>Điểm chính</th><th>Khi nào Levart bị áp</th><th>Nguồn</th></tr><tr><td>NĐ 147/2024/NĐ-CP (hiệu lực 25/12/2024)</td><td>Tài khoản phải xác thực bằng SĐT Việt Nam (hoặc số định danh) mới được đăng, bình luận, livestream; &lt;16 tuổi do cha mẹ đăng ký, giám sát; lưu trữ thông tin người dùng</td><td>Khi có bảng tin, bình luận, chia sẻ ảnh công khai</td><td><sup><a href="#s6">[6]</a></sup> · <sup><a href="#s17">[17]</a></sup></td></tr><tr><td>Luật TMĐT 122/2025/QH15 (hiệu lực 01/07/2026) · NĐ 248/2026/NĐ-CP</td><td>Sàn phải xác thực người bán trước khi mở gian hàng; siết trách nhiệm nền tảng, người livestream bán hàng, nền tảng nước ngoài</td><td>Khi đối tác <i>bán</i> voucher, gói dịch vụ ngay trong app (Levart thành sàn). Chỉ hiển thị ưu đãi rồi chuyển ra ngoài: rủi ro thấp hơn</td><td><sup><a href="#s7">[7]</a></sup><sup><a href="#s8">[8]</a></sup></td></tr></table></div><div class="gap"><b>Câu hỏi cho luật sư:</b> (1) Levart với bảng tin + con dấu có phải là “mạng xã hội” theo NĐ 147 không, ngưỡng nào phải xin giấy phép; (2) hiển thị ưu đãi đối tác kèm mã giảm giá có phải là sàn TMĐT không; (3) Levart có thuộc diện “trực tiếp xử lý dữ liệu nhạy cảm” chỉ vì vị trí check-in không.</div><h2>3. Luật Du lịch — đâu là ranh giới “lữ hành”, “hướng dẫn viên”</h2><div class="tbl "><table><tr><th>Khái niệm</th><th>Luật nói gì</th><th>Ranh giới an toàn cho Levart</th></tr><tr><td>Kinh doanh dịch vụ lữ hành</td><td>Xây dựng, <b>bán</b> và tổ chức thực hiện một phần hoặc toàn bộ chương trình du lịch cho khách <sup><a href="#s9">[9]</a></sup></td><td>Gợi ý lịch trình miễn phí, người dùng tự đặt = không phải lữ hành. <b>Bán gói</b> (đi lại + ở + hoạt động) = lữ hành</td></tr><tr><td>Điều kiện lữ hành nội địa</td><td>Là doanh nghiệp; ký quỹ tại ngân hàng; người phụ trách có trình độ trung cấp trở lên ngành lữ hành, hoặc ngành khác kèm chứng chỉ điều hành <sup><a href="#s10">[10]</a></sup></td><td>Ký quỹ 100 triệu (mức 20 triệu của NĐ 94/2021 chỉ tới hết 2023) <sup><a href="#s11">[11]</a></sup>. Nếu muốn bán tour: hợp tác với công ty lữ hành có phép</td></tr><tr><td>Hướng dẫn viên</td><td>3 loại thẻ: quốc tế, nội địa, tại điểm; phải có thẻ và hợp đồng với doanh nghiệp lữ hành hoặc là hội viên tổ chức nghề nghiệp <sup><a href="#s12">[12]</a></sup></td><td>Tính năng “bạn đồng hành địa phương” có thu tiền = rủi ro. Hành nghề không thẻ: phạt 15–20 triệu đồng (NĐ 45/2019; đã sửa bởi NĐ 129/2021 — kiểm mức hiện hành) <sup><a href="#s13">[13]</a></sup></td></tr><tr><td>Luật đang sửa</td><td>Luật Du lịch sửa đổi trình Quốc hội 10/2027 (tệp P)</td><td>Đọc dự thảo khi lấy ý kiến; định nghĩa có thể mở cho nền tảng số</td></tr></table></div><h2>4. Sở hữu trí tuệ — tên ứng dụng, mã nguồn, mô hình</h2><div class="tbl "><table><tr><th>Đối tượng</th><th>Được bảo hộ thế nào</th><th>Việc cần làm</th></tr><tr><td>Tên “Levart”, logo</td><td>Nhãn hiệu — nộp đơn tại Cục Sở hữu trí tuệ; nộp trước được ưu tiên; thẩm định ~12–18 tháng; bảo hộ 10 năm, gia hạn được <sup><a href="#s14">[14]</a></sup></td><td>Tra cứu trùng (IP Lib của Cục SHTT, WIPO Global Brand Database) rồi nộp đơn sớm. Nhóm đề xuất: 9 (ứng dụng tải về), 42 (nền tảng phần mềm), 39 (dịch vụ du lịch, đặt chỗ vận chuyển), 35 (quảng cáo, kết nối người mua – bán)</td></tr><tr><td>Mã nguồn, giao diện</td><td>Chương trình máy tính được bảo hộ quyền tác giả tự động khi tạo ra; đăng ký không bắt buộc nhưng là chứng cứ <sup><a href="#s16">[16]</a></sup></td><td>Thoả thuận chuyển giao quyền tác giả giữa các thành viên với công ty (mọi người đang viết mã)</td></tr><tr><td>Hình 34 con dấu</td><td>Tác phẩm mỹ thuật ứng dụng — quyền tác giả thuộc người vẽ</td><td>Hợp đồng chuyển quyền với người thiết kế; tránh dùng quốc huy, biểu trưng chính thức của tỉnh</td></tr><tr><td>Tên tỉnh, “34 tỉnh”</td><td>Tên địa danh không thể đăng ký độc quyền làm nhãn hiệu (GT — hỏi luật sư)</td><td>Bảo vệ bằng thương hiệu Levart, không bằng tên địa danh</td></tr><tr><td>Mô hình kinh doanh, ý tưởng, cách chơi</td><td><b>Không được bảo hộ sáng chế</b> (phương pháp kinh doanh, chương trình máy tính bị loại trừ) <sup><a href="#s16">[16]</a></sup></td><td>Bí mật kinh doanh + NDA với người ngoài nhóm + đi nhanh</td></tr><tr><td>Tên miền</td><td>Theo nguyên tắc đăng ký trước</td><td>Mua levart.vn, levart.app ngay</td></tr></table></div><h2>5. Luật Trí tuệ nhân tạo</h2><div class="tbl "><table><tr><th>Nội dung</th><th>Chi tiết</th><th>Hệ quả</th></tr><tr><td>Hiệu lực, phạm vi</td><td>Luật 134/2025/QH15, thông qua 10/12/2025, hiệu lực 01/03/2026; 8 chương 35 điều <sup><a href="#s15">[15]</a></sup></td><td>Áp cho tính năng gợi ý bằng Gemini</td></tr><tr><td>Phân loại rủi ro</td><td>Thấp / trung bình / cao; cao = có thể gây hại đáng kể tới sức khoẻ, tính mạng, quyền lợi <sup><a href="#s15">[15]</a></sup></td><td>Gợi ý lịch trình: nhiều khả năng rủi ro thấp</td></tr><tr><td>Gắn nhãn</td><td>Âm thanh, hình ảnh, video do AI tạo, chỉnh sửa mô phỏng người thật, sự kiện thật phải gắn nhãn dễ nhận biết (Điều 11) <sup><a href="#s15">[15]</a></sup></td><td>Ghi “do AI gợi ý”; không dùng ảnh AI giả làm ảnh thật của điểm đến</td></tr><tr><td>Chế tài</td><td>Tổ chức tới 2 tỷ đồng, cá nhân tới 1 tỷ; nghiêm trọng tới 2% doanh thu tại Việt Nam <sup><a href="#s15">[15]</a></sup></td><td>—</td></tr><tr><td>Chuyển tiếp</td><td>Hệ thống có trước 01/03/2026: 12–18 tháng để tuân thủ <sup><a href="#s15">[15]</a></sup></td><td>—</td></tr></table></div><h2>6. Chấm điểm và cột “vì vậy”</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Loại</th><th>Tác động</th><th>Khả năng</th><th>T×K</th><th>Khi nào</th><th>Nguồn · mức</th><th>Vì vậy Levart nên…</th></tr><tr><td>Vị trí, hành vi = dữ liệu nhạy cảm (NĐ 356)</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[2][3] · A/B</td><td>Thiết kế tối thiểu hoá: chỉ lấy vị trí lúc check-in, lưu theo tỉnh/điểm; đồng ý riêng; chuẩn bị DPIA.</td></tr><tr><td>Firebase = chuyển dữ liệu ra nước ngoài</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[4] · B</td><td>Lập hồ sơ CTIA; ghi rõ trong chính sách quyền riêng tư; hỏi luật sư trước khi mở công khai.</td></tr><tr><td>Ranh giới lữ hành, hướng dẫn viên</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td><b>6</b> ✓ SWOT</td><td>1–2 năm</td><td>[9][11][12] · A</td><td>Không bán gói tour, không cho người dẫn đường thu tiền trong app khi chưa hợp tác với công ty lữ hành có phép.</td></tr><tr><td>Nhãn hiệu “Levart” chưa đăng ký</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[14] · B</td><td>Tra cứu và nộp đơn nhóm 9, 42, 39 trong tháng này; mua tên miền.</td></tr><tr><td>NĐ 147: xác thực SĐT cho tài khoản đăng bài</td><td><span class="tag mx">Cả hai</span></td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[6] · A</td><td>Đăng nhập bằng SĐT (OTP) ngay từ đầu; chặn người dùng &lt;16 tuổi.</td></tr><tr><td>Luật TMĐT: nền tảng bán voucher = sàn</td><td><span class="tag mx">Cả hai</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>1–2 năm</td><td>[7][8] · A</td><td>Giai đoạn đầu chỉ hiển thị ưu đãi; thanh toán diễn ra tại đối tác.</td></tr><tr><td>Luật AI: gắn nhãn nội dung AI</td><td><span class="tag mx">Cả hai</span></td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><b>3</b></td><td>Ngay</td><td>[15] · A</td><td>Gắn nhãn mọi lịch trình do AI tạo.</td></tr></table></div><p class="foot">Đọc kèm <code>Business.md</code> mục 7 (Nghị định 147/2024, Luật BVDLCN, Luật TMĐT, NĐ 168/2017, NQ 198/2025) <sup><a href="#s17">[17]</a></sup>. Tệp này bổ sung NĐ 356/2025, Luật AI, Luật Du lịch, sở hữu trí tuệ.</p>
+<h2>Nguồn</h2>
+<ol class="src"><li id="s1">Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15 (26/06/2025, hiệu lực 01/01/2026), Thư viện Pháp luật — <a href="https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Law-91-2025-QH15-Personal-Data-Protection-665440.aspx" target="_blank" rel="noopener">https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Law-91-2025-QH15-Personal-Data-Protection-665440.aspx</a></li><li id="s2">Nghị định 356/2025/NĐ-CP (31/12/2025) hướng dẫn Luật BVDLCN, Thư viện Pháp luật — <a href="https://thuvienphapluat.vn/van-ban/Quyen-dan-su/Nghi-dinh-356-2025-ND-CP-huong-dan-Luat-Bao-ve-du-lieu-ca-nhan-687428.aspx" target="_blank" rel="noopener">https://thuvienphapluat.vn/van-ban/Quyen-dan-su/Nghi-dinh-356-2025-ND-CP-huong-dan-Luat-Bao-ve-du-lieu-ca-nhan-687428.aspx</a></li><li id="s3">EY Việt Nam — Tin nhanh pháp lý 3/2026 về Nghị định 356/2025 — <a href="https://www.ey.com/content/dam/ey-unified-site/ey-com/vi-vn/technical/tax/documents/ey-vietnam-legal-alert-march-2026-decree-no356-2025-nd-cp-providing-detailed-guidance-for-implementation-of-personal-data-protection-law-viet.pdf" target="_blank" rel="noopener">https://www.ey.com/content/dam/ey-unified-site/ey-com/vi-vn/technical/tax/documents/ey-vietnam-legal-alert-march-2026-decree-no356-2025-nd-cp-providing-detailed-guidance-for-implementation-of-personal-data-protection-law-viet.pdf</a></li><li id="s4">KPMG Việt Nam — Luật Bảo vệ dữ liệu cá nhân mới (6/2025) — <a href="https://assets.kpmg.com/content/dam/kpmg/vn/pdf/2025/06/new-pdp-law-vi.pdf" target="_blank" rel="noopener">https://assets.kpmg.com/content/dam/kpmg/vn/pdf/2025/06/new-pdp-law-vi.pdf</a></li><li id="s5">VCCI — ngoại lệ miễn trừ không áp dụng khi xử lý dữ liệu nhạy cảm — <a href="https://vcci.com.vn/tin-tuc/luat-bao-ve-du-lieu-ca-nhan-luu-y-ve-hanh-lang-phap-ly-moi-cho-doanh-nghiep" target="_blank" rel="noopener">https://vcci.com.vn/tin-tuc/luat-bao-ve-du-lieu-ca-nhan-luu-y-ve-hanh-lang-phap-ly-moi-cho-doanh-nghiep</a></li><li id="s6">Nghị định 147/2024/NĐ-CP — xác thực tài khoản mạng xã hội, qua VnEconomy — <a href="https://vneconomy.vn/tu-ngay-25-12-tai-khoan-mang-xa-hoi-phai-xac-thuc-so-dien-thoai-moi-duoc-dang-bai.htm" target="_blank" rel="noopener">https://vneconomy.vn/tu-ngay-25-12-tai-khoan-mang-xa-hoi-phai-xac-thuc-so-dien-thoai-moi-duoc-dang-bai.htm</a></li><li id="s7">Luật Thương mại điện tử 122/2025/QH15 (10/12/2025, hiệu lực 01/07/2026), LuatVietnam — <a href="https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-thuong-mai-dien-tu-2025-so-122-2025-qh15-186-106402-article.html" target="_blank" rel="noopener">https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-thuong-mai-dien-tu-2025-so-122-2025-qh15-186-106402-article.html</a></li><li id="s8">Luật TMĐT 2025: siết định danh người bán, trách nhiệm nền tảng, VnEconomy — <a href="https://vneconomy.vn/luat-thuong-mai-dien-tu-2025-cam-cuong-va-minh-bach-hoa-thi-truong.htm" target="_blank" rel="noopener">https://vneconomy.vn/luat-thuong-mai-dien-tu-2025-cam-cuong-va-minh-bach-hoa-thi-truong.htm</a></li><li id="s9">Luật Du lịch 2017 (09/2017/QH14), Điều 3 — Hệ thống pháp luật — <a href="https://hethongphapluat.com/luat-du-lich-2017/khoan-1-dieu-3" target="_blank" rel="noopener">https://hethongphapluat.com/luat-du-lich-2017/khoan-1-dieu-3</a></li><li id="s10">Điều kiện kinh doanh lữ hành, Điều 31 Luật Du lịch — Thư viện Pháp luật — <a href="https://thuvienphapluat.vn/hoi-dap-phap-luat/dieu-kien-de-duoc-kinh-doanh-dich-vu-lu-hanh-274883.html" target="_blank" rel="noopener">https://thuvienphapluat.vn/hoi-dap-phap-luat/dieu-kien-de-duoc-kinh-doanh-dich-vu-lu-hanh-274883.html</a></li><li id="s11">Mức ký quỹ lữ hành: 20 triệu (NĐ 94/2021) chỉ tới hết 2023, sau đó theo NĐ 168/2017, Báo Văn hoá — <a href="https://baovanhoa.vn/thoi-su/giam-80-tien-ky-quy-kinh-doanh-dich-vu-lu-hanh-den-het-nam-2023-21934.html" target="_blank" rel="noopener">https://baovanhoa.vn/thoi-su/giam-80-tien-ky-quy-kinh-doanh-dich-vu-lu-hanh-den-het-nam-2023-21934.html</a></li><li id="s12">Hướng dẫn viên: điều kiện hành nghề, 3 loại thẻ; xử phạt NĐ 45/2019 — Luật Dương Gia — <a href="https://luatduonggia.vn/?p=806638" target="_blank" rel="noopener">https://luatduonggia.vn/?p=806638</a></li><li id="s13">Nghị định 45/2019/NĐ-CP — xử phạt vi phạm hành chính trong lĩnh vực du lịch, LuatVietnam — <a href="https://luatvietnam.vn/van-hoa/nghi-dinh-45-2019-nd-cp-xu-phat-vi-pham-hanh-chinh-trong-linh-vuc-du-lich-172972-d1.html" target="_blank" rel="noopener">https://luatvietnam.vn/van-hoa/nghi-dinh-45-2019-nd-cp-xu-phat-vi-pham-hanh-chinh-trong-linh-vuc-du-lich-172972-d1.html</a></li><li id="s14">Đăng ký nhãn hiệu: thủ tục, thời gian, NĐ 100/2026 thẩm định nhanh — Luật Việt An — <a href="https://luatvietan.vn/thu-tuc-dang-ky-nhan-hieu.html" target="_blank" rel="noopener">https://luatvietan.vn/thu-tuc-dang-ky-nhan-hieu.html</a></li><li id="s15">Luật Trí tuệ nhân tạo 134/2025/QH15 (hiệu lực 01/03/2026), qua Vietcetera — <a href="https://vietcetera.com/vn/luat-ai-co-hieu-luc-can-biet-gi-de-tranh-boc-hoi-2-ty" target="_blank" rel="noopener">https://vietcetera.com/vn/luat-ai-co-hieu-luc-can-biet-gi-de-tranh-boc-hoi-2-ty</a></li><li id="s16">Luật Sở hữu trí tuệ 2005 (sửa đổi 2009, 2019, 2022) — Điều 59 đối tượng không được bảo hộ sáng chế; Điều 22 chương trình máy tính</li><li id="s17">Business.md mục 7 (pháp lý đã có) — tài liệu nội bộ</li></ol>
+<p class="foot">Truy cập các nguồn trong khoảng 19/10/2026. Phần pháp lý là danh sách việc cần hỏi luật sư, không phải tư vấn pháp lý.</p>
+</div><script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){var t=document.documentElement.getAttribute('data-theme');
+    if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function lab(){b.textContent=cur()==='dark'?'Giao diện sáng':'Giao diện tối';}
+  try{var s=localStorage.getItem('r1-theme'); if(s) document.documentElement.setAttribute('data-theme',s);}catch(e){}
+  lab();
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('r1-theme',n);}catch(e){} lab();});
+})();
+</script></body></html>

@@ -1,0 +1,1551 @@
+<title>Levart Design Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+/* Bố cục: trang dọc trên nền giấy hộ chiếu; nội dung là các khung điện thoại 390px xếp theo mục,
+   thanh điều hướng dính trên đỉnh. Ngôn ngữ hình: hộ chiếu Việt Nam — mực dấu đỏ, nhũ vàng, guilloché, dải MRZ. */
+:root{
+  --paper:#F5EFE3; --surface:#FFFFFF; --surface-2:#FAF6EC; --sunk:#EDE4D4;
+  --fg:#12241F; --fg-2:#54655F; --fg-3:#8A9993;
+  --line:#E3DACA; --line-2:#D0C4AE;
+  --brand:#0B3A33; --brand-2:#14544A; --on-brand:#F5EFE3;
+  --stamp:#B03A2C; --gold:#B8901F; --jade:#0E8F6E; --sky:#2F7FA8;
+  --ok:#2F7D53; --warn:#A8701A; --crit:#B03A2C;
+  --r-sm:9px; --r:14px; --r-lg:22px; --r-xl:30px;
+  --sh-1:0 1px 2px rgba(18,36,31,.07);
+  --sh-2:0 2px 4px rgba(18,36,31,.06), 0 12px 28px -14px rgba(18,36,31,.28);
+  --sh-3:0 30px 60px -30px rgba(18,36,31,.45);
+  --f-display:'Oswald','Arial Narrow',system-ui,sans-serif;
+  --f-ui:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',monospace;
+  --guilloche:repeating-linear-gradient(115deg,transparent 0 3px,rgba(11,58,51,.035) 3px 4px),
+              repeating-linear-gradient(65deg,transparent 0 3px,rgba(11,58,51,.035) 3px 4px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0B1411; --surface:#121F1A; --surface-2:#182A23; --sunk:#08110E;
+  --fg:#E9E2D3; --fg-2:#A1B1AA; --fg-3:#72847C;
+  --line:#22322B; --line-2:#2D4138;
+  --brand:#14564B; --brand-2:#1C6D5E; --on-brand:#EDE6D6;
+  --stamp:#E0654F; --gold:#DDB24A; --jade:#2FBF93; --sky:#6EB2D5;
+  --ok:#4FBE7E; --warn:#D9A648; --crit:#E0654F;
+  --sh-1:0 1px 2px rgba(0,0,0,.4);
+  --sh-2:0 2px 4px rgba(0,0,0,.35), 0 12px 28px -14px rgba(0,0,0,.8);
+  --sh-3:0 30px 60px -30px rgba(0,0,0,.9);
+  --guilloche:repeating-linear-gradient(115deg,transparent 0 3px,rgba(233,226,211,.035) 3px 4px),
+              repeating-linear-gradient(65deg,transparent 0 3px,rgba(233,226,211,.035) 3px 4px);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0B1411; --surface:#121F1A; --surface-2:#182A23; --sunk:#08110E;
+  --fg:#E9E2D3; --fg-2:#A1B1AA; --fg-3:#72847C;
+  --line:#22322B; --line-2:#2D4138;
+  --brand:#14564B; --brand-2:#1C6D5E; --on-brand:#EDE6D6;
+  --stamp:#E0654F; --gold:#DDB24A; --jade:#2FBF93; --sky:#6EB2D5;
+  --ok:#4FBE7E; --warn:#D9A648; --crit:#E0654F;
+  --sh-1:0 1px 2px rgba(0,0,0,.4);
+  --sh-2:0 2px 4px rgba(0,0,0,.35), 0 12px 28px -14px rgba(0,0,0,.8);
+  --sh-3:0 30px 60px -30px rgba(0,0,0,.9);
+  --guilloche:repeating-linear-gradient(115deg,transparent 0 3px,rgba(233,226,211,.035) 3px 4px),
+              repeating-linear-gradient(65deg,transparent 0 3px,rgba(233,226,211,.035) 3px 4px);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.55;
+     -webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:700}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--jade);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px}
+.eyebrow{font-family:var(--f-display);font-weight:600;font-size:11px;letter-spacing:.16em;
+         text-transform:uppercase;color:var(--fg-3)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- thanh điều hướng ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--paper) 88%,transparent);
+        backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;gap:14px;padding:10px 20px;max-width:1240px;margin:0 auto}
+.mark{display:flex;align-items:center;gap:9px;flex:0 0 auto}
+.mark-seal{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;
+           color:var(--gold);font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:.04em}
+.mark-name{font-family:var(--f-display);font-weight:700;font-size:18px;letter-spacing:.14em;text-transform:uppercase}
+.ver{font-family:var(--f-mono);font-size:10px;padding:2px 6px;border:1px solid var(--line-2);border-radius:99px;color:var(--fg-3)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:7px 12px;border-radius:99px;font-size:13px;font-weight:500;color:var(--fg-2)}
+.tab:hover{background:var(--sunk)}
+.tab[aria-current="true"]{background:var(--brand);color:var(--on-brand)}
+
+/* ---------- bìa ---------- */
+.cover{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:34px;align-items:center;
+       padding-block:46px 40px}
+@media (max-width:860px){.cover{grid-template-columns:1fr;gap:26px;padding-block:32px 26px}}
+.cover h1{font-family:var(--f-display);font-size:clamp(38px,6.4vw,66px);line-height:.96;letter-spacing:-.005em;
+          text-transform:uppercase;font-weight:700}
+.cover h1 em{font-style:normal;color:var(--stamp)}
+.lede{margin-top:16px;font-size:17px;color:var(--fg-2);max-width:56ch}
+.stat-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;box-shadow:var(--sh-1)}
+.stat b{display:block;font-family:var(--f-display);font-size:24px;line-height:1.1;font-weight:600}
+.stat span{font-size:11.5px;color:var(--fg-3);letter-spacing:.03em}
+
+/* bìa hộ chiếu */
+.passport{background:linear-gradient(160deg,var(--brand-2),var(--brand) 60%);color:var(--on-brand);
+          border-radius:var(--r-lg);padding:30px 26px 0;box-shadow:var(--sh-3);position:relative;overflow:hidden;
+          border:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
+.passport::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(115deg,transparent 0 5px,rgba(245,239,227,.05) 5px 6px),
+  repeating-linear-gradient(65deg,transparent 0 5px,rgba(245,239,227,.05) 5px 6px);pointer-events:none}
+.passport .crest{width:62px;height:62px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;
+                 margin-bottom:16px;color:var(--gold)}
+.passport .pp-t{font-family:var(--f-display);font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.8}
+.passport .pp-n{font-family:var(--f-display);font-size:40px;letter-spacing:.2em;text-transform:uppercase;line-height:1.1;
+                color:var(--gold);font-weight:700}
+.passport .pp-s{font-size:13px;opacity:.82;margin-top:6px}
+.mrz{margin-top:22px;background:rgba(0,0,0,.22);border-top:1px solid rgba(245,239,227,.16);
+     padding:10px 26px;margin-inline:-26px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;
+     white-space:nowrap;overflow:hidden;opacity:.75}
+
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);border:1px dashed var(--line-2);
+      border-radius:var(--r);padding:14px 16px;margin-top:22px}
+.note b{font-weight:600}
+.steps{margin:8px 0 0;padding-left:18px;color:var(--fg-2);font-size:13.5px}
+.steps li{margin-bottom:3px}
+
+/* ---------- mục ---------- */
+section{scroll-margin-top:76px}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-block:34px 18px;border-top:1px solid var(--line)}
+.sec-head h2{font-family:var(--f-display);font-size:clamp(22px,3.2vw,30px);text-transform:uppercase;letter-spacing:.03em;font-weight:600}
+.sec-head p{color:var(--fg-2);font-size:14px;max-width:62ch}
+
+/* ---------- khung điện thoại ---------- */
+.phone{width:min(390px,100%);background:var(--surface);border-radius:var(--r-xl);border:1px solid var(--line-2);
+       box-shadow:var(--sh-2);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.phone-body{height:702px;overflow:hidden;display:flex;flex-direction:column;background:var(--surface)}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.scroll::-webkit-scrollbar{width:4px}
+.scroll::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:9px}
+
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:9px 18px 5px;font-size:11.5px;
+           font-family:var(--f-mono);font-weight:500;color:var(--fg);background:var(--surface)}
+.statusbar .sb-r{display:flex;gap:5px;align-items:center;opacity:.8}
+
+.appbar{display:flex;align-items:center;gap:10px;padding:8px 14px 12px;background:var(--surface);
+        border-bottom:1px solid var(--line)}
+.appbar .ab-title{font-family:var(--f-display);font-size:17px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;flex:1;min-width:0}
+.ab-btn{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--fg-2)}
+.ab-btn:hover{background:var(--sunk);color:var(--fg)}
+
+.bottombar{display:flex;align-items:center;justify-content:space-around;padding:9px 6px 10px;
+           border-top:1px solid var(--line);background:var(--surface)}
+.bb{width:44px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--fg-3);position:relative}
+.bb[aria-current="true"]{color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,transparent)}
+:root[data-theme="dark"] .bb[aria-current="true"],
+:root:not([data-theme="light"]) .bb[aria-current="true"]{color:var(--jade)}
+.bb-mid{width:50px;height:50px;border-radius:50%;background:var(--stamp);color:#fff;display:grid;place-items:center;
+        box-shadow:0 6px 16px -6px color-mix(in srgb,var(--stamp) 70%,transparent);margin-top:-14px;border:3px solid var(--surface)}
+
+/* ---------- nguyên tố giao diện app ---------- */
+.pad{padding:14px}
+.stack{display:flex;flex-direction:column}
+.row{display:flex;align-items:center}
+.gap6{gap:6px}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap14{gap:14px}
+.grow{flex:1;min-width:0}
+.t-xs{font-size:11px}.t-sm{font-size:12.5px}.t-md{font-size:14px}.t-lg{font-size:16px}
+.muted{color:var(--fg-2)}.muted2{color:var(--fg-3)}
+.b5{font-weight:500}.b6{font-weight:600}.b7{font-weight:700}
+.trunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;border-radius:var(--r-sm);
+     font-weight:600;font-size:14px;transition:transform .12s,filter .12s}
+.btn:active{transform:translateY(1px)}
+.btn-pri{background:var(--brand);color:var(--on-brand)}
+.btn-pri:hover{filter:brightness(1.12)}
+.btn-stamp{background:var(--stamp);color:#fff}
+.btn-sec{background:var(--sunk);color:var(--fg)}
+.btn-out{border:1px solid var(--line-2);color:var(--fg)}
+.btn-ghost{color:var(--fg-2)}
+.btn-ghost:hover{background:var(--sunk)}
+.btn-dan{border:1px solid color-mix(in srgb,var(--crit) 45%,transparent);color:var(--crit)}
+.btn-blk{width:100%}
+.btn-sm{padding:7px 12px;font-size:12.5px}
+
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-3)}
+.input{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;
+       font:inherit;font-size:14px;color:var(--fg);width:100%}
+.input::placeholder{color:var(--fg-3)}
+.input:focus{outline:none;border-color:var(--jade);background:var(--surface)}
+textarea.input{resize:none;line-height:1.5}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;font-size:12px;font-weight:500;
+      background:var(--sunk);color:var(--fg-2);border:1px solid transparent;white-space:nowrap}
+.chip-on{background:var(--brand);color:var(--on-brand)}
+.chip-out{background:transparent;border-color:var(--line-2)}
+.chip-gold{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold);border-color:color-mix(in srgb,var(--gold) 34%,transparent)}
+.chip-stamp{background:color-mix(in srgb,var(--stamp) 13%,transparent);color:var(--stamp)}
+.chip-jade{background:color-mix(in srgb,var(--jade) 14%,transparent);color:var(--jade)}
+
+.av{border-radius:50%;background:linear-gradient(140deg,var(--brand-2),var(--jade));color:#fff;display:grid;
+    place-items:center;font-weight:700;flex:0 0 auto;font-size:13px;letter-spacing:.02em}
+.av-32{width:32px;height:32px}.av-38{width:38px;height:38px;font-size:14px}
+.av-44{width:44px;height:44px;font-size:15px}.av-72{width:72px;height:72px;font-size:24px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1)}
+.divider{height:1px;background:var(--line)}
+
+/* ảnh mô phỏng bằng gradient — không dùng ảnh ngoài */
+.photo{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--p1),var(--p2) 52%,var(--p3));isolation:isolate}
+.photo::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 20% 0%,rgba(255,255,255,.28),transparent 60%),
+  radial-gradient(90% 60% at 90% 100%,rgba(0,0,0,.28),transparent 65%)}
+.photo svg{position:absolute;bottom:0;left:0;width:100%;height:58%;z-index:1}
+.ph-hagiang{--p1:#8FB9CE;--p2:#5D7F8C;--p3:#2E3F44}
+.ph-ninhbinh{--p1:#CFE0C8;--p2:#7FA37E;--p3:#2F4A3C}
+.ph-mocchau{--p1:#E7DCA8;--p2:#A8BE72;--p3:#4B6237}
+.ph-bien{--p1:#BFE4E6;--p2:#5FB0B8;--p3:#14555F}
+.ph-pho{--p1:#E8C98E;--p2:#C08A4A;--p3:#5A3618}
+.ph-night{--p1:#3C4F7A;--p2:#22304F;--p3:#0E1526}
+
+/* con dấu tỉnh */
+.stamp{position:relative;border:2px solid var(--stamp);color:var(--stamp);border-radius:10px;padding:7px 10px 6px;
+       text-align:center;transform:rotate(-5deg);background:color-mix(in srgb,var(--stamp) 5%,transparent);
+       box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--stamp) 34%,transparent)}
+.stamp .s-arc{font-family:var(--f-display);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;line-height:1}
+.stamp .s-name{font-family:var(--f-display);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.15;margin:2px 0}
+.stamp .s-date{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.06em;opacity:.9}
+.stamp-empty{border-style:dashed;border-color:var(--line-2);color:var(--fg-3);background:transparent;box-shadow:none;transform:rotate(0)}
+.stamp-lg{padding:12px 16px 10px;transform:rotate(-7deg)}
+.stamp-lg .s-name{font-size:22px}
+.stamp-lg .s-arc{font-size:9px}
+.stamp-lg .s-date{font-size:10px}
+
+/* thẻ bài viết */
+.post-head{display:flex;align-items:center;gap:9px;padding:10px 12px}
+.post-acts{display:flex;align-items:center;gap:16px;padding:9px 12px}
+.iact{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--fg-2)}
+.iact.on{color:var(--stamp)}
+.iact.on-b{color:var(--gold)}
+
+/* thanh tiến độ */
+.bar{height:6px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--jade),var(--brand-2))}
+
+/* băng thông báo */
+.banner{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;border-radius:var(--r-sm);font-size:12.5px;line-height:1.45}
+.banner-warn{background:color-mix(in srgb,var(--warn) 13%,transparent);color:var(--warn)}
+.banner-ok{background:color-mix(in srgb,var(--ok) 13%,transparent);color:var(--ok)}
+.banner-crit{background:color-mix(in srgb,var(--crit) 12%,transparent);color:var(--crit)}
+.banner-info{background:var(--surface-2);color:var(--fg-2);border:1px solid var(--line)}
+
+/* skeleton */
+.sk{background:linear-gradient(90deg,var(--sunk),color-mix(in srgb,var(--sunk) 55%,var(--surface)),var(--sunk));
+    background-size:200% 100%;animation:shim 1.4s linear infinite;border-radius:6px}
+@keyframes shim{to{background-position:-200% 0}}
+
+/* lớp phủ trong khung điện thoại */
+.sheet-wrap{position:absolute;inset:0;z-index:20;display:none}
+.sheet-wrap.open{display:block}
+.scrim{position:absolute;inset:0;background:rgba(6,16,13,.5);backdrop-filter:blur(1.5px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:var(--r-lg) var(--r-lg) 0 0;
+       border-top:1px solid var(--line);max-height:74%;display:flex;flex-direction:column;animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:.6}}
+.sheet-grip{width:38px;height:4px;border-radius:99px;background:var(--line-2);margin:9px auto 4px}
+.dialog{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);background:var(--surface);
+        border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--sh-3);animation:pop .18s ease-out}
+@keyframes pop{from{transform:translateY(-50%) scale(.96);opacity:0}}
+
+/* ---------- canvas nhiều khung ---------- */
+.canvas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:30px 26px;padding-block:6px 40px}
+.frame{display:flex;flex-direction:column;gap:9px;min-width:0}
+.frame-cap{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.frame-cap b{font-family:var(--f-display);font-size:14px;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+.frame-cap code{font-family:var(--f-mono);font-size:10.5px;color:var(--fg-3)}
+.frame-cap .fc-note{font-size:11.5px;color:var(--fg-3);flex-basis:100%}
+
+/* ---------- nguyên mẫu ---------- */
+.proto{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:34px;align-items:start;padding-block:6px 40px}
+@media (max-width:860px){.proto{grid-template-columns:1fr;gap:22px}}
+.proto-side{display:flex;flex-direction:column;gap:16px;position:sticky;top:92px}
+@media (max-width:860px){.proto-side{position:static}}
+.screen-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:6px}
+.sl{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-sm);font-size:13px;
+    color:var(--fg-2);text-align:left;border:1px solid transparent}
+.sl:hover{background:var(--surface);border-color:var(--line)}
+.sl[aria-current="true"]{background:var(--surface);border-color:var(--brand);color:var(--fg);font-weight:600}
+.sl i{width:6px;height:6px;border-radius:50%;background:var(--line-2);flex:0 0 auto}
+.sl[aria-current="true"] i{background:var(--stamp)}
+
+/* ---------- token ---------- */
+.tok-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding-bottom:10px}
+.swatch{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.swatch .sw{height:62px}
+.swatch .sw-i{padding:8px 10px;font-size:11.5px}
+.swatch .sw-i b{display:block;font-size:12.5px;font-weight:600}
+.swatch .sw-i code{font-family:var(--f-mono);font-size:10px;color:var(--fg-3)}
+
+.spec{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.spec-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.spec-card h4{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-3);font-family:var(--f-display);
+              font-weight:600;margin-bottom:10px}
+
+/* ---------- thư viện component ---------- */
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;padding-bottom:40px}
+.lib-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+          display:flex;flex-direction:column;min-width:0}
+.lib-head{padding:11px 13px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.lib-head b{display:block;font-size:13.5px;font-weight:600}
+.lib-head code{font-family:var(--f-mono);font-size:10.5px;color:var(--fg-3)}
+.lib-demo{padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--sunk);flex:1}
+.lib-demo>.card,.lib-demo>.stamp-row{background:var(--surface)}
+.stamp-row{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- luồng ---------- */
+.flows{display:flex;flex-direction:column;gap:20px;padding-bottom:40px}
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.flow h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.flow-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.fstep{display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:var(--r-sm);background:var(--surface-2);
+       border:1px solid var(--line);font-size:12.5px;font-weight:500}
+.fstep .fs-n{font-family:var(--f-mono);font-size:10px;color:var(--fg-3)}
+.farrow{color:var(--fg-3);flex:0 0 auto}
+
+/* ---------- backlog ---------- */
+.backlog{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding-bottom:36px}
+.bl{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:var(--r);padding:12px 14px}
+.bl b{display:block;font-size:14px;margin-bottom:3px}
+.bl p{font-size:12.5px;color:var(--fg-2)}
+
+footer{border-top:1px solid var(--line);padding-block:26px 40px;color:var(--fg-3);font-size:12.5px}
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="mark">
+      <div class="mark-seal">L</div>
+      <div class="mark-name">Levart</div>
+      <span class="ver">MVP 0.1</span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab" data-to="proto" aria-current="true">Nguyên mẫu</button>
+      <button class="tab" data-to="screens">Màn hình</button>
+      <button class="tab" data-to="flows">Luồng</button>
+      <button class="tab" data-to="tokens">Hệ thiết kế</button>
+      <button class="tab" data-to="lib">Component</button>
+      <button class="tab" data-to="backlog">Chưa có</button>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ====================== BÌA ====================== -->
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Bộ giao diện · bản dựng frontend</div>
+      <h1>Cuốn hộ chiếu<br>du lịch <em>Việt Nam</em></h1>
+      <p class="lede">Toàn bộ 16 màn hình và 40 component của Levart, dựng thành bản chạy được trên trình duyệt.
+        Bấm thử như app thật: đổi tab, thả tim, mở bình luận, chọn bộ lọc ảnh, đóng dấu tỉnh, để AI lập lịch trình.</p>
+      <div class="stat-row">
+        <div class="stat"><b>16</b><span>màn hình</span></div>
+        <div class="stat"><b>40</b><span>component</span></div>
+        <div class="stat"><b>34</b><span>con dấu tỉnh</span></div>
+        <div class="stat"><b>4</b><span>luồng chính</span></div>
+      </div>
+      <div class="note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:0 0 auto;margin-top:2px;color:var(--fg-3)"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <div>
+          <b>Đưa bản này vào Figma</b>
+          <ol class="steps">
+            <li>Mở Figma → Plugins → tìm <b>html.to.design</b>.</li>
+            <li>Dán đường dẫn của trang này vào ô URL, chọn khổ 390 px (mobile).</li>
+            <li>Plugin trả về layer thật: frame, text, auto-layout — sửa trực tiếp được.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="passport" aria-hidden="true">
+      <div class="crest">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18"/></svg>
+      </div>
+      <div class="pp-t">Cộng hoà xã hội chủ nghĩa Việt Nam</div>
+      <div class="pp-n">Levart</div>
+      <div class="pp-s">Hộ chiếu du lịch · 34 tỉnh thành · đóng dấu bằng GPS thật</div>
+      <div class="mrz">P&lt;VNMLEVART&lt;&lt;HO&lt;CHIEU&lt;DU&lt;LICH&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>VN34TINH2026&lt;&lt;&lt;2610M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;6</div>
+    </div>
+  </header>
+
+  <!-- ====================== NGUYÊN MẪU ====================== -->
+  <section id="proto">
+    <div class="sec-head">
+      <h2>Nguyên mẫu bấm được</h2>
+      <p>Một khung điện thoại 390 px. Thanh dưới và các nút trong màn hình đều hoạt động.</p>
+    </div>
+    <div class="proto">
+      <div id="proto-host"></div>
+      <div class="proto-side">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Đi tới màn hình</div>
+          <div class="screen-list" id="screen-list"></div>
+        </div>
+        <div class="note" style="margin-top:0">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex:0 0 auto;margin-top:2px;color:var(--fg-3)"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4m0-4h.01"/></svg>
+          <div class="t-sm muted">Màn hình dựng lại từ bảng chức năng trong <b>status.md</b>: 15 màn hình, 14 component,
+            30 chức năng. Đây là bản thiết kế đề xuất, không phải ảnh chụp bản dựng hiện tại.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 15 MÀN HÌNH ====================== -->
+  <section id="screens">
+    <div class="sec-head">
+      <h2>Toàn bộ màn hình</h2>
+      <p>Mỗi khung là một frame độc lập, đúng thứ tự người dùng gặp. Đây là phần plugin Figma sẽ nhập thành layer.</p>
+    </div>
+    <div class="canvas" id="canvas"></div>
+  </section>
+
+  <!-- ====================== LUỒNG ====================== -->
+  <section id="flows">
+    <div class="sec-head">
+      <h2>Bốn luồng chính</h2>
+      <p>Đường đi của người dùng qua các màn hình, dùng để nối prototype trong Figma.</p>
+    </div>
+    <div class="flows" id="flow-host"></div>
+  </section>
+
+  <!-- ====================== HỆ THIẾT KẾ ====================== -->
+  <section id="tokens">
+    <div class="sec-head">
+      <h2>Hệ thiết kế</h2>
+      <p>Màu, chữ, bo góc, khoảng cách và bộ biểu tượng. Mọi màu đều có bản sáng và bản tối.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-bottom:10px">Màu</div>
+    <div class="tok-grid" id="swatches"></div>
+
+    <div class="spec" style="margin-top:22px">
+      <div class="spec-card">
+        <h4>Chữ</h4>
+        <div class="stack gap10">
+          <div><div class="t-xs muted2 mono">Oswald 600 · 17/1.2 · +.09em · HOA</div>
+            <div style="font-family:var(--f-display);font-size:17px;letter-spacing:.09em;text-transform:uppercase;font-weight:600">Bảng tin cộng đồng</div></div>
+          <div><div class="t-xs muted2 mono">Be Vietnam Pro 600 · 16/1.4</div>
+            <div class="t-lg b6">Hà Giang 3 ngày 2 đêm</div></div>
+          <div><div class="t-xs muted2 mono">Be Vietnam Pro 400 · 14/1.55</div>
+            <div class="t-md">Đèo Mã Pí Lèng lúc 6 giờ sáng, sương còn chưa tan hết.</div></div>
+          <div><div class="t-xs muted2 mono">JetBrains Mono 500 · 12 · số liệu</div>
+            <div class="mono" style="font-size:12px">21.0278° N · 105.8342° E · 14/09/2026</div></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h4>Bo góc &amp; đổ bóng</h4>
+        <div class="stack gap8">
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:9px;background:var(--sunk)"></div><span class="t-sm muted">9 px — nút, ô nhập, chip nhỏ</span></div>
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:14px;background:var(--sunk)"></div><span class="t-sm muted">14 px — thẻ, khối nội dung</span></div>
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:22px;background:var(--sunk)"></div><span class="t-sm muted">22 px — bottom sheet, ảnh bìa</span></div>
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:30px;background:var(--sunk)"></div><span class="t-sm muted">30 px — khung điện thoại</span></div>
+          <div class="divider" style="margin:4px 0"></div>
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:9px;background:var(--surface);box-shadow:var(--sh-1)"></div><span class="t-sm muted">Nổi 1 — thẻ nằm trong danh sách</span></div>
+          <div class="row gap10"><div style="width:52px;height:34px;border-radius:9px;background:var(--surface);box-shadow:var(--sh-2)"></div><span class="t-sm muted">Nổi 2 — thẻ tách khỏi nền</span></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <h4>Khoảng cách</h4>
+        <div class="stack gap6" id="spacing"></div>
+      </div>
+      <div class="spec-card">
+        <h4>Biểu tượng — nét 1.8, khung 24</h4>
+        <div id="icon-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:10px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== COMPONENT ====================== -->
+  <section id="lib">
+    <div class="sec-head">
+      <h2>Thư viện component</h2>
+      <p>14 component đang có trong app, cộng các nguyên tố nền mà mọi màn hình dùng chung.</p>
+    </div>
+    <div class="lib" id="lib-host"></div>
+  </section>
+
+  <!-- ====================== CHƯA CÓ ====================== -->
+  <section id="backlog">
+    <div class="sec-head">
+      <h2>Chưa có trong app</h2>
+      <p>Năm chức năng ở mức 0% theo status.md. Chưa vẽ thành màn hình, ghi lại để không ai tưởng là đã xong.</p>
+    </div>
+    <div class="backlog" id="backlog-host"></div>
+  </section>
+
+  <footer>
+    Levart Design Kit · MVP 0.1 · dựng từ <span class="mono">status.md</span> (15 màn hình · 14 component · 30 chức năng)
+    và <span class="mono">Business.md</span> (định vị, phân loại du lịch).
+    Ảnh trong bản này là khối màu mô phỏng, không phải ảnh thật.
+  </footer>
+</div>
+
+<script>
+/* ============================ BIỂU TƯỢNG ============================ */
+const P = {
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/>',
+  map:'<path d="m9 4-6 2.5v14L9 18l6 2.5 6-2.5v-14L15 6.5 9 4z"/><path d="M9 4v14M15 6.5v14"/>',
+  stamp:'<path d="M9 9a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.6-1 2.4-1 4h-4c0-1.6-1-2.4-1-4z"/><rect x="4" y="15" width="16" height="3.5" rx="1.2"/><path d="M5 21h14"/>',
+  bag:'<rect x="3" y="7.5" width="18" height="13" rx="2.2"/><path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5"/><path d="M3 12.5h18"/>',
+  user:'<circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+  bell:'<path d="M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6z"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>',
+  heart:'<path d="M12 20s-7-4.4-7-9.2A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.8C19 15.6 12 20 12 20z"/>',
+  comment:'<path d="M20 14.5a2.5 2.5 0 0 1-2.5 2.5H8l-4 3.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5z"/>',
+  book:'<path d="M18 20.5 12 17l-6 3.5v-16A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5z"/>',
+  share:'<circle cx="17.5" cy="6" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18" r="2.5"/><path d="m8.8 10.8 6.4-3.6M8.8 13.2l6.4 3.6"/>',
+  plus:'<path d="M12 5.5v13M5.5 12h13"/>',
+  back:'<path d="M15 5.5 8 12l7 6.5"/>',
+  close:'<path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/>',
+  pin:'<path d="M12 21.5s7-6.2 7-11.2a7 7 0 1 0-14 0c0 5 7 11.2 7 11.2z"/><circle cx="12" cy="10.2" r="2.6"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8.5 3v4M15.5 3v4"/>',
+  cloud:'<path d="M7 18.5a4 4 0 0 1-.4-8A5.5 5.5 0 0 1 17.3 10a3.8 3.8 0 0 1-.3 8.5z"/>',
+  cam:'<rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.6"/><path d="M8.5 7 10 4.5h4L15.5 7"/>',
+  sparkle:'<path d="M12 3.5 13.8 9 19.5 10.8 13.8 12.6 12 18.2 10.2 12.6 4.5 10.8 10.2 9z"/><path d="M18.5 3.5v3M20 5h-3"/>',
+  filter:'<path d="M3.5 6h17M6.5 12h11M10 18h4"/>',
+  globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.5 2.4 14.5 0 17M12 3.5c-2.4 2.5-2.4 14.5 0 17"/>',
+  moon:'<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
+  trash:'<path d="M4.5 6.5h15M9.5 6.5V4.8A1.3 1.3 0 0 1 10.8 3.5h2.4a1.3 1.3 0 0 1 1.3 1.3v1.7"/><path d="M6.5 6.5 7.6 20a1.5 1.5 0 0 0 1.5 1.4h5.8a1.5 1.5 0 0 0 1.5-1.4L17.5 6.5"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7"/>',
+  chev:'<path d="m9 5.5 6.5 6.5L9 18.5"/>',
+  gps:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1.5v3M12 19.5v3M22.5 12h-3M4.5 12h-3"/>',
+  img:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="9.5" r="1.8"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5"/>',
+  users:'<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.4 3.4 0 0 1 0 5.6M17.5 14.4a6.5 6.5 0 0 1 4 6"/>',
+  wallet:'<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.3"/>',
+  flag:'<path d="M5.5 21V4"/><path d="M5.5 5h11l-2 3.5 2 3.5h-11"/>',
+  warn:'<path d="M12 4.5 21 19.5H3z"/><path d="M12 10v4m0 3h.01"/>'
+};
+const ic = (n, s=20, w=1.8) =>
+  `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${P[n]||''}</svg>`;
+
+/* ============================ NGUYÊN TỐ DÙNG CHUNG ============================ */
+const mount = (h) => `<svg viewBox="0 0 390 120" preserveAspectRatio="none"><path d="M0 120 L0 74 L48 36 L92 68 L134 24 L186 72 L228 44 L276 82 L322 40 L390 78 L390 120 Z" fill="rgba(12,28,24,.42)"/><path d="M0 120 L0 96 L58 66 L112 92 L168 58 L226 94 L282 70 L340 96 L390 72 L390 120 Z" fill="rgba(8,20,17,.55)"/></svg>`;
+const photo = (kind, h, extra='') =>
+  `<div class="photo ph-${kind}" style="height:${h}px;${extra}">${mount()}</div>`;
+
+const statusbar = () => `<div class="statusbar"><span>9:41</span>
+  <span class="sb-r">${ic('gps',11,2)}<span style="letter-spacing:.06em">4G</span>
+  <svg width="17" height="10" viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="2" width="18" height="10" rx="2.4"/><rect x="3" y="4" width="12" height="6" rx="1" fill="currentColor" stroke="none"/><path d="M21.5 5.5v3"/></svg></span></div>`;
+
+const appbar = (title, o={}) => `<div class="appbar">
+  ${o.back ? `<button class="ab-btn" data-go="${o.back}">${ic('back',19)}</button>`
+           : `<div class="mark-seal" style="width:26px;height:26px;font-size:12px;border-width:1.3px">L</div>`}
+  <div class="ab-title">${title}</div>
+  ${(o.actions||[]).map(a=>`<button class="ab-btn" ${a.act?`data-act="${a.act}"`:''} ${a.go?`data-go="${a.go}"`:''} aria-label="${a.label||''}">${ic(a.icon,19)}</button>`).join('')}
+</div>`;
+
+const NAV = [['home','home','Trang chủ'],['map','map','Bản đồ'],['checkin','stamp','Đóng dấu'],['trips','bag','Chuyến đi'],['profile','user','Hồ sơ']];
+const bottombar = (active) => `<div class="bottombar">${NAV.map(([id,icon,label])=>
+  id==='checkin'
+    ? `<button class="bb-mid" data-go="checkin" aria-label="${label}">${ic('stamp',24,2)}</button>`
+    : `<button class="bb" data-go="${id}" aria-label="${label}" ${active===id?'aria-current="true"':''}>${ic(icon,22)}</button>`
+).join('')}</div>`;
+
+const stamp = (name, date, lg) => `<div class="stamp ${lg?'stamp-lg':''}">
+  <div class="s-arc">Levart · Việt Nam</div>
+  <div class="s-name">${name}</div>
+  <div class="s-date">${date}</div></div>`;
+const stampEmpty = (name) => `<div class="stamp stamp-empty"><div class="s-arc">Chưa đến</div>
+  <div class="s-name">${name}</div><div class="s-date">— — / — —</div></div>`;
+
+const postcard = (p, i) => `<article class="card" style="margin-bottom:12px;overflow:hidden">
+  <div class="post-head">
+    <div class="av av-38">${p.ini}</div>
+    <div class="grow">
+      <div class="row gap6"><span class="t-md b6 trunc">${p.name}</span>
+        ${p.checkin?`<span class="chip chip-stamp t-xs" style="padding:2px 7px">${ic('stamp',11,2)} vừa đóng dấu</span>`:''}</div>
+      <div class="t-xs muted2 row gap6">${ic('pin',11,2)}<span class="trunc">${p.place}</span><span>·</span><span>${p.ago}</span></div>
+    </div>
+    <button class="ab-btn" aria-label="Thêm">${ic('filter',17)}</button>
+  </div>
+  ${photo(p.photo, 268)}
+  <div class="post-acts">
+    <button class="iact ${p.liked?'on':''}" data-act="like" data-i="${i}">${ic('heart',19)}<span data-likes>${p.likes}</span></button>
+    <button class="iact" data-act="comments">${ic('comment',19)}<span>${p.comments}</span></button>
+    <button class="iact" data-act="share">${ic('share',19)}</button>
+    <div class="grow"></div>
+    <button class="iact ${p.saved?'on-b':''}" data-act="save" data-i="${i}">${ic('book',19)}</button>
+  </div>
+  <div class="pad" style="padding-top:0">
+    <div class="t-md"><b class="b6">${p.handle}</b> ${p.caption}</div>
+    <div class="row gap6" style="margin-top:8px;flex-wrap:wrap">${p.tags.map(t=>`<span class="chip chip-out t-xs">#${t}</span>`).join('')}</div>
+  </div>
+</article>`;
+
+const tripcard = (t) => `<button class="card" data-go="trip" style="width:100%;text-align:left;overflow:hidden;margin-bottom:12px;display:block">
+  <div style="position:relative">${photo(t.photo,124)}
+    <div style="position:absolute;top:10px;left:10px"><span class="chip chip-gold t-xs">${t.status}</span></div>
+    <div style="position:absolute;bottom:10px;left:12px;right:12px;color:#fff">
+      <div class="t-lg b7" style="text-shadow:0 1px 8px rgba(0,0,0,.5)">${t.title}</div>
+      <div class="t-xs mono" style="opacity:.92;text-shadow:0 1px 6px rgba(0,0,0,.5)">${t.dates}</div>
+    </div>
+  </div>
+  <div class="pad row gap12">
+    <div class="grow">
+      <div class="t-xs muted2">Điểm kế tiếp</div>
+      <div class="t-sm b6 trunc">${t.next}</div>
+    </div>
+    <div style="text-align:right">
+      <div class="t-xs muted2">Dự chi</div>
+      <div class="t-sm b6 mono">${t.cost}</div>
+    </div>
+    <div class="muted2">${ic('chev',16)}</div>
+  </div>
+</button>`;
+
+const weathercard = () => `<div class="card pad row gap12" style="align-items:flex-start">
+  <div style="color:var(--sky)">${ic('cloud',30,1.6)}</div>
+  <div class="grow">
+    <div class="row gap8"><span class="t-lg b7 mono">21°</span><span class="t-sm muted">Nhiều mây, chiều có mưa rào</span></div>
+    <div class="t-xs muted2" style="margin-top:2px">Hà Giang · cập nhật 06:10 hôm nay</div>
+  </div>
+  <span class="chip chip-out t-xs">AI ước tính</span>
+</div>`;
+
+const empty = (icon,title,desc,cta) => `<div class="stack" style="align-items:center;text-align:center;padding:38px 24px;gap:8px">
+  <div style="width:56px;height:56px;border-radius:50%;background:var(--sunk);display:grid;place-items:center;color:var(--fg-3)">${ic(icon,26)}</div>
+  <div class="t-lg b6">${title}</div><div class="t-sm muted" style="max-width:28ch">${desc}</div>
+  ${cta?`<button class="btn btn-pri btn-sm" style="margin-top:6px">${cta}</button>`:''}</div>`;
+
+/* ============================ DỮ LIỆU MẪU ============================ */
+const POSTS = [
+  {ini:'MA',name:'Minh Anh',handle:'@minhanh.travel',place:'Mã Pí Lèng, Hà Giang',ago:'2 giờ',photo:'hagiang',
+   likes:248,comments:19,liked:false,saved:false,checkin:true,
+   caption:'Dậy từ 4h30 để kịp sương trên đèo. Đóng được con dấu thứ 10 rồi.',tags:['hagiang','madipileng','dilaanhung']},
+  {ini:'TD',name:'Tuấn Đạt',handle:'@datdi.phuot',place:'Tam Cốc, Ninh Bình',ago:'5 giờ',photo:'ninhbinh',
+   likes:132,comments:8,liked:true,saved:false,checkin:false,
+   caption:'Chèo thuyền lúc vắng khách, nghe được cả tiếng mái chèo chạm nước.',tags:['ninhbinh','tamcoc']},
+  {ini:'HL',name:'Hương Ly',handle:'@lyly.check',place:'Đồi chè Mộc Châu, Sơn La',ago:'1 ngày',photo:'mocchau',
+   likes:97,comments:5,liked:false,saved:true,checkin:true,
+   caption:'Đi cuối tuần, hết 780k cả xe khách lẫn homestay. Rẻ hơn mình tưởng.',tags:['mocchau','cuoituan','tietkiem']}
+];
+const TRIPS = [
+  {title:'Hà Giang 3 ngày 2 đêm',dates:'15/10 – 17/10/2026',status:'Sắp đi',photo:'hagiang',
+   next:'Dốc Thẩm Mã · 08:30 ngày 1',cost:'2.400.000 đ'},
+  {title:'Ninh Bình cuối tuần',dates:'28/09 – 29/09/2026',status:'Đã xong',photo:'ninhbinh',
+   next:'Đã hoàn thành · 6 điểm',cost:'980.000 đ'}
+];
+const STAMPS = [['Hà Nội','14/03/26'],['Ninh Bình','29/09/26'],['Hà Giang','17/10/26'],['Lào Cai','02/01/26'],
+  ['Sơn La','11/05/26'],['Quảng Ninh','20/06/26'],['Thanh Hoá','08/07/26'],['Nghệ An','03/08/26'],
+  ['Huế','19/02/26'],['Đà Nẵng','21/02/26']];
+const TODO_PROV = ['Cao Bằng','Điện Biên','Khánh Hoà','Lâm Đồng','Cần Thơ','Cà Mau'];
+
+/* ============================ MÀN HÌNH ============================ */
+const S = {};
+
+S.login = {name:'Đăng nhập', code:'LoginScreen', note:'4 cách vào: Google · Email · Trình duyệt · Chế độ khách',
+ nav:null, body:()=>`
+  <div class="scroll" style="background:linear-gradient(170deg,var(--brand-2),var(--brand) 58%,var(--sunk) 58%)">
+    <div style="padding:34px 24px 26px;color:var(--on-brand);position:relative">
+      <div style="position:absolute;inset:0;background:var(--guilloche);opacity:.9"></div>
+      <div class="mark-seal" style="width:52px;height:52px;font-size:22px;border-width:2px;position:relative">L</div>
+      <div style="position:relative;margin-top:16px">
+        <div class="eyebrow" style="color:color-mix(in srgb,var(--gold) 90%,#fff)">Hộ chiếu du lịch Việt Nam</div>
+        <div style="font-family:var(--f-display);font-size:34px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;line-height:1.1;color:var(--gold)">Levart</div>
+        <div class="t-sm" style="opacity:.85;margin-top:6px;max-width:30ch">Đi đủ 34 tỉnh, đóng dấu bằng GPS thật. Mỗi chuyến đi là một trang hộ chiếu.</div>
+      </div>
+    </div>
+    <div class="pad stack gap10" style="padding:20px 20px 24px">
+      <button class="btn btn-pri btn-blk" data-go="home">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 12.2c0-.7-.06-1.35-.17-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/><path d="M12 22c2.7 0 5-.9 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.75-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.85-2.85A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.65 9.4 5.9 12 5.9z"/></svg>
+        Tiếp tục với Google</button>
+      <button class="btn btn-out btn-blk" data-go="home">${ic('globe',17)} Đăng nhập qua trình duyệt</button>
+      <div class="row gap10" style="margin:2px 0"><div class="divider grow"></div><span class="t-xs muted2">hoặc</span><div class="divider grow"></div></div>
+      <div class="field"><label for="lg-mail">Email</label><input class="input" id="lg-mail" type="email" placeholder="ban@email.com" value="minhanh@email.com"></div>
+      <div class="field"><label for="lg-pw">Mật khẩu</label><input class="input" id="lg-pw" type="password" placeholder="••••••••" value="passw0rd"></div>
+      <div class="row" style="justify-content:space-between"><span class="t-xs muted2">Quên mật khẩu?</span>
+        <span class="t-xs muted2">Chưa có tài khoản? <b class="b6" style="color:var(--jade)">Đăng ký</b></span></div>
+      <button class="btn btn-stamp btn-blk" data-go="home">Đăng nhập</button>
+      <button class="btn btn-ghost btn-blk" data-go="home" style="margin-top:2px">Khám phá ngay · chế độ khách ${ic('chev',15)}</button>
+      <div class="banner banner-info" style="margin-top:4px">${ic('warn',15,2)}
+        <span>Chế độ khách chỉ xem được. Muốn đăng bài hoặc bình luận thì cần xác thực số điện thoại.</span></div>
+    </div>
+  </div>`};
+
+S.home = {name:'Bảng tin', code:'HomeScreen', note:'Phân trang 10 bài · 4 trạng thái tải/rỗng/lỗi/thành công',
+ nav:'home', body:()=>`
+  ${appbar('Bảng tin',{actions:[{icon:'search',go:'search',label:'Tìm kiếm'},{icon:'bell',go:'notif',label:'Thông báo'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div style="padding:12px 0 6px">
+      <div class="row gap10" style="overflow-x:auto;padding:0 12px 4px;scrollbar-width:none">
+        <button class="stack" style="align-items:center;gap:5px;flex:0 0 auto" data-go="checkin">
+          <div style="width:58px;height:58px;border-radius:50%;border:2px dashed var(--line-2);display:grid;place-items:center;color:var(--fg-3)">${ic('plus',22)}</div>
+          <span class="t-xs muted2">Đóng dấu</span></button>
+        ${['Hà Giang','Ninh Bình','Mộc Châu','Huế','Đà Nẵng'].map((p,i)=>`
+        <button class="stack" style="align-items:center;gap:5px;flex:0 0 auto" data-go="passport">
+          <div style="width:58px;height:58px;border-radius:50%;padding:2px;background:linear-gradient(140deg,var(--gold),var(--stamp))">
+            <div class="photo ph-${['hagiang','ninhbinh','mocchau','pho','bien'][i]}" style="width:100%;height:100%;border-radius:50%;border:2px solid var(--surface)"></div>
+          </div><span class="t-xs muted2" style="max-width:62px" >${p}</span></button>`).join('')}
+      </div>
+    </div>
+    <div class="banner banner-warn" style="margin:4px 12px 10px">${ic('img',15,2)}
+      <span><b>1 bài đang chờ tải lên.</b> Có mạng là tự đăng, không phải soạn lại.</span></div>
+    <div style="padding:0 12px 14px">
+      ${POSTS.map((p,i)=>postcard(p,i)).join('')}
+      <div class="card pad stack gap8" style="margin-bottom:12px">
+        <div class="row gap10"><div class="sk" style="width:38px;height:38px;border-radius:50%"></div>
+          <div class="stack gap6 grow"><div class="sk" style="height:10px;width:52%"></div><div class="sk" style="height:8px;width:32%"></div></div></div>
+        <div class="sk" style="height:150px;border-radius:9px"></div>
+      </div>
+      <div class="t-xs muted2" style="text-align:center;padding-bottom:6px">Đang tải thêm bài…</div>
+    </div>
+  </div>
+  ${bottombar('home')}`};
+
+S.post = {name:'Chi tiết bài viết', code:'PostDetailScreen', note:'Ảnh gốc từ Storage · bình luận lồng trong bài',
+ nav:'home', body:()=>`
+  ${appbar('Bài viết',{back:'home',actions:[{icon:'share',label:'Chia sẻ'}]})}
+  <div class="scroll">
+    <div style="position:relative">${photo('hagiang',330)}
+      <div style="position:absolute;bottom:10px;right:12px" class="chip chip-out t-xs" >3 / 3</div></div>
+    <div class="pad stack gap10">
+      <div class="row gap10">
+        <div class="av av-44">MA</div>
+        <div class="grow"><div class="t-md b6">Minh Anh</div><div class="t-xs muted2">@minhanh.travel · 2 giờ trước</div></div>
+        <button class="btn btn-out btn-sm">Theo dõi</button>
+      </div>
+      <div class="t-md">Dậy từ 4h30 để kịp sương trên đèo. Đóng được con dấu thứ 10 rồi. Ai định đi Hà Giang tháng 10 thì nhắn mình, đường đang đẹp.</div>
+      <div class="row gap6" style="flex-wrap:wrap">
+        <span class="chip chip-stamp t-xs">${ic('pin',11,2)} Mã Pí Lèng, Hà Giang</span>
+        <span class="chip chip-jade t-xs">${ic('bag',11,2)} Hà Giang 3 ngày 2 đêm</span>
+      </div>
+      <div class="post-acts" style="padding-inline:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+        <button class="iact on" data-act="nop">${ic('heart',19)}<span>249</span></button>
+        <button class="iact" data-act="comments">${ic('comment',19)}<span>19</span></button>
+        <button class="iact" data-act="nop">${ic('share',19)}</button>
+        <div class="grow"></div><button class="iact" data-act="nop">${ic('book',19)}</button>
+      </div>
+      <div class="stack gap12" style="padding-bottom:8px">
+        <div class="eyebrow">19 bình luận</div>
+        ${[['TD','Tuấn Đạt','Đẹp quá. Đoạn này đi xe máy có khó không bạn?','12 phút'],
+           ['HL','Hương Ly','Mình đi tuần sau, xin cái lịch trình với ạ','1 giờ'],
+           ['NK','Ngọc Khánh','Con dấu thứ 10 rồi cơ à, ghen tị thật sự','1 giờ']]
+          .map(([i,n,c,t])=>`<div class="row gap10" style="align-items:flex-start">
+            <div class="av av-32">${i}</div>
+            <div class="grow"><div class="t-sm"><b class="b6">${n}</b> ${c}</div>
+              <div class="t-xs muted2 row gap12" style="margin-top:3px"><span>${t}</span><span>Thích</span><span>Trả lời</span></div></div>
+            <button class="iact t-xs">${ic('heart',14)}</button></div>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div class="row gap8 pad" style="border-top:1px solid var(--line);padding:10px 12px">
+    <div class="av av-32">MA</div>
+    <input class="input grow" placeholder="Viết bình luận…" aria-label="Viết bình luận">
+    <button class="btn btn-pri btn-sm">Gửi</button>
+  </div>`};
+
+S.map = {name:'Bản đồ 34 tỉnh', code:'InteractiveMapScreen', note:'Google Maps thật · danh mục địa điểm trong máy',
+ nav:'map', body:()=>`
+  ${appbar('Bản đồ',{actions:[{icon:'filter',label:'Lọc'},{icon:'search',go:'search',label:'Tìm'}]})}
+  <div class="scroll" style="padding:0">
+    <div style="position:relative;background:var(--surface-2);height:318px;overflow:hidden">
+      <div style="position:absolute;inset:0;background:var(--guilloche)"></div>
+      <svg viewBox="0 0 200 320" style="position:absolute;inset:0;width:100%;height:100%" aria-label="Sơ đồ tượng trưng Việt Nam">
+        <path d="M52 22 C74 12 104 16 118 34 C132 52 126 68 138 82 C152 98 148 116 138 132 C128 148 124 162 130 178 C138 198 148 214 150 234 C152 256 138 274 118 286 C100 296 86 292 80 280 C74 268 84 256 82 244 C80 228 66 220 62 206 C56 186 70 172 66 156 C62 140 46 134 42 118 C38 100 50 88 48 72 C46 56 36 34 52 22 Z"
+          fill="color-mix(in srgb,var(--jade) 14%,transparent)" stroke="var(--brand-2)" stroke-width="1.6"/>
+        <g fill="var(--stamp)">
+          <circle cx="76" cy="46" r="5"/><circle cx="92" cy="72" r="5"/><circle cx="84" cy="104" r="5"/>
+          <circle cx="112" cy="140" r="5"/><circle cx="128" cy="186" r="5"/><circle cx="118" cy="232" r="5"/>
+        </g>
+        <g fill="none" stroke="var(--fg-3)" stroke-width="1.2" stroke-dasharray="3 4">
+          <circle cx="104" cy="60" r="4.5"/><circle cx="70" cy="128" r="4.5"/><circle cx="140" cy="212" r="4.5"/>
+          <circle cx="96" cy="268" r="4.5"/>
+        </g>
+        <circle cx="92" cy="72" r="13" fill="none" stroke="var(--stamp)" stroke-width="1.4" opacity=".45"/>
+      </svg>
+      <div style="position:absolute;left:12px;top:12px" class="chip chip-gold t-xs">${ic('stamp',12,2)} 10 / 34 tỉnh đã đóng dấu</div>
+      <div style="position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:7px">
+        <button class="ab-btn" style="background:var(--surface);box-shadow:var(--sh-1);border:1px solid var(--line)">${ic('gps',18)}</button>
+        <button class="ab-btn" style="background:var(--surface);box-shadow:var(--sh-1);border:1px solid var(--line)">${ic('plus',18)}</button>
+      </div>
+    </div>
+    <div class="pad stack gap10">
+      <div class="row gap6" style="overflow-x:auto;scrollbar-width:none">
+        ${['Tất cả','Đã đóng dấu','Chưa đến','Gần tôi','Đang lưu'].map((t,i)=>
+          `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs">${t}</span>`).join('')}
+      </div>
+      <div class="eyebrow">Gần bạn · trong bán kính 40 km</div>
+      ${[['Chùa Hương','Hà Nội','12 km','Di tích','pho'],
+         ['Hang Múa','Ninh Bình','38 km','Leo núi','ninhbinh'],
+         ['Làng cổ Đường Lâm','Hà Nội','31 km','Văn hoá','mocchau']]
+        .map(([n,p,d,c,ph])=>`<button class="card row gap10" style="padding:8px;width:100%;text-align:left" data-go="passport">
+          <div class="photo ph-${ph}" style="width:54px;height:54px;border-radius:9px;flex:0 0 auto"></div>
+          <div class="grow"><div class="t-sm b6 trunc">${n}</div>
+            <div class="t-xs muted2">${p} · ${c}</div>
+            <div class="row gap6" style="margin-top:4px"><span class="chip chip-out t-xs" style="padding:1px 7px">${ic('pin',10,2)} ${d}</span></div></div>
+          <span class="muted2">${ic('chev',16)}</span></button>`).join('')}
+    </div>
+  </div>
+  ${bottombar('map')}`};
+
+S.checkin = {name:'Đóng dấu (Check-in)', code:'CheckInScreen', note:'Camera thật · 8 bộ lọc màu · GPS 7 trạng thái',
+ nav:'checkin', body:()=>`
+  ${appbar('Đóng dấu',{back:'home',actions:[{icon:'img',label:'Thư viện'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div style="position:relative">
+      <div data-ck-photo>${photo('hagiang',330,'transition:filter .2s')}</div>
+      <div style="position:absolute;inset:0;pointer-events:none;border:14px solid transparent">
+        <div style="width:100%;height:100%;border:2px solid rgba(255,255,255,.55);border-radius:6px"></div>
+      </div>
+      <div style="position:absolute;left:14px;top:14px"><span class="chip t-xs" style="background:rgba(8,20,17,.62);color:#fff">${ic('gps',12,2)} GPS chính xác 4 m</span></div>
+      <div style="position:absolute;right:14px;bottom:14px">${stamp('Hà Giang','17/10/2026')}</div>
+    </div>
+    <div class="pad stack gap12">
+      <div>
+        <div class="eyebrow" style="margin-bottom:7px">Khung hộ chiếu</div>
+        <div class="row gap8" style="overflow-x:auto;scrollbar-width:none">
+          ${['Dấu cổ điển','Tem thư','Vé tàu','Sổ tay','Không khung'].map((f,i)=>
+            `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs">${f}</span>`).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:7px">Bộ lọc màu</div>
+        <div class="row gap8" style="overflow-x:auto;scrollbar-width:none;padding-bottom:2px" id="ck-filters">
+          ${[['Gốc','none'],['Mực dấu','sepia(.45) contrast(1.15)'],['Sương sớm','saturate(.7) brightness(1.08)'],
+             ['Phim cũ','sepia(.7) hue-rotate(-12deg) contrast(1.1)'],['Cao nguyên','saturate(1.5) contrast(1.08)'],
+             ['Trắng đen','grayscale(1) contrast(1.12)']].map(([n,f],i)=>
+            `<button class="stack gap6" style="align-items:center;flex:0 0 auto" data-act="filter" data-f="${f}">
+              <div class="photo ph-hagiang" style="width:48px;height:48px;border-radius:9px;filter:${f};border:2px solid ${i===0?'var(--brand)':'transparent'}" data-fthumb></div>
+              <span class="t-xs ${i===0?'b6':'muted2'}">${n}</span></button>`).join('')}
+        </div>
+      </div>
+      <div class="banner banner-ok">${ic('check',15,2)}<span>Bạn đang ở <b>Mã Pí Lèng</b>, trong bán kính 120 m của điểm đã ghi nhận.</span></div>
+      <button class="btn btn-stamp btn-blk" data-act="dostamp" style="padding:14px">${ic('stamp',19,2)} Đóng dấu Hà Giang</button>
+      <div class="t-xs muted2" style="text-align:center">Ảnh được nén còn ≤ 1600 px rồi mới tải lên. Mất mạng thì nằm hàng đợi.</div>
+    </div>
+  </div>
+  ${bottombar('checkin')}
+  <div class="sheet-wrap" data-overlay="stamped">
+    <div class="scrim" data-act="closeov"></div>
+    <div class="dialog pad stack gap12" style="align-items:center;text-align:center;padding:24px 20px">
+      ${stamp('Hà Giang','17/10/2026',true)}
+      <div><div class="t-lg b7" style="margin-top:8px">Con dấu thứ 11</div>
+        <div class="t-sm muted">Hà Giang đã vào hộ chiếu của bạn.</div></div>
+      <div class="bar" style="width:100%"><i style="width:32%"></i></div>
+      <div class="t-xs muted2">11 / 34 tỉnh · còn 23 tỉnh nữa</div>
+      <div class="row gap8" style="width:100%">
+        <button class="btn btn-out grow" data-act="closeov">Đóng</button>
+        <button class="btn btn-pri grow" data-go="create">Đăng bài</button>
+      </div>
+    </div>
+  </div>`};
+
+S.create = {name:'Đăng bài', code:'CreatePostScreen', note:'Photo Picker · nén ảnh · hàng đợi khi mất mạng',
+ nav:'home', body:()=>`
+  ${appbar('Bài viết mới',{back:'home'})}
+  <div class="scroll">
+    <div class="pad stack gap14">
+      <div class="row gap8" style="overflow-x:auto;scrollbar-width:none">
+        ${['hagiang','ninhbinh','mocchau'].map((p,i)=>`
+          <div style="position:relative;flex:0 0 auto">
+            <div class="photo ph-${p}" style="width:88px;height:88px;border-radius:11px"></div>
+            <span class="chip t-xs mono" style="position:absolute;top:5px;left:5px;padding:1px 6px;background:rgba(8,20,17,.6);color:#fff">${i+1}</span>
+            <button class="ab-btn" style="position:absolute;top:2px;right:2px;width:22px;height:22px;background:rgba(8,20,17,.6);color:#fff">${ic('close',12)}</button>
+          </div>`).join('')}
+        <button class="stack" style="align-items:center;justify-content:center;gap:4px;width:88px;height:88px;border-radius:11px;border:2px dashed var(--line-2);color:var(--fg-3);flex:0 0 auto">
+          ${ic('plus',20)}<span class="t-xs">Thêm ảnh</span></button>
+      </div>
+      <div class="field"><label for="cp-cap">Nội dung</label>
+        <textarea class="input" id="cp-cap" rows="4" placeholder="Kể lại chuyến đi…">Dậy từ 4h30 để kịp sương trên đèo. Đóng được con dấu thứ 10 rồi.</textarea></div>
+      <button class="card row gap10 pad" style="width:100%;text-align:left">
+        <span style="color:var(--stamp)">${ic('pin',19)}</span>
+        <div class="grow"><div class="t-sm b6">Mã Pí Lèng, Hà Giang</div><div class="t-xs muted2">Lấy từ vị trí ảnh</div></div>
+        <span class="muted2">${ic('chev',16)}</span></button>
+      <button class="card row gap10 pad" style="width:100%;text-align:left">
+        <span style="color:var(--jade)">${ic('bag',19)}</span>
+        <div class="grow"><div class="t-sm b6">Gắn vào chuyến đi</div><div class="t-xs muted2">Hà Giang 3 ngày 2 đêm</div></div>
+        <span class="muted2">${ic('chev',16)}</span></button>
+      <div class="field"><label>Thẻ</label>
+        <div class="row gap6" style="flex-wrap:wrap">
+          ${['hagiang','madipileng','dilaanhung'].map(t=>`<span class="chip chip-jade t-xs">#${t} ${ic('close',10,2.4)}</span>`).join('')}
+          <span class="chip chip-out t-xs">${ic('plus',11,2.4)} Thêm</span></div></div>
+      <div class="field"><label>Ai xem được</label>
+        <div class="row gap6">
+          <span class="chip chip-on t-xs">Công khai</span>
+          <span class="chip chip-out t-xs">Người theo dõi</span>
+          <span class="chip chip-out t-xs">Chỉ mình tôi</span></div></div>
+      <div class="banner banner-info">${ic('img',15,2)}
+        <span>3 ảnh · 4,2 MB. Sau khi nén còn khoảng <b class="mono">550 KB</b>.</span></div>
+      <button class="btn btn-stamp btn-blk" data-go="home">Đăng bài</button>
+    </div>
+  </div>`};
+
+S.trips = {name:'Chuyến đi của tôi', code:'MyTripsScreen', note:'Danh sách chuyến · trạng thái · điểm kế tiếp',
+ nav:'trips', body:()=>`
+  ${appbar('Chuyến đi',{actions:[{icon:'plus',go:'aiplan',label:'Tạo chuyến'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div class="pad">
+      <button class="card row gap12 pad" data-go="aiplan" style="width:100%;text-align:left;margin-bottom:14px;
+        background:linear-gradient(140deg,var(--brand-2),var(--brand));color:var(--on-brand);border:0">
+        <span style="color:var(--gold)">${ic('sparkle',24)}</span>
+        <div class="grow"><div class="t-md b6">Để AI lập lịch trình</div>
+          <div class="t-xs" style="opacity:.82">Nói điểm đến và số ngày, có lịch trong 30 giây</div></div>
+        ${ic('chev',17)}</button>
+      <div class="row gap6" style="margin-bottom:10px">
+        ${['Tất cả','Sắp đi','Đang đi','Đã xong'].map((t,i)=>`<span class="chip ${i===0?'chip-on':'chip-out'} t-xs">${t}</span>`).join('')}
+      </div>
+      ${TRIPS.map(tripcard).join('')}
+      <div class="card" style="padding:0;overflow:hidden">${empty('bag','Chưa có chuyến nào khác','Tạo chuyến mới hoặc để AI dựng giúp bạn một lịch trình.','Tạo chuyến đi')}</div>
+    </div>
+  </div>
+  ${bottombar('trips')}`};
+
+S.trip = {name:'Chi tiết chuyến đi', code:'TripDetailScreen', note:'Lịch theo ngày · thời tiết · sửa tay được',
+ nav:'trips', body:()=>`
+  ${appbar('Hà Giang 3N2Đ',{back:'trips',actions:[{icon:'cal',label:'Lịch'},{icon:'share',label:'Chia sẻ'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div style="position:relative">${photo('hagiang',150)}
+      <div style="position:absolute;left:14px;bottom:12px;color:#fff">
+        <div class="t-lg b7" style="text-shadow:0 1px 8px rgba(0,0,0,.5)">Hà Giang 3 ngày 2 đêm</div>
+        <div class="t-xs mono" style="opacity:.92">15/10 – 17/10/2026 · 2 người · xe máy</div></div>
+      <span class="chip chip-gold t-xs" style="position:absolute;right:12px;top:12px">${ic('sparkle',11,2)} AI dựng</span>
+    </div>
+    <div class="pad stack gap12">
+      ${weathercard()}
+      <div class="row gap8">
+        <div class="card pad grow" style="text-align:center"><div class="t-lg b7 mono">6</div><div class="t-xs muted2">điểm dừng</div></div>
+        <div class="card pad grow" style="text-align:center"><div class="t-lg b7 mono">2,4tr</div><div class="t-xs muted2">dự chi</div></div>
+        <div class="card pad grow" style="text-align:center"><div class="t-lg b7 mono">340</div><div class="t-xs muted2">km</div></div>
+      </div>
+      <div class="row gap6">${['Ngày 1','Ngày 2','Ngày 3'].map((d,i)=>
+        `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs grow" style="justify-content:center">${d}</span>`).join('')}</div>
+      <div class="stack" style="gap:0">
+        ${[['06:30','Xuất phát Hà Nội','Bến xe Mỹ Đình · xe giường nằm','wallet','260.000 đ'],
+           ['12:40','Nhận xe máy tại TP Hà Giang','Đã đặt trước qua đối tác','pin',''],
+           ['14:00','Dốc Thẩm Mã','Điểm chụp ảnh · dừng 40 phút','cam',''],
+           ['16:30','Nhà của Pao, Sủng Là','Vé vào 20.000 đ/người','wallet','40.000 đ'],
+           ['18:30','Nhận phòng homestay Đồng Văn','Đã xác nhận · 2 giường','bag','420.000 đ']]
+          .map(([t,n,d,i2,c],idx,arr)=>`
+          <div class="row gap10" style="align-items:flex-start">
+            <div class="stack" style="align-items:center;flex:0 0 auto;width:46px">
+              <div class="t-xs mono b6" style="color:var(--fg-2)">${t}</div>
+              <div style="width:9px;height:9px;border-radius:50%;background:var(--stamp);margin:5px 0"></div>
+              ${idx<arr.length-1?'<div style="width:2px;flex:1;background:var(--line);min-height:32px"></div>':''}
+            </div>
+            <div class="card pad grow" style="margin-bottom:10px">
+              <div class="row gap8"><span style="color:var(--fg-3)">${ic(i2,15)}</span>
+                <div class="grow"><div class="t-sm b6">${n}</div><div class="t-xs muted2">${d}</div></div>
+                ${c?`<span class="t-xs mono muted">${c}</span>`:''}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="row gap8">
+        <button class="btn btn-out grow" data-act="editTrip">${ic('filter',16)} Sửa lịch trình</button>
+        <button class="btn btn-pri grow">${ic('cal',16)} Thêm vào Lịch</button>
+      </div>
+    </div>
+  </div>
+  <div class="sheet-wrap" data-overlay="editTrip">
+    <div class="scrim" data-act="closeov"></div>
+    <div class="sheet">
+      <div class="sheet-grip"></div>
+      <div class="row pad" style="padding:6px 14px 10px;border-bottom:1px solid var(--line)">
+        <div class="ab-title grow">Sửa điểm dừng</div>
+        <button class="ab-btn" data-act="closeov">${ic('close',18)}</button></div>
+      <div class="scroll pad stack gap12">
+        <div class="field"><label for="et-n">Tên điểm</label><input class="input" id="et-n" value="Dốc Thẩm Mã"></div>
+        <div class="row gap8">
+          <div class="field grow"><label for="et-t">Giờ</label><input class="input" id="et-t" value="14:00"></div>
+          <div class="field grow"><label for="et-d">Ở lại</label><input class="input" id="et-d" value="40 phút"></div>
+        </div>
+        <div class="field"><label for="et-c">Chi phí dự kiến</label><input class="input mono" id="et-c" value="0 đ"></div>
+        <div class="field"><label for="et-no">Ghi chú</label><textarea class="input" id="et-no" rows="3">Đến trước 15h thì ngược nắng, nên để sau 16h.</textarea></div>
+        <div class="row gap8" style="padding-bottom:14px">
+          <button class="btn btn-dan" data-act="closeov">${ic('trash',16)} Xoá</button>
+          <button class="btn btn-pri grow" data-act="closeov">Lưu thay đổi</button></div>
+      </div>
+    </div>
+  </div>`};
+
+S.aiplan = {name:'Lập lịch trình AI', code:'AiPlanScreen', note:'Gửi yêu cầu · AI trả lịch · sửa tay trước khi lưu',
+ nav:'trips', body:()=>`
+  ${appbar('Lập lịch trình',{back:'trips'})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div class="pad stack gap14">
+      <div class="card pad row gap10" style="background:linear-gradient(140deg,var(--brand-2),var(--brand));color:var(--on-brand);border:0">
+        <span style="color:var(--gold)">${ic('sparkle',22)}</span>
+        <div class="t-sm">Trả lời 4 câu, AI dựng lịch theo ngày. Bạn sửa lại rồi mới lưu.</div></div>
+      <div class="field"><label for="ap-dest">Đi đâu</label>
+        <input class="input" id="ap-dest" value="Hà Giang"></div>
+      <div class="row gap8">
+        <div class="field grow"><label for="ap-day">Mấy ngày</label><input class="input" id="ap-day" value="3 ngày 2 đêm"></div>
+        <div class="field grow"><label for="ap-who">Đi với ai</label><input class="input" id="ap-who" value="2 người, bạn bè"></div>
+      </div>
+      <div class="field"><label>Kiểu chuyến đi</label>
+        <div class="row gap6" style="flex-wrap:wrap">
+          ${['Khám phá','Chụp ảnh','Ẩm thực','Trekking','Chữa lành','Phượt xe máy'].map((t,i)=>
+            `<span class="chip ${i<2?'chip-on':'chip-out'} t-xs">${t}</span>`).join('')}</div></div>
+      <div class="field"><label for="ap-bud">Ngân sách mỗi người</label>
+        <input class="input mono" id="ap-bud" value="1.200.000 đ"></div>
+      <button class="btn btn-stamp btn-blk" data-act="genplan">${ic('sparkle',18)} Dựng lịch trình</button>
+      <div data-ap-out class="stack gap10" hidden>
+        <div class="divider"></div>
+        <div class="row gap8"><div class="eyebrow grow">Bản nháp của AI</div>
+          <span class="chip chip-gold t-xs">${ic('sparkle',11,2)} 6 điểm · 2,4tr</span></div>
+        ${[['Ngày 1','Hà Nội → Hà Giang → Đồng Văn','3 điểm dừng · 280 km'],
+           ['Ngày 2','Mã Pí Lèng → Sông Nho Quế → Lũng Cú','2 điểm dừng · 96 km'],
+           ['Ngày 3','Chợ phiên Đồng Văn → về Hà Nội','1 điểm dừng · 320 km']]
+          .map(([d,n,s])=>`<div class="card pad row gap10">
+            <span class="chip chip-out t-xs mono">${d}</span>
+            <div class="grow"><div class="t-sm b6">${n}</div><div class="t-xs muted2">${s}</div></div>
+            ${ic('chev',16)}</div>`).join('')}
+        <div class="banner banner-warn">${ic('warn',15,2)}
+          <span>Ô thời tiết trong bản nháp do AI ước tính, chưa nối dịch vụ thời tiết thật.</span></div>
+        <div class="row gap8" style="padding-bottom:10px">
+          <button class="btn btn-out grow" data-act="genplan">Dựng lại</button>
+          <button class="btn btn-pri grow" data-go="trip">Lưu thành chuyến đi</button></div>
+      </div>
+    </div>
+  </div>
+  ${bottombar('trips')}`};
+
+S.profile = {name:'Hồ sơ · Hộ chiếu', code:'ProfileScreen', note:'Con dấu 34 tỉnh · Travel CV · bộ sưu tập',
+ nav:'profile', body:()=>`
+  ${appbar('Hộ chiếu của tôi',{actions:[{icon:'gear',go:'settings',label:'Cài đặt'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div style="background:linear-gradient(160deg,var(--brand-2),var(--brand));color:var(--on-brand);padding:16px 14px 18px;position:relative">
+      <div style="position:absolute;inset:0;background:var(--guilloche)"></div>
+      <div class="row gap12" style="position:relative">
+        <div class="av av-72" style="border:2px solid var(--gold)">MA</div>
+        <div class="grow">
+          <div class="t-lg b7">Minh Anh</div>
+          <div class="t-xs" style="opacity:.8">@minhanh.travel</div>
+          <div class="chip chip-gold t-xs" style="margin-top:6px">Người đi đủ · hạng Đồng</div>
+        </div>
+      </div>
+      <div class="row" style="position:relative;margin-top:14px;text-align:center">
+        ${[['10','tỉnh'],['29','con dấu'],['312','theo dõi'],['184','đang theo']].map(([n,l])=>
+          `<div class="grow"><div class="t-lg b7 mono">${n}</div><div class="t-xs" style="opacity:.75">${l}</div></div>`).join('')}
+      </div>
+      <div class="mrz" style="margin:14px -14px 0;padding:8px 14px">MINHANH&lt;&lt;VN&lt;&lt;34TINH&lt;&lt;10&lt;&lt;29DAU&lt;&lt;&lt;&lt;&lt;&lt;&lt;2026</div>
+    </div>
+    <div class="pad stack gap12">
+      <div class="card pad stack gap8">
+        <div class="row"><span class="t-sm b6 grow">Tiến độ hộ chiếu</span><span class="t-xs mono muted">10 / 34</span></div>
+        <div class="bar"><i style="width:29%"></i></div>
+        <div class="t-xs muted2">Còn 24 tỉnh. Gần bạn nhất chưa đóng dấu: Bắc Ninh, Hải Phòng.</div>
+      </div>
+      <div class="row gap6">
+        ${['Con dấu','Bài viết','Đã lưu','Travel CV'].map((t,i)=>
+          `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs grow" style="justify-content:center">${t}</span>`).join('')}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        ${STAMPS.slice(0,6).map(([n,d])=>`<button data-go="passport" style="display:block">${stamp(n,d)}</button>`).join('')}
+        ${TODO_PROV.slice(0,2).map(n=>stampEmpty(n)).join('')}
+      </div>
+      <button class="btn btn-out btn-blk" data-act="cv">${ic('flag',16)} Xem Travel CV</button>
+    </div>
+  </div>
+  ${bottombar('profile')}
+  <div class="sheet-wrap" data-overlay="cv">
+    <div class="scrim" data-act="closeov"></div>
+    <div class="dialog" style="overflow:hidden">
+      <div style="background:linear-gradient(140deg,var(--brand-2),var(--brand));color:var(--on-brand);padding:16px">
+        <div class="eyebrow" style="color:var(--gold)">Travel CV · 2026</div>
+        <div class="t-lg b7">Minh Anh</div>
+        <div class="t-xs" style="opacity:.8">Người đi đủ 34 tỉnh · đang ở chặng 10</div>
+      </div>
+      <div class="pad stack gap10">
+        ${[['Tỉnh đã đến','10 / 34'],['Con dấu','29'],['Quãng đường','3.480 km'],['Chuyến đã xong','7'],['Tỉnh đi nhiều nhất','Hà Giang · 4 lần']]
+          .map(([k,v])=>`<div class="row"><span class="t-sm muted grow">${k}</span><span class="t-sm b6 mono">${v}</span></div>`).join('')}
+        <div class="divider"></div>
+        <button class="btn btn-pri btn-blk" data-act="closeov">Chia sẻ thẻ này</button>
+      </div>
+    </div>
+  </div>`};
+
+S.userprofile = {name:'Trang cá nhân người khác', code:'UserProfileDetailScreen', note:'Theo dõi · lưới bài · con dấu công khai',
+ nav:'home', body:()=>`
+  ${appbar('Tuấn Đạt',{back:'home',actions:[{icon:'share',label:'Chia sẻ'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div class="pad stack gap12" style="background:var(--surface);border-bottom:1px solid var(--line)">
+      <div class="row gap12">
+        <div class="av av-72">TD</div>
+        <div class="grow">
+          <div class="t-lg b7">Tuấn Đạt</div><div class="t-xs muted2">@datdi.phuot</div>
+          <div class="t-sm muted" style="margin-top:4px">Phượt xe máy · đã đi 18/34 tỉnh · Hà Nội</div>
+        </div>
+      </div>
+      <div class="row" style="text-align:center">
+        ${[['18','tỉnh'],['64','con dấu'],['1.2k','theo dõi'],['203','đang theo']].map(([n,l])=>
+          `<div class="grow"><div class="t-md b7 mono">${n}</div><div class="t-xs muted2">${l}</div></div>`).join('')}
+      </div>
+      <div class="row gap8">
+        <button class="btn btn-pri grow" data-act="follow">Theo dõi</button>
+        <button class="btn btn-out grow">Nhắn tin</button>
+      </div>
+    </div>
+    <div class="pad">
+      <div class="row gap6" style="margin-bottom:10px">
+        ${['Bài viết','Con dấu','Chuyến đi'].map((t,i)=>
+          `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs grow" style="justify-content:center">${t}</span>`).join('')}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        ${['ninhbinh','hagiang','mocchau','bien','pho','night','hagiang','ninhbinh','bien'].map(p=>
+          `<button data-go="post" style="display:block">${photo(p,104,'border-radius:4px')}</button>`).join('')}
+      </div>
+    </div>
+  </div>
+  ${bottombar('home')}`};
+
+S.search = {name:'Tìm kiếm', code:'SearchScreen', note:'Hiện chỉ tìm địa điểm trong máy · 40% hoàn thiện',
+ nav:'home', body:()=>`
+  <div class="appbar" style="gap:8px">
+    <button class="ab-btn" data-go="home">${ic('back',19)}</button>
+    <input class="input grow" placeholder="Tìm tỉnh, địa điểm, người…" value="hà giang" aria-label="Tìm kiếm">
+  </div>
+  <div class="scroll">
+    <div class="row gap6 pad" style="padding-bottom:6px">
+      ${['Địa điểm','Người dùng','Bài viết','Chuyến đi'].map((t,i)=>
+        `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs">${t}</span>`).join('')}
+    </div>
+    <div class="pad" style="padding-top:6px">
+      <div class="banner banner-warn" style="margin-bottom:12px">${ic('warn',15,2)}
+        <span>Mới tìm được địa điểm lưu trong máy. Tìm người và bài viết còn đang làm.</span></div>
+      <div class="eyebrow" style="margin-bottom:8px">Địa điểm · 6 kết quả</div>
+      <div class="stack gap8">
+        ${[['Mã Pí Lèng','Hà Giang','Đèo · đã đóng dấu',true],
+           ['Sông Nho Quế','Hà Giang','Sông · chưa đến',false],
+           ['Cột cờ Lũng Cú','Hà Giang','Di tích · chưa đến',false],
+           ['Phố cổ Đồng Văn','Hà Giang','Phố cổ · đã đóng dấu',true]]
+          .map(([n,p,d,done])=>`<button class="card row gap10 pad" style="width:100%;text-align:left" data-go="passport">
+            <span style="color:${done?'var(--stamp)':'var(--fg-3)'}">${ic(done?'stamp':'pin',18)}</span>
+            <div class="grow"><div class="t-sm b6">${n}</div><div class="t-xs muted2">${p} · ${d}</div></div>
+            ${ic('chev',15)}</button>`).join('')}
+      </div>
+      <div class="eyebrow" style="margin:16px 0 8px">Tìm gần đây</div>
+      <div class="row gap6" style="flex-wrap:wrap">
+        ${['ninh bình','mộc châu','đà lạt','cà phê hà nội'].map(t=>`<span class="chip chip-out t-xs">${ic('search',11,2)} ${t}</span>`).join('')}
+      </div>
+    </div>
+  </div>`};
+
+S.notif = {name:'Thông báo', code:'NotificationsScreen', note:'Máy chủ đang 0 bản ghi · chưa có thông báo đẩy',
+ nav:'home', body:()=>`
+  ${appbar('Thông báo',{back:'home',actions:[{icon:'check',label:'Đánh dấu đã đọc'}]})}
+  <div class="scroll">
+    <div class="row gap6 pad" style="padding-bottom:6px">
+      ${['Tất cả','Chưa đọc','Cộng đồng','Hệ thống'].map((t,i)=>
+        `<span class="chip ${i===0?'chip-on':'chip-out'} t-xs">${t}</span>`).join('')}
+    </div>
+    <div class="stack">
+      ${[['TD','Tuấn Đạt','đã thích bài viết của bạn','12 phút','heart',true],
+         ['HL','Hương Ly','bắt đầu theo dõi bạn','1 giờ','user',true],
+         ['NK','Ngọc Khánh','bình luận: “Cho mình xin lịch trình với”','3 giờ','comment',false],
+         ['L','Levart','Bài đang chờ tải lên đã đăng xong','hôm qua','check',false],
+         ['L','Levart','Bạn còn 24 tỉnh nữa là đủ hộ chiếu','2 ngày','stamp',false]]
+        .map(([i,n,t,tm,icn,unread])=>`
+        <button class="row gap10 pad" style="width:100%;text-align:left;border-bottom:1px solid var(--line);
+          background:${unread?'color-mix(in srgb,var(--jade) 6%,transparent)':'transparent'}" data-go="post">
+          <div class="av av-38">${i}</div>
+          <div class="grow"><div class="t-sm"><b class="b6">${n}</b> ${t}</div>
+            <div class="t-xs muted2">${tm}</div></div>
+          <span style="color:var(--fg-3)">${ic(icn,16)}</span>
+        </button>`).join('')}
+    </div>
+    <div class="t-xs muted2" style="text-align:center;padding:16px">Hết thông báo</div>
+  </div>`};
+
+S.passport = {name:'Hộ chiếu tỉnh', code:'CityPassportModal', note:'Mở từ bản đồ hoặc hồ sơ · trang của một tỉnh',
+ nav:'map', body:()=>`
+  ${appbar('Hà Giang',{back:'map',actions:[{icon:'share',label:'Chia sẻ'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div style="position:relative">${photo('hagiang',168)}
+      <div style="position:absolute;right:14px;bottom:-22px">${stamp('Hà Giang','17/10/26',true)}</div></div>
+    <div class="pad stack gap12" style="padding-top:30px">
+      <div>
+        <div class="eyebrow">Tỉnh thứ 10 của bạn</div>
+        <div class="t-lg b7">Hà Giang</div>
+        <div class="t-sm muted">Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng, sông Nho Quế. Mùa đẹp: tháng 9 đến tháng 11 (hoa tam giác mạch).</div>
+      </div>
+      <div class="row gap8">
+        <div class="card pad grow" style="text-align:center"><div class="t-md b7 mono">4</div><div class="t-xs muted2">lần đến</div></div>
+        <div class="card pad grow" style="text-align:center"><div class="t-md b7 mono">6/12</div><div class="t-xs muted2">điểm đã đóng</div></div>
+        <div class="card pad grow" style="text-align:center"><div class="t-md b7 mono">18</div><div class="t-xs muted2">ảnh</div></div>
+      </div>
+      <div><div class="eyebrow" style="margin-bottom:8px">Điểm trong tỉnh</div>
+        <div class="stack gap8">
+          ${[['Mã Pí Lèng','đã đóng dấu · 17/10/26',true],['Phố cổ Đồng Văn','đã đóng dấu · 16/10/26',true],
+             ['Cột cờ Lũng Cú','chưa đến',false],['Sông Nho Quế','chưa đến',false]]
+            .map(([n,s,d])=>`<div class="card row gap10 pad">
+              <span style="color:${d?'var(--stamp)':'var(--fg-3)'}">${ic(d?'stamp':'pin',17)}</span>
+              <div class="grow"><div class="t-sm b6">${n}</div><div class="t-xs muted2">${s}</div></div>
+              ${d?'':`<button class="btn btn-out btn-sm" data-go="checkin">Đóng dấu</button>`}</div>`).join('')}
+        </div></div>
+      <div><div class="eyebrow" style="margin-bottom:8px">Ảnh của bạn tại đây</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+          ${['hagiang','hagiang','night','hagiang','mocchau','night'].map(p=>photo(p,82,'border-radius:4px')).join('')}
+        </div></div>
+    </div>
+  </div>`};
+
+S.saved = {name:'Bộ sưu tập đã lưu', code:'saved_boards', note:'Máy chủ đang 0 bản ghi · 40% hoàn thiện',
+ nav:'profile', body:()=>`
+  ${appbar('Đã lưu',{back:'profile',actions:[{icon:'plus',label:'Tạo bộ sưu tập'}]})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div class="pad">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        ${[['Muốn đi 2027','12 bài','hagiang'],['Quán ăn ngon','8 bài','pho'],
+           ['Homestay rẻ','5 bài','mocchau'],['Ảnh đẹp','21 bài','bien']]
+          .map(([n,c,p])=>`<button class="card" style="overflow:hidden;display:block;text-align:left">
+            ${photo(p,92)}<div class="pad" style="padding:9px 10px">
+              <div class="t-sm b6 trunc">${n}</div><div class="t-xs muted2">${c}</div></div></button>`).join('')}
+      </div>
+      <div class="card" style="margin-top:12px;padding:0;overflow:hidden">
+        ${empty('book','Bộ sưu tập mới','Lưu bài viết vào đây để xem lại khi lên kế hoạch.','Tạo bộ sưu tập')}
+      </div>
+    </div>
+  </div>
+  ${bottombar('profile')}`};
+
+S.settings = {name:'Cài đặt', code:'SettingsScreen', note:'Đổi ngôn ngữ VI/EN · chế độ tối · xoá tài khoản',
+ nav:'profile', body:()=>`
+  ${appbar('Cài đặt',{back:'profile'})}
+  <div class="scroll" style="background:var(--sunk)">
+    <div class="pad stack gap14">
+      <div class="card" style="overflow:hidden">
+        <div class="row gap10 pad"><div class="av av-44">MA</div>
+          <div class="grow"><div class="t-sm b6">Minh Anh</div><div class="t-xs muted2">minhanh@email.com · Google</div></div>
+          <span class="muted2">${ic('chev',16)}</span></div>
+      </div>
+      <div><div class="eyebrow" style="margin-bottom:7px">Hiển thị</div>
+        <div class="card" style="overflow:hidden">
+          <div class="row gap10 pad"><span style="color:var(--fg-3)">${ic('globe',18)}</span>
+            <div class="grow t-sm b5">Ngôn ngữ</div>
+            <div class="row gap6"><span class="chip chip-on t-xs">Tiếng Việt</span><span class="chip chip-out t-xs">English</span></div></div>
+          <div class="divider"></div>
+          <div class="row gap10 pad"><span style="color:var(--fg-3)">${ic('moon',18)}</span>
+            <div class="grow t-sm b5">Chế độ tối</div>
+            <button data-act="theme" aria-label="Bật tắt chế độ tối"
+              style="width:46px;height:26px;border-radius:99px;background:var(--sunk);border:1px solid var(--line);position:relative">
+              <span data-th-knob style="position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;
+                background:var(--brand);transition:transform .18s"></span></button></div>
+        </div></div>
+      <div><div class="eyebrow" style="margin-bottom:7px">Dữ liệu</div>
+        <div class="card" style="overflow:hidden">
+          ${[['gps','Quyền vị trí','Khi đang dùng app'],['cam','Quyền máy ảnh','Đã cho phép'],
+             ['trash','Xoá bộ nhớ đệm','48,2 MB']]
+            .map(([i,n,v],idx)=>`${idx?'<div class="divider"></div>':''}
+            <div class="row gap10 pad"><span style="color:var(--fg-3)">${ic(i,18)}</span>
+              <div class="grow t-sm b5">${n}</div><span class="t-xs muted2">${v}</span>
+              <span class="muted2">${ic('chev',15)}</span></div>`).join('')}
+        </div></div>
+      <div><div class="eyebrow" style="margin-bottom:7px">Tài khoản</div>
+        <div class="stack gap8">
+          <button class="btn btn-out btn-blk">Đăng xuất</button>
+          <button class="btn btn-dan btn-blk" data-act="delacc">${ic('trash',16)} Xoá tài khoản</button>
+        </div></div>
+      <div class="t-xs muted2" style="text-align:center;padding-bottom:12px">
+        Levart 0.1 · Điều khoản · Chính sách quyền riêng tư</div>
+    </div>
+  </div>
+  <div class="sheet-wrap" data-overlay="delacc">
+    <div class="scrim" data-act="closeov"></div>
+    <div class="dialog pad stack gap12">
+      <div class="row gap10"><span style="color:var(--crit)">${ic('warn',22)}</span>
+        <div class="t-lg b7">Xoá tài khoản?</div></div>
+      <div class="t-sm muted">Cả 29 con dấu, 7 chuyến đi và toàn bộ ảnh sẽ mất. Thao tác này không hoàn tác được.</div>
+      <div class="field"><label for="da-c">Gõ <b>XOA</b> để xác nhận</label><input class="input mono" id="da-c" placeholder="XOA"></div>
+      <div class="row gap8"><button class="btn btn-out grow" data-act="closeov">Giữ lại</button>
+        <button class="btn btn-dan grow" data-act="closeov">Xoá vĩnh viễn</button></div>
+    </div>
+  </div>`};
+
+const ORDER = ['login','home','post','userprofile','create','map','passport','checkin','trips','trip','aiplan','profile','saved','search','notif','settings'];
+
+/* ============================ DỰNG KHUNG ============================ */
+function phoneHTML(id, interactive){
+  let inner = S[id].body();
+  if(!interactive) inner = inner
+    .replace(/\sid="([^"]+)"/g, ' id="$1--'+id+'"')
+    .replace(/\sfor="([^"]+)"/g, ' for="$1--'+id+'"');
+  return `<div class="phone" ${interactive?'id="proto-phone"':''} data-screen="${id}">
+    <div class="phone-body">${statusbar()}${inner}</div></div>`;
+}
+
+/* --- nguyên mẫu --- */
+let cur = 'home';
+const host = document.getElementById('proto-host');
+function render(id){
+  cur = id;
+  host.innerHTML = phoneHTML(id, true);
+  document.querySelectorAll('#screen-list .sl').forEach(b=>
+    b.setAttribute('aria-current', b.dataset.go===id ? 'true':'false'));
+}
+document.getElementById('screen-list').innerHTML = ORDER.map(id=>
+  `<button class="sl" data-go="${id}"><i></i><span class="trunc">${S[id].name}</span></button>`).join('');
+
+document.addEventListener('click', (e)=>{
+  const go = e.target.closest('[data-go]');
+  const act = e.target.closest('[data-act]');
+  if(go){
+    render(go.dataset.go);
+    if(!e.target.closest('#proto-host'))
+      document.getElementById('proto').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  if(!act) return;
+  const p = act.closest('.phone') || document.getElementById('proto-phone');
+  if(!p) return;
+  const a = act.dataset.act;
+  if(a==='like' || a==='save'){
+    const i = +act.dataset.i, post = POSTS[i];
+    if(a==='like'){ post.liked=!post.liked; post.likes += post.liked?1:-1;
+      act.classList.toggle('on',post.liked); act.querySelector('[data-likes]').textContent=post.likes; }
+    else { post.saved=!post.saved; act.classList.toggle('on-b',post.saved); }
+  }
+  else if(a==='comments'){ openSheet(p); }
+  else if(a==='filter'){
+    const f = act.dataset.f;
+    const ph = p.querySelector('[data-ck-photo] .photo'); if(!ph) return; ph.style.filter = f;
+    p.querySelectorAll('[data-act="filter"]').forEach(b=>{
+      b.querySelector('[data-fthumb]').style.borderColor = b===act?'var(--brand)':'transparent';
+      b.lastElementChild.className = 't-xs ' + (b===act?'b6':'muted2');
+    });
+  }
+  else if(a==='dostamp'){ toggleOv(p,'stamped',true); }
+  else if(a==='editTrip'){ toggleOv(p,'editTrip',true); }
+  else if(a==='cv'){ toggleOv(p,'cv',true); }
+  else if(a==='delacc'){ toggleOv(p,'delacc',true); }
+  else if(a==='closeov'){ p.querySelectorAll('.sheet-wrap.open').forEach(o=>o.classList.remove('open'));
+    const cs=p.querySelector('[data-cmt-sheet]'); if(cs) cs.remove(); }
+  else if(a==='follow'){ const on = act.textContent.trim()==='Theo dõi';
+    act.textContent = on?'Đang theo dõi':'Theo dõi'; act.className = 'btn grow '+(on?'btn-out':'btn-pri'); }
+  else if(a==='theme'){
+    const dark = document.documentElement.getAttribute('data-theme')==='dark'
+      || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark?'light':'dark');
+    syncKnob();
+  }
+  else if(a==='genplan'){
+    const out = p.querySelector('[data-ap-out]'); const btn = p.querySelector('[data-act="genplan"]');
+    btn.disabled = true; btn.innerHTML = 'Đang dựng lịch trình…';
+    setTimeout(()=>{ out.hidden = false; btn.disabled=false;
+      btn.innerHTML = `${ic('sparkle',18)} Dựng lại lịch trình`;
+      out.scrollIntoView({block:'nearest',behavior:'smooth'}); }, 850);
+  }
+});
+function toggleOv(p, name, open){
+  const ov = p.querySelector(`[data-overlay="${name}"]`); if(ov) ov.classList.toggle('open', open);
+}
+function openSheet(p){
+  if(!p || p.querySelector('[data-cmt-sheet]')) return;
+  const d = document.createElement('div');
+  d.setAttribute('data-cmt-sheet',''); d.className='sheet-wrap open';
+  d.innerHTML = `<div class="scrim" data-act="closeov"></div>
+    <div class="sheet">
+      <div class="sheet-grip"></div>
+      <div class="row pad" style="padding:4px 14px 10px;border-bottom:1px solid var(--line)">
+        <div class="ab-title grow">19 bình luận</div>
+        <button class="ab-btn" data-act="closeov">${ic('close',18)}</button></div>
+      <div class="scroll pad stack gap12">
+        ${[['TD','Tuấn Đạt','Đẹp quá. Đoạn này đi xe máy có khó không bạn?','12 phút'],
+           ['HL','Hương Ly','Mình đi tuần sau, xin cái lịch trình với ạ','1 giờ'],
+           ['NK','Ngọc Khánh','Con dấu thứ 10 rồi cơ à','1 giờ'],
+           ['PT','Phương Thảo','Homestay nào ở Đồng Văn ổn thế bạn?','2 giờ']]
+          .map(([i,n,c,t])=>`<div class="row gap10" style="align-items:flex-start">
+            <div class="av av-32">${i}</div>
+            <div class="grow"><div class="t-sm"><b class="b6">${n}</b> ${c}</div>
+              <div class="t-xs muted2 row gap12" style="margin-top:3px"><span>${t}</span><span>Thích</span><span>Trả lời</span></div></div>
+            <button class="iact t-xs">${ic('heart',14)}</button></div>`).join('')}
+      </div>
+      <div class="row gap8" style="padding:10px 12px;border-top:1px solid var(--line)">
+        <div class="av av-32">MA</div>
+        <input class="input grow" placeholder="Viết bình luận…" aria-label="Viết bình luận">
+        <button class="btn btn-pri btn-sm">Gửi</button></div>
+    </div>`;
+  p.appendChild(d);
+}
+function syncKnob(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark'
+    || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.querySelectorAll('[data-th-knob]').forEach(k=>
+    k.style.transform = dark?'translateX(20px)':'translateX(0)');
+}
+render('home');
+
+/* --- canvas 16 khung --- */
+document.getElementById('canvas').innerHTML = ORDER.map((id,i)=>{
+  const s = S[id];
+  return `<div class="frame">
+    <div class="frame-cap"><span class="mono" style="color:var(--stamp)">${String(i+1).padStart(2,'0')}</span>
+      <b>${s.name}</b><code>${s.code}</code>
+      <span class="fc-note">${s.note}</span></div>
+    ${phoneHTML(id,false)}</div>`;
+}).join('');
+
+/* --- luồng --- */
+const FLOWS = [
+  ['Vào app', 'globe', [['Đăng nhập','login'],['Bảng tin','home'],['Chi tiết bài','post'],['Trang người khác','userprofile']]],
+  ['Đóng dấu một tỉnh', 'stamp', [['Bản đồ','map'],['Hộ chiếu tỉnh','passport'],['Đóng dấu','checkin'],['Hồ sơ','profile']]],
+  ['Lập chuyến đi', 'sparkle', [['Chuyến đi','trips'],['Lập lịch AI','aiplan'],['Chi tiết chuyến','trip'],['Sửa điểm dừng','trip']]],
+  ['Đăng bài sau chuyến', 'img', [['Đóng dấu','checkin'],['Đăng bài','create'],['Bảng tin','home'],['Chi tiết bài','post']]]
+];
+document.getElementById('flow-host').innerHTML = FLOWS.map(([n,icn,steps])=>`
+  <div class="flow">
+    <h4><span style="color:var(--stamp)">${ic(icn,18)}</span> ${n}</h4>
+    <div class="flow-steps">
+      ${steps.map(([label,id],i)=>`
+        ${i?`<span class="farrow">${ic('chev',15)}</span>`:''}
+        <button class="fstep" data-go="${id}"><span class="fs-n">${String(i+1).padStart(2,'0')}</span>${label}</button>`).join('')}
+    </div>
+  </div>`).join('');
+document.getElementById('flow-host').addEventListener('click', e=>{
+  const b = e.target.closest('[data-go]'); if(!b) return;
+  render(b.dataset.go);
+  document.getElementById('proto').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* --- màu --- */
+const SW = [['--brand','Xanh hộ chiếu','Nền chính, nút chính'],['--brand-2','Xanh sáng','Dải chuyển, nền phụ'],
+  ['--stamp','Đỏ mực dấu','Con dấu, thả tim, hành động chính'],['--gold','Nhũ vàng','Huy hiệu, nhấn trên nền xanh'],
+  ['--jade','Ngọc','Thành công, thẻ đang chọn'],['--sky','Xanh trời','Thời tiết, thông tin'],
+  ['--paper','Giấy','Nền trang'],['--surface','Mặt thẻ','Thẻ, khung điện thoại'],
+  ['--sunk','Nền chìm','Nền danh sách, chip'],['--fg','Mực','Chữ chính'],
+  ['--fg-2','Mực nhạt','Chữ phụ'],['--line','Đường kẻ','Viền, chia mục']];
+document.getElementById('swatches').innerHTML = SW.map(([v,n,u])=>`
+  <div class="swatch"><div class="sw" style="background:var(${v})"></div>
+    <div class="sw-i"><b>${n}</b><code>${v}</code><div class="muted2" style="margin-top:2px">${u}</div></div></div>`).join('');
+
+document.getElementById('spacing').innerHTML = [4,6,8,10,12,14,20].map(n=>
+  `<div class="row gap10"><div style="height:10px;width:${n*2}px;background:var(--stamp);opacity:.55;border-radius:2px"></div>
+   <span class="t-sm muted mono">${n} px</span></div>`).join('');
+
+document.getElementById('icon-grid').innerHTML = Object.keys(P).map(k=>
+  `<div class="stack" style="align-items:center;gap:4px"><span style="color:var(--fg-2)">${ic(k,20)}</span>
+   <span class="t-xs muted2 mono" style="font-size:9px">${k}</span></div>`).join('');
+
+/* --- thư viện component --- */
+const LIB = [
+  ['Thanh trên','LuminaHeader', `<div class="card" style="overflow:hidden">${appbar('Bảng tin',{actions:[{icon:'search'},{icon:'bell'}]})}</div>
+    <div class="card" style="overflow:hidden">${appbar('Chi tiết chuyến đi',{back:'trips',actions:[{icon:'share'}]})}</div>`],
+  ['Thanh dưới','LuminaBottomBar', `<div class="card" style="overflow:hidden">${bottombar('home')}</div>
+    <div class="t-xs muted2">Chỉ icon, không chữ. Tên nằm ở contentDescription cho trình đọc màn hình.</div>`],
+  ['Nút','Button', `<div class="row gap8" style="flex-wrap:wrap">
+      <button class="btn btn-pri btn-sm">Chính</button><button class="btn btn-stamp btn-sm">Đóng dấu</button>
+      <button class="btn btn-out btn-sm">Viền</button><button class="btn btn-sec btn-sm">Phụ</button>
+      <button class="btn btn-ghost btn-sm">Mờ</button><button class="btn btn-dan btn-sm">Nguy hiểm</button></div>
+    <button class="btn btn-pri btn-blk">Nút tràn chiều ngang</button>`],
+  ['Ô nhập','TextField', `<div class="field"><label for="d-i1">Điểm đến</label><input class="input" id="d-i1" value="Hà Giang"></div>
+    <div class="field"><label for="d-i2">Trống</label><input class="input" id="d-i2" placeholder="Nhập tên tỉnh…"></div>
+    <div class="field"><label for="d-i3">Nhiều dòng</label><textarea class="input" id="d-i3" rows="2">Ghi chú cho điểm dừng</textarea></div>`],
+  ['Chip','Chip / Tag', `<div class="row gap6" style="flex-wrap:wrap">
+      <span class="chip chip-on">Đang chọn</span><span class="chip chip-out">Viền</span><span class="chip">Nền</span>
+      <span class="chip chip-gold">${ic('stamp',12,2)} 10/34</span><span class="chip chip-stamp">vừa đóng dấu</span>
+      <span class="chip chip-jade">#hagiang</span></div>`],
+  ['Ảnh đại diện','Avatar', `<div class="row gap8" style="align-items:flex-end">
+      <div class="av av-32">MA</div><div class="av av-38">TD</div><div class="av av-44">HL</div>
+      <div class="av av-72" style="border:2px solid var(--gold)">NK</div></div>`],
+  ['Con dấu tỉnh','StampBadge', `<div class="stamp-row">${stamp('Hà Giang','17/10/26')}${stamp('Ninh Bình','29/09/26')}${stampEmpty('Cao Bằng')}</div>
+    <div class="stamp-row">${stamp('Đà Nẵng','21/02/26',true)}</div>`],
+  ['Thẻ bài viết','PostCard', `<div style="max-width:330px">${postcard(POSTS[1],1)}</div>`],
+  ['Thẻ chuyến đi','TripCard', `<div style="max-width:330px">${tripcard(TRIPS[0])}</div>`],
+  ['Thẻ thời tiết','WeatherCard', weathercard()],
+  ['Bộ lọc ảnh','PhotoFilters', `<div class="row gap8" style="overflow-x:auto;scrollbar-width:none">
+      ${[['Gốc','none'],['Mực dấu','sepia(.45) contrast(1.15)'],['Sương sớm','saturate(.7) brightness(1.08)'],
+         ['Phim cũ','sepia(.7) hue-rotate(-12deg) contrast(1.1)'],['Trắng đen','grayscale(1)']].map(([n,f],i)=>
+        `<div class="stack gap6" style="align-items:center;flex:0 0 auto">
+          <div class="photo ph-hagiang" style="width:46px;height:46px;border-radius:9px;filter:${f};border:2px solid ${i===0?'var(--brand)':'transparent'}"></div>
+          <span class="t-xs ${i===0?'b6':'muted2'}">${n}</span></div>`).join('')}</div>`],
+  ['Khung máy ảnh','RealCameraPreview', `<div style="position:relative;border-radius:11px;overflow:hidden">
+      ${photo('hagiang',150)}
+      <div style="position:absolute;inset:10px;border:2px solid rgba(255,255,255,.5);border-radius:5px"></div>
+      <span class="chip t-xs" style="position:absolute;left:10px;top:10px;background:rgba(8,20,17,.62);color:#fff">${ic('gps',11,2)} GPS 4 m</span>
+      <div style="position:absolute;right:10px;bottom:10px">${stamp('Hà Giang','17/10/26')}</div></div>`],
+  ['Bình luận','CommentBottomSheet', `<div class="card" style="overflow:hidden">
+      <div class="sheet-grip"></div>
+      <div class="row pad" style="padding:2px 12px 9px;border-bottom:1px solid var(--line)">
+        <div class="ab-title grow" style="font-size:15px">19 bình luận</div>${ic('close',17)}</div>
+      <div class="pad stack gap10">
+        <div class="row gap10" style="align-items:flex-start"><div class="av av-32">TD</div>
+          <div class="grow"><div class="t-sm"><b class="b6">Tuấn Đạt</b> Đoạn này đi xe máy có khó không?</div>
+            <div class="t-xs muted2">12 phút · Thích · Trả lời</div></div>${ic('heart',14)}</div>
+        <div class="row gap8"><div class="av av-32">MA</div>
+          <input class="input grow" placeholder="Viết bình luận…" aria-label="Bình luận mẫu">
+          <button class="btn btn-pri btn-sm">Gửi</button></div></div></div>`],
+  ['Hộp thoại sửa lịch','EditTripDialog', `<div class="card pad stack gap10">
+      <div class="t-md b6">Sửa điểm dừng</div>
+      <div class="field"><label for="d-e1">Tên điểm</label><input class="input" id="d-e1" value="Dốc Thẩm Mã"></div>
+      <div class="row gap8"><div class="field grow"><label for="d-e2">Giờ</label><input class="input" id="d-e2" value="14:00"></div>
+        <div class="field grow"><label for="d-e3">Ở lại</label><input class="input" id="d-e3" value="40 phút"></div></div>
+      <div class="row gap8"><button class="btn btn-dan btn-sm">Xoá</button><button class="btn btn-pri btn-sm grow">Lưu</button></div></div>`],
+  ['Thẻ Travel CV','TravelCvDialog', `<div class="card" style="overflow:hidden">
+      <div style="background:linear-gradient(140deg,var(--brand-2),var(--brand));color:var(--on-brand);padding:13px">
+        <div class="eyebrow" style="color:var(--gold)">Travel CV · 2026</div>
+        <div class="t-md b7">Minh Anh</div></div>
+      <div class="pad stack gap6">
+        <div class="row"><span class="t-sm muted grow">Tỉnh đã đến</span><span class="t-sm b6 mono">10 / 34</span></div>
+        <div class="row"><span class="t-sm muted grow">Quãng đường</span><span class="t-sm b6 mono">3.480 km</span></div></div></div>`],
+  ['Sơ đồ Việt Nam','VietnamMapGraphic', `<div style="display:grid;place-items:center;background:var(--surface);border-radius:11px;padding:8px">
+      <svg viewBox="0 0 200 320" style="height:180px" aria-label="Sơ đồ tượng trưng Việt Nam">
+        <path d="M52 22 C74 12 104 16 118 34 C132 52 126 68 138 82 C152 98 148 116 138 132 C128 148 124 162 130 178 C138 198 148 214 150 234 C152 256 138 274 118 286 C100 296 86 292 80 280 C74 268 84 256 82 244 C80 228 66 220 62 206 C56 186 70 172 66 156 C62 140 46 134 42 118 C38 100 50 88 48 72 C46 56 36 34 52 22 Z"
+          fill="color-mix(in srgb,var(--jade) 14%,transparent)" stroke="var(--brand-2)" stroke-width="1.6"/>
+        <g fill="var(--stamp)"><circle cx="76" cy="46" r="5"/><circle cx="92" cy="72" r="5"/><circle cx="112" cy="140" r="5"/><circle cx="118" cy="232" r="5"/></g>
+      </svg></div>`],
+  ['Chọn ngôn ngữ','LanguageDropdownButton', `<div class="row gap6"><span class="chip chip-on">${ic('globe',12,2)} Tiếng Việt</span>
+      <span class="chip chip-out">English</span></div>
+    <div class="t-xs muted2">537 chuỗi đã tách ra tài nguyên, VI và EN khớp 100% khoá.</div>`],
+  ['Thanh tiến độ','ProgressBar', `<div class="stack gap4"><div class="bar"><i style="width:29%"></i></div>
+      <div class="t-xs muted2 mono">10 / 34 tỉnh</div></div>
+    <div class="bar"><i style="width:72%;background:var(--gold)"></i></div>`],
+  ['Băng thông báo','Banner', `<div class="banner banner-ok">${ic('check',15,2)}<span>Đã đóng dấu Hà Giang.</span></div>
+    <div class="banner banner-warn">${ic('warn',15,2)}<span>1 bài đang chờ tải lên.</span></div>
+    <div class="banner banner-crit">${ic('close',15,2)}<span>Không lấy được vị trí. Bật GPS rồi thử lại.</span></div>
+    <div class="banner banner-info">${ic('img',15,2)}<span>Ảnh sẽ được nén còn ≤ 1600 px.</span></div>`],
+  ['Trạng thái rỗng','EmptyState', `<div class="card" style="overflow:hidden">${empty('bag','Chưa có chuyến nào','Tạo chuyến mới hoặc để AI dựng giúp.','Tạo chuyến đi')}</div>`],
+  ['Khung xương khi tải','Skeleton', `<div class="card pad stack gap8">
+      <div class="row gap10"><div class="sk" style="width:36px;height:36px;border-radius:50%"></div>
+        <div class="stack gap6 grow"><div class="sk" style="height:9px;width:54%"></div><div class="sk" style="height:8px;width:34%"></div></div></div>
+      <div class="sk" style="height:96px;border-radius:9px"></div></div>`],
+  ['Trạng thái GPS','GpsIssue', `<div class="banner banner-ok">${ic('gps',15,2)}<span>Chính xác 4 m · trong bán kính điểm</span></div>
+    <div class="banner banner-warn">${ic('gps',15,2)}<span>Tín hiệu yếu · đang chờ định vị lại</span></div>
+    <div class="banner banner-crit">${ic('gps',15,2)}<span>Chưa cấp quyền vị trí <b style="text-decoration:underline">Mở cài đặt</b></span></div>`],
+  ['Ô ảnh mô phỏng','PhotoTile', `<div class="row gap6">${['hagiang','ninhbinh','mocchau','bien'].map(p=>
+      `<div class="photo ph-${p}" style="width:56px;height:56px;border-radius:9px"></div>`).join('')}</div>
+    <div class="t-xs muted2">Bản thiết kế dùng khối màu thay ảnh thật.</div>`]
+];
+document.getElementById('lib-host').innerHTML = LIB.map(([n,code,demo])=>`
+  <div class="lib-item"><div class="lib-head"><b>${n}</b><code>${code}</code></div>
+    <div class="lib-demo">${demo}</div></div>`).join('');
+
+/* --- backlog --- */
+const BACKLOG = [
+  ['Đồng bộ Google Calendar','Đẩy lịch trình sang Lịch của người dùng, không tạo trùng khi sửa.'],
+  ['Thời tiết thật','Ô thời tiết hiện do AI ước tính. Cần nối dịch vụ thời tiết và ghi mốc thời gian.'],
+  ['Báo cáo nội dung xấu','Google Play bắt buộc với app có nội dung người dùng. Cần cả chặn người dùng.'],
+  ['Thông báo đẩy','Máy chủ đang 0 bản ghi thông báo. Chưa có token đẩy.'],
+  ['Báo cáo sự cố','App văng trên máy người dùng thì hiện không ai biết.']
+];
+document.getElementById('backlog-host').innerHTML = BACKLOG.map(([n,d])=>
+  `<div class="bl"><b>${n}</b><p>${d}</p></div>`).join('');
+
+/* --- điều hướng mục --- */
+const tabs = document.getElementById('tabs');
+tabs.addEventListener('click', e=>{
+  const b = e.target.closest('.tab'); if(!b) return;
+  document.getElementById(b.dataset.to).scrollIntoView({behavior:'smooth',block:'start'});
+});
+const secs = ['proto','screens','flows','tokens','lib','backlog'].map(id=>document.getElementById(id));
+const io = new IntersectionObserver(es=>{
+  es.forEach(en=>{ if(en.isIntersecting){
+    tabs.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-current', t.dataset.to===en.target.id?'true':'false'));
+  }});
+}, {rootMargin:'-20% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+syncKnob();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncKnob);
+</script>

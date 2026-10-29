@@ -1,0 +1,1538 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-27T10:48:07Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3252662007,
+  "lat": 21.3338530,
+  "lon": 106.8500141,
+  "tags": {
+    "ele": "62.37",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Thu Luyen hotel (Nhà Nghỉ Thu Luyến)",
+    "rooms": "12",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3252685424,
+  "lat": 21.6543336,
+  "lon": 106.5830035,
+  "tags": {
+    "ele": "79.19",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3252685435,
+  "lat": 21.6567569,
+  "lon": 106.5796144,
+  "tags": {
+    "ele": "68.38",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3252712022,
+  "lat": 21.3906556,
+  "lon": 106.7590082,
+  "tags": {
+    "ele": "50.11",
+    "name": "Hotel",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3271106948,
+  "lat": 22.2556223,
+  "lon": 106.4762655,
+  "tags": {
+    "ele": "158.26",
+    "name": "Bao Duong Guesthouse",
+    "sym": "Lodging",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4601414090,
+  "lat": 21.5470398,
+  "lon": 107.0993142,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4706694391,
+  "lat": 21.7321781,
+  "lon": 107.0074408,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4726161274,
+  "lat": 21.9062521,
+  "lon": 106.3416088,
+  "tags": {
+    "name": "Nhà nghỉ du lịch cộng đồng Dương Công Vấn",
+    "phone": "+84 1276 353 656",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4728669790,
+  "lat": 21.9528790,
+  "lon": 106.6989922,
+  "tags": {
+    "name": "Nhà Nghỉ Đức Hạnh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4728893590,
+  "lat": 21.9518328,
+  "lon": 106.6995928,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4778187921,
+  "lat": 22.2582948,
+  "lon": 106.4683995,
+  "tags": {
+    "name": "Quỳ Hương",
+    "name:vi": "Quỳ Hương",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4778489222,
+  "lat": 21.8530186,
+  "lon": 106.7553401,
+  "tags": {
+    "name:en": "Hoàng Sơn Hải",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4778504322,
+  "lat": 21.8542927,
+  "lon": 106.7568197,
+  "tags": {
+    "name:vi": "Mai Phương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4779262227,
+  "lat": 21.8599325,
+  "lon": 106.7561233,
+  "tags": {
+    "name:vi": "Nhà Nghỉ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779262228,
+  "lat": 21.8608484,
+  "lon": 106.7573329,
+  "tags": {
+    "name:vi": "Huyền Trang",
+    "phone": "0253 868 838",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779262229,
+  "lat": 21.8606872,
+  "lon": 106.7559941,
+  "tags": {
+    "addr:street": "Trần Đăng Ninh",
+    "internet_access": "wlan",
+    "name:vi": "Hoàng Vũ III",
+    "phone": "0253 873 738",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4779302522,
+  "lat": 21.8575424,
+  "lon": 106.7567619,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779302523,
+  "lat": 21.8605378,
+  "lon": 106.7563647,
+  "tags": {
+    "internet_access": "wlan",
+    "name:vi": "Bình An",
+    "phone": "01688 166 166",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779302822,
+  "lat": 21.8599881,
+  "lon": 106.7561130,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779302824,
+  "lat": 21.8605759,
+  "lon": 106.7564924,
+  "tags": {
+    "internet_access": "wlan",
+    "name:vi": "Vân Anh",
+    "phone": "0168 590 6528",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4779342621,
+  "lat": 21.8578053,
+  "lon": 106.7569718,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4780344924,
+  "lat": 21.8625280,
+  "lon": 106.7557282,
+  "tags": {
+    "name:vi": "Nhà Hàng - Đoàn 338",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4786031321,
+  "lat": 21.7774265,
+  "lon": 106.9070186,
+  "tags": {
+    "name": "Hong anh",
+    "name:vi": "Hong anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4786031523,
+  "lat": 21.7544832,
+  "lon": 106.9245213,
+  "tags": {
+    "name:vi": "Khanh toan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4796060421,
+  "lat": 21.8575436,
+  "lon": 106.7568938,
+  "tags": {
+    "name:en": "Guesthouse",
+    "name:vi": "Nha Nghi Loi Loc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4796060422,
+  "lat": 21.8577698,
+  "lon": 106.7567076,
+  "tags": {
+    "name:en": "Guesthouse",
+    "name:vi": "Nha Nghi Ngoc Oanh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4796060521,
+  "lat": 21.8577834,
+  "lon": 106.7568805,
+  "tags": {
+    "name:en": "Guesthouse",
+    "name:vi": "Nha Nghi Thu Hien",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4837637321,
+  "lat": 21.8490607,
+  "lon": 106.7560017,
+  "tags": {
+    "addr:housenumber": "20 trung nhi",
+    "addr:street": "Quốc lộ",
+    "internet_access": "wlan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4838089757,
+  "lat": 21.5524914,
+  "lon": 107.0932794,
+  "tags": {
+    "name": "Moi vao",
+    "name:vi": "Moi vao",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4930808224,
+  "lat": 21.8543959,
+  "lon": 106.7685320,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5135095221,
+  "lat": 22.4321731,
+  "lon": 106.4303961,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Khach san bao van",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5348774021,
+  "lat": 21.8537128,
+  "lon": 106.7659475,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5369771626,
+  "lat": 21.3347632,
+  "lon": 106.8497606,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Phuong Son Nha Nghi",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5436673873,
+  "lat": 21.3379061,
+  "lon": 106.2533122,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nanh Nghi 68",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436753746,
+  "lat": 21.3802127,
+  "lon": 106.2678268,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Sao Mai",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436775658,
+  "lat": 21.4203162,
+  "lon": 106.2809200,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Thanh Binh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5437146839,
+  "lat": 21.4976258,
+  "lon": 106.3513723,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Ngoc Khanh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5437148196,
+  "lat": 21.4979253,
+  "lon": 106.3518443,
+  "tags": {
+    "description": "250k per night on work days and 350k in the weekend.",
+    "name": "Quyn Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5438867818,
+  "lat": 21.5758722,
+  "lon": 106.5022788,
+  "tags": {
+    "name": "Nha Nghi Thuy Lin",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5438885335,
+  "lat": 21.5737850,
+  "lon": 106.4997355,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Cuong Ghan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5438886845,
+  "lat": 21.5761216,
+  "lon": 106.5026757,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi TVT",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5438993983,
+  "lat": 21.6488301,
+  "lon": 106.5777572,
+  "tags": {
+    "description": "Budget accommodation",
+    "phone": "0986295127",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5443138868,
+  "lat": 22.0815556,
+  "lon": 106.7377433,
+  "tags": {
+    "name:en": "Happy Meet International Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5443139046,
+  "lat": 22.1110708,
+  "lon": 106.7550684,
+  "tags": {
+    "name:en": "New Century Hotel",
+    "name:zh": "新世纪大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5444243671,
+  "lat": 22.1063381,
+  "lon": 106.7505461,
+  "tags": {
+    "description": "60-90 cny per night",
+    "name:en": "Hotel Gia Nien Hoa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5445807625,
+  "lat": 22.3488610,
+  "lon": 106.8559522,
+  "tags": {
+    "description": "120 CNY per night double bedroom. Three star hotel.",
+    "name:en": "Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5446922065,
+  "lat": 22.3488731,
+  "lon": 106.8560375,
+  "tags": {
+    "description": "120 p/n",
+    "name:en": "Long Jia hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5453203356,
+  "lat": 22.0795440,
+  "lon": 106.7368450,
+  "tags": {
+    "description": "168 CNY per night",
+    "name:en": "Guanyue International Hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5463303522,
+  "lat": 21.8722228,
+  "lon": 106.7620161,
+  "tags": {
+    "name:en": "Sua",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5495485166,
+  "lat": 21.5059406,
+  "lon": 106.3456538,
+  "tags": {
+    "name": "Nhà khách huyện Hữu Lũng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6799418964,
+  "lat": 21.8498308,
+  "lon": 106.9177638,
+  "tags": {
+    "name": "Nhà nghỉ Hương Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6984606988,
+  "lat": 22.4318475,
+  "lon": 106.4310041,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7006092458,
+  "lat": 22.2390594,
+  "lon": 107.0547563,
+  "tags": {
+    "name": "崇左花山民族山寨",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7167953150,
+  "lat": 21.6293408,
+  "lon": 106.3679286,
+  "tags": {
+    "name": "Viet climb homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 8403647017,
+  "lat": 21.8461802,
+  "lon": 107.0040597,
+  "tags": {
+    "name": "M1215",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 10921151705,
+  "lat": 21.8508982,
+  "lon": 106.7564802,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11714811631,
+  "lat": 21.5449447,
+  "lon": 107.0998653,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11714852373,
+  "lat": 21.8586716,
+  "lon": 106.7537769,
+  "tags": {
+    "name": "white hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11714953216,
+  "lat": 22.2573148,
+  "lon": 106.4727957,
+  "tags": {
+    "name:vi": "Nhà Nghỉ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11768919455,
+  "lat": 22.1377198,
+  "lon": 107.0637079,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12062423435,
+  "lat": 22.1092539,
+  "lon": 106.7572442,
+  "tags": {
+    "name": "湘玲宾馆",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12643207893,
+  "lat": 22.1107170,
+  "lon": 106.7554594,
+  "tags": {
+    "name": "雅斯特酒店",
+    "tourism": "hotel",
+    "website": "https://www.trip.com/hotels/pingxiang-hotel-detail-80985360/ast-international-hotel-pingxiang-bus-terminal-food-street"
+  }
+},
+{
+  "type": "node",
+  "id": 12682577369,
+  "lat": 21.9086921,
+  "lon": 106.3414409,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Dương Công Chích Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12682613719,
+  "lat": 21.8475494,
+  "lon": 106.7629625,
+  "tags": {
+    "addr:housenumber": "608B",
+    "addr:street": "Bà Triệu",
+    "name": "Hava Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12944557159,
+  "lat": 22.4098713,
+  "lon": 107.3355597,
+  "tags": {
+    "name": "凯玄国际大酒店",
+    "name:en": "Kai Xuan International Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12989623045,
+  "lat": 21.8467898,
+  "lon": 106.7733846,
+  "tags": {
+    "addr:city": "Thành phố Lạng Sơn",
+    "addr:country": "VN",
+    "addr:housenumber": "297",
+    "addr:province": "Lạng Sơn",
+    "addr:street": "Phai Vệ",
+    "addr:subdistrict": "Mai Pha",
+    "brand": "Tru by Hilton",
+    "email": "hanvp_tru@hilton.com",
+    "internet_access": "wlan",
+    "name": "Tru by Hilton Lang Son City Centre",
+    "phone": "+84 205 3909 555",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/hanvpru-tru-lang-son-city-centre/"
+  }
+},
+{
+  "type": "node",
+  "id": 13084888519,
+  "lat": 21.8435930,
+  "lon": 106.9164865,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087052593,
+  "lat": 22.4227526,
+  "lon": 106.4345369,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087085031,
+  "lat": 22.0631603,
+  "lon": 106.6086432,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087102438,
+  "lat": 22.0503068,
+  "lon": 106.6170652,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087107487,
+  "lat": 22.4481670,
+  "lon": 106.4456625,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087108299,
+  "lat": 21.9422048,
+  "lon": 106.7026225,
+  "tags": {
+    "addr:street": "Quốc lộ 1",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087121312,
+  "lat": 21.9615436,
+  "lon": 106.6902362,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087127037,
+  "lat": 22.2396431,
+  "lon": 106.4989799,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087130816,
+  "lat": 22.0350973,
+  "lon": 106.6273939,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087131767,
+  "lat": 22.2538709,
+  "lon": 106.4777392,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087132310,
+  "lat": 21.9457895,
+  "lon": 106.7016073,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087133014,
+  "lat": 22.3967254,
+  "lon": 106.4363359,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087133015,
+  "lat": 21.9424118,
+  "lon": 106.7019571,
+  "tags": {
+    "addr:street": "Đường Chi Lăng",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087307846,
+  "lat": 21.8558910,
+  "lon": 106.7618982,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087307849,
+  "lat": 21.8624370,
+  "lon": 106.7643091,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087307850,
+  "lat": 21.8624623,
+  "lon": 106.7645277,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087316211,
+  "lat": 21.6987568,
+  "lon": 106.3785600,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087317332,
+  "lat": 21.7009779,
+  "lon": 106.3758153,
+  "tags": {
+    "addr:city": "Lạng Sơn",
+    "addr:district": "Hữu Lũng",
+    "addr:province": "Lạng Sơn",
+    "addr:street": "Thôn Làng Bên",
+    "addr:subdistrict": "Hữu Liên",
+    "contact:facebook": "https://www.facebook.com/bamboohillresort",
+    "email": "bamboohillsresort@gmail.com",
+    "image": "https://bamboohillresort.com/wp-content/uploads/2025/08/hinh-anh-resort-huu-lien-1.jpg",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "Bamboo Hill",
+    "name": "Bamboo Hill Resort",
+    "phone": "+84984419471",
+    "reservation": "yes",
+    "rooms": "14",
+    "tourism": "motel",
+    "website": "https://bamboohillresort.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13087319057,
+  "lat": 21.6827233,
+  "lon": 106.3801638,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087324558,
+  "lat": 21.6994549,
+  "lon": 106.3766003,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087328802,
+  "lat": 21.7035008,
+  "lon": 106.3678642,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091933094,
+  "lat": 21.6817118,
+  "lon": 106.3726863,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091939580,
+  "lat": 21.6306000,
+  "lon": 106.3501147,
+  "tags": {
+    "name": "Mo Nong Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091958884,
+  "lat": 21.8083445,
+  "lon": 106.8650788,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091960014,
+  "lat": 21.6868639,
+  "lon": 106.6187107,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091961811,
+  "lat": 21.6777414,
+  "lon": 106.3771076,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091965829,
+  "lat": 21.6881705,
+  "lon": 106.6227936,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13091978578,
+  "lat": 21.6471325,
+  "lon": 106.3585854,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092415126,
+  "lat": 21.6045542,
+  "lon": 106.3510850,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092422497,
+  "lat": 21.5424175,
+  "lon": 106.3764253,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092424083,
+  "lat": 21.5546447,
+  "lon": 106.4408228,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092424539,
+  "lat": 21.5757160,
+  "lon": 106.5018455,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092427736,
+  "lat": 21.5080901,
+  "lon": 106.3610812,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092431816,
+  "lat": 21.4259202,
+  "lon": 106.2384020,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092434014,
+  "lat": 21.5760949,
+  "lon": 106.5023812,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092438396,
+  "lat": 21.5071802,
+  "lon": 106.3591287,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092443125,
+  "lat": 21.4315537,
+  "lon": 106.2826541,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092446599,
+  "lat": 21.4978763,
+  "lon": 106.3510853,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092446623,
+  "lat": 21.5747058,
+  "lon": 106.5005829,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092447945,
+  "lat": 21.5451871,
+  "lon": 106.3850018,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092449867,
+  "lat": 21.6304509,
+  "lon": 106.3505634,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092449868,
+  "lat": 21.5047819,
+  "lon": 106.3539187,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092449869,
+  "lat": 21.4663035,
+  "lon": 106.2973962,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092453220,
+  "lat": 21.6528402,
+  "lon": 106.5738147,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092454200,
+  "lat": 21.4460970,
+  "lon": 106.2937422,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092455010,
+  "lat": 21.4169171,
+  "lon": 106.2822689,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13424637641,
+  "lat": 21.6162440,
+  "lon": 106.3751762,
+  "tags": {
+    "name": "WoofStuck Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13427714669,
+  "lat": 21.6041779,
+  "lon": 106.3510734,
+  "tags": {
+    "email": "dongnhung121994@gmail.com",
+    "name": "Hữu Lũng Mountain Climbing Hostel",
+    "phone": "091 113 68 26",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/profile.php?id=100080887384678"
+  }
+},
+{
+  "type": "node",
+  "id": 13593265672,
+  "lat": 22.0995108,
+  "lon": 106.7610329,
+  "tags": {
+    "brand": "维也纳酒店",
+    "brand:en": "Vienna Hotels",
+    "brand:wikidata": "Q7928333",
+    "brand:zh": "维也纳酒店",
+    "name": "维也纳酒店（凭祥市政府广场店）",
+    "name:en": "Vienna Hotels",
+    "name:zh": "维也纳酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13625295728,
+  "lat": 21.9451992,
+  "lon": 106.7009088,
+  "tags": {
+    "addr:street": "Đường Bắc Sơn",
+    "name": "Nhà Nghỉ Ngân Hà",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13625310704,
+  "lat": 21.9494891,
+  "lon": 106.6961641,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Đường Trần Hưng Đạo",
+    "name": "Nhà Nghỉ Trường Hưng",
+    "name:en": "Truong Hung Hotel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13631250201,
+  "lat": 22.0972592,
+  "lon": 106.7464243,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13754269601,
+  "lat": 22.4022911,
+  "lon": 107.3508324,
+  "tags": {
+    "name": "桂基云迪安酒店",
+    "name:en": "Guikeyundian Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14189481901,
+  "lat": 21.8439500,
+  "lon": 106.7604319,
+  "tags": {
+    "addr:housenumber": "92",
+    "addr:street": "Nguyễn Du",
+    "name": "Hava Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 627541184,
+  "center": {
+    "lat": 21.8607347,
+    "lon": 106.7640411
+  },
+  "tags": {
+    "addr:city": "Thành phố Lạng Sơn",
+    "addr:district": "Vĩnh Trại",
+    "addr:province": "Lạng Sơn",
+    "addr:subdistrict": "122 Lý Thường Kiệt",
+    "building": "yes",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "songlonghotel",
+    "source": "DigitalGlobe-Standard",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 718877871,
+  "center": {
+    "lat": 21.8453689,
+    "lon": 106.7523935
+  },
+  "tags": {
+    "landuse": "commercial",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 718877899,
+  "center": {
+    "lat": 21.8452870,
+    "lon": 106.7550500
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 718902594,
+  "center": {
+    "lat": 21.8529190,
+    "lon": 106.7685820
+  },
+  "tags": {
+    "addr:housenumber": "68",
+    "addr:street": "QL4C",
+    "internet_access": "wlan",
+    "landuse": "commercial",
+    "name:en": "Muong Thang Langson Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84253866668",
+    "tourism": "hotel",
+    "website": "http://www.langson.muongthanh.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 725082169,
+  "center": {
+    "lat": 21.8486366,
+    "lon": 106.9175210
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Nhà nghỉ Hoa Hồng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 725082183,
+  "center": {
+    "lat": 21.8493199,
+    "lon": 106.9174752
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn 9 Gian",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1121897533,
+  "center": {
+    "lat": 21.8596731,
+    "lon": 106.7558042
+  },
+  "tags": {
+    "building": "hotel",
+    "ele": "275.54",
+    "name:en": "Van Xuan Hotel",
+    "name:ja": "バンスアン ホテル",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1274064888,
+  "center": {
+    "lat": 22.1077238,
+    "lon": 106.7538644
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "中越国际大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1274067406,
+  "center": {
+    "lat": 22.1080059,
+    "lon": 106.7537304
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "金祥大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1306477551,
+  "center": {
+    "lat": 22.1095807,
+    "lon": 106.7574648
+  },
+  "tags": {
+    "check_date": "2025-07-26",
+    "landuse": "commercial",
+    "name": "西贡大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1313685230,
+  "center": {
+    "lat": 22.1089021,
+    "lon": 106.7583798
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "园林国际大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1394074059,
+  "center": {
+    "lat": 22.0813489,
+    "lon": 106.7380142
+  },
+  "tags": {
+    "building": "yes",
+    "name": "喜相逢国际大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1394074062,
+  "center": {
+    "lat": 22.0974594,
+    "lon": 106.7603437
+  },
+  "tags": {
+    "building": "yes",
+    "name": "凭祥国际大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1394074063,
+  "center": {
+    "lat": 22.0979426,
+    "lon": 106.7603593
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1464505631,
+  "center": {
+    "lat": 21.8467685,
+    "lon": 106.7733495
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Tru by Hilton Lang Son",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1482809816,
+  "center": {
+    "lat": 22.1793559,
+    "lon": 107.0635565
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "宁明花山温泉国际酒店",
+    "name:en": "Huashan Hot Spring International Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526030892,
+  "center": {
+    "lat": 21.8593848,
+    "lon": 106.7640315
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Imperial Hotel Lạng Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526032371,
+  "center": {
+    "lat": 21.8599304,
+    "lon": 106.7572532
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Lạng Sơn Marina Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526035978,
+  "center": {
+    "lat": 21.8586562,
+    "lon": 106.7538338
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526038049,
+  "center": {
+    "lat": 21.8607899,
+    "lon": 106.7556560
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn New Century Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526041136,
+  "center": {
+    "lat": 21.8482247,
+    "lon": 106.7678039
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Phú Quý",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

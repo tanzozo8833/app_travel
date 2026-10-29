@@ -1,0 +1,435 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T20:12:09Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3294246961,
+  "tags": {
+    "name": "Hotel Hanoi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294246962,
+  "tags": {
+    "name": "Nha Nghi Sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294246966,
+  "tags": {
+    "name": "Tien Hao Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294246971,
+  "tags": {
+    "name": "Phuong Thanh hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3294252895,
+  "tags": {
+    "name": "Lan Anh Hotel2",
+    "name:vi": "Khách sạn - Nhà hàng Lan Anh 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3294281872,
+  "tags": {
+    "name": "Nha Nghi sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294281873,
+  "tags": {
+    "name": "Nha Nghi sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294281876,
+  "tags": {
+    "name": "Nha Nghi sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4555932190,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Putaleng Hotel",
+    "name:vi": "Putaleng Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4560112789,
+  "tags": {
+    "name": "Bùi Sánh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4577398309,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Motels",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4577398310,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Herberge",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4577398392,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nha Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4577438795,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nha Nghi Duc Giang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4577440812,
+  "tags": {
+    "name:de": "Motels",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4807397522,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Truong Giang",
+    "name:vi": "Truong Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4901458621,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi Guest House",
+    "phone": "0983953269",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4909029221,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ha Nhi",
+    "name:vi": "Ha Nhi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4950010821,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5143029822,
+  "tags": {
+    "name": "Khách sạn Dung Phú",
+    "name:en": "Dung Phu Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5227967821,
+  "tags": {
+    "addr:street": "Deo Khau Pha",
+    "internet_access": "wlan",
+    "name": "Nhà Nghĩ Bình Dân",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "phone": "0949207227",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5227968021,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "H Than Uyen",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5631476421,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6007270885,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghi Minh Thúc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6121560611,
+  "tags": {
+    "name": "Nam My",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6121560612,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6282826486,
+  "tags": {
+    "name": "Hoan Quan (200k)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6285340089,
+  "tags": {
+    "name:en": "Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6655048466,
+  "tags": {
+    "name": "Nhà nghỉ Hương Hộ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7200179386,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "nhà nghì tién tói",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7236238885,
+  "tags": {
+    "name": "Nha nghi ben ho",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7310341385,
+  "tags": {
+    "name:en": "Minh Tuan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7930629955,
+  "tags": {
+    "name": "Phúc Thọ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9933420817,
+  "tags": {
+    "name:en": "A Pao Homestay",
+    "phone": "0382227432",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13033739935,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13033740180,
+  "tags": {
+    "name": "Khách sạn Love Hill",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13033753783,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13033753952,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13033755134,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13033755135,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13037218995,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13037241615,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13037242625,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 14137277304,
+  "tags": {
+    "addr:housenumber": "068",
+    "addr:street": "Đường 30 Tháng 4",
+    "check_date": "2026-08-31",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Lan Hương",
+    "name:en": "Lan Hương Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 705960783,
+  "tags": {
+    "landuse": "commercial",
+    "name": "Nhà khách Hương Phong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 713668261,
+  "tags": {
+    "landuse": "commercial",
+    "name": "Nhà khách Hoa Ban",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 846270019,
+  "tags": {
+    "building": "yes",
+    "name": "Tre Ngà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1160812208,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà nghỉ 25A",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "way",
+  "id": 1160850833,
+  "tags": {
+    "building": "yes",
+    "building:levels": "3",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "way",
+  "id": 1160850841,
+  "tags": {
+    "building": "yes",
+    "building:levels": "3",
+    "tourism": "motel"
+  }
+}
+
+  ]
+}

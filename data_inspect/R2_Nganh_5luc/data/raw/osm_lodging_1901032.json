@@ -1,0 +1,443 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:58:05Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 481837571,
+  "tags": {
+    "name": "Ks Á Đông",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2591036235,
+  "tags": {
+    "addr:street": "Ngõ 982 Lý Bôn",
+    "name": "Khách sạn Đức Nam",
+    "source": "gps",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4372883192,
+  "tags": {
+    "internet_access": "wlan",
+    "name:zh": "朝陽飯店",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4723588008,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nha Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4905260221,
+  "tags": {
+    "name": "khách sạn White Palace",
+    "name:en": "White Palace hotel",
+    "name:vi": "khách sạn White Palace",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5352539629,
+  "tags": {
+    "name:en": "Hotel Green",
+    "phone": "0363867353",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5507680922,
+  "tags": {
+    "name": "Cô Bằng YAZAKI Khu Công Nghiệp Tân Bình Vũ Thư",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5520217421,
+  "tags": {
+    "name": "Hoa long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5586173124,
+  "tags": {
+    "name": "Làng Việt hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5623883513,
+  "tags": {
+    "name": "Golden Thai Binh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5809048153,
+  "tags": {
+    "name": "khách sạn Làng Việt",
+    "name:en": "Lang Viet hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5832817485,
+  "tags": {
+    "name": "nhà mình",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6543701589,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "39 Moi",
+    "internet_access": "wlan",
+    "phone": "0922222632",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7069537987,
+  "tags": {
+    "name": "KHACH SAN HOÀNG GIA(correct location)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7069553185,
+  "tags": {
+    "name:en": "SONG TRA HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7296229185,
+  "tags": {
+    "addr:street": "Lê đình Kiên",
+    "internet_access": "wlan",
+    "name": "LÝcôthảo",
+    "phone": "0398377119",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7983286085,
+  "tags": {
+    "name:en": "Home2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9684287817,
+  "tags": {
+    "name:en": "An Thai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11650806769,
+  "tags": {
+    "name:en": "New Day Hotel",
+    "name:ru": "Гостиница New Day Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13031447418,
+  "tags": {
+    "name": "Nhà Trọ .",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13038657735,
+  "tags": {
+    "name": "Phòng trọ khép kín Tùng Lâm",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13165445935,
+  "tags": {
+    "addr:district": "Xã Lạc Đạo",
+    "addr:province": "Hưng Yên",
+    "addr:street": "ĐT281",
+    "addr:subdistrict": "Thôn Đông Mai",
+    "air_conditioning": "yes",
+    "guest_house": "hostel",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "level": "1-5",
+    "name": "Nhà Nghỉ Như Ý",
+    "note": "Nhà nghỉ Như Ý",
+    "opening_hours": "24/7",
+    "payment:MB_Bank": "yes",
+    "payment:account_cards": "yes",
+    "payment:app": "yes",
+    "payment:cards": "yes",
+    "reservation": "yes",
+    "smoking": "outside",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13269931009,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13304890789,
+  "tags": {
+    "name": "Golden Moon Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13318771885,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13321428701,
+  "tags": {
+    "name": "HÁN MỸ",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13335466114,
+  "tags": {
+    "name": "Phòng trọ Son Bảy",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13350706907,
+  "tags": {
+    "name": "Camping Royal Wave Park",
+    "operator": "Vingrop",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 13403802792,
+  "tags": {
+    "name": "Tiny Cozy House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13403802797,
+  "tags": {
+    "name": "Homestay HL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13726823777,
+  "tags": {
+    "name": "Khách sạn Melia Grand Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 974877057,
+  "tags": {
+    "building": "yes",
+    "guest_house": "guest_house",
+    "name": "Nhà khách tỉnh Hưng Yên",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1199387051,
+  "tags": {
+    "addr:housenumber": "458",
+    "addr:street": "Phố Lý Bôn",
+    "building": "yes",
+    "name": "Khách sạn Petro Thái Bình",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1259213744,
+  "tags": {
+    "building": "yes",
+    "name": "White Palace",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1367884292,
+  "tags": {
+    "addr:street": "Đường phú khê",
+    "building": "yes",
+    "not:brand:wikidata": "Q3895",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "way",
+  "id": 1418833802,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1448196923,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1448196924,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452263399,
+  "tags": {
+    "building": "house",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452281613,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452555945,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452792227,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1454090246,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1455700141,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1461450959,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1461450960,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1483997710,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1487526811,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1487526813,
+  "tags": {
+    "building": "yes",
+    "tourism": "hostel"
+  }
+}
+
+  ]
+}

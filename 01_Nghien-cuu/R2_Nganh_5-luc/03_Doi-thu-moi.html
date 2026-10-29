@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đối thủ mới gia nhập</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f2ee;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --s1-soft:#cde2fb;
+  --q1:#cde2fb; --q2:#86b6ef; --q3:#2a78d6; --q3-ink:#fff;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --accent:#256abf;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+    --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+    --accent:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+  --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+  --accent:#6da7ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+nav.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+nav.files a{font-size:13px;text-decoration:none;color:var(--ink-2);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+nav.files a.on{background:var(--ink);color:var(--page);box-shadow:none}
+.theme{margin-left:auto;font:inherit;font-size:13px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+h1{font-size:30px;line-height:1.2;margin:4px 0 6px;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:24px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.lede{font-size:17px;color:var(--ink-2);max-width:760px}
+.card{min-width:0;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:18px 18px 14px;margin:14px 0}
+.keys{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 20px;margin:18px 0}
+.keys li{margin:6px 0}
+.keys h3{margin:4px 0 6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.tile .l{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+.tile .s{color:var(--muted);font-size:12px;margin-top:6px}
+.lv{display:inline-block;font-size:11px;font-weight:650;line-height:1;padding:3px 6px;border-radius:5px;vertical-align:1px;box-shadow:inset 0 0 0 1px var(--axis);color:var(--ink-2);white-space:nowrap}
+.lv.A{background:var(--ink);color:var(--page);box-shadow:none}
+.lv.B{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.lv.D{border-style:dashed;box-shadow:none;outline:1px dashed var(--axis);outline-offset:-1px}
+.chart-t{font-weight:650;font-size:15.5px;margin:0}
+.chart-s{color:var(--ink-2);font-size:13px;margin:2px 0 12px}
+.bars{display:grid;grid-template-columns:minmax(120px,38%) 1fr;row-gap:8px;column-gap:12px;align-items:center}
+.bl{font-size:13.5px;color:var(--ink);text-align:right;line-height:1.3}
+.bl small{display:block;color:var(--muted);font-size:11.5px}
+.bt{position:relative;height:22px;border-left:1px solid var(--axis);outline:none}
+.bt .b{position:absolute;left:0;top:3px;height:16px;background:var(--s1);border-radius:0 4px 4px 0}
+.bt .b.alt{background:var(--s2)}
+.bt .b.ghost{background:var(--s1-soft)}
+.bt .n{position:absolute;top:1px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;padding-left:6px;font-variant-numeric:tabular-nums}
+.bt .tip{display:none;position:absolute;z-index:5;left:0;top:26px;background:var(--ink);color:var(--page);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:7px;max-width:320px;width:max-content}
+.bt:hover .tip,.bt:focus .tip{display:block}
+.bt:hover .b,.bt:focus .b{filter:brightness(1.12)}
+.foot{color:var(--muted);font-size:12px;margin-top:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--grid)}
+th{font-weight:650;color:var(--ink-2);font-size:12.5px;background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:4px 6px;margin:12px 0}
+.stack{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;padding:0 8px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.stack .a{background:var(--s1);color:#fff}
+.stack .i{background:var(--s2);color:#fff}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.heat table{min-width:760px;table-layout:fixed}
+.heat th,.heat td{text-align:center;vertical-align:middle;padding:6px 2px;border:2px solid var(--surface);font-size:12px}
+.heat td.rl,.heat th.rl{text-align:left;width:190px;padding-left:8px;font-size:12.5px;background:var(--surface)}
+.heat td.h0{background:var(--surface-2);color:var(--muted)}
+.heat td.h1{background:var(--q1);color:var(--ink)}
+.heat td.h2{background:var(--q2);color:#0b0b0b}
+.heat td.h3{background:var(--q3);color:var(--q3-ink);font-weight:650}
+.heat td.rk{background:repeating-linear-gradient(135deg,var(--surface-2) 0 4px,transparent 4px 8px);color:var(--crit);font-weight:650}
+.so{display:inline-block;min-width:22px;text-align:center;font-weight:700;border-radius:5px;padding:1px 6px}
+.so.hi{background:var(--ink);color:var(--page)}
+.so.md{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.so.lo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--axis)}
+.tag{font-size:11.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.op{color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.tag.th{color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}
+.tag.mx{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--axis)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;box-shadow:0 0 0 1px var(--ring)}
+.callout b{color:var(--ink)}
+.gap{border-left:3px dashed var(--axis);padding:8px 14px;margin:12px 0;color:var(--ink-2);font-size:14px}
+.tl{position:relative;margin:10px 0 0 6px;padding-left:22px;border-left:2px solid var(--grid)}
+.tl .ev{position:relative;margin:0 0 14px}
+.tl .ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--s1)}
+.tl .ev.f:before{box-shadow:0 0 0 2px var(--axis);background:var(--surface-2)}
+.tl .d{font-size:12.5px;font-weight:650;color:var(--accent)}
+.tl .ev.f .d{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+ol.src{font-size:12.5px;color:var(--ink-2);padding-left:22px}
+ol.src li{margin:3px 0;word-break:break-word}
+ol.src a{color:var(--accent)}
+a{color:var(--accent)}
+sup a{text-decoration:none;font-size:11px}
+@media (max-width:640px){
+  h1{font-size:24px}
+  .bars{grid-template-columns:minmax(96px,42%) 1fr}
+  .srow{grid-template-columns:76px 1fr}
+}
+@media print{nav.files,.theme{display:none}.bt .tip{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<nav class="files"><a href="01_Tong-quan-nganh.html" class="">Tổng quan ngành</a><a href="02_Doi-thu-hien-tai.html" class="">Đối thủ hiện tại</a><a href="03_Doi-thu-moi.html" class="on">Đối thủ mới</a><a href="04_Quyen-luc-nguoi-dung.html" class="">Quyền lực người dùng</a><a href="05_Quyen-luc-nha-cung-cap.html" class="">Quyền lực nhà cung cấp</a><a href="06_San-pham-thay-the.html" class="">Sản phẩm thay thế</a><a href="07_Tong-hop-5-luc.html" class="">Tổng hợp 5 lực</a><button class="theme" type="button">Giao diện tối</button></nav>
+<div class="meta">LEVART · R2 Ngành và 5 lực cạnh tranh · Soạn 26/10/2026 · Bản 0.1 · Nghiên cứu tại bàn (thứ cấp) + dữ liệu đo trong data_inspect/R2_Nganh_5luc</div>
+<h1>Đối thủ mới gia nhập</h1>
+<p class="lede">Vào ngành này dễ hay khó, ai có thể vào, và Levart dựng được rào cản gì để không bị người đến sau thay thế.</p>
+<p class="meta">Mức bằng chứng theo <code>PLAN_RESEARCH.md</code>: <span class="lv A" title="Mức bằng chứng A">A</span> văn bản/số liệu nhà nước · <span class="lv B" title="Mức bằng chứng B">B</span> báo cáo có công bố cỡ mẫu · <span class="lv C" title="Mức bằng chứng C">C</span> báo chí/báo cáo không công bố cỡ mẫu · <span class="lv D" title="Mức bằng chứng D">D</span> suy luận của nhóm (GT). Di chuột (hoặc chạm) vào thanh biểu đồ để xem nguồn.</p>
+<div class="keys"><h3>Ý chính</h3><ul><li><b>Vào thì dễ, sống thì khó.</b> Để có một app du lịch trên Google Play chỉ cần phí đăng ký 25 USD <sup><a href="#s1">[1]</a></sup> và một nhóm nhỏ lập trình. Nhưng người đến trước đã rút lui vì không đủ tiền nuôi cả hai phía của sàn: Luxstay gần như đóng hẳn (10/2024) <sup><a href="#s10">[10]</a></sup>, Vntrip bỏ mảng khách lẻ (2020) <sup><a href="#s11">[11]</a></sup>.</li><li><b>Người mới đáng sợ nhất không phải startup, mà là người lớn mở thêm tính năng:</b> siêu ứng dụng ví (MoMo Travel, Shopee Travel đã có điểm cân nhắc 8,0 và 7,0) <sup><a href="#s3">[3]</a></sup>; OTA thêm AI (Booking.com) <sup><a href="#s12">[12]</a></sup>; Klook (vừa huy động 210 triệu USD) <sup><a href="#s5">[5]</a></sup> và Trip.com <sup><a href="#s4">[4]</a></sup> ký với chủ điểm đến lớn.</li><li><b>Kênh mới cũng là người mới:</b> đặt chỗ của Klook qua người sáng tạo nội dung tăng 246% năm 2025 <sup><a href="#s2">[2]</a></sup> — creator TikTok đang tự thành “đại lý”.</li><li><b>Nhà nước cũng sẽ vào:</b> nền tảng số du lịch quốc gia và đề án AI hỗ trợ du khách có hạn 2027 <sup><a href="#s6">[6]</a></sup> — một đối thủ miễn phí ở mảng thông tin điểm đến.</li><li><b>Rào cản pháp lý đang cao lên</b> — có lợi cho người đã tuân thủ: mạng xã hội phải xác thực tài khoản bằng số điện thoại (NĐ 147) <sup><a href="#s7">[7]</a></sup>; sàn bán dịch vụ chịu Luật TMĐT 2025 <sup><a href="#s8">[8]</a></sup>; dữ liệu vị trí là dữ liệu nhạy cảm (NĐ 356) <sup><a href="#s9">[9]</a></sup>.</li><li><b>Kết luận:</b> mối đe doạ gia nhập <b>Cao</b> ở mảng app lên kế hoạch, sưu tầm. Rào cản thật duy nhất Levart có thể dựng là <b>hiệu ứng mạng + quan hệ đối tác địa phương + bộ sưu tập người dùng đã tích luỹ</b>.</li></ul></div><div class="tiles"><div class="tile"><div class="v">$25</div><div class="l">phí đăng ký Google Play (một lần)</div><div class="s">Google · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">210 tr USD</div><div class="l">Klook huy động — sức của một người gia nhập lớn</div><div class="s">The Investor · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">+246%</div><div class="l">đặt chỗ Klook qua creator năm 2025</div><div class="s">Inc. Russia · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">8,0 · 7,0</div><div class="l">điểm cân nhắc MoMo Travel · Shopee Travel</div><div class="s">Decision Lab · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">12/2027</div><div class="l">hạn nền tảng số du lịch quốc gia</div><div class="s">NQ 263/NQ-CP · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">2</div><div class="l">OTA Việt từng có vốn lớn đã rút khỏi mảng khách lẻ (Vntrip, Luxstay)</div><div class="s">Báo chí · <span class="lv C" title="Mức bằng chứng C">C</span></div></div></div><h2>1. Rào cản gia nhập — cao hay thấp, với từng ranh giới ngành</h2><div class="tbl "><table><tr><th>Rào cản</th><th>A. App lên kế hoạch, sưu tầm</th><th>B. OTA, sàn dịch vụ</th><th>C. Mạng xã hội du lịch</th><th>Bằng chứng · nguồn</th></tr><tr><td>Vốn ban đầu</td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td>App: $25 + công lập trình <sup><a href="#s1">[1]</a></sup>; OTA cần ngân sách khuyến mãi (Vntrip, Luxstay đốt tiền rồi rút) <sup><a href="#s10">[10]</a></sup><sup><a href="#s11">[11]</a></sup></td></tr><tr><td>Hiệu ứng mạng</td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td>Sàn hai phía cần cả khách lẫn đối tác; MXH cần đông người mới có nội dung</td></tr><tr><td>Quan hệ nhà cung cấp</td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><span class="so lo">1</span></td><td>OTA lớn ký với Vinpearl, Sun Group <sup><a href="#s4">[4]</a></sup>; app sưu tầm không cần đối tác lúc đầu</td></tr><tr><td>Thương hiệu, độ tin</td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td>Traveloka 82% người biết (tệp 02)</td></tr><tr><td>Pháp lý</td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td>NĐ 147 (MXH) <sup><a href="#s7">[7]</a></sup>; Luật TMĐT (sàn) <sup><a href="#s8">[8]</a></sup>; BVDLCN (vị trí) <sup><a href="#s9">[9]</a></sup></td></tr><tr><td>Phân phối (tới được người dùng)</td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td>Ai cũng lên được Play Store/TikTok; khó là được chú ý</td></tr><tr><td>Chi phí công nghệ theo quy mô</td><td><span class="so lo">1</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td>Maps, AI tính phí theo lượt dùng; ngưỡng miễn phí từ 3/2025 <sup><a href="#s13">[13]</a></sup></td></tr><tr><td><b>Tổng (trung bình)</b></td><td><b>1,6 — thấp</b></td><td><b>2,7 — cao</b></td><td><b>2,1 — vừa</b></td><td>Điểm 1–3 do nhóm chấm <span class="lv D" title="Mức bằng chứng D">D</span></td></tr></table></div><h2>2. Ai có thể vào — và nếu vào thì mạnh cỡ nào</h2><div class="tbl "><table><tr><th>Người có thể gia nhập</th><th>Đã có dấu hiệu</th><th>Khả năng (1–3)</th><th>Sức đe doạ (1–3)</th><th>Vì sao</th></tr><tr><td>Siêu ứng dụng ví (MoMo, ZaloPay, Shopee)</td><td>MoMo Travel, Shopee Travel có điểm cân nhắc 8,0 / 7,0 <sup><a href="#s3">[3]</a></sup></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td>Có sẵn hàng chục triệu người dùng và thanh toán; ví chiếm 46% thanh toán du lịch số (tệp 01)</td></tr><tr><td>OTA lớn thêm tính năng AI, cộng đồng</td><td>Booking.com, Agoda đẩy AI <sup><a href="#s12">[12]</a></sup></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td>Có dữ liệu và đối tác; nhưng không làm sản phẩm ngách “34 tỉnh”</td></tr><tr><td>Klook, Trip.com mở rộng trải nghiệm nội địa</td><td>Hợp tác Sun World, Vinpearl <sup><a href="#s4">[4]</a></sup><sup><a href="#s5">[5]</a></sup></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td>Mạnh ở điểm lớn, yếu ở bản nhỏ</td></tr><tr><td>Trợ lý AI (ChatGPT, Gemini) + Google Maps</td><td>Đã là sản phẩm thay thế — tệp 06</td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td>Miễn phí, mặc định trên điện thoại</td></tr><tr><td>Nhà nước — nền tảng số du lịch quốc gia</td><td>Hạn 12/2027 <sup><a href="#s6">[6]</a></sup></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td>Miễn phí nhưng thường kém trải nghiệm; có thể là nguồn dữ liệu</td></tr><tr><td>Creator TikTok, admin nhóm Facebook tự bán</td><td>Klook creator +246% <sup><a href="#s2">[2]</a></sup></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td>Có khán giả sẵn; thiếu công cụ — có thể là đối tác của Levart</td></tr><tr><td>Startup sao chép “hộ chiếu 34 tỉnh”</td><td>Chưa thấy (kiểm ở data_inspect)</td><td><span class="so md">2</span></td><td><span class="so lo">1</span></td><td>Ý tưởng không được bảo hộ (R1, tệp L); chỉ bảo vệ được bằng tốc độ và cộng đồng</td></tr></table></div><h2>3. Các yếu tố quyết định mối đe doạ gia nhập</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Tác động lên lực</th><th>Độ mạnh</th><th>Bằng chứng</th><th>Nguồn · mức</th></tr><tr><td>Chi phí làm một app thấp</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>$25 + nhóm nhỏ; công cụ AI giúp viết mã nhanh</td><td><sup><a href="#s1">[1]</a></sup> · A</td></tr><tr><td>Người dùng không mất gì khi đổi app</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>Chi phí chuyển đổi gần 0 (tệp 04)</td><td>tệp 04 · C</td></tr><tr><td>Người lớn có sẵn người dùng (siêu ứng dụng)</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>MoMo, Shopee đã bán du lịch</td><td><sup><a href="#s3">[3]</a></sup> · B</td></tr><tr><td>Hiệu ứng mạng hai phía</td><td><span class="tag op">↓ giảm sức ép</span></td><td><span class="so md">2</span></td><td>Ai đến trước có đối tác và nội dung trước; người đến sau phải đổ tiền</td><td>D</td></tr><tr><td>Rào cản pháp lý tăng (NĐ 147, Luật TMĐT, BVDLCN)</td><td><span class="tag op">↓ giảm sức ép</span></td><td><span class="so md">2</span></td><td>Người mới phải xác thực tài khoản, bảo vệ dữ liệu vị trí</td><td><sup><a href="#s7">[7]</a></sup><sup><a href="#s8">[8]</a></sup><sup><a href="#s9">[9]</a></sup> · A</td></tr><tr><td>Đối thủ lớn trả đũa</td><td><span class="tag op">↓ giảm sức ép</span></td><td><span class="so lo">1</span></td><td>Ở mảng ngách 34 tỉnh, khó có OTA nào bỏ tiền ra đánh</td><td>D</td></tr></table></div><div class="card"><p class="chart-t">Kết luận sức ép của lực này: <b>Cao</b></p><div class="bars"><div class="bl">Thấp → Rất cao</div><div class="bt"><div class="b" style="width:75%"></div><span class="n" style="left:75%">Cao</span></div></div><p class="foot">Cao ở mảng app lên kế hoạch/sưu tầm (ranh giới A). Thấp–trung bình nếu tính tới quy mô OTA (ranh giới B) — nhưng chính rào cản ở B cũng chặn Levart.</p></div><h2>4. Levart dựng rào cản của riêng mình bằng gì</h2><div class="tbl "><table><tr><th>Rào cản tự dựng</th><th>Cơ chế</th><th>Bao lâu thì có</th><th>Đo bằng gì</th></tr><tr><td>Bộ sưu tập đã tích luỹ</td><td>Người dùng có 12/34 con dấu thì ngại bỏ đi — chi phí chuyển đổi tự tạo</td><td>Ngay khi có người dùng đi ≥ 2 tỉnh</td><td>Tỉ lệ quay lại sau chuyến thứ 2</td></tr><tr><td>Quan hệ đối tác ở tỉnh nhỏ</td><td>Homestay, quán, nhà xe ở Mai Châu, Pù Luông… mà OTA lớn không vào</td><td>3–6 tháng mỗi tỉnh</td><td>Số đối tác hoạt động/tỉnh</td></tr><tr><td>Dữ liệu check-in thật</td><td>Ảnh, vị trí được xác nhận tại chỗ — thứ AI và OTA không có</td><td>Sau vài nghìn lượt check-in</td><td>Số check-in có xác thực</td></tr><tr><td>Cộng đồng theo tỉnh</td><td>Nhóm người đã đi cùng tỉnh hỏi đáp nhau</td><td>6–12 tháng</td><td>Số câu hỏi được trả lời/tuần</td></tr></table></div><h2>5. Chấm điểm và cột “vì vậy”</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Loại</th><th>Tác động</th><th>Khả năng</th><th>T×K</th><th>Khi nào</th><th>Nguồn · mức</th><th>Vì vậy Levart nên…</th></tr><tr><td>Siêu ứng dụng ví bán du lịch</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>1–2 năm</td><td>[3] · B</td><td>Không đấu ở mảng đặt chỗ; tích hợp thanh toán ví (VietQR) thay vì cạnh tranh với ví.</td></tr><tr><td>App mới làm được trong vài tuần</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[1] · A</td><td>Đi nhanh tới bộ sưu tập + đối tác ở 1–2 tỉnh — thứ không sao chép được trong vài tuần.</td></tr><tr><td>Creator tự bán dịch vụ</td><td><span class="tag mx">Cả hai</span></td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[2] · C</td><td>Biến creator thành đối tác: con dấu do creator thiết kế, chia hoa hồng.</td></tr><tr><td>Rào cản pháp lý cao lên</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[7][8][9] · A</td><td>Tuân thủ sớm (đăng nhập SĐT, DPIA) — thành lợi thế với người đến sau.</td></tr><tr><td>Nền tảng số du lịch quốc gia (2027)</td><td><span class="tag mx">Cả hai</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>1–2 năm</td><td>[6] · A</td><td>Theo dõi API; dùng làm nguồn dữ liệu thay vì cạnh tranh.</td></tr></table></div>
+<h2>Nguồn</h2>
+<ol class="src"><li id="s1">Google — Android developer verification, phí đăng ký Google Play $25 — <a href="https://developer.android.com/developer-verification/guides/early-access" target="_blank" rel="noopener">https://developer.android.com/developer-verification/guides/early-access</a></li><li id="s2">Klook: đặt chỗ qua người sáng tạo nội dung tăng 246% năm 2025, Inc. Russia — <a href="https://incrussia.ru/news/turisticheskaya-platforma-klook-privlekla-blogerov-k-prodvizheniyu-novyh-napravlenij-vo-vetname/" target="_blank" rel="noopener">https://incrussia.ru/news/turisticheskaya-platforma-klook-privlekla-blogerov-k-prodvizheniyu-novyh-napravlenij-vo-vetname/</a></li><li id="s3">Decision Lab Travel Rankings 2024 — MoMo (Travel) 8,0; Shopee (Travel) 7,0 — <a href="https://www.decisionlab.co/blog/vietnam-travel-landscape-2024" target="_blank" rel="noopener">https://www.decisionlab.co/blog/vietnam-travel-landscape-2024</a></li><li id="s4">TTG Asia — Trip.com hợp tác chiến lược với Sun World — <a href="https://www.ttgasia.com/tag/sun-world" target="_blank" rel="noopener">https://www.ttgasia.com/tag/sun-world</a></li><li id="s5">Klook huy động 210 triệu USD, The Investor — <a href="https://theinvestor.vn/travel-platform-klook-seals-210-mln-in-funding-d7731.html" target="_blank" rel="noopener">https://theinvestor.vn/travel-platform-klook-seals-210-mln-in-funding-d7731.html</a></li><li id="s6">Nghị quyết 263/NQ-CP (07/09/2026) — nền tảng số du lịch quốc gia, đề án AI hỗ trợ du khách, Báo Văn hoá — <a href="https://baovanhoa.vn/du-lich/ky-3-tu-tam-nhin-den-chuong-trinh-hanh-dong-264168.html" target="_blank" rel="noopener">https://baovanhoa.vn/du-lich/ky-3-tu-tam-nhin-den-chuong-trinh-hanh-dong-264168.html</a></li><li id="s7">Nghị định 147/2024/NĐ-CP — xác thực tài khoản mạng xã hội, VnEconomy — <a href="https://vneconomy.vn/tu-ngay-25-12-tai-khoan-mang-xa-hoi-phai-xac-thuc-so-dien-thoai-moi-duoc-dang-bai.htm" target="_blank" rel="noopener">https://vneconomy.vn/tu-ngay-25-12-tai-khoan-mang-xa-hoi-phai-xac-thuc-so-dien-thoai-moi-duoc-dang-bai.htm</a></li><li id="s8">Luật Thương mại điện tử 122/2025/QH15, LuatVietnam — <a href="https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-thuong-mai-dien-tu-2025-so-122-2025-qh15-186-106402-article.html" target="_blank" rel="noopener">https://luatvietnam.vn/tin-van-ban-moi/da-co-luat-thuong-mai-dien-tu-2025-so-122-2025-qh15-186-106402-article.html</a></li><li id="s9">EY — Nghị định 356/2025 hướng dẫn Luật Bảo vệ dữ liệu cá nhân (3/2026) — <a href="https://www.ey.com/content/dam/ey-unified-site/ey-com/vi-vn/technical/tax/documents/ey-vietnam-legal-alert-march-2026-decree-no356-2025-nd-cp-providing-detailed-guidance-for-implementation-of-personal-data-protection-law-viet.pdf" target="_blank" rel="noopener">https://www.ey.com/content/dam/ey-unified-site/ey-com/vi-vn/technical/tax/documents/ey-vietnam-legal-alert-march-2026-decree-no356-2025-nd-cp-providing-detailed-guidance-for-implementation-of-personal-data-protection-law-viet.pdf</a></li><li id="s10">Luxstay sau khi gọi vốn giờ ra sao? (10/2024), TravelViet — <a href="https://travelviet.net/vn/news/ha-noi/luxstay-nen-tang-dat-homestay-sau-khi-goi-von-gio-ra-sao" target="_blank" rel="noopener">https://travelviet.net/vn/news/ha-noi/luxstay-nen-tang-dat-homestay-sau-khi-goi-von-gio-ra-sao</a></li><li id="s11">Startup du lịch trong khó khăn nhìn ra cơ hội (Vntrip chuyển B2B), Diễn đàn Doanh nghiệp — <a href="https://diendandoanhnghiep.vn/startup-du-lich-trong-kho-khan-nhin-ra-co-hoi-193627.html" target="_blank" rel="noopener">https://diendandoanhnghiep.vn/startup-du-lich-trong-kho-khan-nhin-ra-co-hoi-193627.html</a></li><li id="s12">Booking.com Global AI Adoption Report 2026 — 82% du khách Việt tin AI giúp lên kế hoạch dễ hơn, Báo Đầu tư — <a href="https://baodautu.vn/82-du-khach-viet-tin-ai-se-thay-doi-cach-len-ke-hoach-du-lich-d638301.html" target="_blank" rel="noopener">https://baodautu.vn/82-du-khach-viet-tin-ai-se-thay-doi-cach-len-ke-hoach-du-lich-d638301.html</a></li><li id="s13">Google Maps Platform — bảng giá, ngưỡng miễn phí theo SKU từ 01/03/2025 — <a href="https://developers.google.com/maps/billing-and-pricing/faq" target="_blank" rel="noopener">https://developers.google.com/maps/billing-and-pricing/faq</a></li><li id="s14">Levart — data_inspect/R1_PESTLE/report.md (phân tích dữ liệu R1, 25/10/2026; nội bộ)</li><li id="s15">Levart — data_inspect/R2_Nganh_5luc/report.md (phân tích dữ liệu R2, 26/10/2026; nội bộ)</li><li id="s16">Levart — PLAN_RESEARCH.md mục 4 (R2) và 5 (R3), nội bộ</li></ol>
+<p class="foot">Truy cập các nguồn ngày 26/10/2026. Phần pháp lý là danh sách việc cần hỏi luật sư, không phải tư vấn pháp lý.</p>
+</div><script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){var t=document.documentElement.getAttribute('data-theme');
+    if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function lab(){b.textContent=cur()==='dark'?'Giao diện sáng':'Giao diện tối';}
+  try{var s=localStorage.getItem('r1-theme'); if(s) document.documentElement.setAttribute('data-theme',s);}catch(e){}
+  lab();
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('r1-theme',n);}catch(e){} lab();});
+})();
+</script></body></html>

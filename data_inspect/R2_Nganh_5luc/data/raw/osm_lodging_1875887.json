@@ -1,0 +1,1055 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:47:51Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 897309847,
+  "tags": {
+    "name": "Khách sạn Bưu điện",
+    "name:en": "Post Office Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 897310174,
+  "tags": {
+    "name": "Khách sạn Rừng Dương",
+    "name:en": "Rung Duong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1804916385,
+  "tags": {
+    "name": "Khách sạn Vinh Sang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2380063715,
+  "tags": {
+    "name": "Dong Nam A2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2610796688,
+  "tags": {
+    "name": "Khánh Quỳnh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2610848995,
+  "tags": {
+    "name": "Vân Trang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2610848998,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách Sạn Ngũ Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2610876911,
+  "tags": {
+    "addr:city": "Vĩnh Long",
+    "addr:country": "VN",
+    "addr:housenumber": "62",
+    "addr:street": "Trưng Nữ Vương",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Minh Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3284635843,
+  "tags": {
+    "addr:street": "172/9 Binh Luong,An Binh,Long Ho , Vinh Long, An Bình, Long Hồ, Vĩnh Long, Vietnam",
+    "name": "Nam Thanh Homestay",
+    "opening_hours": "Mo-Su 09:00-22:00",
+    "phone": "+84 91 871 79 86",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 3765138858,
+  "tags": {
+    "addr:city": "Bến Tre",
+    "addr:district": "TP. Bến Tre",
+    "addr:housenumber": "166",
+    "addr:province": "Bến Tre",
+    "addr:street": "Hung Vuong",
+    "addr:subdistrict": "Phường An Hội",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách sạn Hùng Vương",
+    "payment:cash": "yes",
+    "phone": "+84753826134",
+    "smoking": "yes",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3847288355,
+  "tags": {
+    "name": "Ben Tre Kiwi Oasis",
+    "tourism": "hotel",
+    "website": "https://www.bentrehoteloasis.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3852260000,
+  "tags": {
+    "name": "Ham Luong Tourist Hotel",
+    "name:de": "Ham Luong Tourist Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3945867017,
+  "tags": {
+    "name": "Coco Riverside Lodge",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4106941389,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Khách sạn Sao Mai*",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4305589390,
+  "tags": {
+    "name": "Ngoc sang homestay ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4305603392,
+  "tags": {
+    "name": "Ba linh homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4428326290,
+  "tags": {
+    "name:en": "Tourist hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4485719289,
+  "tags": {
+    "name": "Que ngoai",
+    "name:vi": "Que ngoai",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4512175089,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phuong Dong",
+    "name:fr": "Phuong Dong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4547656495,
+  "tags": {
+    "name": "nhà phong",
+    "name:vi": "nhà phong",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4561880422,
+  "tags": {
+    "email": "badanhhomestay@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Ba Danh Homestay",
+    "operator": "Nguyen Phu Si",
+    "phone": "0989217902",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4584305192,
+  "tags": {
+    "addr:housenumber": "113",
+    "addr:street": "Quảng Trường Vĩnh Long (Public Square)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4597356690,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "G Adventure Homestay",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4652673791,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4658933694,
+  "tags": {
+    "name": "Trạm dừng nghỉ",
+    "name:vi": "Trạm dừng nghỉ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4677938093,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phuong Dong",
+    "name:vi": "Phuong Dong",
+    "phone": "0743868819",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4689895590,
+  "tags": {
+    "addr:street": "Võ Văn Kiệt",
+    "email": "thanhhienck@gmail.com",
+    "internet_access": "wlan",
+    "name": "Phòng Trọ 707",
+    "phone": "0939709474",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4696746504,
+  "tags": {
+    "name": "Lộc Phúc",
+    "name:vi": "Lộc Phúc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4748985821,
+  "tags": {
+    "name": "Ngoc Phuong",
+    "name:vi": "Ngoc Phuong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4789221721,
+  "tags": {
+    "name": "Ngọc Phượng",
+    "name:vi": "Ngọc Phượng",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4789221722,
+  "tags": {
+    "addr:housenumber": "2H",
+    "addr:street": "Hùng Vương",
+    "internet_access": "wlan",
+    "name": "Phụng Hoàng Hotel",
+    "name:en": "Phụng Hoàng Hotel",
+    "name:fr": "Phụng Hoàng Hotel",
+    "name:vi": "Phụng Hoàng Hotel",
+    "phone": "3825185",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4793310544,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4810923128,
+  "tags": {
+    "name": "Nam Hien",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4815577521,
+  "tags": {
+    "name": "Nhà Nội",
+    "name:vi": "Nhà Nội",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4826862822,
+  "tags": {
+    "email": "homestayngocsang@yahoo.com.vn",
+    "internet_access": "wlan",
+    "name": "Ngoc Sang Homestay",
+    "name:en": "Ngoc Sang Homestay",
+    "name:vi": "Ngoc Sang Homestay",
+    "phone": "+84 (0) 90 9201828",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4849443021,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5043979128,
+  "tags": {
+    "addr:postcode": "93000",
+    "addr:street": "883",
+    "internet_access": "wlan",
+    "name": "Khu nghỉ dưỡng Forever Green",
+    "name:en": "Forever Green Resort",
+    "name:vi": "Khu nghỉ dưỡng Forever Green",
+    "opening_hours": "24/7",
+    "phone": "0905921639",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5045613026,
+  "tags": {
+    "name": "Nha chi tu",
+    "name:vi": "Nha chi tu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5072698121,
+  "tags": {
+    "email": "info@phuongthaohomestay.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Phuong Thao Homestay",
+    "name:en": "Hostel",
+    "name:vi": "Phuong Thao Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5130340632,
+  "tags": {
+    "addr:street": "T Bình - Q Thiện",
+    "email": "lebanhqt@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà riêng",
+    "phone": "01667995950",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5222746436,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà trọ Nhã Trân",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5265655221,
+  "tags": {
+    "addr:street": "Hẻm Thanh Trà",
+    "name": "DŨNGbếntre",
+    "name:vi": "DŨNGbếntre",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5277156635,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Homestay",
+    "operator": "Trung",
+    "phone": "0908607853",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5340750323,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "mai’s house Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5564145024,
+  "tags": {
+    "name": "Nhon Thanh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5616645221,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ba Hung Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5630883722,
+  "tags": {
+    "name": "Hua Doc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5694767021,
+  "tags": {
+    "addr:street": "RAI_50_BTRI_013",
+    "name": "Nhà cô tư(Anh Cường GĐV)",
+    "name:en": "House Cô Tư",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6071948185,
+  "tags": {
+    "name": "Ut Thuy Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6280007101,
+  "tags": {
+    "addr:street": "Mekong Home, village de Phuoc Long, commune de Ninh Hai, district de Giong Trom, province de Ben Tre, Vietnam",
+    "name": "Mekong Home",
+    "phone": "+(84) 987 29 97 18",
+    "tourism": "hotel",
+    "website": "http://www.mekonghome.com"
+  }
+},
+{
+  "type": "node",
+  "id": 6308020516,
+  "tags": {
+    "name": "Mekong River Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6326577292,
+  "tags": {
+    "name": "Mekong Vintage Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6361666786,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Tro 79",
+    "name:en": "Guesthouse",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6400705985,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6410673685,
+  "tags": {
+    "email": "homestay@mekongchill.com",
+    "internet_access": "wlan",
+    "name": "Mekong Chill Homestay",
+    "phone": "+84707569243",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/MekongChill/"
+  }
+},
+{
+  "type": "node",
+  "id": 6702951787,
+  "tags": {
+    "name:en": "Nha Nghi 99",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6855231297,
+  "tags": {
+    "internet_access": "yes",
+    "name": "Nhà nghĩ trọ Hải Hà",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6859579985,
+  "tags": {
+    "name": "Nhà thờ Mỹ Thuận",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7042963093,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Coco Land Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7073909315,
+  "tags": {
+    "addr:place": "Hoà Quí",
+    "email": "cocohomevinhlong@gmail.com",
+    "name:en": "Cocohome",
+    "name:vi": "Cocohome",
+    "phone": "+84 932871175",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7097973485,
+  "tags": {
+    "name": "Ut Trinh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7127561985,
+  "tags": {
+    "name": "Nhà Phân Phối Khuê Hưng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7140624252,
+  "tags": {
+    "description": "Bungalows",
+    "name": "Ben Tre Farm Stay (Bungalows)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7140635497,
+  "tags": {
+    "addr:city": "Bến Tre",
+    "addr:district": "Bến Tre",
+    "addr:housenumber": "324C",
+    "addr:province": "Bến Tre",
+    "addr:street": "ấp 3",
+    "addr:subdistrict": "Phú Nhuận",
+    "name": "Green Homestay Bến Tre",
+    "tourism": "guest_house",
+    "website": "https://greenhomestaybentre.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 7178400385,
+  "tags": {
+    "name": "Nam Binh  (correct)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7202285386,
+  "tags": {
+    "name:en": "Mecong Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7213953085,
+  "tags": {
+    "addr:housenumber": "209 A/15",
+    "addr:postcode": "891311",
+    "addr:street": "Moi non Thang chin, Thanh dog, long ho",
+    "name": "Mekong Pottery homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7239260799,
+  "tags": {
+    "diet:dairy_free": "yes",
+    "diet:fruitarian": "yes",
+    "diet:gluten_free": "yes",
+    "diet:lacto_vegetarian": "yes",
+    "diet:lactose_free": "yes",
+    "diet:ovo_vegetarian": "yes",
+    "diet:pescetarian": "yes",
+    "diet:raw": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Ben Tre Garden Farmstay",
+    "smoking": "outside",
+    "tourism": "hostel",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 7249863886,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Cuu Long A hôtel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7252647787,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Cuu long a hôtel.",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7257644485,
+  "tags": {
+    "name:en": "Nam Binh Homestay (correct location)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7283078235,
+  "tags": {
+    "name": "Mango Home Riverside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7296726690,
+  "tags": {
+    "addr": "665D Lo Thay Cai, Ben Tre, Vietnam",
+    "name": "Ben Tre Stay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7296735187,
+  "tags": {
+    "addr:full": "53/4 Phu My , Dong Phu, Long Ho, Vĩnh Long, Vietnam",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Happy Family Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7890136385,
+  "tags": {
+    "name:en": "Nguyet Que Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7893633686,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7893650486,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 8712116817,
+  "tags": {
+    "name": "Nha Hang Nguyen Thi Hanh",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 10591655018,
+  "tags": {
+    "name": "Nhà Trọ Tư Nhân",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 10591667972,
+  "tags": {
+    "name": "Nhà Trọ Tư Nhân",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 10653337542,
+  "tags": {
+    "addr:city": "Bến Tre",
+    "addr:district": "Châu Thành",
+    "addr:housenumber": "ấp 10",
+    "addr:province": "Bến Tre",
+    "addr:street": "Ấp Tân Vinh",
+    "addr:subdistrict": "Tân Thạch",
+    "brand": "Coco Island",
+    "email": "festppuuhosting@cocoisland.vn",
+    "image": "https://cocoisland.vn/wp-content/uploads/2021/06/coco-island-con-phung-ben-tre2-510x510.jpg",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Coco Island",
+    "operator": "Công ty TNHH Dl DV TM Cồn Phụng",
+    "phone": "+84939645179",
+    "rooms": "30",
+    "tourism": "hotel",
+    "website": "https://cocoisland.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 10951196005,
+  "tags": {
+    "name:en": "Ecoco homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11548925269,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hide Away Ben Tre",
+    "phone": "+84944903301",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11572837069,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11572837469,
+  "tags": {
+    "name:fr": "Phuoc hung 2 hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11888367969,
+  "tags": {
+    "addr:city": "Bến Tre",
+    "addr:district": "TP. Bến Tre",
+    "addr:housenumber": "140",
+    "addr:province": "Bến Tre",
+    "addr:street": "Hùng Vương",
+    "addr:subdistrict": "Phường An Hội",
+    "contact:facebook": "Diamond-Stars-Ben-Tre-108251257244227",
+    "contact:instagram": "diamondstarsbentrehotel7",
+    "contact:twitter": "DIAMONDSTARSBE1",
+    "email": "info@diamondstarbentre.com",
+    "internet_access": "wlan",
+    "name": "Diamond Star Hotel",
+    "name:en": "Diamond Stars Ben Tre Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84 275 3748 888",
+    "tourism": "hotel",
+    "website": "https://diamondstarbentre.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12464170501,
+  "tags": {
+    "name": "Ben trestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12531353701,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Mékong Pottery Homestay",
+    "tourism": "guest_house",
+    "website": "https://mekongpotteryhomestay.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12598806091,
+  "tags": {
+    "name": "Motel Đồng Khởi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12629887801,
+  "tags": {
+    "addr:district": "Phường Đông Thành",
+    "addr:housenumber": "368",
+    "addr:postcode": "85513",
+    "addr:province": "Vĩnh Long",
+    "addr:street": "Cống cây gòn",
+    "addr:subdistrict": "Đông hưng 1",
+    "email": "canthotouring@gmail.com",
+    "guest_house": "guest_house",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name:en": "Susan's Home",
+    "phone": "+84939690228",
+    "rooms": "5",
+    "tourism": "guest_house",
+    "website": "https://canthotouring.com"
+  }
+},
+{
+  "type": "node",
+  "id": 13485183401,
+  "tags": {
+    "contact:facebook": "@bentrecocolodge",
+    "internet_access": "wlan",
+    "name": "Bentre Coco Lodge",
+    "phone": "0983 775 572",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13977293289,
+  "tags": {
+    "addr:province": "tỉnh Vĩnh Long",
+    "addr:street": "Nguyễn Thiện Thành",
+    "addr:subdistrict": "Phường Hoà Thuận",
+    "internet_access:fee": "no",
+    "name": "Nhà trọ Thanh Trúc",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14084778123,
+  "tags": {
+    "addr:city": "Vĩnh Long",
+    "addr:district": "Vĩnh Thành",
+    "addr:housenumber": "118",
+    "addr:postcode": "86511",
+    "addr:province": "Vĩnh Long",
+    "addr:street": "Hòa khánh",
+    "addr:subdistrict": "Vĩnh Thành",
+    "air_conditioning": "yes",
+    "brand": "freemie",
+    "email": "freemievn@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "level": "1",
+    "mobile": "+84931286289",
+    "name": "Freemie Homestay",
+    "opening_hours": "24/7",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+84931286289",
+    "ref:vatin": "1301165818",
+    "reservation": "yes",
+    "rooms": "6",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 230778845,
+  "tags": {
+    "name": "Khách sạn Việt Úc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 288579055,
+  "tags": {
+    "name": "Nhà khách Công an Tỉnh Trà Vinh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 288585292,
+  "tags": {
+    "name": "Nhà khách Trà Vinh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 463201785,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Thao Nhi Hotel",
+    "source": "Bing 2016",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 794420288,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Trưng Nữ Vương",
+    "building": "hotel",
+    "name": "Khách sạn Sài Gòn - Vĩnh Long",
+    "name:en": "Saigon - Vinh Long Hotel",
+    "operator": "Saigontourist",
+    "tourism": "hotel",
+    "website": "https://www.saigonvinhlonghotel.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1000681703,
+  "tags": {
+    "internet_access": "yes",
+    "landuse": "commercial",
+    "name": "Khách sạn Cửu Long",
+    "rooms": "27",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1421682289,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Ngọc Yến",
+    "name:en": "Ngoc Yen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1454326025,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "name": "Maison du pays de Ben Tre",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1563945422,
+  "tags": {
+    "building": "yes",
+    "name": "NHÀ NGHỈ TRUNG NGHĨA",
+    "tourism": "motel"
+  }
+}
+
+  ]
+}

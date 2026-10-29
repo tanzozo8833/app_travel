@@ -1,0 +1,21 @@
+force,indicator,value,rule,score,source
+Cạnh tranh hiện tại,Độ trùng tính năng lớn nhất với Levart (cosine),0.88,4 × cosine,3.504,"D2, D4"
+Cạnh tranh hiện tại,HHI nhóm đặt chỗ (App Store VN),3178.0,HHI ÷ 1.000,3.178,D4
+Cạnh tranh hiện tại,Độ ổn định thứ hạng (Spearman giữa các năm),0.96,4 × ρ (thứ hạng cứng = khó chen),3.8240000000000003,D6
+Cạnh tranh hiện tại,Tăng trưởng thực của ngành 2023–2025 (%/năm),9.9,4 − tăng trưởng ÷ 3 (ngành tăng nhanh làm dịu cạnh tranh),0.6999999999999997,D1
+Đối thủ mới gia nhập,% app du lịch iOS ra mắt từ 2022,25.9,% ÷ 10,2.5931098696461823,D4
+Đối thủ mới gia nhập,Chi phí đăng ký phát hành (USD),25.0,phí ≤ 100 USD → 4,4.0,S6
+Đối thủ mới gia nhập,% app mới (từ 2022) đạt ≥ 100.000 lượt cài,12.6,4 × % ÷ 25 (ít người mới thành công = mối đe doạ thấp),2.016,D2
+Đối thủ mới gia nhập,Gini lượt cài (thắng thua dồn về số ít),0.954,"4 × (1 − Gini) × 4, tối đa 4",0.7360000000000007,D2
+Quyền lực người dùng,"% đánh giá app đặt chỗ nhắc tên đối thủ (so sánh, dùng nhiều app)",0.8,% ÷ 5 × 4 (nhắc tên đối thủ hiếm trong đánh giá; 5% coi là rất nhiều),0.64,"D3, D5"
+Quyền lực người dùng,Tỉ lệ OTA trả lời đánh giá (phải chiều người dùng),0.73,4 × tỉ lệ,2.927882352941176,D3
+Quyền lực người dùng,|Độ co giãn| tham gia ở chuyến 4–5 triệu (R1),1.68,4 × |e| ÷ 2,3.36,D8
+Quyền lực người dùng,Có sản phẩm thay thế miễn phí,1.0,có → 4,4.0,D2
+Nhà cung cấp — địa phương,Công suất phòng (thừa cung → yếu),0.4533,"4 × công suất ÷ 0,9",2.0146666666666664,S1
+Nhà cung cấp — địa phương,Mức phí tối đa homestay vẫn có lợi (f_max),59.8,4 × (1 − f_max),1.608,"S1, S2, GT"
+Nhà cung cấp — địa phương,% cơ sở lưu trú thuộc chuỗi (OSM),2.63,4 × % ÷ 50,0.2104,D7
+Nhà cung cấp — công nghệ,"Số nhà cung cấp then chốt không thay ngay được (Play, Maps, Firebase, Gemini)",4.0,số ÷ 4 × 3 (GT),3.0,"S6, S7, GT"
+Nhà cung cấp — công nghệ,Phí kho ứng dụng (%),15.0,% ÷ 5,3.0,S6
+Sản phẩm thay thế,"Lượt cài thay thế ÷ app lên kế hoạch, sưu tầm (lần)",938.0,4 × log10(tỉ lệ) ÷ 3,3.9629371178387527,D2
+Sản phẩm thay thế,Tìm 'chatgpt' ÷ tìm 'lịch trình' (2025),11.4,4 × log10(tỉ lệ) ÷ 1,4.0,D6
+Sản phẩm thay thế,Thay đổi tìm 'tour du lịch' 2019→2025 (%),-25.6,4 × (1 + % ÷ 100) (tour truyền thống giảm = bớt một thay thế),2.976,D6

@@ -1,0 +1,345 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:45:51Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1561954478,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4160839990,
+  "tags": {
+    "name": "Nhà Mát",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4170991690,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4398892299,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Khách 276",
+    "name:vi": "Nhà Khách 276",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4483700789,
+  "tags": {
+    "addr:housenumber": "hẻm 141",
+    "addr:street": "Quang Trung",
+    "internet_access": "wlan",
+    "opening_hours": "Mo-Su 07:00-19:00",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4483731490,
+  "tags": {
+    "addr:housenumber": "hẻm 214",
+    "addr:street": "Quang Trung",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4575374297,
+  "tags": {
+    "addr:housenumber": "179",
+    "addr:street": "Phan Ngọc Hiển",
+    "name": "Khách Sạn Quốc Tế",
+    "name:en": "Quoc Te hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4575383376,
+  "tags": {
+    "addr:city": "Cà Mau",
+    "addr:district": "Phường 6",
+    "addr:housenumber": "207",
+    "addr:province": "Cà Mau",
+    "addr:street": "Phan Ngọc Hiển",
+    "internet_access": "wlan",
+    "name": "Anh Nguyet hotel",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4578374469,
+  "tags": {
+    "name": "Dong Anh hotel",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4696948890,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghĩ Hoàng Cung",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4908542198,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Long Ty Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4928343722,
+  "tags": {
+    "name:en": "金瓯 华人旅店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5233871121,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 5395104322,
+  "tags": {
+    "name": "Thành Nanh 1 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5442507721,
+  "tags": {
+    "name": "Khách Sạn Thái Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5453985821,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5584688921,
+  "tags": {
+    "name": "Cam Ha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5613094823,
+  "tags": {
+    "name": "Khách sạn Song Ngọc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6461069085,
+  "tags": {
+    "name": "Khách sạn Cà Mau",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 7897171385,
+  "tags": {
+    "name:en": "Khach San Tien Phat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9741822687,
+  "tags": {
+    "addr:city": "Thành phố Cà Mau",
+    "addr:housenumber": "Lô C3A - Khu Trung Tâm Hành Chính - Chính Trị Cà Mau",
+    "addr:province": "Tỉnh Cà Mau",
+    "addr:street": "Đường số 1",
+    "addr:subdistrict": "Phường 9",
+    "name": "Khách sạn Mường Thanh Luxury Cà Mau",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10928122297,
+  "tags": {
+    "name": "Khách sạn Bạch Vân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11643022054,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12603973330,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "mobile": "+84 914 696 698",
+    "name": "Thiên Lộc",
+    "phone": "+84 2906 268 168",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13765411101,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Đất Mũi",
+    "name": "Nguyễn Văn Nhuần",
+    "phone": "0919 186 419",
+    "tourism": "motel",
+    "website": "http://dulichcongdongnguyenvannhuan.com"
+  }
+},
+{
+  "type": "node",
+  "id": 13957975201,
+  "tags": {
+    "addr:housenumber": "Khóm 6",
+    "addr:street": "Đường tỉnh 988",
+    "name:en": "Kien Toan Hotel",
+    "name:vi": "Kiện Toàn Hotel",
+    "phone": "0949405479",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14308663222,
+  "tags": {
+    "name": "Nhà nghỉ Mai Về",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 14311381358,
+  "tags": {
+    "name": "Nhà trọ Minh Khôi",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14311392739,
+  "tags": {
+    "name": "Nhà Trọ Yến Linh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 225518623,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà khách công đoàn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 225518624,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà khách UBND tỉnh Bạc Liêu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 225519379,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà nghỉ 255",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "way",
+  "id": 225533919,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Bạc Liêu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 243516739,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Hòn Đá Bạc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1060318605,
+  "tags": {
+    "addr:city": "Thành phố Cà Mau",
+    "addr:housenumber": "Lô C3A - Khu Trung Tâm Hành Chính - Chính Trị Cà Mau",
+    "addr:province": "Tỉnh Cà Mau",
+    "addr:street": "Đường số 1",
+    "addr:subdistrict": "Phường 9",
+    "building": "yes",
+    "name": "Khách sạn Mường Thanh Luxury Cà Mau",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1228657047,
+  "tags": {
+    "building": "yes",
+    "name": "Phu Cuong Hotel - Ca Mau",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

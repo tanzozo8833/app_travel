@@ -1,0 +1,4676 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:46:49Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 530849260,
+  "tags": {
+    "name": "Mai House resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1166227096,
+  "tags": {
+    "ele": "13.71",
+    "name": "Chen Sea Resort",
+    "tourism": "hotel",
+    "website": "https://www.chensea-resort.com/",
+    "wpt_symbol": "Dot"
+  }
+},
+{
+  "type": "node",
+  "id": 1274268685,
+  "tags": {
+    "internet_access": "no",
+    "name": "Nhà khách VQG UMT",
+    "smoking": "yes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1274268717,
+  "tags": {
+    "name": "Hương Tràm",
+    "phone": "+84 832 474 745",
+    "smoking": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1316465835,
+  "tags": {
+    "name": "Trung nguyen hotel ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1606049784,
+  "tags": {
+    "name": "Freedomland",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650556230,
+  "tags": {
+    "name": "Hoa Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650556244,
+  "tags": {
+    "description": "hotel touristique",
+    "name": "Hotel Du Hung 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650556257,
+  "tags": {
+    "name": "Hotel Du Hung",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650587739,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hiệp Phong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650587765,
+  "tags": {
+    "name": "Orient Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650599386,
+  "tags": {
+    "name": "Thien Phu An Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650599413,
+  "tags": {
+    "name": "Kim Hoa Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650599436,
+  "tags": {
+    "name": "Blue Lagoon Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650599453,
+  "tags": {
+    "name": "T90 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650599462,
+  "tags": {
+    "name": "Sao Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650607894,
+  "tags": {
+    "name": "South Wind Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650607975,
+  "tags": {
+    "name": "Le Veranda Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650613301,
+  "tags": {
+    "name": "Thanh Kieu Resort",
+    "tourism": "guest_house",
+    "website": "https://www.thanhkieuresort.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 1650622924,
+  "tags": {
+    "name": "A74 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1650622976,
+  "tags": {
+    "name": "Moon Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650630493,
+  "tags": {
+    "name": "Nhà Hàng Paradiso",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1650671989,
+  "tags": {
+    "disused": "yes",
+    "name": "Chez Carole Resort",
+    "note": "temporarily closed",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1753228002,
+  "tags": {
+    "amenity": "restaurant",
+    "email": "bamboophuquoc@gmail.com",
+    "is_in:country": "Vietnam",
+    "is_in:island": "Phu Quoc",
+    "name": "Bamboo",
+    "phone": "+84 (0) 77281.0345",
+    "tourism": "hotel",
+    "website": "https://bamboophuquoc.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 1753228022,
+  "tags": {
+    "name": "Beach Club",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1753228029,
+  "tags": {
+    "addr:street": "Tran Hung Dao",
+    "internet_access": "wlan",
+    "name": "Mai Spa",
+    "name:de": "Mai Spa",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1787713115,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Palace Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1787713254,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1787713262,
+  "tags": {
+    "check_date": "2026-01-07",
+    "name": "Hiep Thanh Resort",
+    "name:vi": "Resort Hiệp Thạnh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1787713318,
+  "tags": {
+    "name": "KS Đông Xanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1798919871,
+  "tags": {
+    "name": "KS Kim Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1805846548,
+  "tags": {
+    "name": "Hòa Bình 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1805896837,
+  "tags": {
+    "name": "KS Gió Sông",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1813395486,
+  "tags": {
+    "name": "KS Hoàng Tuyên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1954274163,
+  "tags": {
+    "name": "Cuu Long Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2079893220,
+  "tags": {
+    "name": "Thai Tan Tien Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2093881889,
+  "tags": {
+    "name": "Coconut Tree",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2093881902,
+  "tags": {
+    "name": "Tropicana Resort",
+    "tourism": "hotel",
+    "website": "www.tropicana.phuquoc.com"
+  }
+},
+{
+  "type": "node",
+  "id": 2122324522,
+  "tags": {
+    "is_in:country": "Vietnam",
+    "is_in:island": "Phu Quoc",
+    "name": "Mai Phuong Beach Resort",
+    "tourism": "hotel",
+    "website": "http://maiphuongphuquoc.com"
+  }
+},
+{
+  "type": "node",
+  "id": 2175954216,
+  "tags": {
+    "addr:city": "Rach Gia",
+    "addr:housenumber": "5",
+    "addr:street": "D Tu Do",
+    "email": "phuonghonghotel@ymail.com",
+    "name": "Phuong Hong Hotel",
+    "phone": "3878777",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2318288310,
+  "tags": {
+    "name": "Hòn Trẹm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2331791876,
+  "tags": {
+    "name": "KS Duy Nguyên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2589014783,
+  "tags": {
+    "name": "Thanh Hải Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2590497259,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Mỹ Linh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2590497270,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Ngọc Tuyết",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2598104316,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Thành Dạt",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2598104596,
+  "tags": {
+    "name": "Wild Rose",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2921270065,
+  "tags": {
+    "name": "Ngoc Phu Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3175002571,
+  "tags": {
+    "addr:city": "Duong Dong",
+    "addr:district": "Phu Quoc",
+    "addr:housenumber": "149",
+    "addr:province": "Kien Giang",
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Coi Nguon Resort",
+    "phone": "0773980206",
+    "smoking": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3196581623,
+  "tags": {
+    "name": "Salinda Premium",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3205448187,
+  "tags": {
+    "name": "Sunset Hill Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3251395262,
+  "tags": {
+    "email": "reservations@lananhphuquoc.com.vn",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Lan Anh Garden Resort",
+    "phone": "+84 773 985 985",
+    "stars": "2",
+    "tourism": "hotel",
+    "website": "https://lananhphuquoc.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 3289615101,
+  "tags": {
+    "addr:city": "Duong Dong",
+    "addr:province": "Phu Quoc Island",
+    "addr:street": "Tan Hung Dao",
+    "name": "Huong Giang Bungalows",
+    "smoking": "outside",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3319583923,
+  "tags": {
+    "fax": "+84 77 399 6685",
+    "name": "Blue Sea Resort",
+    "phone": "+84 77 399 6684",
+    "tourism": "hotel",
+    "website": "http://bluesearesort.net/"
+  }
+},
+{
+  "type": "node",
+  "id": 3319583925,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Mango Bay Resort",
+    "phone": "+84 773 981 693",
+    "tourism": "hotel",
+    "website": "https://mangobayphuquoc.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3320087390,
+  "tags": {
+    "addr:city": "Phu Quoc Island",
+    "addr:housenumber": "143",
+    "addr:street": "Tran Hung Dao Street",
+    "name": "Paradise Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3413817007,
+  "tags": {
+    "addr:city": "Dương Đông",
+    "addr:street": "Nguyễn Huệ",
+    "addr:subdistrict": "KP 5",
+    "name": "Kim Hông Ngoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3424406310,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3561662109,
+  "tags": {
+    "addr:housenumber": "62",
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Saigon - Phu Quoc Resort & Spa",
+    "tourism": "hotel",
+    "website": "https://sgphuquocresort.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 3738798228,
+  "tags": {
+    "name": "Nhà trọ bình dân",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 3897530057,
+  "tags": {
+    "name": "Thuan Loi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3912900566,
+  "tags": {
+    "email": "info@hungcuonghotel.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hung Cuong Hotel",
+    "tourism": "hotel",
+    "website": "http://www.hungcuonghotel.com/home"
+  }
+},
+{
+  "type": "node",
+  "id": 3932119914,
+  "tags": {
+    "name": "Victoria Nui Sam Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4023393668,
+  "tags": {
+    "name": "Dong Xuyen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4023393669,
+  "tags": {
+    "name": "Long Xuyen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4023393670,
+  "tags": {
+    "name": "Cuu Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068098711,
+  "tags": {
+    "email": "giobienphuquoc@gmail.com",
+    "name": "Gio Bien Resort",
+    "phone": "+84 773 845507",
+    "tourism": "hotel",
+    "website": "https://www.giobienphuquoc.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4068098712,
+  "tags": {
+    "email": "info@goldcoastphuquoc.com",
+    "name": "Gold Coast Resort",
+    "phone": "+84 773 989 278",
+    "tourism": "hotel",
+    "website": "www.goldcoastphuquoc.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4068098714,
+  "tags": {
+    "email": "info@peppercornbeach.com",
+    "name": "Peppercorn Beach Resort",
+    "phone": "+84 (0) 77 3989 567",
+    "tourism": "hotel",
+    "website": "https://www.peppercornbeach.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135659,
+  "tags": {
+    "name": "Antinho Hostel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135664,
+  "tags": {
+    "name": "Daisy Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135669,
+  "tags": {
+    "name": "Bungalow Coco Chill PQ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135673,
+  "tags": {
+    "name": "Quoc Thang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135675,
+  "tags": {
+    "name": "Rum Bungalows",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135678,
+  "tags": {
+    "name": "Sun & Sea",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135679,
+  "tags": {
+    "name": "T&T",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135681,
+  "tags": {
+    "name": "Thanh Kim Nga",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4068135683,
+  "tags": {
+    "name": "Truong Thinh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4089316786,
+  "tags": {
+    "addr:city": "Duong Dong",
+    "addr:district": "Phu Quoc",
+    "addr:housenumber": "155",
+    "addr:postcode": "920000",
+    "addr:province": "Kien Giang",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "DƯƠNG ĐÔNG",
+    "internet_access": "yes;wlan",
+    "internet_access:fee": "customers",
+    "leisure": "resort",
+    "name": "HẠNH NGỌC RESORT;Hanh Ngoc Bungalow",
+    "name:en": "Hanh Ngoc Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4134993796,
+  "tags": {
+    "name": "Seaside Villa Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4151477656,
+  "tags": {
+    "name": "Phu Quoc Kim Bungalows",
+    "tourism": "hotel",
+    "website": "http://phuquockimbungalows.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4159055789,
+  "tags": {
+    "name": "An An Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4180093400,
+  "tags": {
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "name": "Long Beach Resort",
+    "phone": "+84 773 981818",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4206125489,
+  "tags": {
+    "name": "La Casa Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4206567289,
+  "tags": {
+    "name": "Vela Phu Quoc Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4223453789,
+  "tags": {
+    "addr:street": "118/12 Tran Hung Dao Street - 7 ward Duong Dong - Phu Quoc Island",
+    "email": "info@lienhiepthanhresort.com",
+    "internet_access": "wlan",
+    "name": "Lien Hiep Thanh Resort",
+    "phone": "+84 773 847 583",
+    "tourism": "hotel",
+    "website": "http://www.lienhiepthanhresort.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4226241689,
+  "tags": {
+    "name": "hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4233938506,
+  "tags": {
+    "name": "Hai Chau Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4258483591,
+  "tags": {
+    "name": "cottage village",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4297922402,
+  "tags": {
+    "name": "Nhà Tro Dông Hô - Dorm Room",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4297922403,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nam Son Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4299948291,
+  "tags": {
+    "name": "Vinh phuoc ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4322754689,
+  "tags": {
+    "addr:street": "Quốc Lộ 63",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Anh Hoài",
+    "opening_hours": "24/7",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4348472300,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4381725890,
+  "tags": {
+    "addr:city": "Phu Quoc",
+    "addr:housenumber": "103",
+    "addr:postcode": "920000",
+    "addr:province": "Kien Giang",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "Duong Dong",
+    "description": "Canary Inn Phu Quoc is located on the main street of Duong Dong town and maximum 10 minutes walking to the downtown or to the beach. Besides, a groceries store for any personal items is cross the street and scooter renting located right next door.",
+    "email": "canaryinnphuquoc@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Quality Inn",
+    "name:en": "Canary Inn Phu Quoc",
+    "note": "Hotline: +84989616233",
+    "operator": "canaryinnphuquoc@gmail.com",
+    "smoking": "outside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4394588716,
+  "tags": {
+    "name": "Happy Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4416039489,
+  "tags": {
+    "addr:city": "Duong Dong",
+    "addr:province": "Kieng Gian",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "KP7",
+    "email": "88hostel.vn@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "88 Hilltop Hostel",
+    "phone": "+84 773 608 883",
+    "rooms": "5",
+    "smoking": "outside",
+    "tourism": "hostel",
+    "website": "https://www.facebook.com/88hilltophostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4428857293,
+  "tags": {
+    "atm": "no",
+    "description": "Hotel cabins",
+    "internet_access": "wlan",
+    "name": "The Simplest Phu Quoc village",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 4430434891,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Phuong Nam Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4437795491,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4451618789,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "leisure": "beach_resort",
+    "name": "Novotel Phu Quoc Resort",
+    "operator": "Novotel",
+    "stars": "5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4455738552,
+  "tags": {
+    "name": "Tài Phát Bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4457161965,
+  "tags": {
+    "name": "Tropical Garden Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4459560652,
+  "tags": {
+    "name": "Island Life Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459627603,
+  "tags": {
+    "name": "Mayfair Valley Bungalows",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4459631756,
+  "tags": {
+    "name": "Mia Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4460863324,
+  "tags": {
+    "name": "Bo Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4467724789,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Thanh Hang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4469784603,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Viet Toan",
+    "name:de": "Viet Toan",
+    "name:vi": "Viet Toan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4470533510,
+  "tags": {
+    "name:en": "An Binh Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4472630389,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Minh Sang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4516597191,
+  "tags": {
+    "name": "Orange resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4524039193,
+  "tags": {
+    "addr:housenumber": "91/1",
+    "addr:street": "Trần Hưng Đạo",
+    "email": "info@9stationhostel.com",
+    "internet_access": "wlan",
+    "name": "9 Station Hostel",
+    "name:en": "9 station hostel",
+    "phone": "0773588999",
+    "tourism": "hostel",
+    "website": "http://9stationhostel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4559433090,
+  "tags": {
+    "addr:housenumber": "98",
+    "addr:street": "Tran Hung Dao",
+    "email": "phuquocseastar@yahoo.com",
+    "name:en": "Sea Star hotel",
+    "name:fr": "Sea Star hotel",
+    "phone": "0084773982161",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4560930302,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4561345796,
+  "tags": {
+    "addr:street": "tt mỹ luông",
+    "name": "Út",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4564935490,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4570480090,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Bon Mua",
+    "name:vi": "Bon Mua",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4621957889,
+  "tags": {
+    "addr:street": "trần hưng đạo",
+    "internet_access": "wlan",
+    "name": "thanh bình 70k",
+    "name:vi": "thanh bình 70k",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4623412289,
+  "tags": {
+    "addr:housenumber": "127D",
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "name": "Lucky PhuQuoc Hotel",
+    "name:ru": "Lucky PhuQuoc Hotel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4624419521,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4625879491,
+  "tags": {
+    "name": "Q Hao",
+    "name:vi": "Q Hao",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4628950183,
+  "tags": {
+    "name": "Huu Le Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4634327790,
+  "tags": {
+    "name:en": "Rock Beach Boutique Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4659496291,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Tro",
+    "name:de": "Nhà Tro",
+    "name:en": "Nhà Tro",
+    "name:vi": "Nhà Tro",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4661428020,
+  "tags": {
+    "addr:housenumber": "96",
+    "addr:postcode": "10000",
+    "addr:street": "Nguyễn Trung Trực",
+    "email": "contact@alanislodge.com",
+    "name": "Khách sạn Alanis Phú Quốc",
+    "name:en": "Alanis Lodge Phu quoc",
+    "phone": "0933551769",
+    "tourism": "hotel",
+    "website": "https://www.alanislodge.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4661817999,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Thuy Van",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4670276696,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ut Map",
+    "name:vi": "Ut Map",
+    "phone": "+84 76 6551 949",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4670288690,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Vien Ngoc",
+    "phone": "+84 98 767 27 39",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4682625618,
+  "tags": {
+    "addr:housenumber": "398",
+    "addr:street": "Hoàng Diệu",
+    "internet_access": "wlan",
+    "name": "Thanh Van 2",
+    "opening_hours": "24/7",
+    "phone": "+84909170785",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4710670691,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4713009489,
+  "tags": {
+    "name": "Delta Floating Hotel",
+    "name:vi": "Delta Floating Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4716336089,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4740974129,
+  "tags": {
+    "addr:housenumber": "1",
+    "internet_access": "wlan",
+    "name": "Sea Sense Resort",
+    "name:en": "Sea Sense Resort",
+    "name:ru": "Sea Sense Resort",
+    "name:vi": "Sea Sense Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4771951122,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4780444721,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Hoang Kim",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4783099421,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4804053422,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Trần Hưng Đạo",
+    "email": "nhanghithaovan@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nha Nghi Thao van",
+    "opening_hours": "24/7",
+    "operator": "Thao Van",
+    "phone": "0773848861",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4810010494,
+  "tags": {
+    "addr:city": "Dương Đông",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "Kiên Giang",
+    "email": "ngoannguyenpq@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Trung Huynh Bungalow",
+    "phone": "+84966770883",
+    "rooms": "13",
+    "stars": "1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4810042621,
+  "tags": {
+    "addr:street": "Quốc lộ 91",
+    "name": "Hiếu Nghĩa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4846984621,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Quang Thắng",
+    "name:en": "Ms. Mệnh",
+    "opening_hours": "24/7",
+    "operator": "Chị Mệnh",
+    "phone": "0166 3436695",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4853121421,
+  "tags": {
+    "addr:housenumber": "32A",
+    "addr:street": "Bạch Đằng",
+    "email": "sophi_hostel@hotmail.com",
+    "internet_access": "wlan",
+    "name": "Sophi Hostel",
+    "name:nl": "Sophi Hostel",
+    "operator": "Ben & Cindy",
+    "phone": "+841677355186",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4882604225,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Bao Tam Lau",
+    "name:en": "Bao Tam Lau",
+    "name:fr": "Bao Tam Lau",
+    "name:vi": "Bao Tam Lau",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4893244121,
+  "tags": {
+    "addr:housenumber": "375",
+    "name": "my home",
+    "name:vi": "nhà của tôi MH",
+    "phone": "0939330222",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 4950697521,
+  "tags": {
+    "addr:housenumber": "tổ 7",
+    "addr:street": "đường Dinh Bà",
+    "name": "Golden Topaz Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4968881226,
+  "tags": {
+    "name": "Kim Co Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4968899723,
+  "tags": {
+    "name": "An An Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4968899725,
+  "tags": {
+    "name": "Tropical Garden Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4968899726,
+  "tags": {
+    "name": "Tropical Garden Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4985329434,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Hòa Hiêp",
+    "phone": "0773850045",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5003536536,
+  "tags": {
+    "name": "Emis",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5022139822,
+  "tags": {
+    "addr:street": "Hà Hoàng Hổ",
+    "name": "An khang",
+    "name:vi": "An khang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5038175321,
+  "tags": {
+    "name:en": "Ninila Fruit Farm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5128215052,
+  "tags": {
+    "name": "Hotel Phu Quoq",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5165150221,
+  "tags": {
+    "addr:housenumber": "36",
+    "addr:street": "Thục Phán",
+    "email": "trietphathuy@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Phát Huy",
+    "name:en": "Phát Huy hotel",
+    "phone": "02963855889",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5182022821,
+  "tags": {
+    "name:en": "Sitaro Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5193018222,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Seaside Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5217862921,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5226323121,
+  "tags": {
+    "addr:housenumber": "295",
+    "addr:street": "Nguyễn Văn Thoại",
+    "internet_access": "wlan",
+    "name": "Hoa Mai",
+    "name:en": "Apricot",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5227374734,
+  "tags": {
+    "addr:street": "Tân Lộ Kiều Lương",
+    "internet_access": "wlan",
+    "name": "Hạ Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5235709821,
+  "tags": {
+    "name:en": "Phuong Dung Guesthouse",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5240965223,
+  "tags": {
+    "name": "Nhà nghỉ phước lôc tho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5255079421,
+  "tags": {
+    "name:en": "Sunny Backpackers",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5267593222,
+  "tags": {
+    "name:en": "Nhat LAN",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5290673737,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phu Quoc Valley Resort",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5296523461,
+  "tags": {
+    "name": "NHA khach",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5303892049,
+  "tags": {
+    "name": "Hai Anh Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5314413324,
+  "tags": {
+    "name:en": "Huynh Gia Bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5317531081,
+  "tags": {
+    "name": "Terrace Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5325259356,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:street": "Ham Ninh Fishervillage, Highway 47",
+    "description": "Guesthouse",
+    "name": "Hai Anh Guesthouse",
+    "phone": "+84 91 875 35 74",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5338495222,
+  "tags": {
+    "name": "Riverside Dormstay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5338643521,
+  "tags": {
+    "name": "Ngoc Quyen",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5342339923,
+  "tags": {
+    "name": "Bien Xanh Hotel",
+    "name:en": "Blue Ocean Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5350195722,
+  "tags": {
+    "name:en": "Chaupho hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5360892823,
+  "tags": {
+    "name": "Thuong hai",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5392453025,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Langchia Village",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5402628534,
+  "tags": {
+    "name:en": "Duc Anh bungalow",
+    "name:ru": "отличная гостиница",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5404777621,
+  "tags": {
+    "email": "Quangkhai.import.export@gmail.com",
+    "internet_access": "wlan",
+    "name": "Sea Lavie Hotel",
+    "phone": "0966668555",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5406797945,
+  "tags": {
+    "name:en": "Diadem Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5419418522,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ngoc Ha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5419803021,
+  "tags": {
+    "check_date": "2026-04-09",
+    "name": "Song Ngoc Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5419803121,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Bao Thy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5421511121,
+  "tags": {
+    "name": "Hotel Helen Ngoc Giang",
+    "name:en": "Helen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5424811048,
+  "tags": {
+    "name": "Kiet Hong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5424811051,
+  "tags": {
+    "addr:housenumber": "89",
+    "addr:street": "Tran Hung Dao",
+    "name": "Boulevard Hotel",
+    "phone": "+84 297 3978 989",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5425794122,
+  "tags": {
+    "name:en": "Phu Quoc Green Land",
+    "name:fr": "Greenland (bof)",
+    "phone": "+842976548866",
+    "tourism": "hotel",
+    "website": "https://facebook.com/Ph%C3%BA-Qu%E1%BB%91c-Green-Land-1511163715627229/"
+  }
+},
+{
+  "type": "node",
+  "id": 5426158221,
+  "tags": {
+    "name": "Thanh Nam 2 mini",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5428936121,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Camia Resort and Spa",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "website": "https://camiaresort.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5433149321,
+  "tags": {
+    "name": "Kim xuan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5433347221,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "ninila fruit farm",
+    "name:en": "Ninila Fruit Farm Bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5437816732,
+  "tags": {
+    "addr:street": "Đường tỉnh 45",
+    "internet_access": "wlan",
+    "name:de": "Elwood Resort Phu Quoc",
+    "name:en": "Elwood Resort Phu Quoc",
+    "phone": "0084773846759",
+    "tourism": "hotel",
+    "website": "http://www.elwoodresort.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5442595322,
+  "tags": {
+    "name": "Tommy’s Beach House",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5450135121,
+  "tags": {
+    "addr:street": "Ba Phong Bridge",
+    "internet_access": "wlan",
+    "name:en": "Orchid Garden Bungalow",
+    "opening_hours": "24/7",
+    "operator": "Phuong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5453614621,
+  "tags": {
+    "addr:housenumber": "30",
+    "internet_access": "wlan",
+    "name": "Đình Đình",
+    "opening_hours": "Mo-Sa 00:00-24:00",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5460662721,
+  "tags": {
+    "name:en": "The Hill Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5482510123,
+  "tags": {
+    "name:en": "Hotel Dai Loi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5482819621,
+  "tags": {
+    "addr:housenumber": "450",
+    "addr:street": "Hoàng Diệu",
+    "internet_access": "wlan",
+    "name": "Phong Lan Guesthouse",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5502672522,
+  "tags": {
+    "name:en": "NOT Orchid Guesthouse, don't trust Booking.com",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5502692421,
+  "tags": {
+    "name": "Orchid Guesthouse",
+    "name:en": "Orchid Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5519557638,
+  "tags": {
+    "name": "local style hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5559697222,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:postcode": "kp1",
+    "addr:street": "dang thuy tram",
+    "name": "Gia phuc guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5562081748,
+  "tags": {
+    "name": "My Than",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5563291699,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5613104322,
+  "tags": {
+    "name": "Phúc Hưng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5628685624,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngọc Hoa",
+    "name:en": "Ngoc Hoa",
+    "opening_hours": "24/7",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5683866521,
+  "tags": {
+    "addr:housenumber": "118/2",
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Chổ ở hiện tại",
+    "name:vi": "Simhotel",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5735595321,
+  "tags": {
+    "name": "Nhat huy bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5735595322,
+  "tags": {
+    "name": "Nhat Huy Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5758095622,
+  "tags": {
+    "addr:street": "Quốc lộ 63",
+    "name": "Phạm Út",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5814596453,
+  "tags": {
+    "name:en": "JW Marriott Staff House",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5843940485,
+  "tags": {
+    "name": "Nhà khách UBND An Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5980826394,
+  "tags": {
+    "name": "KS HẠNH PHÁT CHÂU ĐỐC",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 6030971185,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Sea Sense Resort reception",
+    "name:ru": "Sea Sense Resort лобби",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6035210685,
+  "tags": {
+    "name": "Nhà trọ Yến Oanh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6052212186,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6062583386,
+  "tags": {
+    "addr:housenumber": "236",
+    "addr:postcode": "91000",
+    "addr:street": "Nguyến Hùng Son",
+    "email": "buihostel@gmail.com",
+    "internet_access": "wlan",
+    "name": "BUI Hostel",
+    "opening_hours": "24/7",
+    "phone": "0977296073",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6070092826,
+  "tags": {
+    "brand": "Fusion Resorts",
+    "name": "Fusion Resort Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6083839885,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "HUONG XUA hotel",
+    "phone": "02973957667",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6092535782,
+  "tags": {
+    "addr:housenumber": "Alley 118",
+    "addr:street": "Alley 118, Tran Hung Dao Street",
+    "email": "Phuongbinhhouse@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Phoung Binh House",
+    "phone": "(+84) 02973 994 101",
+    "stars": "3",
+    "tourism": "hotel",
+    "website": "http://phoungbinhhouse.com",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 6105076386,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Xuan Anh",
+    "name:ru": "Xuan Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6105076387,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Xuan Anh",
+    "name:ru": "Xuan Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6106227985,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Lotus Phu Quoc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6135313286,
+  "tags": {
+    "addr:housenumber": "76/4",
+    "addr:postcode": "92000",
+    "addr:street": "30/04 street;Đường 30/4",
+    "email": "sophi_hostel2@hotmail.com",
+    "internet_access": "wlan",
+    "name": "Sophi Hostel 2",
+    "phone": "+84329520560",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6140971685,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Lam Ha Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6144788885,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6151981786,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghi Tú Trinh",
+    "name:en": "Tu trinh motel",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6177537785,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Island Life (neuer Standort)",
+    "name:en": "Island Life (new location)",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6179207686,
+  "tags": {
+    "name": "Huong Giang Bungalow",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6198509885,
+  "tags": {
+    "addr:street": "Nguyễn Tri Phương",
+    "internet_access": "wlan",
+    "name:en": "Hostel Dang Loi",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6211288785,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Thien Hai Son Resort",
+    "name:en": "Hawaii Resort Phu Quoc",
+    "tourism": "hotel",
+    "website": "http://phuquocthienhaison.com"
+  }
+},
+{
+  "type": "node",
+  "id": 6252988785,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6305117966,
+  "tags": {
+    "name": "Guesthouse 20",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6315616785,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6341132085,
+  "tags": {
+    "name:en": "Room to stay 200,000vnd",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6352425335,
+  "tags": {
+    "addr:housenumber": "91/2D",
+    "name": "Mai Binh Phuong Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6352425344,
+  "tags": {
+    "name": "Mai Phuong Binh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6353758237,
+  "tags": {
+    "name": "Bungalow Hong Bin",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6353758240,
+  "tags": {
+    "name": "Be Home Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6353758243,
+  "tags": {
+    "addr:housenumber": "101/5",
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Axura Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6356595462,
+  "tags": {
+    "name": "Amarin resort&spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6358477328,
+  "tags": {
+    "name": "Dusit Princess",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6361666885,
+  "tags": {
+    "name": "Nhà Trọ Quốc tiến",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6377712985,
+  "tags": {
+    "addr:street": "Quốc lộ 47",
+    "internet_access": "wlan",
+    "name": "Hien Mien Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6387166985,
+  "tags": {
+    "name": "Thanh van  1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6390772785,
+  "tags": {
+    "name": "Light House Hotel",
+    "name:vi": "Light House Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6402545285,
+  "tags": {
+    "name": "hồ latina",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 6402576685,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 6417519762,
+  "tags": {
+    "guest_house": "bungalows",
+    "name": "Mely Wow Phu Quoc Resort",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6418157113,
+  "tags": {
+    "brand": "JW Marriott",
+    "brand:wikidata": "Q1067636",
+    "brand:wikipedia": "en:JW Marriott Hotels",
+    "name": "JW Marriott Phu Quoc Emerald Bay Resort & Spa",
+    "rooms": "234",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6444882085,
+  "tags": {
+    "name": "Kim Phượng",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 6477933185,
+  "tags": {
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Levan Hotel",
+    "name:ru": "Отель Levan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6483568743,
+  "tags": {
+    "addr:city": "An Thoi",
+    "addr:housenumber": "60-62",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Khách Sạn Phùng Hưng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6501323575,
+  "tags": {
+    "name": "Thoa chau 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6554722485,
+  "tags": {
+    "addr:housenumber": "23-25",
+    "addr:street": "Phan Văn Vàng",
+    "internet_access": "wlan",
+    "name:en": "Thanh Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6595852985,
+  "tags": {
+    "addr:housenumber": "206/18",
+    "internet_access": "wlan",
+    "name": "Nguyễn Trung",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6743834280,
+  "tags": {
+    "name": "Khách Sạn Hạnh Mai",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6968192385,
+  "tags": {
+    "name": "coop Mark châu đốc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6969643787,
+  "tags": {
+    "name": "Hotel My Phuong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6978585385,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6984601706,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6984782804,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6991517685,
+  "tags": {
+    "addr:city": "Phú Quốc",
+    "addr:district": "Dương Tơ",
+    "addr:postcode": "922210",
+    "addr:province": "Kiên Giang",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "Cửa Lấp",
+    "brand": "An Nhien",
+    "ele": "5",
+    "email": "annhienretreat@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "An Nhien retreat",
+    "name:vi": "An Nhien Retreat",
+    "phone": "+84 906141739",
+    "rooms": "24",
+    "tourism": "hotel",
+    "website": "https://annhienretreat.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7026393651,
+  "tags": {
+    "name": "Sun & Wind Paradise Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7034747785,
+  "tags": {
+    "name:en": "Dreamland Phu Quoc Hotels & Resort, Phú Quốc, Вьетнам",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7043123585,
+  "tags": {
+    "name": "Bamboo Cottages",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7055836285,
+  "tags": {
+    "addr:housenumber": "118/18",
+    "addr:postcode": "922202",
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "name:de": "Vida Loca Resort",
+    "name:en": "Vida Loca Resort",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7071875285,
+  "tags": {
+    "addr:street": "Nguyen Phi Khanh",
+    "internet_access": "wlan",
+    "name": "Amidi homestay and coffee",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7080393086,
+  "tags": {
+    "name:en": "Phong Tro 05 (room 150k)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7104145185,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ruby Phu Quoc Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7109417485,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Villa Caribe",
+    "tourism": "hotel",
+    "website": "https://www.booking.com/hotel/vn/villa-caribe.html"
+  }
+},
+{
+  "type": "node",
+  "id": 7112331486,
+  "tags": {
+    "addr:housenumber": "88/1",
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "name": "OYO 366 Amelia Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7117465485,
+  "tags": {
+    "name:en": "Tom Hill Resort @ Spa Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7121830085,
+  "tags": {
+    "description:ru": "тут не проехать на байке, не пускают жители",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 7122104085,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7149358485,
+  "tags": {
+    "description:ru": "относительно новый отель, но уже есть на букинге",
+    "internet_access": "wlan",
+    "name": "Stellar",
+    "tourism": "hotel",
+    "website": "https://stellarphuquoc.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 7159833685,
+  "tags": {
+    "addr:housenumber": "127",
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "name:en": "Green phu quoc",
+    "opening_hours": "24/7",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7168002185,
+  "tags": {
+    "addr:street": "Đường 30 Tháng 4",
+    "internet_access": "wlan",
+    "name": "Thien Phu Nghia Guesthouse",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7200746687,
+  "tags": {
+    "addr:street": "Xã Bãi Thom",
+    "email": "quochuy@eztrip.vn",
+    "internet_access": "wlan",
+    "name": "Bãi Thom Retreat",
+    "name:en": "Bai Thom Retreat",
+    "name:fr": "Bai Thom Retreat",
+    "phone": "0902416767",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/baithomretreat/"
+  }
+},
+{
+  "type": "node",
+  "id": 7202302485,
+  "tags": {
+    "addr:street": "Đường tỉnh 45",
+    "internet_access": "wlan",
+    "name": "Phú Vy Bungalows",
+    "name:en": "Phu Vy Bungalows",
+    "operator": "Tuàn",
+    "phone": "+849858893556",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7207400885,
+  "tags": {
+    "addr:street": "Cay Sao TL48",
+    "internet_access": "wlan",
+    "name:en": "Naomi Resort",
+    "opening_hours": "24/7",
+    "operator": "Jack & Chan",
+    "phone": "+84962901109",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7463901088,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tuyết Nhi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 7822275885,
+  "tags": {
+    "name": "Phuquoc Ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7825784385,
+  "tags": {
+    "addr:housenumber": "6005",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7899623094,
+  "tags": {
+    "name:en": "Amaia Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9727101817,
+  "tags": {
+    "name": "Phú Quốc Sim",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 9727331917,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phú Quốc Sim",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10169154217,
+  "tags": {
+    "addr:street": "Tồ 2, ấp Ông Lang, Xã Cửa Dương, Phú Quốc, Kiên Giang, Ong Lang, Phu Quoc, Vietnam",
+    "internet_access": "wlan",
+    "name:en": "Phu Quoc Pomelo Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10182443118,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "MTown Hotel & Residences Phu Quoc",
+    "name:vi": "SS12 Sonasea Villas & Resort Dương Tơ",
+    "phone": "+84 90 318 58 36",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10232961819,
+  "tags": {
+    "name": "Thanh Vân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10261228709,
+  "tags": {
+    "addr:housenumber": "Ấp 5",
+    "addr:postcode": "92509",
+    "addr:street": "Đường Bào",
+    "email": "sakuramurahomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Sakura Mura Homestay",
+    "opening_hours": "24/7",
+    "phone": "0985754398",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10277593609,
+  "tags": {
+    "addr:street": "City, Tổ 3, ấp Suối Đá, Kiên Giang 92509, Vietnam",
+    "email": "thelandingresortpq@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Landing Resort Phú Quốc",
+    "opening_hours": "Su-Sa 00:00-00:00",
+    "phone": "+84 93 934 35 43",
+    "tourism": "hotel",
+    "website": "http://thelandingresortpq.com"
+  }
+},
+{
+  "type": "node",
+  "id": 10594458105,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "The Home Station",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10596201905,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Khánh Linh Villa Resort",
+    "name:en": "Khanh Linh Villa Resort",
+    "phone": "0932122585",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10635375105,
+  "tags": {
+    "name:en": "Sele House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10665124205,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Lotus Home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10676055257,
+  "tags": {
+    "name": "Green Bay Pho Quoc Ressort & Spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10736272923,
+  "tags": {
+    "name": "Santa Garden Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10736657729,
+  "tags": {
+    "name": "Eco Lagoon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10736672296,
+  "tags": {
+    "name": "HT Holiday Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10741667621,
+  "tags": {
+    "name": "Star Hill Village Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11002833144,
+  "tags": {
+    "name": "Licorn Bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11005445305,
+  "tags": {
+    "name:en": "Nha Nhgi 200k",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11006965405,
+  "tags": {
+    "name:en": "Nha Nghi 200k",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11373456236,
+  "tags": {
+    "addr:city": "Phu Quoc Island",
+    "addr:postcode": "920000",
+    "addr:province": "Kien Giang",
+    "addr:street": "Hẻm 118 Trần Hưng Đạo, Dương Đông, Phú Quốc. 920000",
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "brand": "Bon Bon Bungalow Phu Quoc",
+    "contact:facebook": "https://www.facebook.com/BonBonBungalow",
+    "email": "phuquocbonbon@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Bon Bon Bungalow Phu Quoc",
+    "phone": "+84789748729",
+    "rooms": "16",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/BonBonBungalow"
+  }
+},
+{
+  "type": "node",
+  "id": 11377628769,
+  "tags": {
+    "addr:street": "Đường Trần Hưng Đạo, Khu 1, Tp. Phú Quốc, Kiên Giang 92506, Вьетнам",
+    "check_date": "2024-05-08",
+    "guest_house": "apartment",
+    "name": "Mi Amor Luxury Island Apartment",
+    "name:en": "Mi Amor Luxury Island Apartment",
+    "tourism": "apartment",
+    "website": "https://miamor-apt.ru/"
+  }
+},
+{
+  "type": "node",
+  "id": 11383154942,
+  "tags": {
+    "addr:city": "Thành phố Phú Quốc",
+    "addr:district": "An Thoi",
+    "addr:housenumber": "19",
+    "addr:province": "Kiên Giang",
+    "addr:street": "Venice Street",
+    "addr:subdistrict": "Sunset Town",
+    "brand": "Atina Boutique Homestay",
+    "email": "sun.law.68infinity@gmail.com",
+    "name": "Atina Boutique Homestay",
+    "phone": "+84774067555",
+    "tourism": "hotel",
+    "website": "https://www.atinahomestay.com"
+  }
+},
+{
+  "type": "node",
+  "id": 11402814600,
+  "tags": {
+    "addr:housenumber": "286",
+    "name": "Kim Ngân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11499885685,
+  "tags": {
+    "addr:city": "Thành phố Phú Quốc",
+    "addr:postcode": "91000",
+    "addr:province": "Kiên Giang",
+    "addr:street": "Sunset Town",
+    "brand": "Curion Collection",
+    "brand:wikidata": "Q19903229",
+    "brand:wikipedia": "en:Curio",
+    "building": "yes",
+    "building:levels": "6",
+    "contact:facebook": "https://www.facebook.com/lafestaphuquoc",
+    "contact:instagram": "https://www.instagram.com/lafestaphuquoc/",
+    "email": "pqcpq_res@hilton.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "La Festa Phu Quoc, Curio Collection by Hilton",
+    "operator": "Hilton",
+    "phone": "+84 297 352 5555",
+    "rooms": "197",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/pqcpqqq-la-festa-phu-quoc/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11510670169,
+  "tags": {
+    "addr:housenumber": "116",
+    "addr:street": "Nguyễn Văn Thoại",
+    "internet_access": "wlan",
+    "name:en": "KHOA CHAUDOC Homestay",
+    "tourism": "guest_house",
+    "website": "https://www.facebook.com/profile.php/?id=100063574151364"
+  }
+},
+{
+  "type": "node",
+  "id": 11533300069,
+  "tags": {
+    "name:en": "Phu House",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11618671669,
+  "tags": {
+    "addr:district": "Thành phố Châu Đốc",
+    "addr:province": "Tỉnh An Giang",
+    "air_conditioning": "yes",
+    "building:levels": "5",
+    "check_in": "14:00",
+    "check_out": "12:00",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "Paris Hotel",
+    "name": "Paris Hôtel Châu Đốc",
+    "name:en": "Paris Hotel Châu Đốc",
+    "name:fr": "Paris Hôtel Châu Đốc",
+    "name:vi": "Paris Hôtel Châu Đốc",
+    "phone": "+81-0939-533-88",
+    "rooms": "20",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11659099069,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "The Shells Resort & Spa",
+    "name:en": "The Shells Resort & Spa Phu Quoc",
+    "phone": "+842973718888",
+    "tourism": "hotel",
+    "website": "https://shellsresort.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 11661740169,
+  "tags": {
+    "name:en": "Dugong Resort Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11681052469,
+  "tags": {
+    "name:en": "L'Azure Resort and Spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11760214669,
+  "tags": {
+    "name:en": "Gaia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11846466570,
+  "tags": {
+    "addr:housenumber": "H1-H2",
+    "addr:postcode": "910000",
+    "addr:street": "Cầu Hôn",
+    "internet_access": "wlan",
+    "name:en": "The HILL",
+    "opening_hours": "24/7",
+    "operator": "Sun Group",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352225,
+  "tags": {
+    "name": "Nhà trọ đk",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352226,
+  "tags": {
+    "name": "Nhà nghỉ Fmily House (day or month",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352227,
+  "tags": {
+    "name": "Villa Lien Tho",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352229,
+  "tags": {
+    "name": "Nhà Trọ Phương Quỳnh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352230,
+  "tags": {
+    "name": "Nhà trọ Đảo Việt",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352231,
+  "tags": {
+    "name": "Nhà Khoa Trần",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352232,
+  "tags": {
+    "name": "Nhà trọ Thuỳ Trang",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352236,
+  "tags": {
+    "name": "Khu du lịch nghĩ dưỡng Eco villa",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11930352237,
+  "tags": {
+    "name": "Eco Spring Phu Quoc Villa",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11932311002,
+  "tags": {
+    "name": "Nhà nghỉ Mỹ Thanh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932311007,
+  "tags": {
+    "name": "Nhà Trọ Phước Thạnh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932329850,
+  "tags": {
+    "name": "H&A House 158",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932329851,
+  "tags": {
+    "name": "Nhà Trọ Cao Đạt",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334186,
+  "tags": {
+    "name": "nhà trọ phúc hậu",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334188,
+  "tags": {
+    "name": "NHÀ TRỌ THIÊN PHÚC",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334200,
+  "tags": {
+    "name": "Bông Hồng Xanh Villa Phú Quốc",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334214,
+  "tags": {
+    "name": "Nhà trọ Lập Hòa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334216,
+  "tags": {
+    "name": "NGỌC ẨN VILLA",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334220,
+  "tags": {
+    "name": "NHÀ TRỌ HÀ PHÁT",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334226,
+  "tags": {
+    "name": "Nhà trọ Hai Thông",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334227,
+  "tags": {
+    "name": "Waterfall Phú Quốc Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334234,
+  "tags": {
+    "name": "Nhà nghỉ Minh nghĩa 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334242,
+  "tags": {
+    "name": "Nhà nghỉ PHÚ AN BÌNH",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334243,
+  "tags": {
+    "name": "Nhà trọ Đức Hoàng",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334251,
+  "tags": {
+    "name": "Nhà trọ LAN HƯNG",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334252,
+  "tags": {
+    "name": "Phu Quoc Blue Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334253,
+  "tags": {
+    "name": "Linh Linh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334255,
+  "tags": {
+    "name": "CENTER PHÚ QUỐC",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334274,
+  "tags": {
+    "name": "Nhà Trọ Huyền Lan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334276,
+  "tags": {
+    "name": "Nhà trọ Mai Phương",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334296,
+  "tags": {
+    "name": "Pear Garden PQ",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334304,
+  "tags": {
+    "name": "Nhà trọ Ngọc Duyên",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334305,
+  "tags": {
+    "name": "Nhà Trọ Duy Chuyên",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334318,
+  "tags": {
+    "name": "Homestay Hoàng Hôn",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11932334357,
+  "tags": {
+    "name": "Nhà trọ Vũ Luyến",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12006231330,
+  "tags": {
+    "addr:city": "Phu Quoc",
+    "addr:district": "Duong To",
+    "addr:postcode": "92500",
+    "addr:province": "Kien Giang",
+    "addr:street": "Hem Chua Ong Cua Lap",
+    "addr:subdistrict": "Cua Lap",
+    "guest_house": "guest_house",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "MrSimple Home",
+    "phone": "+84365810086",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12073653650,
+  "tags": {
+    "addr:city": "Thành phố Phú Quốc",
+    "addr:district": "Phú Quốc",
+    "addr:housenumber": "127/2",
+    "addr:postcode": "92500",
+    "addr:province": "Kiên Giang",
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "Dương Đông",
+    "email": "info.rosettahotelphuquoc@gmail.com",
+    "internet_access": "wlan",
+    "name": "Rosetta Hotel Phu Quoc",
+    "phone": "+84 853854646",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12076569505,
+  "tags": {
+    "description": "Cette hôtel est situé pas très loin de l'aéroport, il y a de la nouriturre aux environs.",
+    "name": "Tây Tiến Bungalow",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "website": "https://www.taytienbungalowphuquoc.com"
+  }
+},
+{
+  "type": "node",
+  "id": 12206408961,
+  "tags": {
+    "name": "Positano 59",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12313206801,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Cosian Bay Phu Quoc Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12339492401,
+  "tags": {
+    "contact:facebook": "https://www.facebook.com/oceanbayphuquoc",
+    "email": "info@oceanbayphuquoc.com",
+    "image": "https://photos.app.goo.gl/G49GPXv7sEpDvLKQ7",
+    "name": "Grand Ocean Bay Resort",
+    "phone": "+84 297 3909 979",
+    "tourism": "hotel",
+    "url": "https://youtu.be/B7w962UeNYY",
+    "website": "https://oceanbayphuquoc.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12346059901,
+  "tags": {
+    "name": "Best Western Premier Sonasea Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12346167801,
+  "tags": {
+    "addr:housenumber": "63",
+    "addr:street": "Trần Hưng Đạo",
+    "name": "Victoria Phu Quoc hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12458590401,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 12490279701,
+  "tags": {
+    "addr:housenumber": "111/9",
+    "addr:street": "Trần Hưng Đạo",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "level": "1",
+    "name": "Solivo Ecolodge Phu Quoc",
+    "name:en": "Solivo Ecolodge Phu Quoc",
+    "opening_hours": "24/7",
+    "phone": "0332258195",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12490283601,
+  "tags": {
+    "addr:housenumber": "5XQF+XHJ",
+    "addr:street": "Kam pốt",
+    "internet_access": "wlan",
+    "level": "1",
+    "name": "Wings Bungalow",
+    "opening_hours": "24/7",
+    "phone": "0297 3607 286",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12497412501,
+  "tags": {
+    "email": "islandlodgephuquoc@gmail.com",
+    "internet_access": "wlan",
+    "name": "Island Lodge Phu Quoc",
+    "name:en": "Island Lodge Phu Quoc",
+    "opening_hours": "24/7",
+    "phone": "+84843592110",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12520963931,
+  "tags": {
+    "name": "Elene hotel Phu Quoc",
+    "tourism": "hotel",
+    "website": "https://elenephuquoc.com"
+  }
+},
+{
+  "type": "node",
+  "id": 12529089401,
+  "tags": {
+    "name": "Little Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12542053601,
+  "tags": {
+    "addr:housenumber": "SK Hotel,MP-135",
+    "addr:postcode": "92509",
+    "addr:street": "Marina Square, BIM Group, Ấp Đường Bào, Dương Tơ, Phú Quốc, Kiên Gia",
+    "internet_access": "wlan",
+    "name": "SK Boutique Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84 908 233 583",
+    "self_service": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12543056358,
+  "tags": {
+    "name": "Anka Home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12543059046,
+  "tags": {
+    "name": "Carp House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12581499561,
+  "tags": {
+    "addr:city": "Phú Quốc",
+    "addr:district": "Phú Quốc",
+    "addr:postcode": "92500",
+    "addr:province": "Kiên Giang",
+    "addr:street": "Bến Tràm",
+    "addr:subdistrict": "Cửa Dương",
+    "bar": "yes",
+    "brand": "Home Coffee shop",
+    "contact:facebook": "https://www.facebook.com/homestayTyUyen",
+    "email": "tyuyenhomestay@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Home Coffee shop Ty Uyen",
+    "opening_hours": "Mo-Su 06:00-23:00",
+    "phone": "+84 329869468",
+    "rooms": "12",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/homestayTyUyen"
+  }
+},
+{
+  "type": "node",
+  "id": 12615417501,
+  "tags": {
+    "name:fr": "Bai Thom Retreat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12619926532,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "mobile": "+84 944 604 470",
+    "name": "Hiếu Sang 68",
+    "phone": "+84 989 377 865",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12622884487,
+  "tags": {
+    "name": "Bảo Hân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12622885290,
+  "tags": {
+    "name": "Trang Linh",
+    "phone": "+84 942 539 570",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12622920336,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "mobile": "+84 365 28 75 19",
+    "name": "Ngọc Phương",
+    "phone": "+84 979 07 07 73",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12622950175,
+  "tags": {
+    "name": "Richen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12622963070,
+  "tags": {
+    "name": "Thùy Dương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12640854290,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Quynh Mai Resort",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12715529882,
+  "tags": {
+    "addr:city": "Tịnh Biên",
+    "addr:province": "An Giang",
+    "addr:street": "Đường Ba Lưới",
+    "addr:subdistrict": "An Hảo",
+    "guest_house": "hotel",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Phú Sĩ Homestay Núi Cấm",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12747436957,
+  "tags": {
+    "guest_house": "homestay",
+    "internet_access": "wlan",
+    "name": "Mai Tùng House - Núi Cấm",
+    "tourism": "hostel",
+    "website": "MAI TÙNG House NuiCam"
+  }
+},
+{
+  "type": "node",
+  "id": 12747450135,
+  "tags": {
+    "guest_house": "homestay",
+    "internet_access": "wlan",
+    "name": "Nhà của Mây (Mây's House)",
+    "tourism": "hostel",
+    "website": "Nhà của Mây"
+  }
+},
+{
+  "type": "node",
+  "id": 12825189902,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Đường tỉnh 975",
+    "name": "Ha Tay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13290213130,
+  "tags": {
+    "email": "info@thienthanhphuquocresort.com.vn",
+    "name": "Thiên Thanh Phú Quốc Resort",
+    "name:en": "Thien Thanh Resort",
+    "tourism": "hotel",
+    "website": "https://thienthanhphuquocresort.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13307454101,
+  "tags": {
+    "addr:street": "Đường 30 Tháng 4",
+    "internet_access": "wlan",
+    "level": "8",
+    "name:en": "An Phu Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13357161201,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 13371113201,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Agarwood Garden Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13385811101,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Langchia Home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13397297401,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Praha hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13404033601,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Hoàng Đô Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13420436701,
+  "tags": {
+    "name": "Fla Village",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13432529701,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13432529801,
+  "tags": {
+    "name": "Kls Holidays",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13432529901,
+  "tags": {
+    "name": "KLC Holidayss",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13437202908,
+  "tags": {
+    "name": "Cassia Cottage",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13518302226,
+  "tags": {
+    "name:en": "Hero Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13518456402,
+  "tags": {
+    "addr:postcode": "920000",
+    "contact:facebook": "share/1A2zuQbhMu",
+    "internet_access": "wlan",
+    "name": "Khu nghỉ dưỡng Hòn Sơn Ecohouse",
+    "phone": "0941 776 336",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13531478901,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Cherry Homestay - Hoàng Đế motel",
+    "tourism": "hotel",
+    "website": "https://br.bluepillow.com/search/662646db4338d48a8fc8fddc?dest=bkng&cat=House&lat=10.70268&lng=105.1311&language=pt"
+  }
+},
+{
+  "type": "node",
+  "id": 13535815162,
+  "tags": {
+    "air_conditioning": "yes",
+    "contact:facebook": "https://www.facebook.com/bienngotphuquoc/",
+    "email": "bienngotvn@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Bien Ngot Resort",
+    "phone": "094 486 11 22",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/bienngotphuquoc/"
+  }
+},
+{
+  "type": "node",
+  "id": 13578134122,
+  "tags": {
+    "addr:city": "Phu Quoc",
+    "addr:province": "Tỉnh Kiên Giang",
+    "email": "leevillaphuquoc@gmail.com",
+    "name": "Lee Villa Phu Quoc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13586157701,
+  "tags": {
+    "name": "Anise Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13590970201,
+  "tags": {
+    "addr:street": "Cầu Hàm Ninh",
+    "internet_access": "wlan",
+    "name": "Ong Huong House Can 2",
+    "name:en": "Ong Huong House Can 2",
+    "tourism": "guest_house",
+    "website": "https://www.booking.com/Share-aKp0sc"
+  }
+},
+{
+  "type": "node",
+  "id": 13590970801,
+  "tags": {
+    "addr:street": "Cầu Hàm Ninh",
+    "internet_access": "wlan",
+    "name": "Ong Huong House Can 2",
+    "name:en": "Ong Huong House Can 2",
+    "tourism": "guest_house",
+    "website": "https://www.booking.com/Share-aKp0sc"
+  }
+},
+{
+  "type": "node",
+  "id": 13629328601,
+  "tags": {
+    "addr:street": "Nguyễn Thượng Hiền",
+    "name": "STAY 2 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13632996401,
+  "tags": {
+    "addr:street": "đảo Nam Du, Kiên Hải District, Kien Giang",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Nam Du View",
+    "phone": "0963 145 342",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13649353471,
+  "tags": {
+    "building": "yes",
+    "image": "https://photos.app.goo.gl/UQrU6ShTtL9bJ39i7",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 13649353472,
+  "tags": {
+    "building": "yes",
+    "image": "https://photos.app.goo.gl/89M2yPZwehiCQRCL8",
+    "tourism": "chalet",
+    "url": "https://youtu.be/oQnscJQcv8A?si=PBcOACR8lPdD6rSK&t=896"
+  }
+},
+{
+  "type": "node",
+  "id": 13666733201,
+  "tags": {
+    "check_date": "2026-03-21",
+    "name": "Crowne Plaza",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13718754902,
+  "tags": {
+    "check_date": "2026-04-09",
+    "name:en": "Long Mountain Resort",
+    "phone": "+84 90 254 67 19",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13719882701,
+  "tags": {
+    "check_date": "2026-04-10",
+    "name:en": "Lana Land",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13719882901,
+  "tags": {
+    "check_date": "2026-04-10",
+    "name:en": "Gecko House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13720256202,
+  "tags": {
+    "check_date": "2026-04-10",
+    "name:en": "Jade Mountain Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13721286953,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13736972905,
+  "tags": {
+    "check_date": "2026-04-17",
+    "name": "SAO MAI",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14221897463,
+  "tags": {
+    "name": "Cát Lợi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245158301,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245163301,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245163302,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245165801,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245166401,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245166402,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245167901,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14245169701,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14269677471,
+  "tags": {
+    "name": "Villa MinhAnh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14269677476,
+  "tags": {
+    "name": "Thiên Phú Nghĩa",
+    "name:en": "Thien Phu Nghia",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14296359201,
+  "tags": {
+    "name": "Sweet home resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14311419863,
+  "tags": {
+    "addr:city": "An Giang",
+    "addr:district": "Phú Quốc",
+    "addr:province": "An Giang",
+    "addr:subdistrict": "Ông Lang",
+    "guest_house": "house",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "G8 Chill Phú Quốc",
+    "phone": "+84349637486",
+    "rooms": "3",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 366903498,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Victoria Châu Đốc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 407507165,
+  "tags": {
+    "barrier": "wall",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Paris Beach Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 550539615,
+  "tags": {
+    "addr:city": "Duong Dong",
+    "addr:district": "Phu Quoc",
+    "addr:province": "Kien Giang",
+    "addr:street": "Tran Hung Dao",
+    "addr:subdistrict": "Ward 7",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Arcadia Resort",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 550539852,
+  "tags": {
+    "name": "Brenta Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 550539882,
+  "tags": {
+    "name": "Brenta Phu Quoc Annex",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 558599995,
+  "tags": {
+    "addr:street": "Trần Hưng Đạo",
+    "addr:subdistrict": "Cửa Lấp",
+    "building": "yes",
+    "building:levels": "2",
+    "name": "Famiana",
+    "tourism": "hotel",
+    "website": "https://famianaresort.com"
+  }
+},
+{
+  "type": "way",
+  "id": 658719915,
+  "tags": {
+    "name": "Sol Beach House Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 684802063,
+  "tags": {
+    "building": "hotel",
+    "building:levels": "4",
+    "name": "Tô Châu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 685445074,
+  "tags": {
+    "addr:housenumber": "844",
+    "addr:street": "Nguyễn Trung Trực",
+    "name": "Khách sạn Sài Gòn Rạch Giá",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 864614471,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 864614474,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 905676289,
+  "tags": {
+    "addr:city": "Phu Quoc",
+    "addr:province": "Kien Giang",
+    "addr:subdistrict": "Duong To",
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "brand": "Mercury Phu Quoc Resort & Villas",
+    "building": "villa",
+    "contact:facebook": "https://www.facebook.com/mercuryphuquoc",
+    "contact:instagram": "https://www.instagram.com/mercury.phuquoc",
+    "contact:youtube": "https://www.youtube.com/@mercuryphuquocresortandvillas",
+    "email": "info@mercuryphuquoc.vn",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Mercury Phu Quoc Resort & Villas",
+    "not:name": "Mercure Phu Quoc Resort & Villas;Mercury Phu Quoc Resort",
+    "official_name": "Mercury Phu Quoc Resort & Villas",
+    "phone": "+842976263999",
+    "reservation": "yes",
+    "rooms": "152",
+    "smoking": "outside",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://mercuryphuquoc.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1232087225,
+  "tags": {
+    "building": "hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1266043525,
+  "tags": {
+    "addr:housenumber": "98/1",
+    "addr:postcode": "92509",
+    "addr:street": "Trần Hưng Đạo",
+    "building": "hotel",
+    "email": "sohophuquoc@gmai.com",
+    "internet_access": "wlan",
+    "name": "SOHO INN",
+    "opening_hours": "24/7",
+    "phone": "+84866863368",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1266043528,
+  "tags": {
+    "building": "hotel",
+    "internet_access": "wlan",
+    "name": "Nesta Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1266472566,
+  "tags": {
+    "building": "hotel",
+    "building:levels": "9",
+    "image": "https://photos.app.goo.gl/fTfEcKYNfPBaamHRA",
+    "name": "AVS HOTEL PHU QUOC",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1270291377,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1270360752,
+  "tags": {
+    "building": "hotel",
+    "building:levels": "8",
+    "image": "https://photos.app.goo.gl/6rPBicFGSjBZY4238",
+    "name": "Vinholidays Fiesta Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1270360759,
+  "tags": {
+    "brand": "Wyndham Garden",
+    "brand:wikidata": "Q112144847",
+    "building": "hotel",
+    "building:levels": "8",
+    "image": "https://photos.app.goo.gl/Ktm4KgGBcXvGRLZV7",
+    "name": "Wyndham Garden Grandworld Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1271966872,
+  "tags": {
+    "building": "hotel",
+    "building:levels": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1272195371,
+  "tags": {
+    "building": "hotel",
+    "contact:facebook": "https://www.facebook.com/seashellspq",
+    "email": "reservation@seashellshotel.vn",
+    "image": "https://photos.app.goo.gl/eCw34UzdJxgfxmVi9",
+    "name": "Seashells Phu Quoc Hotel & Spa",
+    "phone": "+842977300999",
+    "tourism": "hotel",
+    "website": "https://www.seashellshotel.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1272509512,
+  "tags": {
+    "building": "hotel",
+    "building:levels": "2",
+    "name": "River hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1272538574,
+  "tags": {
+    "building": "yes",
+    "name": "KS Pháo Đài",
+    "tourism": "hotel",
+    "website": "www.hatienhotels.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1279286824,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/phunghungboutique",
+    "contact:youtube": "https://www.youtube.com/channel/UC9RuhZgGuINxkj1RKhxiWIg",
+    "email": "phunghunghotel@gmail.com",
+    "image": "https://photos.app.goo.gl/F2oF7uBG84j1EjMGA",
+    "name": "Phung Hung Boutique Hotel",
+    "phone": "+84 297 3991 929",
+    "tourism": "hotel",
+    "website": "https://phunghunghotel.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1283087247,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Coco Palm Resort",
+    "phone": "+84 773 987 979",
+    "tourism": "hotel",
+    "website": "http://cocopalmphuquoc.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1285561137,
+  "tags": {
+    "addr:province": "Tỉnh Kiên Giang",
+    "building": "house",
+    "email": "leevillaphuquoc@gmail.com",
+    "guest_house": "guest_house",
+    "name": "Lee Villa Phu Quoc",
+    "tourism": "guest_house",
+    "website": "https://leevillaphuquoc.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1287348369,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/FishermanHomestayPQ/",
+    "email": "pq.fisherman@gmail.com",
+    "image": "https://photos.app.goo.gl/edQCvYcWpj5zLA1k9",
+    "name": "Fisherman Homestay",
+    "phone": "+84 98 630 25 49",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1287649745,
+  "tags": {
+    "addr:district": "Thành phố Phú Quốc",
+    "addr:postcode": "910000;92513",
+    "addr:province": "Tỉnh Kiên Giang",
+    "addr:subdistrict": "Phường An Thới",
+    "building": "apartments",
+    "building:levels": "19",
+    "image": "https://photos.app.goo.gl/iQcXyTwdeDkq8Diq8",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "H3- The Hill Residences;Ocean Glow Apartment Phú Quốc",
+    "phone": "+84397262686",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 1287649767,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/p/Times-Corner-Amalfi-61571651927582/",
+    "email": "amalfi@timescornerhotel.com",
+    "image": "https://photos.app.goo.gl/nFaydyK91YxtrsJh8",
+    "name": "Times Corner Amalfi Hotel",
+    "phone": "+84 81 233 1199",
+    "tourism": "hotel",
+    "website": "https://timescornerphuquoc.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1287649768,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/p/Sakurakyo-Hotel-Spa-Phu-Quoc-61574971317800/",
+    "email": "info.sakurakyo@skyethgroup.com.vn",
+    "image": "https://photos.app.goo.gl/PRiGwGr5W5FuioaP9",
+    "phone": "+84 89 991 39 16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1292342936,
+  "tags": {
+    "building": "yes",
+    "email": "monacohotelphuquoc@gmail.com",
+    "image": "https://photos.app.goo.gl/83tWCoAo3DfoU2LC8",
+    "name": "MONACO HOTEL",
+    "phone": "+84565225599",
+    "tourism": "hotel",
+    "website": "https://monacohotelphuquoc.com.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1292343025,
+  "tags": {
+    "building": "yes",
+    "image": "https://photos.app.goo.gl/PbzSYSgH4MkkuXNX7",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Nhà Nghỉ Phú Quốc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1327474862,
+  "tags": {
+    "landuse": "residential",
+    "name": "Valley Sen Bungalow",
+    "surface": "grass/trees",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1327474866,
+  "tags": {
+    "landuse": "residential",
+    "name": "Valley Village Phu Quoc",
+    "surface": "grass/trees",
+    "tourism": "hotel",
+    "website": "https://www.valleyvillagephuquoc.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1327486767,
+  "tags": {
+    "barrier": "wall",
+    "height": "2.5",
+    "landuse": "residential",
+    "name": "Famiana Green Villa",
+    "surface": "grass/trees",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1327555000,
+  "tags": {
+    "barrier": "wall",
+    "height": "2",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "landuse": "residential",
+    "name": "Dương Đông",
+    "name:en": "Duong Dong Hotel",
+    "name:vi": "Khách sạn Dương Đông",
+    "surface": "grass/trees",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1376694973,
+  "tags": {
+    "building": "yes",
+    "name": "Mai Tùng House - Núi Cấm",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1376695685,
+  "tags": {
+    "building": "yes",
+    "guest_house": "homestay",
+    "name": "Nhà Của Mây",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467316936,
+  "tags": {
+    "check_date": "2026-01-05",
+    "name": "Coral Bay Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467316938,
+  "tags": {
+    "building": "hotel",
+    "name": "Aquasun Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467316939,
+  "tags": {
+    "building": "hotel",
+    "name": "Night Sea Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467995852,
+  "tags": {
+    "building": "hotel",
+    "internet_access": "wlan",
+    "name:en": "Summer Dream Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467995853,
+  "tags": {
+    "building": "hotel",
+    "name": "Home Park Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1470342867,
+  "tags": {
+    "brand": "Accor",
+    "landuse": "commercial",
+    "name": "Premier Residences Phu Quoc Emerald Bay",
+    "tourism": "hotel",
+    "website": "https://premierresidencesphuquoc.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1475130684,
+  "tags": {
+    "building": "yes",
+    "building:levels": "4",
+    "name": "Mekong Homestay 2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1486236092,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/sereneresort.com.vn/",
+    "email": "serene.resort.pq@gmail.com",
+    "image": "https://photos.app.goo.gl/CynM8T7z2uYS4Fzc9",
+    "internet_access": "wlan",
+    "name": "Serene Resort Phu Quoc",
+    "opening_hours": "24/7",
+    "phone": "+84 85 499 0155",
+    "tourism": "hotel",
+    "url": "https://youtu.be/zyMLEPgORNU?si=5YgHAE-TtlNcGgpu&t=333"
+  }
+},
+{
+  "type": "way",
+  "id": 1488375319,
+  "tags": {
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/Homesteadseaviewpq",
+    "email": "sales@homesteadphuquoc.com",
+    "image": "https://photos.app.goo.gl/zn1pwNkPwerrtV74A",
+    "name": "Homestead Seaview Phu Quoc",
+    "phone": "+84 96 150 05 00",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1491847243,
+  "tags": {
+    "building": "yes",
+    "image": "https://photos.app.goo.gl/Ch43eVtq6C31cMu87",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1547833581,
+  "tags": {
+    "name": "Blue Nose Private 3BR Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1554497491,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1554497497,
+  "tags": {
+    "name": "Lisa House Phu Quoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "relation",
+  "id": 20369635,
+  "tags": {
+    "brand": "InterContinental",
+    "brand:wikidata": "Q1825730",
+    "building": "yes",
+    "check_date": "2026-01-03",
+    "contact:facebook": "https://www.facebook.com/InterContinentalPhuQuoc",
+    "contact:instagram": "https://www.instagram.com/intercontinentalphuquoc",
+    "contact:youtube": "https://www.youtube.com/@intercontinentalphuquoc/featured",
+    "email": "info.icpq@ihg.com",
+    "image": "https://photos.app.goo.gl/8omKLYrzrN8wfgx28",
+    "name": "InterContinental Phu Quoc Long Beach Resort",
+    "phone": "+84 297 3978 888",
+    "tourism": "hotel",
+    "type": "multipolygon",
+    "url": "https://youtu.be/SZPULelsAvA",
+    "website": "https://phuquoc.intercontinental.com/"
+  }
+}
+
+  ]
+}

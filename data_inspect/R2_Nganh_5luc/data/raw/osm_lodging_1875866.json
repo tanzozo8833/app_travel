@@ -1,0 +1,1086 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:47:51Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1268522257,
+  "tags": {
+    "name": "Rạng Đông",
+    "name:de": "Rạng Đông",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1606145444,
+  "tags": {
+    "internet_access": "no",
+    "name": "Nhà Nghỉ Thành Đạt",
+    "phone": "067 3 638 222",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 1753153030,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Trưng Trắc",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách Sạn Sông Tiền Annex",
+    "name:en": "Song Tien Annex",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2733191001,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:housenumber": "69",
+    "addr:street": "Đường 30/4",
+    "addr:subdistrict": "Phường 1",
+    "internet_access": "wlan",
+    "internet_access:fee": "yes",
+    "name:en": "Minh Quan Hotel",
+    "name:vi": "Khách sạn Minh Quân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2742108045,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Lê Văn Duyệt",
+    "name": "M Hotel",
+    "name:en": "M Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3650265675,
+  "tags": {
+    "name": "Royal Kim Chi Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3775978185,
+  "tags": {
+    "name": "Xuân Biển",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3775992468,
+  "tags": {
+    "name": "Xuân Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3897529120,
+  "tags": {
+    "name": "Thao Ngang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4185663298,
+  "tags": {
+    "addr:housenumber": "133B6, tổ 4B",
+    "addr:street": "Đường Huyện 94B",
+    "internet_access": "wlan",
+    "phone": "0733869123",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4213811391,
+  "tags": {
+    "name": "Minh Tai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4224943289,
+  "tags": {
+    "addr:housenumber": "141",
+    "addr:street": "Lê Văn Phẩm",
+    "internet_access": "wlan",
+    "name": "Tan Hoang Vu 2 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4312238105,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Mékong Ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4374993695,
+  "tags": {
+    "name": "777",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457721996,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Gia Khang Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457770692,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Anh Dao",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457800289,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Hoai Thuong 2",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457800291,
+  "tags": {
+    "name:de": "Huu Nghi (Khach San)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457800689,
+  "tags": {
+    "name": "Gia Khang",
+    "name:de": "Gia Khang Hotel",
+    "phone": "09758448877",
+    "price": "250k",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4457803889,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Ngoc Loan (Khach San)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459138492,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "My Dong 2 (Nha Tro)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459138493,
+  "tags": {
+    "name:de": "Thanh Kieu (Nha Nghi)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459138494,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Hung Binh (Khach San)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459143496,
+  "tags": {
+    "name:de": "Song Hy (Nah Tro)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459143497,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Linh Tuyen (Khach San)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4459185493,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Mai Anh (Nha Nghi)",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4460237393,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Minh Phuc (Nha Nghi )",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4497814889,
+  "tags": {
+    "addr:housenumber": "723",
+    "name": "Ấp Thượng, Tân Quới, Thanh Bình, Đồng Tháp",
+    "name:vi": "Ấp Thượng, Tân Quới, Thanh Bình, Đồng Tháp",
+    "phone": "0676538650",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4518233189,
+  "tags": {
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4526409691,
+  "tags": {
+    "addr:housenumber": "42A",
+    "addr:postcode": "860000",
+    "addr:street": "Phan Lương Trực",
+    "internet_access": "wlan",
+    "name": "Nhà trọ tháng Quốc Bảo",
+    "phone": "0907377975",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4531717589,
+  "tags": {
+    "name": "Dan",
+    "name:vi": "Dan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4536057491,
+  "tags": {
+    "name": "khu du lịch bãi tắm sông cồn nổi 1",
+    "name:vi": "khu du lịch bãi tắm sông cồn nổi 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4550107895,
+  "tags": {
+    "addr:street": "Quốc Lộ 1A",
+    "internet_access": "wlan",
+    "name": "ngọc thanh",
+    "name:vi": "ngọc thanh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4550116690,
+  "tags": {
+    "addr:street": "Quốc Lộ 1A",
+    "internet_access": "wlan",
+    "name": "nhà nghỉ",
+    "name:vi": "nhà nghỉ",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4560395190,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4597956291,
+  "tags": {
+    "name": "HOÀNG SANG",
+    "name:vi": "HOÀNG SANG",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4608990389,
+  "tags": {
+    "name": "nhà nghỉtc đàm",
+    "name:vi": "nhà nghỉtc đàm",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4619894789,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nam Giang",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4646674298,
+  "tags": {
+    "addr:street": "Ngô Quyền",
+    "internet_access": "wlan",
+    "name": "quý",
+    "name:vi": "quý",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4646680292,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "738",
+    "name:vi": "738",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4646680293,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4655909191,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Ly Tu Trong",
+    "email": "hoaanhhotel@yahoo.com.vn",
+    "internet_access": "wlan",
+    "name": "Hoa Anh",
+    "name:vi": "Hoa Anh",
+    "phone": "0672240567",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4666370716,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Khach San Yen Nga",
+    "name:de": "Khach San Yen Nga",
+    "name:en": "Khach San Yen Nga",
+    "name:vi": "Khach San Yen Nga",
+    "phone": "0733824707",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4672164189,
+  "tags": {
+    "addr:street": "chợ giồng găng, xã tân phước, huyện tân hồng, tỉnh đồng tháp",
+    "internet_access": "wlan",
+    "name": "Thành Trung 100k",
+    "name:vi": "Thành Trung 100k",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4672976289,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "nhà nghỉ số 33- 80.000đ",
+    "name:en": "mottel 33",
+    "name:vi": "nhà nghỉ số 33- 80.000đ",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4672976489,
+  "tags": {
+    "name": "ở đây có nhiều nhà dân dạng hẽm ad bổ sung đường vào giúp",
+    "name:vi": "ở đây có nhiều nhà dân dạng hẽm ad bổ sung đường vào giúp",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4677938094,
+  "tags": {
+    "name": "Khach San Que Huong",
+    "name:vi": "Khach San Que Huong",
+    "phone": "0733652123",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4696463990,
+  "tags": {
+    "addr:housenumber": "260",
+    "addr:street": "Tan Thien Hamlet, Tan Phong commune, Cai Lay district, Tien Giang",
+    "internet_access": "wlan",
+    "name": "Mekong Rustic Homestay",
+    "name:en": "Mekong Rustic Homestay",
+    "name:nl": "Mekong Rustic Homestay",
+    "name:vi": "Mekong Rustic Homestay",
+    "tourism": "guest_house",
+    "website": "https://www.mekongrustic.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4721887790,
+  "tags": {
+    "addr:housenumber": "254",
+    "addr:street": "Thói Hòa",
+    "email": "hai_den@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Thói Hòa Homestay",
+    "opening_hours": "Mo-Su 08:00-18:00",
+    "phone": "0913615759",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4785706821,
+  "tags": {
+    "addr:housenumber": "588",
+    "addr:street": "Nguyễn Sinh Sắc",
+    "name": "nhà trọ Hoàng Nam",
+    "name:en": "Guest house Hoang Nam",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4803000536,
+  "tags": {
+    "name:en": "My Duyen",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4847511621,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Quoc Dung",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4849456921,
+  "tags": {
+    "name:en": "Mong Yen Hotel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4862022724,
+  "tags": {
+    "name": "Hong Ngan",
+    "name:vi": "Hong Ngan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4862219721,
+  "tags": {
+    "name": "nha cau hanh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4875280121,
+  "tags": {
+    "name:en": "Truong Tien 1",
+    "name:es": "Truong Tien 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4912915122,
+  "tags": {
+    "addr:street": "Phạm Hữu Lầu",
+    "internet_access": "wlan",
+    "name": "Mong Yen Hotel",
+    "name:vi": "Mong Yen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5212400835,
+  "tags": {
+    "name": "khách sạn công đoàn 200k",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5324876421,
+  "tags": {
+    "addr:housenumber": "241／43",
+    "addr:street": "Phạm Ngũ Lão",
+    "name:en": "My Home Guesthouse",
+    "name:ja": "マイホーム",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5377594074,
+  "tags": {
+    "name": "Sao mai hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5453761923,
+  "tags": {
+    "name": "Aurora Mekong Hotel",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5942124986,
+  "tags": {
+    "name": "nhà Thái Hoàng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6050290985,
+  "tags": {
+    "name": "芳",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6273979693,
+  "tags": {
+    "name": "Gia Phat",
+    "name:en": "Gia Phat motel - Correct address",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6308020515,
+  "tags": {
+    "name": "Khach San Sao Mai F5 Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6361666886,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà tro",
+    "name:vi": "Tân hiếu Hoàng (Nhà trọ)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6382471985,
+  "tags": {
+    "name": "Riverside Cai Be Hotel",
+    "name:en": "Riverside Cai Be Hotel (right address)",
+    "name:fr": "Riverside Cai Be Hotel (adresse correcte)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6967976085,
+  "tags": {
+    "name": "Trạm dừng chân Út Thẳng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6968587885,
+  "tags": {
+    "name": "trạm ut thẳng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7079309785,
+  "tags": {
+    "name:en": "Nha Tro Huynh Huong (150k room)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7265322586,
+  "tags": {
+    "addr:street": "lê văn cưr",
+    "name": "Duyên Casa Hoà An Homestay",
+    "operator": "Tran Dinh Tho",
+    "phone": "0909183911",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7296633367,
+  "tags": {
+    "addr:full": "Tan Thien Tan Phong, Lai Cay, Cai Be 860000 Vietnam",
+    "name": "Mekong Family Nam Giang Homestay",
+    "swimming_pool": "yes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7759281486,
+  "tags": {
+    "name:en": "Home GC",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7927261385,
+  "tags": {
+    "name:en": "Nam Phuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7934381585,
+  "tags": {
+    "name:en": "Nha Nghi Ngoc Nhu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9669655617,
+  "tags": {
+    "name": "nhà Cô Hai",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10586724805,
+  "tags": {
+    "name": "Chú 2",
+    "phone": "0858949135",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10586736605,
+  "tags": {
+    "name": "Nhà chị Thanh",
+    "phone": "090000001",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10603655605,
+  "tags": {
+    "name": "chưa tiếp cận",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10603655606,
+  "tags": {
+    "name": "chưa tiếp cận",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10603655607,
+  "tags": {
+    "name": "chưa tiếp cận",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10692302405,
+  "tags": {
+    "addr:street": "Lê Thị Hồng Gấm",
+    "name": "Khách sạn Nhựt Nguyệt",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11001455807,
+  "tags": {
+    "name:en": "Nha nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 11099430805,
+  "tags": {
+    "addr:street": "Lê Thị Hồng Gấm",
+    "name": "Đông Phương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11209678137,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Wildbird Tram Chim Hotel",
+    "phone": "+84918291040",
+    "tourism": "hotel",
+    "website": "https://wildbirdtramchim.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 11361404569,
+  "tags": {
+    "name:fr": "Angel hôtel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12141868002,
+  "tags": {
+    "name": "Nhà nghỉ Thu Huỳnh",
+    "name:en": "Thu Huynh homestay",
+    "outdoor_seating": "no",
+    "phone": "0983354241",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12522159201,
+  "tags": {
+    "addr:street": "Quốc lộ 30, tổ 1, ấp 2, xã Mỹ Long, huyện Cao Lãnh, tỉnh Đồng Tháp.",
+    "internet_access": "wlan",
+    "name": "Nhà trọ Thủy Tiên",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12629819201,
+  "tags": {
+    "addr:street": "QL30, Mỹ Long, Cao Lãnh, Đồng Tháp.",
+    "internet_access": "wlan",
+    "name": "Khách sạn Thùy Linh",
+    "phone": "0945022399",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12629821001,
+  "tags": {
+    "addr:street": "QL30, Mỹ Long, Cao Lãnh, Đồng Tháp.",
+    "internet_access": "wlan",
+    "name": "Khach san Thuy Linh",
+    "phone": "0945022399",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12630357401,
+  "tags": {
+    "addr:postcode": "870000",
+    "addr:street": "ĐT 850, Mỹ Long, Cao Lãnh, Đồng Tháp.",
+    "name": "Nhà trọ cô Chính",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12647736423,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Motel Anh Kiệt",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12711041901,
+  "tags": {
+    "addr:housenumber": "289",
+    "addr:street": "Cái Sao",
+    "name": "Do's home",
+    "name:vi": "Đỗ gia",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 13518302228,
+  "tags": {
+    "name:en": "De Vuong 2 (Correct location)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 206878069,
+  "tags": {
+    "building": "yes",
+    "name": "Mekong Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 206878070,
+  "tags": {
+    "name": "Mekong Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 266573097,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Đường 30/4",
+    "building": "yes",
+    "name": "Nhà Hàng - Khách Sạn Chương Dương",
+    "name:en": "Chuong Duong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 266575611,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Rạch Gầm",
+    "name": "Nhà Khách Tiền Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 268913203,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Trưng Trắc",
+    "building": "yes",
+    "name": "Khách Sạn Sông Tiền",
+    "name:en": "Song Tien Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 268916083,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Đường 30/4",
+    "building": "yes",
+    "name": "Khách Sạn Công Đoàn",
+    "name:en": "Cong Doan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 268916086,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:street": "Trương Định",
+    "building": "yes",
+    "name": "Khách Sạn Chương Dương 2",
+    "name:en": "Chuong Duong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 269570540,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:housenumber": "19",
+    "addr:postcode": "861003",
+    "addr:province": "Tiền Giang",
+    "addr:street": "Đường 30/4",
+    "addr:subdistrict": "1",
+    "building": "hotel",
+    "height": "60",
+    "internet_access": "wlan",
+    "source": "http://masocongty.vn/company/1216858/cong-ty-trach-nhiem-huu-han-mot-thanh-vien-nha-hang-hai-cui-bap.html",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 372806313,
+  "tags": {
+    "building": "hotel",
+    "name": "Khách sạn Hương Sen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 374224052,
+  "tags": {
+    "building": "yes",
+    "name": "Sông Trà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 374224259,
+  "tags": {
+    "building": "yes",
+    "name": "Hòa Bình",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 397670481,
+  "tags": {
+    "addr:city": "Mỹ Tho",
+    "addr:housenumber": "25",
+    "addr:postcode": "861003",
+    "addr:province": "Tiền Giang",
+    "addr:street": "Ba Mươi Tháng Tư",
+    "addr:subdistrict": "1",
+    "building": "yes",
+    "name": "Khách Sạn Rạng Đông 1",
+    "name:en": "Rang Dong 1 Hotel",
+    "phone": "+84 73 3874 400",
+    "tourism": "hotel",
+    "website": "http://www.rangdonghotel.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 399008341,
+  "tags": {
+    "addr:street": "Tết Mậu Thân",
+    "landuse": "commercial",
+    "name": "Khách sạn Mekong Mỹ Tho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 680599971,
+  "tags": {
+    "addr:city": "Cái Bè",
+    "name": "Mekong Riverside Resort & Spa",
+    "tourism": "hotel",
+    "website": "https://mekongriversideresort.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 1457834461,
+  "tags": {
+    "addr:housenumber": "311",
+    "addr:street": "Lê Lợi",
+    "building": "yes",
+    "name": "Bảo Ngọc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1460401842,
+  "tags": {
+    "addr:housenumber": "278",
+    "addr:street": "Nguyễn Trọng Dân",
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "68 Hotel",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

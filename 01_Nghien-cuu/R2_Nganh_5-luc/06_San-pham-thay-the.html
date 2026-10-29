@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sản phẩm thay thế</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f2ee;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --s1-soft:#cde2fb;
+  --q1:#cde2fb; --q2:#86b6ef; --q3:#2a78d6; --q3-ink:#fff;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --accent:#256abf;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+    --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+    --accent:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+  --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+  --accent:#6da7ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+nav.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+nav.files a{font-size:13px;text-decoration:none;color:var(--ink-2);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+nav.files a.on{background:var(--ink);color:var(--page);box-shadow:none}
+.theme{margin-left:auto;font:inherit;font-size:13px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+h1{font-size:30px;line-height:1.2;margin:4px 0 6px;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:24px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.lede{font-size:17px;color:var(--ink-2);max-width:760px}
+.card{min-width:0;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:18px 18px 14px;margin:14px 0}
+.keys{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 20px;margin:18px 0}
+.keys li{margin:6px 0}
+.keys h3{margin:4px 0 6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.tile .l{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+.tile .s{color:var(--muted);font-size:12px;margin-top:6px}
+.lv{display:inline-block;font-size:11px;font-weight:650;line-height:1;padding:3px 6px;border-radius:5px;vertical-align:1px;box-shadow:inset 0 0 0 1px var(--axis);color:var(--ink-2);white-space:nowrap}
+.lv.A{background:var(--ink);color:var(--page);box-shadow:none}
+.lv.B{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.lv.D{border-style:dashed;box-shadow:none;outline:1px dashed var(--axis);outline-offset:-1px}
+.chart-t{font-weight:650;font-size:15.5px;margin:0}
+.chart-s{color:var(--ink-2);font-size:13px;margin:2px 0 12px}
+.bars{display:grid;grid-template-columns:minmax(120px,38%) 1fr;row-gap:8px;column-gap:12px;align-items:center}
+.bl{font-size:13.5px;color:var(--ink);text-align:right;line-height:1.3}
+.bl small{display:block;color:var(--muted);font-size:11.5px}
+.bt{position:relative;height:22px;border-left:1px solid var(--axis);outline:none}
+.bt .b{position:absolute;left:0;top:3px;height:16px;background:var(--s1);border-radius:0 4px 4px 0}
+.bt .b.alt{background:var(--s2)}
+.bt .b.ghost{background:var(--s1-soft)}
+.bt .n{position:absolute;top:1px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;padding-left:6px;font-variant-numeric:tabular-nums}
+.bt .tip{display:none;position:absolute;z-index:5;left:0;top:26px;background:var(--ink);color:var(--page);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:7px;max-width:320px;width:max-content}
+.bt:hover .tip,.bt:focus .tip{display:block}
+.bt:hover .b,.bt:focus .b{filter:brightness(1.12)}
+.foot{color:var(--muted);font-size:12px;margin-top:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--grid)}
+th{font-weight:650;color:var(--ink-2);font-size:12.5px;background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:4px 6px;margin:12px 0}
+.stack{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;padding:0 8px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.stack .a{background:var(--s1);color:#fff}
+.stack .i{background:var(--s2);color:#fff}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.heat table{min-width:760px;table-layout:fixed}
+.heat th,.heat td{text-align:center;vertical-align:middle;padding:6px 2px;border:2px solid var(--surface);font-size:12px}
+.heat td.rl,.heat th.rl{text-align:left;width:190px;padding-left:8px;font-size:12.5px;background:var(--surface)}
+.heat td.h0{background:var(--surface-2);color:var(--muted)}
+.heat td.h1{background:var(--q1);color:var(--ink)}
+.heat td.h2{background:var(--q2);color:#0b0b0b}
+.heat td.h3{background:var(--q3);color:var(--q3-ink);font-weight:650}
+.heat td.rk{background:repeating-linear-gradient(135deg,var(--surface-2) 0 4px,transparent 4px 8px);color:var(--crit);font-weight:650}
+.so{display:inline-block;min-width:22px;text-align:center;font-weight:700;border-radius:5px;padding:1px 6px}
+.so.hi{background:var(--ink);color:var(--page)}
+.so.md{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.so.lo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--axis)}
+.tag{font-size:11.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.op{color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.tag.th{color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}
+.tag.mx{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--axis)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;box-shadow:0 0 0 1px var(--ring)}
+.callout b{color:var(--ink)}
+.gap{border-left:3px dashed var(--axis);padding:8px 14px;margin:12px 0;color:var(--ink-2);font-size:14px}
+.tl{position:relative;margin:10px 0 0 6px;padding-left:22px;border-left:2px solid var(--grid)}
+.tl .ev{position:relative;margin:0 0 14px}
+.tl .ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--s1)}
+.tl .ev.f:before{box-shadow:0 0 0 2px var(--axis);background:var(--surface-2)}
+.tl .d{font-size:12.5px;font-weight:650;color:var(--accent)}
+.tl .ev.f .d{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+ol.src{font-size:12.5px;color:var(--ink-2);padding-left:22px}
+ol.src li{margin:3px 0;word-break:break-word}
+ol.src a{color:var(--accent)}
+a{color:var(--accent)}
+sup a{text-decoration:none;font-size:11px}
+@media (max-width:640px){
+  h1{font-size:24px}
+  .bars{grid-template-columns:minmax(96px,42%) 1fr}
+  .srow{grid-template-columns:76px 1fr}
+}
+@media print{nav.files,.theme{display:none}.bt .tip{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<nav class="files"><a href="01_Tong-quan-nganh.html" class="">Tổng quan ngành</a><a href="02_Doi-thu-hien-tai.html" class="">Đối thủ hiện tại</a><a href="03_Doi-thu-moi.html" class="">Đối thủ mới</a><a href="04_Quyen-luc-nguoi-dung.html" class="">Quyền lực người dùng</a><a href="05_Quyen-luc-nha-cung-cap.html" class="">Quyền lực nhà cung cấp</a><a href="06_San-pham-thay-the.html" class="on">Sản phẩm thay thế</a><a href="07_Tong-hop-5-luc.html" class="">Tổng hợp 5 lực</a><button class="theme" type="button">Giao diện tối</button></nav>
+<div class="meta">LEVART · R2 Ngành và 5 lực cạnh tranh · Soạn 26/10/2026 · Bản 0.1 · Nghiên cứu tại bàn (thứ cấp) + dữ liệu đo trong data_inspect/R2_Nganh_5luc</div>
+<h1>Sản phẩm thay thế</h1>
+<p class="lede">Lực thứ năm của mô hình Porter (bổ sung để đủ 5 lực): người dùng có thể làm những việc Levart làm bằng cách nào khác, miễn phí ra sao.</p>
+<p class="meta">Mức bằng chứng theo <code>PLAN_RESEARCH.md</code>: <span class="lv A" title="Mức bằng chứng A">A</span> văn bản/số liệu nhà nước · <span class="lv B" title="Mức bằng chứng B">B</span> báo cáo có công bố cỡ mẫu · <span class="lv C" title="Mức bằng chứng C">C</span> báo chí/báo cáo không công bố cỡ mẫu · <span class="lv D" title="Mức bằng chứng D">D</span> suy luận của nhóm (GT). Di chuột (hoặc chạm) vào thanh biểu đồ để xem nguồn.</p>
+<div class="keys"><h3>Ý chính</h3><ul><li><b>Mỗi việc Levart định làm đều đã có một sản phẩm thay thế miễn phí mà người dùng đang dùng hằng ngày.</b> Lên kế hoạch: ChatGPT (81% người dùng AI dùng), Gemini (51%) <sup><a href="#s1">[1]</a></sup>, Google Maps. Tìm cảm hứng: TikTok (76,1 triệu người ≥18 tuổi), Facebook (79 triệu) <sup><a href="#s4">[4]</a></sup>. Lưu kỷ niệm: Facebook, Instagram, thư viện ảnh.</li><li><b>AI là sản phẩm thay thế tăng nhanh nhất:</b> 78% người dùng internet đã dùng AI, sinh viên 92% <sup><a href="#s1">[1]</a></sup>; 81% du khách định dùng AI cho chuyến tới <sup><a href="#s2">[2]</a></sup>; 42% người đã dùng AI cho du lịch nhờ nó dựng lịch trình theo giờ <sup><a href="#s3">[3]</a></sup>.</li><li><b>Nhưng các sản phẩm thay thế có lỗ hổng:</b> chỉ 28% thật sự tin AI <sup><a href="#s2">[2]</a></sup>; Facebook mạnh ở giai đoạn mơ ước và chia sẻ, chỉ trung bình–thấp ở giai đoạn lên kế hoạch và đặt dịch vụ (n=486) <sup><a href="#s5">[5]</a></sup>; và trong R1, ChatGPT không làm giảm việc tự tìm “lịch trình” trên Google <sup><a href="#s9">[9]</a></sup>.</li><li><b>Chưa có sản phẩm thay thế tốt cho “bằng chứng đã đi”:</b> ảnh trên mạng xã hội không xác nhận được vị trí, không gom thành bộ sưu tập theo tỉnh. Đây là việc duy nhất không có thứ thay thế miễn phí.</li><li><b>Kết luận:</b> mối đe doạ từ sản phẩm thay thế <b>Rất cao</b> với tính năng lên kế hoạch, gợi ý; <b>Thấp</b> với con dấu, bộ sưu tập có xác thực.</li></ul></div><div class="tiles"><div class="tile"><div class="v">81%</div><div class="l">người dùng AI ở Việt Nam dùng ChatGPT (Gemini 51%)</div><div class="s">Decision Lab 2025 · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">92%</div><div class="l">sinh viên đã dùng AI</div><div class="s">Decision Lab 2025 · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">76,1 tr</div><div class="l">người ≥18 tuổi TikTok tiếp cận được</div><div class="s">DataReportal · <span class="lv B" title="Mức bằng chứng B">B</span></div></div><div class="tile"><div class="v">69%</div><div class="l">Gen Z tìm ý tưởng chuyến đi trên mạng xã hội</div><div class="s">Booking.com 2024 · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">28%</div><div class="l">thật sự tin thông tin do AI tạo ra</div><div class="s">Agoda 2026 · <span class="lv C" title="Mức bằng chứng C">C</span></div></div><div class="tile"><div class="v">6.925</div><div class="l">doanh nghiệp lữ hành (tour trọn gói là sản phẩm thay thế cũ)</div><div class="s">SGGP 11/2025 · <span class="lv A" title="Mức bằng chứng A">A</span></div></div></div><h2>1. Sản phẩm thay thế theo từng việc người dùng cần làm</h2><div class="tbl "><table><tr><th>Việc của người dùng</th><th>Sản phẩm thay thế đang dùng</th><th>Giá</th><th>Thay tốt tới đâu</th><th>Lỗ hổng Levart có thể lấp</th><th>Đe doạ</th></tr><tr><td>Tìm cảm hứng, chọn nơi đi</td><td>TikTok, Facebook, YouTube, Instagram</td><td>Miễn phí</td><td>Rất tốt — 69% Gen Z tìm ý tưởng ở đây <sup><a href="#s6">[6]</a></sup></td><td>Nội dung không gắn với “còn bao nhiêu tỉnh chưa đi”</td><td><span class="so hi">3</span></td></tr><tr><td>Lên lịch trình</td><td>ChatGPT, Gemini, Google Maps, OTA</td><td>Miễn phí</td><td>Tốt — 42% dùng AI để dựng lịch trình <sup><a href="#s3">[3]</a></sup></td><td>Thông tin AI ít được tin (28%) <sup><a href="#s2">[2]</a></sup></td><td><span class="so hi">3</span></td></tr><tr><td>Tìm chỗ ở, quán, xe</td><td>Agoda, Traveloka, Google Maps, Vexere, nhóm Facebook</td><td>Miễn phí (đối tác trả)</td><td>Rất tốt</td><td>Ưu đãi riêng ở tỉnh nhỏ</td><td><span class="so hi">3</span></td></tr><tr><td>Đi theo đoàn, không tự lo</td><td>Tour của 6.925 doanh nghiệp lữ hành <sup><a href="#s7">[7]</a></sup></td><td>Trả tiền</td><td>Tốt với người ngại tự lo</td><td>Người trẻ thích tự túc (&gt;60%, tệp 04)</td><td><span class="so lo">1</span></td></tr><tr><td>Lưu kỷ niệm</td><td>Thư viện ảnh, Facebook, Instagram, Polarsteps</td><td>Miễn phí</td><td>Tốt cho ảnh; không gom theo tỉnh</td><td>Gom theo bản đồ 34 tỉnh</td><td><span class="so md">2</span></td></tr><tr><td><b>Chứng minh “tôi đã đến”, sưu tầm</b></td><td>Chụp ảnh check-in; con dấu giấy ở một số điểm</td><td>Miễn phí</td><td><b>Yếu</b> — không xác thực, không có bộ sưu tập</td><td><b>Lõi của Levart</b></td><td><span class="so lo">1</span></td></tr><tr><td>Tìm người đi cùng</td><td>Nhóm Facebook, Zalo</td><td>Miễn phí</td><td>Vừa — thiếu tin cậy</td><td>Hồ sơ đã đi, con dấu làm bằng chứng tin cậy</td><td><span class="so md">2</span></td></tr></table></div><h2>2. Sức mạnh của các sản phẩm thay thế</h2><div class="cols"><div class="card"><p class="chart-t">Người Việt dùng công cụ AI nào</p><p class="chart-s">% trong số người đã dùng AI · Decision Lab 2025 (n=600)</p><div class="bars"><div class="bl">ChatGPT</div><div class="bt" tabindex="0" aria-label="ChatGPT: 81%"><div class="b" style="width:81.00%"></div><span class="n" style="left:81.00%">81%</span><span class="tip">Decision Lab [1] · B</span></div><div class="bl">Gemini</div><div class="bt" tabindex="0" aria-label="Gemini: 51%"><div class="b" style="width:51.00%"></div><span class="n" style="left:51.00%">51%</span><span class="tip">Decision Lab [1] · B</span></div><div class="bl">Meta AI</div><div class="bt" tabindex="0" aria-label="Meta AI: 36%"><div class="b" style="width:36.00%"></div><span class="n" style="left:36.00%">36%</span><span class="tip">Decision Lab [1] · B</span></div></div><details><summary>Xem dạng bảng</summary><table><tr><th>Mục</th><th>Giá trị</th><th>Ghi chú</th><th>Nguồn</th></tr><tr><td>ChatGPT</td><td class='num'>81%</td><td></td><td>Decision Lab [1] · B</td></tr><tr><td>Gemini</td><td class='num'>51%</td><td></td><td>Decision Lab [1] · B</td></tr><tr><td>Meta AI</td><td class='num'>36%</td><td></td><td>Decision Lab [1] · B</td></tr></table></details></div><div class="card"><p class="chart-t">Độ phủ mạng xã hội tại Việt Nam (triệu người)</p><p class="chart-s">DataReportal Digital 2026 · cuối 2025</p><div class="bars"><div class="bl">Facebook<small>tiếp cận quảng cáo</small></div><div class="bt" tabindex="0" aria-label="Facebook: 79"><div class="b" style="width:92.94%"></div><span class="n" style="right:7.06%;color:#fff;padding-right:6px">79</span><span class="tip">DataReportal [4] · B</span></div><div class="bl">Zalo<small>người dùng tháng</small></div><div class="bt" tabindex="0" aria-label="Zalo: 78.3"><div class="b" style="width:92.12%"></div><span class="n" style="right:7.88%;color:#fff;padding-right:6px">78.3</span><span class="tip">DataReportal [4] · B</span></div><div class="bl">TikTok<small>≥18 tuổi</small></div><div class="bt" tabindex="0" aria-label="TikTok: 76.1"><div class="b" style="width:89.53%"></div><span class="n" style="right:10.47%;color:#fff;padding-right:6px">76.1</span><span class="tip">DataReportal [4] · B</span></div><div class="bl">YouTube</div><div class="bt" tabindex="0" aria-label="YouTube: 62.1"><div class="b" style="width:73.06%"></div><span class="n" style="left:73.06%">62.1</span><span class="tip">DataReportal [4] · B</span></div><div class="bl">Instagram</div><div class="bt" tabindex="0" aria-label="Instagram: 11.7"><div class="b" style="width:13.76%"></div><span class="n" style="left:13.76%">11.7</span><span class="tip">DataReportal [4] · B</span></div></div><details><summary>Xem dạng bảng</summary><table><tr><th>Mục</th><th>Giá trị</th><th>Ghi chú</th><th>Nguồn</th></tr><tr><td>Facebook</td><td class='num'>79</td><td>tiếp cận quảng cáo</td><td>DataReportal [4] · B</td></tr><tr><td>Zalo</td><td class='num'>78.3</td><td>người dùng tháng</td><td>DataReportal [4] · B</td></tr><tr><td>TikTok</td><td class='num'>76.1</td><td>≥18 tuổi</td><td>DataReportal [4] · B</td></tr><tr><td>YouTube</td><td class='num'>62.1</td><td></td><td>DataReportal [4] · B</td></tr><tr><td>Instagram</td><td class='num'>11.7</td><td></td><td>DataReportal [4] · B</td></tr></table></details></div></div><div class="card"><p class="chart-t">Du khách Việt dùng AI để làm gì</p><p class="chart-s">% trong số người đã dùng AI cho du lịch · Booking.com 2026</p><div class="bars"><div class="bl">Gợi ý hoạt động, quán ăn</div><div class="bt" tabindex="0" aria-label="Gợi ý hoạt động, quán ăn: 50%"><div class="b" style="width:50.00%"></div><span class="n" style="left:50.00%">50%</span><span class="tip">Booking.com [3] · C</span></div><div class="bl">Tìm hiểu sâu điểm đến</div><div class="bt" tabindex="0" aria-label="Tìm hiểu sâu điểm đến: 47%"><div class="b" style="width:47.00%"></div><span class="n" style="left:47.00%">47%</span><span class="tip">Booking.com [3] · C</span></div><div class="bl">So sánh phương tiện</div><div class="bt" tabindex="0" aria-label="So sánh phương tiện: 46%"><div class="b" style="width:46.00%"></div><span class="n" style="left:46.00%">46%</span><span class="tip">Booking.com [3] · C</span></div><div class="bl">Tìm chỗ ở</div><div class="bt" tabindex="0" aria-label="Tìm chỗ ở: 43%"><div class="b" style="width:43.00%"></div><span class="n" style="left:43.00%">43%</span><span class="tip">Booking.com [3] · C</span></div><div class="bl">Dựng lịch trình theo giờ</div><div class="bt" tabindex="0" aria-label="Dựng lịch trình theo giờ: 42%"><div class="b" style="width:42.00%"></div><span class="n" style="left:42.00%">42%</span><span class="tip">Booking.com [3] · C</span></div><div class="bl">Tìm điểm ít người biết</div><div class="bt" tabindex="0" aria-label="Tìm điểm ít người biết: 41%"><div class="b" style="width:41.00%"></div><span class="n" style="left:41.00%">41%</span><span class="tip">Booking.com [3] · C</span></div></div><p class="foot">Mỗi dòng là một tính năng Levart từng định làm — và đều đã có AI làm thay, miễn phí.</p><details><summary>Xem dạng bảng</summary><table><tr><th>Mục</th><th>Giá trị</th><th>Ghi chú</th><th>Nguồn</th></tr><tr><td>Gợi ý hoạt động, quán ăn</td><td class='num'>50%</td><td></td><td>Booking.com [3] · C</td></tr><tr><td>Tìm hiểu sâu điểm đến</td><td class='num'>47%</td><td></td><td>Booking.com [3] · C</td></tr><tr><td>So sánh phương tiện</td><td class='num'>46%</td><td></td><td>Booking.com [3] · C</td></tr><tr><td>Tìm chỗ ở</td><td class='num'>43%</td><td></td><td>Booking.com [3] · C</td></tr><tr><td>Dựng lịch trình theo giờ</td><td class='num'>42%</td><td></td><td>Booking.com [3] · C</td></tr><tr><td>Tìm điểm ít người biết</td><td class='num'>41%</td><td></td><td>Booking.com [3] · C</td></tr></table></details></div><h2>3. Các yếu tố quyết định mối đe doạ thay thế</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Tác động lên lực</th><th>Độ mạnh</th><th>Bằng chứng</th><th>Nguồn · mức</th></tr><tr><td>Giá của sản phẩm thay thế</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>Gần như tất cả miễn phí</td><td>D</td></tr><tr><td>Đã thành thói quen</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>AI 78%, sinh viên 92%; Facebook, TikTok, Zalo phủ &gt; 75 triệu người</td><td><sup><a href="#s1">[1]</a></sup><sup><a href="#s4">[4]</a></sup> · B</td></tr><tr><td>Chi phí chuyển sang dùng thay thế</td><td><span class="tag th">↑ tăng sức ép</span></td><td><span class="so hi">3</span></td><td>Bằng 0 — đã cài sẵn trên điện thoại</td><td>D</td></tr><tr><td>Chất lượng thông tin của thay thế</td><td><span class="tag op">↓ giảm sức ép</span></td><td><span class="so md">2</span></td><td>Chỉ 28% tin AI; Facebook yếu ở khâu lên kế hoạch, đặt dịch vụ</td><td><sup><a href="#s2">[2]</a></sup><sup><a href="#s5">[5]</a></sup> · C/B</td></tr><tr><td>Không có thay thế cho “bằng chứng đã đi”</td><td><span class="tag op">↓ giảm sức ép</span></td><td><span class="so hi">3</span></td><td>Không sản phẩm phổ biến nào gom check-in có xác thực theo tỉnh</td><td>D — kiểm ở data_inspect</td></tr></table></div><div class="card"><p class="chart-t">Kết luận sức ép của lực này: <b>Rất cao</b></p><div class="bars"><div class="bl">Thấp → Rất cao</div><div class="bt"><div class="b" style="width:100%"></div><span class="n" style="left:82%">Rất cao</span></div></div><p class="foot">Với tính năng lên kế hoạch, gợi ý, AI — ranh giới A gần như trùng với các sản phẩm thay thế miễn phí. Với con dấu và bộ sưu tập có xác thực, mối đe doạ thấp — nhưng chưa chứng minh được người dùng cần việc này.</p></div><h2>4. Chấm điểm và cột “vì vậy”</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Loại</th><th>Tác động</th><th>Khả năng</th><th>T×K</th><th>Khi nào</th><th>Nguồn · mức</th><th>Vì vậy Levart nên…</th></tr><tr><td>ChatGPT, Gemini làm lịch trình miễn phí</td><td><span class="tag th">Đe doạ</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[1][3] · B/C</td><td>Không đặt lịch trình AI làm tính năng chính; dùng AI làm lớp phụ bên dưới con dấu.</td></tr><tr><td>TikTok, Facebook là nơi tìm cảm hứng</td><td><span class="tag mx">Cả hai</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[4][6] · B</td><td>Dùng TikTok làm kênh đưa người dùng vào, không cạnh tranh làm mạng xã hội nội dung.</td></tr><tr><td>Không có thay thế cho bằng chứng đã đi</td><td><span class="tag op">Cơ hội</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>D</td><td>Đặt con dấu có xác thực lên làm lõi; kiểm bằng phỏng vấn “bạn có muốn bằng chứng đã đến không”.</td></tr><tr><td>Thông tin từ thay thế ít được tin</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so hi">3</span></td><td><b>6</b> ✓ SWOT</td><td>Ngay</td><td>[2][5] · B/C</td><td>Thông tin do người đã check-in xác nhận là khác biệt.</td></tr></table></div>
+<h2>Nguồn</h2>
+<ol class="src"><li id="s1">Decision Lab — The State of Consumer AI tại Việt Nam 2025 (n=600), qua Advertising Vietnam — <a href="https://advertisingvietnam.com/thi-truong-ai-tieu-dung-viet-nam-2025-voi-78-dan-so-truc-tuyen-da-dung-ai-nguoi-viet-chon-nen-tang-nao-cho-tung-tac-vu-p26978" target="_blank" rel="noopener">https://advertisingvietnam.com/thi-truong-ai-tieu-dung-viet-nam-2025-voi-78-dan-so-truc-tuyen-da-dung-ai-nguoi-viet-chon-nen-tang-nao-cho-tung-tac-vu-p26978</a></li><li id="s2">Agoda Travel Outlook 2026 — 81% định dùng AI, 28% tin AI — <a href="https://matterhorncommunications.com/81-of-vietnamese-travelers-want-to-use-ai-to-plan-their-next-trip-agoda-report-finds/" target="_blank" rel="noopener">https://matterhorncommunications.com/81-of-vietnamese-travelers-want-to-use-ai-to-plan-their-next-trip-agoda-report-finds/</a></li><li id="s3">Booking.com Global AI Adoption Report 2026 — mục đích dùng AI, qua Báo Đầu tư — <a href="https://baodautu.vn/82-du-khach-viet-tin-ai-se-thay-doi-cach-len-ke-hoach-du-lich-d638301.html" target="_blank" rel="noopener">https://baodautu.vn/82-du-khach-viet-tin-ai-se-thay-doi-cach-len-ke-hoach-du-lich-d638301.html</a></li><li id="s4">DataReportal — Digital 2026: Vietnam — <a href="https://datareportal.com/reports/digital-2026-vietnam" target="_blank" rel="noopener">https://datareportal.com/reports/digital-2026-vietnam</a></li><li id="s5">Vai trò của Facebook trong tiến trình du lịch của du khách thế hệ Z (n=486), TNU Journal of Science and Technology — <a href="https://jst.tnu.edu.vn/jst/article/view/7529" target="_blank" rel="noopener">https://jst.tnu.edu.vn/jst/article/view/7529</a></li><li id="s6">Booking.com — 69% Gen Z Việt dùng mạng xã hội tìm ý tưởng chuyến đi (2024), SGGP — <a href="https://www.sggp.org.vn/69-gen-z-viet-nam-su-dung-mang-xa-hoi-nhu-mot-cong-cu-tim-kiem-y-tuong-va-cam-hung-du-lich-post755954.html" target="_blank" rel="noopener">https://www.sggp.org.vn/69-gen-z-viet-nam-su-dung-mang-xa-hoi-nhu-mot-cong-cu-tim-kiem-y-tuong-va-cam-hung-du-lich-post755954.html</a></li><li id="s7">Thúc đẩy kết nối, tăng tốc phát triển du lịch (11/2025: 4.775 DN lữ hành quốc tế, 2.150 nội địa), SGGP — <a href="https://www.sggp.org.vn/thuc-day-ket-noi-tang-toc-phat-trien-du-lich-post824667.html" target="_blank" rel="noopener">https://www.sggp.org.vn/thuc-day-ket-noi-tang-toc-phat-trien-du-lich-post824667.html</a></li><li id="s8">Ảnh hưởng của Facebook đến quyết định chọn điểm đến của Gen Z: trường hợp Huế (n=203), Tạp chí ĐH Đồng Tháp — <a href="https://dthujs.vn/index.php/dthujs/article/view/2544" target="_blank" rel="noopener">https://dthujs.vn/index.php/dthujs/article/view/2544</a></li><li id="s9">Levart — data_inspect/R1_PESTLE/report.md (phân tích dữ liệu R1, 25/10/2026; nội bộ)</li><li id="s10">Levart — data_inspect/R2_Nganh_5luc/report.md (phân tích dữ liệu R2, 26/10/2026; nội bộ)</li><li id="s11">Levart — PLAN_RESEARCH.md mục 4 (R2) và 5 (R3), nội bộ</li></ol>
+<p class="foot">Truy cập các nguồn ngày 26/10/2026. Phần pháp lý là danh sách việc cần hỏi luật sư, không phải tư vấn pháp lý.</p>
+</div><script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){var t=document.documentElement.getAttribute('data-theme');
+    if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function lab(){b.textContent=cur()==='dark'?'Giao diện sáng':'Giao diện tối';}
+  try{var s=localStorage.getItem('r1-theme'); if(s) document.documentElement.setAttribute('data-theme',s);}catch(e){}
+  lab();
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('r1-theme',n);}catch(e){} lab();});
+})();
+</script></body></html>

@@ -1,0 +1,3076 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-24T11:04:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 3252662007,
+  "lat": 21.3338530,
+  "lon": 106.8500141,
+  "tags": {
+    "ele": "62.37",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Thu Luyen hotel (Nhà Nghỉ Thu Luyến)",
+    "rooms": "12",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3252712021,
+  "lat": 21.3238110,
+  "lon": 106.8167188,
+  "tags": {
+    "ele": "70.3",
+    "name": "Hotel",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3252712022,
+  "lat": 21.3906556,
+  "lon": 106.7590082,
+  "tags": {
+    "ele": "50.11",
+    "name": "Hotel",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3763486562,
+  "lat": 21.2898967,
+  "lon": 106.1419410,
+  "tags": {
+    "addr:city": "Bắc Giang",
+    "addr:district": "Việt Yên",
+    "addr:postcode": "21000",
+    "addr:province": "Bắc Giang",
+    "addr:street": "Mầm Non",
+    "addr:subdistrict": "Yên Sơn-Nghĩa Trung",
+    "ele": "2",
+    "level": "1",
+    "name": "Dương Cua Studio",
+    "phone": "01696 006 450",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/duongngochoang",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4115152823,
+  "lat": 21.0343474,
+  "lon": 106.7876588,
+  "tags": {
+    "addr:housenumber": "23B",
+    "addr:street": "Quang Trung",
+    "email": "thanglongub@gmail.com",
+    "internet_access": "wlan",
+    "name": "Khách sạn Thăng Long",
+    "opening_hours": "24/7",
+    "phone": "0333 662 686",
+    "tourism": "hotel",
+    "website": "https://thanglongub.blogspot.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4364331493,
+  "lat": 21.0812430,
+  "lon": 105.9056850,
+  "tags": {
+    "addr:housenumber": "227",
+    "addr:street": "Phan Dang Luu",
+    "name": "Khách Sạn Toàn Thắng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4677731890,
+  "lat": 21.4140149,
+  "lon": 105.8827511,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4697329089,
+  "lat": 20.9831651,
+  "lon": 106.9157374,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phat dat",
+    "name:vi": "Phat dat",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4720244036,
+  "lat": 21.0040782,
+  "lon": 106.8540164,
+  "tags": {
+    "name:de": "Nhà Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4720244037,
+  "lat": 21.0037731,
+  "lon": 106.8543769,
+  "tags": {
+    "name:de": "Nhà Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4748286922,
+  "lat": 21.2009440,
+  "lon": 106.0923894,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Thanh Sơn",
+    "addr:subdistrict": "Phường Đáp Cầu",
+    "name": "Resort Phoenix",
+    "name:ko": "박닌피닉스리조트(카지노)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4748437281,
+  "lat": 21.1779675,
+  "lon": 106.0675964,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "36",
+    "addr:postcode": "220000",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngọc Hân Công Chúa",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "brand": "Glory 2 Hotel Bac Ninh",
+    "check_date": "2018-12-25",
+    "email": "glory2hotel@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "level": "10",
+    "name": "Glory 2 Hotel",
+    "note": "Booking online and save money.\nemail: contact@glory2hotel.com",
+    "operator": "Glory 2 Hotel bac ninh Viet Nam",
+    "payment:cash": "yes",
+    "payment:mastercard": "yes",
+    "payment:telephone_cards": "yes",
+    "payment:visa": "yes",
+    "phone": "+84 222 3812 388",
+    "rooms": "38",
+    "stars": "2",
+    "tourism": "hotel",
+    "website": "https://glory2hotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4770615621,
+  "lat": 21.0004219,
+  "lon": 106.5401299,
+  "tags": {
+    "addr:street": "Ngã tư hiệp sơn",
+    "internet_access": "wlan",
+    "name": "Phương Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4841097823,
+  "lat": 21.2705941,
+  "lon": 106.1859528,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5045984521,
+  "lat": 21.1212361,
+  "lon": 105.9794146,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5141145930,
+  "lat": 21.1626645,
+  "lon": 106.0463124,
+  "tags": {
+    "name": "International Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5369771626,
+  "lat": 21.3347632,
+  "lon": 106.8497606,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Phuong Son Nha Nghi",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5424342824,
+  "lat": 21.1158945,
+  "lon": 105.9553772,
+  "tags": {
+    "email": "phambaominhvy@icloud.com",
+    "name": "Grand Hotel",
+    "name:en": "Grand Hotel",
+    "opening_hours": "24/7",
+    "phone": "0985037997",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5436606009,
+  "lat": 21.2662806,
+  "lon": 106.1207750,
+  "tags": {
+    "description": "Garage and hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436615321,
+  "lat": 21.2750287,
+  "lon": 106.1585838,
+  "tags": {
+    "description": "Budget accomodation",
+    "name": "Na Nghi An Tho",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436616867,
+  "lat": 21.2754437,
+  "lon": 106.1633578,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Hoa Hong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436622827,
+  "lat": 21.2741347,
+  "lon": 106.1733681,
+  "tags": {
+    "description": "budget accommodation with Wi-Fi",
+    "name": "Nha Nghi Hai Yen",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436673873,
+  "lat": 21.3379061,
+  "lon": 106.2533122,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nanh Nghi 68",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436753746,
+  "lat": 21.3802127,
+  "lon": 106.2678268,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Sao Mai",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5436775658,
+  "lat": 21.4203162,
+  "lon": 106.2809200,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Thanh Binh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5437146839,
+  "lat": 21.4976258,
+  "lon": 106.3513723,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Ngoc Khanh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5437148196,
+  "lat": 21.4979253,
+  "lon": 106.3518443,
+  "tags": {
+    "description": "250k per night on work days and 350k in the weekend.",
+    "name": "Quyn Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5438867818,
+  "lat": 21.5758722,
+  "lon": 106.5022788,
+  "tags": {
+    "name": "Nha Nghi Thuy Lin",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5438885335,
+  "lat": 21.5737850,
+  "lon": 106.4997355,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi Cuong Ghan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5438886845,
+  "lat": 21.5761216,
+  "lon": 106.5026757,
+  "tags": {
+    "description": "Budget accommodation",
+    "name": "Nha Nghi TVT",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5485672010,
+  "lat": 21.0069962,
+  "lon": 105.9334536,
+  "tags": {
+    "addr:city": "Hà Nội",
+    "addr:district": "Gia Lâm",
+    "addr:housenumber": "NA",
+    "addr:province": "Hà Nội",
+    "addr:street": "Đường T",
+    "addr:subdistrict": "Thị trấn Trâu Quỳ",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Nhà khách VNUA",
+    "operator": "Học viện Nông nghiệp Việt Nam",
+    "rooms": "10",
+    "smoking": "outside",
+    "source": "grab_hanoi_2018_t2",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5495485166,
+  "lat": 21.5059406,
+  "lon": 106.3456538,
+  "tags": {
+    "name": "Nhà khách huyện Hữu Lũng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5594724421,
+  "lat": 21.0192716,
+  "lon": 105.9054018,
+  "tags": {
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5616118021,
+  "lat": 20.9819824,
+  "lon": 107.0213900,
+  "tags": {
+    "name": "Thien Tan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5745089821,
+  "lat": 20.9853440,
+  "lon": 105.9312026,
+  "tags": {
+    "name": "Nhà Nghỉ Hoàng Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5791605756,
+  "lat": 21.4206551,
+  "lon": 105.8991929,
+  "tags": {
+    "addr:postcode": "250000",
+    "addr:street": "Khu đô thị An Bình - Đồng Tiến - Phổ Yên",
+    "internet_access": "wlan",
+    "name": "Khách sạn Hồng Châu",
+    "name:en": "Hong Chau hotel",
+    "opening_hours": "24/7",
+    "phone": "0208 3936 668",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5839415486,
+  "lat": 21.0597324,
+  "lon": 106.6230147,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5893901287,
+  "lat": 21.0100118,
+  "lon": 105.9392819,
+  "tags": {
+    "name:en": "Prime homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6259632687,
+  "lat": 21.1148683,
+  "lon": 105.9534361,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6259646985,
+  "lat": 21.1756804,
+  "lon": 106.0705602,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6259647185,
+  "lat": 21.1149812,
+  "lon": 105.9607894,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6474561985,
+  "lat": 21.2717056,
+  "lon": 106.1982095,
+  "tags": {
+    "addr:housenumber": "05C",
+    "addr:street": "Nguyễn Văn Cừ",
+    "internet_access": "wlan",
+    "name": "Nhà Trọ của tôi",
+    "name:vi": "Nhà Trọ",
+    "phone": "0582057646",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6545478438,
+  "lat": 21.1647310,
+  "lon": 106.0598253,
+  "tags": {
+    "name": "Landmark Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6545478445,
+  "lat": 21.1665863,
+  "lon": 106.0607107,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Trường Tộ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Nhà nghỉ Phú Hưng",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6545851278,
+  "lat": 21.1770261,
+  "lon": 106.0552585,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Tô Hiệu",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Nhà nghỉ Quân Hiếu",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6546439417,
+  "lat": 21.1162276,
+  "lon": 105.9744099,
+  "tags": {
+    "name": "Nhà nghỉ Sao Việt",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6665107287,
+  "lat": 21.1735020,
+  "lon": 106.0746101,
+  "tags": {
+    "name:en": "Haengbok Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6669337485,
+  "lat": 21.1722214,
+  "lon": 106.0806130,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Phúc Xuyên",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Happy Hotel",
+    "name:en": "Happy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6690512885,
+  "lat": 21.0722691,
+  "lon": 105.9052709,
+  "tags": {
+    "addr:housenumber": "18/508",
+    "addr:street": "Ngô Gia Tự",
+    "name": "Nhà",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7554394692,
+  "lat": 21.1103001,
+  "lon": 106.3956535,
+  "tags": {
+    "name": "Đường kim đồng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7554394693,
+  "lat": 21.1077333,
+  "lon": 106.3942269,
+  "tags": {
+    "name": "Đường 1/5",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7554398894,
+  "lat": 21.1117318,
+  "lon": 106.3930920,
+  "tags": {
+    "name": "Số 6 đường sinh viên",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7554398986,
+  "lat": 21.1113263,
+  "lon": 106.3944869,
+  "tags": {
+    "name": "36 lê thị duệ",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065686,
+  "lat": 21.1222292,
+  "lon": 106.4050122,
+  "tags": {
+    "name": "100 lê thanh nghị",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065687,
+  "lat": 21.1147886,
+  "lon": 106.3936398,
+  "tags": {
+    "name": "Suối lựng, lôi động, cộng hòa",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065688,
+  "lat": 21.1099483,
+  "lon": 106.3916360,
+  "tags": {
+    "name": "Trường mầm non tuấn việt",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065785,
+  "lat": 21.1223645,
+  "lon": 106.4038631,
+  "tags": {
+    "name": "Chợ đề",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065786,
+  "lat": 21.1220601,
+  "lon": 106.4046083,
+  "tags": {
+    "name": "17 lê thanh nghị",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065787,
+  "lat": 21.1101737,
+  "lon": 106.3897994,
+  "tags": {
+    "name": "Trà tranh tổ dân phố",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065788,
+  "lat": 21.1058795,
+  "lon": 106.3937694,
+  "tags": {
+    "name": "Ngõ 9",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065885,
+  "lat": 21.1227918,
+  "lon": 106.4016279,
+  "tags": {
+    "name": "Gốc đa",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 7555065886,
+  "lat": 21.1085092,
+  "lon": 106.3920491,
+  "tags": {
+    "name": "Ngõ thái hưng",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 9237323778,
+  "lat": 21.0319495,
+  "lon": 105.8922913,
+  "tags": {
+    "name": "Khu Nhà Ở Bộ Quốc Phòng",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 9883613919,
+  "lat": 21.2809584,
+  "lon": 106.1925983,
+  "tags": {
+    "addr:housenumber": "2 Ngách 4/4",
+    "addr:postcode": "230000",
+    "addr:street": "Đường Lê An",
+    "internet_access": "wlan",
+    "name": "Nhà Của Bột",
+    "name:en": "Bot Home",
+    "phone": "0878300385",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 10028210817,
+  "lat": 20.9858290,
+  "lon": 105.8840380,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Ngách 467/139/34 Lĩnh Nam",
+    "name": "Hotel Hoàng Thắng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10595358605,
+  "lat": 21.1613546,
+  "lon": 106.7953482,
+  "tags": {
+    "name": "Tuyến 7",
+    "name:en": "Ok",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11409450327,
+  "lat": 21.2744411,
+  "lon": 106.1013787,
+  "tags": {
+    "addr:city": "Bích Động",
+    "addr:district": "Việt Yên",
+    "addr:housenumber": "418",
+    "addr:province": "Bắc Giang",
+    "addr:street": "Đường Hoàng Hoa Thám",
+    "addr:subdistrict": "Bích Động",
+    "internet_access": "yes",
+    "name": "nhà nghỉ bình yên",
+    "phone": "02043874231",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11620261969,
+  "lat": 21.1708774,
+  "lon": 106.0592614,
+  "tags": {
+    "name:en": "Crown hotel",
+    "name:ko": "크라운호텔",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11659754670,
+  "lat": 21.1701838,
+  "lon": 106.0576539,
+  "tags": {
+    "name:en": "Crown Hotel 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12337384308,
+  "lat": 21.1661371,
+  "lon": 106.1343936,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:housenumber": "275",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Phố Lương Định Của",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà trọ Tâm Tam",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12343349408,
+  "lat": 21.1762042,
+  "lon": 106.0692831,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Thái Tổ",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Grand Phoenix Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12345816253,
+  "lat": 21.1662477,
+  "lon": 106.1345308,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:housenumber": "290",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Phố Lương Định Của",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà trọ Căn Quý",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12694082758,
+  "lat": 21.1773657,
+  "lon": 106.0675677,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "42",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Nhà nghỉ Giang Nam 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12752064518,
+  "lat": 21.1704862,
+  "lon": 106.0556165,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngọc Hân Công Chúa",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "4M HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12752064519,
+  "lat": 21.1707531,
+  "lon": 106.0553937,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Võ Cường 12",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "HaNa 2 Apartment & Hotel Bac Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12752064520,
+  "lat": 21.1711701,
+  "lon": 106.0550961,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Võ Cường 12",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Hawaii",
+    "name:en": "Hawaii Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12764557249,
+  "lat": 21.1891706,
+  "lon": 106.0721817,
+  "tags": {
+    "name": "Hotel Yên Bình 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645723,
+  "lat": 21.1734667,
+  "lon": 106.0605524,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "148",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Ngọc Hân Công Chúa",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "KHÁCH SẠN NASA BẮC NINH",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645724,
+  "lat": 21.1731566,
+  "lon": 106.0601677,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "166",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Ngọc Hân Công Chúa",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Glory 3 Hotel",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645725,
+  "lat": 21.1728831,
+  "lon": 106.0594037,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Ngô Tất Tố",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Luxury Hotel - 欢悦酒店",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645728,
+  "lat": 21.1730951,
+  "lon": 106.0592792,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Ngô Tất Tố",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "APA HOTEL BAC NINH-喜悦酒店",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645729,
+  "lat": 21.1732537,
+  "lon": 106.0591461,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Ngô Tất Tố",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Queen Hotel",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645734,
+  "lat": 21.1797559,
+  "lon": 106.0660106,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "8-10",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Cao",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Phuc Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645735,
+  "lat": 21.1791288,
+  "lon": 106.0663580,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Hoàng Ngân",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Nhà Nghỉ Hoàng Trung",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12765645737,
+  "lat": 21.1793352,
+  "lon": 106.0686473,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "160",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Hai Bà Trưng",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "K-Boss Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12788200819,
+  "lat": 21.1837385,
+  "lon": 106.0825525,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "173",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Lê Đình Tấn",
+    "addr:subdistrict": "Phường Vũ Ninh",
+    "name": "Nhà Nghỉ An Bình",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12788200927,
+  "lat": 21.1837252,
+  "lon": 106.0830218,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Lê Đình Tấn",
+    "addr:subdistrict": "Phường Vũ Ninh",
+    "name": "Nhà Nghỉ Phạm Châu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797172222,
+  "lat": 21.1609862,
+  "lon": 106.1468852,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Trương Định",
+    "addr:subdistrict": "Phường Phượng Mao",
+    "name": "Nhà nghỉ Ngọc Hương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797172233,
+  "lat": 21.1591684,
+  "lon": 106.1460193,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Trương Định",
+    "addr:subdistrict": "Phường Phượng Mao",
+    "name": "Royal Hotel Que Vo",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797172258,
+  "lat": 21.1534383,
+  "lon": 106.1436168,
+  "tags": {
+    "name": "Nhà nghỉ BaBy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797175336,
+  "lat": 21.1544768,
+  "lon": 106.1398557,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Nhân Phùng",
+    "addr:subdistrict": "Phường Phượng Mao",
+    "name": "Nhà Nghỉ Hoàng Yên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993021,
+  "lat": 21.1547689,
+  "lon": 106.1371624,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Nhân Phùng",
+    "addr:subdistrict": "Phường Phượng Mao",
+    "name": "Nhà Nghỉ Trung Đức",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993022,
+  "lat": 21.1580413,
+  "lon": 106.1305478,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Huy Cận",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Phương Đông",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993023,
+  "lat": 21.1575588,
+  "lon": 106.1304977,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Thư Phong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993024,
+  "lat": 21.1575740,
+  "lon": 106.1311149,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Ngọc Khánh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993025,
+  "lat": 21.1582104,
+  "lon": 106.1307200,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Trọ Tuấn Ngoan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993028,
+  "lat": 21.1576390,
+  "lon": 106.1291911,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Dương Giai",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Hương Quê",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993029,
+  "lat": 21.1577414,
+  "lon": 106.1290034,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Trọ Quang Huy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993031,
+  "lat": 21.1590421,
+  "lon": 106.1276516,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Quang Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993032,
+  "lat": 21.1578628,
+  "lon": 106.1255921,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Trần Hưng Đạo",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Minh Ngọc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993034,
+  "lat": 21.1579607,
+  "lon": 106.1256091,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Đức Trung",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Hướng Dương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993035,
+  "lat": 21.1582917,
+  "lon": 106.1256932,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Đức Trung",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Hà Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993036,
+  "lat": 21.1583631,
+  "lon": 106.1260331,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Đức Trung",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Hoa Biển",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993037,
+  "lat": 21.1583404,
+  "lon": 106.1254821,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Đức Trung",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Hoa Sữa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993039,
+  "lat": 21.1591654,
+  "lon": 106.1260096,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Đức Trung",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Thành Sơn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993046,
+  "lat": 21.1595882,
+  "lon": 106.1287010,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Bỉnh Trục",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà nghỉ Xuân Trường",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993047,
+  "lat": 21.1597663,
+  "lon": 106.1285659,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà trọ Đảm Cúc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993048,
+  "lat": 21.1592810,
+  "lon": 106.1293185,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Dương Giai",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà trọ Hiền Bảo",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12797993049,
+  "lat": 21.1600105,
+  "lon": 106.1295036,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Dương Giai",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà trọ Ban Huyền",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809299258,
+  "lat": 21.1841668,
+  "lon": 106.0798462,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Hàn Thuyên",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Cozy Phoenix Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809299259,
+  "lat": 21.1843737,
+  "lon": 106.0800187,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Hàn Thuyên",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Luxury Phoenix Hotel Bac Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809299261,
+  "lat": 21.1836003,
+  "lon": 106.0788532,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Phù Đổng Thiên Vương",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Royal Phoenix Hotel Bac Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809299265,
+  "lat": 21.1809687,
+  "lon": 106.0757879,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "177",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Thái Tông",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Nhà Nghỉ Giang Nam 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809299266,
+  "lat": 21.1808921,
+  "lon": 106.0757094,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "187",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Thái Tông",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Nhà Nghỉ Yến Phương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12817316981,
+  "lat": 21.1625436,
+  "lon": 106.0949119,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Tam Giang",
+    "addr:subdistrict": "Phường Vân Dương",
+    "name": "Nhà trọ Quỳnh Anh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 12845336148,
+  "lat": 21.1536692,
+  "lon": 106.1527067,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:street": "Ngõ 100 Phố Mai Công",
+    "addr:subdistrict": "Phường Phố Mới",
+    "name": "Nhà Nghỉ Ngọc Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12848974626,
+  "lat": 21.1491054,
+  "lon": 106.2574015,
+  "tags": {
+    "name": "Nhà Khách Làng Gốm Phù Lãng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12875651405,
+  "lat": 21.1763947,
+  "lon": 106.0715229,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "3",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Đăng Đạo",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "GLORY HOTEL",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12875651407,
+  "lat": 21.1763952,
+  "lon": 106.0707012,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Đại Phúc 5",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Nhà nghỉ Hà Vy",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12875651456,
+  "lat": 21.1723118,
+  "lon": 106.0627300,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "37",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Lý Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Toà nhà Vĩnh Cát",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12876608623,
+  "lat": 21.1737334,
+  "lon": 106.0634010,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "34",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Lý Thái Tổ",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "New World Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12906288588,
+  "lat": 21.1823674,
+  "lon": 106.0686482,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "5Đ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Ngô Miễn Thiệu",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Khách Sạn Mimoza",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12969402746,
+  "lat": 21.2767177,
+  "lon": 106.1943253,
+  "tags": {
+    "addr:city": "Phường Bắc Giang",
+    "addr:housenumber": "8",
+    "addr:postcode": "220000",
+    "addr:street": "Nguyễn Văn Cừ",
+    "brand": "Tru by Hilton",
+    "email": "HANBG_TRU@hilton.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Tru by Hilton Bac Giang City Centre",
+    "phone": "+84 204 3838 333",
+    "rooms": "120",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/hanbgru-tru-bac-giang-city-centre/"
+  }
+},
+{
+  "type": "node",
+  "id": 13038565782,
+  "lat": 21.1195291,
+  "lon": 106.2484033,
+  "tags": {
+    "name": "Nhà nghỉ Hương Càng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13041430554,
+  "lat": 21.1574455,
+  "lon": 106.1283740,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thị xã Quế Võ",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Trần Hưng Đạo",
+    "addr:subdistrict": "Phường Phương Liễu",
+    "name": "Nhà Nghỉ Ngọc Đức",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087103820,
+  "lat": 21.1716961,
+  "lon": 106.0604625,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "38",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "비엔나 维也纳酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087103821,
+  "lat": 21.1718116,
+  "lon": 106.0606469,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "38",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Hilton Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087103822,
+  "lat": 21.1718883,
+  "lon": 106.0607795,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "28",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Central Hotel Kinh Bac",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13087103823,
+  "lat": 21.1719541,
+  "lon": 106.0609269,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "26",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Violin Bac Ninh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092415126,
+  "lat": 21.6045542,
+  "lon": 106.3510850,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092422497,
+  "lat": 21.5424175,
+  "lon": 106.3764253,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092424083,
+  "lat": 21.5546447,
+  "lon": 106.4408228,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092424539,
+  "lat": 21.5757160,
+  "lon": 106.5018455,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092427736,
+  "lat": 21.5080901,
+  "lon": 106.3610812,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092431816,
+  "lat": 21.4259202,
+  "lon": 106.2384020,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092434014,
+  "lat": 21.5760949,
+  "lon": 106.5023812,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092434015,
+  "lat": 21.2786421,
+  "lon": 105.9615501,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092438396,
+  "lat": 21.5071802,
+  "lon": 106.3591287,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092443125,
+  "lat": 21.4315537,
+  "lon": 106.2826541,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092446599,
+  "lat": 21.4978763,
+  "lon": 106.3510853,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092446623,
+  "lat": 21.5747058,
+  "lon": 106.5005829,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092446808,
+  "lat": 21.3028196,
+  "lon": 106.0510504,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092447945,
+  "lat": 21.5451871,
+  "lon": 106.3850018,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092449868,
+  "lat": 21.5047819,
+  "lon": 106.3539187,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092449869,
+  "lat": 21.4663035,
+  "lon": 106.2973962,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092454200,
+  "lat": 21.4460970,
+  "lon": 106.2937422,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13092455010,
+  "lat": 21.4169171,
+  "lon": 106.2822689,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13142255966,
+  "lat": 21.1654824,
+  "lon": 106.0488889,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "21",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Quốc Sư",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Homestay 21 Cinema BN",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13165445935,
+  "lat": 20.9899729,
+  "lon": 106.0501433,
+  "tags": {
+    "addr:district": "Xã Lạc Đạo",
+    "addr:province": "Hưng Yên",
+    "addr:street": "ĐT281",
+    "addr:subdistrict": "Thôn Đông Mai",
+    "air_conditioning": "yes",
+    "guest_house": "hostel",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "level": "1-5",
+    "name": "Nhà Nghỉ Như Ý",
+    "note": "Nhà nghỉ Như Ý",
+    "opening_hours": "24/7",
+    "payment:MB_Bank": "yes",
+    "payment:account_cards": "yes",
+    "payment:app": "yes",
+    "payment:cards": "yes",
+    "reservation": "yes",
+    "smoking": "outside",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13179803648,
+  "lat": 21.1748516,
+  "lon": 106.0777134,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Nhà trọ Thanh Hà",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13390974864,
+  "lat": 21.1731548,
+  "lon": 106.0618582,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "241",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Trãi",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Berman Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13394474601,
+  "lat": 21.2762829,
+  "lon": 106.1951263,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:postcode": "230000",
+    "addr:street": "Nguyễn Văn Cừ",
+    "internet_access": "wlan",
+    "name": "Mandala Hotel & Suites Bắc Giang",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "website": "https://bacgiang.mandalahotels.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13394481601,
+  "lat": 21.2762602,
+  "lon": 106.1950820,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Chung Cư AQUA PARK",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 13407013201,
+  "lat": 21.2765123,
+  "lon": 106.1949312,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Chung Cư Saigon Tel",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 13407017101,
+  "lat": 21.2766292,
+  "lon": 106.1946516,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Nguyễn Văn Cừ",
+    "internet_access": "wlan",
+    "name": "dulichbacgiang.com.vn",
+    "opening_hours": "24/7",
+    "phone": "0204 3854719",
+    "tourism": "hotel",
+    "website": "https://dulichbacgiang.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13424637641,
+  "lat": 21.6162440,
+  "lon": 106.3751762,
+  "tags": {
+    "name": "WoofStuck Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13426996379,
+  "lat": 21.1808208,
+  "lon": 106.0670678,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Ngõ 60 Phố Vũ Kiệt",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Nhà nghỉ Vàng Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13427714669,
+  "lat": 21.6041779,
+  "lon": 106.3510734,
+  "tags": {
+    "email": "dongnhung121994@gmail.com",
+    "name": "Hữu Lũng Mountain Climbing Hostel",
+    "phone": "091 113 68 26",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/profile.php?id=100080887384678"
+  }
+},
+{
+  "type": "node",
+  "id": 13432692139,
+  "lat": 21.1887156,
+  "lon": 106.0767147,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Kinh Dương Vương",
+    "addr:subdistrict": "Phường Vũ Ninh",
+    "name": "Mandala Hotel & Spa Bac Ninh",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13437915826,
+  "lat": 21.1750047,
+  "lon": 106.0654195,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "30",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Thái Tổ",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "VIET LONG COMPLEX Residence",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13460627403,
+  "lat": 21.1749289,
+  "lon": 106.0574011,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "3",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngô Tất Tố",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Hotel Hoa Viên Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470905293,
+  "lat": 21.1810229,
+  "lon": 106.0710785,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "17",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Hai Bà Trưng",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Khách sạn Phượng Hoàng 3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470905294,
+  "lat": 21.1781586,
+  "lon": 106.0688678,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "2",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Tô Vĩnh Diện",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Smart Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950901,
+  "lat": 21.1781394,
+  "lon": 106.0678435,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "24",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngọc Hân Công Chúa",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "GOLD BUSINESS HOTEL BẮC NINH (골드뷰지니스호텔 박닌)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950902,
+  "lat": 21.1795611,
+  "lon": 106.0707554,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "45",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Đăng Đạo",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "name": "Le Indochina Hotel Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950903,
+  "lat": 21.1811812,
+  "lon": 106.0665134,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "255A",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Gia Thiều",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "building": "yes",
+    "name": "Amira Hotel Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950904,
+  "lat": 21.1795323,
+  "lon": 106.0658962,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "18-20",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Cao",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Lien Son Apartment",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950905,
+  "lat": 21.1743953,
+  "lon": 106.0596114,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "27",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Hoàng Tích Chù",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "SKY2 HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950906,
+  "lat": 21.1741967,
+  "lon": 106.0589371,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "50",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Hoàng Tích Chù",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Sky Night Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13470950924,
+  "lat": 21.1730803,
+  "lon": 106.0576815,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Võ Cường 4",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Hana 1 Apartment & Hotel Bac Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13483381570,
+  "lat": 21.1859993,
+  "lon": 106.0656320,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "29",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Hàn Mặc Tử",
+    "addr:subdistrict": "Phường Kinh Bắc",
+    "name": "Nhà Nghỉ Xuân Hòa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13512377140,
+  "lat": 21.1764051,
+  "lon": 106.0738987,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Bình Than",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Khách sạn Nga Việt",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13521032350,
+  "lat": 21.1682458,
+  "lon": 106.0657065,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "3",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Tôn Thất Tùng",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Nhà nghỉ Tiến Đạt",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13626940396,
+  "lat": 21.1699111,
+  "lon": 106.0539372,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Võ Cường 18",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Hana",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13626945835,
+  "lat": 21.1702142,
+  "lon": 106.0598465,
+  "tags": {
+    "name": "Khách sạn Đông Đô (东都明月酒店)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13630370857,
+  "lat": 21.1717547,
+  "lon": 106.0618749,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "1A",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "The Grand Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13630370858,
+  "lat": 21.1717565,
+  "lon": 106.0617569,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "1A",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Charming Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13645085202,
+  "lat": 21.0314772,
+  "lon": 106.0983029,
+  "tags": {
+    "name": "Thanh  Dat 1",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13659353136,
+  "lat": 21.1663412,
+  "lon": 106.0445559,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "460",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Văn Cừ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Hoàng Gia Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13661987978,
+  "lat": 21.1611392,
+  "lon": 106.0549028,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "509",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Bình Than",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Hồng Đạt Hotel",
+    "name:zh": "宏达酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13674882986,
+  "lat": 21.1698139,
+  "lon": 106.0574037,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Regina Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13674882987,
+  "lat": 21.1697782,
+  "lon": 106.0573355,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Lavender Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13674882988,
+  "lat": 21.1696999,
+  "lon": 106.0572041,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Yoyo HD Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13674882989,
+  "lat": 21.1696643,
+  "lon": 106.0571376,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Rosy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13677022978,
+  "lat": 21.1712475,
+  "lon": 106.0610692,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "15",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "building": "yes",
+    "building:levels": "14",
+    "name": "Kinh Bắc Palace Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13717891499,
+  "lat": 21.1756472,
+  "lon": 106.0597728,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Chế Lan Viên",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "An Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13718867201,
+  "lat": 21.1764373,
+  "lon": 106.0561093,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "48",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngô Tất Tố",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Khách sạn Hương Mãn Lầu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13718881208,
+  "lat": 21.1941397,
+  "lon": 106.0815169,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "110",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Thường Kiệt",
+    "addr:subdistrict": "Phường Thị Cầu",
+    "name": "Phú Gia Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13738008876,
+  "lat": 21.1657260,
+  "lon": 106.0759182,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "308-322",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Đăng Đạo",
+    "addr:subdistrict": "Phường Đại Phúc",
+    "name": "Green Peninsula Hotel",
+    "name:zh-Hant": "半岛酒店北宁店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13811224664,
+  "lat": 21.1718864,
+  "lon": 106.0591729,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "26-LK9",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đường Võ Cường 3",
+    "addr:subdistrict": "Phường Võ Cường",
+    "building:levels": "5",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Giang Ninh Hotel 江宁酒店",
+    "phone": "+84 867199881",
+    "rooms": "16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13900935727,
+  "lat": 21.1669334,
+  "lon": 106.0451567,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Văn Cừ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Cát Tường Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13959401918,
+  "lat": 21.1744952,
+  "lon": 106.0601526,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "6",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Đặng Thai Mai",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Korea Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13964167912,
+  "lat": 21.1741565,
+  "lon": 106.0559269,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "170",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lý Đạo Thành",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "building": "hotel",
+    "building:levels": "4",
+    "name": "Yen Binh Hotel 平安酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13966783601,
+  "lat": 21.0022404,
+  "lon": 105.9465466,
+  "tags": {
+    "name:vi": "Tìa nhà OC2",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 13974182204,
+  "lat": 21.1730162,
+  "lon": 106.0718507,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "12-14",
+    "addr:postcode": "0241",
+    "addr:province": "Bắc Ninh",
+    "addr:street": "Đại Phúc 24",
+    "addr:subdistrict": "Phường Võ Cường",
+    "email": "quanjivina@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Quan Ji Business Hotel",
+    "phone": "0972562884",
+    "rooms": "46",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13977340758,
+  "lat": 21.1755651,
+  "lon": 106.0610222,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "1",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Văn Trỗi",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Thảo Hương An Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13977424653,
+  "lat": 21.1759508,
+  "lon": 106.0638178,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "92",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Huyền Quang",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Smart Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13989217214,
+  "lat": 21.1757125,
+  "lon": 106.0657701,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "6",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Phố Nguyễn Viết Xuân",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Khách sạn Mỹ Linh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13989235062,
+  "lat": 21.1717172,
+  "lon": 106.0605703,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "38",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Khách sạn Quốc tế",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13989235063,
+  "lat": 21.1720486,
+  "lon": 106.0610644,
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Lê Thái Tổ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "name": "Harmony Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 696950674,
+  "center": {
+    "lat": 21.1744777,
+    "lon": 106.0645435
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Hello Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 793463360,
+  "center": {
+    "lat": 21.1374159,
+    "lon": 106.7245897
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Legacy Yen Tu - MGallery",
+    "tourism": "hotel",
+    "website": "https://www.legacyyentu.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 964416579,
+  "center": {
+    "lat": 21.1829625,
+    "lon": 106.0661971
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "395",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Ngô Gia Tự",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "name": "Khách sạn Mường Thanh Luxury Bắc Ninh",
+    "name:en": "Muong Thanh Luxury Bac Ninh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1050691171,
+  "center": {
+    "lat": 21.2822528,
+    "lon": 106.2031098
+  },
+  "tags": {
+    "landuse": "commercial",
+    "name": "Khách sạn Mường Thanh Grand Bắc Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1133351590,
+  "center": {
+    "lat": 20.9982927,
+    "lon": 105.9038603
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1133351591,
+  "center": {
+    "lat": 20.9983299,
+    "lon": 105.9032969
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1133351598,
+  "center": {
+    "lat": 20.9997239,
+    "lon": 105.9041651
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1208213136,
+  "center": {
+    "lat": 21.0156872,
+    "lon": 105.8798339
+  },
+  "tags": {
+    "name": "Long Bien Longan Garden",
+    "name:en": "Long Bien Longan Garden",
+    "name:vi": "Vườn Nhãn Long Biên",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1210652053,
+  "center": {
+    "lat": 20.9989692,
+    "lon": 105.9039434
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1210652054,
+  "center": {
+    "lat": 20.9972160,
+    "lon": 105.9030427
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1226943911,
+  "center": {
+    "lat": 21.0057421,
+    "lon": 105.8859705
+  },
+  "tags": {
+    "access": "permissive",
+    "name": "Red River Camping",
+    "name:en": "Red River Camping",
+    "name:vi": "Bãi Cắm Trại Sông Hồng",
+    "phone": "+84776220879",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1333228915,
+  "center": {
+    "lat": 21.1897101,
+    "lon": 106.0805695
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "182",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Vũ Ninh",
+    "addr:subdistrict": "Phường Vũ Ninh",
+    "building": "yes",
+    "name": "Lộc Hằng Motel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1334177067,
+  "center": {
+    "lat": 21.1774232,
+    "lon": 106.0741278
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Trần Hưng Đạo",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "brand": "Vinpearl",
+    "building:levels": "32",
+    "internet_access": "yes",
+    "name": "Vinpearl Bắc Ninh",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://vinpearl.com/vi/hotels/vinpearl-hotel-bac-ninh"
+  }
+},
+{
+  "type": "way",
+  "id": 1334531669,
+  "center": {
+    "lat": 21.1795365,
+    "lon": 106.0708618
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "45",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Đăng Đạo",
+    "addr:subdistrict": "Phường Suối Hoa",
+    "building": "hotel",
+    "building:levels": "15",
+    "name": "Le Indochina Hotel Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1339424774,
+  "center": {
+    "lat": 21.1909148,
+    "lon": 106.0752868
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Phúc Sơn",
+    "addr:subdistrict": "Phường Vũ Ninh",
+    "building": "yes",
+    "name": "Phoenix International Hotel",
+    "phone": "+84 2223989999",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1349012033,
+  "center": {
+    "lat": 21.1667489,
+    "lon": 106.0448946
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "456",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Văn Cừ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "building": "yes",
+    "building:levels": "6",
+    "name": "Bacninh Uri Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1370501874,
+  "center": {
+    "lat": 21.1811665,
+    "lon": 106.0665218
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "255A",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Gia Thiều",
+    "addr:subdistrict": "Phường Tiền Ninh Vệ",
+    "building": "yes",
+    "name": "Amira Hotel Bắc Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467804571,
+  "center": {
+    "lat": 21.1176691,
+    "lon": 106.4711446
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1468780622,
+  "center": {
+    "lat": 21.1781432,
+    "lon": 106.0687637
+  },
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1525087690,
+  "center": {
+    "lat": 21.1663904,
+    "lon": 106.0445093
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Thành phố Bắc Ninh",
+    "addr:housenumber": "460",
+    "addr:province": "Bac Ninh",
+    "addr:street": "Đường Nguyễn Văn Cừ",
+    "addr:subdistrict": "Phường Võ Cường",
+    "building": "yes",
+    "building:levels": "3",
+    "name": "Bac Ninh Royal hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1540197563,
+  "center": {
+    "lat": 21.1895142,
+    "lon": 105.9838282
+  },
+  "tags": {
+    "addr:city": "Bắc Ninh",
+    "addr:district": "Huyện Yên phong",
+    "addr:province": "Bac Ninh",
+    "addr:subdistrict": "Xã Long Châu",
+    "name": "Khách sạn J&C Hàn Quốc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "relation",
+  "id": 12404436,
+  "center": {
+    "lat": 21.0287164,
+    "lon": 105.9201633
+  },
+  "tags": {
+    "addr:district": "Long Biên",
+    "addr:province": "Hà Nội",
+    "addr:street": "Nguyễn Văn Linh",
+    "addr:subdistrict": "Sài Đồng",
+    "internet_access": "yes",
+    "landuse": "commercial",
+    "name": "Garco Dragon",
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}

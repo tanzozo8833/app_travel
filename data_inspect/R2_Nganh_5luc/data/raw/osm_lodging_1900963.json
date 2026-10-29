@@ -1,0 +1,3371 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T19:57:05Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 604393209,
+  "tags": {
+    "name": "Kinh Do Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 936706318,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Luong Van Tuy",
+    "name": "Thanh Binh",
+    "phone": "091 202 66 32",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1725481667,
+  "tags": {
+    "check_date": "2024-11-22",
+    "name": "Cuc Phuong National Park Guesthouse",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 2392676524,
+  "tags": {
+    "name": "New Queen Mini Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2449398069,
+  "tags": {
+    "name": "Bini Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2449398072,
+  "tags": {
+    "name": "Hồng Ngọc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2450675603,
+  "tags": {
+    "name": "Hotel Dức An",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2450675604,
+  "tags": {
+    "name": "Nhà Nghỉ Hoa Sữa",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2450675605,
+  "tags": {
+    "name": "Nhà Nghỉ Nam Thành 1",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2450675614,
+  "tags": {
+    "name": "Trung Tanh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2450675615,
+  "tags": {
+    "name": "Vân Anh Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2450750443,
+  "tags": {
+    "name": "Hoa Lư Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2450795072,
+  "tags": {
+    "name": "Thế Vĩnh Hotel",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975902,
+  "tags": {
+    "name": "Chính Duyên Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975905,
+  "tags": {
+    "name": "Lạc Hồng Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975907,
+  "tags": {
+    "name": "Nhà Nghỉ Cơm Phở",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975910,
+  "tags": {
+    "name": "Nhà Nghỉ Hải Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975976,
+  "tags": {
+    "name": "Yến Nhi Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2451975977,
+  "tags": {
+    "name": "Đức Thanh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2452785694,
+  "tags": {
+    "name": "New Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2452785695,
+  "tags": {
+    "name": "Nhà Nghỉ Trọ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2452785696,
+  "tags": {
+    "name": "Nhật Minh Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2452785801,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Đuờng Hoàng Hoa Thám",
+    "email": "phamducnb@gmail.com",
+    "internet_access": "wlan",
+    "name": "Queen Mini Hotel",
+    "phone": "0303 871 874",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2562453997,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Thanh Thuy's Guesthouse & New Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2573378003,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Ninh Binh Legend Hotel",
+    "stars": "4",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3189547070,
+  "tags": {
+    "name": "Anna Tham Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3704410102,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Nam Bình",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Ly Thuong Kiet",
+    "internet_access": "wlan",
+    "name": "AIQ Hotel",
+    "phone": "+84303898968",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3859891796,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3887708817,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lang Khanh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 3887717275,
+  "tags": {
+    "name": "Thanh Thuy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3887717276,
+  "tags": {
+    "addr:street": "Hang Mua, Ninh Xuân, Ninh Binh, Khe Ha Hoa Lu Dítrict",
+    "name": "Nguyễn Shack",
+    "phone": "+84303618678",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 3943325479,
+  "tags": {
+    "addr:province": "Ninh Binh",
+    "name": "Dragon Boat Rock Homestay",
+    "tourism": "hotel",
+    "website": "https://dragonboatrock.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4015797294,
+  "tags": {
+    "addr:city": "Hoa Lu",
+    "addr:district": "Xa Ninh Thang",
+    "addr:postcode": "400000",
+    "addr:province": "Ninh Binh",
+    "addr:subdistrict": "Thon kha luong",
+    "name": "chezbeo homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4106932690,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Rice Fields Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4200156493,
+  "tags": {
+    "name": "Bamboo Hill Villa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4239711969,
+  "tags": {
+    "name": "The Vancouver Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4258479990,
+  "tags": {
+    "addr:street": "Đường Trường Hán Siêu",
+    "name": "THUY ANH HOTEL",
+    "phone": "+842293882712",
+    "tourism": "hotel",
+    "website": "www.thuyanhotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4260153290,
+  "tags": {
+    "name": "Garden Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4287296089,
+  "tags": {
+    "name": "Tam Coc backpackers Hotel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4290163793,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "The Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4327587989,
+  "tags": {
+    "name": "Tam Coc Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4340601789,
+  "tags": {
+    "name": "Thai Thoung Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4365880493,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Luong Van Tuy",
+    "name": "Ngoc Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4366254891,
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Đuờng Hoàng Hoa Thám",
+    "name": "Viet Huong Hotel",
+    "phone": "0303 871 232",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4452902890,
+  "tags": {
+    "name": "đông cường , khánh cường",
+    "name:vi": "đông cường , khánh cường",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4452929391,
+  "tags": {
+    "addr:street": "đông cường, khánh cươngf",
+    "internet_access": "wlan",
+    "name": "từ đường họ Nguyễn Bùi",
+    "name:en": "memories house Nguyễn Bùi",
+    "name:vi": "từ đường họ Nguyễn Bùi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4466697890,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4484136598,
+  "tags": {
+    "addr:housenumber": "22",
+    "addr:street": "thành trung",
+    "internet_access": "wlan",
+    "name": "Acb",
+    "name:vi": "Acb",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4490122090,
+  "tags": {
+    "addr:street": "QL 10",
+    "email": "the21homestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "XXI Homestay",
+    "name:vi": "XXI Homestay",
+    "phone": "+841657362888",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4491875489,
+  "tags": {
+    "addr:city": "Ninh Binh",
+    "addr:housenumber": "67;02",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Phố 10;Đường Kim Đồng",
+    "addr:subdistrict": "Phúc Thành",
+    "name": "Tuần Phone;Thu Guest House",
+    "operator": "Thu guest house",
+    "phone": "0981351888;+84949382590",
+    "shop": "mobile_phone",
+    "smoking": "outside",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/ThuGuestHouse/"
+  }
+},
+{
+  "type": "node",
+  "id": 4499609331,
+  "tags": {
+    "name": "Làm cốc River view homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4528188792,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Gia Bao Home stay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4532151289,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4537678345,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hoa Bien Hotel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4567949296,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4571180591,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4584810389,
+  "tags": {
+    "name": "Nhà Cậu Hoàn",
+    "name:vi": "Nhà Cậu Hoàn",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4585363493,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "La Carte",
+    "name:en": "La Carte",
+    "name:vi": "La Carte",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4599186391,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Lang Toi",
+    "phone": "01693304415",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4603639691,
+  "tags": {
+    "check_date": "2024-11-22",
+    "email": "namhoahotelhl@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nam Hoa Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84 30 3618 043",
+    "tourism": "hotel",
+    "website": "https://namhoahotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4685149595,
+  "tags": {
+    "name": "Tam Coc Family hotel",
+    "name:en": "Tam Coc Family hotel",
+    "name:fr": "Tam Coc Family hotel",
+    "name:vi": "Tam Coc Family hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4685260189,
+  "tags": {
+    "name:en": "Tam Coc tropical homestay",
+    "name:fr": "Tam Coc tropical homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4690301089,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Thanh Lanh Hotel Nha Nghi",
+    "name:vi": "Thanh Lanh Hotel Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4700834001,
+  "tags": {
+    "name:en": "Ethnic Travel Homestay",
+    "name:fr": "Ethnic Travel Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4723601707,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nhà Nghi Binh Dan 559",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4725110397,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nhà Nghi Binh Dan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4738253402,
+  "tags": {
+    "name": "Tam Coc Bungalow",
+    "name:vi": "tam coc bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4745244524,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Tú Tài",
+    "name:de": "Nha Nghi Tu Tai",
+    "name:en": "Nha Nghi Tu Tai",
+    "name:vi": "Nhà Nghỉ Tú Tài",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4792650625,
+  "tags": {
+    "addr:housenumber": "186",
+    "addr:street": "Phố tây sơn",
+    "name": "Hồng hạnh",
+    "name:vi": "Hồng hạnh",
+    "phone": "0972 045 763",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4807780121,
+  "tags": {
+    "name": "Kha Hang Binh Tan",
+    "name:vi": "Kha Hang Binh Tan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4848614222,
+  "tags": {
+    "email": "quockhanhbamboohomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Quoc Khanh Bamboo Homestay",
+    "name:vi": "Quoc Khanh Bamboo Homestay",
+    "opening_hours": "24/7",
+    "phone": "01249089888",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4878621822,
+  "tags": {
+    "name:en": "Greenland Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4889019925,
+  "tags": {
+    "addr:city": "Ninh Binh",
+    "addr:district": "Hoa Lư",
+    "addr:province": "Ninh Binh",
+    "addr:street": "Thôn Tràng An",
+    "addr:subdistrict": "Trường Yên",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hoalu Ecolodge Homestay",
+    "note": "Unsure which side of street",
+    "operator": "Hoalu Ecolodge Homestay",
+    "rooms": "15",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4933500624,
+  "tags": {
+    "addr:street": "Thôn Khê Thuong",
+    "name:en": "Lotus Field Homestay",
+    "phone": "+84 818 638 135",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4958233625,
+  "tags": {
+    "name": "nhà anh việt",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4975355921,
+  "tags": {
+    "name": "家",
+    "name:vi": "家",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 5027460722,
+  "tags": {
+    "name": "Hoalu Eco Backpacker Hostel",
+    "name:cs": "Hoalu Eco Backpacker Hostel",
+    "name:en": "Hoalu Eco Backpacker Hostel",
+    "name:vi": "Hoalu Eco Backpacker Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5058155621,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "GO Ninh Binh Hostel",
+    "opening_hours": "24/7",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5059604713,
+  "tags": {
+    "name": "Vị Hoàng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5083653922,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:province": "ninh bình",
+    "addr:street": "Nguyễn thái học",
+    "addr:subdistrict": "tân thành",
+    "email": "thuydao1712@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Golden Bell Backpacker Hostel (Cheap)",
+    "opening_hours": "24/7",
+    "operator": "đào thị thúy gol",
+    "phone": "0972366192",
+    "tourism": "hostel",
+    "website": "https://www.facebook.com/pg/Golden-backpacker-hostel-140080233158061/about/"
+  }
+},
+{
+  "type": "node",
+  "id": 5105473023,
+  "tags": {
+    "addr:postcode": "43000",
+    "addr:street": "Đường Thành Công",
+    "email": "vnstartours@gmail.com",
+    "name:en": "Ninh Binh Family Hotel",
+    "operator": "Ms.Mi",
+    "phone": "0916910480",
+    "tourism": "hotel",
+    "website": "http://ninhbinhguide.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5150883922,
+  "tags": {
+    "name": "Đồng Tâm motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5226867722,
+  "tags": {
+    "name:zh": "春城水泥厂旅社",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5234478421,
+  "tags": {
+    "email": "tamcocmountainlakehomestay@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Mountain Lake homestay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5257947826,
+  "tags": {
+    "check_date": "2025-03-18",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Trang An Heritage Garden",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5257947827,
+  "tags": {
+    "name": "Trang An River View Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5259040324,
+  "tags": {
+    "name": "Non Nuoc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5259040326,
+  "tags": {
+    "name": "Tam Coc Nature Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5276808920,
+  "tags": {
+    "addr:street": "Lê Hồng Phong",
+    "name": "Son Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5294733032,
+  "tags": {
+    "name": "Hung Anh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5320369022,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Garden Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5335086522,
+  "tags": {
+    "name": "Nhà nghỉ Lá Cọ",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5344463221,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Nguyễn thái học",
+    "email": "thuydao1712@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Golden bell backpacker hostel",
+    "phone": "0972366192",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5348553121,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Phat Diem Dong",
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi 123 Hotel",
+    "phone": "0941192023",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5353612421,
+  "tags": {
+    "name": "Tam Coc Mountain View Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5357922821,
+  "tags": {
+    "addr:housenumber": "168",
+    "addr:street": "Hùng Vương",
+    "name": "Lakeside",
+    "name:en": "Lakeside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5359122121,
+  "tags": {
+    "name": "Hotel Phuong Linh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5360301135,
+  "tags": {
+    "addr:street": "Van Lâm",
+    "internet_access": "wlan",
+    "name": "Xuan Lai Right View Homestay",
+    "operator": "Xuan Lai",
+    "phone": "0084976176657",
+    "tourism": "guest_house",
+    "website": "http://www.xuanlairightviewhomestay.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5362811022,
+  "tags": {
+    "addr:street": "Group 2, Van Lam, Ninh Hai, Hoa Lu,  Ninh Binh, Wietnam",
+    "email": "chungoc.chau81@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ngoc Minh Homestay",
+    "opening_hours": "24/7",
+    "phone": "(+84)0982350196",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5367514021,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ham Rong Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5377063122,
+  "tags": {
+    "addr:street": "Tam Coc Road",
+    "internet_access": "wlan",
+    "name": "Tam Coc Minh Phuc Guesthouse",
+    "phone": "+841662550356",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5385072726,
+  "tags": {
+    "addr:street": "Van Lam - Ninh Hai",
+    "name:en": "Boutique Garden",
+    "phone": "+84989950501",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5388596622,
+  "tags": {
+    "name:en": "Nam Can Green Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5417534486,
+  "tags": {
+    "amenity": "restaurant",
+    "name:en": "Anh Dzung Hotel & Restaurant",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5421575821,
+  "tags": {
+    "addr:postcode": "430000",
+    "addr:street": "Tràng An",
+    "email": "mountainsidehomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Mountainside Homestay",
+    "opening_hours": "24/7",
+    "phone": "+84968655669",
+    "tourism": "hotel",
+    "website": "http://www.facebook.com/Mountainsidehomestay"
+  }
+},
+{
+  "type": "node",
+  "id": 5422047821,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Green Peace Bungalow",
+    "phone": "+84987801132",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5425693222,
+  "tags": {
+    "check_date": "2025-04-19",
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Westlake homestay",
+    "phone": "0983653386",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5432486224,
+  "tags": {
+    "name": "Phu'o'ng Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5444713422,
+  "tags": {
+    "addr:street": "Quốc lộ 1A",
+    "name": "Inco 515.9",
+    "restaurant": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5465833222,
+  "tags": {
+    "name": "Smiley homestay",
+    "name:en": "tam coc smiley homestay",
+    "survey:date": "2019-11-06",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5481710121,
+  "tags": {
+    "name:en": "Anna Tham hotel is not here",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5487567325,
+  "tags": {
+    "check_date": "2025-04-23",
+    "name": "Happy homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5512912621,
+  "tags": {
+    "addr:postcode": "4300",
+    "addr:street": "Thai Vi",
+    "email": "tamcochorizonbungalow@gmail.com",
+    "internet_access": "wlan",
+    "name": "tam coc horizon bungalow",
+    "opening_hours": "24/7",
+    "phone": "0984846268",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5514381150,
+  "tags": {
+    "name:fr": "Tam Coc garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5514399176,
+  "tags": {
+    "check_date": "2026-05-15",
+    "email": "contact@tamcocgarden.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Tam Coc Garden (Authentic & natural resort)",
+    "name:fr": "Tam Coc garden",
+    "phone": "+84 378253555",
+    "rooms": "16",
+    "tourism": "hotel",
+    "website": "https://www.tamcocgarden.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5547860621,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Mai Spa",
+    "name:en": "Mai''s homestay",
+    "phone": "0943028689",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5569170481,
+  "tags": {
+    "name": "Thái Thuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5579793621,
+  "tags": {
+    "name": "Ubytovani family house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5587412321,
+  "tags": {
+    "name": "Ubyzovani ninh bnh",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5589460322,
+  "tags": {
+    "addr:street": "Unnamed Road Binh Khe Village, Ninh Nhat Commune, Ninh Binh City, Ninh Binh",
+    "internet_access": "wlan",
+    "name": "Yen Binh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5589460323,
+  "tags": {
+    "addr:street": "Unnamed Road Binh Khe Village, Ninh Nhat Commune, Ninh Binh City, Ninh Binh",
+    "email": "yenbinhhomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Yen Binh Homestay",
+    "phone": "01698686835",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5589463821,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5589463822,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "yen Binh homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5589720930,
+  "tags": {
+    "name": "Co Do Family Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5593617621,
+  "tags": {
+    "addr:street": "Thai Vi",
+    "internet_access": "wlan",
+    "name": "Tam coc",
+    "name:vi": "Cozy homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5593617721,
+  "tags": {
+    "addr:street": "group 3, van lam hamlet, Ninh Hai, Hoa Lu, Ninh Binh",
+    "email": "tamcoccozyhomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Tam coc cozy homestay",
+    "phone": "0914928006",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5594232521,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Lion King Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5609301021,
+  "tags": {
+    "addr:street": "Hamlet 1, Van Lam village, Ninh Hai commune, Hoa Lu dist, Ninh Binh province",
+    "email": "zulizenhome@gmail.com",
+    "internet_access": "wlan",
+    "name": "Zuli Zen Home",
+    "phone": "+84945435863",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5609301022,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:postcode": "430000",
+    "addr:street": "Van Lam village, Ninh Hai commune, Hoa Lu district, Ninh Binh",
+    "email": "zulizenhome@gmail.com",
+    "internet_access": "wlan",
+    "name": "Zuli Zen Home",
+    "opening_hours": "24/7",
+    "phone": "+84945435863",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5630043921,
+  "tags": {
+    "email": "tamcoc.valley@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Valley Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5645327873,
+  "tags": {
+    "name": "Homestay La Belle Vie",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5678913704,
+  "tags": {
+    "name:en": "Tam Coc Sunshine Homestay",
+    "name:es": "Tam Coc Sunshine Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5680786421,
+  "tags": {
+    "addr:postcode": "430000",
+    "addr:street": "479B",
+    "email": "vnstartours@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà Vườn Thiên Nhiên Tràng An",
+    "name:en": "Trang An Nature Garden Homestay",
+    "opening_hours": "24/7",
+    "operator": "Đại Dương",
+    "phone": "+84916910480",
+    "tourism": "guest_house",
+    "website": "http://vinibi.net"
+  }
+},
+{
+  "type": "node",
+  "id": 5738157721,
+  "tags": {
+    "internet_access": "yes",
+    "name:en": "Trang An Mountain House",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5768674954,
+  "tags": {
+    "name": "Co do Family homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5778193258,
+  "tags": {
+    "name": "Friendly Home",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5789126453,
+  "tags": {
+    "name": "Tuang Nam Homestay",
+    "name:vi": "Tuan Nam Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5811264053,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hai Viet Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5816078153,
+  "tags": {
+    "addr:street": "D. Tran Huy Lieu",
+    "name": "nhà của Hiền 2",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5864565087,
+  "tags": {
+    "name:en": "Cozy Son (Right Location)",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5870465785,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Center tam toc homestay",
+    "opening_hours": "Mo-Su 06:30-20:00",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5917625810,
+  "tags": {
+    "addr:street": "xóm 5, thôn Đam Khê Trong, xã Hải, huyện Hoa Lư ,Ninh 430000, Ninh Hải, Hoa Lư, Ninh Bình",
+    "name": "Tam Cốc Palm house",
+    "phone": "0978030390",
+    "tourism": "hotel",
+    "website": "https://m.facebook.com/Tam-Coc-Palm-House-Homestay-126934754655933/"
+  }
+},
+{
+  "type": "node",
+  "id": 5926464792,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Trang an valley bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5954113885,
+  "tags": {
+    "name": "Vinh thinh homestay",
+    "name:he": "וין טין הום סטאי מומלץ מאד",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5956126985,
+  "tags": {
+    "name": "Tam Coc Tuan Minh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6052692797,
+  "tags": {
+    "name": "Viet Nhat Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6086990185,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Trang an retreat",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6100336434,
+  "tags": {
+    "addr:district": "Hoa Lư",
+    "addr:housenumber": "Đội 4",
+    "addr:postcode": "430000",
+    "addr:province": "Ninh Bình",
+    "addr:street": "đường vào trường Tiểu học Ninh Hải",
+    "addr:subdistrict": "Ninh Hải",
+    "check_date": "2025-04-13",
+    "description": "Tam Coc Hello Homestay furnish bungalows with the decoration mixed modern-ancient. It's centralised but very calm, easy to find. From Tam Coc Hello Homestay to:\nTam Coc Cave: 300 meters\nMua Cave: 5 km\nTrang An: 12 km\nBai Dinh Temple: 31km",
+    "internet_access": "wlan",
+    "name": "Tam Coc Hello Homestay",
+    "phone": "+84961520401",
+    "rooms": "3",
+    "smoking": "outside",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6120410985,
+  "tags": {
+    "name": "Trang An Central Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6194317785,
+  "tags": {
+    "name": "Khách sạn Hoà Bình",
+    "name:en": "Hoa Binh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6197464085,
+  "tags": {
+    "addr:street": "Thai Vi",
+    "name:en": "Tam Coc Melody Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6207358411,
+  "tags": {
+    "addr:housenumber": "30/96",
+    "addr:street": "Đường Trịnh Tú",
+    "internet_access": "wlan",
+    "name": "Huong Sen Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6243723185,
+  "tags": {
+    "name:en": "Tam Coc mountain bungalow",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 6253666489,
+  "tags": {
+    "name:en": "Wild Flower Homestay (real location)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6271604705,
+  "tags": {
+    "name:en": "wild flower homestay (correct location)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6276259085,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Tam Coc Bich Dong Street",
+    "internet_access": "wlan",
+    "name:en": "Thien Truong An Hotel",
+    "phone": "0911593333",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6282886685,
+  "tags": {
+    "addr:street": "Đường Trân Hưng Đạo",
+    "name": "Ninh binh central backpackers hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6287064585,
+  "tags": {
+    "addr:housenumber": "70 ngõ 70",
+    "addr:postcode": "420000",
+    "addr:street": "Trần Bích San",
+    "name": "70 ngõ 70 Trần Bích San - Trần Quang Khải - Nam Định",
+    "name:en": "Thanh Tuan",
+    "name:vi": "Thanh Tuan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6288022345,
+  "tags": {
+    "name": "Net Que",
+    "phone": "0386452132",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6313599285,
+  "tags": {
+    "name": "NHÀ VIỄN Ý YÊN NAM ĐỊNH",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6330034395,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Phố Bình Hòa",
+    "internet_access": "wlan",
+    "name": "wild flower home",
+    "name:en": "wild flower homestay",
+    "name:fr": "wild flower homestay",
+    "name:vi": "wild flower homestay",
+    "tourism": "guest_house",
+    "website": "https://www.booking.com/Share-ZTUB8q"
+  }
+},
+{
+  "type": "node",
+  "id": 6357662720,
+  "tags": {
+    "name": "For You Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6358091970,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6367544086,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "khai yen tam coc hostel",
+    "name:vi": "khai yen tam coc hostel corect place!",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6384754285,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Wild Flower Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6403904487,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Heart Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6430278785,
+  "tags": {
+    "addr:street": "Thon Van Lam, Ninh Hai, Hoa lu, Ninh Binh",
+    "internet_access": "wlan",
+    "name": "Tam Coc Central",
+    "name:en": "Tam Coc Central Hostel",
+    "name:vi": "Tam Coc Central Hostel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6433539786,
+  "tags": {
+    "name:en": "Tam Nhung Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6485237113,
+  "tags": {
+    "check_date": "2024-11-22",
+    "name": "Hoa Luan Restaurant Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6485492985,
+  "tags": {
+    "name": "宝山",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6493540162,
+  "tags": {
+    "name": "Tam Coc La Siesta Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6575791786,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ann ghest house",
+    "name:en": "Ghest house ann",
+    "opening_hours": "24/7",
+    "operator": "ho ann",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6590321585,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Chill villa real address",
+    "name:fr": "Chill villa bonne adresse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6595412185,
+  "tags": {
+    "name:en": "Poland Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6601505499,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Rose garden homestay",
+    "name:fr": "Rose Garden Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6634641685,
+  "tags": {
+    "addr:street": "Xom Lo Voi",
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Golden Rice",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6665262721,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Doi",
+    "description": "bamboo cabins around a swimming pool",
+    "internet_access": "wlan",
+    "name": "Tam Coc Village Bungalow",
+    "phone": "+84 229 3666 686",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6703546726,
+  "tags": {
+    "addr:district": "Hoa Lư",
+    "addr:postcode": "430000",
+    "addr:province": "Ninh Bình",
+    "addr:subdistrict": "Ninh Hải",
+    "internet_access": "wlan",
+    "name": "Tam Cốc Minh Gia Homestay",
+    "smoking": "outside",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6785687086,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Eco Fields Homes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6812070974,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Khê Hạ",
+    "addr:postcode": "4300",
+    "addr:street": "Đường Hang Múa",
+    "email": "hangmuahomestay@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Hang Mua Homestay",
+    "phone": "+84 987 808 340",
+    "tourism": "hotel",
+    "website": "https://hangmuahomestay.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6831757285,
+  "tags": {
+    "name": "Nhà của Canh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6852982217,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chez Loan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6856981641,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Hoa Lư",
+    "addr:housenumber": "Tam Coc",
+    "addr:postcode": "08213",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Tam Coc",
+    "addr:subdistrict": "Ninh Hải",
+    "air_conditioning": "yes",
+    "email": "tamcocamandavillas@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Tam Coc Amanda Villas",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:maestro": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+84853424567",
+    "rooms": "12",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6873083992,
+  "tags": {
+    "name": "Tre Xanh homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6876489089,
+  "tags": {
+    "addr:street": "Hoa Lu",
+    "email": "hangmuafamilyhomestay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Hang Mua Family Homestay",
+    "name:en": "Hang Mua Family Homestay",
+    "phone": "+84 38 7611592",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6929774685,
+  "tags": {
+    "check_date": "2025-08-22",
+    "name": "green mountain home stay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6942368885,
+  "tags": {
+    "addr:street": "Quốc lộ 1A",
+    "name": "Tam Coc Banana Bungalow",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6942963674,
+  "tags": {
+    "name": "Tam Coc La Montagne",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6944264829,
+  "tags": {
+    "name": "Nam Cuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6947674185,
+  "tags": {
+    "name:en": "Tam Coc Ecofield Homes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6950040093,
+  "tags": {
+    "name": "Tam Coc Tea House",
+    "survey:date": "2019-11-06",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6950312885,
+  "tags": {
+    "check_date": "2025-03-17",
+    "name": "Moonlight",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6952985744,
+  "tags": {
+    "name": "Tam Coc Eco house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6952985745,
+  "tags": {
+    "check_date": "2024-11-22",
+    "name": "Tam coc craft homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6952985746,
+  "tags": {
+    "check_date": "2024-11-21",
+    "internet_access:fee": "no",
+    "name": "Tam Coc Rice Fields Home Stay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6975785985,
+  "tags": {
+    "name": "Phi hung's unique homestay",
+    "survey:date": "2019-11-07",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6982504716,
+  "tags": {
+    "name": "Lakeside II Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7018335273,
+  "tags": {
+    "name": "Tam Coc Central Bungalow",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7037864786,
+  "tags": {
+    "addr:street": "Khê Ha, Hoa Lu, Ninh Binh, Vietnam",
+    "email": "cherryhomestay.nb90@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Cherry Homestay (Huna Homestay in Google Maps)",
+    "phone": "+84984773390",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7038430985,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Three Princess",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7043669691,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Tomato Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7046438785,
+  "tags": {
+    "addr:street": "Ngõ 235 Lê Thái Tổ",
+    "internet_access": "wlan",
+    "name": "Việt Anh Hotel",
+    "name:en": "Viet Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7063327540,
+  "tags": {
+    "name": "Hang Mua Valley Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7111979388,
+  "tags": {
+    "addr:housenumber": "168",
+    "addr:street": "Đường Xuân Thanh",
+    "internet_access": "wlan",
+    "name:en": "nam khanh coffee and hostel",
+    "phone": "094 639 97 28",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7116866385,
+  "tags": {
+    "addr:postcode": "0821",
+    "addr:street": "Khê thượng",
+    "email": "ninhbinhvallemontana@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ninh binh valle montana homestay",
+    "opening_hours": "24/7",
+    "phone": "0973324571",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7123518151,
+  "tags": {
+    "name": "Prato hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7125162085,
+  "tags": {
+    "email": "hangmuacentralhomestay@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Hang Mua Central Homestay",
+    "phone": "0397276638",
+    "tourism": "hotel",
+    "website": "http://hangmuacentralhomestay.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7133215885,
+  "tags": {
+    "name": "Tam Coc Ngoc Linh Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7152723785,
+  "tags": {
+    "name": "Blue garden",
+    "name:en": "Bleu garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7162332486,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Little River Bungalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7162746235,
+  "tags": {
+    "name": "Tam Coc Golden Sun",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7177474287,
+  "tags": {
+    "name": "Hang Mua Central Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7194499814,
+  "tags": {
+    "name": "Hang Mua Central Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7236158585,
+  "tags": {
+    "name:en": "Nha Nghi Tra My",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7252214987,
+  "tags": {
+    "addr:street": "Xã Ninh Thắng, Huyện Hoa Lư, Ninh Bình",
+    "internet_access": "wlan",
+    "name:en": "Tamcoc Brothers Homestay",
+    "opening_hours": "24/7",
+    "phone": "+84988213355",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7276571888,
+  "tags": {
+    "addr:street": "Đam Khê Ngoài",
+    "internet_access": "wlan",
+    "name": "Nam Nhung Tam Coc Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7973739429,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Hoa Lu",
+    "addr:postcode": "08251",
+    "addr:province": "Ninh Binh",
+    "addr:street": "Tràng An",
+    "addr:subdistrict": "Trường Yên",
+    "air_conditioning": "yes",
+    "check_date": "2024-04-19",
+    "currency:XBT": "yes",
+    "description": "Trang An Freedom Hood is natural hostel providing beds and breakfast and good environtment for expressing personalities.",
+    "email": "tranganfreedomhood@gmail.com",
+    "guest_house": "hostel",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "TRANGAN FREEDOM HOOD",
+    "name": "Trang An Freedom Hood",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+84963843809",
+    "reservation": "recommended",
+    "rooms": "4",
+    "smoking": "outside",
+    "tourism": "hostel",
+    "website": "https://tranganretreat.com/freedomhood/"
+  }
+},
+{
+  "type": "node",
+  "id": 8210049030,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Hoa Lư",
+    "addr:postcode": "431990",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Khê Hạ",
+    "addr:subdistrict": "xã Ninh Xuân",
+    "image": "http//hangmualuckyhouse.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Hang Mua Lucky House",
+    "rooms": "10",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 8256886711,
+  "tags": {
+    "addr:city": "Phủ Lý",
+    "addr:district": "Phủ Lý",
+    "addr:postcode": "400000",
+    "addr:province": "Hà Nam",
+    "addr:street": "Lê Duẩn",
+    "addr:subdistrict": "Liêm Chính",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Thanh Dat Hotel Phu Ly",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9938372497,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10188318235,
+  "tags": {
+    "addr:street": "Đường Tuệ Tĩnh",
+    "internet_access": "wlan",
+    "name": "Elegant Homestay",
+    "tourism": "guest_house",
+    "website": "https://tranganeleganthomestay.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10314291009,
+  "tags": {
+    "addr:street": "Quốc lộ 38B",
+    "email": "ninhbinhbambootravel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ninh Binh Bamboo Farmstay",
+    "opening_hours": "24/7",
+    "phone": "+84359674921",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 10314291609,
+  "tags": {
+    "addr:street": "Quốc lộ 38B",
+    "email": "ninhbinhbamboofarmstay@gmail.com",
+    "internet_access": "wlan",
+    "name": "Ninh Binh Bamboo Farmstay",
+    "opening_hours": "24/7",
+    "phone": "+84359674921",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 10538813813,
+  "tags": {
+    "name": "Tam Coc Sweet Home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10587939005,
+  "tags": {
+    "name:fr": "Hôtel Tam Coc friendly homestay ( nam nãm )",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10705628405,
+  "tags": {
+    "name": "Asahi Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10705628406,
+  "tags": {
+    "name": "Liberty Hall Tam Coc Villa Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10736253947,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10754865705,
+  "tags": {
+    "addr:street": "Đội 4, Hoa Lư District, Ninh Bình, Vietnam",
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Tuong Vy Homestay",
+    "phone": "+84 837 281 666",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10847855058,
+  "tags": {
+    "description": "Very nice and kind hotel))",
+    "name": "Tam coc relax homestay",
+    "phone": "+84 385 095 098",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10898363726,
+  "tags": {
+    "description": "Stay with a friendly Viet family, with breakfast included. They also serve food, including diner with the family",
+    "fee": "220,000 dong, May2023",
+    "internet_access": "free",
+    "motorcycle:rental": "yes",
+    "name": "White Swan Homestay",
+    "service:bicycle:rental": "yes;used",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10913152706,
+  "tags": {
+    "name": "Lodge by Tam Coc Lake",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11160922185,
+  "tags": {
+    "name": "Tam Coc Riverside Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11161093503,
+  "tags": {
+    "name": "TamCoc Papaya Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11161093504,
+  "tags": {
+    "name": "Tam Coc Mr.Loa Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11164935605,
+  "tags": {
+    "name": "Aquarius",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11501884494,
+  "tags": {
+    "name": "Mr Viet Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11531394665,
+  "tags": {
+    "addr:housenumber": "41/5",
+    "addr:street": "Đường Nam Thành",
+    "name": "Nhà Nghỉ Joy Nibi Guest House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11559091069,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Gecko Backpackers Hostel",
+    "phone": "+84965552121",
+    "reservation": "yes",
+    "rooms": "14",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11583931569,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "An's Eco Garden",
+    "tourism": "guest_house",
+    "website": "https://anecogarden.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 11591938872,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Tam Coc Ngo Dong Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11602006169,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Thang Loan Tam Coc Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11629663869,
+  "tags": {
+    "name:en": "Tam Coc La Siesta Homestay",
+    "name:fr": "Tam Coc La Siesta Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11633690569,
+  "tags": {
+    "name:en": "Tam Coc Van Lam Homestay",
+    "name:fr": "Tam Coc Van Lam Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11655978970,
+  "tags": {
+    "addr:street": "X",
+    "internet_access": "wlan",
+    "name:en": "Fairy Mountain Retreat",
+    "opening_hours": "24/7",
+    "phone": "+85856707988",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11683652669,
+  "tags": {
+    "name:en": "Trang An Mountain View Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11771525895,
+  "tags": {
+    "addr:housenumber": "8",
+    "internet_access": "yes",
+    "name": "Serena Riverside Homestay",
+    "rooms": "9",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11779488369,
+  "tags": {
+    "name:en": "An Restaurant - Hostel & Coffee Bar",
+    "phone": "+84 98 234 56 18",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11896714869,
+  "tags": {
+    "addr:street": "Thai Vi",
+    "internet_access": "wlan",
+    "name": "The Banana Tree Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11934997269,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ninh Binh Mountain View Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12272255301,
+  "tags": {
+    "addr:street": "Quốc lộ 1 đoạn tránh TP. Ninh Bình",
+    "internet_access": "wlan",
+    "name": "Tam Coc Guest House & Hostel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12304070003,
+  "tags": {
+    "name": "Lemon Tree Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12306897401,
+  "tags": {
+    "name": "Chez Hiep Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12347790940,
+  "tags": {
+    "name": "River View",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12350538802,
+  "tags": {
+    "name": "Mai place homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12373462417,
+  "tags": {
+    "addr:city": "Hoa Lư",
+    "addr:district": "Xã Ninh Thắng",
+    "addr:housenumber": "00",
+    "addr:postcode": "08214",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Thôn Tuân Cáo",
+    "email": "booking.chuchuvilla@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Tam Coc Chu Chu Villa",
+    "phone": "+84993 022 865",
+    "rooms": "12",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12420725601,
+  "tags": {
+    "addr:postcode": "08000",
+    "addr:street": "5 Hamlet, Gia Sinh, Gia Viễn",
+    "internet_access": "wlan",
+    "name": "Ninh Binh Palm Homestay",
+    "phone": "+84 904 683 295",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12600257001,
+  "tags": {
+    "name": "Tuyet‘s Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12677639563,
+  "tags": {
+    "name": "Lagalo Hotel",
+    "price": "450k",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12695910130,
+  "tags": {
+    "name": "Le Clos du Fil",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12732425542,
+  "tags": {
+    "addr:city": "Hoa Lư",
+    "addr:postcode": "4300",
+    "addr:province": "Ninh Bình",
+    "addr:subdistrict": "Ninh Hải",
+    "email": "tamcocpeacefulnature@gmail.com",
+    "internet_access": "wlan",
+    "name": "Tam Coc Peaceful Nature",
+    "phone": "+84 835 265 222",
+    "rooms": "16",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12744101322,
+  "tags": {
+    "name": "Coco Island",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12751062854,
+  "tags": {
+    "air_conditioning": "yes",
+    "bar": "no",
+    "check_date": "2025-04-13",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Havana",
+    "name:en": "Havana",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "reservation": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12766335397,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Nam Bình",
+    "addr:housenumber": "39",
+    "addr:postcode": "430000",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Đường Nguyễn Tử Mẫn",
+    "addr:subdistrict": "Thanh Bình",
+    "brand": "Namistay",
+    "email": "namistayninhbinhlinhduc@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Nami Stay Linh Đức",
+    "phone": "+84987564495",
+    "reservation": "yes",
+    "rooms": "9",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12772100061,
+  "tags": {
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Phát Diệm Plaza Hotel",
+    "phone": "+84918343145",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12773368296,
+  "tags": {
+    "check_date": "2025-04-22",
+    "name": "Scenic Mountain Ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12793917801,
+  "tags": {
+    "name:en": "Tam Coc LiLy Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12827606101,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Tam Coc Tropical Garden",
+    "name:en": "Tam Coc Tropical Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12846528555,
+  "tags": {
+    "addr:city": "Ninh Bình",
+    "addr:district": "Hoa Lư",
+    "addr:housenumber": "148",
+    "addr:postcode": "430000",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Đinh Điền",
+    "addr:subdistrict": "Ninh Khánh",
+    "email": "sonaviehotel@gmail.com",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Sonavie Hotel Ninh Bình",
+    "phone": "19003256",
+    "rooms": "24",
+    "tourism": "hotel",
+    "website": "https://www.facebook.com/share/19kSutAh86/"
+  }
+},
+{
+  "type": "node",
+  "id": 13077436459,
+  "tags": {
+    "addr:street": "Trần Hưng Đạo",
+    "phone": "+84823363989",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 13146912427,
+  "tags": {
+    "name": "Annamoi House homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13172352201,
+  "tags": {
+    "name": "Tam Coc Babylon Hotel",
+    "phone": "+84 818 773 668",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13246237971,
+  "tags": {
+    "addr:city": "Hoa Lư",
+    "addr:district": "Xã Ninh Hải",
+    "addr:postcode": "08214",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Thôn Tuân Cáo",
+    "email": "tamcocannavilla@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Tam Coc Anna Villa",
+    "phone": "+84904885968",
+    "rooms": "5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13310209617,
+  "tags": {
+    "name": "Forest Sunset",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13310224451,
+  "tags": {
+    "name": "Golden Mountain Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13310279428,
+  "tags": {
+    "name": "Tam Coc Sunshine Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13373893702,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Aman Retreat Ninh Binh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13379884901,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Anh Huong Tam Coc Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13381288272,
+  "tags": {
+    "addr:city": "Nam Định City",
+    "addr:housenumber": "272",
+    "addr:postcode": "420000",
+    "addr:province": "Nam Dinh Province",
+    "addr:street": "Trần Hưng Đạo,",
+    "addr:subdistrict": "Cửa Bắc Ward",
+    "brand": "Tru by Hilton",
+    "brand:wikidata": "Q24907770",
+    "email": "VDHTH_TRU@hilton.com",
+    "internet_access": "wlan",
+    "name": "Tru by Hilton Nam Dinh City Centre",
+    "opening_hours": "24/7",
+    "operator": "Hilton",
+    "phone": "+84 228 8853 333",
+    "rooms": "90",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/vdhthru-tru-nam-dinh-city-centre/"
+  }
+},
+{
+  "type": "node",
+  "id": 13392683704,
+  "tags": {
+    "name": "Maison Tam Coc Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13392683901,
+  "tags": {
+    "name": "Chilling Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13399175302,
+  "tags": {
+    "internet_access": "wlan",
+    "level": "3",
+    "name": "Mountain Flower Bungalow Homestay",
+    "phone": "0333111555",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13399186901,
+  "tags": {
+    "name": "Min House",
+    "phone": "0364151917",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13399213201,
+  "tags": {
+    "level": "2",
+    "name": "Minh Hưng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13399232701,
+  "tags": {
+    "name": "My Tho Homestay",
+    "phone": "0328739146",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13425507301,
+  "tags": {
+    "name": "Truong Son Luxury Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13444878085,
+  "tags": {
+    "name": "Tràng An Ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13502977727,
+  "tags": {
+    "name": "Trang An Green Bungalow & Restaurant",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13660238812,
+  "tags": {
+    "name": "Lalita Tam Coc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13672056302,
+  "tags": {
+    "name": "Tam Coc Green Garden Bangalow",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13683999156,
+  "tags": {
+    "addr:housenumber": "Số 05",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Ngõ 235 Lê Thái Tổ",
+    "addr:subdistrict": "Phường Hoa Lư",
+    "height": "7 Tầng",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "mobile": "+84922635888",
+    "name": "Olong Phố cổ Hotel",
+    "name:vi": "Olong Phố cổ Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84922635888",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13784010401,
+  "tags": {
+    "name": "Tam Coc Golden Fields",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13844000001,
+  "tags": {
+    "check_date": "2026-05-18",
+    "name": "Tràng An Nature View",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13848672001,
+  "tags": {
+    "check_date": "2026-05-19",
+    "internet_access": "wlan",
+    "name": "Thang An River View Ecolodge",
+    "phone": "+84974308579",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13848937401,
+  "tags": {
+    "check_date": "2026-05-19",
+    "name": "Ninh Binh Retreat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13848940302,
+  "tags": {
+    "check_date": "2026-05-19",
+    "name": "Tràng An Memory Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13848962501,
+  "tags": {
+    "check_date": "2026-05-19",
+    "name": "Heritage Charm",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 13848962502,
+  "tags": {
+    "check_date": "2026-05-19",
+    "name": "Heritage Charm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14178043098,
+  "tags": {
+    "addr:housenumber": "47",
+    "addr:postcode": "43000",
+    "addr:province": "Ninh Bình",
+    "addr:street": "Đường Thành Công",
+    "addr:subdistrict": "Phường Hoa Lư",
+    "air_conditioning": "yes",
+    "guest_house": "guest_house",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Mina Building Self-Checkin Phố cổ Hoa Lư",
+    "phone": "+84941185858",
+    "reservation": "yes",
+    "tourism": "guest_house",
+    "website": "https://minabuilding.com"
+  }
+},
+{
+  "type": "node",
+  "id": 14235324001,
+  "tags": {
+    "check_date": "2026-09-30",
+    "name": "The Sun Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14238586801,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14238595401,
+  "tags": {
+    "check_date": "2026-10-01",
+    "name": "Chin Thu Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14238599301,
+  "tags": {
+    "check_date": "2026-10-01",
+    "name": "Trang an natural bungalow",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14239070001,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241179401,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241179801,
+  "tags": {
+    "check_date": "2026-10-02",
+    "name": "Ngoc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241184201,
+  "tags": {
+    "check_date": "2026-10-02",
+    "name": "Lucky Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241190401,
+  "tags": {
+    "check_date": "2026-10-02",
+    "name": "Xuan Bach",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241190501,
+  "tags": {
+    "check_date": "2026-10-02",
+    "name": "Tran An",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14241192601,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14244634602,
+  "tags": {
+    "check_date": "2026-10-03",
+    "name": "Trang An Viewpoint Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14244639201,
+  "tags": {
+    "check_date": "2026-10-03",
+    "name": "Tran An Lighthouse Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14244639402,
+  "tags": {
+    "check_date": "2026-10-03",
+    "name": "Bamboo river stay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14276158201,
+  "tags": {
+    "name": "Trang an mountain river ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14308888801,
+  "tags": {
+    "check_date": "2026-10-22",
+    "internet_access": "wlan",
+    "level": "0",
+    "name": "Le Maison Tam Coc Boutique Hotel",
+    "phone": "+84 911 273 535",
+    "self_service": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14317746422,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 152606188,
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-11-22",
+    "name": "Nhà nghỉ ở Bống",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 236982897,
+  "tags": {
+    "addr:city": "Ninh Binh",
+    "addr:district": "Ninh Binh",
+    "addr:housenumber": "36",
+    "addr:province": "Ninh Binh",
+    "addr:street": "Đường Chiến Thắng",
+    "addr:subdistrict": "Nam Thanh",
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Xuân Hoa Hotel 2",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 236982898,
+  "tags": {
+    "addr:city": "Ninh Binh",
+    "addr:district": "Ninh Binh",
+    "addr:housenumber": "31D",
+    "addr:postcode": "430000",
+    "addr:province": "Ninh Binh",
+    "addr:street": "Đường Chiến Thắng",
+    "addr:subdistrict": "Nam Thanh",
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Xuân Hoa Hotel 1",
+    "rooms": "17",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 236989253,
+  "tags": {
+    "building": "yes",
+    "name": "Hoang Hai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 237128735,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà Việt Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 237263490,
+  "tags": {
+    "name": "Quang Dũng Hotel",
+    "stars": "3",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 237370553,
+  "tags": {
+    "building:levels": "10",
+    "name": "Queen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 680795048,
+  "tags": {
+    "changing_table": "yes",
+    "check_date": "2024-05-15",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "internet_access:type": "wifi",
+    "name": "Emeralda",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 743170855,
+  "tags": {
+    "building": "yes",
+    "name": "Tam Coc Charm hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 841697582,
+  "tags": {
+    "building": "yes",
+    "name": "Tulip",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1374946022,
+  "tags": {
+    "addr:district": "Tây hoa lư",
+    "addr:postcode": "431970",
+    "addr:province": "Ninh bình",
+    "addr:street": "Tràng An",
+    "addr:subdistrict": "Nguyên Ngoại",
+    "air_conditioning": "yes",
+    "building": "house",
+    "email": "thevalleylodgetrangan@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "layer": "-1",
+    "name": "Khu nghĩ dưỡng The Valley Lodge Trang An",
+    "name:en": "The Valley Lodge Trang An",
+    "opening_hours": "24/7",
+    "phone": "+84839655789",
+    "rooms": "5",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1386126634,
+  "tags": {
+    "building": "yes",
+    "name": "Khách xá Tam Chúc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1430453107,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1430453108,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1430453109,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1430453110,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1430453111,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1460272772,
+  "tags": {
+    "building": "yes",
+    "name": "Sunseekers Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1569820100,
+  "tags": {
+    "name:en": "Muong Village Hotel",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

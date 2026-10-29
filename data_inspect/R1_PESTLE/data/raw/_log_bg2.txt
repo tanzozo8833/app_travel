@@ -1,0 +1,3 @@
+trends ok
+trends_region ok
+region coords ok; thiếu: ['Hà Nam', 'Hồ Chí Minh', 'Thừa Thiên Huế', 'tỉnh Kiên Giang', 'Đăk Nông']

@@ -1,0 +1,2104 @@
+{
+  "a1_demography": {
+    "pop_20_29": {
+      "2015": 16.76,
+      "2020": 14.83,
+      "2025": 13.01,
+      "2030": 13.76,
+      "2035": 15.73,
+      "2040": 15.84,
+      "2050": 12.71
+    },
+    "trough_year": 2026,
+    "trough_value": 12.94,
+    "change_2015_2025_pct": -22.4,
+    "change_2025_2035_pct": 20.9,
+    "peers_2025_2035_pct": {
+      "Việt Nam": 20.9,
+      "Thái Lan": -7.4,
+      "Indonesia": 6.5,
+      "Philippines": 6.4,
+      "Malaysia": -0.3
+    },
+    "share_20_29_2025_pct": 12.8,
+    "pop_18_34_2025": 24.15,
+    "figs": [
+      "results/img/a1_cohorts.png",
+      "results/img/a1_cohort_peers.png"
+    ]
+  },
+  "a2_purchasing_power": {
+    "cons_pc_usd_2015": 1529,
+    "cons_pc_usd_2025": 2382,
+    "cons_pc_usd_2035": 3947,
+    "value_change_2015_2025_pct": 20.9,
+    "value_change_2025_2035_pct": 100.4,
+    "decomp_2025_2035_logpts": {
+      "size": 19.0,
+      "income": 50.5
+    },
+    "decomp_2015_2025_logpts": {
+      "size": -25.4,
+      "income": 44.3
+    },
+    "imf_real_gdp_growth": {
+      "2025": 8.0,
+      "2026": 8.4,
+      "2027": 7.5,
+      "2028": 5.9,
+      "2029": 5.9,
+      "2030": 5.7,
+      "2031": 5.7
+    },
+    "imf_inflation": {
+      "2025": 3.3,
+      "2026": 4.7,
+      "2027": 4.9,
+      "2028": 4.7,
+      "2029": 4.6,
+      "2030": 4.2,
+      "2031": 3.8
+    },
+    "thai_analog": {
+      "2025": {
+        "vn_gdp_pc_ppp": 15457,
+        "thai_year": 2009,
+        "thai_value": 15668
+      },
+      "2030": {
+        "vn_gdp_pc_ppp": 20808,
+        "thai_year": 2022,
+        "thai_value": 20768
+      }
+    },
+    "figs": [
+      "results/img/a2_market_decomposition.png",
+      "results/img/a2_income_convergence.png"
+    ]
+  },
+  "a9_mobile_os": {
+    "ios_latest": 40.2,
+    "ios_latest_month": "2026-09",
+    "ios_yearly": {
+      "2016": 37.1,
+      "2017": 35.2,
+      "2018": 36.7,
+      "2019": 38.7,
+      "2020": 36.2,
+      "2021": 33.9,
+      "2022": 29.9,
+      "2023": 35.1,
+      "2024": 33.3,
+      "2025": 39.4,
+      "2026": 41.0
+    },
+    "ios_low_2023": 29.1,
+    "mk_2022_2026": {
+      "tau": 0.59,
+      "p": 1.2197330919745841e-10,
+      "sen_pp_per_month": 0.234
+    },
+    "ios_2027_09_p50": 44.3,
+    "ios_2029_09_p50": 49.7,
+    "ios_2029_09_p10_p90": [
+      47.0,
+      52.4
+    ],
+    "ios_cross_50_month": null,
+    "vendor_latest": {
+      "Apple": 40.2,
+      "Samsung": 20.4,
+      "Oppo": 15.4,
+      "Xiaomi": 12.3,
+      "Vivo": 5.0,
+      "Realme": 2.2
+    },
+    "vendor_hhi": 2452,
+    "social_latest": {
+      "Facebook": 56.3,
+      "YouTube": 34.8,
+      "Twitter": 3.5,
+      "Pinterest": 2.9,
+      "reddit": 1.1
+    },
+    "figs": [
+      "results/img/a9_mobile_os.png"
+    ]
+  },
+  "a10_fuel": {
+    "jet_latest_usd_gal": 4.46,
+    "jet_latest_month": "2026-10",
+    "jet_yoy_latest_pct": 106.9,
+    "jet_yoy_z": 2.46,
+    "jet_yoy_percentile": 97.2,
+    "jet_9m_2026_vs_2025_pct": 59.8,
+    "airfare_ppi_9m_pct": 7.34,
+    "road_ppi_9m_pct": 8.06,
+    "pass_through_airfare": 0.123,
+    "brent_latest": 125.0,
+    "figs": [
+      "results/img/a10_fuel_shock.png"
+    ]
+  },
+  "a3_affordability": {
+    "assumptions": {
+      "worker_income_median_m": 9.0,
+      "worker_income_sigma": 0.55,
+      "worker_budget_share": 0.45,
+      "student_budget_months": 1.5,
+      "bus_vnd_per_km": 1000,
+      "lodging_per_person_night": 175000,
+      "food_activity_per_day": 300000,
+      "nights": 2,
+      "value_of_time_vnd_h": 25000,
+      "pass_through": 0.123,
+      "max_bus_hours_one_way": 12
+    },
+    "student_spending_fit": {
+      "median_m": 2.44,
+      "sigma": 1.0,
+      "sse": 0.001908568851418488
+    },
+    "flight_fare_model": {
+      "intercept_vnd": 2380644,
+      "vnd_per_km": 1853
+    },
+    "elasticity": {
+      "2tr": {
+        "worker": -0.35,
+        "student": -0.46
+      },
+      "3tr": {
+        "worker": -0.88,
+        "student": -0.67
+      },
+      "4tr": {
+        "worker": -1.43,
+        "student": -0.86
+      },
+      "5tr": {
+        "worker": -1.93,
+        "student": -0.99
+      },
+      "6tr": {
+        "worker": -2.32,
+        "student": -1.14
+      }
+    },
+    "avg_afford_worker_near": 94.7,
+    "avg_afford_worker_far": 36.1,
+    "avg_afford_student_near": 79.0,
+    "avg_afford_student_far": 38.4,
+    "far_drop_worker_pp": 2.0,
+    "far_drop_student_pp": 1.3,
+    "table": [
+      {
+        "name": "Tam Đảo",
+        "mode": "xe khách",
+        "cost": 1415669.0,
+        "afford_worker": 97.2,
+        "afford_student": 83.0
+      },
+      {
+        "name": "Ninh Bình",
+        "mode": "xe khách",
+        "cost": 1450779.4,
+        "afford_worker": 96.9,
+        "afford_student": 82.4
+      },
+      {
+        "name": "Mai Châu",
+        "mode": "xe khách",
+        "cost": 1525885.2,
+        "afford_worker": 96.2,
+        "afford_student": 81.1
+      },
+      {
+        "name": "Cát Bà",
+        "mode": "xe khách",
+        "cost": 1549448.6,
+        "afford_worker": 96.0,
+        "afford_student": 80.6
+      },
+      {
+        "name": "Hạ Long",
+        "mode": "xe khách",
+        "cost": 1591494.2,
+        "afford_worker": 95.5,
+        "afford_student": 79.9
+      },
+      {
+        "name": "Sầm Sơn",
+        "mode": "xe khách",
+        "cost": 1591619.6,
+        "afford_worker": 95.5,
+        "afford_student": 79.9
+      },
+      {
+        "name": "Pù Luông",
+        "mode": "xe khách",
+        "cost": 1615934.6,
+        "afford_worker": 95.2,
+        "afford_student": 79.5
+      },
+      {
+        "name": "Mộc Châu",
+        "mode": "xe khách",
+        "cost": 1636185.2,
+        "afford_worker": 95.0,
+        "afford_student": 79.1
+      },
+      {
+        "name": "Mù Cang Chải",
+        "mode": "xe khách",
+        "cost": 1820417.6,
+        "afford_worker": 92.7,
+        "afford_student": 75.9
+      },
+      {
+        "name": "Hà Giang",
+        "mode": "xe khách",
+        "cost": 1825914.2,
+        "afford_worker": 92.6,
+        "afford_student": 75.9
+      },
+      {
+        "name": "Cao Bằng",
+        "mode": "xe khách",
+        "cost": 1870617.8,
+        "afford_worker": 92.0,
+        "afford_student": 75.1
+      },
+      {
+        "name": "Sa Pa",
+        "mode": "xe khách",
+        "cost": 1877856.6,
+        "afford_worker": 91.8,
+        "afford_student": 75.0
+      },
+      {
+        "name": "Phong Nha",
+        "mode": "xe khách",
+        "cost": 2250155.6,
+        "afford_worker": 85.7,
+        "afford_student": 68.8
+      },
+      {
+        "name": "Huế",
+        "mode": "xe khách",
+        "cost": 2584779.8,
+        "afford_worker": 79.3,
+        "afford_student": 63.7
+      },
+      {
+        "name": "Đà Nẵng",
+        "mode": "máy bay",
+        "cost": 5051627.1,
+        "afford_worker": 34.3,
+        "afford_student": 37.5
+      },
+      {
+        "name": "Hội An",
+        "mode": "máy bay",
+        "cost": 5102728.5,
+        "afford_worker": 33.6,
+        "afford_student": 37.1
+      },
+      {
+        "name": "Quy Nhơn",
+        "mode": "máy bay",
+        "cost": 5629910.4,
+        "afford_worker": 27.4,
+        "afford_student": 33.4
+      },
+      {
+        "name": "Nha Trang",
+        "mode": "máy bay",
+        "cost": 5987408.5,
+        "afford_worker": 23.9,
+        "afford_student": 31.2
+      },
+      {
+        "name": "Đà Lạt",
+        "mode": "máy bay",
+        "cost": 6227576.3,
+        "afford_worker": 21.7,
+        "afford_student": 29.8
+      },
+      {
+        "name": "Vũng Tàu",
+        "mode": "máy bay",
+        "cost": 6567619.5,
+        "afford_worker": 19.0,
+        "afford_student": 28.0
+      },
+      {
+        "name": "Phú Quốc",
+        "mode": "máy bay",
+        "cost": 6606741.8,
+        "afford_worker": 18.7,
+        "afford_student": 27.8
+      },
+      {
+        "name": "Côn Đảo",
+        "mode": "máy bay",
+        "cost": 6782094.4,
+        "afford_worker": 17.4,
+        "afford_student": 26.9
+      }
+    ],
+    "figs": [
+      "results/img/a3_affordability.png"
+    ]
+  },
+  "a11_market": {
+    "hanoi_pop": 8807523.0,
+    "people_20_29_p50_m": 1.34,
+    "TAM_bn_vnd_p10_p50_p90": [
+      7156.1,
+      10256.4,
+      14496.6
+    ],
+    "SAM_bn_vnd": [
+      3226.5,
+      4758.6,
+      6893.8
+    ],
+    "SOM_gmv_bn_vnd": [
+      56.2,
+      113.1,
+      205.5
+    ],
+    "revenue_bn_vnd": [
+      4.5,
+      9.2,
+      17.6
+    ],
+    "sensitivity_spearman": {
+      "Tỉ lệ đi du lịch nội địa/năm": 0.11,
+      "Tỉ lệ 20–29 tuổi trong dân Hà Nội": 0.12,
+      "Tỉ trọng chi tại đối tác địa phương": 0.2,
+      "Chi tiêu/chuyến (triệu đồng)": 0.3,
+      "Hoa hồng đối tác (take rate)": 0.32,
+      "Số chuyến/năm (người có đi)": 0.36,
+      "Tỉ lệ người dùng Levart sau 3 năm": 0.75
+    },
+    "figs": [
+      "results/img/a11_market_montecarlo.png"
+    ]
+  },
+  "a4_trends": {
+    "classification": [
+      {
+        "kw": "du lịch một mình",
+        "cls": "Không đủ dữ liệu",
+        "base_year": 2019,
+        "growth_since_base_pct": NaN,
+        "tau": NaN,
+        "p": NaN,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": NaN,
+        "peak_12m_ending": "2016-12",
+        "zero_share_36m": 1.0
+      },
+      {
+        "kw": "chữa lành",
+        "cls": "Mốt (đã qua đỉnh)",
+        "base_year": 2020,
+        "growth_since_base_pct": 283.3,
+        "tau": 0.73,
+        "p": 0.0556,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": 63.0,
+        "peak_12m_ending": "2024-08",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "cắm trại",
+        "cls": "Mốt (đã qua đỉnh)",
+        "base_year": 2019,
+        "growth_since_base_pct": 78.6,
+        "tau": 0.39,
+        "p": 0.2243,
+        "seasonal_strength": 0.41,
+        "last12_vs_peak_pct": 69.0,
+        "peak_12m_ending": "2023-03",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "review",
+        "cls": "Suy giảm",
+        "base_year": 2019,
+        "growth_since_base_pct": -13.9,
+        "tau": -0.81,
+        "p": 0.0107,
+        "seasonal_strength": 0.23,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "phượt",
+        "cls": "Suy giảm",
+        "base_year": 2019,
+        "growth_since_base_pct": -66.7,
+        "tau": -0.88,
+        "p": 0.0062,
+        "seasonal_strength": 0.03,
+        "last12_vs_peak_pct": 18.0,
+        "peak_12m_ending": "2017-04",
+        "zero_share_36m": 0.03
+      },
+      {
+        "kw": "chatgpt",
+        "cls": "Xu hướng tăng",
+        "base_year": 2023,
+        "growth_since_base_pct": 668.3,
+        "tau": 0.46,
+        "p": 0.0017,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": 97.0,
+        "peak_12m_ending": "2026-06",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "gemini",
+        "cls": "Xu hướng tăng",
+        "base_year": 2024,
+        "growth_since_base_pct": 283.8,
+        "tau": 0.77,
+        "p": 0.0,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.08
+      },
+      {
+        "kw": "lịch trình",
+        "cls": "Xu hướng tăng",
+        "base_year": 2019,
+        "growth_since_base_pct": 105.0,
+        "tau": 0.9,
+        "p": 0.0028,
+        "seasonal_strength": 0.49,
+        "last12_vs_peak_pct": 90.0,
+        "peak_12m_ending": "2025-04",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "du lịch tự túc",
+        "cls": "Đã qua đỉnh (2018)",
+        "base_year": 2019,
+        "growth_since_base_pct": -61.1,
+        "tau": 0.0,
+        "p": 1.0,
+        "seasonal_strength": 0.14,
+        "last12_vs_peak_pct": 39.0,
+        "peak_12m_ending": "2018-07",
+        "zero_share_36m": 0.19
+      },
+      {
+        "kw": "du lịch",
+        "cls": "Đã qua đỉnh (2019)",
+        "base_year": 2019,
+        "growth_since_base_pct": -25.4,
+        "tau": -0.24,
+        "p": 0.5619,
+        "seasonal_strength": 0.3,
+        "last12_vs_peak_pct": 69.0,
+        "peak_12m_ending": "2019-02",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "traveloka",
+        "cls": "Đã qua đỉnh (2023)",
+        "base_year": 2019,
+        "growth_since_base_pct": -5.3,
+        "tau": -0.05,
+        "p": 1.0,
+        "seasonal_strength": 0.08,
+        "last12_vs_peak_pct": 68.0,
+        "peak_12m_ending": "2023-02",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "vé máy bay",
+        "cls": "Đã qua đỉnh (2023)",
+        "base_year": 2019,
+        "growth_since_base_pct": -39.5,
+        "tau": -0.33,
+        "p": 0.3813,
+        "seasonal_strength": 0.17,
+        "last12_vs_peak_pct": 60.0,
+        "peak_12m_ending": "2023-01",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "trekking",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": 58.3,
+        "tau": 0.62,
+        "p": 0.0655,
+        "seasonal_strength": 0.05,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "agoda",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": 34.6,
+        "tau": 0.62,
+        "p": 0.069,
+        "seasonal_strength": 0.19,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-08",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "klook",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": 25.0,
+        "tau": 0.51,
+        "p": 0.1169,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "google maps",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": 13.0,
+        "tau": 0.29,
+        "p": 0.3621,
+        "seasonal_strength": 0.0,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "vé tàu",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": -2.6,
+        "tau": 0.29,
+        "p": 0.3621,
+        "seasonal_strength": 0.28,
+        "last12_vs_peak_pct": 91.0,
+        "peak_12m_ending": "2019-01",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "thuê xe máy",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": -3.7,
+        "tau": 0.0,
+        "p": 1.0,
+        "seasonal_strength": 0.09,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "booking",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": -4.2,
+        "tau": 0.24,
+        "p": 0.5619,
+        "seasonal_strength": 0.2,
+        "last12_vs_peak_pct": 100.0,
+        "peak_12m_ending": "2026-09",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "xe khách",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": -8.8,
+        "tau": -0.33,
+        "p": 0.3813,
+        "seasonal_strength": 0.09,
+        "last12_vs_peak_pct": 90.0,
+        "peak_12m_ending": "2023-03",
+        "zero_share_36m": 0.0
+      },
+      {
+        "kw": "homestay",
+        "cls": "Ổn định / chưa rõ",
+        "base_year": 2019,
+        "growth_since_base_pct": -12.7,
+        "tau": 0.05,
+        "p": 1.0,
+        "seasonal_strength": 0.19,
+        "last12_vs_peak_pct": 93.0,
+        "peak_12m_ending": "2019-09",
+        "zero_share_36m": 0.0
+      }
+    ],
+    "figs": [
+      "results/img/a4_keywords_small_multiples.png",
+      "results/img/a4_its_chatgpt.png",
+      "results/img/a4_fuel_substitution.png",
+      "results/img/a4_platform_attention.png"
+    ],
+    "its_chatgpt": {
+      "level_change_log": 0.002,
+      "level_p": 0.988,
+      "slope_change_per_month_log": 0.0011,
+      "slope_p": 0.6532,
+      "gap_vs_counterfactual_2026_pct": -2.1,
+      "r2": 0.8,
+      "fig": "results/img/a4_its_chatgpt.png"
+    },
+    "fuel_substitution": {
+      "bus": {
+        "shock_effect_pct": 12.4,
+        "ci95_pct": [
+          0.6,
+          25.5
+        ],
+        "p": 0.0385,
+        "trend_pct_per_year": 4.2,
+        "vs2025_same_months_pct": 7.1,
+        "did_vs2025_pct": -1.0
+      },
+      "train": {
+        "shock_effect_pct": 15.1,
+        "ci95_pct": [
+          -9.9,
+          47.0
+        ],
+        "p": 0.2616,
+        "trend_pct_per_year": 3.4,
+        "vs2025_same_months_pct": -10.7,
+        "did_vs2025_pct": -2.0
+      },
+      "fig": "results/img/a4_fuel_substitution.png"
+    },
+    "platforms": {
+      "share_2019": {
+        "agoda": 43.0,
+        "traveloka": 47.0,
+        "klook": 10.0
+      },
+      "share_2025": {
+        "agoda": 50.2,
+        "traveloka": 39.1,
+        "klook": 10.7
+      },
+      "hhi_2019": 4171,
+      "hhi_2025": 4190,
+      "fig": "results/img/a4_platform_attention.png"
+    }
+  },
+  "a5_destinations": {
+    "table": [
+      {
+        "key": "sapa",
+        "name": "Sa Pa",
+        "type": "Núi phía Bắc",
+        "province": "Lào Cai",
+        "road_km": 313.9283,
+        "drive_h": 4.227277777777778,
+        "trends_level_2025": 23.68,
+        "pageviews_2025": 42048,
+        "cagr_trends_19_25": -4.0,
+        "cagr_pv_19_25": -17.6,
+        "momentum_trends_25_23": -12.6,
+        "gini_season": 0.067,
+        "gini_season_pv": 0.094,
+        "peak_month": 2,
+        "low_month": 9,
+        "r_trends_pv": 0.21
+      },
+      {
+        "key": "hagiang",
+        "name": "Hà Giang",
+        "type": "Núi phía Bắc",
+        "province": "Tuyên Quang",
+        "road_km": 287.9571,
+        "drive_h": 3.5756944444444443,
+        "trends_level_2025": 25.18,
+        "pageviews_2025": 44781,
+        "cagr_trends_19_25": 3.8,
+        "cagr_pv_19_25": -13.8,
+        "momentum_trends_25_23": -3.6,
+        "gini_season": 0.035,
+        "gini_season_pv": 0.09,
+        "peak_month": 2,
+        "low_month": 6,
+        "r_trends_pv": 0.36
+      },
+      {
+        "key": "mocchau",
+        "name": "Mộc Châu",
+        "type": "Núi phía Bắc",
+        "province": "Sơn La",
+        "road_km": 193.0926,
+        "drive_h": 2.7332500000000004,
+        "trends_level_2025": 7.21,
+        "pageviews_2025": 23569,
+        "cagr_trends_19_25": 2.4,
+        "cagr_pv_19_25": -5.4,
+        "momentum_trends_25_23": -7.0,
+        "gini_season": 0.158,
+        "gini_season_pv": 0.128,
+        "peak_month": 2,
+        "low_month": 10,
+        "r_trends_pv": 0.93
+      },
+      {
+        "key": "mucangchai",
+        "name": "Mù Cang Chải",
+        "type": "Núi phía Bắc",
+        "province": "Lào Cai",
+        "road_km": 285.2088,
+        "drive_h": 3.604694444444444,
+        "trends_level_2025": 1.91,
+        "pageviews_2025": 20993,
+        "cagr_trends_19_25": 23.2,
+        "cagr_pv_19_25": -6.0,
+        "momentum_trends_25_23": 27.3,
+        "gini_season": 0.247,
+        "gini_season_pv": 0.167,
+        "peak_month": 9,
+        "low_month": 5,
+        "r_trends_pv": 0.63
+      },
+      {
+        "key": "caobang",
+        "name": "Cao Bằng",
+        "type": "Núi phía Bắc",
+        "province": "Cao Bằng",
+        "road_km": 310.30890000000005,
+        "drive_h": 4.277444444444444,
+        "trends_level_2025": 32.8,
+        "pageviews_2025": 35746,
+        "cagr_trends_19_25": 6.5,
+        "cagr_pv_19_25": -2.4,
+        "momentum_trends_25_23": -8.7,
+        "gini_season": 0.121,
+        "gini_season_pv": 0.106,
+        "peak_month": 3,
+        "low_month": 7,
+        "r_trends_pv": 0.48
+      },
+      {
+        "key": "maichau",
+        "name": "Mai Châu",
+        "type": "Núi phía Bắc",
+        "province": "Phú Thọ",
+        "road_km": 137.9426,
+        "drive_h": 1.9391666666666667,
+        "trends_level_2025": 4.63,
+        "pageviews_2025": 9916,
+        "cagr_trends_19_25": 3.9,
+        "cagr_pv_19_25": -7.1,
+        "momentum_trends_25_23": 21.4,
+        "gini_season": 0.05,
+        "gini_season_pv": 0.082,
+        "peak_month": 4,
+        "low_month": 6,
+        "r_trends_pv": 0.66
+      },
+      {
+        "key": "tamdao",
+        "name": "Tam Đảo",
+        "type": "Núi phía Bắc",
+        "province": "Phú Thọ",
+        "road_km": 82.8345,
+        "drive_h": 1.301611111111111,
+        "trends_level_2025": 6.4,
+        "pageviews_2025": 21359,
+        "cagr_trends_19_25": -7.9,
+        "cagr_pv_19_25": -9.6,
+        "momentum_trends_25_23": -14.5,
+        "gini_season": 0.096,
+        "gini_season_pv": 0.063,
+        "peak_month": 7,
+        "low_month": 1,
+        "r_trends_pv": 0.62
+      },
+      {
+        "key": "puluong",
+        "name": "Pù Luông",
+        "type": "Núi phía Bắc",
+        "province": "Thanh Hóa",
+        "road_km": 182.9673,
+        "drive_h": 2.4987777777777778,
+        "trends_level_2025": 1.5,
+        "pageviews_2025": 10123,
+        "cagr_trends_19_25": 7.8,
+        "cagr_pv_19_25": -1.7,
+        "momentum_trends_25_23": 10.0,
+        "gini_season": 0.217,
+        "gini_season_pv": 0.099,
+        "peak_month": 4,
+        "low_month": 1,
+        "r_trends_pv": 0.78
+      },
+      {
+        "key": "ninhbinh",
+        "name": "Ninh Bình",
+        "type": "Di sản ĐB Bắc Bộ",
+        "province": "Ninh Bình",
+        "road_km": 100.3897,
+        "drive_h": 1.3760277777777776,
+        "trends_level_2025": 61.79,
+        "pageviews_2025": 86115,
+        "cagr_trends_19_25": 8.1,
+        "cagr_pv_19_25": 7.5,
+        "momentum_trends_25_23": 43.2,
+        "gini_season": 0.033,
+        "gini_season_pv": 0.213,
+        "peak_month": 7,
+        "low_month": 12,
+        "r_trends_pv": -0.17
+      },
+      {
+        "key": "halong",
+        "name": "Hạ Long",
+        "type": "Biển miền Bắc",
+        "province": "Quảng Ninh",
+        "road_km": 170.74710000000002,
+        "drive_h": 2.122527777777778,
+        "trends_level_2025": 41.24,
+        "pageviews_2025": 299049,
+        "cagr_trends_19_25": 4.4,
+        "cagr_pv_19_25": 0.3,
+        "momentum_trends_25_23": 18.4,
+        "gini_season": 0.127,
+        "gini_season_pv": 0.303,
+        "peak_month": 7,
+        "low_month": 1,
+        "r_trends_pv": -0.38
+      },
+      {
+        "key": "catba",
+        "name": "Cát Bà",
+        "type": "Biển miền Bắc",
+        "province": "Hải Phòng",
+        "road_km": 149.7243,
+        "drive_h": 2.136416666666667,
+        "trends_level_2025": 8.71,
+        "pageviews_2025": 40174,
+        "cagr_trends_19_25": 0.5,
+        "cagr_pv_19_25": -5.3,
+        "momentum_trends_25_23": 10.3,
+        "gini_season": 0.27,
+        "gini_season_pv": 0.192,
+        "peak_month": 6,
+        "low_month": 12,
+        "r_trends_pv": 0.89
+      },
+      {
+        "key": "samson",
+        "name": "Sầm Sơn",
+        "type": "Biển miền Bắc",
+        "province": "Thanh Hóa",
+        "road_km": 170.8098,
+        "drive_h": 2.398833333333333,
+        "trends_level_2025": 6.4,
+        "pageviews_2025": 21309,
+        "cagr_trends_19_25": 0.0,
+        "cagr_pv_19_25": -5.5,
+        "momentum_trends_25_23": 6.8,
+        "gini_season": 0.387,
+        "gini_season_pv": 0.183,
+        "peak_month": 6,
+        "low_month": 12,
+        "r_trends_pv": 0.89
+      },
+      {
+        "key": "phongnha",
+        "name": "Phong Nha",
+        "type": "Miền Trung",
+        "province": "Quảng Trị",
+        "road_km": 500.0778,
+        "drive_h": 6.90075,
+        "trends_level_2025": 6.25,
+        "pageviews_2025": 91236,
+        "cagr_trends_19_25": -6.1,
+        "cagr_pv_19_25": NaN,
+        "momentum_trends_25_23": 4.3,
+        "gini_season": 0.024,
+        "gini_season_pv": 0.23,
+        "peak_month": 1,
+        "low_month": 9,
+        "r_trends_pv": 0.18
+      },
+      {
+        "key": "hue",
+        "name": "Huế",
+        "type": "Miền Trung",
+        "province": "Huế",
+        "road_km": 667.3899,
+        "drive_h": 8.863527777777778,
+        "trends_level_2025": 116.12,
+        "pageviews_2025": 202412,
+        "cagr_trends_19_25": 1.9,
+        "cagr_pv_19_25": 4.6,
+        "momentum_trends_25_23": 9.9,
+        "gini_season": 0.037,
+        "gini_season_pv": 0.132,
+        "peak_month": 7,
+        "low_month": 11,
+        "r_trends_pv": -0.21
+      },
+      {
+        "key": "danang",
+        "name": "Đà Nẵng",
+        "type": "Biển miền Trung",
+        "province": "Đà Nẵng",
+        "road_km": 766.9119000000001,
+        "drive_h": 10.26063888888889,
+        "trends_level_2025": 234.32,
+        "pageviews_2025": 224805,
+        "cagr_trends_19_25": -1.5,
+        "cagr_pv_19_25": -4.2,
+        "momentum_trends_25_23": 12.4,
+        "gini_season": 0.064,
+        "gini_season_pv": 0.069,
+        "peak_month": 7,
+        "low_month": 11,
+        "r_trends_pv": -0.51
+      },
+      {
+        "key": "hoian",
+        "name": "Hội An",
+        "type": "Biển miền Trung",
+        "province": "Đà Nẵng",
+        "road_km": 794.4916,
+        "drive_h": 10.578944444444444,
+        "trends_level_2025": 51.81,
+        "pageviews_2025": 58577,
+        "cagr_trends_19_25": 1.0,
+        "cagr_pv_19_25": -8.2,
+        "momentum_trends_25_23": 26.8,
+        "gini_season": 0.055,
+        "gini_season_pv": 0.145,
+        "peak_month": 3,
+        "low_month": 9,
+        "r_trends_pv": 0.56
+      },
+      {
+        "key": "quynhon",
+        "name": "Quy Nhơn",
+        "type": "Biển miền Trung",
+        "province": "Gia Lai",
+        "road_km": 1079.0143999999998,
+        "drive_h": 13.96202777777778,
+        "trends_level_2025": 32.39,
+        "pageviews_2025": 59345,
+        "cagr_trends_19_25": 0.1,
+        "cagr_pv_19_25": -7.1,
+        "momentum_trends_25_23": 2.6,
+        "gini_season": 0.108,
+        "gini_season_pv": 0.088,
+        "peak_month": 7,
+        "low_month": 12,
+        "r_trends_pv": 0.83
+      },
+      {
+        "key": "nhatrang",
+        "name": "Nha Trang",
+        "type": "Biển miền Trung",
+        "province": "Khánh Hòa",
+        "road_km": 1271.958,
+        "drive_h": 16.65563888888889,
+        "trends_level_2025": 80.31,
+        "pageviews_2025": 89684,
+        "cagr_trends_19_25": -1.9,
+        "cagr_pv_19_25": -10.4,
+        "momentum_trends_25_23": 7.3,
+        "gini_season": 0.094,
+        "gini_season_pv": 0.079,
+        "peak_month": 7,
+        "low_month": 10,
+        "r_trends_pv": 0.18
+      },
+      {
+        "key": "dalat",
+        "name": "Đà Lạt",
+        "type": "Cao nguyên",
+        "province": "Lâm Đồng",
+        "road_km": 1401.5778,
+        "drive_h": 18.66280555555556,
+        "trends_level_2025": 97.08,
+        "pageviews_2025": 168836,
+        "cagr_trends_19_25": -3.8,
+        "cagr_pv_19_25": -6.6,
+        "momentum_trends_25_23": -6.4,
+        "gini_season": 0.068,
+        "gini_season_pv": 0.168,
+        "peak_month": 2,
+        "low_month": 9,
+        "r_trends_pv": -0.4
+      },
+      {
+        "key": "phuquoc",
+        "name": "Phú Quốc",
+        "type": "Biển phía Nam",
+        "province": "An Giang",
+        "road_km": 1606.2153999999998,
+        "drive_h": 30.528222222222222,
+        "trends_level_2025": 41.51,
+        "pageviews_2025": 154327,
+        "cagr_trends_19_25": -1.5,
+        "cagr_pv_19_25": -6.0,
+        "momentum_trends_25_23": 4.8,
+        "gini_season": 0.066,
+        "gini_season_pv": 0.096,
+        "peak_month": 7,
+        "low_month": 9,
+        "r_trends_pv": 0.62
+      },
+      {
+        "key": "vungtau",
+        "name": "Vũng Tàu",
+        "type": "Biển phía Nam",
+        "province": "TP. Hồ Chí Minh",
+        "road_km": 1585.1009,
+        "drive_h": 20.338166666666663,
+        "trends_level_2025": 86.57,
+        "pageviews_2025": 66333,
+        "cagr_trends_19_25": -2.0,
+        "cagr_pv_19_25": -8.0,
+        "momentum_trends_25_23": -0.6,
+        "gini_season": 0.071,
+        "gini_season_pv": 0.067,
+        "peak_month": 7,
+        "low_month": 11,
+        "r_trends_pv": 0.17
+      },
+      {
+        "key": "condao",
+        "name": "Côn Đảo",
+        "type": "Biển phía Nam",
+        "province": "TP. Hồ Chí Minh",
+        "road_km": 1700.8541,
+        "drive_h": 22.07669444444445,
+        "trends_level_2025": 11.02,
+        "pageviews_2025": 91526,
+        "cagr_trends_19_25": -4.1,
+        "cagr_pv_19_25": -3.2,
+        "momentum_trends_25_23": -34.7,
+        "gini_season": 0.082,
+        "gini_season_pv": 0.119,
+        "peak_month": 10,
+        "low_month": 8,
+        "r_trends_pv": 0.13
+      }
+    ],
+    "figs": [
+      "results/img/a5_seasonality_heatmap.png",
+      "results/img/a5_portfolio.png"
+    ]
+  },
+  "a6_climate": {
+    "extreme_rain": [
+      {
+        "key": "hue",
+        "name": "Huế",
+        "heavy_days_per_year": 9.9,
+        "sen_per_decade": 0.0,
+        "tau": 0.05,
+        "p": 0.782,
+        "max_1day_mm": 270.0
+      },
+      {
+        "key": "hoian",
+        "name": "Hội An",
+        "heavy_days_per_year": 7.6,
+        "sen_per_decade": 0.0,
+        "tau": 0.06,
+        "p": 0.714,
+        "max_1day_mm": 253.0
+      },
+      {
+        "key": "danang",
+        "name": "Đà Nẵng",
+        "heavy_days_per_year": 7.1,
+        "sen_per_decade": 0.0,
+        "tau": 0.02,
+        "p": 0.902,
+        "max_1day_mm": 248.0
+      },
+      {
+        "key": "phongnha",
+        "name": "Phong Nha",
+        "heavy_days_per_year": 6.0,
+        "sen_per_decade": 0.91,
+        "tau": 0.19,
+        "p": 0.257,
+        "max_1day_mm": 329.0
+      },
+      {
+        "key": "samson",
+        "name": "Sầm Sơn",
+        "heavy_days_per_year": 5.8,
+        "sen_per_decade": 1.43,
+        "tau": 0.19,
+        "p": 0.234,
+        "max_1day_mm": 236.0
+      },
+      {
+        "key": "ninhbinh",
+        "name": "Ninh Bình",
+        "heavy_days_per_year": 4.9,
+        "sen_per_decade": 1.55,
+        "tau": 0.23,
+        "p": 0.16,
+        "max_1day_mm": 227.0
+      },
+      {
+        "key": "sapa",
+        "name": "Sa Pa",
+        "heavy_days_per_year": 4.6,
+        "sen_per_decade": 0.95,
+        "tau": 0.16,
+        "p": 0.315,
+        "max_1day_mm": 211.0
+      },
+      {
+        "key": "maichau",
+        "name": "Mai Châu",
+        "heavy_days_per_year": 4.2,
+        "sen_per_decade": 1.03,
+        "tau": 0.27,
+        "p": 0.1,
+        "max_1day_mm": 257.0
+      },
+      {
+        "key": "puluong",
+        "name": "Pù Luông",
+        "heavy_days_per_year": 4.2,
+        "sen_per_decade": 0.0,
+        "tau": 0.05,
+        "p": 0.756,
+        "max_1day_mm": 205.0
+      },
+      {
+        "key": "catba",
+        "name": "Cát Bà",
+        "heavy_days_per_year": 4.1,
+        "sen_per_decade": 1.52,
+        "tau": 0.26,
+        "p": 0.112,
+        "max_1day_mm": 196.0
+      },
+      {
+        "key": "nhatrang",
+        "name": "Nha Trang",
+        "heavy_days_per_year": 4.0,
+        "sen_per_decade": -1.18,
+        "tau": -0.18,
+        "p": 0.27,
+        "max_1day_mm": 178.0
+      },
+      {
+        "key": "quynhon",
+        "name": "Quy Nhơn",
+        "heavy_days_per_year": 4.0,
+        "sen_per_decade": -2.61,
+        "tau": -0.33,
+        "p": 0.045,
+        "max_1day_mm": 252.0
+      },
+      {
+        "key": "halong",
+        "name": "Hạ Long",
+        "heavy_days_per_year": 4.0,
+        "sen_per_decade": 1.11,
+        "tau": 0.22,
+        "p": 0.176,
+        "max_1day_mm": 196.0
+      },
+      {
+        "key": "hagiang",
+        "name": "Hà Giang",
+        "heavy_days_per_year": 4.0,
+        "sen_per_decade": 1.43,
+        "tau": 0.26,
+        "p": 0.111,
+        "max_1day_mm": 146.0
+      },
+      {
+        "key": "tamdao",
+        "name": "Tam Đảo",
+        "heavy_days_per_year": 3.5,
+        "sen_per_decade": 1.72,
+        "tau": 0.46,
+        "p": 0.006,
+        "max_1day_mm": 132.0
+      },
+      {
+        "key": "mucangchai",
+        "name": "Mù Cang Chải",
+        "heavy_days_per_year": 3.5,
+        "sen_per_decade": 0.0,
+        "tau": 0.1,
+        "p": 0.537,
+        "max_1day_mm": 169.0
+      },
+      {
+        "key": "mocchau",
+        "name": "Mộc Châu",
+        "heavy_days_per_year": 3.1,
+        "sen_per_decade": 0.71,
+        "tau": 0.28,
+        "p": 0.091,
+        "max_1day_mm": 223.0
+      },
+      {
+        "key": "phuquoc",
+        "name": "Phú Quốc",
+        "heavy_days_per_year": 3.0,
+        "sen_per_decade": -0.77,
+        "tau": -0.28,
+        "p": 0.1,
+        "max_1day_mm": 141.0
+      },
+      {
+        "key": "caobang",
+        "name": "Cao Bằng",
+        "heavy_days_per_year": 2.7,
+        "sen_per_decade": 0.26,
+        "tau": 0.14,
+        "p": 0.388,
+        "max_1day_mm": 208.0
+      },
+      {
+        "key": "dalat",
+        "name": "Đà Lạt",
+        "heavy_days_per_year": 1.8,
+        "sen_per_decade": -0.69,
+        "tau": -0.21,
+        "p": 0.213,
+        "max_1day_mm": 134.0
+      },
+      {
+        "key": "condao",
+        "name": "Côn Đảo",
+        "heavy_days_per_year": 1.5,
+        "sen_per_decade": 0.0,
+        "tau": 0.0,
+        "p": 1.0,
+        "max_1day_mm": 147.0
+      },
+      {
+        "key": "vungtau",
+        "name": "Vũng Tàu",
+        "heavy_days_per_year": 0.6,
+        "sen_per_decade": 0.0,
+        "tau": -0.1,
+        "p": 0.582,
+        "max_1day_mm": 195.0
+      }
+    ],
+    "offseason": [
+      {
+        "name": "Ninh Bình",
+        "best_month": 12,
+        "gap": 2.59,
+        "comfort": 97.0,
+        "demand_index": 0.9,
+        "peak_month": 7
+      },
+      {
+        "name": "Pù Luông",
+        "best_month": 1,
+        "gap": 2.31,
+        "comfort": 83.0,
+        "demand_index": 0.0,
+        "peak_month": 4
+      },
+      {
+        "name": "Côn Đảo",
+        "best_month": 1,
+        "gap": 2.17,
+        "comfort": 99.0,
+        "demand_index": 0.82,
+        "peak_month": 10
+      },
+      {
+        "name": "Vũng Tàu",
+        "best_month": 12,
+        "gap": 2.17,
+        "comfort": 99.0,
+        "demand_index": 0.87,
+        "peak_month": 7
+      },
+      {
+        "name": "Đà Lạt",
+        "best_month": 3,
+        "gap": 1.86,
+        "comfort": 99.0,
+        "demand_index": 0.93,
+        "peak_month": 2
+      },
+      {
+        "name": "Sa Pa",
+        "best_month": 5,
+        "gap": 1.86,
+        "comfort": 83.0,
+        "demand_index": 0.89,
+        "peak_month": 2
+      },
+      {
+        "name": "Hạ Long",
+        "best_month": 11,
+        "gap": 1.75,
+        "comfort": 99.0,
+        "demand_index": 0.82,
+        "peak_month": 7
+      },
+      {
+        "name": "Cát Bà",
+        "best_month": 11,
+        "gap": 1.73,
+        "comfort": 99.0,
+        "demand_index": 0.66,
+        "peak_month": 6
+      },
+      {
+        "name": "Sầm Sơn",
+        "best_month": 3,
+        "gap": 1.69,
+        "comfort": 100.0,
+        "demand_index": 0.52,
+        "peak_month": 6
+      },
+      {
+        "name": "Hội An",
+        "best_month": 1,
+        "gap": 1.67,
+        "comfort": 85.0,
+        "demand_index": 0.89,
+        "peak_month": 3
+      },
+      {
+        "name": "Tam Đảo",
+        "best_month": 10,
+        "gap": 1.63,
+        "comfort": 72.0,
+        "demand_index": 0.85,
+        "peak_month": 7
+      },
+      {
+        "name": "Nha Trang",
+        "best_month": 3,
+        "gap": 1.6,
+        "comfort": 99.0,
+        "demand_index": 0.93,
+        "peak_month": 7
+      },
+      {
+        "name": "Cao Bằng",
+        "best_month": 11,
+        "gap": 1.5,
+        "comfort": 97.0,
+        "demand_index": 0.98,
+        "peak_month": 3
+      },
+      {
+        "name": "Mai Châu",
+        "best_month": 1,
+        "gap": 1.48,
+        "comfort": 89.0,
+        "demand_index": 0.91,
+        "peak_month": 4
+      },
+      {
+        "name": "Mù Cang Chải",
+        "best_month": 3,
+        "gap": 1.46,
+        "comfort": 99.0,
+        "demand_index": 0.75,
+        "peak_month": 9
+      },
+      {
+        "name": "Mộc Châu",
+        "best_month": 11,
+        "gap": 1.46,
+        "comfort": 98.0,
+        "demand_index": 0.9,
+        "peak_month": 2
+      },
+      {
+        "name": "Quy Nhơn",
+        "best_month": 3,
+        "gap": 1.4,
+        "comfort": 99.0,
+        "demand_index": 0.96,
+        "peak_month": 7
+      },
+      {
+        "name": "Đà Nẵng",
+        "best_month": 4,
+        "gap": 1.36,
+        "comfort": 96.0,
+        "demand_index": 0.97,
+        "peak_month": 7
+      },
+      {
+        "name": "Phú Quốc",
+        "best_month": 11,
+        "gap": 1.21,
+        "comfort": 91.0,
+        "demand_index": 0.93,
+        "peak_month": 7
+      },
+      {
+        "name": "Hà Giang",
+        "best_month": 3,
+        "gap": 0.9,
+        "comfort": 91.0,
+        "demand_index": 1.01,
+        "peak_month": 2
+      },
+      {
+        "name": "Huế",
+        "best_month": 3,
+        "gap": 0.81,
+        "comfort": 96.0,
+        "demand_index": 1.03,
+        "peak_month": 7
+      },
+      {
+        "name": "Phong Nha",
+        "best_month": 9,
+        "gap": 0.5,
+        "comfort": 56.0,
+        "demand_index": 0.88,
+        "peak_month": 1
+      }
+    ],
+    "north_pooled": {
+      "n_dest": 12,
+      "mean_per_year": 48.6,
+      "tau": 0.38,
+      "p": 0.0169,
+      "sen_per_decade": 15.9,
+      "first5_mean": 35.6,
+      "last5_mean": 52.4
+    },
+    "figs": [
+      "results/img/a6_climate_heatmaps.png",
+      "results/img/a6_offseason_gap.png"
+    ]
+  },
+  "a7_gravity": {
+    "beta": 0.984,
+    "beta_ci95": [
+      0.899,
+      1.069
+    ],
+    "n_pairs": 1386,
+    "r_log_hanoi_index": 0.77,
+    "pseudo_r2": 0.799,
+    "attractiveness": {
+      "ninhbinh": 16.2,
+      "danang": 100.0,
+      "halong": 16.4,
+      "hue": 49.7,
+      "caobang": 17.9,
+      "hagiang": 10.1,
+      "sapa": 11.4,
+      "dalat": 43.1,
+      "hoian": 24.5,
+      "nhatrang": 38.2,
+      "tamdao": 1.7,
+      "catba": 3.0,
+      "vungtau": 28.5,
+      "phuquoc": 28.7,
+      "mocchau": 2.9,
+      "quynhon": 18.2,
+      "samson": 2.6,
+      "maichau": 1.6,
+      "phongnha": 2.8,
+      "puluong": 0.5,
+      "condao": 6.9,
+      "mucangchai": 0.9
+    },
+    "table": [
+      {
+        "key": "ninhbinh",
+        "name": "Ninh Bình",
+        "attractiveness": 16.2,
+        "dist_from_hanoi_km": 86.0,
+        "huff_share_hanoi_pct": 17.5,
+        "hanoi_index_observed": 0.93,
+        "hanoi_index_predicted": 2.04
+      },
+      {
+        "key": "danang",
+        "name": "Đà Nẵng",
+        "attractiveness": 100.0,
+        "dist_from_hanoi_km": 605.0,
+        "huff_share_hanoi_pct": 16.0,
+        "hanoi_index_observed": 0.41,
+        "hanoi_index_predicted": 0.49
+      },
+      {
+        "key": "halong",
+        "name": "Hạ Long",
+        "attractiveness": 16.4,
+        "dist_from_hanoi_km": 140.0,
+        "huff_share_hanoi_pct": 11.0,
+        "hanoi_index_observed": 1.95,
+        "hanoi_index_predicted": 1.93
+      },
+      {
+        "key": "hue",
+        "name": "Huế",
+        "attractiveness": 49.7,
+        "dist_from_hanoi_km": 539.0,
+        "huff_share_hanoi_pct": 8.9,
+        "hanoi_index_observed": 0.58,
+        "hanoi_index_predicted": 0.55
+      },
+      {
+        "key": "caobang",
+        "name": "Cao Bằng",
+        "attractiveness": 17.9,
+        "dist_from_hanoi_km": 222.0,
+        "huff_share_hanoi_pct": 7.6,
+        "hanoi_index_observed": 0.63,
+        "hanoi_index_predicted": 1.68
+      },
+      {
+        "key": "hagiang",
+        "name": "Hà Giang",
+        "attractiveness": 10.1,
+        "dist_from_hanoi_km": 218.0,
+        "huff_share_hanoi_pct": 4.4,
+        "hanoi_index_observed": 1.09,
+        "hanoi_index_predicted": 1.26
+      },
+      {
+        "key": "sapa",
+        "name": "Sa Pa",
+        "attractiveness": 11.4,
+        "dist_from_hanoi_km": 254.0,
+        "huff_share_hanoi_pct": 4.3,
+        "hanoi_index_observed": 0.97,
+        "hanoi_index_predicted": 1.3
+      },
+      {
+        "key": "dalat",
+        "name": "Đà Lạt",
+        "attractiveness": 43.1,
+        "dist_from_hanoi_km": 1047.0,
+        "huff_share_hanoi_pct": 4.0,
+        "hanoi_index_observed": 0.22,
+        "hanoi_index_predicted": 0.3
+      },
+      {
+        "key": "hoian",
+        "name": "Hội An",
+        "attractiveness": 24.5,
+        "dist_from_hanoi_km": 629.0,
+        "huff_share_hanoi_pct": 3.8,
+        "hanoi_index_observed": 0.68,
+        "hanoi_index_predicted": 0.52
+      },
+      {
+        "key": "nhatrang",
+        "name": "Nha Trang",
+        "attractiveness": 38.2,
+        "dist_from_hanoi_km": 1039.0,
+        "huff_share_hanoi_pct": 3.6,
+        "hanoi_index_observed": 0.69,
+        "hanoi_index_predicted": 0.32
+      },
+      {
+        "key": "tamdao",
+        "name": "Tam Đảo",
+        "attractiveness": 1.7,
+        "dist_from_hanoi_km": 69.0,
+        "huff_share_hanoi_pct": 2.4,
+        "hanoi_index_observed": 2.31,
+        "hanoi_index_predicted": 2.64
+      },
+      {
+        "key": "catba",
+        "name": "Cát Bà",
+        "attractiveness": 3.0,
+        "dist_from_hanoi_km": 115.0,
+        "huff_share_hanoi_pct": 2.4,
+        "hanoi_index_observed": 2.49,
+        "hanoi_index_predicted": 2.01
+      },
+      {
+        "key": "vungtau",
+        "name": "Vũng Tàu",
+        "attractiveness": 28.5,
+        "dist_from_hanoi_km": 1195.0,
+        "huff_share_hanoi_pct": 2.3,
+        "hanoi_index_observed": 0.31,
+        "hanoi_index_predicted": 0.19
+      },
+      {
+        "key": "phuquoc",
+        "name": "Phú Quốc",
+        "attractiveness": 28.7,
+        "dist_from_hanoi_km": 1219.0,
+        "huff_share_hanoi_pct": 2.3,
+        "hanoi_index_observed": 1.67,
+        "hanoi_index_predicted": 0.4
+      },
+      {
+        "key": "mocchau",
+        "name": "Mộc Châu",
+        "attractiveness": 2.9,
+        "dist_from_hanoi_km": 129.0,
+        "huff_share_hanoi_pct": 2.1,
+        "hanoi_index_observed": 1.64,
+        "hanoi_index_predicted": 2.14
+      },
+      {
+        "key": "quynhon",
+        "name": "Quy Nhơn",
+        "attractiveness": 18.2,
+        "dist_from_hanoi_km": 882.0,
+        "huff_share_hanoi_pct": 2.0,
+        "hanoi_index_observed": 0.39,
+        "hanoi_index_predicted": 0.45
+      },
+      {
+        "key": "samson",
+        "name": "Sầm Sơn",
+        "attractiveness": 2.6,
+        "dist_from_hanoi_km": 144.0,
+        "huff_share_hanoi_pct": 1.7,
+        "hanoi_index_observed": 2.21,
+        "hanoi_index_predicted": 1.91
+      },
+      {
+        "key": "maichau",
+        "name": "Mai Châu",
+        "attractiveness": 1.6,
+        "dist_from_hanoi_km": 90.0,
+        "huff_share_hanoi_pct": 1.6,
+        "hanoi_index_observed": 1.7,
+        "hanoi_index_predicted": 2.54
+      },
+      {
+        "key": "phongnha",
+        "name": "Phong Nha",
+        "attractiveness": 2.8,
+        "dist_from_hanoi_km": 389.0,
+        "huff_share_hanoi_pct": 0.7,
+        "hanoi_index_observed": 0.79,
+        "hanoi_index_predicted": 0.79
+      },
+      {
+        "key": "puluong",
+        "name": "Pù Luông",
+        "attractiveness": 0.5,
+        "dist_from_hanoi_km": 98.0,
+        "huff_share_hanoi_pct": 0.5,
+        "hanoi_index_observed": 4.1,
+        "hanoi_index_predicted": 2.39
+      },
+      {
+        "key": "condao",
+        "name": "Côn Đảo",
+        "attractiveness": 6.9,
+        "dist_from_hanoi_km": 1375.0,
+        "huff_share_hanoi_pct": 0.5,
+        "hanoi_index_observed": 0.89,
+        "hanoi_index_predicted": 0.32
+      },
+      {
+        "key": "mucangchai",
+        "name": "Mù Cang Chải",
+        "attractiveness": 0.9,
+        "dist_from_hanoi_km": 204.0,
+        "huff_share_hanoi_pct": 0.4,
+        "hanoi_index_observed": 1.5,
+        "hanoi_index_predicted": 1.52
+      }
+    ],
+    "figs": [
+      "results/img/a7_gravity.png"
+    ]
+  },
+  "a8_supply": {
+    "elasticity_attention_lodging": 0.27,
+    "table": [
+      {
+        "name": "Sa Pa",
+        "lodging": 335,
+        "attractions": 108,
+        "food": 302,
+        "pageviews_2025": 42048,
+        "resid": -0.68
+      },
+      {
+        "name": "Hà Giang",
+        "lodging": 110,
+        "attractions": 39,
+        "food": 119,
+        "pageviews_2025": 44781,
+        "resid": -0.32
+      },
+      {
+        "name": "Mộc Châu",
+        "lodging": 21,
+        "attractions": 16,
+        "food": 22,
+        "pageviews_2025": 23569,
+        "resid": -0.52
+      },
+      {
+        "name": "Mù Cang Chải",
+        "lodging": 18,
+        "attractions": 9,
+        "food": 7,
+        "pageviews_2025": 20993,
+        "resid": -0.59
+      },
+      {
+        "name": "Cao Bằng",
+        "lodging": 41,
+        "attractions": 26,
+        "food": 11,
+        "pageviews_2025": 35746,
+        "resid": -0.28
+      },
+      {
+        "name": "Mai Châu",
+        "lodging": 76,
+        "attractions": 19,
+        "food": 37,
+        "pageviews_2025": 9916,
+        "resid": -1.73
+      },
+      {
+        "name": "Tam Đảo",
+        "lodging": 3,
+        "attractions": 2,
+        "food": 3,
+        "pageviews_2025": 21359,
+        "resid": -0.09
+      },
+      {
+        "name": "Pù Luông",
+        "lodging": 18,
+        "attractions": 8,
+        "food": 3,
+        "pageviews_2025": 10123,
+        "resid": -1.32
+      },
+      {
+        "name": "Ninh Bình",
+        "lodging": 290,
+        "attractions": 122,
+        "food": 359,
+        "pageviews_2025": 86115,
+        "resid": 0.08
+      },
+      {
+        "name": "Hạ Long",
+        "lodging": 26,
+        "attractions": 29,
+        "food": 37,
+        "pageviews_2025": 299049,
+        "resid": 1.97
+      },
+      {
+        "name": "Cát Bà",
+        "lodging": 152,
+        "attractions": 72,
+        "food": 128,
+        "pageviews_2025": 40174,
+        "resid": -0.51
+      },
+      {
+        "name": "Sầm Sơn",
+        "lodging": 35,
+        "attractions": 5,
+        "food": 8,
+        "pageviews_2025": 21309,
+        "resid": -0.75
+      },
+      {
+        "name": "Phong Nha",
+        "lodging": 3,
+        "attractions": 14,
+        "food": 10,
+        "pageviews_2025": 91236,
+        "resid": 1.36
+      },
+      {
+        "name": "Huế",
+        "lodging": 218,
+        "attractions": 103,
+        "food": 731,
+        "pageviews_2025": 202412,
+        "resid": 1.01
+      },
+      {
+        "name": "Đà Nẵng",
+        "lodging": 695,
+        "attractions": 116,
+        "food": 1882,
+        "pageviews_2025": 224805,
+        "resid": 0.8
+      },
+      {
+        "name": "Hội An",
+        "lodging": 492,
+        "attractions": 67,
+        "food": 993,
+        "pageviews_2025": 58577,
+        "resid": -0.45
+      },
+      {
+        "name": "Quy Nhơn",
+        "lodging": 59,
+        "attractions": 30,
+        "food": 208,
+        "pageviews_2025": 59345,
+        "resid": 0.13
+      },
+      {
+        "name": "Nha Trang",
+        "lodging": 426,
+        "attractions": 42,
+        "food": 962,
+        "pageviews_2025": 89684,
+        "resid": 0.02
+      },
+      {
+        "name": "Đà Lạt",
+        "lodging": 498,
+        "attractions": 81,
+        "food": 807,
+        "pageviews_2025": 168836,
+        "resid": 0.61
+      },
+      {
+        "name": "Phú Quốc",
+        "lodging": 310,
+        "attractions": 36,
+        "food": 397,
+        "pageviews_2025": 154327,
+        "resid": 0.64
+      },
+      {
+        "name": "Vũng Tàu",
+        "lodging": 203,
+        "attractions": 40,
+        "food": 418,
+        "pageviews_2025": 66333,
+        "resid": -0.09
+      },
+      {
+        "name": "Côn Đảo",
+        "lodging": 35,
+        "attractions": 44,
+        "food": 63,
+        "pageviews_2025": 91526,
+        "resid": 0.7
+      }
+    ],
+    "figs": [
+      "results/img/a8_supply_demand.png"
+    ]
+  },
+  "a12_mcda": {
+    "weights": {
+      "Gần Hà Nội (giờ xe)": 0.2,
+      "Sinh viên đủ tiền": 0.15,
+      "Đà tăng quan tâm": 0.15,
+      "Quy mô quan tâm": 0.1,
+      "Ít dồn mùa (Gini thấp)": 0.1,
+      "Khí hậu mùa giao": 0.1,
+      "Ít mưa cực đoan": 0.1,
+      "Cung còn dư (cầu/cung thấp)": 0.1
+    },
+    "ranking": [
+      {
+        "name": "Ninh Bình",
+        "score": 0.846,
+        "p_top3": 0.998,
+        "median_rank": 1.0,
+        "Gần Hà Nội (giờ xe)": 1.0,
+        "Sinh viên đủ tiền": 0.99,
+        "Đà tăng quan tâm": 1.0,
+        "Quy mô quan tâm": 0.74,
+        "Ít dồn mùa (Gini thấp)": 0.98,
+        "Khí hậu mùa giao": 0.72,
+        "Ít mưa cực đoan": 0.54,
+        "Cung còn dư (cầu/cung thấp)": 0.51
+      },
+      {
+        "name": "Mai Châu",
+        "score": 0.805,
+        "p_top3": 0.98,
+        "median_rank": 2.0,
+        "Gần Hà Nội (giờ xe)": 0.98,
+        "Sinh viên đủ tiền": 0.96,
+        "Đà tăng quan tâm": 0.72,
+        "Quy mô quan tâm": 0.22,
+        "Ít dồn mùa (Gini thấp)": 0.93,
+        "Khí hậu mùa giao": 0.8,
+        "Ít mưa cực đoan": 0.61,
+        "Cung còn dư (cầu/cung thấp)": 1.0
+      },
+      {
+        "name": "Hạ Long",
+        "score": 0.731,
+        "p_top3": 0.402,
+        "median_rank": 4.0,
+        "Gần Hà Nội (giờ xe)": 0.97,
+        "Sinh viên đủ tiền": 0.94,
+        "Đà tăng quan tâm": 0.68,
+        "Quy mô quan tâm": 0.66,
+        "Ít dồn mùa (Gini thấp)": 0.72,
+        "Khí hậu mùa giao": 0.92,
+        "Ít mưa cực đoan": 0.63,
+        "Cung còn dư (cầu/cung thấp)": 0.0
+      },
+      {
+        "name": "Cao Bằng",
+        "score": 0.728,
+        "p_top3": 0.209,
+        "median_rank": 5.0,
+        "Gần Hà Nội (giờ xe)": 0.9,
+        "Sinh viên đủ tiền": 0.86,
+        "Đà tăng quan tâm": 0.33,
+        "Quy mô quan tâm": 0.61,
+        "Ít dồn mùa (Gini thấp)": 0.73,
+        "Khí hậu mùa giao": 0.97,
+        "Ít mưa cực đoan": 0.77,
+        "Cung còn dư (cầu/cung thấp)": 0.61
+      },
+      {
+        "name": "Hà Giang",
+        "score": 0.718,
+        "p_top3": 0.123,
+        "median_rank": 6.0,
+        "Gần Hà Nội (giờ xe)": 0.92,
+        "Sinh viên đủ tiền": 0.87,
+        "Đà tăng quan tâm": 0.4,
+        "Quy mô quan tâm": 0.56,
+        "Ít dồn mùa (Gini thấp)": 0.97,
+        "Khí hậu mùa giao": 0.65,
+        "Ít mưa cực đoan": 0.63,
+        "Cung còn dư (cầu/cung thấp)": 0.62
+      },
+      {
+        "name": "Mộc Châu",
+        "score": 0.716,
+        "p_top3": 0.024,
+        "median_rank": 6.0,
+        "Gần Hà Nội (giờ xe)": 0.95,
+        "Sinh viên đủ tiền": 0.93,
+        "Đà tăng quan tâm": 0.36,
+        "Quy mô quan tâm": 0.31,
+        "Ít dồn mùa (Gini thấp)": 0.63,
+        "Khí hậu mùa giao": 0.98,
+        "Ít mưa cực đoan": 0.73,
+        "Cung còn dư (cầu/cung thấp)": 0.67
+      },
+      {
+        "name": "Mù Cang Chải",
+        "score": 0.716,
+        "p_top3": 0.193,
+        "median_rank": 6.0,
+        "Gần Hà Nội (giờ xe)": 0.92,
+        "Sinh viên đủ tiền": 0.87,
+        "Đà tăng quan tâm": 0.8,
+        "Quy mô quan tâm": 0.05,
+        "Ít dồn mùa (Gini thấp)": 0.39,
+        "Khí hậu mùa giao": 1.0,
+        "Ít mưa cực đoan": 0.69,
+        "Cung còn dư (cầu/cung thấp)": 0.69
+      },
+      {
+        "name": "Cát Bà",
+        "score": 0.712,
+        "p_top3": 0.022,
+        "median_rank": 7.0,
+        "Gần Hà Nội (giờ xe)": 0.97,
+        "Sinh viên đủ tiền": 0.96,
+        "Đà tăng quan tâm": 0.58,
+        "Quy mô quan tâm": 0.35,
+        "Ít dồn mùa (Gini thấp)": 0.32,
+        "Khí hậu mùa giao": 0.91,
+        "Ít mưa cực đoan": 0.62,
+        "Cung còn dư (cầu/cung thấp)": 0.67
+      },
+      {
+        "name": "Pù Luông",
+        "score": 0.701,
+        "p_top3": 0.046,
+        "median_rank": 8.0,
+        "Gần Hà Nội (giờ xe)": 0.96,
+        "Sinh viên đủ tiền": 0.94,
+        "Đà tăng quan tâm": 0.57,
+        "Quy mô quan tâm": 0.0,
+        "Ít dồn mùa (Gini thấp)": 0.47,
+        "Khí hậu mùa giao": 0.86,
+        "Ít mưa cực đoan": 0.61,
+        "Cung còn dư (cầu/cung thấp)": 0.89
+      },
+      {
+        "name": "Sa Pa",
+        "score": 0.678,
+        "p_top3": 0.0,
+        "median_rank": 10.0,
+        "Gần Hà Nội (giờ xe)": 0.9,
+        "Sinh viên đủ tiền": 0.86,
+        "Đà tăng quan tâm": 0.28,
+        "Quy mô quan tâm": 0.55,
+        "Ít dồn mùa (Gini thấp)": 0.88,
+        "Khí hậu mùa giao": 0.56,
+        "Ít mưa cực đoan": 0.57,
+        "Cung còn dư (cầu/cung thấp)": 0.72
+      },
+      {
+        "name": "Tam Đảo",
+        "score": 0.643,
+        "p_top3": 0.0,
+        "median_rank": 11.0,
+        "Gần Hà Nội (giờ xe)": 1.0,
+        "Sinh viên đủ tiền": 1.0,
+        "Đà tăng quan tâm": 0.26,
+        "Quy mô quan tâm": 0.29,
+        "Ít dồn mùa (Gini thấp)": 0.8,
+        "Khí hậu mùa giao": 0.2,
+        "Ít mưa cực đoan": 0.69,
+        "Cung còn dư (cầu/cung thấp)": 0.56
+      },
+      {
+        "name": "Sầm Sơn",
+        "score": 0.634,
+        "p_top3": 0.0,
+        "median_rank": 12.0,
+        "Gần Hà Nội (giờ xe)": 0.96,
+        "Sinh viên đủ tiền": 0.94,
+        "Đà tăng quan tâm": 0.53,
+        "Quy mô quan tâm": 0.29,
+        "Ít dồn mùa (Gini thấp)": 0.0,
+        "Khí hậu mùa giao": 0.74,
+        "Ít mưa cực đoan": 0.44,
+        "Cung còn dư (cầu/cung thấp)": 0.74
+      }
+    ],
+    "figs": [
+      "results/img/a12_mcda.png"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+key,name,wiki,province,type,lat,lon,road_km,drive_h
+sapa,Sa Pa,Sa Pa,Lào Cai,Núi phía Bắc,22.34023,103.84415,313.9283,4.227277777777778
+hagiang,Hà Giang,Hà Giang,Tuyên Quang,Núi phía Bắc,22.8168,104.980738,287.95709999999997,3.5756944444444443
+mocchau,Mộc Châu,Mộc Châu,Sơn La,Núi phía Bắc,20.85199,104.62177,193.0926,2.7332500000000004
+mucangchai,Mù Cang Chải,Mù Cang Chải,Lào Cai,Núi phía Bắc,21.85125,104.08954,285.2088,3.604694444444444
+caobang,Cao Bằng,Thác Bản Giốc,Cao Bằng,Núi phía Bắc,22.855897,106.722501,310.30890000000005,4.277444444444444
+maichau,Mai Châu,Mai Châu,Phú Thọ,Núi phía Bắc,20.663,105.083,137.9426,1.9391666666666667
+tamdao,Tam Đảo,Tam Đảo,Phú Thọ,Núi phía Bắc,21.573282,105.544326,82.8345,1.301611111111111
+puluong,Pù Luông,Khu bảo tồn thiên nhiên Pù Luông,Thanh Hóa,Núi phía Bắc,20.437,105.155,182.9673,2.4987777777777778
+ninhbinh,Ninh Bình,Quần thể danh thắng Tràng An,Ninh Bình,Di sản ĐB Bắc Bộ,20.253,105.917,100.38969999999999,1.3760277777777776
+halong,Hạ Long,Vịnh Hạ Long,Quảng Ninh,Biển miền Bắc,20.9,107.2,170.74710000000002,2.122527777777778
+catba,Cát Bà,Quần đảo Cát Bà,Hải Phòng,Biển miền Bắc,20.78333333,106.93333333,149.7243,2.136416666666667
+samson,Sầm Sơn,Sầm Sơn,Thanh Hóa,Biển miền Bắc,19.73333,105.9,170.8098,2.398833333333333
+phongnha,Phong Nha,Vườn quốc gia Phong Nha – Kẻ Bàng,Quảng Trị,Miền Trung,17.53722222,106.15125,500.07779999999997,6.90075
+hue,Huế,Huế,Huế,Miền Trung,16.463744,107.58482,667.3899,8.863527777777778
+danang,Đà Nẵng,Đà Nẵng,Đà Nẵng,Biển miền Trung,16.0766667,108.2227778,766.9119000000001,10.26063888888889
+hoian,Hội An,Hội An,Đà Nẵng,Biển miền Trung,15.88333333,108.33333333,794.4916,10.578944444444444
+quynhon,Quy Nhơn,Quy Nhơn,Gia Lai,Biển miền Trung,13.77648,109.22367,1079.0143999999998,13.962027777777779
+nhatrang,Nha Trang,Nha Trang,Khánh Hòa,Biển miền Trung,12.24507,109.19432,1271.958,16.65563888888889
+dalat,Đà Lạt,Đà Lạt,Lâm Đồng,Cao nguyên,11.940381,108.436866,1401.5778,18.662805555555558
+phuquoc,Phú Quốc,Phú Quốc,An Giang,Biển phía Nam,10.21608143,103.95939055,1606.2153999999998,30.528222222222222
+vungtau,Vũng Tàu,Vũng Tàu,TP. Hồ Chí Minh,Biển phía Nam,10.34599,107.08426,1585.1009,20.338166666666666
+condao,Côn Đảo,Côn Đảo,TP. Hồ Chí Minh,Biển phía Nam,8.682374,106.607208,1700.8541,22.076694444444446

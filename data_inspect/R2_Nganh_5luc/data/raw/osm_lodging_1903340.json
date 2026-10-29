@@ -1,0 +1,444 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T20:13:11Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 447004422,
+  "tags": {
+    "name": "Hong Ky Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3294282099,
+  "tags": {
+    "name": "Lan Anh Hotel1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3294289369,
+  "tags": {
+    "name": "Nha Khàch trúc an",
+    "name:en": "Nha Khàch trúc an guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294289398,
+  "tags": {
+    "name": "Nhà nghỉ Thái Bình",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294359936,
+  "tags": {
+    "name": "Nha Nghi Sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294360348,
+  "tags": {
+    "name": "Nga Nghi sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3294360354,
+  "tags": {
+    "cmt": "03-DEC-14 13:38:07",
+    "ele": "579.556",
+    "name": "Hotel snake",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3294360592,
+  "tags": {
+    "name": "Nga Nghi sign",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4061319323,
+  "tags": {
+    "name": "Hong Ky Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4318153990,
+  "tags": {
+    "name": "Nhà Nghỉ Hưng Hà",
+    "name:en": "Hung Ha Guest House",
+    "name:ja": "フンハーゲストハウス",
+    "name:zh": "兴河宾馆",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4369429494,
+  "tags": {
+    "addr:housenumber": "514",
+    "addr:street": "Đường 7 Tháng 5",
+    "email": "info@dienbienphu.muongthanh.vn",
+    "internet_access": "wlan",
+    "name": "Khách sạn Mường Thanh Holiday Điện Biên Phủ",
+    "name:en": "Muong Thanh Holiday Dien Bien Phu Hotel",
+    "opening_hours": "24/7",
+    "phone": "+842303810043",
+    "tourism": "hotel",
+    "website": "https://www.muongthanh.vn/dienbien"
+  }
+},
+{
+  "type": "node",
+  "id": 4511121034,
+  "tags": {
+    "name": "Khach San Nam Rom",
+    "name:en": "Nam Rom Hotel",
+    "source": "GPS;photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4511121038,
+  "tags": {
+    "name": "Nha Khach Truc An",
+    "source": "GPS;photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4574862690,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Tuyen Hong",
+    "name:de": "Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4574870192,
+  "tags": {
+    "name:de": "Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4574870193,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nhà Nghi Hoa Ban",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4778997526,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4779013021,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4779013221,
+  "tags": {
+    "name:en": "Dung Linh Guesthouse",
+    "name:es": "Dung Linh Guesthouse",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4863438621,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Nhat Linh Guesthouse",
+    "name:vi": "Nha Nghi Nhat Linh Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4909020923,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Khachsan Tuan Giao 150/200 per night!",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4909020924,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi Thanh Tung",
+    "phone": "0947 919 626",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5104396125,
+  "tags": {
+    "name:en": "Huyen Trâng guesthouse",
+    "name:fr": "Huyen Trâng guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5293466221,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "MUONG PHANG HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5294896122,
+  "tags": {
+    "name": "NHA NGHI PHUONG HI EN Guesthouse",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6018769185,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Minh Hieu Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6151805186,
+  "tags": {
+    "addr:district": "Mường Chà",
+    "addr:province": "Điện Biên",
+    "addr:street": "QL 12",
+    "addr:subdistrict": "Mường Chà",
+    "contact:facebook": "NameTe19792",
+    "internet_access": "wlan",
+    "name": "Khách sạn New Star",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6419214996,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "Lê Trọng Tấn",
+    "name": "Nhà nghỉ 51 - Chi nhánh 2",
+    "phone": "+84 93 165 46 66",
+    "tourism": "hotel",
+    "website": "https://nhanghi51.webdanang43.net/"
+  }
+},
+{
+  "type": "node",
+  "id": 6499737370,
+  "tags": {
+    "name": "Khách sạn Thanh Bình",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6660595785,
+  "tags": {
+    "name:en": "Phuong Hien guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6694114985,
+  "tags": {
+    "name": "Bāo Lôc",
+    "name:en": "Bao Loc",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6699578585,
+  "tags": {
+    "name:en": "Hoan and Yen Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6990013805,
+  "tags": {
+    "name": "An Lộc Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6990015893,
+  "tags": {
+    "name": "NHÀ HÀNG & KHÁCH SẠN TÂY BẮC",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10225429418,
+  "tags": {
+    "addr:housenumber": "28",
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi Ngoc Linh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10810921905,
+  "tags": {
+    "name:de": "Nha Nghi Tam Cuong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11002829005,
+  "tags": {
+    "name": "Frontier Hostel & Tours",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11366072049,
+  "tags": {
+    "name": "Phuong Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11772651113,
+  "tags": {
+    "name": "Pharma Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11985319769,
+  "tags": {
+    "name:fr": "Frontier Hostel & Tours",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12539708301,
+  "tags": {
+    "name": "Thanh Nam Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13310150802,
+  "tags": {
+    "contact:facebook": "ducthangguesthouse",
+    "name": "Duc Thang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13399323201,
+  "tags": {
+    "guest_house": "agritourism",
+    "name": "A Thia Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13461734501,
+  "tags": {
+    "name": "Tinh Vuong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 717851564,
+  "tags": {
+    "building": "yes",
+    "name": "Đức Trường Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 785085808,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà nghỉ A Pa Chải",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 852612474,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà khách Mường Chà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1190296900,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Hương Bình",
+    "tourism": "hotel"
+  }
+}
+
+  ]
+}

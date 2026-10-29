@@ -1,0 +1,1663 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T20:09:04Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 995291906,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "Ha Long Pearl",
+    "name:de": "Ha Long Pearl",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 995292144,
+  "tags": {
+    "air_conditioning": "yes",
+    "check_date": "2025-03-15",
+    "internet_access": "wlan",
+    "name": "BMC Thăng Long Hotel",
+    "name:de": "BMC Thăng Long Hotel",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1637295122,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637295161,
+  "tags": {
+    "name": "Thành Liễu",
+    "phone": "+84972885869",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637299323,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637299339,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1637299343,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637299346,
+  "tags": {
+    "name": "Ngân Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637390061,
+  "tags": {
+    "name": "Hông Ngoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637390080,
+  "tags": {
+    "addr:city": "Cai Rong - Van Don",
+    "addr:housenumber": "9 TT",
+    "addr:street": "Khu",
+    "name": "Lâm Tâm",
+    "phone": "+84396127168",
+    "smoking": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1637390083,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1756311267,
+  "tags": {
+    "name": "Khach san Phuong Linh",
+    "name:vi": "Khach san Phuong Linh",
+    "source": "GPS",
+    "source:name": "photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1756311277,
+  "tags": {
+    "name": "Kim Hoang Hotel",
+    "name:en": "Kim Hoang Hotel",
+    "source": "GPS",
+    "source:name": "photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1756785454,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3251786601,
+  "tags": {
+    "cmt": "17-OKT-14 15:43:58",
+    "ele": "14.065",
+    "name": "Sao Bien Hotel",
+    "name:en": "Sao Bien Hotel",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3251786614,
+  "tags": {
+    "ele": "31.13",
+    "name": "Nam Phuong Hotel",
+    "name:en": "Nam Phuong Hotel",
+    "source:ele": "gpx",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3251819113,
+  "tags": {
+    "cmt": "19-OKT-14 9:17:11",
+    "ele": "22.72",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3251823106,
+  "tags": {
+    "cmt": "19-OKT-14 13:06:38",
+    "ele": "21.03",
+    "name": "Quyet Nhung Hotel",
+    "sym": "Lodging",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3251861466,
+  "tags": {
+    "cmt": "20-OKT-14 13:33:35",
+    "ele": "9.5",
+    "name": "Viet Trung Hotel",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3410529615,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "Halong Plaza Hotel",
+    "source": "survey",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3770228391,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "Long Ha Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3770235414,
+  "tags": {
+    "name": "Ngoc Ngoan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3773061053,
+  "tags": {
+    "addr:street": "Vườn Đào - Bãi Cháy",
+    "check_date": "2025-03-15",
+    "name": "Van Nam",
+    "name:de": "Van Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4115152823,
+  "tags": {
+    "addr:housenumber": "23B",
+    "addr:street": "Quang Trung",
+    "email": "thanglongub@gmail.com",
+    "internet_access": "wlan",
+    "name": "Khách sạn Thăng Long",
+    "opening_hours": "24/7",
+    "phone": "0333 662 686",
+    "tourism": "hotel",
+    "website": "https://thanglongub.blogspot.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4158540489,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4294499916,
+  "tags": {
+    "addr:housenumber": "9A",
+    "addr:street": "Hàng Than",
+    "internet_access": "wlan",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4330722989,
+  "tags": {
+    "name": "Vinpearl Ha Long resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4466373791,
+  "tags": {
+    "name": "nhà ngỉ thành luân",
+    "name:vi": "nhà ngỉ thành luân",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4466376189,
+  "tags": {
+    "name": "nhà nghỉ thành luân",
+    "name:vi": "nhà nghỉ thành luân",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4479374159,
+  "tags": {
+    "name": "Le Ahn Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4518245589,
+  "tags": {
+    "name": "Thuy Tuan",
+    "name:de": "Thuy Tuan",
+    "name:en": "Thuy Tuan",
+    "name:vi": "Thuy Tuan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4691825127,
+  "tags": {
+    "addr:housenumber": "109",
+    "addr:street": "25 Thang 4",
+    "internet_access": "wlan",
+    "name:en": "Alamo Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4697271389,
+  "tags": {
+    "name:en": "Ethnic Travel Homestay",
+    "name:fr": "Ethnic Travel Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4697329089,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phat dat",
+    "name:vi": "Phat dat",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4698512735,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4698569885,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4720244036,
+  "tags": {
+    "name:de": "Nhà Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4720244037,
+  "tags": {
+    "name:de": "Nhà Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4741038322,
+  "tags": {
+    "addr:housenumber": "8/9/10",
+    "addr:street": "Nhà Nghĩ Tuần Châu",
+    "email": "booking@bhayacruises.com",
+    "internet_access": "wlan",
+    "name:en": "Bhaya Cruise Check In Lounge",
+    "phone": "+84933446542",
+    "tourism": "hotel",
+    "website": "https://www.bhayacruise.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4741055521,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Nhà Nghĩ Tuần Châu",
+    "email": "halongvspiritcruises@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "V Spirit Cruise Check In Lounge",
+    "phone": "+8485820331",
+    "tourism": "hotel",
+    "website": "https://www.vspiritcruises.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4783007726,
+  "tags": {
+    "addr:housenumber": "9",
+    "internet_access": "wlan",
+    "name": "Hà Nội",
+    "name:vi": "Hà Nội",
+    "phone": "0333 780 354",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4783069522,
+  "tags": {
+    "name": "Hải Yến",
+    "name:vi": "Hải Yến",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4783075321,
+  "tags": {
+    "name": "Hoàng Sổ",
+    "name:vi": "Hoàng Sổ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4829977121,
+  "tags": {
+    "name:en": "V Spirit Cruise Lounge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4832014121,
+  "tags": {
+    "name:en": "Bhaya / Auco Cruise Lounge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4838089609,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ming Quan 2",
+    "name:vi": "Ming Quan 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4838089758,
+  "tags": {
+    "name": "Chuyen trang",
+    "name:vi": "Chuyen trang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4863125821,
+  "tags": {
+    "addr:street": "Lô 22D , Khu biệt thự Tuần Châu",
+    "internet_access": "wlan",
+    "name": "Hạ long Khách sạn Vẻ đẹp tiềm ẩn",
+    "name:en": "Hidden Charm Hotel Halong",
+    "name:vi": "Hạ long Khách sạn Vẻ đẹp tiềm ẩn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4875439821,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4895300623,
+  "tags": {
+    "name:en": "Moon Light Cruise",
+    "name:fr": "Moon Light Cruise",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4925494521,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Hoàng Diệu",
+    "name": "Koc moc",
+    "name:vi": "Koc moc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4930808225,
+  "tags": {
+    "name": "Nha nghi Hong Loc/300k room",
+    "name:vi": "Nha nghi Hong Loc/300k room",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5077066623,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hotel Hien Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5179973422,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Halong Lucky Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5224259422,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Gray Line Cruise",
+    "name:en": "Gray Line Cruise",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5323088622,
+  "tags": {
+    "name": "Khách sạn Hà Gia",
+    "name:en": "Quảng Ninh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5323093821,
+  "tags": {
+    "addr:street": "Đường Lê Thanh Nghij",
+    "name": "Nhà nghỉ Hà Gia",
+    "name:en": "Quảng Ninh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5374431321,
+  "tags": {
+    "name": "Banana and Rose Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5406394223,
+  "tags": {
+    "note": "Already abandoned",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5417886522,
+  "tags": {
+    "name:en": "Ruby Halong homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5433051023,
+  "tags": {
+    "name": "Liên cơ 4",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5433054421,
+  "tags": {
+    "addr:street": "Nguyễn Văn Cừ",
+    "name": "Trung tâm tổ chức hội nghị tỉnh",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5470195021,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Vườn Đào - Bãi Cháy",
+    "email": "manager@halongpartyhostel.com",
+    "internet_access": "wlan",
+    "name:en": "Halong Party Hostel & Hotel",
+    "opening_hours": "24/7",
+    "phone": "(+84-203) 3511 368",
+    "tourism": "hostel",
+    "website": "http://www.halongpartyhostel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5614799760,
+  "tags": {
+    "name": "Haihuyen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5616118021,
+  "tags": {
+    "name": "Thien Tan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5777112489,
+  "tags": {
+    "name": "Khách sạn Hữu Nghị",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5793283962,
+  "tags": {
+    "name": "Lilai International Hotel",
+    "name:vi": "Khách sạn Quốc tế Lợi Lai",
+    "name:zh": "利来国际大酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5803698653,
+  "tags": {
+    "addr:street": "Hạ Long",
+    "name:en": "Ngoc Tuan Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5839415486,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5841391786,
+  "tags": {
+    "name": "Paris",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5933422985,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Anh Đào",
+    "internet_access": "wlan",
+    "name:en": "Our Houses Ha Long",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5973662085,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5973662086,
+  "tags": {
+    "name:en": "Minh Chau Beach Hotel",
+    "name:fr": "Hotel Minh Chau Beach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6313597581,
+  "tags": {
+    "name": "Bella Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6340826290,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "Royal Ha Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6356206429,
+  "tags": {
+    "name": "Khách sạn Vân Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6515750385,
+  "tags": {
+    "name": "Binh ha",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6612438288,
+  "tags": {
+    "name": "Hoa",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6717787989,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "NHÀ",
+    "name:en": "Nha Nghi Hong Tham",
+    "name:vi": "Nhà Nghì Hông Thâm",
+    "phone": "0384352552",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6814192321,
+  "tags": {
+    "name": "Paradise Trend Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6814211352,
+  "tags": {
+    "name": "Phuong Dong Oriental Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6814212745,
+  "tags": {
+    "name": "Paradise Comfort Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6814213935,
+  "tags": {
+    "name": "Queen Motel",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6854638085,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "deja vu house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6854640685,
+  "tags": {
+    "name": "Côtô Ecolodge",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6956608362,
+  "tags": {
+    "name": "Paradise Suites",
+    "source": "GPS",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6987509893,
+  "tags": {
+    "check_date": "2025-03-15",
+    "name": "Lea House",
+    "source": "GPS",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7023334685,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Vĩnh Huy",
+    "name:en": "Nha Nghi Cat Tien",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7041567185,
+  "tags": {
+    "addr:street": "Đồng Tiến",
+    "internet_access": "wlan",
+    "name": "Cường Thịnh - Homestay",
+    "name:de": "Cường Thịnh - Gästehaus",
+    "phone": "+84 836 783 457",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7108649285,
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Ngoc Chau",
+    "name:en": "Aclass Cruises",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7129916146,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Gold Mark",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7168783694,
+  "tags": {
+    "name": "Morning Star Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7252844287,
+  "tags": {
+    "addr:housenumber": "41",
+    "addr:street": "So nha 41 day 2 duong 25/4",
+    "air_conditioning": "yes",
+    "name": "Hùng vùòng",
+    "name:en": "Hung vuong",
+    "name:fr": "Hotel hung vuong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7257607385,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Muse home",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7703677537,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 7703677538,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 7703677539,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 7703677540,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 7703677541,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 8661572074,
+  "tags": {
+    "addr:city": "Quảng Ninh",
+    "addr:district": "Hạ long",
+    "addr:subdistrict": "Bãi cháy",
+    "check_date": "2025-03-15",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Bài thơ Hotel",
+    "rooms": "28",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9311122333,
+  "tags": {
+    "addr:city": "vân đồn",
+    "addr:district": "minh châu",
+    "addr:postcode": "02000",
+    "addr:province": "quảng ninh",
+    "addr:subdistrict": "ninh hải",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "PHOENIX",
+    "name:vi": "khách sạn",
+    "rooms": "20",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10576900641,
+  "tags": {
+    "name": "Central Luxury Hotel",
+    "name:en": "Central Luxury Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10859902760,
+  "tags": {
+    "addr:city": "hạ long",
+    "addr:housenumber": "18",
+    "addr:postcode": "01000",
+    "addr:province": "quảng ninh",
+    "addr:street": "Thanh Niên",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "MINALO Hotel",
+    "phone": "0926135555",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10917552405,
+  "tags": {
+    "name:en": "tinh hieu hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11016755305,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11050448405,
+  "tags": {
+    "name:en": "Halong Aroma Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 12001024424,
+  "tags": {
+    "name": "Pearl Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12001024430,
+  "tags": {
+    "name": "Charmhill Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12019817981,
+  "tags": {
+    "addr:housenumber": "TT7.07",
+    "name": "An Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361142,
+  "tags": {
+    "check_date": "2024-09-15",
+    "name": "Prosperity",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361145,
+  "tags": {
+    "check_date": "2024-09-15",
+    "name": "Jayden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361148,
+  "tags": {
+    "check_date": "2024-09-15",
+    "name": "Pasan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361149,
+  "tags": {
+    "brand": "Wyndham Garden",
+    "brand:wikidata": "Q112144847",
+    "check_date": "2024-09-15",
+    "name": "Wyndham Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361150,
+  "tags": {
+    "check_date": "2025-10-06",
+    "name": "Vincent",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12189361151,
+  "tags": {
+    "check_date": "2024-09-15",
+    "name": "Soleil Wyndham",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12214133433,
+  "tags": {
+    "description": "Abandoned house in good condition nearby the road",
+    "name": "Abandoned building",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 12257806121,
+  "tags": {
+    "air_conditioning": "yes",
+    "bar": "yes",
+    "brand": "Wyndham Garden",
+    "brand:wikidata": "Q112144847",
+    "check_date": "2025-11-08",
+    "email": "info@wyndhamgarden-sonaseavandon.com",
+    "internet_access": "yes",
+    "name": "Wyndham Garden Sonasea Vân Đồn",
+    "name:en": "Wyndham Garden Sonasea Van Don",
+    "phone": "+84 2033 889 966",
+    "reservation": "yes",
+    "stars": "5",
+    "tourism": "hotel",
+    "website": "https://wyndhamgarden-sonaseavandon.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12346832201,
+  "tags": {
+    "addr:housenumber": "C5-09",
+    "name": "Chala De Villa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13191749501,
+  "tags": {
+    "name:en": "Maruko Ha Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13264828901,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 13264947201,
+  "tags": {
+    "name": "Beach",
+    "name:ru": "Большой пляж. Удобное место для кемпингом ша",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 13441863901,
+  "tags": {
+    "name": "The Sapphire residence S2",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 13608638001,
+  "tags": {
+    "addr:housenumber": "74",
+    "addr:street": "Bãi Cháy",
+    "internet_access": "wlan",
+    "name:en": "Retro Homestay Ha Long",
+    "phone": "+84 942 425 533",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13619338995,
+  "tags": {
+    "brand": "Airbnb",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Paper Flowers Villa Ha Long - Rổ Hoa Giấy 🌸🌊 (Airbnb)",
+    "phone": "0962861791",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14081406715,
+  "tags": {
+    "name": "Hung Be Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 163974935,
+  "tags": {
+    "name": "khách sạn trà cổ",
+    "name:en": "Tra co Hotel",
+    "name:ja": "チャーコホテル",
+    "name:vi": "khách sạn trà cổ",
+    "name:zh": "茶谷饭店",
+    "name:zh-Hans": "茶谷饭店",
+    "name:zh-Hant": "茶谷飯店",
+    "source:name": "photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 163976938,
+  "tags": {
+    "addr:city": "Móng Cái",
+    "addr:housenumber": "68",
+    "addr:street": "Đại lộ Hoà Bình",
+    "building": "yes",
+    "name": "Khách sạn SAKURA",
+    "name:en": "SAKURA Hotel",
+    "name:ja": "さくらホテル",
+    "phone": "033-3773968",
+    "source": "bing,2008",
+    "source:name": "photograph",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 489324545,
+  "tags": {
+    "building": "yes",
+    "name": "Majestic Mong Cai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 534867800,
+  "tags": {
+    "building": "yes",
+    "name": "Grand",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 534867801,
+  "tags": {
+    "building": "yes",
+    "name": "Mong Cai Palace Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 610529520,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Biển Bắc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 610783619,
+  "tags": {
+    "building": "commercial",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 610783625,
+  "tags": {
+    "building": "yes",
+    "name": "Gió Biển",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 610783670,
+  "tags": {
+    "building": "hotel",
+    "name": "Hoa Sơn Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 611821725,
+  "tags": {
+    "building": "commercial",
+    "name": "Central Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 625066619,
+  "tags": {
+    "building": "commercial",
+    "name": "Hai Yen Luxury Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 673097126,
+  "tags": {
+    "building": "yes",
+    "check_date": "2024-09-15",
+    "name": "Khách sạn Bưu điện Hạ Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 674647540,
+  "tags": {
+    "air_conditioning": "yes",
+    "check_date": "2025-07-15",
+    "check_date:internet_access": "2024-06-07",
+    "internet_access": "wlan",
+    "landuse": "commercial",
+    "name": "Ha Long Palace",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 674647543,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "building:colour": "grey",
+    "check_date:internet_access": "2024-11-28",
+    "internet_access": "wlan",
+    "name": "Marina",
+    "sauna": "no",
+    "swimming_pool": "no",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 674647544,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Crown Hotel",
+    "name:de": "Crown Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 674647546,
+  "tags": {
+    "building": "yes",
+    "check_date": "2025-03-15",
+    "name": "Mường Thanh Grand Hạ Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 674647548,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "name": "Moon Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 674647549,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "internet_access": "wlan",
+    "name": "Galaxy Ha Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 674647550,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "check_date:internet_access": "2024-11-28",
+    "internet_access": "wlan",
+    "name": "Au Lac Hotel",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 676535795,
+  "tags": {
+    "building": "yes",
+    "name": "Khách sạn Hương Biển",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 676720191,
+  "tags": {
+    "brand": "Novotel",
+    "brand:wikidata": "Q420545",
+    "brand:wikipedia": "en:Novotel",
+    "building": "yes",
+    "check_date": "2025-03-15",
+    "name": "Novotel Ha Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 676720195,
+  "tags": {
+    "air_conditioning": "yes",
+    "building": "yes",
+    "building:colour": "navy",
+    "internet_access": "wlan",
+    "name": "Khách sạn Sài Gòn Hạ Long",
+    "sauna": "no",
+    "swimming_pool": "outdoor",
+    "tourism": "hotel",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "way",
+  "id": 793463360,
+  "tags": {
+    "building": "yes",
+    "name": "Legacy Yen Tu - MGallery",
+    "tourism": "hotel",
+    "website": "https://www.legacyyentu.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 971390930,
+  "tags": {
+    "building": "yes",
+    "name": "Luxury6 Móng Cái",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 971911924,
+  "tags": {
+    "building": "yes",
+    "name": "Công Đoàn Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 971911927,
+  "tags": {
+    "building": "yes",
+    "name": "Nam Phong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 971911939,
+  "tags": {
+    "building": "yes",
+    "name": "Vạn Xuân",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 971911940,
+  "tags": {
+    "building": "yes",
+    "name": "Tuyển Đạt",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 971911941,
+  "tags": {
+    "building": "yes",
+    "name": "Viet Nhat I",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1009153344,
+  "tags": {
+    "addr:city": "vân đồn",
+    "addr:district": "minh châu",
+    "addr:postcode": "02000",
+    "addr:province": "quảng ninh",
+    "addr:subdistrict": "ninh hải",
+    "building": "yes",
+    "building:levels": "2",
+    "height": "15",
+    "name": "phoenix hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1209944959,
+  "tags": {
+    "building": "yes",
+    "guest_house": "guest_house",
+    "name": "Nhà khách UBND huyện Cô Tô",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1260399388,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1278946629,
+  "tags": {
+    "brand": "Wyndham",
+    "brand:wikidata": "Q8040120",
+    "building": "yes",
+    "name": "Wyndham Hotel",
+    "official_name": "Wyndham Hotels & Resorts",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1467804571,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1526043729,
+  "tags": {
+    "building": "yes",
+    "name": "Nhật Minh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526044893,
+  "tags": {
+    "building": "yes",
+    "name": "The Almin Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526046781,
+  "tags": {
+    "building": "yes",
+    "name": "Halong Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526053605,
+  "tags": {
+    "building": "yes",
+    "name": "Alee Halong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526053606,
+  "tags": {
+    "building": "yes",
+    "name": "MINH PHÁT HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1526053607,
+  "tags": {
+    "building": "yes",
+    "name": "SUNRISE Hạ Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "relation",
+  "id": 19032744,
+  "tags": {
+    "name": "The Yacht",
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 19032748,
+  "tags": {
+    "addr:street": "Hạ Long",
+    "building": "yes",
+    "check_date": "2024-09-15",
+    "name": "Khách sạn Mường Thanh Luxury Quảng Ninh",
+    "name:en": "Muong Thanh Luxury Quang Ninh Hotel",
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 19093515,
+  "tags": {
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 19100596,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 19730970,
+  "tags": {
+    "addr:street": "Đường Hạ Long",
+    "brand": "Khách sạn Mường Thanh Luxury Hạ Long Centre",
+    "email": "sales@luxuryhalong.muongthanh.com",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Khách sạn Mường Thanh Luxury Hạ Long Centre",
+    "name:en": "Mường Thanh Luxury Ha Long Centre Hotel",
+    "phone": "0203 373 8999",
+    "tourism": "hotel",
+    "type": "multipolygon",
+    "website": "https://booking.muongthanh.com/khach-san-muong-thanh-luxury-ha-long-centre"
+  }
+}
+
+  ]
+}

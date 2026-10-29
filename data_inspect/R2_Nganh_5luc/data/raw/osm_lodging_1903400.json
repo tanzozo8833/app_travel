@@ -1,0 +1,5644 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T20:14:13Z",
+    "timestamp_areas_base": "2026-10-25T16:43:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 977780903,
+  "tags": {
+    "addr:city": "Lào Cai",
+    "addr:district": "Phố Mới",
+    "addr:housenumber": "306",
+    "addr:postcode": "333864",
+    "addr:province": "Laocai",
+    "addr:street": "Phố Khánh Yên",
+    "internet_access": "yes",
+    "internet_access:fee": "yes",
+    "name": "Thien Hai Hotel",
+    "name:en": "Thien Hai Hotel",
+    "operator": "Thien Hai Hotel",
+    "smoking": "no",
+    "stars": "4",
+    "tourism": "hotel",
+    "website": "http://thienhaihotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 977781119,
+  "tags": {
+    "name": "North Star Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 977821328,
+  "tags": {
+    "name": "Cha Pa Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 977821334,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Phạm Xuân Huân",
+    "name": "Sapa Horizon Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 977821349,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 977821357,
+  "tags": {
+    "name": "Bamboo Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239333,
+  "tags": {
+    "addr:housenumber": "28",
+    "name": "Thu Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239477,
+  "tags": {
+    "name": "Việt - Anh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239500,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Đường Ngũ Chỉ Sơn",
+    "name": "Riverside II Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239631,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:country": "VN",
+    "addr:housenumber": "75",
+    "addr:street": "Xuân Viên",
+    "name": "Sapa Eco-Home - Mountain retreat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239648,
+  "tags": {
+    "addr:street": "Xuân Vien",
+    "name": "Thanh Son",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989239943,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Xuân Vien",
+    "name": "Anh Tuan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240075,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Đường Thạch Sơn",
+    "name": "Linh Trang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240239,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Hàm Rồng",
+    "name": "Lan Hương",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240263,
+  "tags": {
+    "addr:housenumber": "17",
+    "addr:street": "Xuân Vien",
+    "email": "vietemotionsapa@gmail.com",
+    "internet_access": "wlan",
+    "name": "Viêt Emotion",
+    "phone": "02143872669",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240317,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 989240348,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Đường Thạch Sơn",
+    "name": "Quỳnh Mai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240357,
+  "tags": {
+    "name": "Đông Á",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 989240435,
+  "tags": {
+    "addr:housenumber": "49",
+    "addr:street": "Xuân Vien",
+    "name": "Tùng Lâm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621816,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Fan Xi Păng",
+    "name": "Bella Vista",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621827,
+  "tags": {
+    "addr:district": "Sa pa",
+    "addr:housenumber": "042",
+    "addr:province": "Lao Cai",
+    "addr:street": "Fansipan",
+    "addr:subdistrict": "Sa pa",
+    "name": "Cat Cat Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621837,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Fanxifăng",
+    "name": "Pink Dream Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621856,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Fan Xi Păng",
+    "check_date": "2025-11-05",
+    "name": "Son Ha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621896,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Fanxifăng",
+    "name": "Thanh Quyên",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991621920,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Fanxifăng",
+    "name": "Cam Tu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 991996259,
+  "tags": {
+    "name": "Vietnam Trade Union Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991996346,
+  "tags": {
+    "name": "Thái Bình Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991996432,
+  "tags": {
+    "name": "Ham Rong Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991996626,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Phạm Xuân Huân",
+    "name": "Ha Giang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 991996753,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Nhà Nghỉ Thành Đạt",
+    "name:ja": "ニャギ タンダット",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1064338123,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1064341802,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1503636663,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1675595831,
+  "tags": {
+    "name": "Sapa Starlight Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1714876169,
+  "tags": {
+    "name": "Quynh Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 1754820915,
+  "tags": {
+    "name": "Nhà Khách Đại Thành",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2027784959,
+  "tags": {
+    "backcountry": "yes",
+    "description": "Trạm nghỉ 2200m (Camp site 2200m)",
+    "designation": "Camp site 2200m",
+    "ele": "2237",
+    "sanitary_dump_station": "no",
+    "tourism": "camp_site",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2430686397,
+  "tags": {
+    "name": "Nhà Nghỉ Bình Dân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430686406,
+  "tags": {
+    "name": "Sơn Trang Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430686407,
+  "tags": {
+    "name": "Toàn Thắng Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2430693742,
+  "tags": {
+    "name": "Nhà Nghỉ Hoàng Vũ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430693743,
+  "tags": {
+    "name": "Nhà Nghỉ Tuấn Anh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430693745,
+  "tags": {
+    "name": "Quynh Trang Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2430693746,
+  "tags": {
+    "name": "Sao Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2430697574,
+  "tags": {
+    "name": "Ngan Nga Bac Ha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2430697575,
+  "tags": {
+    "name": "Ngân Nga Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430697576,
+  "tags": {
+    "name": "Nhà Nghỉ Quỳn Bvân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430704362,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2430724004,
+  "tags": {
+    "name": "Sunday Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2431159284,
+  "tags": {
+    "name": "Congfu Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2431234420,
+  "tags": {
+    "name": "Khách Sạn Bắc Hà",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 2432177648,
+  "tags": {
+    "name": "Guest House Anh Duong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2432177663,
+  "tags": {
+    "name": "Suoi Hoas Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2432177664,
+  "tags": {
+    "name": "Tran Sin Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2506824901,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:housenumber": "044",
+    "addr:street": "Phan Xi Pang Str.",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Enjoy Sapa Hostel",
+    "smoking": "outside",
+    "tourism": "hostel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2587520853,
+  "tags": {
+    "name": "Nhà Nghỉ-Thọ Hường",
+    "name:ja": "ニャギ トーフオン",
+    "name:vi": "Nhà Nghỉ-Thọ Hường",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 2649103108,
+  "tags": {
+    "name": "Song Hong View Hotel",
+    "name:en": "Song Hong View Hotel",
+    "source": "GPS;sign",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3087558475,
+  "tags": {
+    "name": "Swiss-Bel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3107926361,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3115632663,
+  "tags": {
+    "name": "Elegance",
+    "stars": "3",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3115632664,
+  "tags": {
+    "name": "SaPa Elite",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3115632665,
+  "tags": {
+    "name": "SaPa Panorama",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3115632667,
+  "tags": {
+    "email": "resa.sapa@victoriahotels.com",
+    "internet_access": "wlan",
+    "name": "Victoria SaPa",
+    "opening_hours": "24/7",
+    "phone": "+84203871522",
+    "tourism": "hotel",
+    "website": "https://www.victoriahotels.asia/"
+  }
+},
+{
+  "type": "node",
+  "id": 3223460910,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:province": "Lào Cai",
+    "addr:street": "Cầu Mây",
+    "name": "Holiday Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3223469461,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3282384675,
+  "tags": {
+    "name": "Pho Rang Nha Nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3282384676,
+  "tags": {
+    "name": "Pho Nui Nha Nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3282460491,
+  "tags": {
+    "ele": "97.94",
+    "name": "Lao Cai Star hotel",
+    "name:ja": "ラオカイスターホテル",
+    "source": "bing",
+    "tourism": "hotel",
+    "website": "https://laocaistarhotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3282460492,
+  "tags": {
+    "ele": "125.34",
+    "name": "Huyen Trang Kach San",
+    "sym": "Lodging",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3282483154,
+  "tags": {
+    "ele": "1532.7",
+    "name": "HMong sapa hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3285730952,
+  "tags": {
+    "amenity": "restaurant",
+    "name:en": "Hmong gathering",
+    "tourism": "hotel",
+    "website": "https://chaulonghotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3326505783,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Muong Hoa, Pho Cau May",
+    "email": "sapaqueenpalacehotel@gmail.com",
+    "name": "Sapa Queen Hotel",
+    "phone": "(+84)203507899",
+    "tourism": "hotel",
+    "website": "https://sapaqueenpalace.com"
+  }
+},
+{
+  "type": "node",
+  "id": 3326508296,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Pho Dong Loi",
+    "name": "Casablanca Hôtel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3475113390,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Ngu Chi Son",
+    "name": "Sapa Legacy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3754267098,
+  "tags": {
+    "email": "info@topasecolodge.com",
+    "internet_access": "wlan",
+    "name": "Topas Ecolodge",
+    "opening_hours": "24/7",
+    "phone": "+84437151005",
+    "tourism": "hotel",
+    "website": "https://topasecolodge.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3770159057,
+  "tags": {
+    "name": "HomeStay Manh Quan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 3824250501,
+  "tags": {
+    "name": "Grand View Sapa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4016191397,
+  "tags": {
+    "name": "Luang Thuy Family Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4123022089,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Highland Homestay",
+    "phone": "(01652) 943 227",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4125686589,
+  "tags": {
+    "addr:city": "Laocai",
+    "addr:district": "Sapa",
+    "addr:housenumber": "01",
+    "addr:province": "Laocai",
+    "addr:street": "Tavan Dzay",
+    "description": "This is a hostel basic in Sapa.",
+    "internet_access": "yes",
+    "name": "Sapa Volunteer Homestay",
+    "phone": "+84985171522",
+    "rooms": "10",
+    "smoking": "outside",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4133421822,
+  "tags": {
+    "access": "yes",
+    "fee": "no",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4154802841,
+  "tags": {
+    "addr:housenumber": "3a",
+    "addr:street": "Thac Bac",
+    "name": "Sapa House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4175437889,
+  "tags": {
+    "name": "homestay sapa trekking",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4180461889,
+  "tags": {
+    "name": "homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4186862389,
+  "tags": {
+    "name": "Azure Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4187141490,
+  "tags": {
+    "addr:housenumber": "20",
+    "name": "Sapa Lodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4196295489,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Cầu Mây",
+    "name": "Sa Pa Sunflower Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4198265989,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Ngu Chi Son Sapa",
+    "internet_access": "wlan",
+    "name": "Muong Thanh Sapa Hotel",
+    "opening_hours": "24/7",
+    "phone": "+84203887766",
+    "tourism": "hotel",
+    "website": "https://www.sapa.muongthanh.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 4208071997,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4214505940,
+  "tags": {
+    "name": "Pumpkin Hotel",
+    "source": "personal experience",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4235580490,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Bình Dân",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4239242646,
+  "tags": {
+    "name": "Nha Nghi Hau Phuong",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4239246389,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Diệu Thuỷ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4239275596,
+  "tags": {
+    "name": "Nhà Nghỉ Việt Anh",
+    "phone": "0203840605",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4240918999,
+  "tags": {
+    "name": "Nha Nghi Đức Toàn",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4258170493,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4260751890,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4260771524,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4264138592,
+  "tags": {
+    "addr:street": "Ta Van, sa pa",
+    "internet_access": "wlan",
+    "name": "Chopai Hotel",
+    "name:en": "Chopai Homestay",
+    "name:vi": "Chopai Homestay",
+    "opening_hours": "24/7",
+    "operator": "Thang",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4265382492,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Vu Linh Family Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4265540293,
+  "tags": {
+    "name": "Anh Duc Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4266480589,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Go Sapa Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4271331892,
+  "tags": {
+    "name": "Mama Ti HomeStay",
+    "phone": "+84947597207",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4272684090,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Phuong Nam",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4279009492,
+  "tags": {
+    "name": "Mama Shushu's Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4281349691,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4290682593,
+  "tags": {
+    "addr:street": "VMM trail 2015",
+    "internet_access": "wlan",
+    "name": "Mama Sa Homestay",
+    "phone": "+84386918188",
+    "tourism": "guest_house",
+    "website": "https://m.facebook.com/Mamasa-SAPA-trekking-and-homestay-892937377484230/"
+  }
+},
+{
+  "type": "node",
+  "id": 4311373490,
+  "tags": {
+    "name:ja": "HOÀNG ANH HOTEL",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4313792392,
+  "tags": {
+    "addr:street": "Na Hoi, Bac Ha, Lao Cai, Vietnam",
+    "internet_access": "wlan",
+    "name": "Sa House",
+    "phone": "+84984827537",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4322829989,
+  "tags": {
+    "addr:postcode": "12000",
+    "addr:street": "Đường Hoàng Liên",
+    "name": "Nha khach so 1",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4326475289,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4353673000,
+  "tags": {
+    "name": "Châu Long hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4358176990,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Hung Think Phat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4360208189,
+  "tags": {
+    "name:en": "Lucky Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4370514789,
+  "tags": {
+    "addr:housenumber": "09",
+    "addr:street": "Phan Xi Pang Str.",
+    "internet_access": "wlan",
+    "name": "Graceful hotel",
+    "name:en": "Graceful Hotel",
+    "name:vi": "Graceful hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4383126390,
+  "tags": {
+    "name": "Vu vi Homestay",
+    "name:vi": "Vu vi Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4401492789,
+  "tags": {
+    "name": "Royal View Hotel",
+    "name:vi": "Royal View Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4421722183,
+  "tags": {
+    "addr:city": "Sapa",
+    "addr:district": "Tavan Village",
+    "addr:postcode": "33000",
+    "addr:province": "Lao Cai",
+    "addr:street": "Tavan Dayz 1",
+    "description": "This is true homestay for backpacker ,quiet, isolated, beautiful scenery, cheap rooms, friendly",
+    "email": "tavanbackpacker@gmail.com",
+    "fixme": "check exact location",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Tavan Ethnic Homestay",
+    "phone": "+84 973960471",
+    "rooms": "10",
+    "smoking": "outside",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4423217890,
+  "tags": {
+    "addr:street": "Phố Đồng Lợi",
+    "email": "info@amazinghotel.com.vn",
+    "internet_access": "wlan",
+    "name:en": "Amazing Hotel Sapa",
+    "opening_hours": "24/7",
+    "phone": "+84911568228",
+    "tourism": "hotel",
+    "website": "https://www.amazinghotel.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 4424782903,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Sapa Cloudy Mountain Hostel",
+    "name:fr": "SAPA Cloudy Mountain Hostels",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4445008289,
+  "tags": {
+    "addr:street": "Quốc lộ 32",
+    "phone": "0988007334",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4447027820,
+  "tags": {
+    "name": "Nhà nghỉ Phố Núi, Tú Lệ",
+    "operator": "Nhà nghỉ Phố Núi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4455958789,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Binh yen",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4457451189,
+  "tags": {
+    "addr:street": "Cầu Mây",
+    "internet_access": "wlan",
+    "name": "Chapa Dew Boutique Hotel",
+    "name:vi": "Chapa Dew Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4458860990,
+  "tags": {
+    "name": "Floating Homestay",
+    "name:vi": "Floating Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4463097995,
+  "tags": {
+    "name": "Giang ta chai homestay",
+    "name:en": "Homestay Giang ta chai",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 4465496881,
+  "tags": {
+    "addr:country": "VN",
+    "addr:hamlet": "Giang Ta Chai",
+    "name": "Cau May Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4486208989,
+  "tags": {
+    "name:en": "May Kieus Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4499252494,
+  "tags": {
+    "name": "Nhà khách lưu trữ",
+    "name:vi": "Nhà khách lưu trữ",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4499298089,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4509652395,
+  "tags": {
+    "addr:housenumber": "58",
+    "email": "baosonhotel.lc@gmail.com",
+    "internet_access": "wlan",
+    "name": "Bảo Son Hotel",
+    "name:en": "Hotel Bao Son",
+    "name:vi": "Bảo Son Hotel",
+    "phone": "0983926389",
+    "tourism": "hotel",
+    "website": "http://www.baosonhotel.com.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 4509918990,
+  "tags": {
+    "name": "Saturday Hotel",
+    "name:vi": "Saturday Hotel",
+    "phone": "0868138290",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4510695296,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Vũ Van Mất",
+    "internet_access": "wlan",
+    "name": "Bac Ha Cozy Hotel",
+    "name:vi": "Quoc Tuan",
+    "phone": "0915508007",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4539039490,
+  "tags": {
+    "name": "Mamachu homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4541141393,
+  "tags": {
+    "addr:housenumber": "078",
+    "addr:street": "Luong Dinh Cua",
+    "check_date": "2026-07-10",
+    "email": "anhnhihotel@gmail.com",
+    "internet_access": "wlan",
+    "name": "Anh Nhi",
+    "name:vi": "Anh Nhi",
+    "phone": "0084985658399",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4551886091,
+  "tags": {
+    "addr:street": "VMM trail 2015",
+    "name": "Mu homestay",
+    "name:vi": "Mu homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4557807491,
+  "tags": {
+    "name": "Nha nghí",
+    "name:vi": "Nha nghí",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4562976089,
+  "tags": {
+    "name": "nha nghi",
+    "name:vi": "nha nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4563212891,
+  "tags": {
+    "name": "nhà nghỉ hoà yến 2",
+    "name:en": "ptt thị xã nghĩa lộ yên báo",
+    "name:vi": "nhà nghỉ hoà yến 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4563376891,
+  "tags": {
+    "addr:housenumber": "05",
+    "addr:street": "nguyễn thị minh khai",
+    "email": "hoayennghialo@gmail.com",
+    "internet_access": "wlan",
+    "name": "nhà nghỉ hoà yến 1",
+    "name:en": "ptt thị xã nghĩa lộ yên bái",
+    "opening_hours": "24/7",
+    "phone": "0966726726",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4566036992,
+  "tags": {
+    "name": "Hometravel Sapa",
+    "name:en": "Long Anh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4574351789,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4579523193,
+  "tags": {
+    "addr:postcode": "350000",
+    "addr:street": "Ban Pho - Hau Thao village",
+    "email": "zihomethebest@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:password": "zizifamily",
+    "name": "Zizi Homestay",
+    "name:en": "Zizi homestay & trekking",
+    "name:vi": "Zizi Homestay & trekking",
+    "opening_hours": "24/7",
+    "operator": "Zizi homestay(wifi pass: zizifamily)",
+    "phone": "0969859371",
+    "tourism": "guest_house",
+    "website": "http://gowherevn.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4580928990,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Nhà Nghi Hong Phuc",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4580955389,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nha Nghi",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4581099190,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Nha Nghi An Khánh",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4583459789,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nắng Vàng Hotel",
+    "name:en": "Nắng Vàng Hotel",
+    "name:vi": "Nắng Vàng Hotel",
+    "phone": "0293845809",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4597262789,
+  "tags": {
+    "addr:street": "Đường Na Hối",
+    "internet_access": "wlan",
+    "name": "Nhà Hang 123 Homestay",
+    "name:en": "Nha Hang 123 Homestay",
+    "phone": "0946601292",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4615481397,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "My Tra Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4622052090,
+  "tags": {
+    "int_name": "Nha Nghi Hong Minh",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Hồng Minh",
+    "name:en": "Nhà Nghỉ Hồng Minh",
+    "name:vi": "Nhà Nghỉ Hồng Minh",
+    "phone": "+84 123 255 4859",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4628280990,
+  "tags": {
+    "name:en": "Ta van chopai homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4652848590,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:street": "Thác Bạc",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ kháng linh",
+    "name:en": "Hotel khanh linh",
+    "name:vi": "Nhà nghỉ kháng linh",
+    "phone": "01656665655",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4658435849,
+  "tags": {
+    "name": "Homestay Chuong An",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "phone": "0915669113",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4712939890,
+  "tags": {
+    "name": "Nha khach",
+    "name:vi": "Nha khach",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4717746090,
+  "tags": {
+    "name": "Sapa Odyssey hostel",
+    "name:vi": "Sapa Odyssey hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4721787910,
+  "tags": {
+    "name": "Green Valley Hotel",
+    "name:vi": "Green Valley Hotel",
+    "phone": "0912491675",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4728971189,
+  "tags": {
+    "name": "Thành Công Hotel",
+    "name:vi": "Thành Công Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4737385724,
+  "tags": {
+    "name": "Nha Nghi Khanh Ly",
+    "name:vi": "Nha Nghi Khanh Ly",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4737411121,
+  "tags": {
+    "name": "Nha Nghi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4742684323,
+  "tags": {
+    "name": "Jade Hill Resort & Spa",
+    "name:en": "Jade Hill",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4748826402,
+  "tags": {
+    "name": "Sapa Vista Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4750805923,
+  "tags": {
+    "name:en": "Nhà Nghî Thanh Tùng Sô 2",
+    "phone": "0976 548 629",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4757758421,
+  "tags": {
+    "name": "Mrhieu Homestay",
+    "name:en": "Mrhieu Homestay",
+    "name:es": "Mrhieu Homestay",
+    "name:vi": "Mrhieu Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4761890921,
+  "tags": {
+    "internet_access": "wlan",
+    "name:de": "Gia Nuh Guest House",
+    "name:en": "Gia Nuh Guest House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4763976121,
+  "tags": {
+    "name:en": "Hung Mai Hotel",
+    "name:es": "Hung Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4787926722,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Green Valley Hotel (actual location)",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4789943022,
+  "tags": {
+    "email": "zinlee2502@gmail.com",
+    "internet_access": "wlan",
+    "opening_hours": "24/7",
+    "phone": "0969487193",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4791048522,
+  "tags": {
+    "name": "Homestay Chi",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4794363123,
+  "tags": {
+    "name": "Su Pan Homestay",
+    "name:en": "Su Pan Homestay",
+    "name:vi": "Su Pan Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4794468129,
+  "tags": {
+    "addr:street": "Road to Ta Van",
+    "name": "Cho Cho Homestay",
+    "name:en": "Cho Cho Homestay",
+    "name:vi": "Cho Cho Homestay",
+    "phone": "+84 98 400 03 91",
+    "tourism": "guest_house",
+    "website": "https://www.tripadvisor.com/Hotel_Review-g311304-d11711640-Reviews-Cho_cho_s_Trecking_home_stay-Sapa_Lao_Cai_Province.html;https://www.facebook.com/sausapay/"
+  }
+},
+{
+  "type": "node",
+  "id": 4801159425,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Nha Nghi Moon 2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4801183321,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4828213824,
+  "tags": {
+    "name:en": "Ngu Nghi Du Lich Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4832722122,
+  "tags": {
+    "name:en": "Don't do this with a 100 cc, you won't make it",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4832722123,
+  "tags": {
+    "name:en": "Son ca",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4832741921,
+  "tags": {
+    "description": "Hell of a ride up! But worth it",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 4836590721,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Homestay Kim Ta Van",
+    "name:nl": "Homestay Kim Ta Van",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4839665131,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Mama-Mah Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4846987722,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ta Van Hostel",
+    "opening_hours": "24/7",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4849750623,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Trek King Kong House",
+    "name:vi": "Trek King Kong House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4855511421,
+  "tags": {
+    "name": "Cinnamon Eco Lodge",
+    "tourism": "guest_house",
+    "website": "https://www.cinnamonecolodge.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4862739521,
+  "tags": {
+    "addr:street": "TL153",
+    "check_date": "2025",
+    "name": "Quyen Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4871035521,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Stunning Homestay",
+    "name:vi": "Stunning Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4877065522,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi Xuan Mai",
+    "name:en": "Guest House Xuan Mai",
+    "name:vi": "Nha Nghi Xuan Mai",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4878257421,
+  "tags": {
+    "name": "Cho Family Homestay",
+    "phone": "0949423221",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4899235528,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4899235529,
+  "tags": {
+    "name": "nha nghi",
+    "name:vi": "nha nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4899235530,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "nha nghi",
+    "name:vi": "nha nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4899240822,
+  "tags": {
+    "name": "Nha ngho",
+    "name:vi": "Nha ngho",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4899240823,
+  "tags": {
+    "name": "Nha nghi",
+    "name:vi": "Nha nghi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4907187521,
+  "tags": {
+    "name": "Homestay",
+    "name:vi": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4908326521,
+  "tags": {
+    "name": "Mama Zuzu Homestay",
+    "name:en": "Mama Zuzu Homestay",
+    "name:vi": "Mama Zuzu Homestay",
+    "phone": "+84 1675312817",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 4909867022,
+  "tags": {
+    "addr:postcode": "0214",
+    "addr:street": "QL 279",
+    "email": "cinnamonecolodge@gmail.com",
+    "internet_access": "wlan",
+    "name": "Cinnamon Eco Lodge",
+    "name:vi": "Cinnamon Eco Lodge",
+    "opening_hours": "24/7",
+    "phone": "0983158424",
+    "tourism": "guest_house",
+    "website": "https://www.cinnamonecolodge.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4910481122,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Long Hai",
+    "name:vi": "Long Hai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4910483821,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Binh Dan",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4910754722,
+  "tags": {
+    "name": "Nhà Nghì",
+    "name:vi": "Nhà Nghì",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4934692221,
+  "tags": {
+    "addr:housenumber": "07",
+    "addr:street": "Hoang Dieu",
+    "internet_access": "wlan",
+    "name": "Sapa Paramount Hotel",
+    "name:vi": "Sapa Paramount Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4948961923,
+  "tags": {
+    "int_name": "Nhuy",
+    "internet_access": "wlan",
+    "name": "Nhuy",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 4954109621,
+  "tags": {
+    "addr:housenumber": "01 phố Kim Đồng",
+    "addr:street": "Đường Ngũ Chỉ Sơn",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Đức Nhung",
+    "name:en": "Guest House Đức Nhung",
+    "phone": "0985180828",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 4984129822,
+  "tags": {
+    "name": "Thôn Lả Khắt",
+    "name:vi": "Thôn Lả Khắt",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 5012013322,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Po Mu House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5022137724,
+  "tags": {
+    "addr:street": "TT Mù Cang Chải",
+    "name": "Thành Công",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5046327426,
+  "tags": {
+    "int_name": "Nha Nghi Anh Muoi",
+    "name": "Nha Nghi Anh Muoi",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5061182624,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:housenumber": "161",
+    "addr:street": "Thach Son",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Sapa Luxury Hotel",
+    "name:de": "Sapa Luxury Hotel",
+    "tourism": "hotel",
+    "website": "https://sapaluxuryhotel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5100630950,
+  "tags": {
+    "name": "Nhà Ngî Sapatrek",
+    "name:en": "Sapa Trek Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5100796424,
+  "tags": {
+    "name:en": "Sapa Summit Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5101187223,
+  "tags": {
+    "addr:street": "Xuân Viên",
+    "name:en": "The Thinh Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5120061021,
+  "tags": {
+    "name": "Chai homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5125803727,
+  "tags": {
+    "addr:street": "Đường đi Tả Phìn từ QL 4D",
+    "email": "annykmm@gmail.com",
+    "name": "ChaoTaMay Homestay",
+    "name:en": "ChaoTaMay HomeStay",
+    "operator": "ChaoTaMay",
+    "phone": "+841664620433",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5129620121,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Cầu Mây",
+    "name": "BB Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5141041322,
+  "tags": {
+    "name": "Nậm Cang Home stay",
+    "name:en": "Nam Cang RiverSide Lodge",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5153580825,
+  "tags": {
+    "description": "very simple sleeping accommodation",
+    "name": "Trạm nghỉ chân Phan Xi Păng",
+    "name:de": "Fan Si Pan Base Camp",
+    "name:en": "Fan Si Pan Base Camp",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 5170606099,
+  "tags": {
+    "addr:street": "La Pán Tẩn, Mù Cang Chải District, Yên Bái, Vietnam",
+    "internet_access": "wlan",
+    "name": "Homestay Do Gu",
+    "phone": "0977363345",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5201507521,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Green Lodge Sapa",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5206636551,
+  "tags": {
+    "addr:housenumber": "01",
+    "addr:street": "Tái định cư thôn nước mát",
+    "internet_access": "wlan",
+    "name": "Nhà Nguyễn Văn Kiên",
+    "name:en": "Nguyễn Văn Kiên House",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5207683225,
+  "tags": {
+    "email": "tsen-ang@hotmail.com",
+    "name": "Chez Xi Quan",
+    "phone": "+841666924727",
+    "tourism": "guest_house",
+    "website": "https://chezxiquan.jimdo.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5219851921,
+  "tags": {
+    "name:en": "I made it! 1st gear and go!",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 5219876821,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha Nghi",
+    "name:de": "Moon 2",
+    "name:en": "Moon 2",
+    "phone": "0972789569",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5223996421,
+  "tags": {
+    "name": "Pumpkin",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5245033721,
+  "tags": {
+    "name:en": "Thao Nguyen Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5273330522,
+  "tags": {
+    "addr:street": "Road to Ta Van",
+    "internet_access": "wlan",
+    "name": "Crazy Lazy",
+    "name:en": "Lazycrazy Homestay",
+    "operator": "John",
+    "phone": "+841639809197",
+    "tourism": "guest_house",
+    "website": "http://www.lazycrazyhomestay.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5292788422,
+  "tags": {
+    "name": "KS SAPA",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5307497223,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Quốc lộ 32",
+    "internet_access": "wlan",
+    "name": "Duy Vu Hostel",
+    "phone": "+84 94 823 33 23",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5308203222,
+  "tags": {
+    "name:en": "Lao Cai Royal Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5308319722,
+  "tags": {
+    "name": "Miền Tây Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5324020621,
+  "tags": {
+    "name:en": "Mu Cang Chai Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5350183221,
+  "tags": {
+    "name": "Mae's Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5356297325,
+  "tags": {
+    "alt_name": "Miku chill house",
+    "internet_access": "wlan",
+    "name": "Miku Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5357940521,
+  "tags": {
+    "name": "Ta Van",
+    "name:en": "Homestay Ta Van Giay",
+    "name:vi": "Ta Van",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5369941721,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Sapa House Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5370618022,
+  "tags": {
+    "name:en": "Hotel Ngoc Triu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5374136821,
+  "tags": {
+    "name": "Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5395063322,
+  "tags": {
+    "addr:street": "Road to Ta Van",
+    "internet_access": "wlan",
+    "name": "Amica house",
+    "opening_hours": "Mo-Su 09:00-22:00",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5398085329,
+  "tags": {
+    "name": "3 basic home stays",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5398197222,
+  "tags": {
+    "addr:housenumber": "04",
+    "addr:street": "Quy Don",
+    "internet_access": "wlan",
+    "name:en": "Venus Sapa Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5403233925,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:district": "Sapa",
+    "addr:housenumber": "042 Cau May",
+    "addr:postcode": "333320",
+    "addr:province": "Lào Cai",
+    "addr:street": "Cau May Alley",
+    "addr:subdistrict": "Sapa",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "email": "littleviewrestaurant@gmail.com",
+    "internet_access": "wlan",
+    "name": "Little View Restaurant",
+    "opening_hours": "Mo-Su 08:29-21:30",
+    "operator": "Owner",
+    "phone": "+84988787711",
+    "tourism": "guest_house",
+    "website": "https://www.littleviewhomestay.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5413491321,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Hoang Lien",
+    "name:en": "Aira Boutique hotel & spa",
+    "tourism": "hotel",
+    "website": "https://airaboutiquesapa.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5415671022,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5423652424,
+  "tags": {
+    "addr:street": "Phố Đồng Lợi",
+    "internet_access": "wlan",
+    "name": "Heart of sapa",
+    "name:ru": "Сердце Сапа",
+    "opening_hours": "24/7",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5441847121,
+  "tags": {
+    "name:en": "Sapa stunning view hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5444251921,
+  "tags": {
+    "name:en": "Mimosa hôtel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5447154521,
+  "tags": {
+    "name": "Nha nghi hoi nga",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5447928021,
+  "tags": {
+    "name": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5447928922,
+  "tags": {
+    "name:en": "Ta Van eco homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5450133725,
+  "tags": {
+    "name:en": "Quyet Tinh Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5453302621,
+  "tags": {
+    "addr:street": "Phố Na Cồ",
+    "internet_access": "wlan",
+    "name:en": "Hotel Tay Bac",
+    "phone": "0966888356",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5459024630,
+  "tags": {
+    "name:en": "Mountain Clouds Sapa Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5462455621,
+  "tags": {
+    "addr:street": "Đường Na Hối",
+    "email": "maithihiepp@gmail.com",
+    "name": "Flower Hmong Homestay",
+    "name:fr": "na ang na hoi bac ha lao cai",
+    "opening_hours": "24/7",
+    "phone": "01652159763",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5462467721,
+  "tags": {
+    "addr:street": "Đường Na Hối",
+    "name": "FLOWER HMONG HOMESTAY",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5463562121,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Sapa Clay House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5464274723,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "H’Mong Stilt House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5464312522,
+  "tags": {
+    "addr:housenumber": "63",
+    "addr:street": "Mường Hoa",
+    "name:en": "Sapa Stunning View Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5465770440,
+  "tags": {
+    "name:en": "Quyet Tinh Backpacker Sapa",
+    "name:fr": "Quyet Tinh Backpacker Sapa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5466976021,
+  "tags": {
+    "name:en": "Homestay",
+    "name:fr": "Chambres chez l'habitant",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5466976421,
+  "tags": {
+    "name:en": "Heavenly Homestay",
+    "name:fr": "Heavenly Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5473248731,
+  "tags": {
+    "name": "Sapa Garden Hotel",
+    "name:th": "ซาปา กาเด้น โฮเตล",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5473299421,
+  "tags": {
+    "addr:housenumber": "01",
+    "addr:street": "Đường Thạch Sơn",
+    "email": "linhtranghotelsapa@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Linh trang hotel",
+    "opening_hours": "24/7",
+    "phone": "+84 983489498",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5474491223,
+  "tags": {
+    "name": "Quet Tinh",
+    "name:en": "Quet Tinh Sapa Backpacker Hotel",
+    "name:vi": "Quyet Tinh Sapa Backpacker Hotel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5474499721,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Q Sapa Hotel",
+    "tourism": "hotel",
+    "website": "https://visiontravelagent.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5482532022,
+  "tags": {
+    "name": "Sweden Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5487810957,
+  "tags": {
+    "addr:district": "Mường Khương",
+    "addr:province": "Lào Cai",
+    "addr:subdistrict": "Mường Khương",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách sạn Mường Khương",
+    "phone": "+84 166 233 6999",
+    "rooms": "30",
+    "smoking": "outside",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5487844812,
+  "tags": {
+    "name": "Nhà khách huyện Si Ma Cai",
+    "operator": "UBND huyện Si Ma Cai",
+    "rooms": "15",
+    "smoking": "outside",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5487844819,
+  "tags": {
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Khách sạn A27",
+    "rooms": "25",
+    "smoking": "outside",
+    "stars": "2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5493995421,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Homestay",
+    "name:en": "Homestay",
+    "name:fr": "Maison d’Hotes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5520432823,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hoa’s Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5520432824,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Sapa Stay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5521463951,
+  "tags": {
+    "name": "Phong Lan",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5528777422,
+  "tags": {
+    "addr:housenumber": "20",
+    "addr:street": "Sơn Đen",
+    "internet_access": "wlan",
+    "name": "Mai Hotel",
+    "phone": "0987589579",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5530317476,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ta Van Family Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5541467724,
+  "tags": {
+    "name:en": "Wild Camp",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 5544530023,
+  "tags": {
+    "name": "Mountain River View",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5560648123,
+  "tags": {
+    "name:es": "Asiana hotel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5568708722,
+  "tags": {
+    "name": "Ubytovani sapa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5575105421,
+  "tags": {
+    "name": "Unytovani yen nai",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5579972021,
+  "tags": {
+    "addr:street": "Lao Chai road",
+    "internet_access": "wlan",
+    "name:en": "Golden Rice Garden",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5592107389,
+  "tags": {
+    "addr:housenumber": "08A",
+    "addr:street": "Tuệ Tĩnh",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Vinh Quang",
+    "name:en": "Sapa Glory",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5597447421,
+  "tags": {
+    "addr:street": "Bản Hồ village, Sapa Town, Lao Cai province",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Khoa Thìn",
+    "name:en": "Khoa Thìn Friendly Homestay",
+    "name:vi": "Khoa Thìn Friendly Homestay",
+    "opening_hours": "24/7",
+    "phone": "01684164971",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5598726023,
+  "tags": {
+    "name": "Bao Long",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5618663621,
+  "tags": {
+    "name": "Thanh Cong hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5640396824,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5666127538,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5672789925,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:district": "Sapa",
+    "addr:housenumber": "06",
+    "addr:postcode": "330000",
+    "addr:province": "Lào Cai",
+    "addr:street": "Hoang Dieu",
+    "addr:subdistrict": "Sapa",
+    "internet_access": "yes",
+    "name": "Saparis Hotel",
+    "rooms": "18",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5672849848,
+  "tags": {
+    "addr:city": "Lào Cai",
+    "addr:district": "Sapa",
+    "addr:postcode": "330000",
+    "addr:province": "Lào Cai",
+    "addr:street": "Mường Hoa",
+    "addr:subdistrict": "Sapa",
+    "name": "Sapa Eco-Home - Mountain Retreat",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5708186421,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5714482821,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngoc Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5734008322,
+  "tags": {
+    "name": "Mama Mu's homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5738991422,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Quang Guesthouse",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5745423821,
+  "tags": {
+    "name": "mama shushu",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 5797736053,
+  "tags": {
+    "name": "Xưởng kính",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 5801976447,
+  "tags": {
+    "name": "SpicknSpan Homestead",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 5807297353,
+  "tags": {
+    "addr:housenumber": "144",
+    "addr:street": "Thach Son",
+    "internet_access": "wlan",
+    "name": "Olympia Sapa Hotel",
+    "name:de": "Olympia Sapa Hotel",
+    "phone": "0084 96 119 11 71",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5835501186,
+  "tags": {
+    "name": "Check in Hostel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5855686086,
+  "tags": {
+    "name:fr": "Bac ha eco homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5857697387,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "SAPA FRIENDLY INN",
+    "name:ko": "사파 프렌들리 인",
+    "opening_hours": "24/7",
+    "phone": "02146266699",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 5908111185,
+  "tags": {
+    "name": "Du lịch cộng đồng",
+    "name:en": "Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6016383786,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Tavan Ecolodge",
+    "name:es": "Tavan Ecolodge",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6021307685,
+  "tags": {
+    "name": "Mister Pao Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6030357985,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6040494585,
+  "tags": {
+    "email": "bau@sapahoian.com",
+    "internet_access": "wlan",
+    "name:en": "Mama Bau Summit Lodge",
+    "phone": "+84886557422",
+    "tourism": "guest_house",
+    "website": "https://hostelworld.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6040604985,
+  "tags": {
+    "addr:city": "Sa Pa Town",
+    "addr:district": "Sapa",
+    "addr:housenumber": "No.26",
+    "addr:postcode": "330000",
+    "addr:province": "Lào Cai",
+    "addr:street": "Hùng Hồ alley",
+    "addr:subdistrict": "Sapa",
+    "description": "The property is close to several well-known attractions. Popular points of interest near Fancy Sapa Hostel include Sun Plaza (3-min walk), Sa Pa Lake (5-min walk) and Sa Pa Stone Church (3-min walk).",
+    "email": "fancysapahostel@gmail.com",
+    "guest_house": "hostel",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Fancy Sapa Hostel 2",
+    "operator": "Hoang Thi Diu",
+    "phone": "0912337669",
+    "rooms": "6",
+    "tourism": "hostel",
+    "website": "https://fancysapahostel.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6052696095,
+  "tags": {
+    "name:en": "Sapa Clover Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6063358185,
+  "tags": {
+    "name": "Nha Nghi Quynh Phuong",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6087200386,
+  "tags": {
+    "name": "Mama mao homestay",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 6108081385,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ta may homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6111964087,
+  "tags": {
+    "addr:housenumber": "027",
+    "addr:street": "Hoàng Liên",
+    "name": "Sa Pa Pearl Hotel",
+    "phone": "0978398308",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6183092785,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "No Co",
+    "name": "Bac Ha Boutique",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6188888285,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Hmong the Hill homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6226247685,
+  "tags": {
+    "name": "Ja’s house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6251245786,
+  "tags": {
+    "name": "Peace Valley Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6252939385,
+  "tags": {
+    "name:en": "Sapa Home Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6263341785,
+  "tags": {
+    "addr:housenumber": "004",
+    "addr:postcode": "33000",
+    "addr:street": "Lê Văn Tám",
+    "internet_access": "wlan",
+    "name": "Nhà Nghỉ Vượng Hà",
+    "name:en": "Vượng Hà Guesthouse",
+    "phone": "03888543123",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 6293321387,
+  "tags": {
+    "addr:street": "Ô Quý Hồ Tổ 13 (cách sân ga Cáp treo 1.5km theo đường Thác Bạc), Sa Pa, , Viêt Nam -",
+    "internet_access": "wlan",
+    "name": "Sapa Dao Homestay ( vrai emplacement)",
+    "opening_hours": "24/7",
+    "phone": "841682842666",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6295524385,
+  "tags": {
+    "addr:street": "Ban Pho 2A Village, Ban Pho Commune, Bac Ha District, Lao Cai Province, Bắc Hà, , Viêt Nam -",
+    "internet_access": "wlan",
+    "name": "So H’mong Homestay",
+    "name:vi": "So H’mong Homestay ( the real place !!!!)",
+    "phone": "+84963236564",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6339359385,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Sen Cuong Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6339548814,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6340608318,
+  "tags": {
+    "name": "Sapaly Hotel",
+    "name:zh": "赛帕丽老街酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6385189085,
+  "tags": {
+    "name": "Bach Ha Family Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6390635658,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:province": "Lao Cai",
+    "addr:subdistrict": "Cát Cát",
+    "name": "Chin Chin",
+    "operator": "Ma Vinh Chinh",
+    "phone": "+84 962511175",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6419224832,
+  "tags": {
+    "name": "Cuong Phuong Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6427598985,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Luckydaisy's Buffalo house",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6449058185,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nha nghi",
+    "name:en": "Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6472357287,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Sapa Orange Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6484971888,
+  "tags": {
+    "name:en": "Mama Chi Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6535212685,
+  "tags": {
+    "name": "Bac ha family homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6570349585,
+  "tags": {
+    "name": "The Little Village Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6636930085,
+  "tags": {
+    "name:en": "Praha Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6702046185,
+  "tags": {
+    "name:en": "Sapa Hmong bungalow Homestay (real location)",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6709668485,
+  "tags": {
+    "email": "frontoffice.lvvl@gmail.com",
+    "name:en": "La Vie Vu Linh",
+    "phone": "+842439262743",
+    "tourism": "hotel",
+    "website": "http://www.lavievulinh.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6755406385,
+  "tags": {
+    "name:en": "Van Anh Guesthouse",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6755423985,
+  "tags": {
+    "name:en": "Hmong Home Mountain View",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6796149787,
+  "tags": {
+    "name:en": "Hello Sapa",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6796149788,
+  "tags": {
+    "name:en": "Sister’s homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6801525088,
+  "tags": {
+    "addr:housenumber": "64B",
+    "addr:postcode": "333100",
+    "addr:street": "Fansipan Street",
+    "internet_access": "wlan",
+    "name": "Oh Yeah ! Hostel",
+    "phone": "02143 888 128",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681005,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Đường Thác Bạc",
+    "internet_access": "wlan",
+    "name": "Ni Ni homestay Sa Pa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681006,
+  "tags": {
+    "name": "Vinasapa hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681007,
+  "tags": {
+    "name": "Eden Boutique Hotel & Spa",
+    "tourism": "hotel",
+    "website": "https://edenboutiquehotelspa.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681008,
+  "tags": {
+    "name": "Nha Nghi Trung Kien",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681009,
+  "tags": {
+    "name": "La Casa hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810681010,
+  "tags": {
+    "brand": "Four Seasons",
+    "brand:wikidata": "Q1424786",
+    "name": "Four seasons",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6810693516,
+  "tags": {
+    "name": "Homestay Discovery Sapa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6814150888,
+  "tags": {
+    "name": "Charm hotel",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6829133826,
+  "tags": {
+    "name": "Freesia Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6873081195,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 6923692485,
+  "tags": {
+    "name": "Beach camp and swim spot (accessible for bicycle)",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 6923914785,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Homestay Mama Su",
+    "phone": "+84 0377924940",
+    "tourism": "apartment",
+    "website": "https://m.facebook.com/Homestay-Su-Lao-Ch%E1%BA%A3i-169012737190317"
+  }
+},
+{
+  "type": "node",
+  "id": 6924530885,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6933998487,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6936157386,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7004589287,
+  "tags": {
+    "name:en": "Pink Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7017188370,
+  "tags": {
+    "name": "Van Hung Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7035182985,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7035712485,
+  "tags": {
+    "name": "Quynh Mai Hotel",
+    "name:en": "Quynh Mai Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7048657185,
+  "tags": {
+    "name:en": "Hotel Nhat Ha",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7050595585,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Hôtel",
+    "name:en": "Hôtel Hoa Hong",
+    "name:vi": "Hôtel Hoa Hong",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7051323086,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Thu Huong Hotel",
+    "opening_hours": "24/7",
+    "phone": "0983058146",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7060350385,
+  "tags": {
+    "name": "Sapa O Chau",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7100391185,
+  "tags": {
+    "addr:housenumber": "051A",
+    "addr:street": "Mường Hoa",
+    "internet_access": "wlan",
+    "name": "Sapa Mountain City Hôtel",
+    "opening_hours": "24/7",
+    "tourism": "hotel",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7148557586,
+  "tags": {
+    "addr:housenumber": "km5 Ban Den",
+    "addr:postcode": "330000",
+    "addr:street": "VMM trail 2015",
+    "email": "thelittlehmonghouse@gmail.com",
+    "internet_access": "wlan",
+    "name": "The little hmong house",
+    "name:en": "The little Hmong house",
+    "opening_hours": "Mo-Su 06:00-22:00",
+    "operator": "thelittlehmoghouse",
+    "phone": "+84987596644",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7148557587,
+  "tags": {
+    "addr:postcode": "33000",
+    "addr:street": "VMM trail 2015",
+    "email": "sapassoulhouse@gmail.com",
+    "internet_access": "wlan",
+    "name": "Hmong house",
+    "name:en": "Sapa's Soul homestay",
+    "name:vi": "Sapa's Soul house",
+    "phone": "0376679232",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7165392942,
+  "tags": {
+    "name": "Rose",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7165406873,
+  "tags": {
+    "name": "Vien Thanh",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7165411014,
+  "tags": {
+    "name": "Huu Nhgi",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7170607930,
+  "tags": {
+    "name": "Sapa Dragon Hotel",
+    "tourism": "hotel",
+    "website": "https://www.sapadragonhotel.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7170643914,
+  "tags": {
+    "name": "May Ho Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7171197398,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7171960921,
+  "tags": {
+    "name": "Stone Garden Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7171966339,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7171966548,
+  "tags": {
+    "name": "The Warm Sapa",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174600772,
+  "tags": {
+    "name": "Po Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174602738,
+  "tags": {
+    "name": "My Gallery Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7174604869,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174615841,
+  "tags": {
+    "name": "Chapa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7174617930,
+  "tags": {
+    "name": "Mutong Hoa River View",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174624499,
+  "tags": {
+    "name": "Cozy Home",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174625591,
+  "tags": {
+    "addr:housenumber": "025",
+    "addr:street": "Violet",
+    "air_conditioning": "yes",
+    "building:levels": "18",
+    "check_date": "2026-07-17",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "KK Sapa Hotel",
+    "tourism": "hotel",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7174630536,
+  "tags": {
+    "name": "Ta Van Go",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174631987,
+  "tags": {
+    "name": "Lao Chai Room",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7174635032,
+  "tags": {
+    "name": "Sapa Rice Road",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7176429639,
+  "tags": {
+    "name": "Nhat Linh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7176434724,
+  "tags": {
+    "name": "The Nest",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7176450613,
+  "tags": {
+    "name": "Hoang Long Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7176460343,
+  "tags": {
+    "name": "Eva Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7176464942,
+  "tags": {
+    "name": "Hotel Yen Ngoc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7189851467,
+  "tags": {
+    "name": "Ninh Trang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7193196886,
+  "tags": {
+    "name": "Himalaya Hostel",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 7208120985,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Chào Dao Phù",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 7214097911,
+  "tags": {
+    "addr:street": "Hau de La Pan Tan",
+    "contact:phone": "+84355014012",
+    "description": "Indigenous home stay with Vietnamese highlanders family from Hmong tribe.",
+    "ele": "1490",
+    "guest_house": "agritourism",
+    "internet_access": "no",
+    "name": "Indigenous Homestay",
+    "operator": "A Vietnamese Hmong Family",
+    "payment:cash": "yes",
+    "reservation": "yes",
+    "rooms": "2",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7215510286,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Nhà Nghi Hotel",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7238510686,
+  "tags": {
+    "name": "Nha ghi guyet",
+    "name:vi": "Nha ghi guyet thanh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7241740911,
+  "tags": {
+    "name": "Sapa Everest Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 7244060878,
+  "tags": {
+    "name": "Bau's Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 7309307285,
+  "tags": {
+    "access": "yes",
+    "description": "Wildcamping spot 2x4 meter no bushes and prety flat. Go there and use it as a basecamp to get on the sumit the next day.",
+    "fee": "no",
+    "name:en": "Wild Camping Spot",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7309324585,
+  "tags": {
+    "access": "yes",
+    "backcountry": "yes",
+    "caravans": "no",
+    "description": "Wildcamping spot with some flat area. Next to the spring",
+    "fee": "no",
+    "name:en": "Wild Camping Spot",
+    "static_caravans": "no",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7994157185,
+  "tags": {
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7996350985,
+  "tags": {
+    "name:en": "Camping ground for about 100 people",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 7996351285,
+  "tags": {
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 8088663905,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:district": "Sapa",
+    "addr:housenumber": "516",
+    "addr:province": "Lào Cai",
+    "addr:street": "Đường Điện Biên Phủ - Quốc lộ 4D",
+    "addr:subdistrict": "Phan Xi Păng",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Flaco Hostel",
+    "operator": "Flaco Hostel",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 8326023521,
+  "tags": {
+    "addr:street": "Đường Na Hối",
+    "internet_access": "wlan",
+    "name": "Anne House Bắc Hà",
+    "name:en": "Anne House Bac Ha",
+    "phone": "+8496 254 21 22",
+    "tourism": "chalet",
+    "website": "https://m.facebook.com/homestay.anne.house"
+  }
+},
+{
+  "type": "node",
+  "id": 8363070266,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:district": "Ta Van Village",
+    "addr:postcode": "330000",
+    "addr:province": "Lao Cai",
+    "brand": "S+ House",
+    "guest_house": "bed_and_breakfast",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "S+ House",
+    "rooms": "7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 8429448717,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Phạm Xuân Huân",
+    "name": "Tưởng Mai",
+    "opening_hours": "24/7",
+    "phone": "0983374169",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 9478710037,
+  "tags": {
+    "addr:district": "Luc Yen",
+    "addr:province": "Yen Bai",
+    "name": "Xôi Farmstay - Eco Homestay Lục Yên Yên Bái",
+    "operator": "KPF",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 9482626617,
+  "tags": {
+    "name": "Home stay An Nhiên Bắc Hà",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 10050536237,
+  "tags": {
+    "name:en": "Mama May Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10230332018,
+  "tags": {
+    "email": "Sureleehomestay@gmail.com",
+    "internet_access": "wlan",
+    "name:en": "Surelee Homestay",
+    "phone": "0377 157 896",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10232732817,
+  "tags": {
+    "name": "Pavi home",
+    "name:en": "Pavi home",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10235243418,
+  "tags": {
+    "addr:housenumber": "180",
+    "addr:street": "Dien Bien Phu",
+    "internet_access": "wlan",
+    "name:en": "Cloud House Sapa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10246389886,
+  "tags": {
+    "addr:street": "Muong hoa",
+    "description": "Very nice Homestay",
+    "name": "My's Homestay",
+    "phone": "+84365850510",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10287063909,
+  "tags": {
+    "addr:housenumber": "023",
+    "addr:street": "Lê Văn Tám",
+    "name:ru": "Гостиница Sapa Memory Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10571969743,
+  "tags": {
+    "name": "Pang homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10657654705,
+  "tags": {
+    "name": "Homestay Vũ Hoàng",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10679913854,
+  "tags": {
+    "name": "May Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10682695095,
+  "tags": {
+    "addr:housenumber": "+84 398995229",
+    "name": "River Mountain View Home stay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10682705333,
+  "tags": {
+    "addr:street": "Ta van giay 1",
+    "name": "Dzay House homestay",
+    "phone": "+84984655683",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10703262105,
+  "tags": {
+    "name:en": "Green Sapa Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 10703262107,
+  "tags": {
+    "name:en": "Way to Green Sapa Homestay",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 10740820705,
+  "tags": {
+    "name": "Tubotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10810928005,
+  "tags": {
+    "name:en": "Green Sapa Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 10821772105,
+  "tags": {
+    "name:en": "Muong Hoa Hmong Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10898929407,
+  "tags": {
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 10898929408,
+  "tags": {
+    "name": "Hôtel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10904490506,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 10915418708,
+  "tags": {
+    "name": "Ks",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "node",
+  "id": 11002197006,
+  "tags": {
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11095266305,
+  "tags": {
+    "name:en": "Home stay Búng Sổm",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11098670605,
+  "tags": {
+    "name:en": "Le Champ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11108977305,
+  "tags": {
+    "name:ko": "호텔더사파",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11119501806,
+  "tags": {
+    "name:en": "Hmong Sister House & Trekking",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11265630670,
+  "tags": {
+    "addr:housenumber": "07",
+    "addr:street": "Thac Bac Street",
+    "email": "info@sapahighlandresort.com",
+    "internet_access": "wlan",
+    "name:en": "Sapa Highland Resort & Spa",
+    "phone": "+842143771123",
+    "tourism": "hotel",
+    "website": "http://www.sapahighlandresort.com"
+  }
+},
+{
+  "type": "node",
+  "id": 11301636069,
+  "tags": {
+    "name:en": "TATU Homestay",
+    "name:pl": "TATU Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994433,
+  "tags": {
+    "name": "Nhà Nghỉ Thuỷ Tiên",
+    "name:ja": "ニャギ トゥイティエン",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994440,
+  "tags": {
+    "name": "Thuỷ Đào Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994441,
+  "tags": {
+    "name": "Nhà Nghỉ Duyên Hải",
+    "name:ja": "ニャギ デュエンハイ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994443,
+  "tags": {
+    "name": "NHÀ NGHỈ HOÀNG VŨ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994447,
+  "tags": {
+    "name": "Nhà Nghỉ Hướng Dương",
+    "name:ja": "ニャギ フアンズオン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994450,
+  "tags": {
+    "name": "Nhà Nghỉ Đức Tài",
+    "name:ja": "ニャギ ドゥックタイ",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994451,
+  "tags": {
+    "name": "Nhà Nghỉ Xô Nga",
+    "name:ja": "ニャギ ソンガァ",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994456,
+  "tags": {
+    "name": "Nhà Nghỉ Đại Trường Giang",
+    "name:ja": "ニャギ ダイチュオンザン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994458,
+  "tags": {
+    "name": "Nhà Nghỉ Hoa Ban",
+    "name:ja": "ニャギ ホアバン",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994459,
+  "tags": {
+    "name": "Nhà Nghỉ Hồng Kông Vi Vi",
+    "name:ja": "ニャギ ホンコンヴィヴィ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11344994462,
+  "tags": {
+    "name": "Nhà Nghỉ Kim Thành",
+    "name:ja": "ニャギ キムタン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790514,
+  "tags": {
+    "name": "Nhà Nghỉ Hoa Phượng Đỏ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790516,
+  "tags": {
+    "name": "Nhà Nghỉ Vân Anh",
+    "name:ja": "ニャギ ヴァンアン",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790517,
+  "tags": {
+    "name": "Nhà Nghỉ Hồng Ngọc",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790518,
+  "tags": {
+    "name": "Nhà Nghỉ Hoàng Hiệp",
+    "name:ja": "ニャギ ホアンヒエップ",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790520,
+  "tags": {
+    "name": "Nhà Nghỉ Sơn Dương",
+    "name:ja": "ニャギ ソンユオン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790521,
+  "tags": {
+    "name": "Nhà Nghỉ Trang Anh",
+    "name:ja": "ニャギ チャンアン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790524,
+  "tags": {
+    "name": "Nhà Nghỉ Linh Trang",
+    "name:ja": "ニャギ",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790525,
+  "tags": {
+    "name": "Nhà Nghỉ Thảo Linh",
+    "name:ja": "ニャギ タオリン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790526,
+  "tags": {
+    "name": "Nhà Nghỉ Hoàng Hôn",
+    "name:ja": "ニャギ ホァンホン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790527,
+  "tags": {
+    "name": "Như Ý Hotel",
+    "name:ja": "ニュイーホテル",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790529,
+  "tags": {
+    "name": "Nhà Nghỉ Hoa Phượng Đỏ 2",
+    "name:ja": "ニャギ ホアバンフッドーハイ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790532,
+  "tags": {
+    "name": "Nhà Nghỉ Thúy Nghĩa",
+    "name:ja": "ニャギ トゥイギア",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790533,
+  "tags": {
+    "name": "Nhà Nghỉ Thành An",
+    "name:ja": "ニャギ タンアン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790535,
+  "tags": {
+    "name": "Nhà Nghỉ Châu Anh",
+    "name:ja": "ニャギ チャウアン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790536,
+  "tags": {
+    "name": "Nhà Nghỉ Thiên Phú",
+    "name:ja": "ニャギ ティエンフォー",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790537,
+  "tags": {
+    "name": "Nhà nghỉ Tùng Quân",
+    "name:ja": "ニャギ トンクォン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790538,
+  "tags": {
+    "name": "Nhà Nghỉ 335",
+    "name:ja": "ニャギ バーチャンバムラン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790539,
+  "tags": {
+    "name": "Nhà Nghỉ Ngọc Lan",
+    "name:ja": "ニャギ ンゴックラン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790540,
+  "tags": {
+    "name": "Nhà Nghỉ Tuấn Sản",
+    "name:ja": "ニャギ トゥアンサン",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11346790541,
+  "tags": {
+    "name": "Nhà Nghỉ Lê Thị Thuỷ",
+    "name:ja": "ニャギ レティトゥイ",
+    "source": "bing",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11358233671,
+  "tags": {
+    "name": "Khach San Misa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11358233672,
+  "tags": {
+    "name": "Khách sạn Đoan Trang Lào Cai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11358233687,
+  "tags": {
+    "name": "Nhà Nghỉ Mai",
+    "name:ja": "ニャギ マイ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11358233688,
+  "tags": {
+    "name": "Khách sạn Mường Thanh Grand Lào Cai",
+    "name:en": "Muong Thanh Grand Lao Cai Hotel",
+    "name:ja": "ムオンタイン・グランドホテル",
+    "name:zh": "老街孟青格兰德酒店",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11383277335,
+  "tags": {
+    "name": "Homestay 715",
+    "phone": "+84 336 134 455",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11517872269,
+  "tags": {
+    "internet_access": "wlan",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11530680520,
+  "tags": {
+    "name": "Thoc Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11553215369,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Sapa Garden Bungalow",
+    "phone": "+84 976535135",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 11658955532,
+  "tags": {
+    "name": "Mu Cang Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11660936856,
+  "tags": {
+    "name": "Nhà nghỉ Van Minh 1",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11661000134,
+  "tags": {
+    "name:vi": "nhà nghỉ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11661011953,
+  "tags": {
+    "name:vi": "Nhà Nghỉ",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11661028372,
+  "tags": {
+    "name": "Hung than",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11765009413,
+  "tags": {
+    "name": "Van Minh 2",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 11768934333,
+  "tags": {
+    "name": "Happy Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11770233455,
+  "tags": {
+    "name": "Nha Nghi Hong Honh",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11891048069,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ta Van Chu Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 11934362869,
+  "tags": {
+    "addr:street": "Đường Na Hối",
+    "name": "(22.53853 104.28278)",
+    "name:en": "Ann House Bắc Hà",
+    "opening_hours": "24/7",
+    "phone": "0332428338",
+    "tourism": "guest_house",
+    "website": "https://www.facebook.com/homestay.anne.house"
+  }
+},
+{
+  "type": "node",
+  "id": 12272760601,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Valley View Homestay",
+    "phone": "+84 96 873 36 88",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12420693202,
+  "tags": {
+    "addr:street": "Road to Ta Van",
+    "contact:facebook": "comlamecohouse",
+    "email": "infocomlamecohouse@gmail.com",
+    "guest_house": "guest_house",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Comlam Eco House",
+    "phone": "+84 866 599 588",
+    "tourism": "guest_house",
+    "website": "https://comlamecohouseandcafe.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12494625939,
+  "tags": {
+    "name": "Giangtien Homestay / Vulinh Farmstay",
+    "phone": "+84986922931",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12536787303,
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Phố Đồng Lợi",
+    "email": "khongtienthuong.vp2@gmail.com",
+    "internet_access": "wlan",
+    "name": "Nhà nghỉ Nhật Sapa Central",
+    "name:en": "Nhat's Sapa Central Hostel",
+    "phone": "+84 973 021 389",
+    "tourism": "hostel",
+    "website": "http://khongtienthuong.vp2@gmail.com"
+  }
+},
+{
+  "type": "node",
+  "id": 12612375601,
+  "tags": {
+    "name:en": "Lodge for up to 14 people",
+    "outdoor_seating": "no",
+    "tourism": "alpine_hut"
+  }
+},
+{
+  "type": "node",
+  "id": 12661932001,
+  "tags": {
+    "name": "Stella Boutique Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12669624761,
+  "tags": {
+    "check_date": "2025-03-16",
+    "name": "Heaven Hill",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12669624763,
+  "tags": {
+    "check_date": "2025-03-16",
+    "name": "Eco Green Homestay",
+    "phone": "+84 849288880",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12752409494,
+  "tags": {
+    "name": "Mường Lò Retreat Nghĩa Lộ - Yên Bái",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12756997401,
+  "tags": {
+    "addr:housenumber": "56",
+    "addr:street": "Ngô Sĩ Liên",
+    "internet_access": "wlan",
+    "name": "Hoang Ha Rivertown Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12757147525,
+  "tags": {
+    "name": "Ecolodge Mucangchai",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12757194905,
+  "tags": {
+    "name": "Sin Chai Ecolodge",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12760120501,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Cầu Treo Homestay",
+    "phone": "0918829540",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12761621104,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "BaoLam Homestay - Tam khoang nong",
+    "name:en": "Bao Lam Homestay - Hot bath",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 12767864901,
+  "tags": {
+    "name": "Sam hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12780212501,
+  "tags": {
+    "check_date": "2025-11-05",
+    "name:en": "Sapa Fansipan View House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12787628901,
+  "tags": {
+    "name:en": "Sapa Harmony Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809566701,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Lung Chung Doi Homestay & Coffee Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12809566901,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Sapa Village Retreat - Dine & Coffee",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12823775528,
+  "tags": {
+    "access": "customers",
+    "addr:city": "Phan Si Păng - Sa Pa",
+    "addr:district": "Sapa",
+    "addr:housenumber": "73",
+    "addr:postcode": "31786",
+    "addr:province": "Lào Cai",
+    "addr:street": "Nguyễn Chí Thanh",
+    "addr:subdistrict": "Phan Si Păng",
+    "camp_site": "serviced",
+    "capacity:persons": "20",
+    "capacity:tents": "10",
+    "drinking_water": "yes",
+    "fee": "yes",
+    "name": "Glamper Sapa Campground",
+    "openfire": "yes",
+    "payment:cash": "yes",
+    "phone": "0919118858",
+    "power_supply": "yes",
+    "shower": "yes",
+    "tents": "yes",
+    "toilets": "yes",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 12824980787,
+  "tags": {
+    "name": "Pao's Sapa Leisure Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12944640908,
+  "tags": {
+    "addr:housenumber": "116 Đ.",
+    "addr:postcode": "300000",
+    "addr:street": "Thạch Sơn",
+    "internet_access": "wlan",
+    "name": "Central Sapa Serenity Homestay",
+    "phone": "0373 668 576",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12995786601,
+  "tags": {
+    "addr:street": "050 Violet",
+    "name": "Still cafe home kictchen",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13007773001,
+  "tags": {
+    "name": "Táo Tày House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13022654002,
+  "tags": {
+    "addr:street": "Đội 4, Thôn Sả Séng",
+    "internet_access": "wlan",
+    "name": "Lý Mẩy Đào",
+    "phone": "+84365503692;+84362494322",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13037226567,
+  "tags": {
+    "name": "Song Nhu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13037241616,
+  "tags": {
+    "name": "Nha Khach Guest House",
+    "phone": "0976373366",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13038546488,
+  "tags": {
+    "name": "Minh Anh House",
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13042609472,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13042927474,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045220697,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045252700,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045259276,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045300928,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045307677,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045311304,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13045312156,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13048044885,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13048055207,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13048055327,
+  "tags": {
+    "tourism": "motel"
+  }
+},
+{
+  "type": "node",
+  "id": 13075940401,
+  "tags": {
+    "addr:street": "Ngo Cau May",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13084307428,
+  "tags": {
+    "name": "Ngũ Chỉ Sơn",
+    "tourism": "guest_house",
+    "website": "https://nguchisontrekking.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13086714074,
+  "tags": {
+    "name": "Homestay Ha Lu",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13134419368,
+  "tags": {
+    "brand": "Lagom Home",
+    "email": "lagomsapa@gmail.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Lagom Home - Bamboo Forest",
+    "phone": "+84333039369",
+    "rooms": "8",
+    "tourism": "hotel",
+    "website": "https://lagomhome.vn"
+  }
+},
+{
+  "type": "node",
+  "id": 13276702876,
+  "tags": {
+    "addr:street": "Đường Điện Biên Phủ",
+    "check_date": "2025-11-03",
+    "name": "Green Villa",
+    "tourism": "guest_house",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 13276734817,
+  "tags": {
+    "addr:housenumber": "689B",
+    "addr:street": "Đường Điện Biên Phủ",
+    "check_date": "2025-11-04",
+    "elevator": "no",
+    "name": "Sapa Indigo Inn",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "tourism": "guest_house",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13282194526,
+  "tags": {
+    "addr:housenumber": "720",
+    "addr:street": "Đường Điện Biên Phủ",
+    "check_date": "2025-11-05",
+    "name": "Sapa Warm Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13282245157,
+  "tags": {
+    "check_date": "2025-11-05",
+    "name": "A Lử Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13282898098,
+  "tags": {
+    "check_date": "2025-11-05",
+    "name": "Sapa Green View Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13282967120,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Đường Hoàng Liên",
+    "name": "Hotel de la Coupole",
+    "payment:credit_cards": "yes",
+    "tourism": "hotel",
+    "website": "https://hoteldelacoupole.com"
+  }
+},
+{
+  "type": "node",
+  "id": 13352909401,
+  "tags": {
+    "name": "Grand Blue Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13355502801,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Ngah Ngih J'ai Dang",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13363726901,
+  "tags": {
+    "name": "London Sa Pa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13369352601,
+  "tags": {
+    "name": "Cat Cat Garden Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13380426001,
+  "tags": {
+    "name": "Sapanapro",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13381247201,
+  "tags": {
+    "name": "Sapa Binh Lan Homestay",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13417882401,
+  "tags": {
+    "name": "Phansi",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "node",
+  "id": 13601116101,
+  "tags": {
+    "name": "Viet Duc Guest House",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13628898701,
+  "tags": {
+    "addr:street": "Ta Van",
+    "name": "NaChi Homesray",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13666989223,
+  "tags": {
+    "name": "Sapa Jungle Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13754498601,
+  "tags": {
+    "addr:street": "Thủy Hoa",
+    "name": "Viêt Trung Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13834408301,
+  "tags": {
+    "internet_access": "wlan",
+    "name:en": "Ngot’s House Lam Thuong Valley",
+    "phone": "+84 034 2945739",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13897950901,
+  "tags": {
+    "addr:street": "VMM trail 2015",
+    "internet_access": "wlan",
+    "name": "Mama Lili's Homestay",
+    "phone": "+84327286475",
+    "tourism": "guest_house",
+    "website": "https://homestay-sapa.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13947583001,
+  "tags": {
+    "name": "Hotel Palm Eco House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14102266501,
+  "tags": {
+    "addr:street": "Đường tỉnh 152B",
+    "name": "Homestay Tả Mẩy",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14130534125,
+  "tags": {
+    "name": "Ấp Retreat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14218516101,
+  "tags": {
+    "internet_access": "wlan",
+    "name": "Friendly homestay & trekking restaurant",
+    "opening_hours": "24/7",
+    "phone": "+84355468623",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "node",
+  "id": 14229610101,
+  "tags": {
+    "check_date": "2026-09-29",
+    "internet_access": "wlan",
+    "name": "Chapa eco lodge",
+    "tourism": "hotel",
+    "website": "https://chapaecolodge.com"
+  }
+},
+{
+  "type": "node",
+  "id": 14229691302,
+  "tags": {
+    "check_date": "2026-09-29",
+    "name": "Mimi's homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14229932301,
+  "tags": {
+    "check_date": "2026-09-29",
+    "name": "SaPa retreat",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14230148801,
+  "tags": {
+    "check_date": "2026-09-29",
+    "name": "Little ta van Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14230149701,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 14230150202,
+  "tags": {
+    "check_date": "2026-09-29",
+    "name": "Én",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 14308855399,
+  "tags": {
+    "name": "Mrs Giang Thi Chi Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 306026906,
+  "tags": {
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 548984541,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel",
+    "wikidata": "Q117326045"
+  }
+},
+{
+  "type": "way",
+  "id": 548984542,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel",
+    "wikidata": "Q117326045"
+  }
+},
+{
+  "type": "way",
+  "id": 548984543,
+  "tags": {
+    "building": "yes",
+    "tourism": "hotel",
+    "wikidata": "Q117326045"
+  }
+},
+{
+  "type": "way",
+  "id": 661734164,
+  "tags": {
+    "building": "residential",
+    "name": "Duc Huy Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 741352658,
+  "tags": {
+    "addr:city": "TP Lao Cai",
+    "addr:district": "Huyen Sapa",
+    "addr:postcode": "661300",
+    "addr:province": "Lao Cai",
+    "addr:street": "Cat Cat Road",
+    "addr:subdistrict": "TT Sapa",
+    "building": "yes",
+    "capacity": "30",
+    "description": "Homestay, coffee, Restaurant",
+    "email": "toquynh91@gmail.com",
+    "level": "2",
+    "name": "Woody Homestay Sapa",
+    "opening_hours": "24/7",
+    "outdoor_seating": "no",
+    "payment:cash": "yes",
+    "phone": "0911789528",
+    "smoking": "no",
+    "start_date": "3/2018",
+    "takeaway": "yes",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 741352659,
+  "tags": {
+    "building": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "CHAPI HOMESTAY",
+    "name": "Chapi Homestay",
+    "phone": "+84975073437",
+    "tourism": "hostel"
+  }
+},
+{
+  "type": "way",
+  "id": 934329485,
+  "tags": {
+    "building": "house",
+    "name": "Sâu Hảo Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 946390565,
+  "tags": {
+    "addr:street": "Cat Cat Road",
+    "building": "house",
+    "email": "phuocvu000999@gmail.com",
+    "name": "Terraced H'Mong Homestay",
+    "name:en": "Terraced H'mong Homestay",
+    "opening_hours": "24/7",
+    "operator": "Phuoc Le Duc (Reception);Phuoc Le Duc",
+    "phone": "+84905839989",
+    "tourism": "guest_house",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 946390620,
+  "tags": {
+    "building": "house",
+    "name": "Apao Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1157845519,
+  "tags": {
+    "backcountry": "yes",
+    "fee": "no",
+    "name": "Wild Camping Spot",
+    "tourism": "camp_site"
+  }
+},
+{
+  "type": "way",
+  "id": 1167471567,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà khách Đồng Tâm",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1215081886,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1215081887,
+  "tags": {
+    "addr:city": "Sa Pa",
+    "addr:district": "Sapa",
+    "addr:housenumber": "24",
+    "addr:postcode": "333101",
+    "addr:province": "Lào Cai",
+    "addr:street": "Ngo Cau May",
+    "addr:subdistrict": "Sapa",
+    "building": "yes",
+    "email": "megaviewhomestay@gmail.com",
+    "name": "Mega View Homestay",
+    "phone": "+84 924 551 552",
+    "tourism": "chalet",
+    "website": "https://www.megaviewhomestay.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1262076050,
+  "tags": {
+    "building": "yes",
+    "name": "Mama Pham",
+    "tourism": "apartment"
+  }
+},
+{
+  "type": "way",
+  "id": 1339449216,
+  "tags": {
+    "addr:subdistrict": "Vu Lhin",
+    "building": "roof",
+    "layer": "1",
+    "name": "Vu Lhin Palm House Homestay",
+    "phone": "0969207809",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1339449220,
+  "tags": {
+    "addr:subdistrict": "Vu Lhin",
+    "building": "yes",
+    "guest_house": "guest_house",
+    "name": "Giang Tien Homestay",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1370817585,
+  "tags": {
+    "leisure": "resort",
+    "name": "An Lavita",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1370817600,
+  "tags": {
+    "addr:postcode": "33600",
+    "check_date": "2025-03-15",
+    "contact:facebook": "61570897981443",
+    "internet_access": "wlan",
+    "leisure": "resort",
+    "name": "Tram Tau Eco Garden Resort",
+    "tourism": "hotel",
+    "website": "https://www.booking.com/Share-V84hYq"
+  }
+},
+{
+  "type": "way",
+  "id": 1379080556,
+  "tags": {
+    "building": "yes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1379080557,
+  "tags": {
+    "building": "yes",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 1385230987,
+  "tags": {
+    "building": "yes",
+    "name": "Liberty Sapa Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1385230988,
+  "tags": {
+    "building": "yes",
+    "name": "My Gallery Boutique Hotel & Spa",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1385230989,
+  "tags": {
+    "building": "yes",
+    "name": "Mường Hoa View Hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452618214,
+  "tags": {
+    "building": "yes",
+    "name": "Nhà nghỉ Hải Đăng",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452635300,
+  "tags": {
+    "building": "yes",
+    "name": "Galaxy Hotel",
+    "source": "GPS; sign",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1452788362,
+  "tags": {
+    "addr:city": "Lào Cai",
+    "addr:housenumber": "2",
+    "addr:postcode": "330000",
+    "addr:province": "Lao Cai",
+    "addr:street": "Đường An Dương Vương",
+    "brand": "Tru by Hilton",
+    "building": "yes",
+    "email": "HANCL_TRU@hilton.com",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Tru by Hilton Lao Cai City Riverside",
+    "phone": "+84 214 3909 333",
+    "rooms": "134",
+    "tourism": "hotel",
+    "website": "https://www.hilton.com/en/hotels/hanclru-tru-lao-cai-city-riverside/"
+  }
+},
+{
+  "type": "way",
+  "id": 1453073047,
+  "tags": {
+    "building": "yes",
+    "name": "H'mong Eco House",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 1533888754,
+  "tags": {
+    "building": "yes",
+    "name": "Little House in KhauPha",
+    "phone": "0988425173",
+    "tourism": "guest_house",
+    "website": "https://www.facebook.com/littlehousekhaupha"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694283,
+  "tags": {
+    "building": "yes",
+    "check_date": "2026-09-29",
+    "name": "Pu Hmong Eco Retreat",
+    "tourism": "hotel",
+    "website": "https://chapaecolodge.com"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694284,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694285,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694286,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694287,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694288,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694289,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "way",
+  "id": 1569694290,
+  "tags": {
+    "building": "yes",
+    "tourism": "chalet"
+  }
+}
+
+  ]
+}

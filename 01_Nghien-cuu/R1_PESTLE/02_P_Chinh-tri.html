@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P — Chính trị, chính sách</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f2ee;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --s1-soft:#cde2fb;
+  --q1:#cde2fb; --q2:#86b6ef; --q3:#2a78d6; --q3-ink:#fff;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --accent:#256abf;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+    --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+    --accent:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --s1-soft:#1c3556;
+  --q1:#1c3556; --q2:#256abf; --q3:#5598e7; --q3-ink:#0b0b0b;
+  --accent:#6da7ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+nav.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+nav.files a{font-size:13px;text-decoration:none;color:var(--ink-2);padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+nav.files a.on{background:var(--ink);color:var(--page);box-shadow:none}
+.theme{margin-left:auto;font:inherit;font-size:13px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ring)}
+h1{font-size:30px;line-height:1.2;margin:4px 0 6px;letter-spacing:-.01em}
+h2{font-size:21px;margin:44px 0 6px;padding-top:12px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:24px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.lede{font-size:17px;color:var(--ink-2);max-width:760px}
+.card{min-width:0;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:18px 18px 14px;margin:14px 0}
+.keys{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 20px;margin:18px 0}
+.keys li{margin:6px 0}
+.keys h3{margin:4px 0 6px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.15;letter-spacing:-.01em}
+.tile .l{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+.tile .s{color:var(--muted);font-size:12px;margin-top:6px}
+.lv{display:inline-block;font-size:11px;font-weight:650;line-height:1;padding:3px 6px;border-radius:5px;vertical-align:1px;box-shadow:inset 0 0 0 1px var(--axis);color:var(--ink-2);white-space:nowrap}
+.lv.A{background:var(--ink);color:var(--page);box-shadow:none}
+.lv.B{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+.lv.D{border-style:dashed;box-shadow:none;outline:1px dashed var(--axis);outline-offset:-1px}
+.chart-t{font-weight:650;font-size:15.5px;margin:0}
+.chart-s{color:var(--ink-2);font-size:13px;margin:2px 0 12px}
+.bars{display:grid;grid-template-columns:minmax(120px,38%) 1fr;row-gap:8px;column-gap:12px;align-items:center}
+.bl{font-size:13.5px;color:var(--ink);text-align:right;line-height:1.3}
+.bl small{display:block;color:var(--muted);font-size:11.5px}
+.bt{position:relative;height:22px;border-left:1px solid var(--axis);outline:none}
+.bt .b{position:absolute;left:0;top:3px;height:16px;background:var(--s1);border-radius:0 4px 4px 0}
+.bt .b.alt{background:var(--s2)}
+.bt .b.ghost{background:var(--s1-soft)}
+.bt .n{position:absolute;top:1px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;padding-left:6px;font-variant-numeric:tabular-nums}
+.bt .tip{display:none;position:absolute;z-index:5;left:0;top:26px;background:var(--ink);color:var(--page);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:7px;max-width:320px;width:max-content}
+.bt:hover .tip,.bt:focus .tip{display:block}
+.bt:hover .b,.bt:focus .b{filter:brightness(1.12)}
+.foot{color:var(--muted);font-size:12px;margin-top:12px}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--grid)}
+th{font-weight:650;color:var(--ink-2);font-size:12.5px;background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:12px;box-shadow:0 0 0 1px var(--ring);padding:4px 6px;margin:12px 0}
+.stack{display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;padding:0 8px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.stack .a{background:var(--s1);color:#fff}
+.stack .i{background:var(--s2);color:#fff}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.heat{overflow-x:auto}
+.heat table{min-width:760px;table-layout:fixed}
+.heat th,.heat td{text-align:center;vertical-align:middle;padding:6px 2px;border:2px solid var(--surface);font-size:12px}
+.heat td.rl,.heat th.rl{text-align:left;width:190px;padding-left:8px;font-size:12.5px;background:var(--surface)}
+.heat td.h0{background:var(--surface-2);color:var(--muted)}
+.heat td.h1{background:var(--q1);color:var(--ink)}
+.heat td.h2{background:var(--q2);color:#0b0b0b}
+.heat td.h3{background:var(--q3);color:var(--q3-ink);font-weight:650}
+.heat td.rk{background:repeating-linear-gradient(135deg,var(--surface-2) 0 4px,transparent 4px 8px);color:var(--crit);font-weight:650}
+.so{display:inline-block;min-width:22px;text-align:center;font-weight:700;border-radius:5px;padding:1px 6px}
+.so.hi{background:var(--ink);color:var(--page)}
+.so.md{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.so.lo{color:var(--muted);box-shadow:inset 0 0 0 1px var(--axis)}
+.tag{font-size:11.5px;font-weight:650;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.op{color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.tag.th{color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}
+.tag.mx{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--axis)}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0;box-shadow:0 0 0 1px var(--ring)}
+.callout b{color:var(--ink)}
+.gap{border-left:3px dashed var(--axis);padding:8px 14px;margin:12px 0;color:var(--ink-2);font-size:14px}
+.tl{position:relative;margin:10px 0 0 6px;padding-left:22px;border-left:2px solid var(--grid)}
+.tl .ev{position:relative;margin:0 0 14px}
+.tl .ev:before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--s1)}
+.tl .ev.f:before{box-shadow:0 0 0 2px var(--axis);background:var(--surface-2)}
+.tl .d{font-size:12.5px;font-weight:650;color:var(--accent)}
+.tl .ev.f .d{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+ol.src{font-size:12.5px;color:var(--ink-2);padding-left:22px}
+ol.src li{margin:3px 0;word-break:break-word}
+ol.src a{color:var(--accent)}
+a{color:var(--accent)}
+sup a{text-decoration:none;font-size:11px}
+@media (max-width:640px){
+  h1{font-size:24px}
+  .bars{grid-template-columns:minmax(96px,42%) 1fr}
+  .srow{grid-template-columns:76px 1fr}
+}
+@media print{nav.files,.theme{display:none}.bt .tip{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<nav class="files"><a href="01_Xu-huong.html" class="">Xu hướng</a><a href="02_P_Chinh-tri.html" class="on">P · Chính trị</a><a href="03_E_Kinh-te.html" class="">E · Kinh tế</a><a href="04_S_Xa-hoi.html" class="">S · Xã hội</a><a href="05_T_Cong-nghe.html" class="">T · Công nghệ</a><a href="06_L_Phap-ly.html" class="">L · Pháp lý</a><a href="07_E_Moi-truong.html" class="">E · Môi trường</a><button class="theme" type="button">Giao diện tối</button></nav>
+<div class="meta">LEVART · R1 Môi trường vĩ mô · Soạn 19/10/2026 · Bản 0.1 · Nghiên cứu tại bàn (thứ cấp)</div>
+<h1>P — Chính trị, chính sách</h1>
+<p class="lede">Kích cầu du lịch nội địa, chuyển đổi số ngành du lịch, và nghị quyết mới của Bộ Chính trị: Nhà nước đang đẩy Levart hay chặn đường?</p>
+<p class="meta">Mức bằng chứng theo <code>PLAN_RESEARCH.md</code>: <span class="lv A" title="Mức bằng chứng A">A</span> văn bản/số liệu nhà nước · <span class="lv B" title="Mức bằng chứng B">B</span> báo cáo có công bố cỡ mẫu · <span class="lv C" title="Mức bằng chứng C">C</span> báo chí/báo cáo không công bố cỡ mẫu · <span class="lv D" title="Mức bằng chứng D">D</span> suy luận của nhóm (GT). Di chuột (hoặc chạm) vào thanh biểu đồ để xem nguồn.</p>
+<div class="keys"><h3>Ý chính</h3><ul><li><b>Môi trường chính sách vừa đổi lớn:</b> Bộ Chính trị ban hành <b>Nghị quyết 26-NQ/TW ngày 22/08/2026</b>, thay Nghị quyết 08-NQ/TW (2017). Mục tiêu 2030: 160 triệu lượt khách nội địa, du lịch đóng góp trực tiếp 10–12% GDP, có <b>nền tảng số du lịch quốc gia</b> và <b>cơ sở dữ liệu du lịch quốc gia</b> <sup><a href="#s1">[1]</a></sup><sup><a href="#s3">[3]</a></sup>.</li><li><b>Chính phủ đã ra chương trình hành động (NQ 263/NQ-CP, 07/09/2026)</b> có hạn cụ thể: đề án AI hỗ trợ du khách tại khu, điểm du lịch (10/2027); nền tảng số dùng chung, kiến trúc dữ liệu, chuẩn tích hợp (12/2027); Luật Du lịch sửa đổi trình Quốc hội 10/2027 <sup><a href="#s2">[2]</a></sup>.</li><li><b>Có tín hiệu mở cho mô hình nền tảng:</b> NQ 263 yêu cầu rà soát chính sách đột phá cho <i>kinh tế chia sẻ, kinh doanh trên nền tảng</i>, kinh tế đêm <sup><a href="#s2">[2]</a></sup>; NQ 68 coi kinh tế tư nhân là lực lượng tiên phong của chuyển đổi số <sup><a href="#s11">[11]</a></sup>.</li><li><b>Kích cầu nội địa là chương trình năm, không phải trợ giá:</b> 2024 “Người Việt đi du lịch Việt”, 2025 “Việt Nam – đi để yêu” (QĐ 444) — chủ yếu là gói sản phẩm liên kết và quảng bá <sup><a href="#s4">[4]</a></sup>. Cấp tỉnh tự làm thêm (Lâm Đồng 6–12/2026) <sup><a href="#s5">[5]</a></sup>.</li><li><b>Chính sách tài khoá có lợi cho chi phí chuyến đi:</b> giảm 2% VAT (10% → 8%) đến 31/12/2026 cho nhóm du lịch, vận tải <sup><a href="#s14">[14]</a></sup>; giảm thuế, phí nhiên liệu bay năm 2026 kìm giá vé máy bay chỉ còn tăng 7,34% <sup><a href="#s16">[16]</a></sup>.</li><li><b>Rủi ro thời điểm:</b> giảm VAT hết hạn cuối 2026; Luật Du lịch đang chờ sửa (2027) — khái niệm lữ hành, hướng dẫn viên có thể đổi.</li></ul></div><div class="tiles"><div class="tile"><div class="v">160 tr</div><div class="l">lượt khách nội địa — mục tiêu 2030</div><div class="s">NQ 26-NQ/TW · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">10–12%</div><div class="l">GDP đóng góp trực tiếp của du lịch — 2030</div><div class="s">NQ 26-NQ/TW · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">~135,5 tr</div><div class="l">lượt khách nội địa năm 2025; tổng thu &gt; 1 triệu tỷ đồng</div><div class="s">Cục DLQG qua báo · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">150 tr</div><div class="l">lượt nội địa — kế hoạch 2026; 6 tháng đạt 81 tr (54%)</div><div class="s">Cục DLQG · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">12/2027</div><div class="l">hạn nền tảng số du lịch quốc gia dùng chung</div><div class="s">NQ 263/NQ-CP · <span class="lv A" title="Mức bằng chứng A">A</span></div></div><div class="tile"><div class="v">8%</div><div class="l">VAT áp dụng cho dịch vụ du lịch, vận tải đến hết 2026</div><div class="s">NQ của Quốc hội · <span class="lv A" title="Mức bằng chứng A">A</span></div></div></div><p class="meta">Ghi chú mức: các nghị quyết được đọc qua báo Đảng, TTXVN dẫn lại — xếp A nhưng <b>phải đối chiếu toàn văn</b> trước khi trích trong hồ sơ gọi vốn.</p><h2>1. Khách nội địa: thực tế và mục tiêu</h2><div class="card"><p class="chart-t">Lượt khách du lịch nội địa (triệu lượt)</p><p class="chart-s">Thực tế theo Cục Du lịch Quốc gia và mục tiêu theo văn bản chính sách</p><div class="bars"><div class="bl">2025 — thực tế<small>ước của Cục DLQG; nguồn khác 130–137</small></div><div class="bt" tabindex="0" aria-label="2025 — thực tế: 135.5"><div class="b" style="width:79.71%"></div><span class="n" style="left:79.71%">135.5</span><span class="tip">Cục DLQG qua Tuổi Trẻ [6]; Bộ VHTTDL 137 tr [7] · mức A</span></div><div class="bl">2025 — mục tiêu<small>QĐ 444 kích cầu</small></div><div class="bt" tabindex="0" aria-label="2025 — mục tiêu: 150"><div class="b alt" style="width:88.24%"></div><span class="n" style="right:11.76%;color:#fff;padding-right:6px">150</span><span class="tip">QĐ 444/QĐ-BVHTTDL [4] · mức A</span></div><div class="bl">6 tháng 2026 — thực tế<small>54% kế hoạch năm</small></div><div class="bt" tabindex="0" aria-label="6 tháng 2026 — thực tế: 81"><div class="b" style="width:47.65%"></div><span class="n" style="left:47.65%">81</span><span class="tip">Cục DLQG [8] · mức A</span></div><div class="bl">2026 — mục tiêu<small>tổng thu ~1.125 nghìn tỷ</small></div><div class="bt" tabindex="0" aria-label="2026 — mục tiêu: 150"><div class="b alt" style="width:88.24%"></div><span class="n" style="right:11.76%;color:#fff;padding-right:6px">150</span><span class="tip">Cục DLQG [8] · mức A</span></div><div class="bl">2030 — mục tiêu<small>NQ 26-NQ/TW</small></div><div class="bt" tabindex="0" aria-label="2030 — mục tiêu: 160"><div class="b alt" style="width:94.12%"></div><span class="n" style="right:5.88%;color:#fff;padding-right:6px">160</span><span class="tip">NQ 26-NQ/TW [1][3] · mức A</span></div></div><p class="foot">Màu xanh = thực tế, cam = mục tiêu. Năm 2025 hụt mục tiêu ~10%. Mục tiêu 2030 chỉ cao hơn thực tế 2025 khoảng 18% — tức tăng ~3,4%/năm: <b>nội địa không còn là câu chuyện tăng số lượng</b>, mà là chất lượng, chi tiêu, lưu trú dài (đúng lời NQ 26).</p><details><summary>Xem dạng bảng</summary><table><tr><th>Mục</th><th>Giá trị</th><th>Ghi chú</th><th>Nguồn</th></tr><tr><td>2025 — thực tế</td><td class='num'>135.5</td><td>ước của Cục DLQG; nguồn khác 130–137</td><td>Cục DLQG qua Tuổi Trẻ [6]; Bộ VHTTDL 137 tr [7] · mức A</td></tr><tr><td>2025 — mục tiêu</td><td class='num'>150</td><td>QĐ 444 kích cầu</td><td>QĐ 444/QĐ-BVHTTDL [4] · mức A</td></tr><tr><td>6 tháng 2026 — thực tế</td><td class='num'>81</td><td>54% kế hoạch năm</td><td>Cục DLQG [8] · mức A</td></tr><tr><td>2026 — mục tiêu</td><td class='num'>150</td><td>tổng thu ~1.125 nghìn tỷ</td><td>Cục DLQG [8] · mức A</td></tr><tr><td>2030 — mục tiêu</td><td class='num'>160</td><td>NQ 26-NQ/TW</td><td>NQ 26-NQ/TW [1][3] · mức A</td></tr></table></details></div><div class="legend"><span><i style="background:var(--s1)"></i>Thực tế</span><span><i style="background:var(--s2)"></i>Mục tiêu</span></div><h2>2. Dòng thời gian chính sách liên quan Levart</h2><div class="card"><p class="chart-t">Mốc chính sách</p><p class="chart-s">Chấm đặc = đã ban hành · chấm rỗng = mốc tương lai đã có hạn</p><div class="tl"><div class="ev"><div class="d">22/01/2020</div>QĐ 147/QĐ-TTg — Chiến lược phát triển du lịch đến 2030: số hoá thông tin điểm đến, hướng tới hệ sinh thái du lịch thông minh <sup><a href="#s12">[12]</a></sup></div><div class="ev"><div class="d">23/02/2024</div>Chỉ thị 08/CT-TTg — phát triển du lịch toàn diện, nhanh, bền vững; giao bộ, tỉnh làm kế hoạch <sup><a href="#s13">[13]</a></sup></div><div class="ev"><div class="d">04/2024</div>Chương trình “Người Việt đi du lịch Việt – Việt Nam tôi yêu”</div><div class="ev"><div class="d">22/12/2024</div>NQ 57-NQ/TW — khoa học công nghệ, đổi mới sáng tạo, chuyển đổi số quốc gia</div><div class="ev"><div class="d">28/02/2025</div>QĐ 444/QĐ-BVHTTDL — kích cầu 2025 “Việt Nam – đi để yêu”: gói sản phẩm liên kết văn hoá, ẩm thực, golf <sup><a href="#s4">[4]</a></sup></div><div class="ev"><div class="d">04/05/2025</div>NQ 68-NQ/TW — kinh tế tư nhân là lực lượng tiên phong; mục tiêu 2 triệu doanh nghiệp năm 2030 <sup><a href="#s11">[11]</a></sup></div><div class="ev"><div class="d">12/06/2025</div>NQ 202/2025/QH15 — còn 34 tỉnh, thành (từ 63), hiệu lực 01/07/2025 <sup><a href="#s17">[17]</a></sup></div><div class="ev"><div class="d">01/07/2025</div>Giảm 2% VAT (còn 8%) tới 31/12/2026, gồm du lịch, vận tải <sup><a href="#s14">[14]</a></sup></div><div class="ev"><div class="d">01/01/2026</div>Ngưỡng miễn thuế hộ kinh doanh nâng 200 → 500 triệu đồng/năm; giảm trừ gia cảnh 15,5 triệu đồng/tháng <sup><a href="#s15">[15]</a></sup></div><div class="ev"><div class="d">03–05/2026</div>Giá nhiên liệu bay tăng mạnh; Nhà nước giảm thuế, phí nhiên liệu bay <sup><a href="#s16">[16]</a></sup></div><div class="ev"><div class="d">22/08/2026</div><b>NQ 26-NQ/TW</b> — du lịch thành ngành kinh tế mũi nhọn; 8 nhóm nhiệm vụ, nhóm 7 là KHCN, chuyển đổi số, du lịch thông minh <sup><a href="#s1">[1]</a></sup></div><div class="ev"><div class="d">07/09/2026</div><b>NQ 263/NQ-CP</b> — chương trình hành động: bộ chỉ số điểm đến thông minh, trung tâm điều hành du lịch thông minh <sup><a href="#s2">[2]</a></sup></div><div class="ev f"><div class="d">24/11/2026</div>Ngày Văn hoá Việt Nam — lần đầu là ngày nghỉ có lương (1 ngày) <sup><a href="#s18">[18]</a></sup></div><div class="ev f"><div class="d">31/12/2026</div>Hết hạn giảm 2% VAT — giá dịch vụ có thể nhích lên từ 2027</div><div class="ev f"><div class="d">09/2027</div>Chiến lược phát triển du lịch đến 2035, tầm nhìn 2045 <sup><a href="#s2">[2]</a></sup></div><div class="ev f"><div class="d">10/2027</div>Trình Luật Du lịch sửa đổi (kỳ họp thứ 4, QH khoá XVI); đề án AI hỗ trợ du khách <sup><a href="#s2">[2]</a></sup></div><div class="ev f"><div class="d">12/2027</div>Nền tảng số du lịch quốc gia dùng chung, kiến trúc dữ liệu, chuẩn tích hợp <sup><a href="#s2">[2]</a></sup></div><div class="ev f"><div class="d">2030</div>Hệ sinh thái du lịch thông minh đồng bộ; 160 triệu khách nội địa; 80–90 tỷ USD tổng thu <sup><a href="#s1">[1]</a></sup></div></div></div><h2>3. Nghị quyết 26-NQ/TW: những gì chạm tới Levart</h2><div class="tbl "><table><tr><th>Nội dung</th><th>Chi tiết</th><th>Liên quan Levart</th></tr><tr><td>Mục tiêu 2030</td><td>10–12% GDP; 45–50 triệu khách quốc tế; 160 triệu khách nội địa; 80–90 tỷ USD; 3 cực tăng trưởng (Hà Nội, TP.HCM, Đà Nẵng); 10 trung tâm, 20 khu du lịch quốc gia; 2,3 triệu việc làm trực tiếp <sup><a href="#s1">[1]</a></sup><sup><a href="#s3">[3]</a></sup></td><td>Thị trường được Nhà nước ưu tiên ít nhất 10 năm</td></tr><tr><td>Tầm nhìn 2045</td><td>14–15% GDP; top 30 thế giới về năng lực cạnh tranh; 70 triệu khách quốc tế <sup><a href="#s1">[1]</a></sup></td><td>—</td></tr><tr><td>Nhóm nhiệm vụ 7</td><td>Đẩy mạnh KHCN, đổi mới sáng tạo, chuyển đổi số, du lịch thông minh; quản trị dựa trên dữ liệu <sup><a href="#s1">[1]</a></sup></td><td>Khớp định vị “du lịch thông minh”; có thể xin vào chương trình hỗ trợ khởi nghiệp số</td></tr><tr><td>Nhóm nhiệm vụ 8</td><td>Điểm đến xanh, thông minh, an toàn, bền vững; chuyển từ số lượng sang chất lượng <sup><a href="#s1">[1]</a></sup></td><td>Giãn khách khỏi điểm nóng — đúng hướng sưu tầm 34 tỉnh</td></tr><tr><td>NQ 263 — kinh tế nền tảng</td><td>Rà soát chính sách đột phá cho kinh tế chia sẻ, kinh doanh trên nền tảng, kinh tế đêm; thí điểm trung tâm thương mại–du lịch 24/7 <sup><a href="#s2">[2]</a></sup></td><td>Cửa mở cho mô hình kết nối đối tác; theo dõi văn bản hướng dẫn</td></tr><tr><td>NQ 263 — dữ liệu và AI</td><td>Đề án AI hỗ trợ du khách tại điểm (10/2027); nền tảng số quốc gia, chuẩn tích hợp (12/2027) <sup><a href="#s2">[2]</a></sup></td><td><b>Vừa là cơ hội (dữ liệu mở, chuẩn tích hợp) vừa là đối thủ miễn phí</b></td></tr></table></div><div class="gap"><b>Chưa trả lời được:</b> nền tảng số quốc gia có mở API cho doanh nghiệp tư nhân không, và có thu phí không. Cần theo dõi đề án của Cục Du lịch Quốc gia trong 2027. Chưa thấy văn bản kích cầu nội địa cấp Bộ riêng cho 2026.</div><h2>4. Chấm điểm và cột “vì vậy”</h2><div class="tbl "><table><tr><th>Yếu tố</th><th>Loại</th><th>Tác động</th><th>Khả năng</th><th>T×K</th><th>Khi nào</th><th>Nguồn · mức</th><th>Vì vậy Levart nên…</th></tr><tr><td>Bản đồ 34 tỉnh mới (NQ 202/2025)</td><td><span class="tag op">Cơ hội</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>Ngay</td><td>[17] · A</td><td>Định vị theo bản đồ mới; kiểm với khách cách gọi tên cũ/mới (Hà Giang → Tuyên Quang).</td></tr><tr><td>NQ 26 + NQ 263: du lịch thông minh, dữ liệu, AI</td><td><span class="tag op">Cơ hội</span></td><td><span class="so hi">3</span></td><td><span class="so hi">3</span></td><td><b>9</b> ✓ SWOT</td><td>1–2 năm</td><td>[1][2] · A</td><td>Viết hồ sơ Levart bằng đúng ngôn ngữ NQ 26 (nhóm 7, 8) khi xin tài trợ, vườn ươm, đối tác tỉnh.</td></tr><tr><td>Nền tảng số du lịch quốc gia (12/2027)</td><td><span class="tag mx">Cả hai</span></td><td><span class="so hi">3</span></td><td><span class="so md">2</span></td><td><b>6</b> ✓ SWOT</td><td>1–2 năm</td><td>[2] · A</td><td>Không xây cái Nhà nước sẽ cho miễn phí (danh bạ điểm đến). Xây lớp cộng đồng và trò chơi bên trên; chờ API.</td></tr><tr><td>Chính sách cho kinh tế nền tảng, chia sẻ</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>1–2 năm</td><td>[2] · A</td><td>Theo dõi văn bản; tham gia góp ý dự thảo nếu có kênh.</td></tr><tr><td>Luật Du lịch sửa đổi (10/2027)</td><td><span class="tag mx">Cả hai</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>1–2 năm</td><td>[2] · A</td><td>Thiết kế để không thành “lữ hành”; đọc dự thảo khi công bố lấy ý kiến.</td></tr><tr><td>Kích cầu nội địa hằng năm (Bộ, tỉnh)</td><td><span class="tag op">Cơ hội</span></td><td><span class="so md">2</span></td><td><span class="so md">2</span></td><td><b>4</b> ✓ SWOT</td><td>Ngay</td><td>[4][5] · A</td><td>Đề xuất làm “con dấu” cho chương trình kích cầu của tỉnh mục tiêu — kênh đối tác rẻ.</td></tr><tr><td>Giảm VAT 2% hết hạn 31/12/2026</td><td><span class="tag th">Đe doạ</span></td><td><span class="so lo">1</span></td><td><span class="so hi">3</span></td><td><b>3</b></td><td>Ngay</td><td>[14] · A</td><td>Đừng xây kịch bản giá đối tác dựa trên mức 8%.</td></tr></table></div>
+<h2>Nguồn</h2>
+<ol class="src"><li id="s1">Nghị quyết 26-NQ/TW (22/08/2026) về phát triển du lịch thành ngành kinh tế mũi nhọn, qua VietnamPlus — <a href="https://www.vietnamplus.vn/phat-trien-du-lich-viet-nam-tro-thanh-nganh-kinh-te-mui-nhon-trong-ky-nguyen-moi-post1133212.vnp" target="_blank" rel="noopener">https://www.vietnamplus.vn/phat-trien-du-lich-viet-nam-tro-thanh-nganh-kinh-te-mui-nhon-trong-ky-nguyen-moi-post1133212.vnp</a></li><li id="s2">Nghị quyết 263/NQ-CP (07/09/2026) — Chương trình hành động thực hiện NQ 26, qua Báo Văn hoá — <a href="https://baovanhoa.vn/du-lich/ky-3-tu-tam-nhin-den-chuong-trinh-hanh-dong-264168.html" target="_blank" rel="noopener">https://baovanhoa.vn/du-lich/ky-3-tu-tam-nhin-den-chuong-trinh-hanh-dong-264168.html</a></li><li id="s3">NQ 26: mục tiêu 2030, 2045, qua Tiền Phong — <a href="https://tienphong.vn/den-nam-2030-du-lich-viet-nam-la-nganh-kinh-te-mui-nhon-dong-gop-truc-tiep-tu-10-12-gdp-post1871731.html" target="_blank" rel="noopener">https://tienphong.vn/den-nam-2030-du-lich-viet-nam-la-nganh-kinh-te-mui-nhon-dong-gop-truc-tiep-tu-10-12-gdp-post1871731.html</a></li><li id="s4">Quyết định 444/QĐ-BVHTTDL (28/02/2025) — Chương trình kích cầu du lịch 2025, qua Cổng PBGDPL Cần Thơ — <a href="https://pbgdpl.cantho.gov.vn/se-co-cac-goi-san-pham-du-lich-lien-ket-trong-nam-2025" target="_blank" rel="noopener">https://pbgdpl.cantho.gov.vn/se-co-cac-goi-san-pham-du-lich-lien-ket-trong-nam-2025</a></li><li id="s5">Lâm Đồng kích cầu du lịch nội tỉnh 2026, qua Đại biểu Nhân dân — <a href="https://daibieunhandan.vn/nguoi-lam-dong-di-du-lich-lam-dong-10420506.html" target="_blank" rel="noopener">https://daibieunhandan.vn/nguoi-lam-dong-di-du-lich-lam-dong-10420506.html</a></li><li id="s6">Cục Du lịch Quốc gia — kết quả 2025, qua Tuổi Trẻ (30/12/2025) — <a href="https://tuoitre.vn/danh-sach-cac-dia-phuong-dat-doanh-thu-du-lich-lon-nhat-nam-2025-20251230210144217.htm" target="_blank" rel="noopener">https://tuoitre.vn/danh-sach-cac-dia-phuong-dat-doanh-thu-du-lich-lon-nhat-nam-2025-20251230210144217.htm</a></li><li id="s7">Bộ VHTTDL — báo cáo 13/01/2026: 137 triệu lượt nội địa, qua Nhà Đầu tư — <a href="https://nhadautu.vn/nganh-du-lich-viet-nam-thu-ve-1-trieu-ty-dong-tu-du-khach-d102292.html" target="_blank" rel="noopener">https://nhadautu.vn/nganh-du-lich-viet-nam-thu-ve-1-trieu-ty-dong-tu-du-khach-d102292.html</a></li><li id="s8">Cục Du lịch Quốc gia — 6 tháng 2026, mục tiêu 2026, qua Thương hiệu & Công luận — <a href="https://thuonghieucongluan.com.vn/du-lich-viet-nam-but-toc-trong-nua-dau-nam-2026-a324972.html" target="_blank" rel="noopener">https://thuonghieucongluan.com.vn/du-lich-viet-nam-but-toc-trong-nua-dau-nam-2026-a324972.html</a></li><li id="s9">Quý I/2026: 37 triệu lượt nội địa, 267 nghìn tỷ, qua Đại biểu Nhân dân — <a href="https://daibieunhandan.vn/doanh-thu-tu-du-lich-quy-i-2026-dat-hon-267-nghin-ty-dong-10413683.html" target="_blank" rel="noopener">https://daibieunhandan.vn/doanh-thu-tu-du-lich-quy-i-2026-dat-hon-267-nghin-ty-dong-10413683.html</a></li><li id="s10">Tết Bính Ngọ 2026: 14 triệu lượt khách, qua Báo Văn hoá — <a href="https://baovanhoa.vn/du-lich/ap-luc-du-lich-nen-dip-le-qua-tai-un-tac-va-gia-ca-leo-thang-223033.html" target="_blank" rel="noopener">https://baovanhoa.vn/du-lich/ap-luc-du-lich-nen-dip-le-qua-tai-un-tac-va-gia-ca-leo-thang-223033.html</a></li><li id="s11">Nghị quyết 68-NQ/TW (04/05/2025) về phát triển kinh tế tư nhân, Thư viện Pháp luật — <a href="https://thuvienphapluat.vn/van-ban/Doanh-nghiep/Resolution-68-NQ-TW-2025-regarding-private-sector-development-656375.aspx" target="_blank" rel="noopener">https://thuvienphapluat.vn/van-ban/Doanh-nghiep/Resolution-68-NQ-TW-2025-regarding-private-sector-development-656375.aspx</a></li><li id="s12">Chuyển đổi số ngành du lịch: QĐ 147/QĐ-TTg, QĐ 1671/QĐ-TTg, QĐ 3611/QĐ-BVHTTDL, qua Tạp chí Quản lý Nhà nước — <a href="https://www.quanlynhanuoc.vn/2025/06/26/thuc-day-qua-trinh-chuyen-doi-so-nganh-du-lich-trong-boi-canh-moi/" target="_blank" rel="noopener">https://www.quanlynhanuoc.vn/2025/06/26/thuc-day-qua-trinh-chuyen-doi-so-nganh-du-lich-trong-boi-canh-moi/</a></li><li id="s13">Chỉ thị 08/CT-TTg (23/02/2024) — kế hoạch thực hiện của UBND Ninh Bình — <a href="https://sodulich.ninhbinh.gov.vn/uploads/images/Ke_hoach_thuc_hien_Chi_thi_08_cua_TTCP_202403150817439990_vnpt_ca_signed_20240315082517_H42.pdf" target="_blank" rel="noopener">https://sodulich.ninhbinh.gov.vn/uploads/images/Ke_hoach_thuc_hien_Chi_thi_08_cua_TTCP_202403150817439990_vnpt_ca_signed_20240315082517_H42.pdf</a></li><li id="s14">Quốc hội chốt giảm 2% VAT đến hết 2026, qua VOH — <a href="https://voh.com.vn/xa-hoi/giam-2-vat-den-het-2026-them-nhieu-nganh-duoc-uu-dai-600223.html" target="_blank" rel="noopener">https://voh.com.vn/xa-hoi/giam-2-vat-den-het-2026-them-nhieu-nganh-duoc-uu-dai-600223.html</a></li><li id="s15">Ngưỡng miễn thuế hộ kinh doanh 500 triệu, giảm trừ gia cảnh, qua Tiền Phong — <a href="https://tienphong.vn/chinh-thuc-nang-nguong-mien-thue-ho-kinh-doanh-tang-muc-giam-tru-gia-canh-post1809542.tpo" target="_blank" rel="noopener">https://tienphong.vn/chinh-thuc-nang-nguong-mien-thue-ho-kinh-doanh-tang-muc-giam-tru-gia-canh-post1809542.tpo</a></li><li id="s16">Cục Thống kê — Thông cáo giá 9 tháng 2026 (hỗ trợ thuế, phí nhiên liệu bay) — <a href="https://www.nso.gov.vn/wp-content/uploads/2026/10/2.-Thong-cao-bao-chi-ve-tinh-hinh-gia-thang-9-quy-III-va-9-thang-nam-2026.pdf" target="_blank" rel="noopener">https://www.nso.gov.vn/wp-content/uploads/2026/10/2.-Thong-cao-bao-chi-ve-tinh-hinh-gia-thang-9-quy-III-va-9-thang-nam-2026.pdf</a></li><li id="s17">Nghị quyết 202/2025/QH15 — 34 đơn vị hành chính cấp tỉnh (PLAN_RESEARCH [N-01])</li><li id="s18">Văn bản 10065/VPCP-KGVX (02/10/2026) — lịch nghỉ Ngày Văn hoá 2026, Tết và Quốc khánh 2027, qua VietnamPlus — <a href="https://www.vietnamplus.vn/chot-lich-nghi-dip-ngay-van-hoa-viet-nam-2026-tet-nguyen-dan-va-quoc-khanh-nam-2027-post1139707.vnp" target="_blank" rel="noopener">https://www.vietnamplus.vn/chot-lich-nghi-dip-ngay-van-hoa-viet-nam-2026-tet-nguyen-dan-va-quoc-khanh-nam-2027-post1139707.vnp</a></li></ol>
+<p class="foot">Truy cập các nguồn trong khoảng 19/10/2026. Phần pháp lý là danh sách việc cần hỏi luật sư, không phải tư vấn pháp lý.</p>
+</div><script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){var t=document.documentElement.getAttribute('data-theme');
+    if(t) return t; return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function lab(){b.textContent=cur()==='dark'?'Giao diện sáng':'Giao diện tối';}
+  try{var s=localStorage.getItem('r1-theme'); if(s) document.documentElement.setAttribute('data-theme',s);}catch(e){}
+  lab();
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('r1-theme',n);}catch(e){} lab();});
+})();
+</script></body></html>

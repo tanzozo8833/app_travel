@@ -1,0 +1,5 @@
+   overpass overpass-api.de lỗi
+   overpass overpass.kumi.systems lỗi
+   rel 1902690: khung bao 222 → trong ranh giới 159
+   rel 5522596: khung bao 141 → trong ranh giới 105
+osm_lodging ok 11459

@@ -1,0 +1,183 @@
+﻿file,source,request,bytes,downloaded,sha256_16
+data/raw/fred_DCOILBRENTEU.csv,D5,https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU,180469,2026-10-26 02:09,c9fb265a14773750
+data/raw/fred_DJFUELUSGULF.csv,D5,https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJFUELUSGULF,164317,2026-10-26 02:09,782b8d3be54f83ba
+data/raw/geocode_catba.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'catba'),361,2026-10-26 02:09,6b4e515c6f1fba1a
+data/raw/geocode_maichau.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'maichau'),630,2026-10-26 02:09,3d8bda551ef9bb6e
+data/raw/geocode_mocchau.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'mocchau'),342,2026-10-26 02:09,320550b843de9bbc
+data/raw/geocode_mucangchai.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'mucangchai'),352,2026-10-26 02:09,ac7cb5b1d29f75bd
+data/raw/geocode_nhatrang.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'nhatrang'),983,2026-10-26 02:09,39024d56dc11c93e
+data/raw/geocode_ninhbinh.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'ninhbinh'),1245,2026-10-26 02:09,b86a8d4252899acf
+data/raw/geocode_puluong.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'puluong'),342,2026-10-26 02:09,20320dc67bb77db6
+data/raw/geocode_quynhon.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'quynhon'),361,2026-10-26 02:09,29f460312719d247
+data/raw/geocode_samson.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'samson'),363,2026-10-26 02:09,8b97832ada93ca86
+data/raw/geocode_sapa.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'sapa'),641,2026-10-26 02:09,b1b7b9e8378e1174
+data/raw/geocode_vungtau.json,D7,https://geocoding-api.open-meteo.com/v1/search?countryCode=VN&name=… (điểm 'vungtau'),723,2026-10-26 02:09,37245da465aa2287
+data/raw/imf_NGDP_RPCH.json,D3,https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH/VNM,121784,2026-10-26 02:09,5200170b0f19f025
+data/raw/imf_NGDPDPC.json,D3,https://www.imf.org/external/datamapper/api/v1/NGDPDPC/VNM,175565,2026-10-26 02:09,d1143922c6ec0248
+data/raw/imf_PCPIPCH.json,D3,https://www.imf.org/external/datamapper/api/v1/PCPIPCH/VNM,121340,2026-10-26 02:09,e36fb78dc58c5b50
+data/raw/imf_PPPPC.json,D3,https://www.imf.org/external/datamapper/api/v1/PPPPC/VNM,179284,2026-10-26 02:09,50bf0fd1cc9a9b57
+data/raw/meteo_caobang.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'caobang'),215140,2026-10-26 02:09,ee0741ba1914e546
+data/raw/meteo_catba.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'catba'),216251,2026-10-26 02:09,6145dd893ecfe59d
+data/raw/meteo_condao.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'condao'),216543,2026-10-26 02:09,a68bef6fb1fff4ca
+data/raw/meteo_dalat.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'dalat'),216563,2026-10-26 02:09,380aacf7a1418da2
+data/raw/meteo_danang.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'danang'),216518,2026-10-26 02:09,126a53c81ba0a89b
+data/raw/meteo_hagiang.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'hagiang'),216581,2026-10-26 02:09,e24f1d2045610084
+data/raw/meteo_halong.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'halong'),216225,2026-10-26 02:09,ab2896dd8d1498d4
+data/raw/meteo_hoian.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'hoian'),216591,2026-10-26 02:09,9428ddf6f8f4c264
+data/raw/meteo_hue.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'hue'),216926,2026-10-26 02:09,4cac60b020cdb3dc
+data/raw/meteo_maichau.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'maichau'),216172,2026-10-26 02:09,92f1f28636b32771
+data/raw/meteo_mocchau.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'mocchau'),215187,2026-10-26 02:09,eeb6f1131ed111cb
+data/raw/meteo_mucangchai.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'mucangchai'),216165,2026-10-26 02:09,a21886b7c0b978b2
+data/raw/meteo_nhatrang.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'nhatrang'),216477,2026-10-26 02:09,a36cbf4f742bde98
+data/raw/meteo_ninhbinh.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'ninhbinh'),216062,2026-10-26 02:09,c8c13eaffb7644fe
+data/raw/meteo_phongnha.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'phongnha'),216378,2026-10-26 02:09,4eb34036adf5f218
+data/raw/meteo_phuquoc.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'phuquoc'),217233,2026-10-26 02:09,34bbcbd3b2e7ce08
+data/raw/meteo_puluong.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'puluong'),215928,2026-10-26 02:09,01a170f808dfee28
+data/raw/meteo_quynhon.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'quynhon'),216390,2026-10-26 02:09,f36ce6170c1bcc9b
+data/raw/meteo_samson.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'samson'),216152,2026-10-26 02:09,14f5d6954dcc9d5b
+data/raw/meteo_sapa.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'sapa'),214665,2026-10-26 02:09,5e6984461b3f026b
+data/raw/meteo_tamdao.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'tamdao'),213288,2026-10-26 02:09,e7af3508b87519c2
+data/raw/meteo_vungtau.json,D11,https://archive-api.open-meteo.com/v1/archive … 2005-01-01 → 2025-12-31 (điểm 'vungtau'),216473,2026-10-26 02:09,0bca0f856645aec1
+data/raw/osm_caobang.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'caobang',708,2026-10-26 02:09,73583e228e644acc
+data/raw/osm_catba.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'catba',712,2026-10-26 02:09,b3eeb0fc933f6d0e
+data/raw/osm_condao.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'condao',708,2026-10-26 02:09,ae94113389cabd5a
+data/raw/osm_dalat.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'dalat',715,2026-10-26 02:09,4c3de7d1de98e267
+data/raw/osm_danang.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'danang',720,2026-10-26 02:09,6d1a1d7f84c6edb9
+data/raw/osm_hagiang.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'hagiang',712,2026-10-26 02:09,e68926949d415d32
+data/raw/osm_halong.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'halong',708,2026-10-26 02:09,1b8fa6981a20d3f4
+data/raw/osm_hoian.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'hoian',715,2026-10-26 02:09,023738d68b8f5293
+data/raw/osm_hue.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'hue',716,2026-10-26 02:09,c9dab2f5f9681f32
+data/raw/osm_maichau.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'maichau',708,2026-10-26 02:09,eabab97ca4722d98
+data/raw/osm_mocchau.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'mocchau',708,2026-10-26 02:09,f3887eb6f75869a0
+data/raw/osm_mucangchai.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'mucangchai',704,2026-10-26 02:09,50db31fe956ce13d
+data/raw/osm_nhatrang.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'nhatrang',714,2026-10-26 02:09,895ff07fb58a37b0
+data/raw/osm_ninhbinh.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'ninhbinh',717,2026-10-26 02:09,494eb569cbc62eeb
+data/raw/osm_phongnha.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'phongnha',705,2026-10-26 02:09,92dcb4aaf8db0418
+data/raw/osm_phuquoc.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'phuquoc',714,2026-10-26 02:09,13e10ed9c9131efd
+data/raw/osm_puluong.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'puluong',704,2026-10-26 02:09,b713b4037c516a42
+data/raw/osm_quynhon.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'quynhon',711,2026-10-26 02:09,76dabdd7d19bde5e
+data/raw/osm_samson.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'samson',704,2026-10-26 02:09,77a26446261588ad
+data/raw/osm_sapa.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'sapa',716,2026-10-26 02:09,d150de0ad1b96494
+data/raw/osm_tamdao.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'tamdao',702,2026-10-26 02:09,2f3336603a93b40d
+data/raw/osm_vungtau.json,D12,https://overpass-api.de/api/interpreter — bán kính 15 km quanh 'vungtau',714,2026-10-26 02:09,c5c73e9bfa9cfbdc
+data/raw/osrm_destinations.json,D8,https://router.project-osrm.org/table/v1/driving/… (Hà Nội → destinations),5238,2026-10-26 02:09,b6dda4f13da74ea4
+data/raw/osrm_provinces34.json,D8,https://router.project-osrm.org/table/v1/driving/… (Hà Nội → provinces34),7863,2026-10-26 02:09,10123f8ed9be54c8
+data/raw/pv__i_n_Bi_n_8e8abd7e.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Điện_Biên/monthly/2016010100/2026093000,19621,2026-10-26 02:09,2b6ceaeeb534ccf8
+data/raw/pv__k_L_k_1d97589b.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Đắk_Lắk/monthly/2016010100/2026093000,19580,2026-10-26 02:09,75f4f9a18c711f14
+data/raw/pv__L_t_b69021c1.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Đà_Lạt/monthly/2016010100/2026093000,19350,2026-10-26 02:09,95e5659a37ff111e
+data/raw/pv__N_ng_ee4636c3.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Đà_Nẵng/monthly/2016010100/2026093000,19488,2026-10-26 02:09,f50d24ba9465c9c9
+data/raw/pv__ng_Nai_efb45e03.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Đồng_Nai/monthly/2016010100/2026093000,19471,2026-10-26 02:09,964f186ac95848c9
+data/raw/pv__ng_Th_p_94a8cf0a.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Đồng_Tháp/monthly/2016010100/2026093000,19650,2026-10-26 02:09,a41906ea0194ab41
+data/raw/pv_An_Giang_a2b9017e.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/An_Giang/monthly/2016010100/2026093000,19048,2026-10-26 02:09,cdbe0216874453f1
+data/raw/pv_B_c_Ninh_33bd98cd.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Bắc_Ninh/monthly/2016010100/2026093000,19302,2026-10-26 02:09,6272f01760e8ff62
+data/raw/pv_C_Mau_c33a8f30.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Cà_Mau/monthly/2016010100/2026093000,18848,2026-10-26 02:09,95b7407b1bfd66ef
+data/raw/pv_C_n_o_8f5b0e14.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Côn_Đảo/monthly/2016010100/2026093000,19384,2026-10-26 02:09,01308003dcb444c4
+data/raw/pv_C_n_Th__9ab9b057.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Cần_Thơ/monthly/2016010100/2026093000,19338,2026-10-26 02:09,d03c4431b1583d70
+data/raw/pv_Cao_B_ng_c6f1a51e.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Cao_Bằng/monthly/2016010100/2026093000,19233,2026-10-26 02:09,002d2655f771d080
+data/raw/pv_Gia_Lai_9e2835b4.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Gia_Lai/monthly/2016010100/2026093000,18897,2026-10-26 02:09,cb2211eb7ecb61ec
+data/raw/pv_H_Giang_42c5b557.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hà_Giang/monthly/2016010100/2026093000,19113,2026-10-26 02:09,878efdb8da5ad91c
+data/raw/pv_H_i_An_e349d4a6.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hội_An/monthly/2016010100/2026093000,18974,2026-10-26 02:09,f176f249e318c050
+data/raw/pv_H_i_Ph_ng_6f8a251b.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hải_Phòng/monthly/2016010100/2026093000,19611,2026-10-26 02:09,a4a100e7b814346e
+data/raw/pv_H_N_i_dbd5e260.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hà_Nội/monthly/2016010100/2026093000,19232,2026-10-26 02:09,a340daf97d759b60
+data/raw/pv_H_ng_Y_n_1ba38237.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hưng_Yên/monthly/2016010100/2026093000,19282,2026-10-26 02:09,31b6440421b45c10
+data/raw/pv_H_T_nh_402f8ead.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Hà_Tĩnh/monthly/2016010100/2026093000,19118,2026-10-26 02:09,48ccf3a0de03a7c1
+data/raw/pv_Hu__6e56856f.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Huế/monthly/2016010100/2026093000,18656,2026-10-26 02:09,627ea83b04bf9234
+data/raw/pv_Kh_nh_H_a_6f6500a4.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Khánh_Hòa/monthly/2016010100/2026093000,19403,2026-10-26 02:09,0a7da3fbe4a2b77a
+data/raw/pv_Khu_b_o_t_n_thi_n_nhi_n_P_Lu_ng_ecae0e87.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Khu_bảo_tồn_thiên_nhiên_Pù_Luông/monthly/2016010100/2026093000,22995,2026-10-26 02:09,64671b409556286f
+data/raw/pv_L_m_ng_5295655c.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Lâm_Đồng/monthly/2016010100/2026093000,19537,2026-10-26 02:09,c9414285bcd3be10
+data/raw/pv_L_ng_S_n_4c863d4f.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Lạng_Sơn/monthly/2016010100/2026093000,19362,2026-10-26 02:09,6c5c4e0ee91fa8a5
+data/raw/pv_L_o_Cai_9d01558b.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Lào_Cai/monthly/2016010100/2026093000,18974,2026-10-26 02:09,e48f67534e6fe45b
+data/raw/pv_Lai_Ch_u_7d3baf85.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Lai_Châu/monthly/2016010100/2026093000,19103,2026-10-26 02:09,631b3504d1c42122
+data/raw/pv_M_c_Ch_u_24eea641.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Mộc_Châu/monthly/2016010100/2026093000,19344,2026-10-26 02:09,1ced15d71baaa3f8
+data/raw/pv_M_Cang_Ch_i_cf0f7158.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Mù_Cang_Chải/monthly/2016010100/2026093000,19844,2026-10-26 02:09,e0862bf24508da3d
+data/raw/pv_Mai_Ch_u_ace254e0.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Mai_Châu/monthly/2016010100/2026093000,19051,2026-10-26 02:09,d182385a11b2a6ef
+data/raw/pv_Ngh_An_03110719.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Nghệ_An/monthly/2016010100/2026093000,19209,2026-10-26 02:09,0327883ac9f21f6b
+data/raw/pv_Nha_Trang_1cd6657f.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Nha_Trang/monthly/2016010100/2026093000,19187,2026-10-26 02:09,9d735748dccd61e0
+data/raw/pv_Ninh_B_nh_ec89ac85.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Ninh_Bình/monthly/2016010100/2026093000,19294,2026-10-26 02:09,06902075e27e23d6
+data/raw/pv_Ph_Qu_c_6158d738.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Phú_Quốc/monthly/2016010100/2026093000,19481,2026-10-26 02:09,f72cd4d459dd2646
+data/raw/pv_Ph_Th__93fa0bb8.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Phú_Thọ/monthly/2016010100/2026093000,19238,2026-10-26 02:09,6dbcf175db38b915
+data/raw/pv_Qu_n_o_C_t_B__68e1fd83.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quần_đảo_Cát_Bà/monthly/2016010100/2026093000,20782,2026-10-26 02:09,ce02edf128cbeb3c
+data/raw/pv_Qu_n_th_danh_th_ng_Tr_ng_An_6371b769.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quần_thể_danh_thắng_Tràng_An/monthly/2016010100/2026093000,22472,2026-10-26 02:09,dd47bb51d292a838
+data/raw/pv_Qu_ng_Ng_i_4e1320e8.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quảng_Ngãi/monthly/2016010100/2026093000,19640,2026-10-26 02:09,6a42df23bccbcef9
+data/raw/pv_Qu_ng_Ninh_0c07959a.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quảng_Ninh/monthly/2016010100/2026093000,19597,2026-10-26 02:09,a61061dbd7017fef
+data/raw/pv_Qu_ng_Tr__470cd148.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quảng_Trị/monthly/2016010100/2026093000,19626,2026-10-26 02:09,3636a536bb889fd2
+data/raw/pv_Quy_Nh_n_0df3fe96.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Quy_Nhơn/monthly/2016010100/2026093000,19099,2026-10-26 02:09,7b4a04792635d6ea
+data/raw/pv_S_m_S_n_030f48e1.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Sầm_Sơn/monthly/2016010100/2026093000,19215,2026-10-26 02:09,3b49b19cbc1dc419
+data/raw/pv_S_n_La_c4e6f7aa.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Sơn_La/monthly/2016010100/2026093000,18849,2026-10-26 02:09,61d6b90bcec7dd6f
+data/raw/pv_Sa_Pa_850d8748.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Sa_Pa/monthly/2016010100/2026093000,18607,2026-10-26 02:09,23d2b3d5a1e39fca
+data/raw/pv_T_y_Ninh_57da12f6.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Tây_Ninh/monthly/2016010100/2026093000,19133,2026-10-26 02:09,4f8df1ddd698bf06
+data/raw/pv_Tam_o_ac4e1a7d.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Tam_Đảo/monthly/2016010100/2026093000,19228,2026-10-26 02:09,6a673abc770c9294
+data/raw/pv_Th_c_B_n_Gi_c_b7696ac5.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Thác_Bản_Giốc/monthly/2016010100/2026093000,20264,2026-10-26 02:09,9770e18affddccbd
+data/raw/pv_Th_i_Nguy_n_9da673a9.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Thái_Nguyên/monthly/2016010100/2026093000,19635,2026-10-26 02:09,981bde4ace88dbd0
+data/raw/pv_Th_nh_ph_H_Ch_Minh_a6846acf.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Thành_phố_Hồ_Chí_Minh/monthly/2016010100/2026093000,21554,2026-10-26 02:09,5963989acc3015d5
+data/raw/pv_Thanh_H_a_9f246c67.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Thanh_Hóa/monthly/2016010100/2026093000,19349,2026-10-26 02:09,924f89fc87a3be7c
+data/raw/pv_Tuy_n_Quang_732be374.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Tuyên_Quang/monthly/2016010100/2026093000,19490,2026-10-26 02:09,8436659de175d3b8
+data/raw/pv_V_n_qu_c_gia_Phong_Nha_K_B_ng_205a11d3.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Vườn_quốc_gia_Phong_Nha_–_Kẻ_Bàng/monthly/2016010100/2026093000,12771,2026-10-26 02:09,8d4b9c0289a5a392
+data/raw/pv_V_ng_T_u_fe258341.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Vũng_Tàu/monthly/2016010100/2026093000,19249,2026-10-26 02:09,06c07f6817c35cf1
+data/raw/pv_V_nh_H_Long_25ede19b.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Vịnh_Hạ_Long/monthly/2016010100/2026093000,20120,2026-10-26 02:09,4bad5e96566b6816
+data/raw/pv_V_nh_Long_379d6e4b.json,D10,https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/vi.wikipedia/all-access/user/Vĩnh_Long/monthly/2016010100/2026093000,19236,2026-10-26 02:09,663437880fc0d799
+data/raw/statcounter_os_mobile.csv,D4,"https://gs.statcounter.com/os-market-share/mobile/viet-nam (xuất CSV, 2012-01 → 2026-09)",11345,2026-10-26 02:09,c90a8cc27355c48e
+data/raw/statcounter_social_all.csv,D4,"https://gs.statcounter.com/social-media-stats/all/viet-nam (xuất CSV, 2012-01 → 2026-09)",12841,2026-10-26 02:09,e7585caa9ba63ae9
+data/raw/statcounter_vendor_mobile.csv,D4,"https://gs.statcounter.com/vendor-market-share/mobile/viet-nam (xuất CSV, 2012-01 → 2026-09)",27881,2026-10-26 02:09,69165e558e568b5a
+data/raw/trends_behaviour.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'behaviour'",3168,2026-10-26 02:09,eb342d55755b6bce
+data/raw/trends_booking.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'booking'",3025,2026-10-26 02:09,7beb00dad15b4a2c
+data/raw/trends_dest0.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest0'",3362,2026-10-26 02:09,b6321e76741a13b0
+data/raw/trends_dest1.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest1'",3261,2026-10-26 02:09,5280afcfc662acc0
+data/raw/trends_dest2.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest2'",3390,2026-10-26 02:09,af9f90e33b6c9cc7
+data/raw/trends_dest3.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest3'",3460,2026-10-26 02:09,0883e4a2f27743a4
+data/raw/trends_dest4.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest4'",3631,2026-10-26 02:09,05b3bfebc462e1bb
+data/raw/trends_dest5.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'dest5'",2313,2026-10-26 02:09,b0c0a35d5ffe35dd
+data/raw/trends_motive.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'motive'",3042,2026-10-26 02:09,f06bb45e863aafa5
+data/raw/trends_planning.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'planning'",3074,2026-10-26 02:09,5f8d3c5437d7e127
+data/raw/trends_transport.csv,D9,"Google Trends interest_over_time, geo=VN, 2016-01-01 2026-09-30, nhóm 'transport'",3316,2026-10-26 02:09,6cfde0e6b0c2e075
+data/raw/trendsreg_caobang.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'caobang'",1374,2026-10-26 02:09,f9d1e47e9506cfa0
+data/raw/trendsreg_catba.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'catba'",1377,2026-10-26 02:09,08dc6418d578cef6
+data/raw/trendsreg_condao.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'condao'",1436,2026-10-26 02:09,f1044687e75a0449
+data/raw/trendsreg_dalat.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'dalat'",1373,2026-10-26 02:09,f117cd8819b4b1a2
+data/raw/trendsreg_danang.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'danang'",1380,2026-10-26 02:09,9037258b03d09b17
+data/raw/trendsreg_hagiang.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'hagiang'",1373,2026-10-26 02:09,929209078ca37dc3
+data/raw/trendsreg_halong.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'halong'",1372,2026-10-26 02:09,3a4ec3ef12e595e1
+data/raw/trendsreg_hoian.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'hoian'",1369,2026-10-26 02:09,a2f462a8fc99fad3
+data/raw/trendsreg_hue.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'hue'",1357,2026-10-26 02:09,c44d3dca8fa36f7a
+data/raw/trendsreg_maichau.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'maichau'",1380,2026-10-26 02:09,234ef8ff1631b8d8
+data/raw/trendsreg_mocchau.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'mocchau'",1376,2026-10-26 02:09,7debefe548a99f93
+data/raw/trendsreg_mucangchai.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'mucangchai'",1387,2026-10-26 02:09,2c79d641ec355371
+data/raw/trendsreg_nhatrang.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'nhatrang'",1363,2026-10-26 02:09,af3cc2730cbaea74
+data/raw/trendsreg_ninhbinh.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'ninhbinh'",1377,2026-10-26 02:09,c19ccfdd0e98a5ae
+data/raw/trendsreg_phongnha.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'phongnha'",1366,2026-10-26 02:09,0c7555e49162f1ee
+data/raw/trendsreg_phuquoc.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'phuquoc'",1433,2026-10-26 02:09,646307d3fd9f6eb2
+data/raw/trendsreg_puluong.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'puluong'",1382,2026-10-26 02:09,88b2795cb04630e2
+data/raw/trendsreg_quynhon.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'quynhon'",1374,2026-10-26 02:09,cf36cc43e4098e18
+data/raw/trendsreg_samson.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'samson'",1380,2026-10-26 02:09,a306e1034c0e71f4
+data/raw/trendsreg_sapa.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'sapa'",1355,2026-10-26 02:09,25d185b9b692fb12
+data/raw/trendsreg_tamdao.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'tamdao'",1383,2026-10-26 02:09,017ffbd8474bc074
+data/raw/trendsreg_vungtau.csv,D9,"Google Trends interest_by_region, geo=VN, 2023-01-01 2026-09-30, điểm 'vungtau'",1376,2026-10-26 02:09,22ff55a6bd1ec6e7
+data/raw/wb_FP.CPI.TOTL.ZG.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/FP.CPI.TOTL.ZG?format=json&per_page=2000&date=1990:2025,41208,2026-10-26 02:09,4960e47b0720f632
+data/raw/wb_IT.NET.USER.ZS.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/IT.NET.USER.ZS?format=json&per_page=2000&date=1990:2025,42074,2026-10-26 02:09,3304cf06c003bf44
+data/raw/wb_NE.CON.PRVT.PC.KD.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/NE.CON.PRVT.PC.KD?format=json&per_page=2000&date=1990:2025,49858,2026-10-26 02:09,25875b391a2bec11
+data/raw/wb_NY.GDP.PCAP.KD.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/NY.GDP.PCAP.KD?format=json&per_page=2000&date=1990:2025,40715,2026-10-26 02:09,1e6e202acfa87d26
+data/raw/wb_NY.GDP.PCAP.PP.KD.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/NY.GDP.PCAP.PP.KD?format=json&per_page=2000&date=1990:2025,44320,2026-10-26 02:09,d7118c5e4396ec76
+data/raw/wb_SP.POP.TOTL.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.TOTL?format=json&per_page=2000&date=1990:2025,35751,2026-10-26 02:09,bb84533583684063
+data/raw/wb_SP.URB.TOTL.IN.ZS.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.URB.TOTL.IN.ZS?format=json&per_page=2000&date=1990:2025,42340,2026-10-26 02:09,6ca6aeb93bfd2330
+data/raw/wb_ST.INT.ARVL.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/ST.INT.ARVL?format=json&per_page=2000&date=1990:2025,39733,2026-10-26 02:09,97f7d707c0e44739
+data/raw/wb_ST.INT.DPRT.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/ST.INT.DPRT?format=json&per_page=2000&date=1990:2025,39895,2026-10-26 02:09,7a033bb4fe564bad
+data/raw/wb_ST.INT.RCPT.CD.json,D1,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/ST.INT.RCPT.CD?format=json&per_page=2000&date=1990:2025,41293,2026-10-26 02:09,69c64d086e9819e8
+data/raw/wbpop_SP.POP.1519.FE.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.1519.FE?format=json&per_page=2000&date=1990:2050&source=40,64745,2026-10-26 02:09,4b054de4ef5d6706
+data/raw/wbpop_SP.POP.1519.MA.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.1519.MA?format=json&per_page=2000&date=1990:2050&source=40,64139,2026-10-26 02:09,50a80b69afe7feca
+data/raw/wbpop_SP.POP.2024.FE.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.2024.FE?format=json&per_page=2000&date=1990:2050&source=40,64735,2026-10-26 02:09,5609a4bff411128c
+data/raw/wbpop_SP.POP.2024.MA.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.2024.MA?format=json&per_page=2000&date=1990:2050&source=40,64128,2026-10-26 02:09,9ce2c148e7ae1189
+data/raw/wbpop_SP.POP.2529.FE.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.2529.FE?format=json&per_page=2000&date=1990:2050&source=40,64725,2026-10-26 02:09,121fd7bdc5ba2a29
+data/raw/wbpop_SP.POP.2529.MA.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.2529.MA?format=json&per_page=2000&date=1990:2050&source=40,64119,2026-10-26 02:09,7c9684ade288641d
+data/raw/wbpop_SP.POP.3034.FE.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.3034.FE?format=json&per_page=2000&date=1990:2050&source=40,64716,2026-10-26 02:09,8d32b7380abf0a35
+data/raw/wbpop_SP.POP.3034.MA.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.3034.MA?format=json&per_page=2000&date=1990:2050&source=40,64111,2026-10-26 02:09,20279ef0f75821b8
+data/raw/wbpop_SP.POP.3539.FE.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.3539.FE?format=json&per_page=2000&date=1990:2050&source=40,64705,2026-10-26 02:09,b338bdf1969fe3ba
+data/raw/wbpop_SP.POP.3539.MA.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.3539.MA?format=json&per_page=2000&date=1990:2050&source=40,64101,2026-10-26 02:09,1ada590da82235c8
+data/raw/wbpop_total40.json,D2,https://api.worldbank.org/v2/country/VNM;THA;IDN;PHL;MYS/indicator/SP.POP.TOTL?format=json&per_page=2000&date=1990:2050&source=40,60552,2026-10-26 02:09,de3aedc0538034cf
+data/raw/wiki__n_v_h_nh_ch_nh_c_p_t_nh_Vi_t_Nam_.json,D6,https://vi.wikipedia.org/w/api.php?action=parse&page=Đơn vị hành chính cấp tỉnh (Việt Nam)&prop=wikitext,61045,2026-10-26 02:09,f7b6bcfe87ca1182
+data/raw/wikicoords_1155d154.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),3166,2026-10-26 02:09,20f9cd20f5ed3141
+data/raw/wikicoords_2b99c962.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),3096,2026-10-26 02:09,2e80552415eafc4c
+data/raw/wikicoords_327ce642.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),1923,2026-10-26 02:09,c71bd77670b9eb0a
+data/raw/wikicoords_4ba916f8.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),4763,2026-10-26 02:09,27ac7f83df28caaf
+data/raw/wikicoords_b3de4eb7.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),3759,2026-10-26 02:09,9df8fe0cea6b6f73
+data/raw/wikicoords_c1d45bd8.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),6221,2026-10-26 02:09,33c0acec7f362a4b
+data/raw/wikicoords_ed18273f.json,D6,https://vi.wikipedia.org/w/api.php?action=query&prop=coordinates (lô ≤40 bài),3579,2026-10-26 02:09,3ecd763cfe7a67ec

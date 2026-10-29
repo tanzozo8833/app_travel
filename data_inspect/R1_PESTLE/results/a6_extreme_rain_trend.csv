@@ -1,0 +1,23 @@
+key,name,heavy_days_per_year,sen_per_decade,tau,p,max_1day_mm
+hue,Huế,9.9,0.0,0.05,0.782,270.0
+hoian,Hội An,7.6,0.0,0.06,0.714,253.0
+danang,Đà Nẵng,7.1,0.0,0.02,0.902,248.0
+phongnha,Phong Nha,6.0,0.91,0.19,0.257,329.0
+samson,Sầm Sơn,5.8,1.43,0.19,0.234,236.0
+ninhbinh,Ninh Bình,4.9,1.55,0.23,0.16,227.0
+sapa,Sa Pa,4.6,0.95,0.16,0.315,211.0
+maichau,Mai Châu,4.2,1.03,0.27,0.1,257.0
+puluong,Pù Luông,4.2,0.0,0.05,0.756,205.0
+catba,Cát Bà,4.1,1.52,0.26,0.112,196.0
+nhatrang,Nha Trang,4.0,-1.18,-0.18,0.27,178.0
+quynhon,Quy Nhơn,4.0,-2.61,-0.33,0.045,252.0
+halong,Hạ Long,4.0,1.11,0.22,0.176,196.0
+hagiang,Hà Giang,4.0,1.43,0.26,0.111,146.0
+tamdao,Tam Đảo,3.5,1.72,0.46,0.006,132.0
+mucangchai,Mù Cang Chải,3.5,0.0,0.1,0.537,169.0
+mocchau,Mộc Châu,3.1,0.71,0.28,0.091,223.0
+phuquoc,Phú Quốc,3.0,-0.77,-0.28,0.1,141.0
+caobang,Cao Bằng,2.7,0.26,0.14,0.388,208.0
+dalat,Đà Lạt,1.8,-0.69,-0.21,0.213,134.0
+condao,Côn Đảo,1.5,0.0,0.0,1.0,147.0
+vungtau,Vũng Tàu,0.6,0.0,-0.1,0.582,195.0
